@@ -26,11 +26,27 @@
   <meta property="og:image" content="#">
   <style>
     /* ===== ROMULUS TERMINAL AESTHETIC ===== */
+    :root {
+      --romulus-bg: #0b0b10;
+      --romulus-bg-soft: rgba(255,255,255,0.03);
+      --romulus-border: rgba(255,255,255,0.08);
+      --romulus-text: rgba(255,255,255,0.86);
+      --romulus-text-soft: rgba(255,255,255,0.58);
+      --romulus-text-faint: rgba(255,255,255,0.26);
+      --romulus-amber: #f59e0b;
+      --romulus-purple: #6d28d9;
+      --romulus-purple-soft: rgba(109,40,217,0.18);
+    }
+
     .romulus-page {
-      background: #0d0d0f;
+      background:
+        radial-gradient(circle at top right, rgba(109,40,217,0.16), transparent 28%),
+        radial-gradient(circle at top left, rgba(245,158,11,0.08), transparent 24%),
+        var(--romulus-bg);
       min-height: 100vh;
-      color: #e8e8e8;
+      color: var(--romulus-text);
       font-family: 'Inter', 'Inter Tight', sans-serif;
+      letter-spacing: -0.01em;
     }
 
     /* Password Gate */
@@ -48,27 +64,45 @@
     .romulus-gate.hidden { display: none; }
 
     .gate-terminal {
-      background: rgba(255,255,255,0.03);
+      background: rgba(255,255,255,0.035);
       border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 40px 48px;
       max-width: 420px;
       width: 90%;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 20px 80px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.04);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gate-terminal::before {
+      content: '';
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+      pointer-events: none;
     }
 
     .gate-prompt {
       font-family: 'Inconsolata', monospace;
       font-size: 13px;
-      color: #f59e0b;
+      color: var(--romulus-amber);
       letter-spacing: 0.05em;
       margin-bottom: 20px;
     }
     .gate-prompt span { color: rgba(255,255,255,0.4); }
+    .gate-cursor {
+      display: inline-block;
+      color: var(--romulus-purple);
+      animation: blink 1s steps(1) infinite;
+      margin-left: 4px;
+    }
 
     .gate-label {
-      font-family: 'Josefin Sans', sans-serif;
+      font-family: 'Inter Tight', 'Inter', sans-serif;
       font-size: 11px;
       letter-spacing: 0.15em;
       text-transform: uppercase;
@@ -97,21 +131,22 @@
     .gate-submit {
       margin-top: 16px;
       width: 100%;
-      background: rgba(245, 158, 11, 0.15);
-      border: 1px solid rgba(245, 158, 11, 0.3);
+      background: rgba(109,40,217,0.12);
+      border: 1px solid rgba(109,40,217,0.32);
       border-radius: 6px;
       padding: 11px 16px;
-      font-family: 'Josefin Sans', sans-serif;
+      font-family: 'Inter Tight', 'Inter', sans-serif;
       font-size: 12px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: #f59e0b;
+      color: #d7c0ff;
       cursor: pointer;
-      transition: background 0.2s, border-color 0.2s;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
     }
     .gate-submit:hover {
-      background: rgba(245, 158, 11, 0.25);
-      border-color: rgba(245, 158, 11, 0.5);
+      background: rgba(109,40,217,0.2);
+      border-color: rgba(109,40,217,0.55);
+      transform: translateY(-1px);
     }
 
     .gate-error {
@@ -143,17 +178,18 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 16px;
     }
     .romulus-logo {
       font-family: 'Inconsolata', monospace;
       font-size: 15px;
-      color: #f59e0b;
+      color: var(--romulus-amber);
       letter-spacing: 0.08em;
       text-decoration: none;
     }
     .romulus-logo:hover { opacity: 0.8; }
     .romulus-back {
-      font-family: 'Josefin Sans', sans-serif;
+      font-family: 'Inter Tight', 'Inter', sans-serif;
       font-size: 11px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -162,6 +198,14 @@
       transition: color 0.2s;
     }
     .romulus-back:hover { color: rgba(255,255,255,0.6); }
+    .romulus-status {
+      font-family: 'Inconsolata', monospace;
+      font-size: 11px;
+      color: rgba(255,255,255,0.42);
+      text-align: right;
+      line-height: 1.5;
+    }
+    .romulus-status .accent { color: var(--romulus-purple); }
 
     /* Hero */
     .romulus-hero {
@@ -172,27 +216,46 @@
     .romulus-eyebrow {
       font-family: 'Inconsolata', monospace;
       font-size: 12px;
-      color: #f59e0b;
+      color: var(--romulus-amber);
       letter-spacing: 0.1em;
       margin-bottom: 20px;
       opacity: 0.9;
     }
     .romulus-title {
-      font-family: 'Josefin Sans', sans-serif;
-      font-size: clamp(36px, 6vw, 56px);
-      font-weight: 600;
+      font-family: 'Inter Tight', 'Inter', sans-serif;
+      font-size: clamp(38px, 6vw, 58px);
+      font-weight: 500;
       color: #ffffff;
-      line-height: 1.1;
+      line-height: 1.02;
       margin-bottom: 16px;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.04em;
+      max-width: 700px;
     }
     .romulus-subtitle {
       font-size: 18px;
       color: rgba(255,255,255,0.55);
       line-height: 1.6;
-      max-width: 560px;
+      max-width: 620px;
       font-weight: 300;
     }
+
+    .hero-terminal {
+      margin-top: 28px;
+      max-width: 620px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 18px 20px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+    .hero-terminal-line {
+      font-family: 'Inconsolata', monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.72);
+    }
+    .hero-terminal-line .prompt { color: var(--romulus-amber); }
+    .hero-terminal-line .value { color: #c4b5fd; }
 
     /* Sections */
     .romulus-section {
@@ -206,19 +269,18 @@
     .section-label {
       font-family: 'Inconsolata', monospace;
       font-size: 11px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: #f59e0b;
-      opacity: 0.7;
+      letter-spacing: 0.08em;
+      color: var(--romulus-amber);
+      opacity: 0.75;
       margin-bottom: 20px;
     }
     .section-title {
-      font-family: 'Josefin Sans', sans-serif;
-      font-size: 22px;
-      font-weight: 600;
+      font-family: 'Inter Tight', 'Inter', sans-serif;
+      font-size: 24px;
+      font-weight: 500;
       color: #ffffff;
       margin-bottom: 16px;
-      letter-spacing: 0.01em;
+      letter-spacing: -0.02em;
     }
     .section-body {
       font-size: 16px;
@@ -247,13 +309,14 @@
       transition: border-color 0.2s, background 0.2s;
     }
     .model-card:hover {
-      border-color: rgba(245,158,11,0.2);
+      border-color: rgba(109,40,217,0.28);
       background: rgba(255,255,255,0.05);
+      box-shadow: 0 0 0 1px rgba(109,40,217,0.12) inset;
     }
     .model-name {
       font-family: 'Inconsolata', monospace;
       font-size: 13px;
-      color: #f59e0b;
+      color: #c4b5fd;
       margin-bottom: 6px;
     }
     .model-desc {
@@ -270,12 +333,37 @@
       border-radius: 10px;
       padding: 28px;
       margin-top: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--romulus-purple), transparent 75%);
+      opacity: 0.85;
     }
     .project-name {
       font-family: 'Inconsolata', monospace;
       font-size: 14px;
       color: #f59e0b;
       margin-bottom: 4px;
+    }
+
+    .project-status {
+      display: inline-block;
+      margin-left: 8px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      border: 1px solid rgba(109,40,217,0.35);
+      background: rgba(109,40,217,0.12);
+      color: #d7c0ff;
+      font-family: 'Inconsolata', monospace;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      vertical-align: middle;
     }
     .project-url {
       font-family: 'Inconsolata', monospace;
@@ -334,7 +422,7 @@
       flex: 1;
     }
     .step-title {
-      font-family: 'Josefin Sans', sans-serif;
+      font-family: 'Inter Tight', 'Inter', sans-serif;
       font-size: 15px;
       color: #e8e8e8;
       margin-bottom: 4px;
@@ -349,16 +437,17 @@
 
     /* Legion section */
     .legion-box {
-      background: rgba(245,158,11,0.05);
-      border: 1px solid rgba(245,158,11,0.15);
+      background: rgba(109,40,217,0.08);
+      border: 1px solid rgba(109,40,217,0.18);
       border-radius: 10px;
       padding: 28px;
       margin-top: 20px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
     }
     .legion-title {
       font-family: 'Inconsolata', monospace;
       font-size: 14px;
-      color: #f59e0b;
+      color: #d7c0ff;
       margin-bottom: 12px;
     }
     .legion-body {
@@ -376,17 +465,9 @@
       margin: 0 auto;
     }
 
-    /* Footer */
-    .romulus-footer {
-      padding: 40px;
-      text-align: center;
-      border-top: 1px solid rgba(255,255,255,0.06);
-    }
-    .romulus-footer p {
-      font-family: 'Inconsolata', monospace;
-      font-size: 12px;
-      color: rgba(255,255,255,0.2);
-      letter-spacing: 0.05em;
+    @keyframes blink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
     }
 
     /* Scroll animations */
@@ -401,10 +482,11 @@
     }
 
     @media (max-width: 600px) {
-      .romulus-header { padding: 24px 20px 20px; }
+      .romulus-header { padding: 24px 20px 20px; align-items: flex-start; flex-direction: column; }
       .romulus-hero { padding: 48px 20px 40px; }
       .romulus-section { padding: 40px 20px; }
       .gate-terminal { padding: 28px 24px; }
+      .romulus-status { text-align: left; }
     }
   </style>
 </head>
@@ -413,7 +495,7 @@
   <!-- PASSWORD GATE -->
   <div class="romulus-gate" id="gate">
     <div class="gate-terminal">
-      <div class="gate-prompt">romulus@roma-eterna:~$ <span>./access.sh</span></div>
+      <div class="gate-prompt">romulus@roma-eterna:~$ <span>./access.sh</span><span class="gate-cursor">▍</span></div>
       <div class="gate-label">Enter Access Phrase</div>
       <input type="password" class="gate-input" id="gateInput" placeholder="&#xB7;&#xB7;&#xB7;&#xB7;&#xB7;&#xB7;&#xB7;&#xB7;&#xB7;&#xB7;&#xB7;&#xB7;&#xB7;&#xB7;&#xB7;" autocomplete="off" />
       <button class="gate-submit" id="gateSubmit">Unlock</button>
@@ -428,6 +510,10 @@
     <!-- Header -->
     <div class="romulus-header">
       <a href="index.html" class="romulus-back">&#x2190; Back to site</a>
+      <div class="romulus-status">
+        <div>node: <span class="accent">roma-eterna</span></div>
+        <div>mode: persistent / discord / obsidian</div>
+      </div>
       <a href="index.html" class="romulus-logo">ROMULUS</a>
     </div>
 
@@ -436,17 +522,21 @@
       <div class="romulus-eyebrow">CASE STUDY &#x2022; 2026</div>
       <h1 class="romulus-title">Building a Scalable, Personal AI System</h1>
       <p class="romulus-subtitle">How I designed and built an always-on AI agent — named after the first king of Rome — to close the gap between conception and shipping.</p>
+      <div class="hero-terminal">
+        <div class="hero-terminal-line"><span class="prompt">$</span> system.boot --name <span class="value">Romulus</span> --host <span class="value">Roma Eterna</span></div>
+        <div class="hero-terminal-line"><span class="prompt">$</span> status <span class="value">persistent agent / discord interface / obsidian memory / scheduled workflows</span></div>
+      </div>
     </div>
 
     <hr class="romulus-divider">
 
     <!-- Overview -->
     <div class="romulus-section" data-romulus-animate>
-      <div class="section-label">01 &#x2014; OVERVIEW</div>
+      <div class="section-label">~/romulus/overview.txt</div>
       <h2 class="section-title">The Problem</h2>
       <div class="section-body">
-        <p>I've spent the past decade in product — designing, building, and shipping across startups in health, web3, energy, and consumer apps. For most of that time, the bottleneck was me. Not for lack of skill or clarity, but bandwidth. Good ideas pile up fast. Building them alone is slow.</p>
-        <p>In early 2026 I started building Romulus — a personal AI system designed to close that gap. Named after Rome's founding king. Running on a Mac mini called Roma Eterna. This is a look at how it came together, what we shipped with it, and where it's heading next.</p>
+        <p>I've spent the past decade in product — designing, building, and shipping across startups in health, web3, energy, and consumer apps. The recurring bottleneck was never ideas. It was throughput.</p>
+        <p>Good opportunities pile up fast when you know how to spot them. Building them one by one, alone, is slower than it should be. Romulus started as an attempt to change that without giving up taste, judgment, or control.</p>
       </div>
     </div>
 
@@ -454,12 +544,12 @@
 
     <!-- Setup -->
     <div class="romulus-section" data-romulus-animate>
-      <div class="section-label">02 &#x2014; THE SETUP</div>
+      <div class="section-label">~/romulus/setup.md</div>
       <h2 class="section-title">Roma Eterna</h2>
       <div class="section-body">
-        <p>Romulus runs on OpenClaw, a platform for persistent personal AI agents. It lives on a dedicated Mac mini (Roma Eterna) so it's always on — running cron jobs, monitoring in the background, executing research and picking up signal, delivering a morning briefing to Discord every day at 8 AM.</p>
-        <p>The interface is Discord. The memory is an Obsidian vault brain: daily notes, project files, decisions, going back to the first boot session on February 3rd, 2026.</p>
-        <p>The goal was a system that compounds — one that gets more useful over time, not one you have to re-explain yourself to every session. 100+ files of context, always loaded.</p>
+        <p>Romulus runs on OpenClaw and lives on a dedicated Mac mini called Roma Eterna. It's always on — running scheduled jobs, monitoring things in the background, and sending a morning brief to Discord every day at 8 AM.</p>
+        <p>The interface is Discord. The memory layer is an Obsidian vault: daily notes, project files, operating context, decisions, and lessons learned going back to the first boot session on February 3, 2026.</p>
+        <p>Right now that memory spans 83 files, 29 project notes, 31 daily logs, and 11 key decisions. That's the actual point of the system: context that compounds instead of disappearing between chats.</p>
       </div>
     </div>
 
@@ -467,7 +557,7 @@
 
     <!-- Workflow -->
     <div class="romulus-section" data-romulus-animate>
-      <div class="section-label">03 &#x2014; THE WORKFLOW</div>
+      <div class="section-label">~/romulus/workflow.sh</div>
       <h2 class="section-title">How the Work Actually Runs</h2>
       <div class="section-body">
         <p>Every project follows the same loop:</p>
@@ -477,28 +567,28 @@
           <div class="step-num">01</div>
           <div class="step-content">
             <div class="step-title">Research</div>
-            <div class="step-body">Grok surfaces real-time signal from X — what's getting traction, what people are complaining about, what's under-served right now.</div>
+            <div class="step-body">Grok pulls in live signal from X — what people are talking about, what feels noisy, and where there might actually be an opening.</div>
           </div>
         </div>
         <div class="workflow-step">
           <div class="step-num">02</div>
           <div class="step-content">
             <div class="step-title">Analysis</div>
-            <div class="step-body">OpenAI Codex stress-tests the idea. Technical feasibility, stack options, competitive landscape. Structured thinking, fast.</div>
+            <div class="step-body">OpenAI models stress-test the idea: technical feasibility, stack options, product shape, and whether the thing is actually worth building.</div>
           </div>
         </div>
         <div class="workflow-step">
           <div class="step-num">03</div>
           <div class="step-content">
             <div class="step-title">Synthesis</div>
-            <div class="step-body">Both come back to Romulus. This is where the work gets filtered. Ten years of product judgment is the actual filter — Romulus helps surface the data, the go/no-go is a human call.</div>
+            <div class="step-body">Everything routes back through Romulus. That's where the filtering happens. The system helps surface options. Product judgment still makes the call.</div>
           </div>
         </div>
         <div class="workflow-step">
           <div class="step-num">04</div>
           <div class="step-content">
             <div class="step-title">Execution</div>
-            <div class="step-body">Claude Code (Opus) handles the heavy build work. Romulus orchestrates, tracks, and keeps context between sessions. Git and Vercel handle deployment.</div>
+            <div class="step-body">Claude Code handles the heavier implementation work. Romulus orchestrates, tracks state, and preserves context between sessions. Git and Vercel close the loop.</div>
           </div>
         </div>
       </div>
@@ -506,9 +596,10 @@
 
     <!-- Model Routing -->
     <div class="romulus-section" data-romulus-animate>
+      <div class="section-label">~/romulus/models.json</div>
       <h2 class="section-title">Model Routing Philosophy</h2>
       <div class="section-body">
-        <p>Not every task needs the same tool. I apply the same resource allocation thinking to AI that I'd apply to any engineering system. Right tool, right job.</p>
+        <p>Not every task deserves the same model. I treat model selection the same way I'd treat any system design decision: match capability and cost to the job.</p>
       </div>
       <div class="model-grid">
         <div class="model-card">
@@ -534,17 +625,17 @@
       <h2 class="section-title">Projects Built with This System</h2>
 
       <div class="project-card">
-        <div class="project-name">Chronicle</div>
+        <div class="project-name">Chronicle <span class="project-status">shipped</span></div>
         <div class="project-url">thischronicle.com</div>
         <div class="project-body">
           <p>A daily history guessing game. One event per day, three chances to guess the year. Wordle-style digit feedback. 90 hand-curated puzzles spanning five centuries.</p>
-          <p>Specced, scaffolded, and pushed to production in a focused sprint. The design came first — share card format, difficulty calibration, the no-clues Sunday mode. Claude Code built to the spec.</p>
+          <p>I designed the game first — share card format, difficulty calibration, no-clues Sunday mode, and the editorial voice. Then I used the system to move from spec to production quickly.</p>
           <span class="project-tag">Next.js + Tailwind</span>
         </div>
       </div>
 
       <div class="project-card">
-        <div class="project-name">Caveat</div>
+        <div class="project-name">Caveat <span class="project-status">shipped</span></div>
         <div class="project-url">trycaveat.com</div>
         <div class="project-body">
           <p>AI contract analyzer. Upload any PDF or DOCX, get a risk report in 60 seconds. Flags bad terms, missing clauses, unfavorable language. Built on Next.js 15, Stripe, GPT-4o. Privacy-first — contracts are never stored.</p>
@@ -554,7 +645,7 @@
       </div>
 
       <div class="project-card">
-        <div class="project-name">The Morning Brief</div>
+        <div class="project-name">The Morning Brief <span class="project-status">live daily</span></div>
         <div class="project-url">delivered daily to Discord</div>
         <div class="project-body">
           <p>Every morning at 8 AM: weather for Park Slope, subway departures for the R train from Prospect Ave to Canal St, and a product signal digest. All three in Discord. Custom Node.js script pulling live MTA GTFS-RT protobuf feeds.</p>
@@ -568,11 +659,11 @@
 
     <!-- Memory Architecture -->
     <div class="romulus-section" data-romulus-animate>
-      <div class="section-label">05 &#x2014; THE BRAIN</div>
+      <div class="section-label">~/romulus/memory/</div>
       <h2 class="section-title">The Memory Architecture</h2>
       <div class="section-body">
         <p>The Obsidian vault is the part of this system I'm most proud of.</p>
-        <p>100+ files. 12 core memory documents. 29 project notes. 31 daily logs. 11 key decisions. Every session reads from it. Every session writes to it. Romulus knows the context of every project, every past decision, every lesson learned — not because I repeat myself, but because the system holds it.</p>
+        <p>83 files. 12 core memory docs. 29 project notes. 31 daily logs. 11 key decisions. Every session reads from it. Every session writes back to it. Romulus keeps context because the system stores it, not because I restate it every time.</p>
         <p>This is what makes it compound. Each project makes the next one faster. The vault grows more useful over time. The system learns from itself.</p>
       </div>
     </div>
@@ -581,7 +672,7 @@
 
     <!-- What's Next -->
     <div class="romulus-section" data-romulus-animate>
-      <div class="section-label">06 &#x2014; WHAT'S NEXT</div>
+      <div class="section-label">~/romulus/legion/README.md</div>
       <h2 class="section-title">Legion</h2>
       <div class="section-body">
         <p>The next layer is already designed. Legion is an orchestration system — Romulus as conductor, multiple Claude Code workers running in parallel with git worktree isolation.</p>
@@ -603,18 +694,13 @@
 
     <!-- Takeaways -->
     <div class="romulus-section" data-romulus-animate>
-      <div class="section-label">07 &#x2014; TAKEAWAYS</div>
+      <div class="section-label">~/romulus/notes.txt</div>
       <h2 class="section-title">What I'd Tell Another Builder</h2>
       <div class="section-body">
-        <p>The system matters as much as the tools. Getting the infrastructure right — the memory architecture, the model routing, the always-on setup — is what makes everything else go faster.</p>
-        <p>Good product judgment still applies. AI amplifies the work, it doesn't replace the thinking. Knowing what not to build is just as important as how fast you can ship.</p>
-        <p>The best measure of a system like this is whether you actually use it. Romulus runs every day. It delivers the morning brief. It keeps context across weeks of work. It's infrastructure now, not an experiment.</p>
+        <p>The difference between a useful AI setup and a toy is system design. Memory matters. Routing matters. Context management matters. The model alone is not the product.</p>
+        <p>Judgment still matters more. AI can accelerate research, writing, coding, and execution. It can't decide what deserves your time. That part is still human.</p>
+        <p>The best test is whether the thing becomes part of your real workflow. Romulus did. It runs every day, keeps state across projects, and helps me move faster without losing the thread.</p>
       </div>
-    </div>
-
-    <!-- Footer -->
-    <div class="romulus-footer">
-      <p>romulus@roma-eterna &#x2022; built with OpenClaw + Claude + OpenRouter</p>
     </div>
   </div>
 
