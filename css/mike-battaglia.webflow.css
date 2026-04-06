@@ -5615,6 +5615,14 @@
 .container-30 {
   border-radius: 8px;
   max-width: 640px;
+  overflow: hidden;
+}
+
+.container-30 img {
+  display: block;
+  border-radius: 0;
+  border: 1px solid rgba(200, 200, 200, 0.35);
+  box-sizing: border-box;
 }
 
 .container-30.list-work {
