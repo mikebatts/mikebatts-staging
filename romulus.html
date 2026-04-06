@@ -33,16 +33,13 @@
       --romulus-text: rgba(255,255,255,0.86);
       --romulus-text-soft: rgba(255,255,255,0.58);
       --romulus-text-faint: rgba(255,255,255,0.26);
-      --romulus-amber: #f59e0b;
+      --romulus-amber: #d9951a;
+      --romulus-amber-soft: rgba(217,149,26,0.14);
       --romulus-purple: #6d28d9;
-      --romulus-purple-soft: rgba(109,40,217,0.18);
     }
 
     .romulus-page {
-      background:
-        radial-gradient(circle at top right, rgba(109,40,217,0.16), transparent 28%),
-        radial-gradient(circle at top left, rgba(245,158,11,0.08), transparent 24%),
-        var(--romulus-bg);
+      background: var(--romulus-bg);
       min-height: 100vh;
       color: var(--romulus-text);
       font-family: 'Inter', 'Inter Tight', sans-serif;
@@ -96,7 +93,7 @@
     .gate-prompt span { color: rgba(255,255,255,0.4); }
     .gate-cursor {
       display: inline-block;
-      color: var(--romulus-purple);
+      color: var(--romulus-amber);
       animation: blink 1s steps(1) infinite;
       margin-left: 4px;
     }
@@ -131,21 +128,21 @@
     .gate-submit {
       margin-top: 16px;
       width: 100%;
-      background: rgba(109,40,217,0.12);
-      border: 1px solid rgba(109,40,217,0.32);
+      background: var(--romulus-amber-soft);
+      border: 1px solid rgba(217,149,26,0.28);
       border-radius: 6px;
       padding: 11px 16px;
       font-family: 'Inter Tight', 'Inter', sans-serif;
       font-size: 12px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: #d7c0ff;
+      color: #f1c06c;
       cursor: pointer;
       transition: background 0.2s, border-color 0.2s, transform 0.2s;
     }
     .gate-submit:hover {
-      background: rgba(109,40,217,0.2);
-      border-color: rgba(109,40,217,0.55);
+      background: rgba(217,149,26,0.2);
+      border-color: rgba(217,149,26,0.48);
       transform: translateY(-1px);
     }
 
@@ -159,14 +156,6 @@
     }
     .gate-error.visible { display: block; }
 
-    .gate-hint {
-      font-family: 'Inconsolata', monospace;
-      font-size: 11px;
-      color: rgba(255,255,255,0.2);
-      text-align: center;
-      margin-top: 8px;
-    }
-
     /* Content */
     .romulus-content { display: none; }
     .romulus-content.visible { display: block; }
@@ -175,9 +164,9 @@
     .romulus-header {
       padding: 32px 40px 24px;
       border-bottom: 1px solid rgba(255,255,255,0.06);
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
       align-items: center;
-      justify-content: space-between;
       gap: 16px;
     }
     .romulus-logo {
@@ -186,6 +175,7 @@
       color: var(--romulus-amber);
       letter-spacing: 0.08em;
       text-decoration: none;
+      justify-self: end;
     }
     .romulus-logo:hover { opacity: 0.8; }
     .romulus-back {
@@ -196,16 +186,18 @@
       color: rgba(255,255,255,0.35);
       text-decoration: none;
       transition: color 0.2s;
+      justify-self: start;
     }
     .romulus-back:hover { color: rgba(255,255,255,0.6); }
     .romulus-status {
       font-family: 'Inconsolata', monospace;
       font-size: 11px;
       color: rgba(255,255,255,0.42);
-      text-align: right;
+      text-align: center;
       line-height: 1.5;
+      justify-self: center;
     }
-    .romulus-status .accent { color: var(--romulus-purple); }
+    .romulus-status .accent { color: var(--romulus-amber); }
 
     /* Hero */
     .romulus-hero {
@@ -255,7 +247,7 @@
       color: rgba(255,255,255,0.72);
     }
     .hero-terminal-line .prompt { color: var(--romulus-amber); }
-    .hero-terminal-line .value { color: #c4b5fd; }
+    .hero-terminal-line .value { color: rgba(255,255,255,0.82); }
 
     /* Sections */
     .romulus-section {
@@ -309,14 +301,13 @@
       transition: border-color 0.2s, background 0.2s;
     }
     .model-card:hover {
-      border-color: rgba(109,40,217,0.28);
+      border-color: rgba(255,255,255,0.12);
       background: rgba(255,255,255,0.05);
-      box-shadow: 0 0 0 1px rgba(109,40,217,0.12) inset;
     }
     .model-name {
       font-family: 'Inconsolata', monospace;
       font-size: 13px;
-      color: #c4b5fd;
+      color: var(--romulus-amber);
       margin-bottom: 6px;
     }
     .model-desc {
@@ -336,15 +327,6 @@
       position: relative;
       overflow: hidden;
     }
-
-    .project-card::before {
-      content: '';
-      position: absolute;
-      inset: 0 auto 0 0;
-      width: 2px;
-      background: linear-gradient(180deg, var(--romulus-purple), transparent 75%);
-      opacity: 0.85;
-    }
     .project-name {
       font-family: 'Inconsolata', monospace;
       font-size: 14px;
@@ -357,9 +339,9 @@
       margin-left: 8px;
       padding: 2px 6px;
       border-radius: 999px;
-      border: 1px solid rgba(109,40,217,0.35);
-      background: rgba(109,40,217,0.12);
-      color: #d7c0ff;
+      border: 1px solid rgba(217,149,26,0.28);
+      background: rgba(217,149,26,0.1);
+      color: #f1c06c;
       font-family: 'Inconsolata', monospace;
       font-size: 10px;
       letter-spacing: 0.06em;
@@ -437,8 +419,8 @@
 
     /* Legion section */
     .legion-box {
-      background: rgba(109,40,217,0.08);
-      border: 1px solid rgba(109,40,217,0.18);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
       border-radius: 10px;
       padding: 28px;
       margin-top: 20px;
@@ -447,7 +429,7 @@
     .legion-title {
       font-family: 'Inconsolata', monospace;
       font-size: 14px;
-      color: #d7c0ff;
+      color: var(--romulus-amber);
       margin-bottom: 12px;
     }
     .legion-body {
@@ -482,11 +464,20 @@
     }
 
     @media (max-width: 600px) {
-      .romulus-header { padding: 24px 20px 20px; align-items: flex-start; flex-direction: column; }
+      .romulus-header {
+        padding: 24px 20px 20px;
+        grid-template-columns: 1fr;
+        justify-items: center;
+      }
       .romulus-hero { padding: 48px 20px 40px; }
       .romulus-section { padding: 40px 20px; }
       .gate-terminal { padding: 28px 24px; }
-      .romulus-status { text-align: left; }
+      .romulus-back,
+      .romulus-logo,
+      .romulus-status {
+        justify-self: center;
+        text-align: center;
+      }
     }
   </style>
 </head>
@@ -501,7 +492,6 @@
       <button class="gate-submit" id="gateSubmit">Unlock</button>
       <div class="gate-error" id="gateError">Access denied. Try again.</div>
     </div>
-    <div class="gate-hint">hint: italian pastry you love</div>
   </div>
 
   <!-- CONTENT -->
