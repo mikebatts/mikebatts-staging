@@ -439,21 +439,71 @@
       font-weight: 300;
     }
 
-    /* Morning brief screenshots */
-    .brief-screenshots {
+    /* Artifact screenshots */
+    .artifact-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
       margin-top: 20px;
     }
-    .brief-img {
+    .artifact-grid.single {
+      grid-template-columns: 1fr;
+    }
+    .artifact-img {
       width: 100%;
       border-radius: 10px;
       border: 1px solid rgba(255,255,255,0.08);
       display: block;
     }
+    .artifact-caption {
+      font-family: 'Inconsolata', monospace;
+      font-size: 11px;
+      color: rgba(255,255,255,0.28);
+      margin-top: 8px;
+      text-align: center;
+      letter-spacing: 0.04em;
+    }
+    .artifact-placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: rgba(255,255,255,0.025);
+      border: 1px dashed rgba(255,255,255,0.1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inconsolata', monospace;
+      font-size: 11px;
+      color: rgba(255,255,255,0.2);
+    }
+    /* What broke section */
+    .broke-card {
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-left: 2px solid rgba(217,149,26,0.5);
+      border-radius: 10px;
+      padding: 24px 28px;
+      margin-top: 16px;
+    }
+    .broke-label {
+      font-family: 'Inconsolata', monospace;
+      font-size: 11px;
+      color: var(--romulus-amber);
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+    .broke-body {
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+    .broke-body strong {
+      color: rgba(255,255,255,0.75);
+      font-weight: 500;
+    }
     @media (max-width: 600px) {
-      .brief-screenshots { grid-template-columns: 1fr; }
+      .artifact-grid { grid-template-columns: 1fr; }
     }
 
     /* Divider */
@@ -567,31 +617,31 @@
       <h2 class="section-title">Why I Built It This Way</h2>
       <div class="workflow-list" style="margin-top:20px;">
         <div class="workflow-step">
-          <div class="step-num">💬</div>
+          <div class="step-num">01</div>
           <div class="step-content">
-            <div class="step-title">Discord as the interface</div>
-            <div class="step-body">It's always in my pocket, supports threaded context, and gives recurring outputs a natural home. It also doubles as a lightweight log — every brief, every command, every response is timestamped and searchable.</div>
+            <div class="step-title">Discord</div>
+            <div class="step-body">Threaded, logged, pocketable. Every brief, command, and response is timestamped and searchable. The channel history doubles as episodic memory before anything needs a vector DB.</div>
           </div>
         </div>
         <div class="workflow-step">
-          <div class="step-num">📓</div>
+          <div class="step-num">02</div>
           <div class="step-content">
-            <div class="step-title">Obsidian as persistent memory</div>
-            <div class="step-body">Markdown files are durable, inspectable, and not locked to a proprietary layer. I can review, restructure, and evolve memory without vendor risk. It was also a deliberate choice over the built-in session memory in OpenClaw — which is session-bound, not persistent.</div>
+            <div class="step-title">Obsidian</div>
+            <div class="step-body">Durable Markdown, no vendor lock, human-inspectable. Deliberate choice over built-in session memory — which resets between sessions. Files survive reboots. Context doesn't disappear when the agent does.</div>
           </div>
         </div>
         <div class="workflow-step">
-          <div class="step-num">🖥</div>
+          <div class="step-num">03</div>
           <div class="step-content">
-            <div class="step-title">Dedicated Mac mini over cloud</div>
-            <div class="step-body">I wanted a machine that was always available, stable, and separate from my daily laptop workflow. A dedicated node means cron jobs run reliably, context is always loaded, and there's no cold-start latency. Simpler to reason about than a cloud VM.</div>
+            <div class="step-title">Dedicated Mac mini</div>
+            <div class="step-body">Stable cron, zero cold-start, separate from the daily laptop. A dedicated node means scheduled jobs run reliably and context is always preloaded. Simpler to reason about than a cloud VM for a one-person system.</div>
           </div>
         </div>
         <div class="workflow-step">
-          <div class="step-num">🧠</div>
+          <div class="step-num">04</div>
           <div class="step-content">
-            <div class="step-title">Multi-model instead of one-model-for-everything</div>
-            <div class="step-body">Different tasks have different cost/capability tradeoffs. I apply the same resource allocation thinking to AI that I'd apply to any system: match the tool to the job. Routing a morning brief through a $0.000001/token model instead of Opus saves real money at scale without any quality loss.</div>
+            <div class="step-title">Multi-model routing</div>
+            <div class="step-body">Match capability and cost to the job. Minimax M2.7 for briefs and scheduled tasks ($0.000001/token). Claude Sonnet for research synthesis. Claude Opus for multi-file implementation. Running the same 8 AM brief through Opus would cost 400x more with identical output quality.</div>
           </div>
         </div>
       </div>
@@ -696,9 +746,34 @@
           <p>63 consecutive mornings. Zero missed. The kind of utility that makes the system feel real before breakfast.</p>
           <span class="project-tag">Node.js + MTA GTFS-RT + NWS API</span>
         </div>
-        <div class="brief-screenshots">
-          <img src="images/morning-brief-1.png" alt="Morning brief: weather + subway departures" class="brief-img" />
-          <img src="images/morning-brief-2.png" alt="Morning brief: product signal digest" class="brief-img" />
+        <div class="artifact-grid">
+          <div>
+            <img src="images/morning-brief-1.png" alt="Morning brief: weather + subway" class="artifact-img" />
+            <div class="artifact-caption">weather + R train departures — Park Slope → Canal St</div>
+          </div>
+          <div>
+            <img src="images/morning-brief-2.png" alt="Morning brief: product signal" class="artifact-img" />
+            <div class="artifact-caption">product signal digest — daily curated scan</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="romulus-divider">
+
+    <!-- What Broke -->
+    <div class="romulus-section" data-romulus-animate>
+      <div class="section-label">~/romulus/lessons.md</div>
+      <h2 class="section-title">What Broke</h2>
+      <div class="section-body">
+        <p>The most credible part of running a system in production is what goes wrong. Here's the one worth documenting.</p>
+      </div>
+      <div class="broke-card">
+        <div class="broke-label">MTA STOP ID BUG — DAY 11</div>
+        <div class="broke-body">
+          <p><strong>What happened:</strong> The morning brief shipped with stop ID R16. The feed returned plausible-looking data — 12-minute travel time from Prospect Ave to Canal St. It looked right. R16 is Times Square. We were tracking the wrong station entirely for 11 days.</p>
+          <p><strong>Fix:</strong> Downloaded the full static GTFS dataset, cross-referenced stops.txt, found R34N (Prospect Ave northbound) and R23N (Canal St northbound). Patched the script. Correct travel time: 26 minutes.</p>
+          <p><strong>Lesson:</strong> Plausible data isn't verified data. A number that looks reasonable is not a number that's correct. Always cross-reference against a second source before declaring anything production-ready.</p>
         </div>
       </div>
     </div>
@@ -710,9 +785,14 @@
       <div class="section-label">~/romulus/memory/</div>
       <h2 class="section-title">The Memory Architecture</h2>
       <div class="section-body">
-        <p>The Obsidian vault is the part of this system I'm most proud of.</p>
-        <p>83 files. 12 core memory docs. 29 project notes. 31 daily logs. 11 key decisions. Every session reads from it. Every session writes back to it. Romulus keeps context because the system stores it, not because I restate it every time.</p>
-        <p>This is what makes it compound. Each project makes the next one faster. The vault grows more useful over time. The system learns from itself.</p>
+        <p>83 files. 12 core memory docs. 29 project notes. 31 daily logs. 11 key decisions. Dating back to first boot on February 3, 2026.</p>
+        <p>Every session reads from it. Every session writes back. The result: each new project starts with full context from every prior project — no re-explaining history, no rebuilding mental models from scratch. Chat history is ephemeral. Obsidian files are not.</p>
+      </div>
+      <div class="artifact-grid single" style="margin-top:20px;">
+        <div>
+          <div class="artifact-placeholder">obsidian graph view — screenshot coming</div>
+          <div class="artifact-caption">vault graph view — 29 project nodes, 31 daily logs, 11 decisions</div>
+        </div>
       </div>
     </div>
 
