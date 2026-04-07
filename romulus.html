@@ -439,6 +439,23 @@
       font-weight: 300;
     }
 
+    /* Morning brief screenshots */
+    .brief-screenshots {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .brief-img {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.08);
+      display: block;
+    }
+    @media (max-width: 600px) {
+      .brief-screenshots { grid-template-columns: 1fr; }
+    }
+
     /* Divider */
     .romulus-divider {
       border: none;
@@ -510,11 +527,11 @@
     <!-- Hero -->
     <div class="romulus-hero">
       <div class="romulus-eyebrow">CASE STUDY &#x2022; 2026</div>
-      <h1 class="romulus-title">Building a Scalable, Personal AI System</h1>
-      <p class="romulus-subtitle">How I designed and built an always-on AI agent — named after the first king of Rome — to close the gap between conception and shipping.</p>
+      <h1 class="romulus-title">Designing a Persistent Product Engineering System on OpenClaw</h1>
+      <p class="romulus-subtitle">An always-on agent that preserves context, routes work across models, and closes the loop from signal to shipped artifact. Running since February 3, 2026.</p>
       <div class="hero-terminal">
         <div class="hero-terminal-line"><span class="prompt">$</span> system.boot --name <span class="value">Romulus</span> --host <span class="value">Roma Eterna</span></div>
-        <div class="hero-terminal-line"><span class="prompt">$</span> status <span class="value">persistent agent / discord interface / obsidian memory / scheduled workflows</span></div>
+        <div class="hero-terminal-line"><span class="prompt">$</span> status brief:<span class="value">delivered 63/63 days, zero missed</span> — memory:<span class="value">83 files / 11 decisions</span></div>
       </div>
     </div>
 
@@ -525,8 +542,8 @@
       <div class="section-label">~/romulus/overview.txt</div>
       <h2 class="section-title">The Problem</h2>
       <div class="section-body">
-        <p>I've spent the past decade in product — designing, building, and shipping across startups in health, web3, energy, and consumer apps. The recurring bottleneck was never ideas. It was throughput.</p>
-        <p>Good opportunities pile up fast when you know how to spot them. Building them one by one, alone, is slower than it should be. Romulus started as an attempt to change that without giving up taste, judgment, or control.</p>
+        <p>I've worked across product, design, and engineering for a decade — startups in health, web3, energy, consumer software. The recurring constraint wasn't ideas or skill. It was throughput.</p>
+        <p>Strong opportunities surface faster than one person can evaluate and build them. Most AI workflows helped with isolated tasks but didn't preserve context well enough for real product work. Sessions reset. Notes fragmented. Good ideas disappeared into chat history. I needed a system that stayed on, retained project memory, and supported the full path from signal to shipped artifact — without removing judgment from the loop.</p>
       </div>
     </div>
 
@@ -535,11 +552,48 @@
     <!-- Setup -->
     <div class="romulus-section" data-romulus-animate>
       <div class="section-label">~/romulus/setup.md</div>
-      <h2 class="section-title">Roma Eterna</h2>
+      <h2 class="section-title">The Setup</h2>
       <div class="section-body">
-        <p>Romulus runs on OpenClaw and lives on a dedicated Mac mini called Roma Eterna. It's always on — running scheduled jobs, monitoring things in the background, and sending a morning brief to Discord every day at 8 AM.</p>
-        <p>The interface is Discord. The memory layer is an Obsidian vault: daily notes, project files, operating context, decisions, and lessons learned going back to the first boot session on February 3, 2026.</p>
-        <p>Right now that memory spans 83 files, 29 project notes, 31 daily logs, and 11 key decisions. That's the actual point of the system: context that compounds instead of disappearing between chats.</p>
+        <p>Romulus runs on OpenClaw and lives on a dedicated Mac mini named Roma Eterna. It's always on — running scheduled jobs, monitoring things in the background, and sending a morning brief to Discord every day at 8 AM.</p>
+        <p>Memory lives in an Obsidian vault: daily notes, project files, operating context, decisions, and lessons. Every session reads from it. Every session writes back. 83 files, 29 project notes, 31 daily logs, 11 key decisions — dating back to first boot on February 3, 2026.</p>
+      </div>
+    </div>
+
+    <hr class="romulus-divider">
+
+    <!-- Why This Architecture -->
+    <div class="romulus-section" data-romulus-animate>
+      <div class="section-label">~/romulus/decisions.md</div>
+      <h2 class="section-title">Why I Built It This Way</h2>
+      <div class="workflow-list" style="margin-top:20px;">
+        <div class="workflow-step">
+          <div class="step-num">💬</div>
+          <div class="step-content">
+            <div class="step-title">Discord as the interface</div>
+            <div class="step-body">It's always in my pocket, supports threaded context, and gives recurring outputs a natural home. It also doubles as a lightweight log — every brief, every command, every response is timestamped and searchable.</div>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-num">📓</div>
+          <div class="step-content">
+            <div class="step-title">Obsidian as persistent memory</div>
+            <div class="step-body">Markdown files are durable, inspectable, and not locked to a proprietary layer. I can review, restructure, and evolve memory without vendor risk. It was also a deliberate choice over the built-in session memory in OpenClaw — which is session-bound, not persistent.</div>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-num">🖥</div>
+          <div class="step-content">
+            <div class="step-title">Dedicated Mac mini over cloud</div>
+            <div class="step-body">I wanted a machine that was always available, stable, and separate from my daily laptop workflow. A dedicated node means cron jobs run reliably, context is always loaded, and there's no cold-start latency. Simpler to reason about than a cloud VM.</div>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-num">🧠</div>
+          <div class="step-content">
+            <div class="step-title">Multi-model instead of one-model-for-everything</div>
+            <div class="step-body">Different tasks have different cost/capability tradeoffs. I apply the same resource allocation thinking to AI that I'd apply to any system: match the tool to the job. Routing a morning brief through a $0.000001/token model instead of Opus saves real money at scale without any quality loss.</div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -548,37 +602,37 @@
     <!-- Workflow -->
     <div class="romulus-section" data-romulus-animate>
       <div class="section-label">~/romulus/workflow.sh</div>
-      <h2 class="section-title">How the Work Actually Runs</h2>
+      <h2 class="section-title">The Workflow</h2>
       <div class="section-body">
-        <p>Every project follows the same loop:</p>
+        <p>Every project moves through the same four stages. The models change. The loop stays fixed.</p>
       </div>
       <div class="workflow-list">
         <div class="workflow-step">
           <div class="step-num">01</div>
           <div class="step-content">
             <div class="step-title">Research</div>
-            <div class="step-body">Grok pulls in live signal from X — what people are talking about, what feels noisy, and where there might actually be an opening.</div>
+            <div class="step-body">Grok queries X live — classifying signal from noise, surfacing recurring pain points, flagging what's trending versus what's overdone. The output is a ranked list of opportunities worth evaluating, not a raw feed.</div>
           </div>
         </div>
         <div class="workflow-step">
           <div class="step-num">02</div>
           <div class="step-content">
             <div class="step-title">Analysis</div>
-            <div class="step-body">OpenAI models stress-test the idea: technical feasibility, stack options, product shape, and whether the thing is actually worth building.</div>
+            <div class="step-body">OpenAI models pressure-test feasibility: stack complexity, competitive landscape, build time, distribution path. Structured output. Forces a real decision on whether the thing is worth the week.</div>
           </div>
         </div>
         <div class="workflow-step">
           <div class="step-num">03</div>
           <div class="step-content">
             <div class="step-title">Synthesis</div>
-            <div class="step-body">Everything routes back through Romulus. That's where the filtering happens. The system helps surface options. Product judgment still makes the call.</div>
+            <div class="step-body">Both route back through Romulus, where project memory and prior decisions are loaded as context. The system retrieves relevant past work, compares options, flags contradictions. Final call stays with me.</div>
           </div>
         </div>
         <div class="workflow-step">
           <div class="step-num">04</div>
           <div class="step-content">
             <div class="step-title">Execution</div>
-            <div class="step-body">Claude Code handles the heavier implementation work. Romulus orchestrates, tracks state, and preserves context between sessions. Git and Vercel close the loop.</div>
+            <div class="step-body">Claude Code handles multi-file implementation. Romulus tracks Git state, Vercel deploys, and session context between builds. When one sprint ends and the next starts, nothing has to be re-explained.</div>
           </div>
         </div>
       </div>
@@ -611,8 +665,8 @@
 
     <!-- What Shipped -->
     <div class="romulus-section" data-romulus-animate>
-      <div class="section-label">04 &#x2014; WHAT WE SHIPPED</div>
-      <h2 class="section-title">Projects Built with This System</h2>
+      <div class="section-label">~/romulus/shipped/</div>
+      <h2 class="section-title">What This System Has Shipped</h2>
 
       <div class="project-card">
         <div class="project-name">Chronicle <span class="project-status">shipped</span></div>
@@ -636,11 +690,15 @@
 
       <div class="project-card">
         <div class="project-name">The Morning Brief <span class="project-status">live daily</span></div>
-        <div class="project-url">delivered daily to Discord</div>
+        <div class="project-url">delivered to #roma-eterna every morning at 8 AM</div>
         <div class="project-body">
-          <p>Every morning at 8 AM: weather for Park Slope, subway departures for the R train from Prospect Ave to Canal St, and a product signal digest. All three in Discord. Custom Node.js script pulling live MTA GTFS-RT protobuf feeds.</p>
-          <p>Built something I actually use every day. Real utility, not a demo. The kind of tool that makes the system feel worth it before breakfast.</p>
-          <span class="project-tag">Node.js + MTA GTFS-RT</span>
+          <p>Weather for Park Slope. R train departures from Prospect Ave to Canal St in exact minutes. Product signal digest: what's worth watching, what's noise, what to skip. All three in Discord. Custom Node.js script pulling live MTA GTFS-RT protobuf feeds, NWS weather API, and a curated signal scan via Grok.</p>
+          <p>63 consecutive mornings. Zero missed. The kind of utility that makes the system feel real before breakfast.</p>
+          <span class="project-tag">Node.js + MTA GTFS-RT + NWS API</span>
+        </div>
+        <div class="brief-screenshots">
+          <img src="images/morning-brief-1.png" alt="Morning brief: weather + subway departures" class="brief-img" />
+          <img src="images/morning-brief-2.png" alt="Morning brief: product signal digest" class="brief-img" />
         </div>
       </div>
     </div>
@@ -687,9 +745,9 @@
       <div class="section-label">~/romulus/notes.txt</div>
       <h2 class="section-title">What I'd Tell Another Builder</h2>
       <div class="section-body">
-        <p>The difference between a useful AI setup and a toy is system design. Memory matters. Routing matters. Context management matters. The model alone is not the product.</p>
-        <p>Judgment still matters more. AI can accelerate research, writing, coding, and execution. It can't decide what deserves your time. That part is still human.</p>
-        <p>The best test is whether the thing becomes part of your real workflow. Romulus did. It runs every day, keeps state across projects, and helps me move faster without losing the thread.</p>
+        <p>The model is not the product. The architecture is. Persistent memory, explicit routing, a fixed workflow, and a stable host change what's possible. Without them, you have a fast chatbot. With them, you have a system.</p>
+        <p>Articulate your tradeoffs. Why this interface, why this memory substrate, why this model for this task — the decisions are where the product engineering shows. Anyone can list the tools. Fewer people can explain why they chose them over the alternatives.</p>
+        <p>Build something you actually use every day. The morning brief is the most useful thing in this system. Not because it's impressive — because I check it every morning before I leave. That's the real test.</p>
       </div>
     </div>
   </div>
