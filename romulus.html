@@ -429,7 +429,7 @@
     .terminal-header-host { color: var(--amber); }
     .terminal-body {
       padding: 24px 20px 28px;
-      min-height: 220px;
+      min-height: 180px;
       overflow-x: hidden;
       font-family: 'Inconsolata', monospace;
       font-size: 13px;
@@ -469,6 +469,7 @@
     .term-connector { color: var(--amber); }
     .term-arrow { color: rgba(255,255,255,0.25); }
     .term-sparkle { color: #e879f9; }
+    .term-cursor { color: var(--amber); animation: cursor-blink 0.6s steps(1) infinite; }
     .terminal-line .cursor {
       display: inline-block;
       color: var(--amber);
@@ -587,171 +588,119 @@
       line-height: 1.5;
     }
 
-    /* ===== PIPELINE FLOW DIAGRAM ===== */
+    /* ===== PIPELINE SECTION ===== */
     .pipeline-section {
       padding: 40px 20px;
-      max-width: calc(var(--container) + 280px);
+      max-width: calc(var(--container) + 80px);
       margin: 0 auto;
     }
-    .pipeline-label {
+
+    /* ===== GANTT CHART ===== */
+    .gantt-chart {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 20px 0;
+    }
+    .gantt-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+      position: relative;
+    }
+    .gantt-label {
+      width: 160px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
       font-family: 'Inconsolata', monospace;
       font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--amber);
-      margin-bottom: 16px;
+      color: var(--text-secondary);
     }
-    .pipeline-heading {
-      font-family: 'Josefin Sans', 'Inter Tight', sans-serif;
-      font-size: 30px;
-      font-weight: 600;
-      color: #fff;
-      letter-spacing: -0.02em;
-      margin-bottom: 16px;
-      text-shadow: 0 0 20px rgba(217,149,26,0.15);
+    .gantt-label .emoji { font-size: 16px; }
+    .gantt-track {
+      flex: 1;
+      height: 20px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
     }
-    .pipeline-sublabel {
+    .gantt-bar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--amber), rgba(217,149,26,0.6));
+      border-radius: 4px;
+      transition: width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      box-shadow: 0 0 8px rgba(217,149,26,0.2);
+    }
+    .gantt-bar.caesar { width: 0; }
+    .gantt-bar.gate { width: 0; background: linear-gradient(90deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06)); }
+    .gantt-bar.augustus { width: 0; }
+    .gantt-bar.vespasian { width: 0; }
+    .gantt-bar.trajan { width: 0; }
+    .gantt-bar.total {
+      width: 0;
+      background: linear-gradient(90deg, var(--amber), rgba(217,149,26,0.8));
+      box-shadow: 0 0 12px rgba(217,149,26,0.3), 0 0 24px rgba(217,149,26,0.1);
+      height: 24px;
+      top: -2px;
+    }
+    .gantt-time {
+      width: 70px;
+      flex-shrink: 0;
+      text-align: right;
       font-family: 'Inconsolata', monospace;
       font-size: 12px;
-      color: var(--text-secondary);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      margin-bottom: 32px;
-    }
-    .pipeline-body {
-      font-family: 'Inter', sans-serif;
-      font-size: 16px;
-      color: var(--text-body);
-      line-height: 1.6;
-      margin-bottom: 40px;
-      max-width: var(--container);
-    }
-
-    .pipeline-diagram {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 0;
-      padding: 32px 0;
-      max-width: 100%;
-      margin: 0 auto;
-    }
-
-    .pipeline-node {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 14px 16px;
-      background: var(--card-bg);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 10px;
-      min-width: 90px;
-      transition: all 0.4s ease;
-      opacity: 0;
-      transform: translateY(6px);
-    }
-
-    .pipeline-node.lit {
-      opacity: 1;
-      transform: translateY(-2px);
-      background: var(--amber-soft);
-      border-color: var(--amber-border);
-    }
-    .pipeline-node.lit[data-accent="purple"] {
-      border-color: rgba(168,85,247,0.35);
-      background: rgba(168,85,247,0.08);
-    }
-    .pipeline-node.lit[data-accent="blue"] {
-      border-color: rgba(59,130,246,0.35);
-      background: rgba(59,130,246,0.08);
-    }
-    .pipeline-node.lit[data-accent="cyan"] {
-      border-color: rgba(6,182,212,0.35);
-      background: rgba(6,182,212,0.08);
-    }
-    .pipeline-node.lit[data-accent="green"] {
-      border-color: rgba(34,197,94,0.35);
-      background: rgba(34,197,94,0.08);
-    }
-
-    .pipeline-node-emoji {
-      font-size: 20px;
-      margin-bottom: 6px;
-    }
-
-    .pipeline-node-name {
-      font-family: 'Inter Tight', sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--text-secondary);
-      transition: color 0.4s ease;
-    }
-
-    .pipeline-node.lit .pipeline-node-name { color: var(--text-primary); }
-
-    .pipeline-node-sub {
-      font-family: 'Inconsolata', monospace;
-      font-size: 10px;
       color: var(--text-faint);
-      margin-top: 3px;
+    }
+    .gantt-row.total {
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .gantt-row.total .gantt-label {
+      color: var(--text-primary);
+      font-weight: 600;
     }
 
-    .pipeline-arrow {
-      width: 24px;
-      height: 1px;
-      background: rgba(255,255,255,0.12);
-      position: relative;
-      flex-shrink: 0;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-    .pipeline-arrow.lit {
-      opacity: 1;
-    }
+    /* Gate rows */
+    .gantt-row.gate { margin-bottom: 6px; }
+    .gantt-row.gate .gantt-label { font-size: 11px; color: rgba(255,255,255,0.3); }
+    .gantt-row.gate .gantt-time { font-size: 11px; }
+    .gantt-row.gate .gantt-track { height: 12px; }
 
-    .pipeline-arrow::after {
-      content: '\203A';
-      position: absolute;
-      right: -4px;
-      top: -9px;
-      font-size: 18px;
-      color: rgba(255,255,255,0.15);
-      line-height: 1;
-    }
+    /* Animated state */
+    .gantt-chart.lit .gantt-bar.caesar { width: 30.7%; }
+    .gantt-chart.lit .gantt-bar.gate-1 { width: 2.1%; }
+    .gantt-chart.lit .gantt-bar.augustus { width: 73.5%; }
+    .gantt-chart.lit .gantt-bar.gate-2 { width: 1%; }
+    .gantt-chart.lit .gantt-bar.vespasian { width: 10.3%; }
+    .gantt-chart.lit .gantt-bar.gate-3 { width: 0.4%; }
+    .gantt-chart.lit .gantt-bar.trajan { width: 6.7%; }
+    .gantt-chart.lit .gantt-bar.total { width: 100%; }
 
-    .pipeline-arrow.lit {
-      background: var(--amber);
-    }
-    .pipeline-arrow.lit::after {
-      color: var(--amber);
-    }
+    /* Stagger delays for bars */
+    .gantt-chart.lit .gantt-bar.caesar { transition-delay: 0s; }
+    .gantt-chart.lit .gantt-bar.gate-1 { transition-delay: 400ms; }
+    .gantt-chart.lit .gantt-bar.augustus { transition-delay: 600ms; }
+    .gantt-chart.lit .gantt-bar.gate-2 { transition-delay: 2000ms; }
+    .gantt-chart.lit .gantt-bar.vespasian { transition-delay: 2200ms; }
+    .gantt-chart.lit .gantt-bar.gate-3 { transition-delay: 2800ms; }
+    .gantt-chart.lit .gantt-bar.trajan { transition-delay: 3000ms; }
+    .gantt-chart.lit .gantt-bar.total { transition-delay: 3400ms; }
 
-    /* Pipeline mobile: vertical layout */
     @media (max-width: 768px) {
-      .pipeline-diagram {
-        flex-direction: column;
-        align-items: center;
-      }
-      .pipeline-node {
-        min-width: unset;
-        width: auto;
-        padding: 12px 20px;
-      }
-      .pipeline-arrow {
-        width: 1px;
-        height: 24px;
-      }
-      .pipeline-arrow::after {
-        content: '\203A';
-        right: auto;
-        left: -5px;
-        top: auto;
-        bottom: -8px;
-        transform: rotate(90deg);
-      }
+      .gantt-row { flex-wrap: wrap; gap: 4px; }
+      .gantt-label { width: 100%; font-size: 12px; }
+      .gantt-time { width: auto; text-align: right; font-size: 11px; margin-left: auto; }
+      .gantt-track { width: 100%; height: 16px; }
+      .gantt-bar.total { height: 20px; }
+      .gantt-chart { padding: 12px 0; }
     }
 
     /* ===== EXPERIMENT CARDS ===== */
@@ -1031,7 +980,7 @@
       .cohort-grid { grid-template-columns: repeat(3, 1fr); }
       .cohort-card { padding: 24px; }
 
-      .pipeline-section { padding: 80px 40px; }
+      .pipeline-section { padding: 80px 40px; max-width: calc(var(--container) + 80px); }
 
       .experiment-section { padding: 80px 40px; }
       .experiment-card {
@@ -1207,49 +1156,33 @@
         </div>
         <div class="terminal-body">
           <div class="terminal-line" data-text="❯ legion forge forbidden —type party-game —genre word" data-html="<span class='term-cmd'>❯ legion forge forbidden —type party-game —genre word</span>"></div>
-          <div class="terminal-line" data-text=""></div>
-          <div class="terminal-line" data-text="⚡  spawning  ·  4 cohorts ·  8 workers" data-html="<span class='term-label'>⚡  spawning  ·  4 cohorts ·  8 workers</span>"></div>
-          <div class="terminal-line" data-text=""></div>
-          <div class="terminal-line" data-text="⚔️  caesar · research pipeline started" data-html="<span class='term-caesar'>⚔️  caesar</span><span class='term-label'> · research pipeline started</span>"></div>
-          <div class="terminal-line" data-text="  🔍  researcher   →  scanning taboo, jackbox, psych  ·  42 competitors" data-html="  <span class='term-label'>🔍  researcher</span><span class='term-arrow'>   →  </span>scanning taboo, jackbox, psych  ·  42 competitors"></div>
-          <div class="terminal-line" data-text="  🎯  analyst       →  saturation: 87% casual · wedge: AI decks ✓" data-html="  <span class='term-label'>🎯  analyst      </span><span class='term-arrow'> →  </span>saturation: 87% casual · wedge: AI decks <span class='term-check'>✓</span>"></div>
-          <div class="terminal-line" data-text="  ⚔️  competitor    →  pricing map: $0–$12/mo · gap: premium theme engine" data-html="  <span class='term-label'>⚔️  competitor   </span><span class='term-arrow'> →  </span>pricing map: $0–$12/mo · gap: premium theme engine"></div>
-          <div class="terminal-line" data-text="  🧠  synthesizer   →  KEY FINDINGS: themed deck gen, zero competitors" data-html="  <span class='term-label'>🧠  synthesizer  </span><span class='term-arrow'> →  </span><span class='term-metric'>KEY FINDINGS: themed deck gen, zero competitors</span>"></div>
-          <div class="terminal-line" data-text="  📊 pipeline complete  ·  2m 23s  ·  decision: BUILD ✓" data-html="  <span class='term-metric'>📊 pipeline complete</span>  ·  2m 23s  ·  decision: BUILD <span class='term-check'>✓</span>"></div>
-          <div class="terminal-line" data-text=""></div>
-          <div class="terminal-line" data-text="✅  caesar → augustus  ·  spec approved ·  gate: PASS" data-html="<span class='term-ok'>✅  caesar → augustus</span>  ·  spec approved ·  gate: <span class='term-ok'>PASS</span>"></div>
-          <div class="terminal-line" data-text=""></div>
-          <div class="terminal-line" data-text="🏛  augustus · build pipeline started" data-html="<span class='term-augustus'>🏛  augustus</span><span class='term-label'> · build pipeline started</span>"></div>
-          <div class="terminal-line" data-text="  📐  architect     →  Next.js 15 + Stripe + OAuth + Vercel" data-html="  <span class='term-label'>📐  architect    </span><span class='term-arrow'> →  </span>Next.js 15 + Stripe + OAuth + Vercel"></div>
-          <div class="terminal-line" data-text="  🔨  builder       →  42 files · 3,847 lines · TypeScript strict ✓" data-html="  <span class='term-label'>🔨  builder      </span><span class='term-arrow'> →  </span>42 files · 3,847 lines · TypeScript strict <span class='term-check'>✓</span>"></div>
-          <div class="terminal-line" data-text="  🔎  reviewer  (1) →  nit: add error boundary on game lobby page" data-html="  <span class='term-label'>🔎  reviewer  (1)</span><span class='term-arrow'> →  </span>nit: add error boundary on game lobby page"></div>
-          <div class="terminal-line" data-text="  🔨  builder       →  fix applied · +38 lines" data-html="  <span class='term-label'>🔨  builder      </span><span class='term-arrow'> →  </span>fix applied · +38 lines"></div>
-          <div class="terminal-line" data-text="  ✅  reviewer  (2) →  PASS · all checks green" data-html="  <span class='term-ok'>✅  reviewer  (2)</span><span class='term-arrow'> →  </span><span class='term-ok'>PASS</span> · all checks green"></div>
-          <div class="terminal-line" data-text="  🚀  deployer      →  playforbidden.com · TLS provisioned · 342s" data-html="  <span class='term-label'>🚀  deployer     </span><span class='term-arrow'> →  </span><span class='term-path'>playforbidden.com</span> · TLS provisioned · 342s"></div>
-          <div class="terminal-line" data-text=""></div>
-          <div class="terminal-line" data-text="✅  augustus → vespasian  ·  build: LIVE ·  gate: PASS" data-html="<span class='term-ok'>✅  augustus → vespasian</span>  ·  build: <span class='term-ok'>LIVE</span> ·  gate: <span class='term-ok'>PASS</span>"></div>
-          <div class="terminal-line" data-text=""></div>
-          <div class="terminal-line" data-text="💰  vespasian · revenue model started" data-html="<span class='term-vespasian'>💰  vespasian</span><span class='term-label'> · revenue model started</span>"></div>
-          <div class="terminal-line" data-text="  💲  unit-econ     →  CAC $2.30 ·  LTV $14.70 ·  ratio: 6.4x ✓" data-html="  <span class='term-label'>💲  unit-econ    </span><span class='term-arrow'> →  </span>CAC $2.30 ·  LTV $14.70 ·  ratio: 6.4x <span class='term-check'>✓</span>"></div>
-          <div class="terminal-line" data-text="  📈  exit-modeler  →  comparables: $14M–$42M · acquirers: Hasbro, Mattel" data-html="  <span class='term-label'>📈  exit-modeler </span><span class='term-arrow'> →  </span>comparables: $14M–$42M · acquirers: Hasbro, Mattel"></div>
-          <div class="terminal-line" data-text="  🎯  growth-mapper →  path: $4.99/mo × 3,003 subs = $15K MRR · 8d payback" data-html="  <span class='term-label'>🎯  growth-mapper</span><span class='term-arrow'> →  </span>path: $4.99/mo × 3,003 subs = $15K MRR · 8d payback"></div>
-          <div class="terminal-line" data-text="  📊 pipeline complete  ·  48s  ·  verdict: STRONG UNIT ECONOMICS" data-html="  <span class='term-metric'>📊 pipeline complete</span>  ·  48s  ·  verdict: <span class='term-ok'>STRONG UNIT ECONOMICS</span>"></div>
-          <div class="terminal-line" data-text=""></div>
-          <div class="terminal-line" data-text="✅  vespasian → trajan  ·  model: SOLID ·  gate: PASS" data-html="<span class='term-ok'>✅  vespasian → trajan</span>  ·  model: <span class='term-ok'>SOLID</span> ·  gate: <span class='term-ok'>PASS</span>"></div>
-          <div class="terminal-line" data-text=""></div>
-          <div class="terminal-line" data-text="🛣  trajan · GTM pipeline started" data-html="<span class='term-trajan'>🛣  trajan</span><span class='term-label'> · GTM pipeline started</span>"></div>
-          <div class="terminal-line" data-text="  📱  content       →  5 TikTok scripts · 3 hooks for testing" data-html="  <span class='term-label'>📱  content      </span><span class='term-arrow'> →  </span>5 TikTok scripts · 3 hooks for testing"></div>
-          <div class="terminal-line" data-text="  🚀  launch-manager →  PH listing drafted · 3AM ET submission ready" data-html="  <span class='term-label'>🚀  launch-manager</span><span class='term-arrow'> →  </span>PH listing drafted · 3AM ET submission ready"></div>
-          <div class="terminal-line" data-text="  🎯  partnerships  →  12 party-game streamers identified for outreach" data-html="  <span class='term-label'>🎯  partnerships </span><span class='term-arrow'> →  </span>12 party-game streamers identified for outreach"></div>
-          <div class="terminal-line" data-text="  📊 pipeline complete  ·  31s  ·  assets: 23 total" data-html="  <span class='term-metric'>📊 pipeline complete</span>  ·  31s  ·  assets: 23 total"></div>
-          <div class="terminal-line" data-text=""></div>
-          <div class="terminal-line" data-text=""></div>
-          <div class="terminal-line" data-text="🔨  FORGED  ·  7m 45s total  ·  pipeline: PASS (all gates)" data-html="<span class='term-forge'>🔨  FORGED</span>  ·  7m 45s total  ·  pipeline: <span class='term-ok'>PASS (all gates)</span>"></div>
-          <div class="terminal-line" data-text="  🌐  playforbidden.com  ·  deploy: ✅ ·  SSL: ✅ ·  CDN: ✅" data-html="  🌐  <span class='term-path'>playforbidden.com</span>  ·  deploy: <span class='term-ok'>✅</span> ·  SSL: <span class='term-ok'>✅</span> ·  CDN: <span class='term-ok'>✅</span>"></div>
-          <div class="terminal-line" data-text="  💰  $4.99/mo premium ·  unit economics: STRONG  ·  payback: 8d" data-html="  💰  $4.99/mo premium ·  unit economics: <span class='term-ok'>STRONG</span>  ·  payback: 8d"></div>
-          <div class="terminal-line" data-text="  🛣  5 TikToks · PH listing · 12 streamer targets · all ready"></div>
-          <div class="terminal-line" data-text=""></div>
-          <div class="terminal-line" data-text="✦  legion forge complete  ·  all cohorts synced  ▮" data-html="<span class='term-sparkle'>✦</span>  legion forge complete  ·  all cohorts synced  ▮"></div>
+          <div class="terminal-line" data-text="⚡ spawning 4 cohorts · 8 workers" data-html="<span class='term-label'>⚡</span> spawning <span class='term-cmd'>4 cohorts</span> · <span class='term-metric'>8 workers</span>"></div>
+          <div class="terminal-line" data-text="" data-html=""></div>
+          <div class="terminal-line" data-text="⚔️ caesar · research pipeline started" data-html="<span class='term-caesar'>⚔️ caesar</span> <span class='term-label'>· research pipeline</span>"></div>
+          <div class="terminal-line" data-text="  🔍 researcher → 42 competitors scanned · saturation: 87%" data-html="  <span class='term-label'>🔍 researcher</span> <span class='term-arrow'>→</span> <span class='term-metric'>42 competitors</span> · saturation: <span class='term-metric'>87%</span>"></div>
+          <div class="terminal-line" data-text="  🎯 analyst → wedge found: AI-themed deck gen, zero competitors" data-html="  <span class='term-label'>🎯 analyst</span> <span class='term-arrow'>→</span> wedge: <span class='term-caesar'>AI-themed deck gen</span> <span class='term-check'>✓</span>"></div>
+          <div class="terminal-line" data-text="  🧠 synthesizer → DECISION: BUILD · 2m 23s" data-html="  <span class='term-label'>🧠 synthesizer</span> <span class='term-arrow'>→</span> <span class='term-ok'>DECISION: BUILD</span> · <span class='term-metric'>2m 23s</span>"></div>
+          <div class="terminal-line" data-text="✅ gate → augustus · spec: PASS" data-html="<span class='term-ok'>✅</span> <span class='term-label'>gate → augustus</span> · spec: <span class='term-check'>PASS</span>"></div>
+          <div class="terminal-line" data-text="" data-html=""></div>
+          <div class="terminal-line" data-text="🏛 augustus · build pipeline started" data-html="<span class='term-augustus'>🏛 augustus</span> <span class='term-label'>· build pipeline</span>"></div>
+          <div class="terminal-line" data-text="  📐 architect → Next.js 15 + Stripe + OAuth · 38s" data-html="  <span class='term-label'>📐 architect</span> <span class='term-arrow'>→</span> <span class='term-path'>Next.js 15 + Stripe</span> · <span class='term-metric'>38s</span>"></div>
+          <div class="terminal-line" data-text="  🔨 builder → 42 files · 3,847 lines · TypeScript strict ✓" data-html="  <span class='term-label'>🔨 builder</span> <span class='term-arrow'>→</span> <span class='term-metric'>42 files</span> · <span class='term-metric'>3,847 lines</span> <span class='term-check'>✓</span>"></div>
+          <div class="terminal-line" data-text="  🔎 reviewer (1) → nit: add error boundary on lobby" data-html="  <span class='term-label'>🔎 reviewer</span> <span class='term-arrow'>→</span> nit: add error boundary on lobby"></div>
+          <div class="terminal-line" data-text="  🔨 builder (fix) → +38 lines · review (2) PASS" data-html="  <span class='term-label'>🔨 fix</span> <span class='term-arrow'>→</span> +38 lines · review(2) <span class='term-check'>PASS ✓</span>"></div>
+          <div class="terminal-line" data-text="  🚀 deployer → playforbidden.com · TLS provisioned · 5m 4s" data-html="  <span class='term-label'>🚀 deployer</span> <span class='term-arrow'>→</span> <span class='term-path'>playforbidden.com</span> · TLS ✓ · <span class='term-metric'>5m 4s</span>"></div>
+          <div class="terminal-line" data-text="✅ gate → vespasian · build: LIVE" data-html="<span class='term-ok'>✅</span> <span class='term-label'>gate → vespasian</span> · build: <span class='term-check'>LIVE</span>"></div>
+          <div class="terminal-line" data-text="" data-html=""></div>
+          <div class="terminal-line" data-text="💰 vespasian · revenue model started" data-html="<span class='term-vespasian'>💰 vespasian</span> <span class='term-label'>· revenue model</span>"></div>
+          <div class="terminal-line" data-text="  CAC $2.30 · LTV $14.70 · 6.4x ratio · $15K MRR path · 48s" data-html="  CAC <span class='term-metric'>$2.30</span> · LTV <span class='term-metric'>$14.70</span> · ratio <span class='term-check'>6.4x ✓</span> · path: <span class='term-ok'>$15K MRR</span> · <span class='term-metric'>48s</span>"></div>
+          <div class="terminal-line" data-text="✅ gate → trajan · economics: STRONG" data-html="<span class='term-ok'>✅</span> <span class='term-label'>gate → trajan</span> · econ: <span class='term-check'>STRONG</span>"></div>
+          <div class="terminal-line" data-text="" data-html=""></div>
+          <div class="terminal-line" data-text="🛣 trajan · GTM pipeline started" data-html="<span class='term-trajan'>🛣 trajan</span> <span class='term-label'>· GTM pipeline</span>"></div>
+          <div class="terminal-line" data-text="  5 TikToks · X thread · PH listing · 12 streamer targets · 31s" data-html="  <span class='term-metric'>5 TikToks</span> · X thread · PH listing · <span class='term-metric'>12 streamer targets</span> · <span class='term-metric'>31s</span>"></div>
+          <div class="terminal-line" data-text="" data-html=""></div>
+          <div class="terminal-line" data-text="🔨 FORGED · 7m 45s · pipeline: PASS (all gates)" data-html="<span class='term-forge'>🔨 FORGED</span> · <span class='term-metric'>7m 45s</span> · pipeline: <span class='term-check'>PASS</span> <span class='term-label'>(all gates)</span>"></div>
+          <div class="terminal-line" data-text="  🌐 playforbidden.com · SSL ✓ · CDN ✓" data-html="  <span class='term-connector'>└</span><span class='term-path'>playforbidden.com</span> · SSL <span class='term-check'>✓</span> · CDN <span class='term-check'>✓</span>"></div>
+          <div class="terminal-line" data-text="  💰 $4.99/mo · unit econ: STRONG · payback: 8d" data-html="  <span class='term-connector'>└</span> <span class='term-metric'>$4.99/mo</span> · econ: <span class='term-check'>STRONG</span> · payback: <span class='term-metric'>8d</span>"></div>
+          <div class="terminal-line" data-text="  🛣 23 assets ready · all cohorts synced ▮" data-html="  <span class='term-connector'>└</span> <span class='term-metric'>23 assets</span> ready · <span class='term-sparkle'>all cohorts synced</span> <span class='term-cursor'>▮</span>"></div>
         </div>
       </div>
     </div>
@@ -1352,51 +1285,51 @@
 
     <div class="section-divider"><span class="dot"></span></div>
 
-    <!-- ===== 12. PIPELINE — Flow Diagram ===== -->
+    <!-- ===== 12. PIPELINE — Gantt Chart ===== -->
     <div class="pipeline-section" data-romulus-animate>
-      <div class="pipeline-label">~/legion/pipeline.md</div>
-      <h2 class="pipeline-heading">The Pipeline</h2>
-      <div class="pipeline-body">A prompt enters the system. It gets classified: research or build. If research &rarr; Caesar. If build &rarr; Caesar spec &rarr; approve &rarr; Augustus architecture &rarr; Augustus build &rarr; review (max 3 cycles) &rarr; deploy. Auto-chain: Augustus triggers Vespasian (wealth strategy), Vespasian triggers Trajan (GTM strategy). Total pipeline time: ~15-30 minutes.</div>
-      <div class="pipeline-sublabel">FULL PIPELINE &mdash; ~15-30 MIN PROMPT TO DELIVERABLES</div>
-
-      <div class="pipeline-diagram" id="pipelineDiagram" data-romulus-animate>
-        <div class="pipeline-node" data-pipe-index="0">
-          <span class="pipeline-node-emoji">&#x1F4EC;</span>
-          <span class="pipeline-node-name">Prompt</span>
+      <div class="section-label">~/legion/pipeline.md</div>
+      <h2 class="section-heading">The Pipeline</h2>
+      <div class="section-body" style="margin-bottom:24px;">A prompt enters. The system classifies, routes, and chains five cohorts automatically. Each stage has a quality gate. The total cycle time is measured and logged.</div>
+      <div class="gantt-chart" id="ganttChart">
+        <div class="gantt-row">
+          <div class="gantt-label"><span class="emoji">⚔️</span> Caesar</div>
+          <div class="gantt-track"><div class="gantt-bar caesar"></div></div>
+          <div class="gantt-time">2m 23s</div>
         </div>
-        <div class="pipeline-arrow"></div>
-        <div class="pipeline-node" data-pipe-index="1" data-accent="purple">
-          <span class="pipeline-node-emoji">&#x1F985;</span>
-          <span class="pipeline-node-name">Caesar</span>
-          <span class="pipeline-node-sub">~2 min</span>
+        <div class="gantt-row gate">
+          <div class="gantt-label"><span class="emoji" style="color:#22c55e">✓</span> Gate</div>
+          <div class="gantt-track"><div class="gantt-bar gate gate-1"></div></div>
+          <div class="gantt-time">10s</div>
         </div>
-        <div class="pipeline-arrow"></div>
-        <div class="pipeline-node" data-pipe-index="2" data-accent="green">
-          <span class="pipeline-node-emoji">&#x2705;</span>
-          <span class="pipeline-node-name">Approve</span>
+        <div class="gantt-row">
+          <div class="gantt-label"><span class="emoji">🏛</span> Augustus</div>
+          <div class="gantt-track"><div class="gantt-bar augustus"></div></div>
+          <div class="gantt-time">5m 42s</div>
         </div>
-        <div class="pipeline-arrow"></div>
-        <div class="pipeline-node" data-pipe-index="3" data-accent="blue">
-          <span class="pipeline-node-emoji">&#x1F3DB;</span>
-          <span class="pipeline-node-name">Augustus</span>
-          <span class="pipeline-node-sub">5-15 min</span>
+        <div class="gantt-row gate">
+          <div class="gantt-label"><span class="emoji" style="color:#22c55e">✓</span> Gate</div>
+          <div class="gantt-track"><div class="gantt-bar gate gate-2"></div></div>
+          <div class="gantt-time">5s</div>
         </div>
-        <div class="pipeline-arrow"></div>
-        <div class="pipeline-node" data-pipe-index="4">
-          <span class="pipeline-node-emoji">&#x1F4B0;</span>
-          <span class="pipeline-node-name">Vespasian</span>
-          <span class="pipeline-node-sub">3-5 min</span>
+        <div class="gantt-row">
+          <div class="gantt-label"><span class="emoji">💰</span> Vespasian</div>
+          <div class="gantt-track"><div class="gantt-bar vespasian"></div></div>
+          <div class="gantt-time">48s</div>
         </div>
-        <div class="pipeline-arrow"></div>
-        <div class="pipeline-node" data-pipe-index="5" data-accent="cyan">
-          <span class="pipeline-node-emoji">&#x1F6E3;</span>
-          <span class="pipeline-node-name">Trajan</span>
-          <span class="pipeline-node-sub">3-5 min</span>
+        <div class="gantt-row gate">
+          <div class="gantt-label"><span class="emoji" style="color:#22c55e">✓</span> Gate</div>
+          <div class="gantt-track"><div class="gantt-bar gate gate-3"></div></div>
+          <div class="gantt-time">2s</div>
         </div>
-        <div class="pipeline-arrow"></div>
-        <div class="pipeline-node" data-pipe-index="6" data-accent="green">
-          <span class="pipeline-node-emoji">&#x1F4E6;</span>
-          <span class="pipeline-node-name">Delivered</span>
+        <div class="gantt-row">
+          <div class="gantt-label"><span class="emoji">🛣</span> Trajan</div>
+          <div class="gantt-track"><div class="gantt-bar trajan"></div></div>
+          <div class="gantt-time">31s</div>
+        </div>
+        <div class="gantt-row total">
+          <div class="gantt-label"><span class="emoji" style="color:#fff">🔥</span> Total</div>
+          <div class="gantt-track"><div class="gantt-bar total"></div></div>
+          <div class="gantt-time" style="color:var(--amber);">7m 45s</div>
         </div>
       </div>
     </div>
@@ -1648,7 +1581,7 @@
         window.scrollTo(0, 0);
         initAnimations();
         initTerminal();
-        initPipeline();
+        initGantt();
       }
 
       if (!checkSession()) {
@@ -1734,32 +1667,20 @@
         observer.observe(terminal);
       }
 
-      /* ===== PIPELINE ANIMATION — flow diagram sequential lighting ===== */
-      function initPipeline() {
-        var diagram = document.getElementById('pipelineDiagram');
-        if (!diagram || !('IntersectionObserver' in window)) return;
+      /* ===== GANTT CHART ANIMATION ===== */
+      function initGantt() {
+        var chart = document.getElementById('ganttChart');
+        if (!chart || !('IntersectionObserver' in window)) return;
 
-        var items = diagram.querySelectorAll('.pipeline-node, .pipeline-arrow');
-
-        var pipeObserver = new IntersectionObserver(function(entries) {
+        var observer = new IntersectionObserver(function(entries) {
           entries.forEach(function(entry) {
             if (entry.isIntersecting) {
-              animatePipeline();
-              pipeObserver.unobserve(entry.target);
+              chart.classList.add('lit');
+              observer.unobserve(chart);
             }
           });
         }, { threshold: 0.3 });
-        pipeObserver.observe(diagram);
-
-        function animatePipeline() {
-          for (var i = 0; i < items.length; i++) {
-            (function(item, delay) {
-              setTimeout(function() {
-                item.classList.add('lit');
-              }, delay);
-            })(items[i], i * 300);
-          }
-        }
+        observer.observe(chart);
       }
     })();
   </script>
