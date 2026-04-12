@@ -1295,23 +1295,209 @@
 
     <hr class="romulus-divider">
 
-    <!-- What's Next -->
-    <div class="romulus-section" data-romulus-animate>
-      <div class="section-label">~/romulus/legion/README.md</div>
-      <h2 class="section-title">Legion</h2>
+    <!-- LEGION — Full Expansion -->
+    <div class="romulus-section legion-section" id="legion" data-romulus-animate>
+      <div class="section-label">~/legion/</div>
+      <h2 class="section-title">Legion: An Orchestration Layer</h2>
       <div class="section-body">
-        <p>The next layer is already designed. Legion is an orchestration system — Romulus as conductor, multiple Claude Code workers running in parallel with git worktree isolation.</p>
-        <p>Task decomposition, parallel execution, quality gates before merge, results synthesized and delivered to Discord. The goal is to move from one person building with an AI partner to something closer to a small studio.</p>
+        <p>The system worked. But one person giving commands to one AI is still a bottleneck. The question became: what if Romulus commanded a legion?</p>
+        <p>In April 2026, I rebuilt the architecture from scratch. Five specialized AI cohorts, each owning a different phase of product work, orchestrated under a single command structure. Named after Roman emperors — because the structure maps exactly.</p>
       </div>
-      <div class="legion-box">
-        <div class="legion-title">romulus@roma-eterna:~/legion$ cat README.md</div>
-        <div class="legion-body">
-          Phase 1: MVP Swarm — 2-3 parallel workers, collected results, completion notification.<br>
-          Phase 2: Worktree isolation — each worker in its own git branch.<br>
-          Phase 3: Quality gates — automated tests before merge.<br>
-          Phase 4: Knowledge accumulation — past learnings prime future tasks.<br><br>
-          "Romulus commands Legion." &#x2014; Roman military structure. A disciplined coordinated force under single command.
+
+      <!-- THE SHIFT -->
+      <div class="legion-shift" data-romulus-animate>
+        <div class="shift-before">
+          <div class="shift-label">Before</div>
+          <div class="shift-terminal">
+            <div class="shift-line"><span class="prompt">$</span> you → Romulus → Claude Code</div>
+            <div class="shift-line dim">one assistant. one session. one task at a time.</div>
+          </div>
         </div>
+        <div class="shift-arrow">&#x2192;</div>
+        <div class="shift-after">
+          <div class="shift-label" style="color:var(--romulus-amber)">After</div>
+          <div class="shift-terminal" style="border-color:rgba(217,149,26,0.3)">
+            <div class="shift-line" style="color:var(--romulus-amber)"><span class="prompt">$</span> you → Romulus → Legion &#x2014; 4 cohorts, parallel</div>
+            <div class="shift-line">Caesar specs it. Augustus builds it.</div>
+            <div class="shift-line">Vespasian models the money. Trajan launches it.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANIMATED PIPELINE -->
+      <div class="legion-pipeline" data-romulus-animate id="legionPipeline">
+        <div class="pipeline-label">FULL PIPELINE — ~15 MIN PROMPT TO DELIVERABLES</div>
+        <div class="pipeline-track">
+          <div class="pipeline-node node-prompt" data-node="0">
+            <div class="pipeline-node-icon">&#x25BA;</div>
+            <div class="pipeline-node-name">PROMPT</div>
+            <div class="pipeline-node-time">0s</div>
+          </div>
+          <div class="pipeline-conn" data-conn="0"></div>
+          <div class="pipeline-node" data-node="1">
+            <div class="pipeline-node-icon">&#x2694;&#xFE0F;</div>
+            <div class="pipeline-node-name">CAESAR</div>
+            <div class="pipeline-node-time">~2 min</div>
+          </div>
+          <div class="pipeline-conn" data-conn="1"></div>
+          <div class="pipeline-node" data-node="2">
+            <div class="pipeline-node-icon">&#x2713;</div>
+            <div class="pipeline-node-name">APPROVE</div>
+            <div class="pipeline-node-time">you</div>
+          </div>
+          <div class="pipeline-conn" data-conn="2"></div>
+          <div class="pipeline-node" data-node="3">
+            <div class="pipeline-node-icon">&#x1F3D7;&#xFE0F;</div>
+            <div class="pipeline-node-name">AUGUSTUS</div>
+            <div class="pipeline-node-time">~5-10 min</div>
+          </div>
+          <div class="pipeline-conn" data-conn="3"></div>
+          <div class="pipeline-node" data-node="4">
+            <div class="pipeline-node-icon">&#x1F4B0;</div>
+            <div class="pipeline-node-name">VESPASIAN</div>
+            <div class="pipeline-node-time">~3-5 min</div>
+          </div>
+          <div class="pipeline-conn" data-conn="4"></div>
+          <div class="pipeline-node" data-node="5">
+            <div class="pipeline-node-icon">&#x1F3DB;&#xFE0F;</div>
+            <div class="pipeline-node-name">TRAJAN</div>
+            <div class="pipeline-node-time">~3-5 min</div>
+          </div>
+          <div class="pipeline-conn" data-conn="5"></div>
+          <div class="pipeline-node node-done" data-node="6">
+            <div class="pipeline-node-icon">&#x2605;</div>
+            <div class="pipeline-node-name">DELIVERED</div>
+            <div class="pipeline-node-time">live</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COHORT COMMAND CARDS -->
+      <div class="cohort-grid" data-romulus-animate>
+        <div class="cohort-card">
+          <div class="cohort-header">
+            <span class="cohort-emoji">&#x2694;&#xFE0F;</span>
+            <div>
+              <div class="cohort-name">CAESAR</div>
+              <div class="cohort-status">OPERATIONAL</div>
+            </div>
+          </div>
+          <div class="cohort-question">&ldquo;Is this worth building?&rdquo;</div>
+          <div class="cohort-workers">
+            <div class="worker-line">researcher &rarr; analyst &rarr; competitor &rarr; synthesizer</div>
+          </div>
+          <div class="cohort-output">Build spec. Market validation. Competitive gap.</div>
+        </div>
+
+        <div class="cohort-card">
+          <div class="cohort-header">
+            <span class="cohort-emoji">&#x1F3D7;&#xFE0F;</span>
+            <div>
+              <div class="cohort-name">AUGUSTUS</div>
+              <div class="cohort-status">OPERATIONAL</div>
+            </div>
+          </div>
+          <div class="cohort-question">&ldquo;How do I build it?&rdquo;</div>
+          <div class="cohort-workers">
+            <div class="worker-line">architecture &rarr; builder &rarr; reviewer (3&times;) &rarr; deploy</div>
+          </div>
+          <div class="cohort-output">Working product. GitHub Pages link. Review cycles.</div>
+        </div>
+
+        <div class="cohort-card">
+          <div class="cohort-header">
+            <span class="cohort-emoji">&#x1F4B0;</span>
+            <div>
+              <div class="cohort-name">VESPASIAN</div>
+              <div class="cohort-status">OPERATIONAL</div>
+            </div>
+          </div>
+          <div class="cohort-question">&ldquo;How do we make $20K MRR or sell for 7 figures?&rdquo;</div>
+          <div class="cohort-workers">
+            <div class="worker-line">unit_economist &rarr; exit_strategist &rarr; growth_mapper</div>
+          </div>
+          <div class="cohort-output">Revenue path. Exit analysis. Pricing architecture.</div>
+        </div>
+
+        <div class="cohort-card">
+          <div class="cohort-header">
+            <span class="cohort-emoji">&#x1F3DB;&#xFE0F;</span>
+            <div>
+              <div class="cohort-name">TRAJAN</div>
+              <div class="cohort-status">OPERATIONAL</div>
+            </div>
+          </div>
+          <div class="cohort-question">&ldquo;How do we get distribution?&rdquo;</div>
+          <div class="cohort-workers">
+            <div class="worker-line">seo_optimizer &rarr; content_creator &rarr; launch_manager</div>
+          </div>
+          <div class="cohort-output">15 tweets. 3 TikTok scripts. Blog post. PH listing.</div>
+        </div>
+
+        <div class="cohort-card cohort-card--orchestrator">
+          <div class="cohort-header">
+            <span class="cohort-emoji">&#x1F3DB;</span>
+            <div>
+              <div class="cohort-name">ROMULUS</div>
+              <div class="cohort-status" style="color:var(--romulus-amber)">ORCHESTRATING</div>
+            </div>
+          </div>
+          <div class="cohort-question">&ldquo;What should we do next?&rdquo;</div>
+          <div class="cohort-workers">
+            <div class="worker-line">decomposes &rarr; routes &rarr; gates &rarr; synthesizes &rarr; delivers</div>
+          </div>
+          <div class="cohort-output">The conductor. Every cohort reports here.</div>
+        </div>
+      </div>
+
+      <!-- TERMINAL DEMO -->
+      <div class="legion-terminal" data-romulus-animate id="legionTerminal">
+        <div class="terminal-bar">
+          <span class="terminal-dot" style="background:#ff5f57"></span>
+          <span class="terminal-dot" style="background:#febc2e"></span>
+          <span class="terminal-dot" style="background:#28c840"></span>
+          <span class="terminal-title">romulus@roma-eterna — legion pipeline</span>
+        </div>
+        <div class="terminal-body">
+          <div class="t-line" data-delay="0"><span class="t-prompt">$</span> <span class="t-cmd">@Caesar build a portfolio site for Alexa Nasiedlak &#x2014; post-production coordinator seeking editorial roles</span></div>
+          <div class="t-line t-dim" data-delay="1">&nbsp;</div>
+          <div class="t-line" data-delay="2"><span class="t-accent">&#x2694;&#xFE0F; CAESAR</span> <span class="t-dim">[build_spec_pipeline]</span></div>
+          <div class="t-line" data-delay="3">&nbsp;&nbsp;&#x2192; build_researcher: <span class="t-green">87s &#x2713;</span></div>
+          <div class="t-line" data-delay="4">&nbsp;&nbsp;&#x2192; build_spec_writer: <span class="t-green">43s &#x2713;</span></div>
+          <div class="t-line" data-delay="5">&nbsp;&nbsp;&#x2192; spec_delivered: Alexa Nasiedlak Editorial Portfolio</div>
+          <div class="t-line" data-delay="6">&nbsp;</div>
+          <div class="t-line t-amber" data-delay="7">&nbsp;&nbsp;&#x1F4CB; Build Plan Ready &#x2014; Scope: medium | Stack: Astro + Tailwind</div>
+          <div class="t-line t-dim" data-delay="8">&nbsp;&nbsp;[AUTO-APPROVED by orchestrator]</div>
+          <div class="t-line" data-delay="9">&nbsp;</div>
+          <div class="t-line" data-delay="10"><span class="t-accent">&#x1F3D7;&#xFE0F; AUGUSTUS</span> <span class="t-dim">[build_pipeline]</span></div>
+          <div class="t-line" data-delay="11">&nbsp;&nbsp;&#x2192; architecture: <span class="t-green">49s &#x2713;</span></div>
+          <div class="t-line" data-delay="12">&nbsp;&nbsp;&#x2192; builder (Claude Code): <span class="t-dim">running...</span></div>
+          <div class="t-line" data-delay="13">&nbsp;&nbsp;&#x2192; build_done: 13,280 files &nbsp;<span class="t-green">&#x2713;</span></div>
+          <div class="t-line" data-delay="14">&nbsp;&nbsp;&#x2192; review: <span class="t-green">PASS &#x2713;</span></div>
+          <div class="t-line" data-delay="15">&nbsp;&nbsp;&#x2192; deploy: <span class="t-green">https://mikebatts.github.io/alexa-nasiedlak-portfolio/ &#x2713;</span></div>
+          <div class="t-line" data-delay="16">&nbsp;</div>
+          <div class="t-line" data-delay="17"><span class="t-accent">&#x1F4B0; VESPASIAN</span> <span class="t-dim">[wealth_pipeline]</span></div>
+          <div class="t-line" data-delay="18">&nbsp;&nbsp;&#x2192; unit_economist + exit_strategist: <span class="t-green">parallel &#x2713;</span></div>
+          <div class="t-line" data-delay="19">&nbsp;&nbsp;&#x2192; growth_mapper: <span class="t-green">55s &#x2713;</span></div>
+          <div class="t-line" data-delay="20">&nbsp;&nbsp;&#x2192; wealth_strategy: <span class="t-amber">$20K MRR path + exit analysis delivered</span></div>
+          <div class="t-line" data-delay="21">&nbsp;</div>
+          <div class="t-line" data-delay="22"><span class="t-accent">&#x1F3DB;&#xFE0F; TRAJAN</span> <span class="t-dim">[gtm_pipeline]</span></div>
+          <div class="t-line" data-delay="23">&nbsp;&nbsp;&#x2192; seo_optimizer: <span class="t-green">43s &#x2713;</span></div>
+          <div class="t-line" data-delay="24">&nbsp;&nbsp;&#x2192; content_creator + launch_manager: <span class="t-green">parallel &#x2713;</span></div>
+          <div class="t-line" data-delay="25">&nbsp;&nbsp;&#x2192; gtm_assets: <span class="t-amber">15 tweets, 3 TikTok scripts, 1500-word blog post</span></div>
+          <div class="t-line" data-delay="26">&nbsp;</div>
+          <div class="t-line t-green" data-delay="27">&#x2705; PIPELINE COMPLETE &#x2014; 8m 42s total</div>
+          <div class="t-line" data-delay="28">&nbsp;&nbsp;&#x2022; <span class="t-dim">live:</span> https://mikebatts.github.io/alexa-nasiedlak-portfolio/</div>
+          <div class="t-line" data-delay="29">&nbsp;&nbsp;&#x2022; <span class="t-dim">wealth:</span> $20K MRR path + 7-figure exit analysis</div>
+          <div class="t-line" data-delay="30">&nbsp;&nbsp;&#x2022; <span class="t-dim">launch:</span> tweets, TikToks, blog post, PH listing</div>
+        </div>
+      </div>
+
+      <!-- WHAT'S NEXT -->
+      <div class="section-body" style="margin-top:40px" data-romulus-animate>
+        <h3 style="font-size:18px;font-weight:600;color:var(--romulus-text);margin-bottom:12px">Where this is going</h3>
+        <p>Vespasian tracking real Stripe revenue per project. Trajan auto-posting to X and TikTok. Caesar running continuous competitive monitoring — flagging when a competitor changes pricing or ships something new. A LEGIO command dashboard replacing the Discord terminal.</p>
+        <p>The goal: an end-to-end system that ships product, models the business, and markets it — without losing context between sessions. Not automation for automation's sake. A force multiplier for building things that earn.</p>
       </div>
     </div>
 
