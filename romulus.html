@@ -1,52 +1,56 @@
-<!DOCTYPE html><!--  Last Published: Mon Apr 06 2026 17:51:00 GMT+0000 (Coordinated Universal Time)  -->
-<html data-wf-page="663100000000000000000000" data-wf-site="5dbdf5d45ad64f500c81ca1f">
+<!DOCTYPE html>
+<html data-wf-page="663100000000000000000000" data-wf-site="5dbdf5d45ad64f500c81ca1f" lang="en">
 <head>
   <meta charset="utf-8">
   <title>Romulus</title>
-  <meta content="Romulus — Building a Personal AI System for Shipping Faster" property="og:title">
-  <meta content="Romulus — Building a Personal AI System for Shipping Faster" property="twitter:title">
+  <meta content="Romulus — From Personal AI to Multi-Cohort Command Structure" property="og:title">
+  <meta content="Romulus — From Personal AI to Multi-Cohort Command Structure" property="twitter:title">
   <meta content="width=device-width, initial-scale=1" name="viewport">
-  <link href="css/normalize.css" rel="stylesheet" type="text/css">
-  <link href="css/webflow.css" rel="stylesheet" type="text/css">
-  <link href="css/mike-battaglia.webflow.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
-  <script type="text/javascript">WebFont.load({  google: {    families: ["Inconsolata:400,700","Inter:300,400,500,600,700","Inter Tight:300,400,500,600,700","Josefin Sans:300,400,500,600,700","Poppins:300,400,500,600,700"]  }});</script>
+  <script type="text/javascript">WebFont.load({google:{families:["Inconsolata:400,700","Inter:300,400,500,600,700","Inter Tight:300,400,500,600,700","Josefin Sans:300,400,500,600,700","Poppins:300,400,500,600,700"]}});</script>
   <script src="https://use.typekit.net/sbl1ady.js" type="text/javascript"></script>
   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-  <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||c.documentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
   <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon">
   <link href="images/webclip.png" rel="apple-touch-icon">
-  <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-57180566-1"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57180566-1"></script>
   <script type="text/javascript">window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','UA-57180566-1',{'anonymize_ip':false});</script>
-  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-0HCHFJPP3W"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0HCHFJPP3W"></script>
   <script type="text/javascript">window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0HCHFJPP3W');</script>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta property="og:image" content="#">
   <style>
-    /* ===== ROMULUS TERMINAL AESTHETIC ===== */
+    /* ===== CSS CUSTOM PROPERTIES ===== */
     :root {
-      --romulus-bg: #0b0b10;
-      --romulus-bg-soft: rgba(255,255,255,0.03);
-      --romulus-border: rgba(255,255,255,0.08);
-      --romulus-text: rgba(255,255,255,0.86);
-      --romulus-text-soft: rgba(255,255,255,0.58);
-      --romulus-text-faint: rgba(255,255,255,0.26);
-      --romulus-amber: #d9951a;
-      --romulus-amber-soft: rgba(217,149,26,0.14);
-      --romulus-purple: #6d28d9;
+      --bg: #0b0b10;
+      --amber: #d9951a;
+      --amber-soft: rgba(217,149,26,0.14);
+      --amber-border: rgba(217,149,26,0.28);
+      --amber-glow: rgba(217,149,26,0.08);
+      --text-primary: rgba(255,255,255,0.86);
+      --text-body: rgba(255,255,255,0.72);
+      --text-secondary: rgba(255,255,255,0.58);
+      --text-faint: rgba(255,255,255,0.26);
+      --card-bg: rgba(255,255,255,0.03);
+      --card-border: rgba(255,255,255,0.08);
+      --green: #22c55e;
+      --container: 720px;
+      --section-gap: 100px;
     }
 
-    .romulus-page {
-      background: var(--romulus-bg);
+    /* ===== RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ===== BASE ===== */
+    body.romulus-page {
+      background: var(--bg);
       min-height: 100vh;
-      color: var(--romulus-text);
-      font-family: 'Inter', 'Inter Tight', sans-serif;
-      letter-spacing: -0.01em;
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Password Gate */
+    /* ===== PASSWORD GATE ===== */
     .romulus-gate {
       position: fixed;
       inset: 0;
@@ -61,8 +65,8 @@
     .romulus-gate.hidden { display: none; }
 
     .gate-terminal {
-      background: rgba(255,255,255,0.035);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
       border-radius: 14px;
       padding: 40px 48px;
       max-width: 420px;
@@ -73,7 +77,6 @@
       position: relative;
       overflow: hidden;
     }
-
     .gate-terminal::before {
       content: '';
       position: absolute;
@@ -86,20 +89,21 @@
     .gate-prompt {
       font-family: 'Inconsolata', monospace;
       font-size: 13px;
-      color: var(--romulus-amber);
+      color: var(--amber);
       letter-spacing: 0.05em;
       margin-bottom: 20px;
     }
     .gate-prompt span { color: rgba(255,255,255,0.4); }
     .gate-cursor {
       display: inline-block;
-      color: var(--romulus-amber);
+      color: var(--amber);
       animation: blink 1s steps(1) infinite;
       margin-left: 4px;
     }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
     .gate-label {
-      font-family: 'Inter Tight', 'Inter', sans-serif;
+      font-family: 'Inter Tight', sans-serif;
       font-size: 11px;
       letter-spacing: 0.15em;
       text-transform: uppercase;
@@ -118,21 +122,20 @@
       color: #e8e8e8;
       outline: none;
       transition: border-color 0.2s, box-shadow 0.2s;
-      box-sizing: border-box;
     }
     .gate-input:focus {
-      border-color: rgba(245, 158, 11, 0.5);
-      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+      border-color: rgba(217,149,26,0.5);
+      box-shadow: 0 0 0 3px rgba(217,149,26,0.1);
     }
 
     .gate-submit {
       margin-top: 16px;
       width: 100%;
-      background: var(--romulus-amber-soft);
-      border: 1px solid rgba(217,149,26,0.28);
+      background: var(--amber-soft);
+      border: 1px solid var(--amber-border);
       border-radius: 6px;
       padding: 11px 16px;
-      font-family: 'Inter Tight', 'Inter', sans-serif;
+      font-family: 'Inter Tight', sans-serif;
       font-size: 12px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -156,1369 +159,1018 @@
     }
     .gate-error.visible { display: block; }
 
-    /* Content */
+    @keyframes shake { 0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-8px)} 40%,80%{transform:translateX(8px)} }
+
+    /* ===== CONTENT WRAPPER ===== */
     .romulus-content { display: none; }
     .romulus-content.visible { display: block; }
 
-    /* Header */
-    .romulus-header {
-      padding: 32px 40px 24px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
+    /* ===== TOP NAV ===== */
+    .romulus-nav {
+      padding: 28px 40px;
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
-    .romulus-logo {
-      font-family: 'Inconsolata', monospace;
-      font-size: 15px;
-      color: var(--romulus-amber);
-      letter-spacing: 0.08em;
-      text-decoration: none;
-      justify-self: end;
-    }
-    .romulus-logo:hover { opacity: 0.8; }
-    .romulus-back {
-      font-family: 'Inter Tight', 'Inter', sans-serif;
+    .romulus-nav a {
+      font-family: 'Inter Tight', sans-serif;
       font-size: 11px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: rgba(255,255,255,0.35);
       text-decoration: none;
       transition: color 0.2s;
-      justify-self: start;
     }
-    .romulus-back:hover { color: rgba(255,255,255,0.6); }
-    .romulus-status {
+    .romulus-nav a:hover { color: rgba(255,255,255,0.6); }
+    .romulus-nav .badge {
       font-family: 'Inconsolata', monospace;
       font-size: 11px;
-      color: rgba(255,255,255,0.42);
-      text-align: center;
-      line-height: 1.5;
-      justify-self: center;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.08em;
     }
-    .romulus-status .accent { color: var(--romulus-amber); }
 
-    /* Hero */
+    /* ===== HERO ===== */
     .romulus-hero {
-      padding: 80px 40px 60px;
-      max-width: 760px;
+      padding: 100px 40px 80px;
+      max-width: calc(var(--container) + 80px);
       margin: 0 auto;
     }
-    .romulus-eyebrow {
-      font-family: 'Inconsolata', monospace;
-      font-size: 12px;
-      color: var(--romulus-amber);
-      letter-spacing: 0.1em;
+    .hero-headline {
+      font-family: 'Josefin Sans', 'Inter Tight', sans-serif;
+      font-size: clamp(36px, 5.5vw, 60px);
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
       margin-bottom: 20px;
-      opacity: 0.9;
     }
-    .romulus-title {
-      font-family: 'Inter Tight', 'Inter', sans-serif;
-      font-size: clamp(38px, 6vw, 58px);
-      font-weight: 500;
-      color: #ffffff;
-      line-height: 1.02;
-      margin-bottom: 16px;
-      letter-spacing: -0.04em;
-      max-width: 700px;
+    .hero-headline .amber-underline {
+      text-decoration: underline;
+      text-decoration-color: var(--amber);
+      text-underline-offset: 6px;
+      text-decoration-thickness: 3px;
     }
-    .romulus-subtitle {
+    .hero-sub {
+      font-family: 'Inter', sans-serif;
       font-size: 18px;
-      color: rgba(255,255,255,0.55);
+      color: var(--text-secondary);
       line-height: 1.6;
-      max-width: 620px;
-      font-weight: 300;
+      max-width: 600px;
+      font-weight: 400;
+      margin-bottom: 32px;
     }
-
-    .hero-terminal {
-      margin-top: 28px;
-      max-width: 620px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 10px;
-      padding: 18px 20px;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
-    }
-    .hero-terminal-line {
+    .hero-stats {
       font-family: 'Inconsolata', monospace;
-      font-size: 13px;
-      line-height: 1.7;
-      color: rgba(255,255,255,0.72);
+      font-size: 14px;
+      color: var(--text-secondary);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
     }
-    .hero-terminal-line .prompt { color: var(--romulus-amber); }
-    .hero-terminal-line .value { color: rgba(255,255,255,0.82); }
+    .hero-stats .stat-value { color: var(--text-primary); }
+    .hero-stats .dot {
+      color: var(--amber);
+      margin: 0 4px;
+    }
 
-    /* Sections */
-    .romulus-section {
-      padding: 56px 40px;
-      max-width: 760px;
+    /* ===== SECTION DIVIDER ===== */
+    .section-divider {
+      max-width: calc(var(--container) + 80px);
       margin: 0 auto;
-      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 0 40px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .romulus-section:first-of-type { border-top: none; }
+    .section-divider::before {
+      content: '';
+      position: absolute;
+      left: 40px;
+      right: 40px;
+      height: 1px;
+      background: var(--card-border);
+    }
+    .section-divider .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--amber);
+      position: relative;
+      z-index: 1;
+    }
 
+    /* ===== SECTIONS ===== */
+    .rom-section {
+      padding: 80px 40px;
+      max-width: calc(var(--container) + 80px);
+      margin: 0 auto;
+    }
     .section-label {
       font-family: 'Inconsolata', monospace;
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      color: var(--romulus-amber);
-      opacity: 0.75;
-      margin-bottom: 20px;
-    }
-    .section-title {
-      font-family: 'Inter Tight', 'Inter', sans-serif;
-      font-size: 24px;
-      font-weight: 500;
-      color: #ffffff;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--amber);
       margin-bottom: 16px;
+    }
+    .section-heading {
+      font-family: 'Josefin Sans', 'Inter Tight', sans-serif;
+      font-size: 30px;
+      font-weight: 600;
+      color: #fff;
       letter-spacing: -0.02em;
+      margin-bottom: 24px;
+      position: relative;
+      display: inline-block;
+    }
+    /* Animated underline on section headings */
+    .section-heading::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--amber);
+      transition: width 0.5s ease-out, left 0.5s ease-out;
+    }
+    .romulus-visible .section-heading::after {
+      width: 100%;
+      left: 0;
     }
     .section-body {
+      font-family: 'Inter', sans-serif;
       font-size: 16px;
-      color: rgba(255,255,255,0.6);
-      line-height: 1.75;
-      font-weight: 300;
+      color: var(--text-body);
+      line-height: 1.6;
     }
     .section-body p { margin-bottom: 16px; }
     .section-body p:last-child { margin-bottom: 0; }
 
-    /* Model routing boxes */
-    .model-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 24px;
-    }
-    @media (max-width: 600px) {
-      .model-grid { grid-template-columns: 1fr; }
-    }
-    .model-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 8px;
-      padding: 20px;
-      transition: border-color 0.2s, background 0.2s;
-    }
-    .model-card:hover {
-      border-color: rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.05);
-    }
-    .model-name {
-      font-family: 'Inconsolata', monospace;
-      font-size: 13px;
-      color: var(--romulus-amber);
-      margin-bottom: 6px;
-    }
-    .model-desc {
-      font-size: 13px;
-      color: rgba(255,255,255,0.45);
-      line-height: 1.5;
-      font-weight: 300;
-    }
-
-    /* Project cards */
-    .project-card {
-      background: rgba(255,255,255,0.025);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 10px;
-      padding: 28px;
-      margin-top: 20px;
-      position: relative;
-      overflow: hidden;
-    }
-    .project-name {
-      font-family: 'Inconsolata', monospace;
-      font-size: 14px;
-      color: #f59e0b;
-      margin-bottom: 4px;
-    }
-
-    .project-status {
-      display: inline-block;
-      margin-left: 8px;
-      padding: 2px 6px;
-      border-radius: 999px;
-      border: 1px solid rgba(217,149,26,0.28);
-      background: rgba(217,149,26,0.1);
-      color: #f1c06c;
-      font-family: 'Inconsolata', monospace;
-      font-size: 10px;
-      letter-spacing: 0.06em;
-      vertical-align: middle;
-    }
-    .project-url {
-      font-family: 'Inconsolata', monospace;
-      font-size: 12px;
-      color: rgba(255,255,255,0.25);
-      margin-bottom: 16px;
-    }
-    .project-body {
-      font-size: 14px;
-      color: rgba(255,255,255,0.55);
-      line-height: 1.7;
-      font-weight: 300;
-    }
-    .project-body p { margin-bottom: 12px; }
-    .project-body p:last-child { margin-bottom: 0; }
-    .project-tag {
-      display: inline-block;
-      background: rgba(245,158,11,0.1);
-      border: 1px solid rgba(245,158,11,0.2);
-      border-radius: 4px;
-      padding: 2px 8px;
-      font-family: 'Inconsolata', monospace;
-      font-size: 11px;
-      color: #f59e0b;
-      margin-top: 12px;
-    }
-
-    /* Workflow steps */
-    .workflow-list {
-      margin-top: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .workflow-step {
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-    }
-    .step-num {
-      font-family: 'Inconsolata', monospace;
-      font-size: 12px;
-      color: #f59e0b;
-      background: rgba(245,158,11,0.1);
-      border: 1px solid rgba(245,158,11,0.2);
-      border-radius: 4px;
-      width: 28px;
-      height: 28px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .step-content {
-      flex: 1;
-    }
-    .step-title {
-      font-family: 'Inter Tight', 'Inter', sans-serif;
-      font-size: 15px;
-      color: #e8e8e8;
-      margin-bottom: 4px;
+    /* ===== PULL QUOTE ===== */
+    .pull-quote {
+      font-family: 'Inter', sans-serif;
+      font-size: 22px;
       font-weight: 500;
-    }
-    .step-body {
-      font-size: 14px;
-      color: rgba(255,255,255,0.5);
-      line-height: 1.6;
-      font-weight: 300;
-    }
-
-    /* Legion section */
-    .legion-box {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 10px;
-      padding: 28px;
-      margin-top: 20px;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
-    }
-    .legion-title {
-      font-family: 'Inconsolata', monospace;
-      font-size: 14px;
-      color: var(--romulus-amber);
-      margin-bottom: 12px;
-    }
-    .legion-body {
-      font-size: 14px;
-      color: rgba(255,255,255,0.55);
-      line-height: 1.7;
-      font-weight: 300;
+      font-style: italic;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.5;
+      border-left: 4px solid var(--amber);
+      padding-left: 24px;
+      margin: 32px 0;
+      max-width: 620px;
     }
 
-    /* Artifact screenshots */
-    .artifact-grid {
+    /* ===== DECISION CARDS ===== */
+    .decisions-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 20px;
+      gap: 16px;
+      margin-top: 32px;
     }
-    .artifact-grid.single {
-      grid-template-columns: 1fr;
-    }
-    .artifact-img {
-      width: 100%;
+    .decision-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
       border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.08);
-      display: block;
+      padding: 28px 24px;
     }
-    .artifact-caption {
+    .decision-number {
       font-family: 'Inconsolata', monospace;
-      font-size: 11px;
-      color: rgba(255,255,255,0.28);
-      margin-top: 8px;
-      text-align: center;
-      letter-spacing: 0.04em;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--amber);
+      line-height: 1;
+      margin-bottom: 12px;
     }
-    .artifact-placeholder {
-      width: 100%;
-      aspect-ratio: 16/9;
-      background: rgba(255,255,255,0.025);
-      border: 1px dashed rgba(255,255,255,0.1);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Inconsolata', monospace;
-      font-size: 11px;
-      color: rgba(255,255,255,0.2);
-    }
-    /* What broke section */
-    .broke-card {
-      background: rgba(255,255,255,0.025);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-left: 2px solid rgba(217,149,26,0.5);
-      border-radius: 10px;
-      padding: 24px 28px;
-      margin-top: 16px;
-    }
-    .broke-label {
-      font-family: 'Inconsolata', monospace;
-      font-size: 11px;
-      color: var(--romulus-amber);
-      letter-spacing: 0.08em;
+    .decision-title {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
       margin-bottom: 10px;
     }
-    .broke-body {
+    .decision-body {
+      font-family: 'Inter', sans-serif;
       font-size: 14px;
-      color: rgba(255,255,255,0.55);
-      line-height: 1.7;
-      font-weight: 300;
-    }
-    .broke-body strong {
-      color: rgba(255,255,255,0.75);
-      font-weight: 500;
-    }
-    @media (max-width: 600px) {
-      .artifact-grid { grid-template-columns: 1fr; }
+      color: var(--text-body);
+      line-height: 1.6;
     }
 
-    /* Divider */
-    .romulus-divider {
-      border: none;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      max-width: 760px;
+    /* ===== ASCII SEPARATOR ===== */
+    .ascii-separator {
+      padding: 60px 40px;
+      max-width: calc(var(--container) + 80px);
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+    }
+    .ascii-block {
+      font-family: 'Inconsolata', monospace;
+      font-size: 14px;
+      color: var(--amber);
+      white-space: pre;
+      line-height: 1.6;
+      border: 1px solid var(--amber-border);
+      border-radius: 8px;
+      padding: 28px 36px;
+      background: rgba(217,149,26,0.04);
+      text-align: left;
+      overflow-x: auto;
+      max-width: 100%;
+    }
+
+    /* ===== COHORT CARDS ===== */
+    .cohort-section {
+      padding: 0 40px 80px;
+      max-width: calc(var(--container) + 280px);
       margin: 0 auto;
     }
-
-    @keyframes blink {
-      0%, 49% { opacity: 1; }
-      50%, 100% { opacity: 0; }
+    .cohort-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .cohort-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-top: 2px solid var(--amber);
+      border-radius: 8px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+    }
+    .cohort-card.orchestrator {
+      border-left: 3px solid var(--amber);
+      box-shadow: inset 0 0 30px var(--amber-glow);
+    }
+    .cohort-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 4px;
+    }
+    .cohort-emoji { font-size: 22px; }
+    .cohort-name {
+      font-family: 'Inconsolata', monospace;
+      font-size: 18px;
+      color: #fff;
+      font-weight: 700;
+    }
+    .cohort-status {
+      font-family: 'Inconsolata', monospace;
+      font-size: 11px;
+      color: var(--green);
+      letter-spacing: 0.06em;
+      margin-bottom: 14px;
+    }
+    .cohort-question {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .cohort-workers {
+      font-family: 'Inconsolata', monospace;
+      font-size: 12px;
+      color: var(--text-faint);
+      line-height: 1.8;
+      margin-bottom: 14px;
+    }
+    .cohort-output-label {
+      font-family: 'Inconsolata', monospace;
+      font-size: 11px;
+      color: var(--amber);
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+    }
+    .cohort-output {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: var(--text-body);
+      line-height: 1.5;
     }
 
-    /* Scroll animations */
+    /* ===== PIPELINE ===== */
+    .pipeline-section {
+      padding: 80px 40px;
+      max-width: calc(var(--container) + 280px);
+      margin: 0 auto;
+    }
+    .pipeline-label {
+      font-family: 'Inconsolata', monospace;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--amber);
+      margin-bottom: 16px;
+    }
+    .pipeline-heading {
+      font-family: 'Josefin Sans', 'Inter Tight', sans-serif;
+      font-size: 30px;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .pipeline-sublabel {
+      font-family: 'Inconsolata', monospace;
+      font-size: 12px;
+      color: var(--text-secondary);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+    .pipeline-body {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      color: var(--text-body);
+      line-height: 1.6;
+      margin-bottom: 40px;
+      max-width: var(--container);
+    }
+    .pipeline-flow {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      overflow-x: auto;
+      padding: 20px 0;
+      flex-wrap: nowrap;
+    }
+    .pipeline-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+      transition: background-color 0.6s ease;
+    }
+    .pipeline-node-box {
+      height: 44px;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--card-border);
+      border-radius: 22px;
+      font-family: 'Inconsolata', monospace;
+      font-size: 13px;
+      color: var(--text-primary);
+      white-space: nowrap;
+      transition: background-color 0.6s ease, border-color 0.6s ease;
+      background: transparent;
+    }
+    .pipeline-node.lit .pipeline-node-box {
+      background: var(--amber-soft);
+      border-color: var(--amber-border);
+    }
+    .pipeline-node-time {
+      font-family: 'Inconsolata', monospace;
+      font-size: 11px;
+      color: var(--text-faint);
+    }
+    .pipeline-connector {
+      width: 40px;
+      flex-shrink: 0;
+      height: 1px;
+      position: relative;
+    }
+    .pipeline-connector-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: repeating-linear-gradient(90deg, rgba(255,255,255,0.15) 0, rgba(255,255,255,0.15) 4px, transparent 4px, transparent 8px);
+    }
+    .pipeline-connector-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--amber);
+      transition: width 0.5s ease;
+    }
+    .pipeline-connector.lit .pipeline-connector-fill {
+      width: 100%;
+    }
+
+    /* ===== EXPERIMENT CARDS ===== */
+    .experiment-section {
+      padding: 80px 40px;
+      max-width: calc(var(--container) + 80px);
+      margin: 0 auto;
+    }
+    .experiment-card {
+      border-left: 3px solid var(--amber);
+      padding-left: 28px;
+      margin-bottom: 64px;
+    }
+    .experiment-card:last-child { margin-bottom: 0; }
+    .experiment-label {
+      font-family: 'Inconsolata', monospace;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--amber);
+      margin-bottom: 12px;
+    }
+    .experiment-heading {
+      font-family: 'Josefin Sans', 'Inter Tight', sans-serif;
+      font-size: 26px;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+    .experiment-comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+    .experiment-col-label {
+      font-family: 'Inconsolata', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-faint);
+      margin-bottom: 8px;
+    }
+    .experiment-col-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--text-body);
+      line-height: 1.5;
+    }
+    .experiment-metric {
+      font-family: 'Inconsolata', monospace;
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--amber);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .experiment-insight {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      color: var(--text-body);
+      line-height: 1.6;
+    }
+    .experiment-body {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      color: var(--text-body);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    /* ===== WHAT BROKE ===== */
+    .broke-tag {
+      font-family: 'Inconsolata', monospace;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #ef4444;
+      background: rgba(239,68,68,0.1);
+      border: 1px solid rgba(239,68,68,0.2);
+      border-radius: 4px;
+      padding: 2px 8px;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+    .broke-item {
+      margin-bottom: 28px;
+    }
+    .broke-item:last-child { margin-bottom: 0; }
+    .broke-item-title {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    /* ===== NEXT / FORWARD CARDS ===== */
+    .forward-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 32px;
+      margin-bottom: 40px;
+    }
+    .forward-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 24px;
+    }
+    .forward-card-title {
+      font-family: 'Inconsolata', monospace;
+      font-size: 14px;
+      color: var(--amber);
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    .forward-card-body {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--text-body);
+      line-height: 1.6;
+    }
+
+    /* ===== THESIS RESTATEMENT ===== */
+    .thesis-restate {
+      font-family: 'Inter', sans-serif;
+      font-size: 20px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.5;
+      border-left: 4px solid var(--amber);
+      padding-left: 24px;
+      margin-top: 40px;
+      max-width: 620px;
+    }
+
+    /* ===== SCROLL ANIMATIONS ===== */
     [data-romulus-animate] {
       opacity: 0;
-      transform: translateY(16px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
+      transform: translateY(20px);
+      transition: opacity 0.4s ease-out, transform 0.4s ease-out;
     }
     [data-romulus-animate].romulus-visible {
       opacity: 1;
       transform: translateY(0);
     }
-
-    @media (max-width: 600px) {
-      .romulus-header {
-        padding: 24px 20px 20px;
-        grid-template-columns: 1fr;
-        justify-items: center;
-      }
-      .romulus-hero { padding: 48px 20px 40px; }
-      .romulus-section { padding: 40px 20px; }
-      .gate-terminal { padding: 28px 24px; }
-      .romulus-back,
-      .romulus-logo,
-      .romulus-status {
-        justify-self: center;
-        text-align: center;
-      }
-    }
-
-    /* ===== LEGION WAR ROOM ===== */
-    :root {
-      --legion-green: #22c55e;
-      --legion-red: #ef4444;
-      --legion-dim: rgba(217,149,26,0.08);
-    }
-
-    /* Legion container — wider than standard sections for immersive feel */
-    .legion-wrap {
-      padding: 80px 40px;
-      max-width: 920px;
-      margin: 0 auto;
-    }
-
-    .legion-header {
-      text-align: center;
-      margin-bottom: 72px;
-    }
-
-    .legion-header-title {
-      font-family: 'Inter Tight', 'Inter', sans-serif;
-      font-size: clamp(32px, 5vw, 48px);
-      font-weight: 500;
-      color: #fff;
-      letter-spacing: -0.03em;
-      margin-bottom: 12px;
-    }
-
-    .legion-header-sub {
-      font-size: 17px;
-      color: rgba(255,255,255,0.5);
-      font-weight: 300;
-      max-width: 560px;
-      margin: 0 auto;
-      line-height: 1.6;
-    }
-
-    .legion-sub-label {
-      font-family: 'Inconsolata', monospace;
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      color: var(--romulus-amber);
-      opacity: 0.75;
-      margin-bottom: 20px;
-    }
-
-    .legion-sub-title {
-      font-family: 'Inter Tight', 'Inter', sans-serif;
-      font-size: 20px;
-      font-weight: 500;
-      color: #fff;
-      margin-bottom: 16px;
-      letter-spacing: -0.02em;
-    }
-
-    /* --- Evolution: Before → After --- */
-    .legion-evo {
-      margin-bottom: 72px;
-    }
-
-    .evo-grid {
-      display: grid;
-      grid-template-columns: 1fr 40px 1fr;
-      align-items: stretch;
-      gap: 0;
-    }
-
-    .evo-panel {
-      background: rgba(255,255,255,0.025);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 10px;
-      padding: 24px;
-    }
-
-    .evo-panel--before {
-      opacity: 0.55;
-    }
-
-    .evo-panel--after {
-      border-color: rgba(217,149,26,0.35);
-      box-shadow: 0 0 40px rgba(217,149,26,0.06);
-    }
-
-    .evo-arrow {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Inconsolata', monospace;
-      font-size: 18px;
-      color: var(--romulus-amber);
-    }
-
-    .evo-tag {
-      font-family: 'Inconsolata', monospace;
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-
-    .evo-panel--before .evo-tag { color: rgba(255,255,255,0.35); }
-    .evo-panel--after .evo-tag { color: var(--romulus-amber); }
-
-    .evo-line {
-      font-family: 'Inconsolata', monospace;
-      font-size: 12px;
-      line-height: 1.9;
-      color: rgba(255,255,255,0.5);
-    }
-
-    .evo-panel--after .evo-line {
-      color: rgba(255,255,255,0.7);
-    }
-
-    .evo-line .p { color: var(--romulus-amber); }
-    .evo-line .g { color: var(--legion-green); }
-    .evo-line .d { color: rgba(255,255,255,0.2); }
-
-    /* --- Pipeline Flow --- */
-    .legion-pipeline {
-      margin-bottom: 72px;
-    }
-
-    .pipeline-track {
-      display: flex;
-      align-items: center;
-      overflow-x: auto;
-      padding: 20px 0;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .pipeline-node {
-      flex-shrink: 0;
-      background: var(--legion-dim);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 8px;
-      padding: 14px 12px;
-      text-align: center;
-      min-width: 72px;
-      opacity: 0.35;
-      transform: scale(0.92);
-      transition: opacity 0.4s ease, transform 0.4s ease,
-                  border-color 0.4s ease, box-shadow 0.4s ease;
-    }
-
-    .pipeline-node.node-lit {
+    /* Fallback for no JS */
+    .no-js [data-romulus-animate] {
       opacity: 1;
-      transform: scale(1);
-      border-color: rgba(217,149,26,0.5);
-      box-shadow: 0 0 16px rgba(217,149,26,0.12);
+      transform: none;
     }
 
-    .pipeline-node-name {
-      font-family: 'Inconsolata', monospace;
-      font-size: 10px;
-      letter-spacing: 0.06em;
-      color: rgba(255,255,255,0.7);
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
-    .pipeline-node-time {
-      font-family: 'Inconsolata', monospace;
-      font-size: 9px;
-      color: rgba(255,255,255,0.3);
-      margin-top: 4px;
-    }
-
-    .pipeline-conn {
-      flex-shrink: 0;
-      width: 24px;
-      height: 2px;
-      background: rgba(255,255,255,0.06);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .pipeline-conn::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      width: 0;
-      background: var(--romulus-amber);
-      transition: width 0.35s ease;
-    }
-
-    .pipeline-conn.conn-lit::after {
-      width: 100%;
-    }
-
-    /* --- Question Architecture --- */
-    .legion-questions {
-      margin-bottom: 72px;
-      text-align: center;
-    }
-
-    .question-list {
-      display: flex;
-      flex-direction: column;
-      gap: 48px;
-      margin-top: 40px;
-    }
-
-    .question-cohort {
-      font-family: 'Inconsolata', monospace;
-      font-size: 11px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--romulus-amber);
-      opacity: 0.65;
-      margin-bottom: 10px;
-    }
-
-    .question-text {
-      font-family: 'Inter Tight', 'Inter', sans-serif;
-      font-size: clamp(22px, 3.5vw, 32px);
-      font-weight: 500;
-      color: #fff;
-      letter-spacing: -0.02em;
-      line-height: 1.2;
-    }
-
-    .question-text::before {
-      content: '\201C';
-      color: var(--romulus-amber);
-      opacity: 0.4;
-    }
-
-    .question-text::after {
-      content: '\201D';
-      color: var(--romulus-amber);
-      opacity: 0.4;
-    }
-
-    /* --- Cohort Command Cards --- */
-    .legion-cohorts {
-      margin-bottom: 72px;
-    }
-
-    .cohort-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      margin-top: 20px;
-    }
-
-    .cohort-card {
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 10px;
-      padding: 28px;
-      transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
-    }
-
-    .cohort-card:hover {
-      border-color: rgba(217,149,26,0.4);
-      box-shadow: 0 0 30px rgba(217,149,26,0.08),
-                  inset 0 0 30px rgba(217,149,26,0.03);
-      background: rgba(217,149,26,0.03);
-    }
-
-    .cohort-card:hover .cohort-status {
-      color: var(--legion-green);
-      border-color: rgba(34,197,94,0.3);
-      background: rgba(34,197,94,0.1);
-    }
-
-    .cohort-card:hover .cohort-status::before {
-      background: var(--legion-green);
-    }
-
-    .cohort-card--orchestrator {
-      grid-column: 1 / -1;
-      border-color: rgba(217,149,26,0.2);
-      background: rgba(217,149,26,0.03);
-    }
-
-    .cohort-emoji {
-      font-size: 20px;
-      margin-bottom: 12px;
-    }
-
-    .cohort-name {
-      font-family: 'Inconsolata', monospace;
-      font-size: 13px;
-      color: var(--romulus-amber);
-      letter-spacing: 0.06em;
-      margin-bottom: 4px;
-    }
-
-    .cohort-question {
-      font-family: 'Inter Tight', 'Inter', sans-serif;
-      font-size: 17px;
-      font-weight: 500;
-      color: #fff;
-      letter-spacing: -0.01em;
-      margin-bottom: 16px;
-      line-height: 1.3;
-    }
-
-    .cohort-outputs {
-      font-family: 'Inconsolata', monospace;
-      font-size: 11px;
-      color: rgba(255,255,255,0.4);
-      line-height: 1.8;
-    }
-
-    .cohort-outputs span {
-      display: block;
-    }
-
-    .cohort-outputs span::before {
-      content: '\2192  ';
-      color: rgba(255,255,255,0.2);
-    }
-
-    .cohort-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 16px;
-      padding: 3px 10px 3px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.1);
-      background: rgba(255,255,255,0.03);
-      font-family: 'Inconsolata', monospace;
-      font-size: 9px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
-      transition: color 0.3s, border-color 0.3s, background 0.3s;
-    }
-
-    .cohort-status::before {
-      content: '';
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.25);
-      transition: background 0.3s;
-    }
-
-    /* --- Terminal Demo --- */
-    .legion-terminal {
-      margin-bottom: 72px;
-    }
-
-    .terminal-window {
-      background: rgba(0,0,0,0.4);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 10px;
-      overflow: hidden;
-      margin-top: 20px;
-    }
-
-    .terminal-chrome {
-      padding: 10px 16px;
-      background: rgba(255,255,255,0.03);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .terminal-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-    }
-
-    .terminal-dot:nth-child(1) { background: rgba(239,68,68,0.6); }
-    .terminal-dot:nth-child(2) { background: rgba(234,179,8,0.6); }
-    .terminal-dot:nth-child(3) { background: rgba(34,197,94,0.6); }
-
-    .terminal-body {
-      padding: 20px 24px;
-      max-height: 520px;
-      overflow-y: auto;
-    }
-
-    .terminal-line {
-      font-family: 'Inconsolata', monospace;
-      font-size: 12px;
-      line-height: 1.75;
-      color: rgba(255,255,255,0.55);
-      white-space: pre-wrap;
-      opacity: 0;
-      transform: translateY(4px);
-      transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-
-    .terminal-window.active .terminal-line {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .terminal-line--blank { height: 12px; }
-
-    .terminal-line .cmd { color: rgba(255,255,255,0.85); }
-    .terminal-line .t-prompt { color: var(--romulus-amber); }
-    .terminal-line .t-ok { color: var(--legion-green); }
-    .terminal-line .t-head { color: var(--romulus-amber); font-weight: 700; }
-    .terminal-line .t-info { color: rgba(255,255,255,0.7); }
-    .terminal-line .t-dim { color: rgba(255,255,255,0.3); }
-    .terminal-line .t-link { color: #60a5fa; }
-    .terminal-line .t-complete { color: var(--legion-green); font-weight: 700; }
-
-    /* --- Memory Graph --- */
-    .legion-memory-section {
-      margin-bottom: 72px;
-    }
-
-    .memory-viz {
-      margin-top: 24px;
-      height: 160px;
-      position: relative;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    .memory-dot {
-      position: absolute;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--romulus-amber);
-      opacity: 0;
-      transition: opacity 0.6s ease;
-    }
-
-    .memory-viz.active .memory-dot {
-      opacity: 0.6;
-    }
-
-    .memory-edge {
-      position: absolute;
-      height: 1px;
-      background: rgba(217,149,26,0.15);
-      transform-origin: left center;
-      opacity: 0;
-      transition: opacity 0.8s ease;
-    }
-
-    .memory-viz.active .memory-edge {
-      opacity: 1;
-    }
-
-    .memory-desc {
-      font-size: 14px;
-      color: rgba(255,255,255,0.5);
-      line-height: 1.7;
-      font-weight: 300;
-      margin-top: 16px;
-    }
-
-    /* --- Roadmap --- */
-    .legion-roadmap {
-      margin-bottom: 20px;
-    }
-
-    .roadmap-list {
-      margin-top: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .roadmap-item {
-      display: flex;
-      align-items: baseline;
-      gap: 10px;
-      font-size: 14px;
-      color: rgba(255,255,255,0.55);
-      line-height: 1.6;
-      font-weight: 300;
-    }
-
-    .roadmap-item::before {
-      content: '\25B8';
-      color: var(--romulus-amber);
-      flex-shrink: 0;
-    }
-
-    /* --- Legion responsive --- */
+    /* ===== MOBILE — max 768px ===== */
     @media (max-width: 768px) {
-      .legion-wrap { padding: 56px 20px; }
-      .evo-grid { grid-template-columns: 1fr; gap: 12px; }
-      .evo-arrow { transform: rotate(90deg); padding: 4px 0; }
+      .romulus-hero { padding: 60px 20px 50px; }
+      .hero-headline { font-size: clamp(28px, 8vw, 40px); }
+      .hero-sub { font-size: 16px; }
+      .hero-stats { font-size: 12px; gap: 4px; }
+
+      .rom-section { padding: 50px 20px; }
+      .section-heading { font-size: 24px; }
+
+      .decisions-grid { grid-template-columns: 1fr; }
+
+      .cohort-section { padding: 0 20px 50px; }
       .cohort-grid { grid-template-columns: 1fr; }
-      .pipeline-node { min-width: 60px; padding: 12px 8px; }
-      .pipeline-conn { width: 16px; }
-      .terminal-body { padding: 16px; }
-      .terminal-line { font-size: 11px; }
+
+      .pipeline-section { padding: 50px 20px; }
+      .pipeline-flow { flex-wrap: wrap; gap: 8px; justify-content: center; }
+      .pipeline-connector { width: 24px; }
+
+      .experiment-section { padding: 50px 20px; }
+      .experiment-comparison { grid-template-columns: 1fr; }
+      .experiment-metric { font-size: 36px; }
+
+      .ascii-separator { padding: 40px 20px; }
+      .ascii-block { font-size: 11px; padding: 20px; overflow-x: auto; }
+
+      .forward-grid { grid-template-columns: 1fr; }
+
+      .romulus-nav { padding: 20px; }
+
+      .gate-terminal { padding: 32px 24px; }
+    }
+
+    /* ===== TABLET — 769 to 1024 ===== */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .cohort-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
 <body class="romulus-page">
 
-  <!-- PASSWORD GATE -->
+  <!-- ===== PASSWORD GATE ===== -->
   <div class="romulus-gate" id="gate">
     <div class="gate-terminal">
-      <div class="gate-prompt">romulus@roma-eterna:~$ <span>./access.sh</span><span class="gate-cursor">▍</span></div>
-      <div class="gate-label">Enter Access Phrase</div>
+      <div class="gate-prompt">romulus<span>@</span>roma-eterna <span>~</span> <span class="gate-cursor">_</span></div>
+      <div class="gate-label">Access Required</div>
       <input type="password" class="gate-input" id="gateInput" placeholder="&#xB7;&#xB7;&#xB7;&#xB7;&#xB7;&#xB7;&#xB7;&#xB7;&#xB7;&#xB7;&#xB7;&#xB7;&#xB7;&#xB7;&#xB7;" autocomplete="off" />
-      <button class="gate-submit" id="gateSubmit">Unlock</button>
-      <div class="gate-error" id="gateError">Access denied. Try again.</div>
+      <button class="gate-submit" id="gateSubmit">AUTHENTICATE</button>
+      <div class="gate-error" id="gateError">ACCESS DENIED — incorrect passphrase</div>
     </div>
   </div>
 
-  <!-- CONTENT -->
+  <!-- ===== MAIN CONTENT ===== -->
   <div class="romulus-content" id="content">
 
-    <!-- Header -->
-    <div class="romulus-header">
-      <a href="index.html" class="romulus-back">&#x2190; Back to site</a>
-      <div class="romulus-status">
-        <div>node: <span class="accent">roma-eterna</span></div>
-        <div>mode: persistent / discord / obsidian</div>
-      </div>
-      <a href="index.html" class="romulus-logo">ROMULUS</a>
-    </div>
+    <!-- Top Nav -->
+    <nav class="romulus-nav">
+      <a href="index.html">&larr; Back to site</a>
+      <span class="badge">CASE STUDY &middot; 2026</span>
+    </nav>
 
     <!-- Hero -->
-    <div class="romulus-hero">
-      <div class="romulus-eyebrow">CASE STUDY &#x2022; 2026</div>
-      <h1 class="romulus-title">Romulus: built to ship faster, without losing the thread.</h1>
-      <p class="romulus-subtitle">An always-on engineering system with persistent memory, multi-model routing, and a fixed workflow. Running since February 3, 2026.</p>
-      <div class="hero-terminal">
-        <div class="hero-terminal-line"><span class="prompt">$</span> host:<span class="value">Roma Eterna</span> &nbsp; uptime:<span class="value">63 days</span> &nbsp; memory:<span class="value">83 files / 31 logs / 11 decisions</span></div>
-        <div class="hero-terminal-line"><span class="prompt">$</span> brief:<span class="value">delivered 63/63 mornings, zero missed</span></div>
+    <header class="romulus-hero" data-romulus-animate>
+      <h1 class="hero-headline">I ran one AI. Then I built a <span class="amber-underline">command structure</span>.</h1>
+      <p class="hero-sub">A case study in persistent memory, specialized cohorts, and force-multiplying a single engineer.</p>
+      <div class="hero-stats">
+        <span>uptime: <span class="stat-value">69 days</span></span>
+        <span class="dot">&middot;</span>
+        <span>tasks: <span class="stat-value">400+</span></span>
+        <span class="dot">&middot;</span>
+        <span>models routed: <span class="stat-value">5</span></span>
+        <span class="dot">&middot;</span>
+        <span>cohorts deployed: <span class="stat-value">4</span></span>
+        <span class="dot">&middot;</span>
+        <span>products shipped: <span class="stat-value">2</span></span>
       </div>
-    </div>
+    </header>
 
-    <hr class="romulus-divider">
+    <div class="section-divider"><span class="dot"></span></div>
 
-    <!-- Overview -->
-    <div class="romulus-section" data-romulus-animate>
+    <!-- 1. THE PROBLEM -->
+    <section class="rom-section" data-romulus-animate>
       <div class="section-label">~/romulus/overview.txt</div>
-      <h2 class="section-title">The Problem</h2>
+      <h2 class="section-heading">The Throughput Wall</h2>
       <div class="section-body">
-        <p>I've worked across product, design, and engineering for a decade — startups in health, web3, energy, consumer software. The recurring constraint wasn't ideas or skill. It was throughput.</p>
-        <p>Strong opportunities surface faster than one person can evaluate and build them. Most AI workflows helped with isolated tasks but didn't preserve context well enough for real product work. Sessions reset. Notes fragmented. Good ideas disappeared into chat history. I needed a system that stayed on, retained project memory, and supported the full path from signal to shipped artifact — without removing judgment from the loop.</p>
+        <p>I've worked across product, design, and engineering for a decade &mdash; startups in health, web3, energy, consumer software. The recurring constraint wasn't ideas or skill. It was throughput.</p>
+        <p>Strong opportunities surface faster than one person can evaluate and build them. Session-based AI tools don't help because they dissolve context between conversations. Every session is Day 1. Every project requires re-explaining the backstory. Good insights disappear into chat history.</p>
       </div>
-    </div>
+      <div class="pull-quote">The breakthrough wasn't finding a better model. It was building a system that remembers.</div>
+    </section>
 
-    <hr class="romulus-divider">
+    <div class="section-divider"><span class="dot"></span></div>
 
-    <!-- Setup -->
-    <div class="romulus-section" data-romulus-animate>
-      <div class="section-label">~/romulus/setup.md</div>
-      <h2 class="section-title">The Setup</h2>
-      <div class="section-body">
-        <p>Romulus runs on OpenClaw and lives on a dedicated Mac mini named Roma Eterna. It's always on — running scheduled jobs, monitoring things in the background, and sending a morning brief to Discord every day at 8 AM.</p>
-        <p>Memory lives in an Obsidian vault: daily notes, project files, operating context, decisions, and lessons. Every session reads from it. Every session writes back. 83 files, 29 project notes, 31 daily logs, 11 key decisions — dating back to first boot on February 3, 2026.</p>
-      </div>
-    </div>
-
-    <hr class="romulus-divider">
-
-    <!-- Why This Architecture -->
-    <div class="romulus-section" data-romulus-animate>
+    <!-- 2. WHY I BUILT IT THIS WAY -->
+    <section class="rom-section" data-romulus-animate>
       <div class="section-label">~/romulus/decisions.md</div>
-      <h2 class="section-title">Why I Built It This Way</h2>
-      <div class="workflow-list" style="margin-top:20px;">
-        <div class="workflow-step">
-          <div class="step-num">01</div>
-          <div class="step-content">
-            <div class="step-title">Discord</div>
-            <div class="step-body">Threaded, logged, pocketable. Every brief, command, and response is timestamped and searchable. The channel history doubles as episodic memory before anything needs a vector DB.</div>
-          </div>
+      <h2 class="section-heading">Design Decisions</h2>
+      <div class="decisions-grid">
+        <div class="decision-card" data-romulus-animate>
+          <div class="decision-number">01</div>
+          <div class="decision-title">Discord as interface</div>
+          <div class="decision-body">Threaded, logged, pocketable. Every brief, command, and response is timestamped and searchable. The channel history doubles as episodic memory before anything needs a vector database.</div>
         </div>
-        <div class="workflow-step">
-          <div class="step-num">02</div>
-          <div class="step-content">
-            <div class="step-title">Obsidian</div>
-            <div class="step-body">Durable Markdown, no vendor lock, human-inspectable. Deliberate choice over built-in session memory — which resets between sessions. Files survive reboots. Context doesn't disappear when the agent does.</div>
-          </div>
+        <div class="decision-card" data-romulus-animate>
+          <div class="decision-number">02</div>
+          <div class="decision-title">Obsidian as memory substrate</div>
+          <div class="decision-body">Durable Markdown. No vendor lock. Human-inspectable. Files survive reboots. Context doesn't disappear when the agent does. 83 files, 29 project notes, 31 daily logs, 11 key decisions &mdash; dating back to first boot on February 3, 2026.</div>
         </div>
-        <div class="workflow-step">
-          <div class="step-num">03</div>
-          <div class="step-content">
-            <div class="step-title">Dedicated Mac mini</div>
-            <div class="step-body">Stable cron, zero cold-start, separate from the daily laptop. A dedicated node means scheduled jobs run reliably and context is always preloaded. Simpler to reason about than a cloud VM for a one-person system.</div>
-          </div>
+        <div class="decision-card" data-romulus-animate>
+          <div class="decision-number">03</div>
+          <div class="decision-title">A dedicated host</div>
+          <div class="decision-body">Stable cron. Zero cold-start. Separate from the daily laptop. A Mac mini named Roma Eterna means scheduled jobs run reliably and context is always preloaded.</div>
         </div>
-        <div class="workflow-step">
-          <div class="step-num">04</div>
-          <div class="step-content">
-            <div class="step-title">Multi-model routing</div>
-            <div class="step-body">Match capability and cost to the job. Minimax M2.7 for briefs and scheduled tasks ($0.000001/token). Claude Sonnet for research synthesis. Claude Opus for multi-file implementation. Running the same 8 AM brief through Opus would cost 400x more with identical output quality.</div>
-          </div>
+        <div class="decision-card" data-romulus-animate>
+          <div class="decision-number">04</div>
+          <div class="decision-title">Match model to task</div>
+          <div class="decision-body">Not every task deserves the same model. Running an 8 AM morning brief through the most expensive model costs 400x more with identical output quality. Match capability and cost to the job.</div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <hr class="romulus-divider">
+    <div class="section-divider"><span class="dot"></span></div>
 
-    <!-- Workflow -->
-    <div class="romulus-section" data-romulus-animate>
-      <div class="section-label">~/romulus/workflow.sh</div>
-      <h2 class="section-title">The Workflow</h2>
+    <!-- 3. THE SETUP -->
+    <section class="rom-section" data-romulus-animate>
+      <div class="section-label">~/romulus/system.md</div>
+      <h2 class="section-heading">The System</h2>
       <div class="section-body">
-        <p>Every project moves through the same four stages. The models change. The loop stays fixed.</p>
+        <p>Romulus runs on OpenClaw and lives on a dedicated Mac mini. It's always on &mdash; running scheduled jobs, monitoring things in the background, and sending a morning brief every day at 8 AM.</p>
+        <p>Every session reads the Obsidian vault. Every session writes back. The result: each new project starts with full context from every prior project. No re-explaining history. No rebuilding mental models from scratch.</p>
       </div>
-      <div class="workflow-list">
-        <div class="workflow-step">
-          <div class="step-num">01</div>
-          <div class="step-content">
-            <div class="step-title">Research</div>
-            <div class="step-body">Grok queries X live — classifying signal from noise, surfacing recurring pain points, flagging what's trending versus what's overdone. The output is a ranked list of opportunities worth evaluating, not a raw feed.</div>
-          </div>
-        </div>
-        <div class="workflow-step">
-          <div class="step-num">02</div>
-          <div class="step-content">
-            <div class="step-title">Analysis</div>
-            <div class="step-body">OpenAI models pressure-test feasibility: stack complexity, competitive landscape, build time, distribution path. Structured output. Forces a real decision on whether the thing is worth the week.</div>
-          </div>
-        </div>
-        <div class="workflow-step">
-          <div class="step-num">03</div>
-          <div class="step-content">
-            <div class="step-title">Synthesis</div>
-            <div class="step-body">Both route back through Romulus, where project memory and prior decisions are loaded as context. The system retrieves relevant past work, compares options, flags contradictions. Final call stays with me.</div>
-          </div>
-        </div>
-        <div class="workflow-step">
-          <div class="step-num">04</div>
-          <div class="step-content">
-            <div class="step-title">Execution</div>
-            <div class="step-body">Claude Code handles multi-file implementation. Romulus tracks Git state, Vercel deploys, and session context between builds. When one sprint ends and the next starts, nothing has to be re-explained.</div>
-          </div>
-        </div>
-      </div>
-    </div>
+    </section>
 
-    <!-- Model Routing -->
-    <div class="romulus-section" data-romulus-animate>
-      <div class="section-label">~/romulus/models.json</div>
-      <h2 class="section-title">Model Routing Philosophy</h2>
-      <div class="section-body">
-        <p>Not every task deserves the same model. I treat model selection the same way I'd treat any system design decision: match capability and cost to the job.</p>
-      </div>
-      <div class="model-grid">
-        <div class="model-card">
-          <div class="model-name">Minimax M2.7</div>
-          <div class="model-desc">The nervous system. Morning briefs, balance checks, scheduled tasks. Fast, cheap, reliable. Zero overhead.</div>
-        </div>
-        <div class="model-card">
-          <div class="model-name">Claude Sonnet</div>
-          <div class="model-desc">The thinking partner. Research synthesis, strategic discussions, things that need actual depth — not just output.</div>
-        </div>
-        <div class="model-card">
-          <div class="model-name">Claude Opus</div>
-          <div class="model-desc">The workhorse. Multi-file implementations, complex refactors, the builds that actually matter.</div>
-        </div>
-      </div>
-    </div>
+    <div class="section-divider"><span class="dot"></span></div>
 
-    <hr class="romulus-divider">
-
-    <!-- What Shipped -->
-    <div class="romulus-section" data-romulus-animate>
-      <div class="section-label">~/romulus/shipped/</div>
-      <h2 class="section-title">What This System Has Shipped</h2>
-
-      <div class="project-card">
-        <div class="project-name">Chronicle <span class="project-status">shipped</span></div>
-        <div class="project-url">thischronicle.com</div>
-        <div class="project-body">
-          <p>A daily history guessing game. One event per day, three chances to guess the year. Wordle-style digit feedback. 90 hand-curated puzzles spanning five centuries.</p>
-          <p>I designed the game first — share card format, difficulty calibration, no-clues Sunday mode, and the editorial voice. Then I used the system to move from spec to production quickly.</p>
-          <span class="project-tag">Next.js + Tailwind</span>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-name">Caveat <span class="project-status">shipped</span></div>
-        <div class="project-url">trycaveat.com</div>
-        <div class="project-body">
-          <p>AI contract analyzer. Upload any PDF or DOCX, get a risk report in 60 seconds. Flags bad terms, missing clauses, unfavorable language. Built on Next.js 15, Stripe, GPT-4o. Privacy-first — contracts are never stored.</p>
-          <p>The core insight came from genuine signal: contract review is expensive and slow, and most people skip it. The product addresses a real friction point that freelancers, contractors, and founders face every day.</p>
-          <span class="project-tag">Next.js 15 + Stripe + GPT-4o</span>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-name">The Morning Brief <span class="project-status">live daily</span></div>
-        <div class="project-url">delivered to #roma-eterna every morning at 8 AM</div>
-        <div class="project-body">
-          <p>Weather for Park Slope. R train departures from Prospect Ave to Canal St in exact minutes. Product signal digest: what's worth watching, what's noise, what to skip. All three in Discord. Custom Node.js script pulling live MTA GTFS-RT protobuf feeds, NWS weather API, and a curated signal scan via Grok.</p>
-          <p>63 consecutive mornings. Zero missed. The kind of utility that makes the system feel real before breakfast.</p>
-          <span class="project-tag">Node.js + MTA GTFS-RT + NWS API</span>
-        </div>
-        <div class="artifact-grid">
-          <div>
-            <img src="images/morning-brief-1.png" alt="Morning brief: weather + subway" class="artifact-img" />
-            <div class="artifact-caption">weather + R train departures — Park Slope → Canal St</div>
-          </div>
-          <div>
-            <img src="images/morning-brief-2.png" alt="Morning brief: product signal" class="artifact-img" />
-            <div class="artifact-caption">product signal digest — daily curated scan</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <hr class="romulus-divider">
-
-    <!-- What Broke -->
-    <div class="romulus-section" data-romulus-animate>
-      <div class="section-label">~/romulus/lessons.md</div>
-      <h2 class="section-title">What Broke</h2>
-      <div class="section-body">
-        <p>The most credible part of running a system in production is what goes wrong. Here's the one worth documenting.</p>
-      </div>
-      <div class="broke-card">
-        <div class="broke-label">MTA STOP ID BUG — DAY 11</div>
-        <div class="broke-body">
-          <p><strong>What happened:</strong> The morning brief shipped with stop ID R16. The feed returned plausible-looking data — 12-minute travel time from Prospect Ave to Canal St. It looked right. R16 is Times Square. We were tracking the wrong station entirely for 11 days.</p>
-          <p><strong>Fix:</strong> Downloaded the full static GTFS dataset, cross-referenced stops.txt, found R34N (Prospect Ave northbound) and R23N (Canal St northbound). Patched the script. Correct travel time: 26 minutes.</p>
-          <p><strong>Lesson:</strong> Plausible data isn't verified data. A number that looks reasonable is not a number that's correct. Always cross-reference against a second source before declaring anything production-ready.</p>
-        </div>
-      </div>
-    </div>
-
-    <hr class="romulus-divider">
-
-    <!-- Memory Architecture -->
-    <div class="romulus-section" data-romulus-animate>
+    <!-- 4. MEMORY ARCHITECTURE -->
+    <section class="rom-section" data-romulus-animate>
       <div class="section-label">~/romulus/memory/</div>
-      <h2 class="section-title">The Memory Architecture</h2>
+      <h2 class="section-heading">Persistent Memory</h2>
       <div class="section-body">
-        <p>83 files. 12 core memory docs. 29 project notes. 31 daily logs. 11 key decisions. Dating back to first boot on February 3, 2026.</p>
-        <p>Every session reads from it. Every session writes back. The result: each new project starts with full context from every prior project — no re-explaining history, no rebuilding mental models from scratch. Chat history is ephemeral. Obsidian files are not.</p>
+        <p style="font-family:'Inconsolata',monospace;font-size:14px;color:var(--text-secondary);margin-bottom:20px;">83 files. 12 core memory documents. 29 project notes. 31 daily logs. 11 key decisions.</p>
+        <p>Chat history is ephemeral. Obsidian files are not. The system retrieves relevant past work before every session &mdash; comparing context, flagging contradictions, loading project state. After 69 days, the knowledge graph compounds. What was an empty vault is now a living map of 400+ tasks, shipped products, failures, and lessons.</p>
       </div>
-      <div class="artifact-grid single" style="margin-top:20px;">
-        <div>
-          <img src="images/obsidian-graph.png" alt="Obsidian vault graph view" class="artifact-img" />
-          <div class="artifact-caption">vault graph view — 83 nodes, 29 projects, 31 daily logs, 11 decisions</div>
-        </div>
+    </section>
+
+    <div class="section-divider"><span class="dot"></span></div>
+
+    <!-- 5. WHAT BROKE — Romulus Era -->
+    <section class="rom-section" data-romulus-animate>
+      <div class="section-label">~/romulus/lessons.md</div>
+      <span class="broke-tag">BUG</span>
+      <h2 class="section-heading">What Broke &mdash; Day 11</h2>
+      <div class="section-body">
+        <p>The morning brief shipped with stop ID R16. The feed returned plausible-looking data &mdash; 12-minute travel time from Prospect Ave to Canal St. It looked right.</p>
+        <p>R16 is Times Square. We were tracking the wrong station entirely for 11 days.</p>
+        <p>Fix: Downloaded the full static GTFS dataset, cross-referenced stops.txt, found R34N (Prospect Ave northbound) and R23N (Canal St northbound). Patched the script. Correct travel time: 26 minutes.</p>
       </div>
+      <div class="pull-quote" style="font-size:18px;">Plausible data isn't verified data. Always cross-reference against a second source before declaring production-ready.</div>
+    </section>
+
+    <!-- ===== ASCII SEPARATOR ===== -->
+    <div class="ascii-separator" data-romulus-animate>
+      <div class="ascii-block">ROMA ETERNA &middot; COMMAND STRUCTURE
+&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;
+&#9474;  [ROMULUS]                          &#9474;
+&#9474;     &#9492;&#9472;&#9472; BEFORE: single thread       &#9474;
+&#9474;                                     &#9474;
+&#9474;  [ROMULUS COMMANDS LEGION]          &#9474;
+&#9474;     &#9500;&#9472;&#9472; CAESAR   &#9472;&#9472;  research       &#9474;
+&#9474;     &#9500;&#9472;&#9472; AUGUSTUS  &#9472;&#9472;  build          &#9474;
+&#9474;     &#9500;&#9472;&#9472; VESPASIAN &#9472;&#9472;  revenue       &#9474;
+&#9474;     &#9492;&#9472;&#9472; TRAJAN   &#9472;&#9472;  distribution   &#9474;
+&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</div>
     </div>
 
-    <hr class="romulus-divider">
+    <div class="section-divider"><span class="dot"></span></div>
 
-    <!-- LEGION — Full Expansion -->
-    <div class="romulus-section legion-section" id="legion" data-romulus-animate>
-      <div class="section-label">~/legion/</div>
-      <h2 class="section-title">Legion: An Orchestration Layer</h2>
+    <!-- 6. THE SHIFT -->
+    <section class="rom-section" data-romulus-animate>
+      <div class="section-label">~/legion/pivot.txt</div>
+      <h2 class="section-heading">Then I Built Its Army</h2>
       <div class="section-body">
-        <p>The system worked. But one person giving commands to one AI is still a bottleneck. The question became: what if Romulus commanded a legion?</p>
-        <p>In April 2026, I rebuilt the architecture from scratch. Five specialized AI cohorts, each owning a different phase of product work, orchestrated under a single command structure. Named after Roman emperors — because the structure maps exactly.</p>
+        <p>One person with one AI can only do one thing at a time. That ceiling shows up as a queue: research, then build, then launch, then analyze the business. Four jobs done sequentially. It works &mdash; but slowly.</p>
+        <p>So I rebuilt the architecture. Five specialized cohorts, each owning a different function, sharing one persistent memory layer, orchestrated under a single command structure. The names aren't decoration. They're functional identifiers:</p>
+        <p><strong style="color:#fff;">Caesar</strong> &mdash; intelligence. Rapid synthesis from live signals.<br>
+        <strong style="color:#fff;">Augustus</strong> &mdash; execution. Architecture, build, review, deploy.<br>
+        <strong style="color:#fff;">Vespasian</strong> &mdash; revenue. Named for restoring the depleted treasury. Pricing, unit economics, exit analysis.<br>
+        <strong style="color:#fff;">Trajan</strong> &mdash; distribution. Named for roads that lasted centuries. Launch strategy, content, partnerships.<br>
+        <strong style="color:#fff;">Romulus</strong> &mdash; the orchestrator. Decomposes tasks, routes to the right cohort, enforces gates, synthesizes results.</p>
+        <p style="margin-top:24px;font-family:'Inconsolata',monospace;font-size:14px;color:var(--text-secondary);">Before: you &rarr; Romulus &rarr; Claude Code &rarr; one thing at a time<br>After: you &rarr; Romulus &rarr; Legion &rarr; four cohorts in parallel</p>
       </div>
+    </section>
 
-      <!-- THE SHIFT -->
-      <div class="legion-shift" data-romulus-animate>
-        <div class="shift-before">
-          <div class="shift-label">Before</div>
-          <div class="shift-terminal">
-            <div class="shift-line"><span class="prompt">$</span> you → Romulus → Claude Code</div>
-            <div class="shift-line dim">one assistant. one session. one task at a time.</div>
-          </div>
-        </div>
-        <div class="shift-arrow">&#x2192;</div>
-        <div class="shift-after">
-          <div class="shift-label" style="color:var(--romulus-amber)">After</div>
-          <div class="shift-terminal" style="border-color:rgba(217,149,26,0.3)">
-            <div class="shift-line" style="color:var(--romulus-amber)"><span class="prompt">$</span> you → Romulus → Legion &#x2014; 4 cohorts, parallel</div>
-            <div class="shift-line">Caesar specs it. Augustus builds it.</div>
-            <div class="shift-line">Vespasian models the money. Trajan launches it.</div>
-          </div>
-        </div>
-      </div>
+    <!-- 7. COHORT COMMAND CARDS -->
+    <div class="cohort-section" data-romulus-animate>
+      <div class="cohort-grid">
 
-      <!-- ANIMATED PIPELINE -->
-      <div class="legion-pipeline" data-romulus-animate id="legionPipeline">
-        <div class="pipeline-label">FULL PIPELINE — ~15 MIN PROMPT TO DELIVERABLES</div>
-        <div class="pipeline-track">
-          <div class="pipeline-node node-prompt" data-node="0">
-            <div class="pipeline-node-icon">&#x25BA;</div>
-            <div class="pipeline-node-name">PROMPT</div>
-            <div class="pipeline-node-time">0s</div>
-          </div>
-          <div class="pipeline-conn" data-conn="0"></div>
-          <div class="pipeline-node" data-node="1">
-            <div class="pipeline-node-icon">&#x2694;&#xFE0F;</div>
-            <div class="pipeline-node-name">CAESAR</div>
-            <div class="pipeline-node-time">~2 min</div>
-          </div>
-          <div class="pipeline-conn" data-conn="1"></div>
-          <div class="pipeline-node" data-node="2">
-            <div class="pipeline-node-icon">&#x2713;</div>
-            <div class="pipeline-node-name">APPROVE</div>
-            <div class="pipeline-node-time">you</div>
-          </div>
-          <div class="pipeline-conn" data-conn="2"></div>
-          <div class="pipeline-node" data-node="3">
-            <div class="pipeline-node-icon">&#x1F3D7;&#xFE0F;</div>
-            <div class="pipeline-node-name">AUGUSTUS</div>
-            <div class="pipeline-node-time">~5-10 min</div>
-          </div>
-          <div class="pipeline-conn" data-conn="3"></div>
-          <div class="pipeline-node" data-node="4">
-            <div class="pipeline-node-icon">&#x1F4B0;</div>
-            <div class="pipeline-node-name">VESPASIAN</div>
-            <div class="pipeline-node-time">~3-5 min</div>
-          </div>
-          <div class="pipeline-conn" data-conn="4"></div>
-          <div class="pipeline-node" data-node="5">
-            <div class="pipeline-node-icon">&#x1F3DB;&#xFE0F;</div>
-            <div class="pipeline-node-name">TRAJAN</div>
-            <div class="pipeline-node-time">~3-5 min</div>
-          </div>
-          <div class="pipeline-conn" data-conn="5"></div>
-          <div class="pipeline-node node-done" data-node="6">
-            <div class="pipeline-node-icon">&#x2605;</div>
-            <div class="pipeline-node-name">DELIVERED</div>
-            <div class="pipeline-node-time">live</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- COHORT COMMAND CARDS -->
-      <div class="cohort-grid" data-romulus-animate>
         <div class="cohort-card">
           <div class="cohort-header">
-            <span class="cohort-emoji">&#x2694;&#xFE0F;</span>
-            <div>
-              <div class="cohort-name">CAESAR</div>
-              <div class="cohort-status">OPERATIONAL</div>
-            </div>
+            <span class="cohort-emoji">&#x1F985;</span>
+            <span class="cohort-name">CAESAR</span>
           </div>
-          <div class="cohort-question">&ldquo;Is this worth building?&rdquo;</div>
-          <div class="cohort-workers">
-            <div class="worker-line">researcher &rarr; analyst &rarr; competitor &rarr; synthesizer</div>
-          </div>
-          <div class="cohort-output">Build spec. Market validation. Competitive gap.</div>
+          <div class="cohort-status">OPERATIONAL</div>
+          <div class="cohort-question">What do we know, and what are we missing?</div>
+          <div class="cohort-workers">researcher<br>analyst<br>competitor<br>synthesizer<br>monitor</div>
+          <div class="cohort-output-label">Output:</div>
+          <div class="cohort-output">Competitive landscapes, pricing intelligence, strategic gap analysis</div>
         </div>
 
         <div class="cohort-card">
           <div class="cohort-header">
-            <span class="cohort-emoji">&#x1F3D7;&#xFE0F;</span>
-            <div>
-              <div class="cohort-name">AUGUSTUS</div>
-              <div class="cohort-status">OPERATIONAL</div>
-            </div>
+            <span class="cohort-emoji">&#x1F3DB;</span>
+            <span class="cohort-name">AUGUSTUS</span>
           </div>
-          <div class="cohort-question">&ldquo;How do I build it?&rdquo;</div>
-          <div class="cohort-workers">
-            <div class="worker-line">architecture &rarr; builder &rarr; reviewer (3&times;) &rarr; deploy</div>
-          </div>
-          <div class="cohort-output">Working product. GitHub Pages link. Review cycles.</div>
+          <div class="cohort-status">OPERATIONAL</div>
+          <div class="cohort-question">Can we build it, and does it hold?</div>
+          <div class="cohort-workers">architect<br>builder<br>reviewer<br>deployer</div>
+          <div class="cohort-output-label">Output:</div>
+          <div class="cohort-output">Shipped code, deployed apps, architecture specs</div>
         </div>
 
         <div class="cohort-card">
           <div class="cohort-header">
             <span class="cohort-emoji">&#x1F4B0;</span>
-            <div>
-              <div class="cohort-name">VESPASIAN</div>
-              <div class="cohort-status">OPERATIONAL</div>
-            </div>
+            <span class="cohort-name">VESPASIAN</span>
           </div>
-          <div class="cohort-question">&ldquo;How do we make $20K MRR or sell for 7 figures?&rdquo;</div>
-          <div class="cohort-workers">
-            <div class="worker-line">unit_economist &rarr; exit_strategist &rarr; growth_mapper</div>
-          </div>
-          <div class="cohort-output">Revenue path. Exit analysis. Pricing architecture.</div>
+          <div class="cohort-status">OPERATIONAL</div>
+          <div class="cohort-question">What's it worth, and how does it pay?</div>
+          <div class="cohort-workers">pricing-analyst<br>unit-economist<br>exit-modeler</div>
+          <div class="cohort-output-label">Output:</div>
+          <div class="cohort-output">Pricing models, unit economics, revenue strategy</div>
         </div>
 
         <div class="cohort-card">
           <div class="cohort-header">
-            <span class="cohort-emoji">&#x1F3DB;&#xFE0F;</span>
-            <div>
-              <div class="cohort-name">TRAJAN</div>
-              <div class="cohort-status">OPERATIONAL</div>
-            </div>
+            <span class="cohort-emoji">&#x1F6E3;</span>
+            <span class="cohort-name">TRAJAN</span>
           </div>
-          <div class="cohort-question">&ldquo;How do we get distribution?&rdquo;</div>
-          <div class="cohort-workers">
-            <div class="worker-line">seo_optimizer &rarr; content_creator &rarr; launch_manager</div>
-          </div>
-          <div class="cohort-output">15 tweets. 3 TikTok scripts. Blog post. PH listing.</div>
+          <div class="cohort-status">OPERATIONAL</div>
+          <div class="cohort-question">Who needs to see it, and how do they find it?</div>
+          <div class="cohort-workers">strategist<br>content-writer<br>partnerships</div>
+          <div class="cohort-output-label">Output:</div>
+          <div class="cohort-output">Launch plans, GTM strategy, content assets</div>
         </div>
 
-        <div class="cohort-card cohort-card--orchestrator">
+        <div class="cohort-card orchestrator">
           <div class="cohort-header">
-            <span class="cohort-emoji">&#x1F3DB;</span>
-            <div>
-              <div class="cohort-name">ROMULUS</div>
-              <div class="cohort-status" style="color:var(--romulus-amber)">ORCHESTRATING</div>
-            </div>
+            <span class="cohort-emoji">&#x1F43A;</span>
+            <span class="cohort-name">ROMULUS</span>
           </div>
-          <div class="cohort-question">&ldquo;What should we do next?&rdquo;</div>
-          <div class="cohort-workers">
-            <div class="worker-line">decomposes &rarr; routes &rarr; gates &rarr; synthesizes &rarr; delivers</div>
-          </div>
-          <div class="cohort-output">The conductor. Every cohort reports here.</div>
+          <div class="cohort-status">OPERATIONAL &middot; ORCHESTRATOR</div>
+          <div class="cohort-question">What's the mission, and who runs point?</div>
+          <div class="cohort-workers">task-decomposer<br>router<br>gate-enforcer<br>synthesizer</div>
+          <div class="cohort-output-label">Output:</div>
+          <div class="cohort-output">Task routing, pipeline orchestration, cross-cohort synthesis</div>
         </div>
-      </div>
 
-      <!-- TERMINAL DEMO -->
-      <div class="legion-terminal" data-romulus-animate id="legionTerminal">
-        <div class="terminal-bar">
-          <span class="terminal-dot" style="background:#ff5f57"></span>
-          <span class="terminal-dot" style="background:#febc2e"></span>
-          <span class="terminal-dot" style="background:#28c840"></span>
-          <span class="terminal-title">romulus@roma-eterna — legion pipeline</span>
-        </div>
-        <div class="terminal-body">
-          <div class="t-line" data-delay="0"><span class="t-prompt">$</span> <span class="t-cmd">@Caesar build a portfolio site for Alexa Nasiedlak &#x2014; post-production coordinator seeking editorial roles</span></div>
-          <div class="t-line t-dim" data-delay="1">&nbsp;</div>
-          <div class="t-line" data-delay="2"><span class="t-accent">&#x2694;&#xFE0F; CAESAR</span> <span class="t-dim">[build_spec_pipeline]</span></div>
-          <div class="t-line" data-delay="3">&nbsp;&nbsp;&#x2192; build_researcher: <span class="t-green">87s &#x2713;</span></div>
-          <div class="t-line" data-delay="4">&nbsp;&nbsp;&#x2192; build_spec_writer: <span class="t-green">43s &#x2713;</span></div>
-          <div class="t-line" data-delay="5">&nbsp;&nbsp;&#x2192; spec_delivered: Alexa Nasiedlak Editorial Portfolio</div>
-          <div class="t-line" data-delay="6">&nbsp;</div>
-          <div class="t-line t-amber" data-delay="7">&nbsp;&nbsp;&#x1F4CB; Build Plan Ready &#x2014; Scope: medium | Stack: Astro + Tailwind</div>
-          <div class="t-line t-dim" data-delay="8">&nbsp;&nbsp;[AUTO-APPROVED by orchestrator]</div>
-          <div class="t-line" data-delay="9">&nbsp;</div>
-          <div class="t-line" data-delay="10"><span class="t-accent">&#x1F3D7;&#xFE0F; AUGUSTUS</span> <span class="t-dim">[build_pipeline]</span></div>
-          <div class="t-line" data-delay="11">&nbsp;&nbsp;&#x2192; architecture: <span class="t-green">49s &#x2713;</span></div>
-          <div class="t-line" data-delay="12">&nbsp;&nbsp;&#x2192; builder (Claude Code): <span class="t-dim">running...</span></div>
-          <div class="t-line" data-delay="13">&nbsp;&nbsp;&#x2192; build_done: 13,280 files &nbsp;<span class="t-green">&#x2713;</span></div>
-          <div class="t-line" data-delay="14">&nbsp;&nbsp;&#x2192; review: <span class="t-green">PASS &#x2713;</span></div>
-          <div class="t-line" data-delay="15">&nbsp;&nbsp;&#x2192; deploy: <span class="t-green">https://mikebatts.github.io/alexa-nasiedlak-portfolio/ &#x2713;</span></div>
-          <div class="t-line" data-delay="16">&nbsp;</div>
-          <div class="t-line" data-delay="17"><span class="t-accent">&#x1F4B0; VESPASIAN</span> <span class="t-dim">[wealth_pipeline]</span></div>
-          <div class="t-line" data-delay="18">&nbsp;&nbsp;&#x2192; unit_economist + exit_strategist: <span class="t-green">parallel &#x2713;</span></div>
-          <div class="t-line" data-delay="19">&nbsp;&nbsp;&#x2192; growth_mapper: <span class="t-green">55s &#x2713;</span></div>
-          <div class="t-line" data-delay="20">&nbsp;&nbsp;&#x2192; wealth_strategy: <span class="t-amber">$20K MRR path + exit analysis delivered</span></div>
-          <div class="t-line" data-delay="21">&nbsp;</div>
-          <div class="t-line" data-delay="22"><span class="t-accent">&#x1F3DB;&#xFE0F; TRAJAN</span> <span class="t-dim">[gtm_pipeline]</span></div>
-          <div class="t-line" data-delay="23">&nbsp;&nbsp;&#x2192; seo_optimizer: <span class="t-green">43s &#x2713;</span></div>
-          <div class="t-line" data-delay="24">&nbsp;&nbsp;&#x2192; content_creator + launch_manager: <span class="t-green">parallel &#x2713;</span></div>
-          <div class="t-line" data-delay="25">&nbsp;&nbsp;&#x2192; gtm_assets: <span class="t-amber">15 tweets, 3 TikTok scripts, 1500-word blog post</span></div>
-          <div class="t-line" data-delay="26">&nbsp;</div>
-          <div class="t-line t-green" data-delay="27">&#x2705; PIPELINE COMPLETE &#x2014; 8m 42s total</div>
-          <div class="t-line" data-delay="28">&nbsp;&nbsp;&#x2022; <span class="t-dim">live:</span> https://mikebatts.github.io/alexa-nasiedlak-portfolio/</div>
-          <div class="t-line" data-delay="29">&nbsp;&nbsp;&#x2022; <span class="t-dim">wealth:</span> $20K MRR path + 7-figure exit analysis</div>
-          <div class="t-line" data-delay="30">&nbsp;&nbsp;&#x2022; <span class="t-dim">launch:</span> tweets, TikToks, blog post, PH listing</div>
-        </div>
-      </div>
-
-      <!-- WHAT'S NEXT -->
-      <div class="section-body" style="margin-top:40px" data-romulus-animate>
-        <h3 style="font-size:18px;font-weight:600;color:var(--romulus-text);margin-bottom:12px">Where this is going</h3>
-        <p>Vespasian tracking real Stripe revenue per project. Trajan auto-posting to X and TikTok. Caesar running continuous competitive monitoring — flagging when a competitor changes pricing or ships something new. A LEGIO command dashboard replacing the Discord terminal.</p>
-        <p>The goal: an end-to-end system that ships product, models the business, and markets it — without losing context between sessions. Not automation for automation's sake. A force multiplier for building things that earn.</p>
       </div>
     </div>
 
-    <hr class="romulus-divider">
+    <div class="section-divider"><span class="dot"></span></div>
 
-    <!-- Takeaways -->
-    <div class="romulus-section" data-romulus-animate>
+    <!-- 8. PIPELINE DIAGRAM -->
+    <div class="pipeline-section" data-romulus-animate>
+      <div class="pipeline-label">~/legion/pipeline.md</div>
+      <h2 class="pipeline-heading">The Pipeline</h2>
+      <div class="pipeline-body">A prompt enters the system. It gets classified: research or build. If research &rarr; Caesar. If build &rarr; Caesar spec &rarr; approve &rarr; Augustus architecture &rarr; Augustus build &rarr; review (max 3 cycles) &rarr; deploy. Auto-chain: Augustus triggers Vespasian (wealth strategy), Vespasian triggers Trajan (GTM strategy).</div>
+      <div class="pipeline-sublabel">FULL PIPELINE &mdash; ~15-30 MIN PROMPT TO DELIVERABLES</div>
+      <div class="pipeline-flow" id="pipelineFlow">
+        <div class="pipeline-node" data-pipe-index="0">
+          <div class="pipeline-node-box">&#x1F4AC; PROMPT</div>
+        </div>
+        <div class="pipeline-connector" data-pipe-index="0"><div class="pipeline-connector-line"></div><div class="pipeline-connector-fill"></div></div>
+        <div class="pipeline-node" data-pipe-index="1">
+          <div class="pipeline-node-box">&#x1F985; CAESAR</div>
+          <div class="pipeline-node-time">~2 min</div>
+        </div>
+        <div class="pipeline-connector" data-pipe-index="1"><div class="pipeline-connector-line"></div><div class="pipeline-connector-fill"></div></div>
+        <div class="pipeline-node" data-pipe-index="2">
+          <div class="pipeline-node-box">&#x2705; APPROVE</div>
+        </div>
+        <div class="pipeline-connector" data-pipe-index="2"><div class="pipeline-connector-line"></div><div class="pipeline-connector-fill"></div></div>
+        <div class="pipeline-node" data-pipe-index="3">
+          <div class="pipeline-node-box">&#x1F3DB; AUGUSTUS</div>
+          <div class="pipeline-node-time">5-15 min</div>
+        </div>
+        <div class="pipeline-connector" data-pipe-index="3"><div class="pipeline-connector-line"></div><div class="pipeline-connector-fill"></div></div>
+        <div class="pipeline-node" data-pipe-index="4">
+          <div class="pipeline-node-box">&#x1F4B0; VESPASIAN</div>
+          <div class="pipeline-node-time">3-5 min</div>
+        </div>
+        <div class="pipeline-connector" data-pipe-index="4"><div class="pipeline-connector-line"></div><div class="pipeline-connector-fill"></div></div>
+        <div class="pipeline-node" data-pipe-index="5">
+          <div class="pipeline-node-box">&#x1F6E3; TRAJAN</div>
+          <div class="pipeline-node-time">3-5 min</div>
+        </div>
+        <div class="pipeline-connector" data-pipe-index="5"><div class="pipeline-connector-line"></div><div class="pipeline-connector-fill"></div></div>
+        <div class="pipeline-node" data-pipe-index="6">
+          <div class="pipeline-node-box">&#x1F4E6; DELIVERED</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"><span class="dot"></span></div>
+
+    <!-- 9-12. EXPERIMENTS -->
+    <div class="experiment-section">
+
+      <!-- Experiment 1: Caesar Speed -->
+      <div class="experiment-card" data-romulus-animate>
+        <div class="experiment-label">~/legion/experiments/01-caesar-speed.md</div>
+        <h3 class="experiment-heading">Caesar &mdash; Research Speed</h3>
+        <div class="experiment-comparison">
+          <div>
+            <div class="experiment-col-label">Control</div>
+            <div class="experiment-col-text">~3 hours of manual competitive research, web searches, pricing page audits, and synthesis.</div>
+          </div>
+          <div>
+            <div class="experiment-col-label">Result</div>
+            <div class="experiment-col-text">Five specialized workers (researcher, analyst, competitor, synthesizer, monitor) produce a ranked competitive landscape with pricing intelligence and strategic gaps.</div>
+          </div>
+        </div>
+        <div class="experiment-metric">2.4 min</div>
+        <div class="experiment-body">The system found Off Limits' pricing model &mdash; a signal I would have missed scrolling Twitter.</div>
+        <div class="experiment-insight"><strong style="color:#fff;">Key insight:</strong> Specialist agents are faster not because models are fast, but because they don't need to understand the whole problem. A competitive analyst worker only loads competitive context. It doesn't waste context on build instructions.</div>
+      </div>
+
+      <!-- Experiment 2: Memory Compounding -->
+      <div class="experiment-card" data-romulus-animate>
+        <div class="experiment-label">~/legion/experiments/02-memory-compound.md</div>
+        <h3 class="experiment-heading">Memory Compounding</h3>
+        <div class="experiment-comparison">
+          <div>
+            <div class="experiment-col-label">Run 1 (Forbidden)</div>
+            <div class="experiment-col-text">0 entities in the knowledge graph. Every task starts blind.</div>
+          </div>
+          <div>
+            <div class="experiment-col-label">Run 3 (Alexa Portfolio)</div>
+            <div class="experiment-col-text">36 entities. 33 relationships. The system loaded prior context from Forbidden, Chronicle, and Legion's own architecture notes before Caesar's workers even started.</div>
+          </div>
+        </div>
+        <div class="experiment-metric">36 entities</div>
+        <div class="experiment-body">The graph compounds. Each project writes entities (products, tech, pricing, competitive moves) and relationships (competitor-of, built-with, influenced-by). Subsequent tasks load this context automatically.</div>
+        <div class="experiment-insight">By week three, the system knew things I hadn't told it about a project &mdash; because Caesar's competitive research on a different product had surfaced relevant information.</div>
+      </div>
+
+      <!-- Experiment 3: Synthesizer Fix -->
+      <div class="experiment-card" data-romulus-animate>
+        <div class="experiment-label">~/legion/experiments/03-synth-fix.md</div>
+        <h3 class="experiment-heading">The Synthesizer Fix</h3>
+        <div class="experiment-comparison">
+          <div>
+            <div class="experiment-col-label">Problem</div>
+            <div class="experiment-col-text">The synthesizer worker had a 21-minute timeout. It was outputting the full raw research from every upstream worker &mdash; thousands of words of unfiltered data dump.</div>
+          </div>
+          <div>
+            <div class="experiment-col-label">Fix</div>
+            <div class="experiment-col-text">"KEY FINDINGS" extraction constraint in the system prompt. Tell the synthesizer: output only the 5-8 most important findings. No fluff. No restating the question.</div>
+          </div>
+        </div>
+        <div class="experiment-metric">48 seconds</div>
+        <div class="experiment-body">80% reduction in time. The output got shorter and more useful.</div>
+        <div class="experiment-insight"><strong style="color:#fff;">Lesson:</strong> The constraint is the product. Tell agents what NOT to do.</div>
+      </div>
+
+      <!-- Experiment 4: VOIDBREAKER -->
+      <div class="experiment-card" data-romulus-animate>
+        <div class="experiment-label">~/legion/experiments/04-voidbreaker.md</div>
+        <h3 class="experiment-heading">VOIDBREAKER &mdash; One-Shot Build</h3>
+        <div class="experiment-comparison">
+          <div>
+            <div class="experiment-col-label">Prompt</div>
+            <div class="experiment-col-text">"Build a web-based asteroid shooter with retro CRT aesthetics, mobile touch controls, and a void-break mechanic."</div>
+          </div>
+          <div>
+            <div class="experiment-col-label">Result</div>
+            <div class="experiment-col-text">Touch joystick. Particle effects. Game loop. Deployed to GitHub Pages.</div>
+          </div>
+        </div>
+        <div class="experiment-metric">1,047 lines</div>
+        <div class="experiment-body">Augustus delivered a complete, deployed game from a single prompt.</div>
+        <div class="experiment-insight">The point isn't that one AI can write a game. The point is that the spec came from Caesar's competitive research on the genre, the architecture was scoped before building, and the result was reviewed before shipping.</div>
+      </div>
+
+    </div>
+
+    <div class="section-divider"><span class="dot"></span></div>
+
+    <!-- 13. WHAT BROKE — Legion Era -->
+    <section class="rom-section" data-romulus-animate>
+      <div class="section-label">~/legion/lessons.md</div>
+      <span class="broke-tag">TIMEOUT</span>
+      <h2 class="section-heading">What Broke &mdash; Legion Era</h2>
+      <div class="section-body">
+        <div class="broke-item">
+          <div class="broke-item-title">iOS Build Timeout</div>
+          <p>Augustus uses Claude Code CLI to build native Swift apps. The sandbox has a 15-minute timeout. Scaffolding a real iOS project with SwiftUI, Speech framework, and AI integration takes 20+ minutes. Architectural limitation, not a fixable bug. Workaround: generate key files directly and scaffold manually.</p>
+        </div>
+        <div class="broke-item">
+          <div class="broke-item-title">Bot-to-Bot Mentions Blocked</div>
+          <p>Discord limits self-bots. The cohort bots can't reliably @mention each other for handoffs. Workaround: database-driven event routing with polling.</p>
+        </div>
+        <div class="broke-item">
+          <div class="broke-item-title">Alias Matching Contamination</div>
+          <p>The memory alias matcher for project notes was too loose. "Asteroid game" matched "party game" via the keyword "game," loading Forbidden.md as context for an unrelated build. Fix: word-boundary regex and expanded stop words.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"><span class="dot"></span></div>
+
+    <!-- 14. WHERE THIS IS GOING -->
+    <section class="rom-section" data-romulus-animate>
+      <div class="section-label">~/legion/forward.md</div>
+      <h2 class="section-heading">What's Next</h2>
+      <div class="forward-grid">
+        <div class="forward-card">
+          <div class="forward-card-title">Revenue Tracking</div>
+          <div class="forward-card-body">Vespasian tracking actual Stripe revenue &mdash; not modeling hypothetical MRR, but watching real numbers move.</div>
+        </div>
+        <div class="forward-card">
+          <div class="forward-card-title">Auto-Posting</div>
+          <div class="forward-card-body">Trajan auto-posting to X &mdash; the launch assets it produces are already write-ready. The missing piece is the posting API.</div>
+        </div>
+        <div class="forward-card">
+          <div class="forward-card-title">Ambient Monitoring</div>
+          <div class="forward-card-body">Caesar ambient monitoring &mdash; flagging when a competitor changes pricing, ships a feature, or gets mentioned in a relevant community.</div>
+        </div>
+        <div class="forward-card">
+          <div class="forward-card-title">LEGIO Dashboard</div>
+          <div class="forward-card-body">A LEGIO command dashboard replacing the Discord terminal. Real-time cohort status. Active pipeline tasks. Memory graph visualization.</div>
+        </div>
+      </div>
+      <div class="thesis-restate">The right model for AI-assisted product work isn't a single brilliant assistant. It's a disciplined force with clear specializations, shared memory, and a single command structure.</div>
+    </section>
+
+    <div class="section-divider"><span class="dot"></span></div>
+
+    <!-- 15. TAKEAWAYS -->
+    <section class="rom-section" data-romulus-animate>
       <div class="section-label">~/romulus/notes.txt</div>
-      <h2 class="section-title">What I'd Tell Another Builder</h2>
+      <h2 class="section-heading">What I'd Tell Another Builder</h2>
       <div class="section-body">
         <p>The model is not the product. The architecture is. Persistent memory, explicit routing, a fixed workflow, and a stable host change what's possible. Without them, you have a fast chatbot. With them, you have a system.</p>
-        <p>Articulate your tradeoffs. Why this interface, why this memory substrate, why this model for this task — the decisions are where the product engineering shows. Anyone can list the tools. Fewer people can explain why they chose them over the alternatives.</p>
-        <p>Build something you actually use every day. The morning brief is the most useful thing in this system. Not because it's impressive — because I check it every morning before I leave. That's the real test.</p>
+        <p>Articulate your tradeoffs. Why this interface, why this memory substrate, why this model for this task &mdash; the decisions are where the product engineering shows. Anyone can list the tools. Fewer people can explain why they chose them over the alternatives.</p>
+        <p>Build something you actually use every day. The morning brief is the most useful thing in this system. Not because it's impressive &mdash; because I check it every morning before I leave. That's the real test.</p>
       </div>
-    </div>
+    </section>
+
+    <div style="height:80px;"></div>
+
   </div>
 
   <script>
     (function() {
+      /* ===== PASSWORD GATE ===== */
       var PASSWORD = 'Sfogliatelle!';
-
       var gate = document.getElementById('gate');
       var content = document.getElementById('content');
       var input = document.getElementById('gateInput');
@@ -1529,32 +1181,32 @@
         if (input.value === PASSWORD) {
           gate.classList.add('hidden');
           content.classList.add('visible');
-          // Scroll to top
           window.scrollTo(0, 0);
-          // Init animations
           initAnimations();
+          initPipeline();
         } else {
           error.classList.add('visible');
           input.value = '';
           input.focus();
-          // Shake animation
-          gate.querySelector('.gate-terminal').style.animation = 'none';
-          gate.offsetWidth; // reflow
-          gate.querySelector('.gate-terminal').style.animation = 'shake 0.4s ease';
+          var term = gate.querySelector('.gate-terminal');
+          term.style.animation = 'none';
+          term.offsetWidth;
+          term.style.animation = 'shake 0.4s ease';
         }
       }
 
       submit.addEventListener('click', unlock);
-      input.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') unlock();
-      });
-      input.addEventListener('input', function() {
-        error.classList.remove('visible');
-      });
+      input.addEventListener('keydown', function(e) { if (e.key === 'Enter') unlock(); });
+      input.addEventListener('input', function() { error.classList.remove('visible'); });
 
-      // Scroll animations
+      /* ===== SCROLL ANIMATIONS ===== */
       function initAnimations() {
-        var els = document.querySelectorAll('[data-romulus-animate]');
+        if (!('IntersectionObserver' in window)) {
+          /* Fallback: show everything immediately */
+          var els = document.querySelectorAll('[data-romulus-animate]');
+          for (var i = 0; i < els.length; i++) els[i].classList.add('romulus-visible');
+          return;
+        }
         var observer = new IntersectionObserver(function(entries) {
           entries.forEach(function(entry) {
             if (entry.isIntersecting) {
@@ -1562,18 +1214,49 @@
               observer.unobserve(entry.target);
             }
           });
-        }, { threshold: 0.1 });
-        els.forEach(function(el) { observer.observe(el); });
+        }, { threshold: 0.08 });
+        var els = document.querySelectorAll('[data-romulus-animate]');
+        for (var i = 0; i < els.length; i++) observer.observe(els[i]);
       }
 
-      // Shake keyframes
-      var style = document.createElement('style');
-      style.textContent = '@keyframes shake { 0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-8px)} 40%,80%{transform:translateX(8px)} }';
-      document.head.appendChild(style);
+      /* ===== PIPELINE SEQUENTIAL LIGHT-UP ===== */
+      function initPipeline() {
+        var flow = document.getElementById('pipelineFlow');
+        if (!flow || !('IntersectionObserver' in window)) return;
+
+        var pipeObserver = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              lightUpPipeline();
+              pipeObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.3 });
+        pipeObserver.observe(flow);
+
+        function lightUpPipeline() {
+          var nodes = flow.querySelectorAll('.pipeline-node');
+          var connectors = flow.querySelectorAll('.pipeline-connector');
+          var delay = 0;
+          for (var i = 0; i < nodes.length; i++) {
+            (function(node, d) {
+              setTimeout(function() { node.classList.add('lit'); }, d);
+            })(nodes[i], delay);
+            delay += 300;
+            if (i < connectors.length) {
+              (function(conn, d) {
+                var fill = conn.querySelector('.pipeline-connector-fill');
+                if (fill) {
+                  setTimeout(function() { conn.classList.add('lit'); }, d);
+                }
+              })(connectors[i], delay);
+              delay += 200;
+            }
+          }
+        }
+      }
     })();
   </script>
 
-  <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=5dbdf5d45ad64f500c81ca1f" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-  <script src="js/webflow.js" type="text/javascript"></script>
 </body>
 </html>
