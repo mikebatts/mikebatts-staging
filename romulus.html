@@ -428,12 +428,13 @@
     }
     .terminal-header-host { color: var(--amber); }
     .terminal-body {
-      padding: 20px 20px 24px;
-      min-height: 180px;
-      position: relative;
-      overflow-wrap: break-word;
-      max-width: 100%;
-      overflow: hidden;
+      padding: 24px 20px 28px;
+      min-height: 220px;
+      overflow-x: hidden;
+      font-family: 'Inconsolata', monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text-body);
     }
     .terminal-body::after {
       content: '';
@@ -443,24 +444,24 @@
       pointer-events: none;
     }
     .terminal-line {
-      opacity: 1;
-      transform: none;
       font-family: 'Inconsolata', monospace;
-      font-size: 14px;
-      line-height: 1.8;
+      font-size: 13px;
+      line-height: 1.7;
       color: var(--text-body);
       white-space: pre-wrap;
       overflow-wrap: break-word;
-      word-break: break-all;
-      min-height: 1.8em;
-      position: relative;
+      word-break: break-word;
+      margin-bottom: 2px;
+      min-height: 1.7em;
     }
-    .terminal-line[data-type="command"] { color: var(--amber); }
-    .terminal-line[data-type="success"] { color: var(--green); }
-    .terminal-line[data-type="accent"] { color: #c084fc; }
-    .terminal-line.success-line {
-      background: rgba(34,197,94,0.08);
-    }
+    .term-cmd { color: var(--amber); }
+    .term-ok { color: #22c55e; }
+    .term-cohort { color: #a78bfa; }
+    .term-path { color: #60a5fa; }
+    .term-metric { color: #06b6d4; }
+    .dim { color: rgba(255,255,255,0.35); }
+    .term-label { color: rgba(255,255,255,0.55); }
+    .term-divider { color: rgba(255,255,255,0.12); }
     .terminal-line .cursor {
       display: inline-block;
       color: var(--amber);
@@ -1055,8 +1056,8 @@
 
     /* ===== MOBILE TERMINAL ===== */
     @media (max-width: 768px) {
-      .terminal-body { padding: 16px; }
-      .terminal-line { font-size: 11px; }
+      .terminal-body { padding: 16px 12px 20px; }
+      .terminal-line { font-size: 11px; line-height: 1.6; }
       .romulus-hero-image { padding: 0; }
     }
   </style>
@@ -1198,22 +1199,33 @@
           <span class="terminal-header-label">legion pipeline</span>
         </div>
         <div class="terminal-body">
-          <div class="terminal-line" data-type="command" data-text="&#x276F; legion forge --project forbidden --type game"></div>
-          <div class="terminal-line" data-text="&#x250C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500; LEGION PIPELINE &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2510;"></div>
-          <div class="terminal-line" data-text="&#x2502;  &#x2694;&#xFE0F;  caesar    researching taboo-adjacent market landscape    &#x2502;"></div>
-          <div class="terminal-line" data-text="&#x2502;  &#x1F4CA; result     87% saturation risk &#xB7; wedge: themed decks     &#x2502;"></div>
-          <div class="terminal-line" data-text="&#x2502;                                                                &#x2502;"></div>
-          <div class="terminal-line" data-text="&#x2502;  &#x1F3DB;  augustus  scaffolding Next.js + Stripe + auth            &#x2502;"></div>
-          <div class="terminal-line" data-text="&#x2502;  &#x1F4C4; files      42 created &#xB7; 3.8k lines &#xB7; 1 review pass        &#x2502;"></div>
-          <div class="terminal-line" data-text="&#x2502;                                                                &#x2502;"></div>
-          <div class="terminal-line" data-text="&#x2502;  &#x1F4B0;  vespasian CAC $2.30 &#xB7; LTV $14.70 &#xB7; 8d payback           &#x2502;"></div>
-          <div class="terminal-line" data-text="&#x2502;  &#x1F4C8; path       $4.99/mo premium decks &#xB7; 3K subs = $15K MRR  &#x2502;"></div>
-          <div class="terminal-line" data-text="&#x2502;                                                                &#x2502;"></div>
-          <div class="terminal-line" data-text="&#x2502;  &#x1F6E3;  trajan    5 TikToks &#xB7; PH listing &#xB7; X thread drafted      &#x2502;"></div>
-          <div class="terminal-line" data-text="&#x2502;  &#x1F3AF; audience   party game &#xB7; group play &#xB7; 25-35 demo         &#x2502;"></div>
-          <div class="terminal-line" data-text="&#x2514;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2518;"></div>
+          <div class="terminal-line" data-text="❯ legion forge forbidden —type party-game —genre word"></div>
           <div class="terminal-line" data-text=""></div>
-          <div class="terminal-line success-line" data-type="success" data-text="&#x2705;  FORGED  &#xB7;  7m 45s  &#xB7;  playforbidden.com"></div>
+          <div class="terminal-line" data-text="⚙️  caesar · research pipeline started"></div>
+          <div class="terminal-line" data-text="  📊 taboo, jackbox, psych  —  87% saturation in casual segment"></div>
+          <div class="terminal-line" data-text="  💡 wedge found  —  AI-themed deck generation, zero competitors"></div>
+          <div class="terminal-line" data-text="  🎯 42 competitors scanned  ·  pricing: $0–$12/mo  ·  117s"></div>
+          <div class="terminal-line" data-text=""></div>
+          <div class="terminal-line" data-text="✅  caesar · approved → passing to augustus"></div>
+          <div class="terminal-line" data-text=""></div>
+          <div class="terminal-line" data-text="🏛  augustus · build pipeline started"></div>
+          <div class="terminal-line" data-text="  📦 scaffolding  Next.js 15 + Stripe + auth + Vercel"></div>
+          <div class="terminal-line" data-text="  📄 42 files created  ·  3,847 lines  ·  1 review cycle  ·  PASS"></div>
+          <div class="terminal-line" data-text="  🚀 deploy: playforbidden.com  ·  342s"></div>
+          <div class="terminal-line" data-text=""></div>
+          <div class="terminal-line" data-text="💰  vespasian · model started"></div>
+          <div class="terminal-line" data-text="  CAC: $2.30  ·  LTV: $14.70  ·  payback: 8d  ·  48s"></div>
+          <div class="terminal-line" data-text="  path to $15K MRR: $4.99/mo premium decks × 3,003 subs"></div>
+          <div class="terminal-line" data-text=""></div>
+          <div class="terminal-line" data-text="🛣  trajan · GTM pipeline started"></div>
+          <div class="terminal-line" data-text="  5 TikTok scripts · X thread drafted · PH listing prepped  ·  31s"></div>
+          <div class="terminal-line" data-text="  target demo: 25–35, group play, party game enthusiasts"></div>
+          <div class="terminal-line" data-text=""></div>
+          <div class="terminal-line" data-text=""></div>
+          <div class="terminal-line" data-text="🔨  FORGED  ·  7m 45s total  ·  pipeline: PASS"></div>
+          <div class="terminal-line" data-text="  └🌐 playforbidden.com"></div>
+          <div class="terminal-line" data-text="  └💰 $4.99/mo premium · $15K MRR path"></div>
+          <div class="terminal-line" data-text="  └📱 5 TikToks · X thread · Product Hunt ready"></div>
         </div>
       </div>
     </div>
@@ -1659,7 +1671,7 @@
             return;
           }
           if (text === '') {
-            setTimeout(function() { typeWriter(lines, index + 1, callback); }, 80);
+            setTimeout(function() { typeWriter(lines, index + 1, callback); }, 40);
             return;
           }
           line.innerHTML = '';
@@ -1676,10 +1688,10 @@
               line.appendChild(document.createTextNode(text[charIndex]));
               line.appendChild(cursor);
               charIndex++;
-              setTimeout(typeNext, 10 + Math.random() * 10);
+              setTimeout(typeNext, 12 + Math.random() * 6);
             } else {
               if (cursor.parentNode) cursor.parentNode.removeChild(cursor);
-              setTimeout(function() { typeWriter(lines, index + 1, callback); }, 120);
+              setTimeout(function() { typeWriter(lines, index + 1, callback); }, 80);
             }
           }
           typing = true;
