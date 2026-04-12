@@ -21,18 +21,23 @@
   <style>
     /* ===== CSS CUSTOM PROPERTIES ===== */
     :root {
-      --bg: #0b0b10;
+      --bg: #030305;
+      --bg-soft: rgba(255,255,255,0.035);
+      --bg-elevated: rgba(255,255,255,0.05);
       --amber: #d9951a;
-      --amber-soft: rgba(217,149,26,0.14);
-      --amber-border: rgba(217,149,26,0.28);
-      --amber-glow: rgba(217,149,26,0.08);
-      --text-primary: rgba(255,255,255,0.86);
-      --text-body: rgba(255,255,255,0.72);
-      --text-secondary: rgba(255,255,255,0.58);
-      --text-faint: rgba(255,255,255,0.26);
-      --card-bg: rgba(255,255,255,0.03);
-      --card-border: rgba(255,255,255,0.08);
+      --amber-glow: rgba(217,149,26,0.06);
+      --amber-soft: rgba(217,149,26,0.12);
+      --amber-border: rgba(217,149,26,0.24);
+      --accent-purple: #a855f7;
+      --accent-blue: #3b82f6;
+      --accent-cyan: #06b6d4;
       --green: #22c55e;
+      --text-primary: rgba(255,255,255,0.92);
+      --text-body: rgba(255,255,255,0.68);
+      --text-secondary: rgba(255,255,255,0.48);
+      --text-faint: rgba(255,255,255,0.20);
+      --card-bg: rgba(255,255,255,0.04);
+      --card-border: rgba(255,255,255,0.08);
       --container: 720px;
       --section-gap: 100px;
     }
@@ -42,7 +47,7 @@
 
     /* ===== BASE ===== */
     body.romulus-page {
-      background: var(--bg);
+      background: linear-gradient(180deg, #030305 0%, #080808 100%);
       min-height: 100vh;
       color: var(--text-primary);
       font-family: 'Inter', sans-serif;
@@ -54,7 +59,7 @@
     .romulus-gate {
       position: fixed;
       inset: 0;
-      background: #0d0d0f;
+      background: #030305;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -260,6 +265,7 @@
       background: var(--amber);
       position: relative;
       z-index: 1;
+      box-shadow: 0 0 12px rgba(217,149,26,0.3);
     }
 
     /* ===== SECTIONS ===== */
@@ -285,6 +291,7 @@
       margin-bottom: 24px;
       position: relative;
       display: inline-block;
+      text-shadow: 0 0 20px rgba(217,149,26,0.15);
     }
     /* Animated underline on section headings */
     .section-heading::after {
@@ -310,7 +317,32 @@
     .section-body p { margin-bottom: 16px; }
     .section-body p:last-child { margin-bottom: 0; }
 
-    /* ===== PULL QUOTE (CHANGE 1) ===== */
+    /* ===== ROMULUS HERO IMAGE PLACEHOLDER ===== */
+    .romulus-hero-image {
+      max-width: calc(var(--container) + 80px);
+      margin: 0 auto 32px;
+      padding: 0 40px;
+    }
+    .hero-image-placeholder {
+      width: 100%;
+      aspect-ratio: 2 / 1;
+      background: var(--card-bg);
+      border: 1px dashed rgba(217,149,26,0.3);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-image-placeholder .placeholder-label {
+      font-family: 'Inconsolata', monospace;
+      font-size: 13px;
+      color: var(--text-faint);
+      letter-spacing: 0.06em;
+    }
+
+    /* ===== PULL QUOTE ===== */
     .pull-quote {
       font-family: 'Inter', sans-serif;
       font-size: 20px;
@@ -399,6 +431,9 @@
       padding: 20px 20px 24px;
       min-height: 180px;
       position: relative;
+      overflow-wrap: break-word;
+      max-width: 100%;
+      overflow: hidden;
     }
     .terminal-body::after {
       content: '';
@@ -414,10 +449,15 @@
       font-size: 14px;
       line-height: 1.8;
       color: var(--text-body);
-      white-space: pre;
+      white-space: pre-wrap;
+      overflow-wrap: break-word;
+      word-break: break-all;
       min-height: 1.8em;
       position: relative;
     }
+    .terminal-line[data-type="command"] { color: var(--amber); }
+    .terminal-line[data-type="success"] { color: var(--green); }
+    .terminal-line[data-type="accent"] { color: #c084fc; }
     .terminal-line.success-line {
       background: rgba(34,197,94,0.08);
     }
@@ -445,34 +485,50 @@
     }
     .cohort-card {
       background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-top: 2px solid var(--amber);
-      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
       padding: 20px;
       display: flex;
       flex-direction: column;
       text-align: center;
     }
     .cohort-card.orchestrator {
-      border-left: 3px solid var(--amber);
       box-shadow: inset 0 0 30px var(--amber-glow);
     }
-    .cohort-avatar-circle {
-      width: 56px;
-      height: 56px;
+
+    /* Cohort avatar placeholder */
+    .cohort-avatar-placeholder {
+      width: 64px;
+      height: 64px;
       border-radius: 50%;
-      background: linear-gradient(135deg, rgba(217,149,26,0.12), rgba(217,149,26,0.03));
-      border: 2px solid var(--amber-border);
+      background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.12);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 28px;
       margin: 0 auto 12px;
+      overflow: hidden;
+      position: relative;
     }
-    .orchestrator .cohort-avatar-circle {
+    .cohort-avatar-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    .cohort-avatar-placeholder .cohort-emoji-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+    .orchestrator .cohort-avatar-placeholder {
       border-color: var(--amber);
       box-shadow: 0 0 20px rgba(217,149,26,0.15);
     }
+
     .cohort-header {
       display: flex;
       align-items: center;
@@ -523,7 +579,7 @@
       line-height: 1.5;
     }
 
-    /* ===== PIPELINE ===== */
+    /* ===== PIPELINE FLOW DIAGRAM ===== */
     .pipeline-section {
       padding: 40px 20px;
       max-width: calc(var(--container) + 280px);
@@ -544,6 +600,7 @@
       color: #fff;
       letter-spacing: -0.02em;
       margin-bottom: 16px;
+      text-shadow: 0 0 20px rgba(217,149,26,0.15);
     }
     .pipeline-sublabel {
       font-family: 'Inconsolata', monospace;
@@ -562,151 +619,134 @@
       max-width: var(--container);
     }
 
-    /* Pipeline HUD — progress bar with cohort icons */
-    .pipeline-visual {
-      padding: 40px 0;
-      max-width: 100%;
-      overflow: hidden;
-    }
-    .pipeline-hud {
-      position: relative;
-      padding: 60px 20px 0;
-      max-width: 720px;
-      margin: 0 auto;
-    }
-    .pipeline-track-bg {
-      position: absolute;
-      top: 30px;
-      left: 20px;
-      right: 20px;
-      height: 2px;
-      background: repeating-linear-gradient(90deg, rgba(255,255,255,0.08) 0, rgba(255,255,255,0.08) 8px, transparent 8px, transparent 14px);
-    }
-    .pipeline-track-fill {
-      position: absolute;
-      top: 30px;
-      left: 20px;
-      height: 2px;
-      width: 0;
-      background: linear-gradient(90deg, var(--amber), rgba(217,149,26,0.6));
-      transition: width 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      box-shadow: 0 0 12px rgba(217,149,26,0.3);
-    }
-    .pipeline-steps-row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      position: relative;
-      z-index: 1;
-    }
-    .pipeline-step {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 14.28%;
-      opacity: 0;
-      transform: translateY(8px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-    .pipeline-step.lit {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .pipeline-step-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--bg);
-      border: 2px solid rgba(255,255,255,0.12);
+    .pipeline-diagram {
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
-      margin-bottom: 10px;
-      position: relative;
-      z-index: 2;
-      transition: border-color 0.4s ease, background 0.4s ease, box-shadow 0.4s ease;
+      flex-wrap: wrap;
+      gap: 0;
+      padding: 32px 0;
+      max-width: 100%;
+      margin: 0 auto;
     }
-    .pipeline-step.lit .pipeline-step-icon {
-      border-color: var(--amber);
-      background: rgba(217,149,26,0.1);
-      box-shadow: 0 0 20px rgba(217,149,26,0.2);
+
+    .pipeline-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 14px 16px;
+      background: var(--card-bg);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      min-width: 90px;
+      transition: all 0.4s ease;
+      opacity: 0;
+      transform: translateY(6px);
     }
-    .pipeline-step-label {
+
+    .pipeline-node.lit {
+      opacity: 1;
+      transform: translateY(-2px);
+      background: var(--amber-soft);
+      border-color: var(--amber-border);
+    }
+    .pipeline-node.lit[data-accent="purple"] {
+      border-color: rgba(168,85,247,0.35);
+      background: rgba(168,85,247,0.08);
+    }
+    .pipeline-node.lit[data-accent="blue"] {
+      border-color: rgba(59,130,246,0.35);
+      background: rgba(59,130,246,0.08);
+    }
+    .pipeline-node.lit[data-accent="cyan"] {
+      border-color: rgba(6,182,212,0.35);
+      background: rgba(6,182,212,0.08);
+    }
+    .pipeline-node.lit[data-accent="green"] {
+      border-color: rgba(34,197,94,0.35);
+      background: rgba(34,197,94,0.08);
+    }
+
+    .pipeline-node-emoji {
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+
+    .pipeline-node-name {
       font-family: 'Inter Tight', sans-serif;
       font-size: 11px;
       font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: var(--text-faint);
-      text-align: center;
+      letter-spacing: 0.06em;
+      color: var(--text-secondary);
       transition: color 0.4s ease;
     }
-    .pipeline-step.lit .pipeline-step-label {
-      color: var(--text-primary);
-    }
-    .pipeline-step-time {
+
+    .pipeline-node.lit .pipeline-node-name { color: var(--text-primary); }
+
+    .pipeline-node-sub {
       font-family: 'Inconsolata', monospace;
       font-size: 10px;
       color: var(--text-faint);
       margin-top: 3px;
     }
-    .pipeline-hud.complete .pipeline-track-fill {
-      animation: pipeline-pulse 0.6s ease;
+
+    .pipeline-arrow {
+      width: 24px;
+      height: 1px;
+      background: rgba(255,255,255,0.12);
+      position: relative;
+      flex-shrink: 0;
+      opacity: 0;
+      transition: opacity 0.4s ease;
     }
-    @keyframes pipeline-pulse {
-      0%, 100% { box-shadow: 0 0 12px rgba(217,149,26,0.3); }
-      50% { box-shadow: 0 0 28px rgba(217,149,26,0.6); }
+    .pipeline-arrow.lit {
+      opacity: 1;
+    }
+
+    .pipeline-arrow::after {
+      content: '\203A';
+      position: absolute;
+      right: -4px;
+      top: -9px;
+      font-size: 18px;
+      color: rgba(255,255,255,0.15);
+      line-height: 1;
+    }
+
+    .pipeline-arrow.lit {
+      background: var(--amber);
+    }
+    .pipeline-arrow.lit::after {
+      color: var(--amber);
     }
 
     /* Pipeline mobile: vertical layout */
     @media (max-width: 768px) {
-      .pipeline-hud {
-        padding: 20px 0;
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .pipeline-track-bg {
-        left: 50%;
-        top: 20px;
-        bottom: 20px;
-        width: 2px;
-        height: auto;
-        right: auto;
-        transform: translateX(-50%);
-        background: repeating-linear-gradient(180deg, rgba(255,255,255,0.08) 0, rgba(255,255,255,0.08) 8px, transparent 8px, transparent 14px);
-      }
-      .pipeline-track-fill {
-        left: 50%;
-        top: 20px;
-        height: 0;
-        width: 2px;
-        transform: translateX(-50%);
-        transition: height 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      }
-      .pipeline-steps-row {
+      .pipeline-diagram {
         flex-direction: column;
         align-items: center;
       }
-      .pipeline-step {
+      .pipeline-node {
+        min-width: unset;
         width: auto;
-        margin-bottom: 24px;
-        flex-direction: column;
-        align-items: center;
+        padding: 12px 20px;
       }
-      .pipeline-step-icon {
-        width: 32px;
-        height: 32px;
-        font-size: 14px;
-        margin-bottom: 6px;
+      .pipeline-arrow {
+        width: 1px;
+        height: 24px;
       }
-      .pipeline-step-label { font-size: 10px; }
-      .pipeline-step-time { font-size: 9px; }
+      .pipeline-arrow::after {
+        content: '\203A';
+        right: auto;
+        left: -5px;
+        top: auto;
+        bottom: -8px;
+        transform: rotate(90deg);
+      }
     }
 
-    /* ===== EXPERIMENT CARDS (CHANGE 6) ===== */
+    /* ===== EXPERIMENT CARDS ===== */
     .experiment-section {
       padding: 40px 20px;
       max-width: calc(var(--container) + 80px);
@@ -734,6 +774,7 @@
       color: #fff;
       letter-spacing: -0.02em;
       margin-bottom: 24px;
+      text-shadow: 0 0 20px rgba(217,149,26,0.15);
     }
     .experiment-comparison {
       display: flex;
@@ -759,7 +800,7 @@
       line-height: 1.5;
     }
 
-    /* KPI metric callout (CHANGE 1) */
+    /* KPI metric callout */
     .experiment-metric-callout {
       border-left: 4px solid var(--amber);
       background: linear-gradient(135deg, rgba(217,149,26,0.06), rgba(217,149,26,0.02));
@@ -981,11 +1022,6 @@
       .cohort-section { padding: 0 40px 80px; }
       .cohort-grid { grid-template-columns: repeat(3, 1fr); }
       .cohort-card { padding: 24px; }
-      .cohort-avatar-circle {
-        width: 64px;
-        height: 64px;
-        font-size: 32px;
-      }
 
       .pipeline-section { padding: 80px 40px; }
 
@@ -1015,6 +1051,13 @@
     @media (min-width: 769px) and (max-width: 1024px) {
       .cohort-grid { grid-template-columns: repeat(2, 1fr); }
       .decisions-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* ===== MOBILE TERMINAL ===== */
+    @media (max-width: 768px) {
+      .terminal-body { padding: 16px; }
+      .terminal-line { font-size: 11px; }
+      .romulus-hero-image { padding: 0; }
     }
   </style>
 </head>
@@ -1060,6 +1103,11 @@
     <!-- ===== 4. ORIGIN STORY ===== -->
     <section class="rom-section" data-romulus-animate>
       <div class="section-label">~/romulus/identity.md</div>
+      <div class="romulus-hero-image">
+        <div class="hero-image-placeholder">
+          <span class="placeholder-label">[ Romulus portrait ]</span>
+        </div>
+      </div>
       <h2 class="section-heading">Who Is Romulus</h2>
       <div class="section-body">
         <p>He came online February 3, 2026. Named after the legend of Rome's founding &mdash; not as a gimmick, but to clarify what I was trying to build: something with a name, an identity, and a purpose, rather than another stateless chat window.</p>
@@ -1121,6 +1169,7 @@
       <div class="section-body">
         <p style="font-family:'Inconsolata',monospace;font-size:14px;color:var(--text-secondary);margin-bottom:20px;">83 files. 12 core memory documents. 29 project notes. 31 daily logs. 11 key decisions.</p>
         <p>Chat history is ephemeral. Obsidian files are not. The system retrieves relevant past work before every session &mdash; comparing context, flagging contradictions, loading project state. After 69 days, the knowledge graph compounds. What was an empty vault is now a living map of 400+ tasks, shipped products, failures, and lessons.</p>
+        <p>The system stores context in two places, by design. Obsidian holds the human-readable layer: project notes, daily logs, decisions — things Mike can open, edit, and reason about at any time. SQLite holds the machine-readable layer: 36 entities, 33 relationships, task histories, build reports — structured data that Caesar's workers load as context before they start. The Obsidian vault provides qualitative memory (what happened, decisions made, lessons learned). The SQLite graph provides quantitative memory (relationships, dependencies, outcomes). Together they form a knowledge base that's both human-inspectable and machine-actionable.</p>
       </div>
     </section>
 
@@ -1141,27 +1190,30 @@
       <div class="pull-quote" style="font-size:18px;">Plausible data isn't verified data. Always cross-reference against a second source before declaring production-ready.</div>
     </section>
 
-    <!-- ===== 9. TERMINAL WINDOW (replaces ASCII separator) ===== -->
+    <!-- ===== 9. TERMINAL WINDOW ===== -->
     <div class="terminal-section" data-romulus-animate>
       <div class="terminal-window" id="terminal">
         <div class="terminal-header">
           <span class="terminal-header-host">romulus@roma-eterna</span>
-          <span class="terminal-header-label">pipeline demo</span>
+          <span class="terminal-header-label">legion pipeline</span>
         </div>
         <div class="terminal-body">
-          <div class="terminal-line" data-text="$ legion init --pipeline new"></div>
-          <div class="terminal-line success-line" data-text="✓  5 cohorts loaded"></div>
-          <div class="terminal-line" data-text="   └── Caesar, Augustus, Vespasian, Trajan, Romulus"></div>
-          <div class="terminal-line" data-text="$ legion run &#39;Forbidden — Taboo-style party game, themed decks, pressure round&#39;"></div>
-          <div class="terminal-line" data-text="⚔️  Caesar researching Taboo genre... done 2.4min"></div>
-          <div class="terminal-line" data-text="🏛  Augustus scaffolding Next.js + Stripe... done 342s"></div>
-          <div class="terminal-line" data-text="💰  Vespasian modeling freemium... done 48s"></div>
-          <div class="terminal-line" data-text="🛣  Trajan generating launch plan... done 31s"></div>
+          <div class="terminal-line" data-type="command" data-text="&#x276F; legion forge --project forbidden --type game"></div>
+          <div class="terminal-line" data-text="&#x250C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500; LEGION PIPELINE &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2510;"></div>
+          <div class="terminal-line" data-text="&#x2502;  &#x2694;&#xFE0F;  caesar    researching taboo-adjacent market landscape    &#x2502;"></div>
+          <div class="terminal-line" data-text="&#x2502;  &#x1F4CA; result     87% saturation risk &#xB7; wedge: themed decks     &#x2502;"></div>
+          <div class="terminal-line" data-text="&#x2502;                                                                &#x2502;"></div>
+          <div class="terminal-line" data-text="&#x2502;  &#x1F3DB;  augustus  scaffolding Next.js + Stripe + auth            &#x2502;"></div>
+          <div class="terminal-line" data-text="&#x2502;  &#x1F4C4; files      42 created &#xB7; 3.8k lines &#xB7; 1 review pass        &#x2502;"></div>
+          <div class="terminal-line" data-text="&#x2502;                                                                &#x2502;"></div>
+          <div class="terminal-line" data-text="&#x2502;  &#x1F4B0;  vespasian CAC $2.30 &#xB7; LTV $14.70 &#xB7; 8d payback           &#x2502;"></div>
+          <div class="terminal-line" data-text="&#x2502;  &#x1F4C8; path       $4.99/mo premium decks &#xB7; 3K subs = $15K MRR  &#x2502;"></div>
+          <div class="terminal-line" data-text="&#x2502;                                                                &#x2502;"></div>
+          <div class="terminal-line" data-text="&#x2502;  &#x1F6E3;  trajan    5 TikToks &#xB7; PH listing &#xB7; X thread drafted      &#x2502;"></div>
+          <div class="terminal-line" data-text="&#x2502;  &#x1F3AF; audience   party game &#xB7; group play &#xB7; 25-35 demo         &#x2502;"></div>
+          <div class="terminal-line" data-text="&#x2514;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2518;"></div>
           <div class="terminal-line" data-text=""></div>
-          <div class="terminal-line success-line" data-text="✓  Pipeline complete — 7m 45s"></div>
-          <div class="terminal-line" data-text="   └── Live: playforbidden.com"></div>
-          <div class="terminal-line" data-text="   └── Revenue: $4.99/mo premium decks projected"></div>
-          <div class="terminal-line" data-text="   └── Launch: 5 TikToks, X thread, PH listing ready"></div>
+          <div class="terminal-line success-line" data-type="success" data-text="&#x2705;  FORGED  &#xB7;  7m 45s  &#xB7;  playforbidden.com"></div>
         </div>
       </div>
     </div>
@@ -1180,6 +1232,7 @@
         <strong style="color:#fff;">Vespasian</strong> &mdash; revenue. Pricing models, unit economics, exit scenarios.<br>
         <strong style="color:#fff;">Trajan</strong> &mdash; distribution. GTM strategy, content planning, launch sequencing.<br>
         <strong style="color:#fff;">Romulus</strong> &mdash; orchestrator. Task decomposition, routing, quality gates.</p>
+        <p>A critical mechanic: every transition between cohorts is gated. Caesar's research brief doesn't automatically flow to Augustus — it gets reviewed first. Augustus doesn't deploy without a review cycle. Vespasian doesn't run unless the build succeeded. These gates aren't manual approvals — they're programmed checkpoints that validate outputs against structured criteria before the next phase triggers. This is what distinguishes Legion from a chained prompt: each stage has its own quality bar, and the chain breaks if a stage fails.</p>
         <p style="margin-top:24px;font-family:'Inconsolata',monospace;font-size:14px;color:var(--text-secondary);">Before: you &rarr; one tool, sequential.<br>After: you &rarr; five cohorts, parallel.</p>
       </div>
     </section>
@@ -1189,7 +1242,9 @@
       <div class="cohort-grid">
 
         <div class="cohort-card orchestrator">
-          <div class="cohort-avatar-circle">&#x1F43A;</div>
+          <div class="cohort-avatar-placeholder">
+            <span class="cohort-emoji-badge">&#x1F43A;</span>
+          </div>
           <div class="cohort-header">
             <span class="cohort-name">ROMULUS</span>
           </div>
@@ -1201,7 +1256,9 @@
         </div>
 
         <div class="cohort-card">
-          <div class="cohort-avatar-circle">&#x1F985;</div>
+          <div class="cohort-avatar-placeholder">
+            <span class="cohort-emoji-badge">&#x1F985;</span>
+          </div>
           <div class="cohort-header">
             <span class="cohort-name">CAESAR</span>
           </div>
@@ -1213,7 +1270,9 @@
         </div>
 
         <div class="cohort-card">
-          <div class="cohort-avatar-circle">&#x1F3DB;</div>
+          <div class="cohort-avatar-placeholder">
+            <span class="cohort-emoji-badge">&#x1F3DB;</span>
+          </div>
           <div class="cohort-header">
             <span class="cohort-name">AUGUSTUS</span>
           </div>
@@ -1225,7 +1284,9 @@
         </div>
 
         <div class="cohort-card">
-          <div class="cohort-avatar-circle">&#x1F4B0;</div>
+          <div class="cohort-avatar-placeholder">
+            <span class="cohort-emoji-badge">&#x1F4B0;</span>
+          </div>
           <div class="cohort-header">
             <span class="cohort-name">VESPASIAN</span>
           </div>
@@ -1237,7 +1298,9 @@
         </div>
 
         <div class="cohort-card">
-          <div class="cohort-avatar-circle">&#x1F6E3;</div>
+          <div class="cohort-avatar-placeholder">
+            <span class="cohort-emoji-badge">&#x1F6E3;</span>
+          </div>
           <div class="cohort-header">
             <span class="cohort-name">TRAJAN</span>
           </div>
@@ -1253,58 +1316,58 @@
 
     <div class="section-divider"><span class="dot"></span></div>
 
-    <!-- ===== 12. PIPELINE (CHANGE 5 — dual layout) ===== -->
+    <!-- ===== 12. PIPELINE — Flow Diagram ===== -->
     <div class="pipeline-section" data-romulus-animate>
       <div class="pipeline-label">~/legion/pipeline.md</div>
       <h2 class="pipeline-heading">The Pipeline</h2>
       <div class="pipeline-body">A prompt enters the system. It gets classified: research or build. If research &rarr; Caesar. If build &rarr; Caesar spec &rarr; approve &rarr; Augustus architecture &rarr; Augustus build &rarr; review (max 3 cycles) &rarr; deploy. Auto-chain: Augustus triggers Vespasian (wealth strategy), Vespasian triggers Trajan (GTM strategy). Total pipeline time: ~15-30 minutes.</div>
       <div class="pipeline-sublabel">FULL PIPELINE &mdash; ~15-30 MIN PROMPT TO DELIVERABLES</div>
 
-      <div class="pipeline-visual" data-romulus-animate>
-        <div class="pipeline-hud" id="pipelineHud">
-          <div class="pipeline-track-bg"></div>
-          <div class="pipeline-track-fill" id="pipelineFill"></div>
-          <div class="pipeline-steps-row">
-            <div class="pipeline-step" data-pipe-index="0">
-              <div class="pipeline-step-icon">&#x1F4EC;</div>
-              <div class="pipeline-step-label">Prompt</div>
-            </div>
-            <div class="pipeline-step" data-pipe-index="1">
-              <div class="pipeline-step-icon">&#x1F985;</div>
-              <div class="pipeline-step-label">Caesar</div>
-              <div class="pipeline-step-time">~2 min</div>
-            </div>
-            <div class="pipeline-step" data-pipe-index="2">
-              <div class="pipeline-step-icon">&#x2705;</div>
-              <div class="pipeline-step-label">Approve</div>
-            </div>
-            <div class="pipeline-step" data-pipe-index="3">
-              <div class="pipeline-step-icon">&#x1F3DB;</div>
-              <div class="pipeline-step-label">Augustus</div>
-              <div class="pipeline-step-time">5-15 min</div>
-            </div>
-            <div class="pipeline-step" data-pipe-index="4">
-              <div class="pipeline-step-icon">&#x1F4B0;</div>
-              <div class="pipeline-step-label">Vespasian</div>
-              <div class="pipeline-step-time">3-5 min</div>
-            </div>
-            <div class="pipeline-step" data-pipe-index="5">
-              <div class="pipeline-step-icon">&#x1F6E3;</div>
-              <div class="pipeline-step-label">Trajan</div>
-              <div class="pipeline-step-time">3-5 min</div>
-            </div>
-            <div class="pipeline-step" data-pipe-index="6">
-              <div class="pipeline-step-icon">&#x1F4E6;</div>
-              <div class="pipeline-step-label">Delivered</div>
-            </div>
-          </div>
+      <div class="pipeline-diagram" id="pipelineDiagram" data-romulus-animate>
+        <div class="pipeline-node" data-pipe-index="0">
+          <span class="pipeline-node-emoji">&#x1F4EC;</span>
+          <span class="pipeline-node-name">Prompt</span>
+        </div>
+        <div class="pipeline-arrow"></div>
+        <div class="pipeline-node" data-pipe-index="1" data-accent="purple">
+          <span class="pipeline-node-emoji">&#x1F985;</span>
+          <span class="pipeline-node-name">Caesar</span>
+          <span class="pipeline-node-sub">~2 min</span>
+        </div>
+        <div class="pipeline-arrow"></div>
+        <div class="pipeline-node" data-pipe-index="2" data-accent="green">
+          <span class="pipeline-node-emoji">&#x2705;</span>
+          <span class="pipeline-node-name">Approve</span>
+        </div>
+        <div class="pipeline-arrow"></div>
+        <div class="pipeline-node" data-pipe-index="3" data-accent="blue">
+          <span class="pipeline-node-emoji">&#x1F3DB;</span>
+          <span class="pipeline-node-name">Augustus</span>
+          <span class="pipeline-node-sub">5-15 min</span>
+        </div>
+        <div class="pipeline-arrow"></div>
+        <div class="pipeline-node" data-pipe-index="4">
+          <span class="pipeline-node-emoji">&#x1F4B0;</span>
+          <span class="pipeline-node-name">Vespasian</span>
+          <span class="pipeline-node-sub">3-5 min</span>
+        </div>
+        <div class="pipeline-arrow"></div>
+        <div class="pipeline-node" data-pipe-index="5" data-accent="cyan">
+          <span class="pipeline-node-emoji">&#x1F6E3;</span>
+          <span class="pipeline-node-name">Trajan</span>
+          <span class="pipeline-node-sub">3-5 min</span>
+        </div>
+        <div class="pipeline-arrow"></div>
+        <div class="pipeline-node" data-pipe-index="6" data-accent="green">
+          <span class="pipeline-node-emoji">&#x1F4E6;</span>
+          <span class="pipeline-node-name">Delivered</span>
         </div>
       </div>
     </div>
 
     <div class="section-divider"><span class="dot"></span></div>
 
-    <!-- ===== 13-16. EXPERIMENTS (CHANGE 1 — KPI callouts, CHANGE 6 — mobile stacked) ===== -->
+    <!-- ===== 13-16. EXPERIMENTS ===== -->
     <div class="experiment-section">
 
       <!-- 13. Experiment 1: Caesar Speed -->
@@ -1394,7 +1457,6 @@
         <div class="experiment-body">One prompt, one build session, deployed. The build was reviewed before shipping and passed on the first pass.</div>
         <div class="experiment-insight"><strong style="color:#fff;">Insight:</strong> The important part isn't the output size &mdash; it's that Caesar's competitive research on the game genre was already loaded as context before Augustus touched a single file. The pipeline works end to end.</div>
       </div>
-
     </div>
 
     <div class="section-divider"><span class="dot"></span></div>
@@ -1597,7 +1659,7 @@
             return;
           }
           if (text === '') {
-            setTimeout(function() { typeWriter(lines, index + 1, callback); }, 120);
+            setTimeout(function() { typeWriter(lines, index + 1, callback); }, 80);
             return;
           }
           line.innerHTML = '';
@@ -1614,10 +1676,10 @@
               line.appendChild(document.createTextNode(text[charIndex]));
               line.appendChild(cursor);
               charIndex++;
-              setTimeout(typeNext, 20 + Math.random() * 25);
+              setTimeout(typeNext, 10 + Math.random() * 10);
             } else {
               if (cursor.parentNode) cursor.parentNode.removeChild(cursor);
-              setTimeout(function() { typeWriter(lines, index + 1, callback); }, 200);
+              setTimeout(function() { typeWriter(lines, index + 1, callback); }, 120);
             }
           }
           typing = true;
@@ -1639,50 +1701,30 @@
         observer.observe(terminal);
       }
 
-      /* ===== PIPELINE ANIMATION — HUD progress bar ===== */
+      /* ===== PIPELINE ANIMATION — flow diagram sequential lighting ===== */
       function initPipeline() {
-        var hud = document.getElementById('pipelineHud');
-        if (!hud || !('IntersectionObserver' in window)) return;
+        var diagram = document.getElementById('pipelineDiagram');
+        if (!diagram || !('IntersectionObserver' in window)) return;
 
-        var fill = document.getElementById('pipelineFill');
-        var steps = hud.querySelectorAll('.pipeline-step');
-        var totalSteps = steps.length;
-        var isMobile = window.matchMedia('(max-width: 768px)').matches;
+        var items = diagram.querySelectorAll('.pipeline-node, .pipeline-arrow');
 
         var pipeObserver = new IntersectionObserver(function(entries) {
           entries.forEach(function(entry) {
             if (entry.isIntersecting) {
-              animateHud();
+              animatePipeline();
               pipeObserver.unobserve(entry.target);
             }
           });
         }, { threshold: 0.3 });
-        pipeObserver.observe(hud);
+        pipeObserver.observe(diagram);
 
-        function animateHud() {
-          var delay = 0;
-          for (var i = 0; i < totalSteps; i++) {
-            (function(step, idx, d) {
+        function animatePipeline() {
+          for (var i = 0; i < items.length; i++) {
+            (function(item, delay) {
               setTimeout(function() {
-                step.classList.add('lit');
-                var pct = ((idx + 1) / totalSteps) * 100;
-                if (fill) {
-                  if (isMobile) {
-                    var trackEl = hud.querySelector('.pipeline-track-bg');
-                    var totalHeight = trackEl ? trackEl.offsetHeight : (hud.offsetHeight - 40);
-                    fill.style.height = (totalHeight * (idx + 1) / totalSteps) + 'px';
-                  } else {
-                    var trackBg = hud.querySelector('.pipeline-track-bg');
-                    var trackWidth = trackBg ? trackBg.offsetWidth : (hud.offsetWidth - 40);
-                    fill.style.width = (trackWidth * (idx + 1) / totalSteps) + 'px';
-                  }
-                }
-                if (idx === totalSteps - 1) {
-                  setTimeout(function() { hud.classList.add('complete'); }, 300);
-                }
-              }, d);
-            })(steps[i], i, delay);
-            delay += 400;
+                item.classList.add('lit');
+              }, delay);
+            })(items[i], i * 300);
           }
         }
       }
