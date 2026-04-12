@@ -371,7 +371,7 @@
       border: 1px solid var(--card-border);
       border-top: 2px solid var(--amber);
       border-radius: 10px;
-      background: #0d0d0f;
+      background: #050508;
       overflow: hidden;
       box-shadow: 0 32px 80px rgba(0,0,0,0.6);
       transition: border-color 0.5s ease, box-shadow 0.5s ease;
@@ -387,8 +387,8 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 16px;
-      background: rgba(255,255,255,0.02);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: rgba(0,0,0,0.3);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
       font-family: 'Inconsolata', monospace;
       font-size: 11px;
       color: var(--text-faint);
@@ -398,40 +398,41 @@
     .terminal-body {
       padding: 20px 20px 24px;
       min-height: 180px;
+      position: relative;
+    }
+    .terminal-body::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(0deg, rgba(255,255,255,0.01) 0, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 2px);
+      pointer-events: none;
     }
     .terminal-line {
+      opacity: 1;
+      transform: none;
       font-family: 'Inconsolata', monospace;
       font-size: 14px;
       line-height: 1.8;
       color: var(--text-body);
-      opacity: 0;
-      transform: translateY(4px);
-      transition: opacity 0.3s ease, transform 0.3s ease;
-      white-space: pre-wrap;
-      word-break: break-word;
+      white-space: pre;
+      min-height: 1.8em;
+      position: relative;
     }
-    .terminal-line.visible {
-      opacity: 1;
-      transform: translateY(0);
+    .terminal-line.success-line {
+      background: rgba(34,197,94,0.08);
     }
-    .terminal-line .cmd { color: var(--amber); }
-    .terminal-line .success { color: var(--green); }
-    .terminal-line .url { color: var(--amber); text-decoration: underline; text-underline-offset: 2px; }
-    .terminal-line .dim { color: var(--text-faint); }
-    .terminal-line .indent { padding-left: 20px; }
-    /* Blinking cursor */
-    .terminal-cursor {
+    .terminal-line .cursor {
       display: inline-block;
       color: var(--amber);
-      animation: cursor-blink 0.8s steps(1) infinite;
       font-weight: 700;
+      animation: cursor-blink 0.6s steps(1) infinite;
     }
     @keyframes cursor-blink {
       0%, 100% { opacity: 1; }
       50% { opacity: 0; }
     }
 
-    /* ===== COHORT CARDS (CHANGE 2) ===== */
+    /* ===== COHORT CARDS ===== */
     .cohort-section {
       padding: 0 20px 40px;
       max-width: calc(var(--container) + 280px);
@@ -447,47 +448,35 @@
       border: 1px solid var(--card-border);
       border-top: 2px solid var(--amber);
       border-radius: 8px;
-      padding: 16px;
+      padding: 20px;
       display: flex;
       flex-direction: column;
+      text-align: center;
     }
     .cohort-card.orchestrator {
       border-left: 3px solid var(--amber);
       box-shadow: inset 0 0 30px var(--amber-glow);
     }
-    .cohort-card-top {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      margin-bottom: 4px;
-    }
-    .cohort-avatar {
-      flex-shrink: 0;
-    }
-    .avatar-circle {
-      width: 48px;
-      height: 48px;
+    .cohort-avatar-circle {
+      width: 56px;
+      height: 56px;
       border-radius: 50%;
+      background: linear-gradient(135deg, rgba(217,149,26,0.12), rgba(217,149,26,0.03));
+      border: 2px solid var(--amber-border);
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid var(--amber-border);
-      font-size: 24px;
-      line-height: 1;
-      flex-shrink: 0;
+      font-size: 28px;
+      margin: 0 auto 12px;
     }
-    .orchestrator .avatar-circle {
-      border: 2px solid var(--amber);
+    .orchestrator .cohort-avatar-circle {
+      border-color: var(--amber);
       box-shadow: 0 0 20px rgba(217,149,26,0.15);
-    }
-    .cohort-card-info {
-      flex: 1;
-      min-width: 0;
     }
     .cohort-header {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 12px;
       margin-bottom: 2px;
     }
@@ -573,79 +562,148 @@
       max-width: var(--container);
     }
 
-    /* Pipeline stepped progress — mobile first */
-    .pipeline-track { display: none; }
-    .pipeline-track-mobile {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px 0;
+    /* Pipeline HUD — progress bar with cohort icons */
+    .pipeline-visual {
+      padding: 40px 0;
+      max-width: 100%;
+      overflow: hidden;
+    }
+    .pipeline-hud {
       position: relative;
+      padding: 60px 20px 0;
+      max-width: 720px;
+      margin: 0 auto;
     }
-    .pipeline-track-mobile::before {
-      content: '';
+    .pipeline-track-bg {
       position: absolute;
-      top: 24px;
-      bottom: 24px;
-      left: 50%;
-      width: 1px;
-      background: var(--card-border);
-      transform: translateX(-50%);
+      top: 30px;
+      left: 20px;
+      right: 20px;
+      height: 2px;
+      background: repeating-linear-gradient(90deg, rgba(255,255,255,0.08) 0, rgba(255,255,255,0.08) 8px, transparent 8px, transparent 14px);
     }
-    .pipeline-track-mobile .track-fill {
+    .pipeline-track-fill {
       position: absolute;
-      top: 24px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 1px;
-      height: 0;
-      background: var(--amber);
-      transition: height 1.5s ease-out;
-    }
-    .pipeline-step {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-      z-index: 1;
-      padding: 16px 0;
-    }
-    .pipeline-dot {
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: var(--bg);
-      border: 2px solid var(--card-border);
-      margin-bottom: 10px;
-      transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
-    }
-    .pipeline-step.lit .pipeline-dot {
-      background: var(--amber);
-      border-color: var(--amber);
+      top: 30px;
+      left: 20px;
+      height: 2px;
+      width: 0;
+      background: linear-gradient(90deg, var(--amber), rgba(217,149,26,0.6));
+      transition: width 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       box-shadow: 0 0 12px rgba(217,149,26,0.3);
     }
-    .pipeline-step-emoji {
-      font-size: 20px;
-      margin-bottom: 4px;
+    .pipeline-steps-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1;
     }
-    .pipeline-step-name {
+    .pipeline-step {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 14.28%;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .pipeline-step.lit {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .pipeline-step-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid rgba(255,255,255,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 2;
+      transition: border-color 0.4s ease, background 0.4s ease, box-shadow 0.4s ease;
+    }
+    .pipeline-step.lit .pipeline-step-icon {
+      border-color: var(--amber);
+      background: rgba(217,149,26,0.1);
+      box-shadow: 0 0 20px rgba(217,149,26,0.2);
+    }
+    .pipeline-step-label {
       font-family: 'Inter Tight', sans-serif;
       font-size: 11px;
       font-weight: 600;
-      color: var(--text-secondary);
-      text-align: center;
       text-transform: uppercase;
       letter-spacing: 0.04em;
+      color: var(--text-faint);
+      text-align: center;
       transition: color 0.4s ease;
     }
-    .pipeline-step.lit .pipeline-step-name {
+    .pipeline-step.lit .pipeline-step-label {
       color: var(--text-primary);
     }
     .pipeline-step-time {
       font-family: 'Inconsolata', monospace;
       font-size: 10px;
       color: var(--text-faint);
-      margin-top: 2px;
+      margin-top: 3px;
+    }
+    .pipeline-hud.complete .pipeline-track-fill {
+      animation: pipeline-pulse 0.6s ease;
+    }
+    @keyframes pipeline-pulse {
+      0%, 100% { box-shadow: 0 0 12px rgba(217,149,26,0.3); }
+      50% { box-shadow: 0 0 28px rgba(217,149,26,0.6); }
+    }
+
+    /* Pipeline mobile: vertical layout */
+    @media (max-width: 768px) {
+      .pipeline-hud {
+        padding: 20px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .pipeline-track-bg {
+        left: 50%;
+        top: 20px;
+        bottom: 20px;
+        width: 2px;
+        height: auto;
+        right: auto;
+        transform: translateX(-50%);
+        background: repeating-linear-gradient(180deg, rgba(255,255,255,0.08) 0, rgba(255,255,255,0.08) 8px, transparent 8px, transparent 14px);
+      }
+      .pipeline-track-fill {
+        left: 50%;
+        top: 20px;
+        height: 0;
+        width: 2px;
+        transform: translateX(-50%);
+        transition: height 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .pipeline-steps-row {
+        flex-direction: column;
+        align-items: center;
+      }
+      .pipeline-step {
+        width: auto;
+        margin-bottom: 24px;
+        flex-direction: column;
+        align-items: center;
+      }
+      .pipeline-step-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+        margin-bottom: 6px;
+      }
+      .pipeline-step-label { font-size: 10px; }
+      .pipeline-step-time { font-size: 9px; }
     }
 
     /* ===== EXPERIMENT CARDS (CHANGE 6) ===== */
@@ -822,7 +880,7 @@
       max-width: 620px;
     }
 
-    /* ===== PROJECT / SHIPPED CARDS (CHANGE 7) ===== */
+    /* ===== PROJECT / SHIPPED CARDS ===== */
     .shipped-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -832,66 +890,55 @@
     .shipped-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      border-top: 2px solid var(--amber);
       border-radius: 10px;
-      padding: 28px 24px;
-      display: flex;
-      flex-direction: column;
-    }
-    .shipped-card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 12px;
+      padding: 24px;
+      position: relative;
     }
     .shipped-card-name {
       font-family: 'Inter Tight', sans-serif;
       font-size: 18px;
       font-weight: 600;
       color: #fff;
-    }
-    .shipped-card-status {
-      font-family: 'Inconsolata', monospace;
-      font-size: 11px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 2px 8px;
-      border-radius: 4px;
-    }
-    .shipped-card-status.live {
-      color: var(--green);
-      background: rgba(34,197,94,0.1);
-      border: 1px solid rgba(34,197,94,0.2);
-    }
-    .shipped-card-status.dev {
-      color: var(--amber);
-      background: var(--amber-soft);
-      border: 1px solid var(--amber-border);
-    }
-    .shipped-card-status.tbd {
-      color: var(--text-faint);
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--card-border);
+      margin-bottom: 4px;
     }
     .shipped-card-url {
       font-family: 'Inconsolata', monospace;
       font-size: 12px;
       color: var(--amber);
-      text-decoration: none;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      display: inline-block;
       margin-bottom: 12px;
       transition: color 0.2s;
     }
     .shipped-card-url:hover { color: #f1c06c; }
-    .shipped-card-url.placeholder {
-      color: var(--text-faint);
-      cursor: default;
-    }
-    .shipped-card-desc {
+    .shipped-card-body {
       font-family: 'Inter', sans-serif;
       font-size: 14px;
       color: var(--text-body);
       line-height: 1.6;
-      flex: 1;
+      margin-bottom: 14px;
+    }
+    .shipped-card-tech {
+      font-family: 'Inconsolata', monospace;
+      font-size: 11px;
+      color: var(--amber);
+    }
+    .shipped-card-status {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-family: 'Inconsolata', monospace;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 3px;
+    }
+    .shipped-card-status.live {
+      color: var(--green);
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.2);
     }
 
     /* ===== SCROLL ANIMATIONS ===== */
@@ -934,50 +981,13 @@
       .cohort-section { padding: 0 40px 80px; }
       .cohort-grid { grid-template-columns: repeat(3, 1fr); }
       .cohort-card { padding: 24px; }
-      .avatar-circle {
-        width: 56px;
-        height: 56px;
-        font-size: 28px;
+      .cohort-avatar-circle {
+        width: 64px;
+        height: 64px;
+        font-size: 32px;
       }
 
       .pipeline-section { padding: 80px 40px; }
-
-      /* Desktop: horizontal stepped pipeline */
-      .pipeline-track-mobile { display: none; }
-      .pipeline-track {
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        position: relative;
-        padding: 40px 0 0 0;
-      }
-      .pipeline-track::before {
-        content: '';
-        position: absolute;
-        top: 47px;
-        left: 0;
-        right: 0;
-        height: 1px;
-        background: var(--card-border);
-      }
-      .pipeline-track .track-fill {
-        position: absolute;
-        top: 47px;
-        left: 0;
-        width: 0;
-        height: 1px;
-        background: var(--amber);
-        transition: width 1.5s ease-out;
-      }
-      .pipeline-track .pipeline-step {
-        width: 80px;
-        padding: 0;
-      }
-      .pipeline-track .pipeline-dot {
-        width: 12px;
-        height: 12px;
-        margin-bottom: 12px;
-      }
 
       .experiment-section { padding: 80px 40px; }
       .experiment-card {
@@ -1005,10 +1015,6 @@
     @media (min-width: 769px) and (max-width: 1024px) {
       .cohort-grid { grid-template-columns: repeat(2, 1fr); }
       .decisions-grid { grid-template-columns: 1fr 1fr; }
-      .pipeline-track {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-      }
     }
   </style>
 </head>
@@ -1137,24 +1143,25 @@
 
     <!-- ===== 9. TERMINAL WINDOW (replaces ASCII separator) ===== -->
     <div class="terminal-section" data-romulus-animate>
-      <div class="terminal-window" id="terminalWindow">
+      <div class="terminal-window" id="terminal">
         <div class="terminal-header">
           <span class="terminal-header-host">romulus@roma-eterna</span>
           <span class="terminal-header-label">pipeline demo</span>
         </div>
-        <div class="terminal-body" id="terminalBody">
-          <div class="terminal-line" data-delay="0"><span class="cmd">$ legion init --pipeline new</span></div>
-          <div class="terminal-line" data-delay="1"><span class="success">&#x2713;</span> 5 cohorts loaded</div>
-          <div class="terminal-line" data-delay="2"><span class="indent">&#x2514;&#x2500;&#x2500; Caesar, Augustus, Vespasian, Trajan, Romulus</span></div>
-          <div class="terminal-line" data-delay="4"><span class="cmd">$ legion run "portfolio site &mdash; editorial, modern, responsive"</span></div>
-          <div class="terminal-line" data-delay="6"><span class="success">&#x2694;&#xFE0F;</span> Caesar analyzing... done <span class="dim">(2.4 min)</span></div>
-          <div class="terminal-line" data-delay="8"><span class="success">&#x1F3DB;</span> Augustus building... done <span class="dim">(342s)</span></div>
-          <div class="terminal-line" data-delay="10"><span class="success">&#x1F4B0;</span> Vespasian modeling... done <span class="dim">(48s)</span></div>
-          <div class="terminal-line" data-delay="12"><span class="success">&#x1F6E3;</span> Trajan launching... done <span class="dim">(31s)</span></div>
-          <div class="terminal-line" data-delay="14"><span class="success">&#x2713;</span> Pipeline complete &mdash; <span class="dim">7m 45s</span></div>
-          <div class="terminal-line" data-delay="15"><span class="success">&#x2514;&#x2500;&#x2500;</span> Live: <span class="url">mikebatts.github.io/alexa-portfolio/</span></div>
-          <div class="terminal-line" data-delay="16"><span class="success">&#x2514;&#x2500;&#x2500;</span> Revenue: $12K MRR projected</div>
-          <div class="terminal-line" data-delay="17"><span class="success">&#x2514;&#x2500;&#x2500;</span> Launch: 15 tweets, 3 TikToks, blog post ready</div>
+        <div class="terminal-body">
+          <div class="terminal-line" data-text="$ legion init --pipeline new"></div>
+          <div class="terminal-line success-line" data-text="✓  5 cohorts loaded"></div>
+          <div class="terminal-line" data-text="   └── Caesar, Augustus, Vespasian, Trajan, Romulus"></div>
+          <div class="terminal-line" data-text="$ legion run &#39;Forbidden — Taboo-style party game, themed decks, pressure round&#39;"></div>
+          <div class="terminal-line" data-text="⚔️  Caesar researching Taboo genre... done 2.4min"></div>
+          <div class="terminal-line" data-text="🏛  Augustus scaffolding Next.js + Stripe... done 342s"></div>
+          <div class="terminal-line" data-text="💰  Vespasian modeling freemium... done 48s"></div>
+          <div class="terminal-line" data-text="🛣  Trajan generating launch plan... done 31s"></div>
+          <div class="terminal-line" data-text=""></div>
+          <div class="terminal-line success-line" data-text="✓  Pipeline complete — 7m 45s"></div>
+          <div class="terminal-line" data-text="   └── Live: playforbidden.com"></div>
+          <div class="terminal-line" data-text="   └── Revenue: $4.99/mo premium decks projected"></div>
+          <div class="terminal-line" data-text="   └── Launch: 5 TikToks, X thread, PH listing ready"></div>
         </div>
       </div>
     </div>
@@ -1177,20 +1184,28 @@
       </div>
     </section>
 
-    <!-- ===== 11. COHORT CARDS (CHANGE 2 — avatars) ===== -->
+    <!-- ===== 11. COHORT CARDS ===== -->
     <div class="cohort-section" data-romulus-animate>
       <div class="cohort-grid">
 
-        <div class="cohort-card">
-          <div class="cohort-card-top">
-            <div class="cohort-avatar"><div class="avatar-circle">&#x1F985;</div></div>
-            <div class="cohort-card-info">
-              <div class="cohort-header">
-                <span class="cohort-name">CAESAR</span>
-              </div>
-              <div class="cohort-status">OPERATIONAL</div>
-            </div>
+        <div class="cohort-card orchestrator">
+          <div class="cohort-avatar-circle">&#x1F43A;</div>
+          <div class="cohort-header">
+            <span class="cohort-name">ROMULUS</span>
           </div>
+          <div class="cohort-status">OPERATIONAL &middot; ORCHESTRATOR</div>
+          <div class="cohort-question">"What's the mission, what's the priority, and who runs point right now?"</div>
+          <div class="cohort-workers">task-decomposer<br>router<br>gate-enforcer<br>synthesizer</div>
+          <div class="cohort-output-label">Output:</div>
+          <div class="cohort-output">Task routing, pipeline orchestration, cross-cohort synthesis</div>
+        </div>
+
+        <div class="cohort-card">
+          <div class="cohort-avatar-circle">&#x1F985;</div>
+          <div class="cohort-header">
+            <span class="cohort-name">CAESAR</span>
+          </div>
+          <div class="cohort-status">OPERATIONAL</div>
           <div class="cohort-question">"What information is missing before we decide whether to build?"</div>
           <div class="cohort-workers">researcher<br>analyst<br>competitor<br>synthesizer<br>monitor</div>
           <div class="cohort-output-label">Output:</div>
@@ -1198,15 +1213,11 @@
         </div>
 
         <div class="cohort-card">
-          <div class="cohort-card-top">
-            <div class="cohort-avatar"><div class="avatar-circle">&#x1F3DB;</div></div>
-            <div class="cohort-card-info">
-              <div class="cohort-header">
-                <span class="cohort-name">AUGUSTUS</span>
-              </div>
-              <div class="cohort-status">OPERATIONAL</div>
-            </div>
+          <div class="cohort-avatar-circle">&#x1F3DB;</div>
+          <div class="cohort-header">
+            <span class="cohort-name">AUGUSTUS</span>
           </div>
+          <div class="cohort-status">OPERATIONAL</div>
           <div class="cohort-question">"What does the spec say, and what needs to be built first?"</div>
           <div class="cohort-workers">architect<br>builder<br>reviewer<br>deployer</div>
           <div class="cohort-output-label">Output:</div>
@@ -1214,15 +1225,11 @@
         </div>
 
         <div class="cohort-card">
-          <div class="cohort-card-top">
-            <div class="cohort-avatar"><div class="avatar-circle">&#x1F4B0;</div></div>
-            <div class="cohort-card-info">
-              <div class="cohort-header">
-                <span class="cohort-name">VESPASIAN</span>
-              </div>
-              <div class="cohort-status">OPERATIONAL</div>
-            </div>
+          <div class="cohort-avatar-circle">&#x1F4B0;</div>
+          <div class="cohort-header">
+            <span class="cohort-name">VESPASIAN</span>
           </div>
+          <div class="cohort-status">OPERATIONAL</div>
           <div class="cohort-question">"What's the unit economics look like at scale?"</div>
           <div class="cohort-workers">pricing-analyst<br>unit-economist<br>exit-modeler</div>
           <div class="cohort-output-label">Output:</div>
@@ -1230,35 +1237,15 @@
         </div>
 
         <div class="cohort-card">
-          <div class="cohort-card-top">
-            <div class="cohort-avatar"><div class="avatar-circle">&#x1F6E3;</div></div>
-            <div class="cohort-card-info">
-              <div class="cohort-header">
-                <span class="cohort-name">TRAJAN</span>
-              </div>
-              <div class="cohort-status">OPERATIONAL</div>
-            </div>
+          <div class="cohort-avatar-circle">&#x1F6E3;</div>
+          <div class="cohort-header">
+            <span class="cohort-name">TRAJAN</span>
           </div>
+          <div class="cohort-status">OPERATIONAL</div>
           <div class="cohort-question">"Where does this audience live, and what's the fastest way to reach them?"</div>
           <div class="cohort-workers">strategist<br>content-writer<br>partnerships</div>
           <div class="cohort-output-label">Output:</div>
           <div class="cohort-output">Launch plans, GTM strategy, content assets</div>
-        </div>
-
-        <div class="cohort-card orchestrator">
-          <div class="cohort-card-top">
-            <div class="cohort-avatar"><div class="avatar-circle">&#x1F43A;</div></div>
-            <div class="cohort-card-info">
-              <div class="cohort-header">
-                <span class="cohort-name">ROMULUS</span>
-              </div>
-              <div class="cohort-status">OPERATIONAL &middot; ORCHESTRATOR</div>
-            </div>
-          </div>
-          <div class="cohort-question">"What's the priority, who handles it, and what gate checks apply?"</div>
-          <div class="cohort-workers">task-decomposer<br>router<br>gate-enforcer<br>synthesizer</div>
-          <div class="cohort-output-label">Output:</div>
-          <div class="cohort-output">Task routing, pipeline orchestration, cross-cohort synthesis</div>
         </div>
 
       </div>
@@ -1274,91 +1261,42 @@
       <div class="pipeline-sublabel">FULL PIPELINE &mdash; ~15-30 MIN PROMPT TO DELIVERABLES</div>
 
       <div class="pipeline-visual" data-romulus-animate>
-        <!-- Desktop: horizontal stepped progress -->
-        <div class="pipeline-track" id="pipelineDesktop">
-          <div class="track-fill" id="pipelineFillDesktop"></div>
-          <div class="pipeline-step" data-pipe-index="0">
-            <div class="pipeline-dot"></div>
-            <div class="pipeline-step-emoji">&#x1F4AC;</div>
-            <div class="pipeline-step-name">Prompt</div>
-          </div>
-          <div class="pipeline-step" data-pipe-index="1">
-            <div class="pipeline-dot"></div>
-            <div class="pipeline-step-emoji">&#x1F985;</div>
-            <div class="pipeline-step-name">Caesar</div>
-            <div class="pipeline-step-time">~2 min</div>
-          </div>
-          <div class="pipeline-step" data-pipe-index="2">
-            <div class="pipeline-dot"></div>
-            <div class="pipeline-step-emoji">&#x2705;</div>
-            <div class="pipeline-step-name">Approve</div>
-          </div>
-          <div class="pipeline-step" data-pipe-index="3">
-            <div class="pipeline-dot"></div>
-            <div class="pipeline-step-emoji">&#x1F3DB;</div>
-            <div class="pipeline-step-name">Augustus</div>
-            <div class="pipeline-step-time">5-15 min</div>
-          </div>
-          <div class="pipeline-step" data-pipe-index="4">
-            <div class="pipeline-dot"></div>
-            <div class="pipeline-step-emoji">&#x1F4B0;</div>
-            <div class="pipeline-step-name">Vespasian</div>
-            <div class="pipeline-step-time">3-5 min</div>
-          </div>
-          <div class="pipeline-step" data-pipe-index="5">
-            <div class="pipeline-dot"></div>
-            <div class="pipeline-step-emoji">&#x1F6E3;</div>
-            <div class="pipeline-step-name">Trajan</div>
-            <div class="pipeline-step-time">3-5 min</div>
-          </div>
-          <div class="pipeline-step" data-pipe-index="6">
-            <div class="pipeline-dot"></div>
-            <div class="pipeline-step-emoji">&#x1F4E6;</div>
-            <div class="pipeline-step-name">Delivered</div>
-          </div>
-        </div>
-
-        <!-- Mobile: vertical stepped progress -->
-        <div class="pipeline-track-mobile" id="pipelineMobile">
-          <div class="track-fill" id="pipelineFillMobile"></div>
-          <div class="pipeline-step" data-pipe-index="0">
-            <div class="pipeline-dot"></div>
-            <div class="pipeline-step-emoji">&#x1F4AC;</div>
-            <div class="pipeline-step-name">Prompt</div>
-          </div>
-          <div class="pipeline-step" data-pipe-index="1">
-            <div class="pipeline-dot"></div>
-            <div class="pipeline-step-emoji">&#x1F985;</div>
-            <div class="pipeline-step-name">Caesar</div>
-            <div class="pipeline-step-time">~2 min</div>
-          </div>
-          <div class="pipeline-step" data-pipe-index="2">
-            <div class="pipeline-dot"></div>
-            <div class="pipeline-step-emoji">&#x2705;</div>
-            <div class="pipeline-step-name">Approve</div>
-          </div>
-          <div class="pipeline-step" data-pipe-index="3">
-            <div class="pipeline-dot"></div>
-            <div class="pipeline-step-emoji">&#x1F3DB;</div>
-            <div class="pipeline-step-name">Augustus</div>
-            <div class="pipeline-step-time">5-15 min</div>
-          </div>
-          <div class="pipeline-step" data-pipe-index="4">
-            <div class="pipeline-dot"></div>
-            <div class="pipeline-step-emoji">&#x1F4B0;</div>
-            <div class="pipeline-step-name">Vespasian</div>
-            <div class="pipeline-step-time">3-5 min</div>
-          </div>
-          <div class="pipeline-step" data-pipe-index="5">
-            <div class="pipeline-dot"></div>
-            <div class="pipeline-step-emoji">&#x1F6E3;</div>
-            <div class="pipeline-step-name">Trajan</div>
-            <div class="pipeline-step-time">3-5 min</div>
-          </div>
-          <div class="pipeline-step" data-pipe-index="6">
-            <div class="pipeline-dot"></div>
-            <div class="pipeline-step-emoji">&#x1F4E6;</div>
-            <div class="pipeline-step-name">Delivered</div>
+        <div class="pipeline-hud" id="pipelineHud">
+          <div class="pipeline-track-bg"></div>
+          <div class="pipeline-track-fill" id="pipelineFill"></div>
+          <div class="pipeline-steps-row">
+            <div class="pipeline-step" data-pipe-index="0">
+              <div class="pipeline-step-icon">&#x1F4EC;</div>
+              <div class="pipeline-step-label">Prompt</div>
+            </div>
+            <div class="pipeline-step" data-pipe-index="1">
+              <div class="pipeline-step-icon">&#x1F985;</div>
+              <div class="pipeline-step-label">Caesar</div>
+              <div class="pipeline-step-time">~2 min</div>
+            </div>
+            <div class="pipeline-step" data-pipe-index="2">
+              <div class="pipeline-step-icon">&#x2705;</div>
+              <div class="pipeline-step-label">Approve</div>
+            </div>
+            <div class="pipeline-step" data-pipe-index="3">
+              <div class="pipeline-step-icon">&#x1F3DB;</div>
+              <div class="pipeline-step-label">Augustus</div>
+              <div class="pipeline-step-time">5-15 min</div>
+            </div>
+            <div class="pipeline-step" data-pipe-index="4">
+              <div class="pipeline-step-icon">&#x1F4B0;</div>
+              <div class="pipeline-step-label">Vespasian</div>
+              <div class="pipeline-step-time">3-5 min</div>
+            </div>
+            <div class="pipeline-step" data-pipe-index="5">
+              <div class="pipeline-step-icon">&#x1F6E3;</div>
+              <div class="pipeline-step-label">Trajan</div>
+              <div class="pipeline-step-time">3-5 min</div>
+            </div>
+            <div class="pipeline-step" data-pipe-index="6">
+              <div class="pipeline-step-icon">&#x1F4E6;</div>
+              <div class="pipeline-step-label">Delivered</div>
+            </div>
           </div>
         </div>
       </div>
@@ -1538,36 +1476,32 @@
       </div>
       <div class="shipped-grid">
         <div class="shipped-card" data-romulus-animate>
-          <div class="shipped-card-header">
-            <span class="shipped-card-name">Chronicle</span>
-            <span class="shipped-card-status live">LIVE</span>
-          </div>
-          <a href="https://mikebatts.net/projects.html#chronicle" target="_blank" rel="noopener" class="shipped-card-url">mikebatts.net/projects.html#chronicle</a>
-          <div class="shipped-card-desc">A daily history guessing game. One event per day, three chances to guess the year. Wordle-style digit feedback. 90 hand-curated puzzles spanning five centuries. Built with Next.js + Tailwind + Vercel.</div>
+          <span class="shipped-card-status live">LIVE</span>
+          <div class="shipped-card-name">Chronicle</div>
+          <a href="https://thischronicle.com" target="_blank" rel="noopener" class="shipped-card-url">thischronicle.com</a>
+          <div class="shipped-card-body">A daily history guessing game. One event per day, three chances to guess the year. Wordle-style digit feedback across five centuries. 90 hand-curated puzzles.</div>
+          <div class="shipped-card-tech">Next.js + Tailwind + Vercel</div>
         </div>
         <div class="shipped-card" data-romulus-animate>
-          <div class="shipped-card-header">
-            <span class="shipped-card-name">Caveat</span>
-            <span class="shipped-card-status live">LIVE</span>
-          </div>
+          <span class="shipped-card-status live">LIVE</span>
+          <div class="shipped-card-name">Caveat</div>
           <a href="https://trycaveat.com" target="_blank" rel="noopener" class="shipped-card-url">trycaveat.com</a>
-          <div class="shipped-card-desc">AI contract analyzer. Upload any PDF or DOCX, get a risk report in 60 seconds. Flags bad terms, missing clauses, unfavorable language. Built on Next.js 15, Stripe, GPT-4o. Privacy-first &mdash; contracts are never stored.</div>
+          <div class="shipped-card-body">AI contract analyzer. Upload a PDF, get a risk report in 60 seconds. Built on Next.js 15 + Stripe + GPT-4o. Privacy-first &mdash; contracts are never stored.</div>
+          <div class="shipped-card-tech">Next.js + Stripe + OpenAI</div>
         </div>
         <div class="shipped-card" data-romulus-animate>
-          <div class="shipped-card-header">
-            <span class="shipped-card-name">Forbidden</span>
-            <span class="shipped-card-status live">LIVE</span>
-          </div>
-          <a href="https://mikebatts.net/projects.html#forbidden" target="_blank" rel="noopener" class="shipped-card-url">mikebatts.net/projects.html#forbidden</a>
-          <div class="shipped-card-desc">A Taboo-style party game with AI-generated themed card decks, pressure rounds, and multiplayer scoring. Designed for groups, played in minutes. Built with Next.js and Stripe, live on a custom domain.</div>
+          <span class="shipped-card-status live">LIVE</span>
+          <div class="shipped-card-name">Forbidden</div>
+          <a href="https://playforbidden.com" target="_blank" rel="noopener" class="shipped-card-url">playforbidden.com</a>
+          <div class="shipped-card-body">Taboo-style party game with AI-generated themed card decks. Pressure rounds, multiplayer scoring. Designed for groups, played in two minutes.</div>
+          <div class="shipped-card-tech">Next.js + Stripe + Vercel</div>
         </div>
         <div class="shipped-card" data-romulus-animate>
-          <div class="shipped-card-header">
-            <span class="shipped-card-name">BiblePath</span>
-            <span class="shipped-card-status live">LIVE</span>
-          </div>
-          <a href="https://mikebatts.net/projects.html#biblepath" target="_blank" rel="noopener" class="shipped-card-url">mikebatts.net/projects.html#biblepath</a>
-          <div class="shipped-card-desc" style="color:var(--text-faint);font-style:italic;">Description coming soon.</div>
+          <span class="shipped-card-status live">LIVE</span>
+          <div class="shipped-card-name">BiblePath</div>
+          <a href="https://apps.apple.com/us/app/my-bible-path/id6759575186" target="_blank" rel="noopener" class="shipped-card-url">apps.apple.com/us/app/my-bible-path</a>
+          <div class="shipped-card-body">iOS app for daily scripture reading and habit building. Clean, focused, local-first design.</div>
+          <div class="shipped-card-tech">Swift + SwiftUI</div>
         </div>
       </div>
     </section>
@@ -1644,87 +1578,111 @@
         for (var i = 0; i < els.length; i++) observer.observe(els[i]);
       }
 
-      /* ===== TERMINAL ANIMATION ===== */
+      /* ===== TERMINAL ANIMATION — character-by-character typing ===== */
       function initTerminal() {
         var terminal = document.querySelector('.terminal-window');
-        if (!terminal || !('IntersectionObserver' in window)) {
-          var lines = document.querySelectorAll('.terminal-line');
-          for (var i = 0; i < lines.length; i++) lines[i].classList.add('visible');
-          return;
+        if (!terminal || !('IntersectionObserver' in window)) return;
+
+        var typing = false;
+
+        function typeWriter(lines, index, callback) {
+          if (index >= lines.length) {
+            if (callback) callback();
+            return;
+          }
+          var line = lines[index];
+          var text = line.getAttribute('data-text');
+          if (text === null) {
+            typeWriter(lines, index + 1, callback);
+            return;
+          }
+          if (text === '') {
+            setTimeout(function() { typeWriter(lines, index + 1, callback); }, 120);
+            return;
+          }
+          line.innerHTML = '';
+          var charIndex = 0;
+
+          var cursor = document.createElement('span');
+          cursor.className = 'cursor';
+          cursor.textContent = '\u25AE';
+          line.appendChild(cursor);
+
+          function typeNext() {
+            if (charIndex < text.length) {
+              if (cursor.parentNode) cursor.parentNode.removeChild(cursor);
+              line.appendChild(document.createTextNode(text[charIndex]));
+              line.appendChild(cursor);
+              charIndex++;
+              setTimeout(typeNext, 20 + Math.random() * 25);
+            } else {
+              if (cursor.parentNode) cursor.parentNode.removeChild(cursor);
+              setTimeout(function() { typeWriter(lines, index + 1, callback); }, 200);
+            }
+          }
+          typing = true;
+          typeNext();
         }
 
-        var termObserver = new IntersectionObserver(function(entries) {
+        var observer = new IntersectionObserver(function(entries) {
           entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
+            if (entry.isIntersecting && !typing) {
               var lines = terminal.querySelectorAll('.terminal-line');
-              var maxDelay = 0;
-              lines.forEach(function(line) {
-                var delay = parseInt(line.getAttribute('data-delay'), 10) * 300;
-                if (delay > maxDelay) maxDelay = delay;
-                setTimeout(function() {
-                  line.classList.add('visible');
-                }, delay);
-              });
-              setTimeout(function() {
+              var arr = Array.prototype.slice.call(lines);
+              typeWriter(arr, 0, function() {
                 terminal.classList.add('glow');
-              }, maxDelay + 600);
-              termObserver.unobserve(entry.target);
+              });
+              observer.unobserve(entry.target);
             }
           });
         }, { threshold: 0.3 });
-        termObserver.observe(terminal);
+        observer.observe(terminal);
       }
 
-      /* ===== PIPELINE ANIMATION ===== */
+      /* ===== PIPELINE ANIMATION — HUD progress bar ===== */
       function initPipeline() {
-        // Desktop pipeline
-        var desktopTrack = document.getElementById('pipelineDesktop');
-        if (desktopTrack && 'IntersectionObserver' in window) {
-          var deskObserver = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-              if (entry.isIntersecting) {
-                animateTrack(desktopTrack, 'desktop');
-                deskObserver.unobserve(entry.target);
-              }
-            });
-          }, { threshold: 0.3 });
-          deskObserver.observe(desktopTrack);
-        }
+        var hud = document.getElementById('pipelineHud');
+        if (!hud || !('IntersectionObserver' in window)) return;
 
-        // Mobile pipeline
-        var mobileTrack = document.getElementById('pipelineMobile');
-        if (mobileTrack && 'IntersectionObserver' in window) {
-          var mobObserver = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-              if (entry.isIntersecting) {
-                animateTrack(mobileTrack, 'mobile');
-                mobObserver.unobserve(entry.target);
-              }
-            });
-          }, { threshold: 0.2 });
-          mobObserver.observe(mobileTrack);
-        }
+        var fill = document.getElementById('pipelineFill');
+        var steps = hud.querySelectorAll('.pipeline-step');
+        var totalSteps = steps.length;
+        var isMobile = window.matchMedia('(max-width: 768px)').matches;
 
-        function animateTrack(track, mode) {
-          var steps = track.querySelectorAll('.pipeline-step');
-          var fill = track.querySelector('.track-fill');
+        var pipeObserver = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              animateHud();
+              pipeObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.3 });
+        pipeObserver.observe(hud);
+
+        function animateHud() {
           var delay = 0;
-          for (var i = 0; i < steps.length; i++) {
+          for (var i = 0; i < totalSteps; i++) {
             (function(step, idx, d) {
               setTimeout(function() {
                 step.classList.add('lit');
+                var pct = ((idx + 1) / totalSteps) * 100;
                 if (fill) {
-                  var pct = ((idx + 1) / steps.length) * 100;
-                  if (mode === 'desktop') {
-                    fill.style.width = pct + '%';
+                  if (isMobile) {
+                    var trackEl = hud.querySelector('.pipeline-track-bg');
+                    var totalHeight = trackEl ? trackEl.offsetHeight : (hud.offsetHeight - 40);
+                    fill.style.height = (totalHeight * (idx + 1) / totalSteps) + 'px';
                   } else {
-                    var trackHeight = track.offsetHeight - 48;
-                    fill.style.height = (trackHeight * (idx + 1) / steps.length) + 'px';
+                    var trackBg = hud.querySelector('.pipeline-track-bg');
+                    var trackWidth = trackBg ? trackBg.offsetWidth : (hud.offsetWidth - 40);
+                    fill.style.width = (trackWidth * (idx + 1) / totalSteps) + 'px';
                   }
+                }
+                if (idx === totalSteps - 1) {
+                  setTimeout(function() { hud.classList.add('complete'); }, 300);
                 }
               }, d);
             })(steps[i], i, delay);
-            delay += 350;
+            delay += 400;
           }
         }
       }
