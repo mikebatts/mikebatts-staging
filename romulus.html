@@ -546,6 +546,503 @@
         text-align: center;
       }
     }
+
+    /* ===== LEGION WAR ROOM ===== */
+    :root {
+      --legion-green: #22c55e;
+      --legion-red: #ef4444;
+      --legion-dim: rgba(217,149,26,0.08);
+    }
+
+    /* Legion container — wider than standard sections for immersive feel */
+    .legion-wrap {
+      padding: 80px 40px;
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    .legion-header {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+
+    .legion-header-title {
+      font-family: 'Inter Tight', 'Inter', sans-serif;
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 500;
+      color: #fff;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+
+    .legion-header-sub {
+      font-size: 17px;
+      color: rgba(255,255,255,0.5);
+      font-weight: 300;
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .legion-sub-label {
+      font-family: 'Inconsolata', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--romulus-amber);
+      opacity: 0.75;
+      margin-bottom: 20px;
+    }
+
+    .legion-sub-title {
+      font-family: 'Inter Tight', 'Inter', sans-serif;
+      font-size: 20px;
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    /* --- Evolution: Before → After --- */
+    .legion-evo {
+      margin-bottom: 72px;
+    }
+
+    .evo-grid {
+      display: grid;
+      grid-template-columns: 1fr 40px 1fr;
+      align-items: stretch;
+      gap: 0;
+    }
+
+    .evo-panel {
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 24px;
+    }
+
+    .evo-panel--before {
+      opacity: 0.55;
+    }
+
+    .evo-panel--after {
+      border-color: rgba(217,149,26,0.35);
+      box-shadow: 0 0 40px rgba(217,149,26,0.06);
+    }
+
+    .evo-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inconsolata', monospace;
+      font-size: 18px;
+      color: var(--romulus-amber);
+    }
+
+    .evo-tag {
+      font-family: 'Inconsolata', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .evo-panel--before .evo-tag { color: rgba(255,255,255,0.35); }
+    .evo-panel--after .evo-tag { color: var(--romulus-amber); }
+
+    .evo-line {
+      font-family: 'Inconsolata', monospace;
+      font-size: 12px;
+      line-height: 1.9;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .evo-panel--after .evo-line {
+      color: rgba(255,255,255,0.7);
+    }
+
+    .evo-line .p { color: var(--romulus-amber); }
+    .evo-line .g { color: var(--legion-green); }
+    .evo-line .d { color: rgba(255,255,255,0.2); }
+
+    /* --- Pipeline Flow --- */
+    .legion-pipeline {
+      margin-bottom: 72px;
+    }
+
+    .pipeline-track {
+      display: flex;
+      align-items: center;
+      overflow-x: auto;
+      padding: 20px 0;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .pipeline-node {
+      flex-shrink: 0;
+      background: var(--legion-dim);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 14px 12px;
+      text-align: center;
+      min-width: 72px;
+      opacity: 0.35;
+      transform: scale(0.92);
+      transition: opacity 0.4s ease, transform 0.4s ease,
+                  border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .pipeline-node.node-lit {
+      opacity: 1;
+      transform: scale(1);
+      border-color: rgba(217,149,26,0.5);
+      box-shadow: 0 0 16px rgba(217,149,26,0.12);
+    }
+
+    .pipeline-node-name {
+      font-family: 'Inconsolata', monospace;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.7);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .pipeline-node-time {
+      font-family: 'Inconsolata', monospace;
+      font-size: 9px;
+      color: rgba(255,255,255,0.3);
+      margin-top: 4px;
+    }
+
+    .pipeline-conn {
+      flex-shrink: 0;
+      width: 24px;
+      height: 2px;
+      background: rgba(255,255,255,0.06);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pipeline-conn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      width: 0;
+      background: var(--romulus-amber);
+      transition: width 0.35s ease;
+    }
+
+    .pipeline-conn.conn-lit::after {
+      width: 100%;
+    }
+
+    /* --- Question Architecture --- */
+    .legion-questions {
+      margin-bottom: 72px;
+      text-align: center;
+    }
+
+    .question-list {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+      margin-top: 40px;
+    }
+
+    .question-cohort {
+      font-family: 'Inconsolata', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--romulus-amber);
+      opacity: 0.65;
+      margin-bottom: 10px;
+    }
+
+    .question-text {
+      font-family: 'Inter Tight', 'Inter', sans-serif;
+      font-size: clamp(22px, 3.5vw, 32px);
+      font-weight: 500;
+      color: #fff;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .question-text::before {
+      content: '\201C';
+      color: var(--romulus-amber);
+      opacity: 0.4;
+    }
+
+    .question-text::after {
+      content: '\201D';
+      color: var(--romulus-amber);
+      opacity: 0.4;
+    }
+
+    /* --- Cohort Command Cards --- */
+    .legion-cohorts {
+      margin-bottom: 72px;
+    }
+
+    .cohort-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .cohort-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 28px;
+      transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+    }
+
+    .cohort-card:hover {
+      border-color: rgba(217,149,26,0.4);
+      box-shadow: 0 0 30px rgba(217,149,26,0.08),
+                  inset 0 0 30px rgba(217,149,26,0.03);
+      background: rgba(217,149,26,0.03);
+    }
+
+    .cohort-card:hover .cohort-status {
+      color: var(--legion-green);
+      border-color: rgba(34,197,94,0.3);
+      background: rgba(34,197,94,0.1);
+    }
+
+    .cohort-card:hover .cohort-status::before {
+      background: var(--legion-green);
+    }
+
+    .cohort-card--orchestrator {
+      grid-column: 1 / -1;
+      border-color: rgba(217,149,26,0.2);
+      background: rgba(217,149,26,0.03);
+    }
+
+    .cohort-emoji {
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    .cohort-name {
+      font-family: 'Inconsolata', monospace;
+      font-size: 13px;
+      color: var(--romulus-amber);
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+    }
+
+    .cohort-question {
+      font-family: 'Inter Tight', 'Inter', sans-serif;
+      font-size: 17px;
+      font-weight: 500;
+      color: #fff;
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+
+    .cohort-outputs {
+      font-family: 'Inconsolata', monospace;
+      font-size: 11px;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.8;
+    }
+
+    .cohort-outputs span {
+      display: block;
+    }
+
+    .cohort-outputs span::before {
+      content: '\2192  ';
+      color: rgba(255,255,255,0.2);
+    }
+
+    .cohort-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      padding: 3px 10px 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.03);
+      font-family: 'Inconsolata', monospace;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      transition: color 0.3s, border-color 0.3s, background 0.3s;
+    }
+
+    .cohort-status::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      transition: background 0.3s;
+    }
+
+    /* --- Terminal Demo --- */
+    .legion-terminal {
+      margin-bottom: 72px;
+    }
+
+    .terminal-window {
+      background: rgba(0,0,0,0.4);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 20px;
+    }
+
+    .terminal-chrome {
+      padding: 10px 16px;
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .terminal-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .terminal-dot:nth-child(1) { background: rgba(239,68,68,0.6); }
+    .terminal-dot:nth-child(2) { background: rgba(234,179,8,0.6); }
+    .terminal-dot:nth-child(3) { background: rgba(34,197,94,0.6); }
+
+    .terminal-body {
+      padding: 20px 24px;
+      max-height: 520px;
+      overflow-y: auto;
+    }
+
+    .terminal-line {
+      font-family: 'Inconsolata', monospace;
+      font-size: 12px;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.55);
+      white-space: pre-wrap;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .terminal-window.active .terminal-line {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .terminal-line--blank { height: 12px; }
+
+    .terminal-line .cmd { color: rgba(255,255,255,0.85); }
+    .terminal-line .t-prompt { color: var(--romulus-amber); }
+    .terminal-line .t-ok { color: var(--legion-green); }
+    .terminal-line .t-head { color: var(--romulus-amber); font-weight: 700; }
+    .terminal-line .t-info { color: rgba(255,255,255,0.7); }
+    .terminal-line .t-dim { color: rgba(255,255,255,0.3); }
+    .terminal-line .t-link { color: #60a5fa; }
+    .terminal-line .t-complete { color: var(--legion-green); font-weight: 700; }
+
+    /* --- Memory Graph --- */
+    .legion-memory-section {
+      margin-bottom: 72px;
+    }
+
+    .memory-viz {
+      margin-top: 24px;
+      height: 160px;
+      position: relative;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .memory-dot {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--romulus-amber);
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+
+    .memory-viz.active .memory-dot {
+      opacity: 0.6;
+    }
+
+    .memory-edge {
+      position: absolute;
+      height: 1px;
+      background: rgba(217,149,26,0.15);
+      transform-origin: left center;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+
+    .memory-viz.active .memory-edge {
+      opacity: 1;
+    }
+
+    .memory-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.7;
+      font-weight: 300;
+      margin-top: 16px;
+    }
+
+    /* --- Roadmap --- */
+    .legion-roadmap {
+      margin-bottom: 20px;
+    }
+
+    .roadmap-list {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .roadmap-item {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    .roadmap-item::before {
+      content: '\25B8';
+      color: var(--romulus-amber);
+      flex-shrink: 0;
+    }
+
+    /* --- Legion responsive --- */
+    @media (max-width: 768px) {
+      .legion-wrap { padding: 56px 20px; }
+      .evo-grid { grid-template-columns: 1fr; gap: 12px; }
+      .evo-arrow { transform: rotate(90deg); padding: 4px 0; }
+      .cohort-grid { grid-template-columns: 1fr; }
+      .pipeline-node { min-width: 60px; padding: 12px 8px; }
+      .pipeline-conn { width: 16px; }
+      .terminal-body { padding: 16px; }
+      .terminal-line { font-size: 11px; }
+    }
   </style>
 </head>
 <body class="romulus-page">
