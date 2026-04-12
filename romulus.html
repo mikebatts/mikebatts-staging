@@ -1291,33 +1291,51 @@
     (function() {
       /* ===== PASSWORD GATE ===== */
       var PASSWORD = 'Sfogliatelle!';
+      var SESSION_KEY = 'romulus_session';
+      var SESSION_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
+
+      function checkSession() {
+        try {
+          var stored = localStorage.getItem(SESSION_KEY);
+          if (stored) {
+            var data = JSON.parse(stored);
+            if (data.ts && (Date.now() - data.ts < SESSION_TTL_MS)) {
+              // Valid session — skip the gate
+              unlock(true);
+              return true;
+            }
+          }
+        } catch(e) {}
+        return false;
+      }
+
+      function saveSession() {
+        try {
+          localStorage.setItem(SESSION_KEY, JSON.stringify({ ts: Date.now() }));
+        } catch(e) {}
+      }
+
       var gate = document.getElementById('gate');
       var content = document.getElementById('content');
       var input = document.getElementById('gateInput');
       var submit = document.getElementById('gateSubmit');
       var error = document.getElementById('gateError');
 
-      function unlock() {
-        if (input.value === PASSWORD) {
-          gate.classList.add('hidden');
-          content.classList.add('visible');
-          window.scrollTo(0, 0);
-          initAnimations();
-          initPipeline();
-        } else {
-          error.classList.add('visible');
-          input.value = '';
-          input.focus();
-          var term = gate.querySelector('.gate-terminal');
-          term.style.animation = 'none';
-          term.offsetWidth;
-          term.style.animation = 'shake 0.4s ease';
-        }
+      function unlock(isSession) {
+        gate.classList.add('hidden');
+        content.classList.add('visible');
+        if (!isSession) saveSession();
+        window.scrollTo(0, 0);
+        initAnimations();
+        initPipeline();
       }
 
-      submit.addEventListener('click', unlock);
-      input.addEventListener('keydown', function(e) { if (e.key === 'Enter') unlock(); });
-      input.addEventListener('input', function() { error.classList.remove('visible'); });
+      // Check for existing session on load
+      if (!checkSession()) {
+        submit.addEventListener('click', unlock.bind(null, false));
+        input.addEventListener('keydown', function(e) { if (e.key === 'Enter') unlock(false); });
+        input.addEventListener('input', function() { error.classList.remove('visible'); });
+      }
 
       /* ===== SCROLL ANIMATIONS ===== */
       function initAnimations() {
