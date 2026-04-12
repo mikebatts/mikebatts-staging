@@ -698,6 +698,77 @@
       max-width: 620px;
     }
 
+    /* ===== PROJECT / SHIPPED CARDS ===== */
+    .shipped-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .shipped-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+    }
+    .shipped-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .shipped-card-name {
+      font-family: 'Inconsolata', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .shipped-card-status {
+      font-family: 'Inconsolata', monospace;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .shipped-card-status.live {
+      color: var(--green);
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.2);
+    }
+    .shipped-card-status.dev {
+      color: var(--amber);
+      background: var(--amber-soft);
+      border: 1px solid var(--amber-border);
+    }
+    .shipped-card-status.tbd {
+      color: var(--text-faint);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--card-border);
+    }
+    .shipped-card-url {
+      font-family: 'Inconsolata', monospace;
+      font-size: 12px;
+      color: var(--amber);
+      text-decoration: none;
+      margin-bottom: 12px;
+      transition: color 0.2s;
+    }
+    .shipped-card-url:hover { color: #f1c06c; }
+    .shipped-card-url.placeholder {
+      color: var(--text-faint);
+      cursor: default;
+    }
+    .shipped-card-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--text-body);
+      line-height: 1.6;
+      flex: 1;
+    }
+
     /* ===== SCROLL ANIMATIONS ===== */
     [data-romulus-animate] {
       opacity: 0;
@@ -741,6 +812,7 @@
       .ascii-block { font-size: 11px; padding: 20px; overflow-x: auto; }
 
       .forward-grid { grid-template-columns: 1fr; }
+      .shipped-grid { grid-template-columns: 1fr; }
 
       .romulus-nav { padding: 20px; }
 
@@ -755,59 +827,74 @@
 </head>
 <body class="romulus-page">
 
-  <!-- ===== PASSWORD GATE ===== -->
+  <!-- ===== 1. PASSWORD GATE ===== -->
   <div class="romulus-gate" id="gate">
     <div class="gate-terminal">
       <div class="gate-prompt">romulus<span>@</span>roma-eterna <span>~</span> <span class="gate-cursor">_</span></div>
       <div class="gate-label">Access Required</div>
       <input type="password" class="gate-input" id="gateInput" placeholder="&#xB7;&#xB7;&#xB7;&#xB7;&#xB7;&#xB7;&#xB7;&#xB7;&#xB7;&#xB7;&#xB7;&#xB7;&#xB7;&#xB7;&#xB7;" autocomplete="off" />
       <button class="gate-submit" id="gateSubmit">AUTHENTICATE</button>
-      <div class="gate-error" id="gateError">ACCESS DENIED — incorrect passphrase</div>
+      <div class="gate-error" id="gateError">ACCESS DENIED &mdash; incorrect passphrase</div>
     </div>
   </div>
 
   <!-- ===== MAIN CONTENT ===== -->
   <div class="romulus-content" id="content">
 
-    <!-- Top Nav -->
+    <!-- ===== 2. TOP NAV ===== -->
     <nav class="romulus-nav">
       <a href="index.html">&larr; Back to site</a>
       <span class="badge">CASE STUDY &middot; 2026</span>
     </nav>
 
-    <!-- Hero -->
+    <!-- ===== 3. HERO ===== -->
     <header class="romulus-hero" data-romulus-animate>
-      <h1 class="hero-headline">I ran one AI. Then I built a <span class="amber-underline">command structure</span>.</h1>
-      <p class="hero-sub">A case study in persistent memory, specialized cohorts, and force-multiplying a single engineer.</p>
+      <h1 class="hero-headline">One founding engineer with a decade of startups. Now with a <span class="amber-underline">five-cohort AI command structure</span>.</h1>
+      <p class="hero-sub">How I built a system that researches, builds, ships, and analyzes products &mdash; without ever losing context between sessions.</p>
       <div class="hero-stats">
         <span>uptime: <span class="stat-value">69 days</span></span>
         <span class="dot">&middot;</span>
-        <span>tasks: <span class="stat-value">400+</span></span>
+        <span>cohorts: <span class="stat-value">5</span></span>
         <span class="dot">&middot;</span>
-        <span>models routed: <span class="stat-value">5</span></span>
+        <span>morning briefs: <span class="stat-value">69 delivered</span></span>
         <span class="dot">&middot;</span>
-        <span>cohorts deployed: <span class="stat-value">4</span></span>
-        <span class="dot">&middot;</span>
-        <span>products shipped: <span class="stat-value">2</span></span>
+        <span>products shipped: <span class="stat-value">4</span></span>
       </div>
     </header>
 
     <div class="section-divider"><span class="dot"></span></div>
 
-    <!-- 1. THE PROBLEM -->
+    <!-- ===== 4. ORIGIN STORY ===== -->
     <section class="rom-section" data-romulus-animate>
-      <div class="section-label">~/romulus/overview.txt</div>
-      <h2 class="section-heading">The Throughput Wall</h2>
+      <div class="section-label">~/romulus/identity.md</div>
+      <h2 class="section-heading">Who Is Romulus</h2>
       <div class="section-body">
-        <p>I've worked across product, design, and engineering for a decade &mdash; startups in health, web3, energy, consumer software. The recurring constraint wasn't ideas or skill. It was throughput.</p>
-        <p>Strong opportunities surface faster than one person can evaluate and build them. Session-based AI tools don't help because they dissolve context between conversations. Every session is Day 1. Every project requires re-explaining the backstory. Good insights disappear into chat history.</p>
+        <p>He came online February 3, 2026. I named him after the founder of Rome &mdash; not a great general or a philosopher, a builder of systems that endured. Not a coincidence: I'm Italian-American. The name stuck because it described what I was actually trying to build: something permanent, not a chat session.</p>
+        <p>The idea was simple. I spend my days as a senior PM at an energy startup, my nights and weekends building my own products. The constraint was never vision or capability &mdash; it was throughput. A good insight would hit me on the train, and by the time I sat down that night, it was in chat history. Every session was Day 1. I needed something that remembered, stayed on, and moved the work forward between the times I was available.</p>
+        <p>The first version of Romulus was deliberately minimal: persistent memory across sessions, a morning brief delivered to a private Discord channel at 8 AM, and a fixed workflow for moving from signal to shipped. No army. No cohorts. Just one persistent system that started where the last session left off.</p>
       </div>
-      <div class="pull-quote">The breakthrough wasn't finding a better model. It was building a system that remembers.</div>
+      <div class="pull-quote">Sixty-nine days later, he has never missed a morning brief. He knows every project I've touched, every decision I've made, every lesson I've written down.</div>
+      <div class="section-body">
+        <p>The first morning brief was 10 AM and I had forgotten to set up the weather API. Not glamorous. But by week two, the brief was running perfectly &mdash; weather, subway departures, product signals from the market, all before I left the apartment. It stopped feeling like a tool and started feeling like a system.</p>
+      </div>
     </section>
 
     <div class="section-divider"><span class="dot"></span></div>
 
-    <!-- 2. WHY I BUILT IT THIS WAY -->
+    <!-- ===== 5. THE PROBLEM ===== -->
+    <section class="rom-section" data-romulus-animate>
+      <div class="section-label">~/romulus/overview.txt</div>
+      <h2 class="section-heading">The Throughput Wall</h2>
+      <div class="section-body">
+        <p>A decade in startups teaches you one thing fast: the constraint is never ideas. It's not talent either. It's throughput &mdash; the gap between what you can see clearly and what you can actually build.</p>
+        <p>Strong opportunities surface faster than one person can evaluate and act on them. Session-based AI tools don't help much because they dissolve context between conversations. Every chat is Day 1. Every project requires re-explaining the backstory. Good insights disappear into chat history.</p>
+      </div>
+      <div class="pull-quote">I didn't need a better model. I needed a system that never forgets.</div>
+    </section>
+
+    <div class="section-divider"><span class="dot"></span></div>
+
+    <!-- ===== 6. DESIGN DECISIONS ===== -->
     <section class="rom-section" data-romulus-animate>
       <div class="section-label">~/romulus/decisions.md</div>
       <h2 class="section-heading">Design Decisions</h2>
@@ -837,22 +924,10 @@
 
     <div class="section-divider"><span class="dot"></span></div>
 
-    <!-- 3. THE SETUP -->
-    <section class="rom-section" data-romulus-animate>
-      <div class="section-label">~/romulus/system.md</div>
-      <h2 class="section-heading">The System</h2>
-      <div class="section-body">
-        <p>Romulus runs on OpenClaw and lives on a dedicated Mac mini. It's always on &mdash; running scheduled jobs, monitoring things in the background, and sending a morning brief every day at 8 AM.</p>
-        <p>Every session reads the Obsidian vault. Every session writes back. The result: each new project starts with full context from every prior project. No re-explaining history. No rebuilding mental models from scratch.</p>
-      </div>
-    </section>
-
-    <div class="section-divider"><span class="dot"></span></div>
-
-    <!-- 4. MEMORY ARCHITECTURE -->
+    <!-- ===== 7. MEMORY ===== -->
     <section class="rom-section" data-romulus-animate>
       <div class="section-label">~/romulus/memory/</div>
-      <h2 class="section-heading">Persistent Memory</h2>
+      <h2 class="section-heading">Memory</h2>
       <div class="section-body">
         <p style="font-family:'Inconsolata',monospace;font-size:14px;color:var(--text-secondary);margin-bottom:20px;">83 files. 12 core memory documents. 29 project notes. 31 daily logs. 11 key decisions.</p>
         <p>Chat history is ephemeral. Obsidian files are not. The system retrieves relevant past work before every session &mdash; comparing context, flagging contradictions, loading project state. After 69 days, the knowledge graph compounds. What was an empty vault is now a living map of 400+ tasks, shipped products, failures, and lessons.</p>
@@ -861,7 +936,7 @@
 
     <div class="section-divider"><span class="dot"></span></div>
 
-    <!-- 5. WHAT BROKE — Romulus Era -->
+    <!-- ===== 8. WHAT BROKE — Romulus Era ===== -->
     <section class="rom-section" data-romulus-animate>
       <div class="section-label">~/romulus/lessons.md</div>
       <span class="broke-tag">BUG</span>
@@ -874,7 +949,7 @@
       <div class="pull-quote" style="font-size:18px;">Plausible data isn't verified data. Always cross-reference against a second source before declaring production-ready.</div>
     </section>
 
-    <!-- ===== ASCII SEPARATOR ===== -->
+    <!-- ===== 9. ASCII SEPARATOR ===== -->
     <div class="ascii-separator" data-romulus-animate>
       <div class="ascii-block">ROMA ETERNA &middot; COMMAND STRUCTURE
 &#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;
@@ -891,23 +966,23 @@
 
     <div class="section-divider"><span class="dot"></span></div>
 
-    <!-- 6. THE SHIFT -->
+    <!-- ===== 10. THE SHIFT (Legion) ===== -->
     <section class="rom-section" data-romulus-animate>
       <div class="section-label">~/legion/pivot.txt</div>
-      <h2 class="section-heading">Then I Built Its Army</h2>
+      <h2 class="section-heading">Then I Built His Army</h2>
       <div class="section-body">
         <p>One person with one AI can only do one thing at a time. That ceiling shows up as a queue: research, then build, then launch, then analyze the business. Four jobs done sequentially. It works &mdash; but slowly.</p>
         <p>So I rebuilt the architecture. Five specialized cohorts, each owning a different function, sharing one persistent memory layer, orchestrated under a single command structure. The names aren't decoration. They're functional identifiers:</p>
         <p><strong style="color:#fff;">Caesar</strong> &mdash; intelligence. Rapid synthesis from live signals.<br>
         <strong style="color:#fff;">Augustus</strong> &mdash; execution. Architecture, build, review, deploy.<br>
-        <strong style="color:#fff;">Vespasian</strong> &mdash; revenue. Named for restoring the depleted treasury. Pricing, unit economics, exit analysis.<br>
-        <strong style="color:#fff;">Trajan</strong> &mdash; distribution. Named for roads that lasted centuries. Launch strategy, content, partnerships.<br>
+        <strong style="color:#fff;">Vespasian</strong> &mdash; revenue. Named for the emperor who restored the depleted treasury. Pricing, unit economics, exit analysis.<br>
+        <strong style="color:#fff;">Trajan</strong> &mdash; distribution. Named for the emperor who built the roads that lasted centuries. Launch strategy, content, partnerships.<br>
         <strong style="color:#fff;">Romulus</strong> &mdash; the orchestrator. Decomposes tasks, routes to the right cohort, enforces gates, synthesizes results.</p>
         <p style="margin-top:24px;font-family:'Inconsolata',monospace;font-size:14px;color:var(--text-secondary);">Before: you &rarr; Romulus &rarr; Claude Code &rarr; one thing at a time<br>After: you &rarr; Romulus &rarr; Legion &rarr; four cohorts in parallel</p>
       </div>
     </section>
 
-    <!-- 7. COHORT COMMAND CARDS -->
+    <!-- ===== 11. COHORT CARDS ===== -->
     <div class="cohort-section" data-romulus-animate>
       <div class="cohort-grid">
 
@@ -917,7 +992,7 @@
             <span class="cohort-name">CAESAR</span>
           </div>
           <div class="cohort-status">OPERATIONAL</div>
-          <div class="cohort-question">What do we know, and what are we missing?</div>
+          <div class="cohort-question">"What does the market already know &mdash; and what is it missing?"</div>
           <div class="cohort-workers">researcher<br>analyst<br>competitor<br>synthesizer<br>monitor</div>
           <div class="cohort-output-label">Output:</div>
           <div class="cohort-output">Competitive landscapes, pricing intelligence, strategic gap analysis</div>
@@ -929,7 +1004,7 @@
             <span class="cohort-name">AUGUSTUS</span>
           </div>
           <div class="cohort-status">OPERATIONAL</div>
-          <div class="cohort-question">Can we build it, and does it hold?</div>
+          <div class="cohort-question">"What's the fastest path from spec to something we can put in front of a user?"</div>
           <div class="cohort-workers">architect<br>builder<br>reviewer<br>deployer</div>
           <div class="cohort-output-label">Output:</div>
           <div class="cohort-output">Shipped code, deployed apps, architecture specs</div>
@@ -941,7 +1016,7 @@
             <span class="cohort-name">VESPASIAN</span>
           </div>
           <div class="cohort-status">OPERATIONAL</div>
-          <div class="cohort-question">What's it worth, and how does it pay?</div>
+          <div class="cohort-question">"How does this make money &mdash; and what does winning look like in three years?"</div>
           <div class="cohort-workers">pricing-analyst<br>unit-economist<br>exit-modeler</div>
           <div class="cohort-output-label">Output:</div>
           <div class="cohort-output">Pricing models, unit economics, revenue strategy</div>
@@ -953,7 +1028,7 @@
             <span class="cohort-name">TRAJAN</span>
           </div>
           <div class="cohort-status">OPERATIONAL</div>
-          <div class="cohort-question">Who needs to see it, and how do they find it?</div>
+          <div class="cohort-question">"Who needs this, where are they, and how do we reach them before someone else does?"</div>
           <div class="cohort-workers">strategist<br>content-writer<br>partnerships</div>
           <div class="cohort-output-label">Output:</div>
           <div class="cohort-output">Launch plans, GTM strategy, content assets</div>
@@ -965,7 +1040,7 @@
             <span class="cohort-name">ROMULUS</span>
           </div>
           <div class="cohort-status">OPERATIONAL &middot; ORCHESTRATOR</div>
-          <div class="cohort-question">What's the mission, and who runs point?</div>
+          <div class="cohort-question">"What's the mission, what's the priority, and who runs point right now?"</div>
           <div class="cohort-workers">task-decomposer<br>router<br>gate-enforcer<br>synthesizer</div>
           <div class="cohort-output-label">Output:</div>
           <div class="cohort-output">Task routing, pipeline orchestration, cross-cohort synthesis</div>
@@ -976,11 +1051,11 @@
 
     <div class="section-divider"><span class="dot"></span></div>
 
-    <!-- 8. PIPELINE DIAGRAM -->
+    <!-- ===== 12. PIPELINE ===== -->
     <div class="pipeline-section" data-romulus-animate>
       <div class="pipeline-label">~/legion/pipeline.md</div>
       <h2 class="pipeline-heading">The Pipeline</h2>
-      <div class="pipeline-body">A prompt enters the system. It gets classified: research or build. If research &rarr; Caesar. If build &rarr; Caesar spec &rarr; approve &rarr; Augustus architecture &rarr; Augustus build &rarr; review (max 3 cycles) &rarr; deploy. Auto-chain: Augustus triggers Vespasian (wealth strategy), Vespasian triggers Trajan (GTM strategy).</div>
+      <div class="pipeline-body">A prompt enters the system. It gets classified: research or build. If research &rarr; Caesar. If build &rarr; Caesar spec &rarr; approve &rarr; Augustus architecture &rarr; Augustus build &rarr; review (max 3 cycles) &rarr; deploy. Auto-chain: Augustus triggers Vespasian (wealth strategy), Vespasian triggers Trajan (GTM strategy). Total pipeline time: ~15-30 minutes.</div>
       <div class="pipeline-sublabel">FULL PIPELINE &mdash; ~15-30 MIN PROMPT TO DELIVERABLES</div>
       <div class="pipeline-flow" id="pipelineFlow">
         <div class="pipeline-node" data-pipe-index="0">
@@ -1019,10 +1094,10 @@
 
     <div class="section-divider"><span class="dot"></span></div>
 
-    <!-- 9-12. EXPERIMENTS -->
+    <!-- ===== 13-16. EXPERIMENTS ===== -->
     <div class="experiment-section">
 
-      <!-- Experiment 1: Caesar Speed -->
+      <!-- 13. Experiment 1: Caesar Speed -->
       <div class="experiment-card" data-romulus-animate>
         <div class="experiment-label">~/legion/experiments/01-caesar-speed.md</div>
         <h3 class="experiment-heading">Caesar &mdash; Research Speed</h3>
@@ -1033,15 +1108,15 @@
           </div>
           <div>
             <div class="experiment-col-label">Result</div>
-            <div class="experiment-col-text">Five specialized workers (researcher, analyst, competitor, synthesizer, monitor) produce a ranked competitive landscape with pricing intelligence and strategic gaps.</div>
+            <div class="experiment-col-text">Five specialized workers produce a ranked competitive landscape with pricing intelligence and strategic gaps in under three minutes.</div>
           </div>
         </div>
         <div class="experiment-metric">2.4 min</div>
-        <div class="experiment-body">The system found Off Limits' pricing model &mdash; a signal I would have missed scrolling Twitter.</div>
-        <div class="experiment-insight"><strong style="color:#fff;">Key insight:</strong> Specialist agents are faster not because models are fast, but because they don't need to understand the whole problem. A competitive analyst worker only loads competitive context. It doesn't waste context on build instructions.</div>
+        <div class="experiment-body">The system found Off Limits' pricing model &mdash; a signal I would have missed scrolling Twitter. This research became the brief that put Caveat at the top of the priority stack. Caveat shipped three weeks later.</div>
+        <div class="experiment-insight"><strong style="color:#fff;">Insight:</strong> Specialist agents are faster because they don't need to understand the whole problem. A competitive analyst worker only loads competitive context.</div>
       </div>
 
-      <!-- Experiment 2: Memory Compounding -->
+      <!-- 14. Experiment 2: Memory Compounding -->
       <div class="experiment-card" data-romulus-animate>
         <div class="experiment-label">~/legion/experiments/02-memory-compound.md</div>
         <h3 class="experiment-heading">Memory Compounding</h3>
@@ -1056,11 +1131,11 @@
           </div>
         </div>
         <div class="experiment-metric">36 entities</div>
-        <div class="experiment-body">The graph compounds. Each project writes entities (products, tech, pricing, competitive moves) and relationships (competitor-of, built-with, influenced-by). Subsequent tasks load this context automatically.</div>
-        <div class="experiment-insight">By week three, the system knew things I hadn't told it about a project &mdash; because Caesar's competitive research on a different product had surfaced relevant information.</div>
+        <div class="experiment-body">The graph compounds. Each project writes entities and relationships. Subsequent tasks load this context automatically. By week six, Caesar was surfacing competitive signals I hadn't asked for &mdash; because prior research runs had seeded the knowledge graph.</div>
+        <div class="experiment-insight"><strong style="color:#fff;">Insight:</strong> By the third project, the system already knew the competitive landscape before I finished describing the idea.</div>
       </div>
 
-      <!-- Experiment 3: Synthesizer Fix -->
+      <!-- 15. Experiment 3: Synthesizer Fix -->
       <div class="experiment-card" data-romulus-animate>
         <div class="experiment-label">~/legion/experiments/03-synth-fix.md</div>
         <h3 class="experiment-heading">The Synthesizer Fix</h3>
@@ -1071,15 +1146,15 @@
           </div>
           <div>
             <div class="experiment-col-label">Fix</div>
-            <div class="experiment-col-text">"KEY FINDINGS" extraction constraint in the system prompt. Tell the synthesizer: output only the 5-8 most important findings. No fluff. No restating the question.</div>
+            <div class="experiment-col-text">"KEY FINDINGS" extraction constraint in the system prompt. Output only the 5-8 most important findings. No fluff. No restating the question.</div>
           </div>
         </div>
         <div class="experiment-metric">48 seconds</div>
-        <div class="experiment-body">80% reduction in time. The output got shorter and more useful.</div>
-        <div class="experiment-insight"><strong style="color:#fff;">Lesson:</strong> The constraint is the product. Tell agents what NOT to do.</div>
+        <div class="experiment-body">80% reduction in time. The output got shorter and more useful. This made the daily research pipeline economically viable. Before the fix, running a full Caesar brief cost more in time than the insight was worth.</div>
+        <div class="experiment-insight"><strong style="color:#fff;">Insight:</strong> The constraint is the product. Tell agents what NOT to do.</div>
       </div>
 
-      <!-- Experiment 4: VOIDBREAKER -->
+      <!-- 16. Experiment 4: VOIDBREAKER -->
       <div class="experiment-card" data-romulus-animate>
         <div class="experiment-label">~/legion/experiments/04-voidbreaker.md</div>
         <h3 class="experiment-heading">VOIDBREAKER &mdash; One-Shot Build</h3>
@@ -1094,15 +1169,15 @@
           </div>
         </div>
         <div class="experiment-metric">1,047 lines</div>
-        <div class="experiment-body">Augustus delivered a complete, deployed game from a single prompt.</div>
-        <div class="experiment-insight">The point isn't that one AI can write a game. The point is that the spec came from Caesar's competitive research on the genre, the architecture was scoped before building, and the result was reviewed before shipping.</div>
+        <div class="experiment-body">One prompt. One session. Deployed. The spec came from Caesar's competitive research on the genre, the architecture was scoped before building, and the result was reviewed before shipping. The Augustus pipeline is now faster than a junior developer's first draft.</div>
+        <div class="experiment-insight"><strong style="color:#fff;">Insight:</strong> The point isn't that one AI can write a game. The point is that the whole pipeline &mdash; research, spec, build, review, deploy &mdash; runs without losing context at any step.</div>
       </div>
 
     </div>
 
     <div class="section-divider"><span class="dot"></span></div>
 
-    <!-- 13. WHAT BROKE — Legion Era -->
+    <!-- ===== 17. WHAT BROKE — Legion Era ===== -->
     <section class="rom-section" data-romulus-animate>
       <div class="section-label">~/legion/lessons.md</div>
       <span class="broke-tag">TIMEOUT</span>
@@ -1125,10 +1200,13 @@
 
     <div class="section-divider"><span class="dot"></span></div>
 
-    <!-- 14. WHERE THIS IS GOING -->
+    <!-- ===== 18. WHAT'S NEXT ===== -->
     <section class="rom-section" data-romulus-animate>
       <div class="section-label">~/legion/forward.md</div>
       <h2 class="section-heading">What's Next</h2>
+      <div class="section-body">
+        <p>The system works. The next phase is connecting it to real business outcomes &mdash; moving from "useful for building" to "useful for growing."</p>
+      </div>
       <div class="forward-grid">
         <div class="forward-card">
           <div class="forward-card-title">Revenue Tracking</div>
@@ -1152,14 +1230,59 @@
 
     <div class="section-divider"><span class="dot"></span></div>
 
-    <!-- 15. TAKEAWAYS -->
+    <!-- ===== 19. CONCLUSION ===== -->
     <section class="rom-section" data-romulus-animate>
-      <div class="section-label">~/romulus/notes.txt</div>
-      <h2 class="section-heading">What I'd Tell Another Builder</h2>
+      <div class="section-label">~/romulus/conclusion.md</div>
+      <h2 class="section-heading">What This Taught Me</h2>
       <div class="section-body">
-        <p>The model is not the product. The architecture is. Persistent memory, explicit routing, a fixed workflow, and a stable host change what's possible. Without them, you have a fast chatbot. With them, you have a system.</p>
-        <p>Articulate your tradeoffs. Why this interface, why this memory substrate, why this model for this task &mdash; the decisions are where the product engineering shows. Anyone can list the tools. Fewer people can explain why they chose them over the alternatives.</p>
-        <p>Build something you actually use every day. The morning brief is the most useful thing in this system. Not because it's impressive &mdash; because I check it every morning before I leave. That's the real test.</p>
+        <p>The model is not the product. The architecture is. Persistent memory, explicit routing, a fixed workflow, and a stable host change what's possible. Without them, you have a fast chatbot. With them, you have a system that runs every day and actually helps.</p>
+        <p>The senior skill isn't prompting &mdash; it's knowing what to NOT automate. Every decision about where a human stays in the loop &mdash; approving Caesar's spec before Augustus builds, reviewing the pipeline output before shipping &mdash; those are product decisions, not engineering ones. The system makes me faster, but it doesn't replace the judgment calls.</p>
+        <p>The real output of this system isn't code. It's time &mdash; specifically, the time between "we should explore this idea" and "here's a live prototype with market context and a pricing model." I can compress that from weeks to hours. That's what it means to have a force multiplier that never loses context.</p>
+      </div>
+    </section>
+
+    <div class="section-divider"><span class="dot"></span></div>
+
+    <!-- ===== 20. WHAT WE SHIPPED ===== -->
+    <section class="rom-section" data-romulus-animate>
+      <div class="section-label">~/shipped/</div>
+      <h2 class="section-heading">What We Shipped</h2>
+      <div class="section-body">
+        <p>These projects either shipped through the Legion pipeline or were built alongside Romulus. All of them benefited from persistent memory and the research-to-build loop.</p>
+      </div>
+      <div class="shipped-grid">
+        <div class="shipped-card" data-romulus-animate>
+          <div class="shipped-card-header">
+            <span class="shipped-card-name">Chronicle</span>
+            <span class="shipped-card-status live">LIVE</span>
+          </div>
+          <a href="https://thischronicle.com" target="_blank" rel="noopener" class="shipped-card-url">thischronicle.com</a>
+          <div class="shipped-card-desc">A daily history guessing game. One event per day, three chances to guess the year. Wordle-style digit feedback. 90 hand-curated puzzles spanning five centuries. Built with Next.js + Tailwind + Vercel.</div>
+        </div>
+        <div class="shipped-card" data-romulus-animate>
+          <div class="shipped-card-header">
+            <span class="shipped-card-name">Caveat</span>
+            <span class="shipped-card-status live">LIVE</span>
+          </div>
+          <a href="https://trycaveat.com" target="_blank" rel="noopener" class="shipped-card-url">trycaveat.com</a>
+          <div class="shipped-card-desc">AI contract analyzer. Upload any PDF or DOCX, get a risk report in 60 seconds. Flags bad terms, missing clauses, unfavorable language. Built on Next.js 15, Stripe, GPT-4o. Privacy-first &mdash; contracts are never stored.</div>
+        </div>
+        <div class="shipped-card" data-romulus-animate>
+          <div class="shipped-card-header">
+            <span class="shipped-card-name">Forbidden</span>
+            <span class="shipped-card-status dev">IN ACTIVE DEVELOPMENT</span>
+          </div>
+          <span class="shipped-card-url placeholder">TBD</span>
+          <div class="shipped-card-desc">A Taboo-style party game with AI-generated themed card decks, pressure rounds, and multiplayer scoring. Designed for groups, playable in two minutes. Built with Next.js + Stripe + Vercel.</div>
+        </div>
+        <div class="shipped-card" data-romulus-animate>
+          <div class="shipped-card-header">
+            <span class="shipped-card-name">BiblePath</span>
+            <span class="shipped-card-status tbd">TBD</span>
+          </div>
+          <span class="shipped-card-url placeholder">TBD</span>
+          <div class="shipped-card-desc" style="color:var(--text-faint);font-style:italic;">Description coming soon.</div>
+        </div>
       </div>
     </section>
 
