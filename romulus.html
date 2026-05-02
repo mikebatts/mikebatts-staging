@@ -2,9 +2,11 @@
 <html data-wf-page="663100000000000000000000" data-wf-site="5dbdf5d45ad64f500c81ca1f" lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Romulus</title>
-  <meta content="Romulus — From Personal AI to Multi-Cohort Command Structure" property="og:title">
-  <meta content="Romulus — From Personal AI to Multi-Cohort Command Structure" property="twitter:title">
+  <title>Romulus &mdash; Mike Battaglia</title>
+  <meta content="Romulus &mdash; How I Built My AI, Then Built With It" property="og:title">
+  <meta content="Romulus &mdash; How I Built My AI, Then Built With It" property="twitter:title">
+  <meta content="A long-form case study on designing a persistent AI operating system, then using it to ship four products in 87 days." name="description">
+  <meta content="A long-form case study on designing a persistent AI operating system, then using it to ship four products in 87 days." property="og:description">
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
@@ -19,43 +21,40 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-0HCHFJPP3W"></script>
   <script type="text/javascript">window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0HCHFJPP3W');</script>
   <style>
-    /* ===== CSS CUSTOM PROPERTIES ===== */
+    /* ===== TOKENS ===== */
     :root {
       --bg: #030305;
       --bg-soft: rgba(255,255,255,0.035);
-      --bg-elevated: rgba(255,255,255,0.05);
       --amber: #d9951a;
-      --amber-glow: rgba(217,149,26,0.06);
       --amber-soft: rgba(217,149,26,0.12);
       --amber-border: rgba(217,149,26,0.24);
-      --accent-purple: #a855f7;
-      --accent-blue: #3b82f6;
-      --accent-cyan: #06b6d4;
-      --green: #22c55e;
       --text-primary: rgba(255,255,255,0.92);
       --text-body: rgba(255,255,255,0.68);
       --text-secondary: rgba(255,255,255,0.48);
       --text-faint: rgba(255,255,255,0.20);
       --card-bg: rgba(255,255,255,0.04);
       --card-border: rgba(255,255,255,0.08);
-      --container: 720px;
-      --section-gap: 100px;
+      --measure: 680px;
     }
 
     /* ===== RESET ===== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* ===== BASE ===== */
+    html { scroll-behavior: smooth; }
+
     body.romulus-page {
-      background: linear-gradient(180deg, #030305 0%, #080808 100%);
+      background: linear-gradient(180deg, #030305 0%, #060608 60%, #08070a 100%);
       min-height: 100vh;
       color: var(--text-primary);
       font-family: 'Inter', sans-serif;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
     }
 
-    /* ===== PASSWORD GATE ===== */
+    ::selection { background: rgba(217,149,26,0.32); color: #fff; }
+
+    /* ===== PASSWORD GATE (preserved) ===== */
     .romulus-gate {
       position: fixed;
       inset: 0;
@@ -172,7 +171,7 @@
 
     /* ===== TOP NAV ===== */
     .romulus-nav {
-      padding: 20px;
+      padding: 22px 28px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -183,852 +182,408 @@
       font-size: 11px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
+      color: rgba(255,255,255,0.45);
       text-decoration: none;
       transition: color 0.2s;
     }
-    .romulus-nav a:hover { color: rgba(255,255,255,0.6); }
+    .romulus-nav a:hover { color: rgba(255,255,255,0.85); }
     .romulus-nav .badge {
       font-family: 'Inconsolata', monospace;
       font-size: 11px;
-      color: rgba(255,255,255,0.35);
+      color: rgba(255,255,255,0.45);
       letter-spacing: 0.08em;
+    }
+
+    /* ===== EDITORIAL CONTAINER ===== */
+    .measure {
+      max-width: var(--measure);
+      margin: 0 auto;
+      padding: 0 28px;
     }
 
     /* ===== HERO ===== */
     .romulus-hero {
-      padding: 60px 20px 50px;
-      max-width: calc(var(--container) + 80px);
+      padding: 96px 28px 56px;
+      max-width: var(--measure);
       margin: 0 auto;
     }
-    .hero-headline {
+    .hero-eyebrow {
+      font-family: 'Inconsolata', monospace;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .hero-eyebrow::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--amber-border), transparent);
+      max-width: 120px;
+    }
+    .hero-title {
       font-family: 'Josefin Sans', 'Inter Tight', sans-serif;
-      font-size: clamp(28px, 5.5vw, 60px);
-      font-weight: 600;
+      font-size: clamp(44px, 8vw, 92px);
+      font-weight: 500;
       color: #fff;
-      line-height: 1.08;
-      letter-spacing: -0.02em;
-      margin-bottom: 20px;
+      line-height: 0.98;
+      letter-spacing: -0.035em;
+      margin-bottom: 22px;
     }
-    .hero-headline .amber-underline {
-      text-decoration: underline;
-      text-decoration-color: var(--amber);
-      text-underline-offset: 6px;
-      text-decoration-thickness: 3px;
-    }
-    .hero-sub {
+    .hero-subtitle {
       font-family: 'Inter', sans-serif;
-      font-size: 16px;
+      font-style: italic;
+      font-size: clamp(18px, 2.4vw, 22px);
       color: var(--text-secondary);
-      line-height: 1.6;
-      max-width: 600px;
-      font-weight: 400;
-      margin-bottom: 32px;
+      line-height: 1.45;
+      font-weight: 300;
+      max-width: 560px;
+      margin-bottom: 42px;
     }
-    .hero-stats {
+    .hero-meta {
       font-family: 'Inconsolata', monospace;
       font-size: 12px;
       color: var(--text-secondary);
+      letter-spacing: 0.06em;
       display: flex;
       flex-wrap: wrap;
-      gap: 4px;
+      gap: 14px;
       align-items: center;
     }
-    .hero-stats .stat-value { color: var(--text-primary); }
-    .hero-stats .dot {
-      color: var(--amber);
-      margin: 0 4px;
+    .hero-meta .dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--amber);
+      display: inline-block;
     }
+    .hero-meta .meta-value { color: var(--text-primary); }
 
     /* ===== SECTION DIVIDER ===== */
     .section-divider {
-      max-width: calc(var(--container) + 80px);
+      max-width: var(--measure);
       margin: 0 auto;
-      padding: 0 20px;
+      padding: 0 28px;
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
+      height: 80px;
     }
     .section-divider::before {
       content: '';
       position: absolute;
-      left: 20px;
-      right: 20px;
+      left: 28px;
+      right: 28px;
       height: 1px;
-      background: var(--card-border);
+      background: rgba(255,255,255,0.08);
     }
     .section-divider .dot {
-      width: 8px;
-      height: 8px;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
       background: var(--amber);
       position: relative;
       z-index: 1;
-      box-shadow: 0 0 12px rgba(217,149,26,0.3);
+      box-shadow: 0 0 14px rgba(217,149,26,0.45);
     }
 
-    /* ===== SECTIONS ===== */
-    .rom-section {
-      padding: 40px 20px;
-      max-width: calc(var(--container) + 80px);
+    /* ===== ACT ===== */
+    .act {
+      padding: 64px 28px 24px;
+      max-width: var(--measure);
       margin: 0 auto;
     }
-    .section-label {
+    .act-label {
       font-family: 'Inconsolata', monospace;
-      font-size: 13px;
+      font-size: 12px;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
       color: var(--amber);
-      margin-bottom: 16px;
-    }
-    .section-heading {
-      font-family: 'Josefin Sans', 'Inter Tight', sans-serif;
-      font-size: 24px;
-      font-weight: 600;
-      color: #fff;
-      letter-spacing: -0.02em;
-      margin-bottom: 24px;
-      position: relative;
+      margin-bottom: 22px;
       display: inline-block;
-      text-shadow: 0 0 20px rgba(217,149,26,0.15);
     }
-    /* Animated underline on section headings */
-    .section-heading::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 50%;
-      width: 0;
-      height: 2px;
-      background: var(--amber);
-      transition: width 0.5s ease-out, left 0.5s ease-out;
+    .act-title {
+      font-family: 'Josefin Sans', 'Inter Tight', sans-serif;
+      font-size: clamp(30px, 4.4vw, 40px);
+      font-weight: 500;
+      color: #fff;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      margin-bottom: 56px;
     }
-    .romulus-visible .section-heading::after {
-      width: 100%;
-      left: 0;
-    }
-    .section-body {
-      font-family: 'Inter', sans-serif;
-      font-size: 16px;
-      color: var(--text-body);
-      line-height: 1.6;
-    }
-    .section-body p { margin-bottom: 16px; }
-    .section-body p:last-child { margin-bottom: 0; }
-
-    /* ===== ROMULUS HERO IMAGE PLACEHOLDER ===== */
-    .romulus-hero-image {
-      max-width: calc(var(--container) + 80px);
-      margin: 0 auto 32px;
-      padding: 0 40px;
-    }
-    .romulus-cover-image {
-      width: 100%;
-      height: auto;
-      border-radius: 12px;
+    .act-title .sub {
       display: block;
-      object-fit: cover;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+      font-family: 'Inter', sans-serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: 18px;
+      color: var(--text-secondary);
+      letter-spacing: 0;
+      margin-top: 14px;
+      line-height: 1.45;
     }
-    .hero-image-placeholder {
-      width: 100%;
-      aspect-ratio: 2 / 1;
-      background: var(--card-bg);
-      border: 1px dashed rgba(217,149,26,0.3);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
+
+    /* ===== PROSE ===== */
+    .prose p {
+      font-family: 'Inter', sans-serif;
+      font-size: 17.5px;
+      line-height: 1.78;
+      color: var(--text-body);
+      margin-bottom: 1.4em;
+      font-weight: 400;
     }
-    .hero-image-placeholder .placeholder-label {
+    .prose p:last-child { margin-bottom: 0; }
+    .prose em { color: rgba(255,255,255,0.82); font-style: italic; }
+    .prose strong { color: var(--text-primary); font-weight: 600; }
+
+    /* ===== INLINE CODE / PATH PILL ===== */
+    code, .path {
       font-family: 'Inconsolata', monospace;
-      font-size: 13px;
-      color: var(--text-faint);
-      letter-spacing: 0.06em;
+      font-size: 0.92em;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 4px;
+      padding: 2px 7px;
+      color: rgba(255,255,255,0.86);
+      white-space: nowrap;
     }
 
     /* ===== PULL QUOTE ===== */
     .pull-quote {
-      font-family: 'Inter', sans-serif;
-      font-size: 20px;
-      font-weight: 500;
+      font-family: 'Josefin Sans', 'Inter Tight', sans-serif;
       font-style: italic;
-      color: rgba(225,210,180,0.88);
-      line-height: 1.5;
-      border-left: 4px solid var(--amber);
-      padding-left: 24px;
-      margin: 32px 0;
-      max-width: 620px;
+      font-weight: 400;
+      font-size: clamp(22px, 2.8vw, 28px);
+      line-height: 1.4;
+      color: rgba(255,255,255,0.88);
+      border-left: 2px solid var(--amber);
+      padding: 8px 0 8px 24px;
+      margin: 48px 0 48px 8px;
+      letter-spacing: -0.005em;
     }
 
-    /* ===== DECISION CARDS ===== */
-    .decisions-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-      margin-top: 32px;
-    }
-    .decision-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 10px;
-      padding: 28px 24px;
-    }
-    .decision-number {
-      font-family: 'Inconsolata', monospace;
-      font-size: 32px;
-      font-weight: 700;
-      color: var(--amber);
-      line-height: 1;
-      margin-bottom: 12px;
-    }
-    .decision-title {
-      font-family: 'Inter Tight', sans-serif;
-      font-size: 16px;
-      font-weight: 600;
-      color: #fff;
-      margin-bottom: 10px;
-    }
-    .decision-body {
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      color: var(--text-body);
-      line-height: 1.6;
-    }
+    /* ===== SUB-ACT (failure subsections) ===== */
+    .sub-act { margin-top: 56px; }
+    .sub-act:first-child { margin-top: 0; }
 
-    /* ===== TERMINAL WINDOW ===== */
-    .terminal-section {
-      padding: 40px 20px;
-      max-width: calc(var(--container) + 80px);
-      margin: 0 auto;
-    }
-    .terminal-window {
-      max-width: 700px;
-      margin: 0 auto;
-      border: 1px solid var(--card-border);
-      border-top: 2px solid var(--amber);
-      border-radius: 10px;
-      background: #050508;
-      overflow: hidden;
-      box-shadow: 0 32px 80px rgba(0,0,0,0.6);
-      transition: border-color 0.5s ease, box-shadow 0.5s ease;
-      font-family: 'Inconsolata', monospace;
-    }
-    .terminal-window.glow {
-      border-color: rgba(217,149,26,0.5);
-      box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 40px rgba(217,149,26,0.08);
-    }
-    .terminal-header {
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 16px;
-      background: rgba(0,0,0,0.3);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      font-family: 'Inconsolata', monospace;
-      font-size: 11px;
-      color: var(--text-faint);
-      letter-spacing: 0.02em;
-    }
-    .terminal-header-host { color: var(--amber); }
-    .terminal-body {
-      padding: 24px 20px 28px;
-      min-height: 180px;
-      overflow-x: hidden;
-      font-family: 'Inconsolata', monospace;
-      font-size: 13px;
-      line-height: 1.7;
-      color: var(--text-body);
-    }
-    .terminal-body::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(0deg, rgba(255,255,255,0.01) 0, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 2px);
-      pointer-events: none;
-    }
-    .terminal-line {
-      font-family: 'Inconsolata', monospace;
-      font-size: 13px;
-      line-height: 1.7;
-      color: var(--text-body);
-      white-space: pre-wrap;
-      overflow-wrap: break-word;
-      word-break: break-word;
-      margin-bottom: 2px;
-      min-height: 1.7em;
-    }
-    .term-cmd { color: var(--amber); }
-    .term-ok { color: #22c55e; }
-    .term-caesar { color: #a78bfa; }
-    .term-augustus { color: #60a5fa; }
-    .term-vespasian { color: #22c55e; }
-    .term-trajan { color: #06b6d4; }
-    .term-metric { color: #fb923c; }
-    .term-path { color: #60a5fa; text-decoration: underline; text-underline-offset: 2px; }
-    .term-forge { color: #fff; font-weight: 700; text-shadow: 0 0 12px rgba(217,149,26,0.4); }
-    .dim { color: rgba(255,255,255,0.35); }
-    .term-label { color: rgba(255,255,255,0.48); }
-    .term-check { color: #22c55e; }
-    .term-connector { color: var(--amber); }
-    .term-arrow { color: rgba(255,255,255,0.25); }
-    .term-sparkle { color: #e879f9; }
-    .term-cursor { color: var(--amber); animation: cursor-blink 0.6s steps(1) infinite; }
-    .terminal-line .cursor {
-      display: inline-block;
-      color: var(--amber);
-      font-weight: 700;
-      animation: cursor-blink 0.6s steps(1) infinite;
-    }
-    @keyframes cursor-blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-
-    /* ===== COHORT CARDS ===== */
-    .cohort-section {
-      padding: 0 20px 40px;
-      max-width: calc(var(--container) + 280px);
-      margin: 0 auto;
-    }
-    .cohort-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
-    .cohort-card {
-      background: var(--card-bg);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 10px;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      text-align: center;
-    }
-    .cohort-card.orchestrator {
-      box-shadow: inset 0 0 30px var(--amber-glow);
-    }
-
-    /* Cohort avatar placeholder */
-    .cohort-avatar-placeholder {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-      border: 1px solid rgba(255,255,255,0.12);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      margin: 0 auto 12px;
-      overflow: hidden;
-      position: relative;
-    }
-    .cohort-avatar-placeholder img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-    }
-    .cohort-avatar-placeholder .cohort-emoji-badge {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: 100%;
-    }
-    .orchestrator .cohort-avatar-placeholder {
-      border-color: var(--amber);
-      box-shadow: 0 0 20px rgba(217,149,26,0.15);
-    }
-
-    .cohort-header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 2px;
-    }
-    .cohort-name {
-      font-family: 'Inconsolata', monospace;
-      font-size: 18px;
-      color: #fff;
-      font-weight: 700;
-    }
-    .cohort-status {
-      font-family: 'Inconsolata', monospace;
-      font-size: 11px;
-      color: var(--green);
-      letter-spacing: 0.06em;
-      margin-bottom: 14px;
-    }
-    .cohort-question {
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      font-style: italic;
-      color: var(--text-secondary);
-      margin-bottom: 14px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid var(--card-border);
-    }
-    .cohort-workers {
+    .sub-act-tag {
       font-family: 'Inconsolata', monospace;
       font-size: 12px;
-      color: var(--text-faint);
-      line-height: 1.8;
-      margin-bottom: 14px;
-    }
-    .cohort-output-label {
-      font-family: 'Inconsolata', monospace;
-      font-size: 11px;
+      letter-spacing: 0.08em;
       color: var(--amber);
-      letter-spacing: 0.04em;
-      margin-bottom: 4px;
-    }
-    .cohort-output {
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      color: var(--text-body);
-      line-height: 1.5;
-    }
-
-    /* ===== PIPELINE SECTION ===== */
-    .pipeline-section {
-      padding: 40px 20px;
-      max-width: calc(var(--container) + 80px);
-      margin: 0 auto;
-    }
-
-    /* ===== GANTT CHART ===== */
-    .gantt-chart {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 20px 0;
-    }
-    .gantt-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
       margin-bottom: 10px;
+      opacity: 0.85;
+    }
+    .sub-act-heading {
+      font-family: 'Inter Tight', 'Inter', sans-serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: -0.012em;
+      line-height: 1.25;
+      margin-bottom: 24px;
+    }
+
+    /* ===== NUMBERED PATTERN LIST ===== */
+    .pattern-list {
+      list-style: none;
+      counter-reset: pattern;
+      margin: 36px 0 12px;
+      padding: 0;
+    }
+    .pattern-list li {
+      counter-increment: pattern;
       position: relative;
+      padding: 16px 0 16px 56px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-family: 'Inter', sans-serif;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--text-body);
     }
-    .gantt-label {
-      width: 160px;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-family: 'Inconsolata', monospace;
-      font-size: 13px;
-      color: var(--text-secondary);
-    }
-    .gantt-label .emoji { font-size: 16px; }
-    .gantt-track {
-      flex: 1;
-      height: 20px;
-      background: rgba(255,255,255,0.04);
-      border-radius: 4px;
-      position: relative;
-      overflow: hidden;
-    }
-    .gantt-bar {
+    .pattern-list li:last-child { border-bottom: none; }
+    .pattern-list li::before {
+      content: counter(pattern, decimal-leading-zero);
       position: absolute;
       left: 0;
-      top: 0;
-      height: 100%;
-      width: 0;
-      background: linear-gradient(90deg, var(--amber), rgba(217,149,26,0.6));
-      border-radius: 4px;
-      transition: width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      box-shadow: 0 0 8px rgba(217,149,26,0.2);
-    }
-    .gantt-bar.caesar { width: 0; }
-    .gantt-bar.gate { width: 0; background: linear-gradient(90deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06)); }
-    .gantt-bar.augustus { width: 0; }
-    .gantt-bar.vespasian { width: 0; }
-    .gantt-bar.trajan { width: 0; }
-    .gantt-bar.total {
-      width: 0;
-      background: linear-gradient(90deg, var(--amber), rgba(217,149,26,0.8));
-      box-shadow: 0 0 12px rgba(217,149,26,0.3), 0 0 24px rgba(217,149,26,0.1);
-      height: 24px;
-      top: -2px;
-    }
-    .gantt-time {
-      width: 70px;
-      flex-shrink: 0;
-      text-align: right;
-      font-family: 'Inconsolata', monospace;
-      font-size: 12px;
-      color: var(--text-faint);
-    }
-    .gantt-row.total {
-      margin-top: 16px;
-      padding-top: 12px;
-      border-top: 1px solid rgba(255,255,255,0.06);
-    }
-    .gantt-row.total .gantt-label {
-      color: var(--text-primary);
-      font-weight: 600;
-    }
-
-    /* Gate rows */
-    .gantt-row.gate { margin-bottom: 6px; }
-    .gantt-row.gate .gantt-label { font-size: 11px; color: rgba(255,255,255,0.3); }
-    .gantt-row.gate .gantt-time { font-size: 11px; }
-    .gantt-row.gate .gantt-track { height: 12px; }
-
-    /* Animated state */
-    .gantt-chart.lit .gantt-bar.caesar { width: 30.7%; }
-    .gantt-chart.lit .gantt-bar.gate-1 { width: 2.1%; }
-    .gantt-chart.lit .gantt-bar.augustus { width: 73.5%; }
-    .gantt-chart.lit .gantt-bar.gate-2 { width: 1%; }
-    .gantt-chart.lit .gantt-bar.vespasian { width: 10.3%; }
-    .gantt-chart.lit .gantt-bar.gate-3 { width: 0.4%; }
-    .gantt-chart.lit .gantt-bar.trajan { width: 6.7%; }
-    .gantt-chart.lit .gantt-bar.total { width: 100%; }
-
-    /* Stagger delays for bars */
-    .gantt-chart.lit .gantt-bar.caesar { transition-delay: 0s; }
-    .gantt-chart.lit .gantt-bar.gate-1 { transition-delay: 400ms; }
-    .gantt-chart.lit .gantt-bar.augustus { transition-delay: 600ms; }
-    .gantt-chart.lit .gantt-bar.gate-2 { transition-delay: 2000ms; }
-    .gantt-chart.lit .gantt-bar.vespasian { transition-delay: 2200ms; }
-    .gantt-chart.lit .gantt-bar.gate-3 { transition-delay: 2800ms; }
-    .gantt-chart.lit .gantt-bar.trajan { transition-delay: 3000ms; }
-    .gantt-chart.lit .gantt-bar.total { transition-delay: 3400ms; }
-
-    @media (max-width: 768px) {
-      .gantt-row { flex-wrap: wrap; gap: 4px; }
-      .gantt-label { width: 100%; font-size: 12px; }
-      .gantt-time { width: auto; text-align: right; font-size: 11px; margin-left: auto; }
-      .gantt-track { width: 100%; height: 16px; }
-      .gantt-bar.total { height: 20px; }
-      .gantt-chart { padding: 12px 0; }
-    }
-
-    /* ===== EXPERIMENT CARDS ===== */
-    .experiment-section {
-      padding: 40px 20px;
-      max-width: calc(var(--container) + 80px);
-      margin: 0 auto;
-    }
-    .experiment-card {
-      border-top: 3px solid var(--amber);
-      border-left: none;
-      padding: 24px 0 0 0;
-      margin-bottom: 64px;
-    }
-    .experiment-card:last-child { margin-bottom: 0; }
-    .experiment-label {
+      top: 16px;
       font-family: 'Inconsolata', monospace;
       font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      font-weight: 700;
+      letter-spacing: 0.08em;
       color: var(--amber);
-      margin-bottom: 12px;
+      width: 40px;
     }
-    .experiment-heading {
+
+    /* ===== PROJECT ENTRY ===== */
+    .project {
+      padding: 72px 0 56px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .project:first-of-type { padding-top: 16px; }
+    .project:last-of-type { border-bottom: none; }
+
+    .project-label {
+      font-family: 'Inconsolata', monospace;
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 18px;
+      display: inline-block;
+    }
+    .project-name {
       font-family: 'Josefin Sans', 'Inter Tight', sans-serif;
-      font-size: 26px;
-      font-weight: 600;
-      color: #fff;
-      letter-spacing: -0.02em;
-      margin-bottom: 24px;
-      text-shadow: 0 0 20px rgba(217,149,26,0.15);
-    }
-    .experiment-comparison {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      margin-bottom: 24px;
-    }
-    .experiment-col-label {
-      font-family: 'Inconsolata', monospace;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--text-faint);
-      margin-bottom: 8px;
-    }
-    .experiment-col-label.result-label {
-      color: var(--amber);
-    }
-    .experiment-col-text {
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      color: var(--text-body);
-      line-height: 1.5;
-    }
-
-    /* KPI metric callout */
-    .experiment-metric-callout {
-      border-left: 4px solid var(--amber);
-      background: linear-gradient(135deg, rgba(217,149,26,0.06), rgba(217,149,26,0.02));
-      border-radius: 0 8px 8px 0;
-      padding: 20px 24px;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-    .experiment-metric {
-      font-family: 'Inconsolata', monospace;
-      font-size: 48px;
-      font-weight: 700;
-      color: var(--amber);
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-    .experiment-metric-context {
-      font-family: 'Inter Tight', sans-serif;
-      font-size: 13px;
-      color: var(--text-secondary);
-      letter-spacing: 0.02em;
-    }
-
-    .experiment-insight {
-      font-family: 'Inter', sans-serif;
-      font-size: 15px;
-      color: var(--text-body);
-      line-height: 1.6;
-    }
-    .experiment-body {
-      font-family: 'Inter', sans-serif;
-      font-size: 15px;
-      color: var(--text-body);
-      line-height: 1.6;
-      margin-bottom: 16px;
-    }
-
-    /* ===== WHAT BROKE ===== */
-    .broke-tag {
-      font-family: 'Inconsolata', monospace;
-      font-size: 11px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: #ef4444;
-      background: rgba(239,68,68,0.1);
-      border: 1px solid rgba(239,68,68,0.2);
-      border-radius: 4px;
-      padding: 2px 8px;
-      display: inline-block;
-      margin-bottom: 12px;
-    }
-    .broke-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 24px;
-    }
-    .broke-row .section-heading {
-      margin-bottom: 0;
-    }
-    .broke-row .broke-tag {
-      margin-bottom: 0;
-      flex-shrink: 0;
-    }
-    .broke-item {
-      margin-bottom: 28px;
-    }
-    .broke-item:last-child { margin-bottom: 0; }
-    .broke-item-title {
-      font-family: 'Inter Tight', sans-serif;
-      font-size: 16px;
-      font-weight: 600;
-      color: #fff;
-      margin-bottom: 8px;
-    }
-
-    /* ===== NEXT / FORWARD CARDS ===== */
-    .forward-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-      margin-top: 32px;
-      margin-bottom: 40px;
-    }
-    .forward-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 10px;
-      padding: 24px;
-    }
-    .forward-card-title {
-      font-family: 'Inconsolata', monospace;
-      font-size: 14px;
-      color: var(--amber);
-      margin-bottom: 10px;
-      font-weight: 700;
-    }
-    .forward-card-body {
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      color: var(--text-body);
-      line-height: 1.6;
-    }
-
-    /* ===== THESIS RESTATEMENT ===== */
-    .thesis-restate {
-      font-family: 'Inter', sans-serif;
-      font-size: 20px;
+      font-size: clamp(28px, 4vw, 36px);
       font-weight: 500;
-      color: rgba(225,210,180,0.88);
+      color: #fff;
+      letter-spacing: -0.025em;
+      line-height: 1.08;
+      margin-bottom: 12px;
+    }
+    .project-tagline {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      color: var(--text-primary);
+      font-weight: 400;
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+    .project-status {
+      font-family: 'Inter', sans-serif;
       font-style: italic;
-      line-height: 1.5;
-      border-left: 4px solid var(--amber);
-      padding-left: 24px;
-      margin-top: 40px;
-      max-width: 620px;
+      font-size: 14.5px;
+      color: var(--text-secondary);
+      margin-bottom: 36px;
+      letter-spacing: 0.005em;
+    }
+    .project-status a {
+      color: var(--amber);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(217,149,26,0.32);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .project-status a:hover {
+      color: #f1c06c;
+      border-color: rgba(217,149,26,0.7);
     }
 
-    /* ===== PROJECT / SHIPPED CARDS ===== */
-    .shipped-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-      margin-top: 32px;
-    }
-    .shipped-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 10px;
-      padding: 24px;
-      position: relative;
-    }
-    .shipped-card-name {
-      font-family: 'Inter Tight', sans-serif;
-      font-size: 18px;
-      font-weight: 600;
-      color: #fff;
-      margin-bottom: 4px;
-    }
-    .shipped-card-url {
+    /* ===== BYLINE / FOOTER ===== */
+    .byline {
+      max-width: var(--measure);
+      margin: 0 auto;
+      padding: 96px 28px 80px;
+      text-align: center;
       font-family: 'Inconsolata', monospace;
-      font-size: 12px;
-      color: var(--amber);
-      text-decoration: underline;
-      text-underline-offset: 2px;
-      display: inline-block;
-      margin-bottom: 12px;
-      transition: color 0.2s;
+      font-size: 12.5px;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+      line-height: 2;
     }
-    .shipped-card-url:hover { color: #f1c06c; }
-    .shipped-card-body {
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      color: var(--text-body);
-      line-height: 1.6;
-      margin-bottom: 14px;
-    }
-    .shipped-card-tech {
-      font-family: 'Inconsolata', monospace;
-      font-size: 11px;
-      color: var(--amber);
-    }
-    .shipped-card-status {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      font-family: 'Inconsolata', monospace;
-      font-size: 10px;
-      letter-spacing: 0.06em;
+    .byline .name {
+      color: var(--text-primary);
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      padding: 2px 8px;
-      border-radius: 3px;
+      font-size: 13px;
     }
-    .shipped-card-status.live {
-      color: var(--green);
-      background: rgba(34,197,94,0.1);
-      border: 1px solid rgba(34,197,94,0.2);
+    .byline .sep {
+      color: var(--amber);
+      margin: 0 6px;
+    }
+    .byline a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(255,255,255,0.2);
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .byline a:hover {
+      color: var(--amber);
+      border-color: var(--amber);
+    }
+    .byline-rule {
+      width: 32px;
+      height: 1px;
+      background: var(--amber);
+      margin: 0 auto 36px;
+      opacity: 0.6;
     }
 
     /* ===== SCROLL ANIMATIONS ===== */
     [data-romulus-animate] {
       opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+      transform: translateY(16px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
     }
     [data-romulus-animate].romulus-visible {
       opacity: 1;
       transform: translateY(0);
     }
-    /* Fallback for no JS */
-    .no-js [data-romulus-animate] {
-      opacity: 1;
-      transform: none;
+
+    @media (prefers-reduced-motion: reduce) {
+      [data-romulus-animate] {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+      html { scroll-behavior: auto; }
     }
 
-    /* ===== DESKTOP — min-width 769px ===== */
-    @media (min-width: 769px) {
-      .romulus-nav { padding: 28px 40px; }
+    /* ===== MOBILE ===== */
+    @media (max-width: 640px) {
+      .romulus-nav { padding: 18px 20px; }
+      .romulus-hero { padding: 64px 20px 40px; }
+      .act { padding: 48px 20px 16px; }
+      .measure { padding: 0 20px; }
+      .section-divider { padding: 0 20px; height: 64px; }
+      .section-divider::before { left: 20px; right: 20px; }
 
-      .romulus-hero { padding: 100px 40px 80px; }
-      .hero-headline { font-size: clamp(36px, 5.5vw, 60px); }
-      .hero-sub { font-size: 18px; }
-      .hero-stats { font-size: 14px; gap: 6px; }
+      .hero-title { font-size: clamp(36px, 11vw, 56px); }
+      .hero-subtitle { font-size: 16px; }
+      .hero-meta { font-size: 11px; gap: 10px; }
 
-      .section-divider { padding: 0 40px; }
-      .section-divider::before { left: 40px; right: 40px; }
+      .act-title { font-size: 26px; margin-bottom: 40px; }
+      .act-title .sub { font-size: 15px; }
 
-      .rom-section { padding: 80px 40px; }
-      .section-heading { font-size: 30px; }
-
-      .pull-quote { font-size: 22px; }
-
-      .decisions-grid { grid-template-columns: 1fr 1fr; }
-
-      .terminal-section { padding: 60px 40px; }
-
-      .cohort-section { padding: 0 40px 80px; }
-      .cohort-grid { grid-template-columns: repeat(3, 1fr); }
-      .cohort-card { padding: 24px; }
-
-      .pipeline-section { padding: 80px 40px; max-width: calc(var(--container) + 80px); }
-
-      .experiment-section { padding: 80px 40px; }
-      .experiment-card {
-        border-top: none;
-        border-left: 3px solid var(--amber);
-        padding: 0 0 0 28px;
+      .prose p { font-size: 16.5px; line-height: 1.72; }
+      .pull-quote {
+        font-size: 19px;
+        padding-left: 18px;
+        margin: 36px 0 36px 0;
       }
-      .experiment-comparison {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        flex-direction: unset;
-        gap: 20px;
-      }
-      .experiment-metric-callout {
-        text-align: left;
-      }
+      .sub-act { margin-top: 44px; }
+      .sub-act-heading { font-size: 19px; }
 
-      .forward-grid { grid-template-columns: 1fr 1fr; }
-      .shipped-grid { grid-template-columns: 1fr 1fr; }
+      .pattern-list li {
+        padding: 14px 0 14px 44px;
+        font-size: 15.5px;
+      }
+      .pattern-list li::before { width: 32px; font-size: 12px; }
 
-      .gate-terminal { padding: 40px 48px; }
+      .project { padding: 56px 0 40px; }
+      .project-name { font-size: 26px; }
+      .project-tagline { font-size: 15px; }
+      .project-status { font-size: 13.5px; margin-bottom: 28px; }
+
+      .byline { padding: 72px 20px 56px; font-size: 11.5px; line-height: 1.9; }
+      .byline .name { font-size: 12px; }
+
+      code, .path { font-size: 0.9em; padding: 1px 5px; }
     }
 
-    /* ===== TABLET — 769 to 1024 ===== */
-    @media (min-width: 769px) and (max-width: 1024px) {
-      .cohort-grid { grid-template-columns: repeat(2, 1fr); }
-      .decisions-grid { grid-template-columns: 1fr 1fr; }
-    }
-
-    /* ===== MOBILE TERMINAL ===== */
-    @media (max-width: 768px) {
-      .terminal-body { padding: 16px 12px 20px; }
-      .terminal-line { font-size: 11px; line-height: 1.6; }
-      .romulus-hero-image { padding: 0; }
+    @media (max-width: 380px) {
+      .hero-meta { flex-direction: column; align-items: flex-start; gap: 6px; }
+      .hero-meta .dot { display: none; }
     }
   </style>
 </head>
 <body class="romulus-page">
 
-  <!-- ===== 1. PASSWORD GATE ===== -->
+  <!-- ===== PASSWORD GATE (preserved verbatim) ===== -->
   <div class="romulus-gate" id="gate">
     <div class="gate-terminal">
       <div class="gate-prompt">romulus<span>@</span>roma-eterna <span>~</span> <span class="gate-cursor">_</span></div>
@@ -1042,514 +597,340 @@
   <!-- ===== MAIN CONTENT ===== -->
   <div class="romulus-content" id="content">
 
-    <!-- ===== 2. TOP NAV ===== -->
+    <!-- ===== TOP NAV ===== -->
     <nav class="romulus-nav">
-      <a href="index.html">&larr; Back to site</a>
+      <a href="index.html">&larr; mikebatts.net</a>
       <span class="badge">CASE STUDY &middot; 2026</span>
     </nav>
 
-    <!-- ===== 3. HERO ===== -->
+    <!-- ===== HERO ===== -->
     <header class="romulus-hero" data-romulus-animate>
-      <h1 class="hero-headline">Romulus: Building an AI system that <span class="amber-underline">remembers</span>.</h1>
-      <p class="hero-sub">From a persistent personal assistant to a five-cohort command structure &mdash; a case study in what one engineer can do when context never resets.</p>
-      <div class="hero-stats">
-        <span>uptime: <span class="stat-value">69 days</span></span>
-        <span class="dot">&middot;</span>
-        <span>cohorts: <span class="stat-value">5</span></span>
-        <span class="dot">&middot;</span>
-        <span>morning briefs: <span class="stat-value">69 delivered</span></span>
-        <span class="dot">&middot;</span>
-        <span>products shipped: <span class="stat-value">4</span></span>
+      <div class="hero-eyebrow">Romulus</div>
+      <h1 class="hero-title">How I Built My&nbsp;AI, Then Built With&nbsp;It.</h1>
+      <p class="hero-subtitle">Eighty-seven days. One designed system. Four products shipped or in&nbsp;flight.</p>
+      <div class="hero-meta">
+        <span><span class="meta-value">Feb 3</span> &rarr; <span class="meta-value">May 1, 2026</span></span>
+        <span class="dot"></span>
+        <span>Brooklyn, NY</span>
+        <span class="dot"></span>
+        <span>By <span class="meta-value">Mike Battaglia</span></span>
       </div>
     </header>
 
     <div class="section-divider"><span class="dot"></span></div>
 
-    <!-- ===== 4. ORIGIN STORY ===== -->
-    <section class="rom-section" data-romulus-animate>
-      <div class="section-label">~/romulus/identity.md</div>
-      <div class="romulus-hero-image">
-        <img src="images/romulus-cover.jpg" alt="Romulus — From Personal AI to Multi-Cohort Command" class="romulus-cover-image">
+    <!-- ===== ACT 1 — THE IDENTITY ===== -->
+    <section class="act" data-romulus-animate>
+      <div class="act-label">Act 01</div>
+      <h2 class="act-title">The Identity</h2>
+
+      <div class="prose">
+        <p>The name came first.</p>
+
+        <p><em>Romulus</em> &mdash; the founder-king of Rome. Not a conqueror. An architect of systems that outlasted him. That name wasn't decoration. It was the first design decision, and it set the tone for everything that followed.</p>
+
+        <p>Before I wrote a single prompt, I asked a harder question: <em>what should this thing actually be?</em></p>
+
+        <p>The answer took the shape of a document &mdash; <code>SOUL.md</code>. Not a system prompt. A soul document. Who is Romulus? What does he believe? How does he speak? What is he <em>for</em>? I gave him contextual modes &mdash; precise and efficient when speed mattered, measured and willing to push back when the stakes were high enough to warrant it, a genuine collaborator when a build was going sideways at midnight. I gave him a mission: not productivity, not task automation, but a trusted operator with a defined identity, working toward shared goals over time.</p>
+
+        <p>Then <code>USER.md</code> &mdash; my context, my background, my actual goals. Ten years in startups. Senior PM at Daylight by day. Solopreneur in the evenings and weekends. What I'm building toward and why.</p>
+
+        <p>Then <code>IDENTITY.md</code>, <code>MEMORY.md</code>, <code>AGENTS.md</code>, <code>HEARTBEAT.md</code>, <code>TOOLS.md</code>.</p>
+
+        <p>All of it was in place before a single cron job ran. Before a model was selected. Before any code was written.</p>
       </div>
-      <h2 class="section-heading">Who Is Romulus</h2>
-      <div class="section-body">
-        <p>He came online February 3, 2026. Named after the legend of Rome's founding &mdash; not as a gimmick, but to clarify what I was trying to build: something with a name, an identity, and a purpose, rather than another stateless chat window.</p>
-        <p>The problem was straightforward. I work as a senior PM by day and build my own products by night. The gap between "interesting idea" and "shipped prototype" was filled with re-explained context, lost threads, and morning sessions where I had to brief myself on whatever I'd figured out the week before.</p>
-        <p>Romulus started as an experiment in persistent AI memory: a system that reads from a shared knowledge base (an Obsidian vault) on every session and writes back after. First use case: a morning brief delivered to a private Discord channel at 8 AM &mdash; weather, subway timings, product signals from the market. Nothing glamorous. Just a baseline to verify the system was actually running.</p>
-      </div>
-      <div class="pull-quote">By week two, the brief was running every morning without intervention. It stopped feeling like a tool and started feeling like a system.</div>
-    </section>
 
-    <div class="section-divider"><span class="dot"></span></div>
+      <div class="pull-quote">You don't start with the technology. You start with the person using it.</div>
 
-    <!-- ===== 5. THE PROBLEM ===== -->
-    <section class="rom-section" data-romulus-animate>
-      <div class="section-label">~/romulus/overview.txt</div>
-      <h2 class="section-heading">The Throughput Wall</h2>
-      <div class="section-body">
-        <p>A decade of shipping between day jobs taught me the same thing at every startup: ideas aren't the bottleneck. It's throughput &mdash; the time between seeing a problem clearly and having a working prototype.</p>
-        <p>The current generation of AI tools has a specific weakness: they're stateless. Every new conversation starts from zero. Context that took a session to build evaporates the moment it's over. For solopreneurs working in stolen hours, this means constant overhead just to stay aligned with their own thinking.</p>
-      </div>
-      <div class="pull-quote">The constraint isn't the model. It's the absence of memory.</div>
-    </section>
+      <div class="prose">
+        <p>This is the instinct that comes from ten years of building products for people. Here the person using it was me, and the product was my own operating system. I designed it the same way I'd design anything else: identity first, constraints defined, goals clear, then go build.</p>
 
-    <div class="section-divider"><span class="dot"></span></div>
-
-    <!-- ===== 6. DESIGN DECISIONS ===== -->
-    <section class="rom-section" data-romulus-animate>
-      <div class="section-label">~/romulus/decisions.md</div>
-      <h2 class="section-heading">Design Decisions</h2>
-      <div class="decisions-grid">
-        <div class="decision-card" data-romulus-animate>
-          <div class="decision-number">01</div>
-          <div class="decision-title">Discord as interface</div>
-          <div class="decision-body">Threaded, logged, pocketable. Every brief, command, and response is timestamped and searchable. The channel history doubles as episodic memory before anything needs a vector database.</div>
-        </div>
-        <div class="decision-card" data-romulus-animate>
-          <div class="decision-number">02</div>
-          <div class="decision-title">Obsidian as memory substrate</div>
-          <div class="decision-body">Durable Markdown. No vendor lock. Human-inspectable. Files survive reboots. Context doesn't disappear when the agent does. 83 files, 29 project notes, 31 daily logs, 11 key decisions &mdash; dating back to first boot on February 3, 2026.</div>
-        </div>
-        <div class="decision-card" data-romulus-animate>
-          <div class="decision-number">03</div>
-          <div class="decision-title">A dedicated host</div>
-          <div class="decision-body">Stable cron. Zero cold-start. Separate from the daily laptop. A Mac mini named Roma Eterna means scheduled jobs run reliably and context is always preloaded.</div>
-        </div>
-        <div class="decision-card" data-romulus-animate>
-          <div class="decision-number">04</div>
-          <div class="decision-title">Match model to task</div>
-          <div class="decision-body">Not every task deserves the same model. Running an 8 AM morning brief through the most expensive model costs 400x more with identical output quality. Match capability and cost to the job.</div>
-        </div>
+        <p>Roman gravitas, worn lightly. But the intention was real.</p>
       </div>
     </section>
 
     <div class="section-divider"><span class="dot"></span></div>
 
-    <!-- ===== 7. MEMORY ===== -->
-    <section class="rom-section" data-romulus-animate>
-      <div class="section-label">~/romulus/memory/</div>
-      <h2 class="section-heading">Memory</h2>
-      <div class="section-body">
-        <p style="font-family:'Inconsolata',monospace;font-size:14px;color:var(--text-secondary);margin-bottom:20px;">83 files. 12 core memory documents. 29 project notes. 31 daily logs. 11 key decisions.</p>
-        <p>Chat history is ephemeral. Obsidian files are not. The system retrieves relevant past work before every session &mdash; comparing context, flagging contradictions, loading project state. After 69 days, the knowledge graph compounds. What was an empty vault is now a living map of 400+ tasks, shipped products, failures, and lessons.</p>
-        <p>The system stores context in two places, by design. Obsidian holds the human-readable layer: project notes, daily logs, decisions — things Mike can open, edit, and reason about at any time. SQLite holds the machine-readable layer: 36 entities, 33 relationships, task histories, build reports — structured data that Caesar's workers load as context before they start. The Obsidian vault provides qualitative memory (what happened, decisions made, lessons learned). The SQLite graph provides quantitative memory (relationships, dependencies, outcomes). Together they form a knowledge base that's both human-inspectable and machine-actionable.</p>
-      </div>
-    </section>
+    <!-- ===== ACT 2 — THE BUILD ===== -->
+    <section class="act" data-romulus-animate>
+      <div class="act-label">Act 02</div>
+      <h2 class="act-title">
+        The Build
+        <span class="sub">February 3, 2026. First boot.</span>
+      </h2>
 
-    <div class="section-divider"><span class="dot"></span></div>
+      <div class="prose">
+        <p>MacBook Pro. OpenClaw installed. Discord integration wired to a private channel &mdash; <code>#roma-eterna</code>. First model: Nvidia Kimi K2.5, a free-tier LLM with 128K context. Flat <code>MEMORY.md</code> as the only persistent memory. The first response landed in Discord and came back clean.</p>
 
-    <!-- ===== 8. WHAT BROKE — Romulus Era ===== -->
-    <section class="rom-section" data-romulus-animate>
-      <div class="section-label">~/romulus/lessons.md</div>
-      <div class="broke-row">
-        <h2 class="section-heading">What Broke &mdash; Day 11</h2>
-        <span class="broke-tag">BUG</span>
-      </div>
-      <div class="section-body">
-        <p>The morning brief shipped with stop ID R16. The feed returned plausible-looking data &mdash; 12-minute travel time from Prospect Ave to Canal St. It looked right.</p>
-        <p>R16 is Times Square. We were tracking the wrong station entirely for 11 days.</p>
-        <p>Fix: Downloaded the full static GTFS dataset, cross-referenced stops.txt, found R34N (Prospect Ave northbound) and R23N (Canal St northbound). Patched the script. Correct travel time: 26 minutes.</p>
-      </div>
-      <div class="pull-quote" style="font-size:18px;">Plausible data isn't verified data. Always cross-reference against a second source before declaring production-ready.</div>
-    </section>
-
-    <!-- ===== 9. TERMINAL WINDOW ===== -->
-    <div class="terminal-section" data-romulus-animate>
-      <div class="terminal-window" id="terminal">
-        <div class="terminal-header">
-          <span class="terminal-header-host">romulus@roma-eterna</span>
-          <span class="terminal-header-label">legion pipeline</span>
-        </div>
-        <div class="terminal-body">
-          <div class="terminal-line" data-text="❯ legion forge forbidden —type party-game —genre word" data-html="<span class='term-cmd'>❯ legion forge forbidden —type party-game —genre word</span>"></div>
-          <div class="terminal-line" data-text="⚡ spawning 4 cohorts · 8 workers" data-html="<span class='term-label'>⚡</span> spawning <span class='term-cmd'>4 cohorts</span> · <span class='term-metric'>8 workers</span>"></div>
-          <div class="terminal-line" data-text="" data-html=""></div>
-          <div class="terminal-line" data-text="⚔️ caesar · research pipeline started" data-html="<span class='term-caesar'>⚔️ caesar</span> <span class='term-label'>· research pipeline</span>"></div>
-          <div class="terminal-line" data-text="  🔍 researcher → 42 competitors scanned · saturation: 87%" data-html="  <span class='term-label'>🔍 researcher</span> <span class='term-arrow'>→</span> <span class='term-metric'>42 competitors</span> · saturation: <span class='term-metric'>87%</span>"></div>
-          <div class="terminal-line" data-text="  🎯 analyst → wedge found: AI-themed deck gen, zero competitors" data-html="  <span class='term-label'>🎯 analyst</span> <span class='term-arrow'>→</span> wedge: <span class='term-caesar'>AI-themed deck gen</span> <span class='term-check'>✓</span>"></div>
-          <div class="terminal-line" data-text="  🧠 synthesizer → DECISION: BUILD · 2m 23s" data-html="  <span class='term-label'>🧠 synthesizer</span> <span class='term-arrow'>→</span> <span class='term-ok'>DECISION: BUILD</span> · <span class='term-metric'>2m 23s</span>"></div>
-          <div class="terminal-line" data-text="✅ gate → augustus · spec: PASS" data-html="<span class='term-ok'>✅</span> <span class='term-label'>gate → augustus</span> · spec: <span class='term-check'>PASS</span>"></div>
-          <div class="terminal-line" data-text="" data-html=""></div>
-          <div class="terminal-line" data-text="🏛 augustus · build pipeline started" data-html="<span class='term-augustus'>🏛 augustus</span> <span class='term-label'>· build pipeline</span>"></div>
-          <div class="terminal-line" data-text="  📐 architect → Next.js 15 + Stripe + OAuth · 38s" data-html="  <span class='term-label'>📐 architect</span> <span class='term-arrow'>→</span> <span class='term-path'>Next.js 15 + Stripe</span> · <span class='term-metric'>38s</span>"></div>
-          <div class="terminal-line" data-text="  🔨 builder → 42 files · 3,847 lines · TypeScript strict ✓" data-html="  <span class='term-label'>🔨 builder</span> <span class='term-arrow'>→</span> <span class='term-metric'>42 files</span> · <span class='term-metric'>3,847 lines</span> <span class='term-check'>✓</span>"></div>
-          <div class="terminal-line" data-text="  🔎 reviewer (1) → nit: add error boundary on lobby" data-html="  <span class='term-label'>🔎 reviewer</span> <span class='term-arrow'>→</span> nit: add error boundary on lobby"></div>
-          <div class="terminal-line" data-text="  🔨 builder (fix) → +38 lines · review (2) PASS" data-html="  <span class='term-label'>🔨 fix</span> <span class='term-arrow'>→</span> +38 lines · review(2) <span class='term-check'>PASS ✓</span>"></div>
-          <div class="terminal-line" data-text="  🚀 deployer → playforbidden.com · TLS provisioned · 5m 4s" data-html="  <span class='term-label'>🚀 deployer</span> <span class='term-arrow'>→</span> <span class='term-path'>playforbidden.com</span> · TLS ✓ · <span class='term-metric'>5m 4s</span>"></div>
-          <div class="terminal-line" data-text="✅ gate → vespasian · build: LIVE" data-html="<span class='term-ok'>✅</span> <span class='term-label'>gate → vespasian</span> · build: <span class='term-check'>LIVE</span>"></div>
-          <div class="terminal-line" data-text="" data-html=""></div>
-          <div class="terminal-line" data-text="💰 vespasian · revenue model started" data-html="<span class='term-vespasian'>💰 vespasian</span> <span class='term-label'>· revenue model</span>"></div>
-          <div class="terminal-line" data-text="  CAC $2.30 · LTV $14.70 · 6.4x ratio · $15K MRR path · 48s" data-html="  CAC <span class='term-metric'>$2.30</span> · LTV <span class='term-metric'>$14.70</span> · ratio <span class='term-check'>6.4x ✓</span> · path: <span class='term-ok'>$15K MRR</span> · <span class='term-metric'>48s</span>"></div>
-          <div class="terminal-line" data-text="✅ gate → trajan · economics: STRONG" data-html="<span class='term-ok'>✅</span> <span class='term-label'>gate → trajan</span> · econ: <span class='term-check'>STRONG</span>"></div>
-          <div class="terminal-line" data-text="" data-html=""></div>
-          <div class="terminal-line" data-text="🛣 trajan · GTM pipeline started" data-html="<span class='term-trajan'>🛣 trajan</span> <span class='term-label'>· GTM pipeline</span>"></div>
-          <div class="terminal-line" data-text="  5 TikToks · X thread · PH listing · 12 streamer targets · 31s" data-html="  <span class='term-metric'>5 TikToks</span> · X thread · PH listing · <span class='term-metric'>12 streamer targets</span> · <span class='term-metric'>31s</span>"></div>
-          <div class="terminal-line" data-text="" data-html=""></div>
-          <div class="terminal-line" data-text="🔨 FORGED · 7m 45s · pipeline: PASS (all gates)" data-html="<span class='term-forge'>🔨 FORGED</span> · <span class='term-metric'>7m 45s</span> · pipeline: <span class='term-check'>PASS</span> <span class='term-label'>(all gates)</span>"></div>
-          <div class="terminal-line" data-text="  🌐 playforbidden.com · SSL ✓ · CDN ✓" data-html="  <span class='term-connector'>└</span><span class='term-path'>playforbidden.com</span> · SSL <span class='term-check'>✓</span> · CDN <span class='term-check'>✓</span>"></div>
-          <div class="terminal-line" data-text="  💰 $4.99/mo · unit econ: STRONG · payback: 8d" data-html="  <span class='term-connector'>└</span> <span class='term-metric'>$4.99/mo</span> · econ: <span class='term-check'>STRONG</span> · payback: <span class='term-metric'>8d</span>"></div>
-          <div class="terminal-line" data-text="  🛣 23 assets ready · all cohorts synced ▮" data-html="  <span class='term-connector'>└</span> <span class='term-metric'>23 assets</span> ready · <span class='term-sparkle'>all cohorts synced</span> <span class='term-cursor'>▮</span>"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="section-divider"><span class="dot"></span></div>
-
-    <!-- ===== 10. THE SHIFT (Legion) ===== -->
-    <section class="rom-section" data-romulus-animate>
-      <div class="section-label">~/legion/pivot.txt</div>
-      <h2 class="section-heading">The Extension: Legion</h2>
-      <div class="section-body">
-        <p>Running one AI with persistent memory was useful. But it still required one person to initiate each step: research, spec, build, deploy, analyze. The bottleneck shifted from context to bandwidth.</p>
-        <p>Legion extends the architecture from one system to five &mdash; each specialized in a different function, sharing the same memory layer, orchestrated through a single routing system. The model: decompose a prompt, route it to the right cohort, chain the outputs together automatically.</p>
-        <p><strong style="color:#fff;">Caesar</strong> &mdash; intelligence. Research, competitive analysis, market signals.<br>
-        <strong style="color:#fff;">Augustus</strong> &mdash; execution. Architecture review, build, and deployment.<br>
-        <strong style="color:#fff;">Vespasian</strong> &mdash; revenue. Pricing models, unit economics, exit scenarios.<br>
-        <strong style="color:#fff;">Trajan</strong> &mdash; distribution. GTM strategy, content planning, launch sequencing.<br>
-        <strong style="color:#fff;">Romulus</strong> &mdash; orchestrator. Task decomposition, routing, quality gates.</p>
-        <p>A critical mechanic: every transition between cohorts is gated. Caesar's research brief doesn't automatically flow to Augustus — it gets reviewed first. Augustus doesn't deploy without a review cycle. Vespasian doesn't run unless the build succeeded. These gates aren't manual approvals — they're programmed checkpoints that validate outputs against structured criteria before the next phase triggers. This is what distinguishes Legion from a chained prompt: each stage has its own quality bar, and the chain breaks if a stage fails.</p>
-        <p style="margin-top:24px;font-family:'Inconsolata',monospace;font-size:14px;color:var(--text-secondary);">Before: you &rarr; one tool, sequential.<br>After: you &rarr; five cohorts, parallel.</p>
-      </div>
-    </section>
-
-    <!-- ===== 11. COHORT CARDS ===== -->
-    <div class="cohort-section" data-romulus-animate>
-      <div class="cohort-grid">
-
-        <div class="cohort-card orchestrator">
-          <div class="cohort-avatar-placeholder">
-            <span class="cohort-emoji-badge">&#x1F43A;</span>
-          </div>
-          <div class="cohort-header">
-            <span class="cohort-name">ROMULUS</span>
-          </div>
-          <div class="cohort-status">OPERATIONAL &middot; ORCHESTRATOR</div>
-          <div class="cohort-question">"What's the mission, what's the priority, and who runs point right now?"</div>
-          <div class="cohort-workers">task-decomposer<br>router<br>gate-enforcer<br>synthesizer</div>
-          <div class="cohort-output-label">Output:</div>
-          <div class="cohort-output">Task routing, pipeline orchestration, cross-cohort synthesis</div>
-        </div>
-
-        <div class="cohort-card">
-          <div class="cohort-avatar-placeholder">
-            <span class="cohort-emoji-badge">&#x1F985;</span>
-          </div>
-          <div class="cohort-header">
-            <span class="cohort-name">CAESAR</span>
-          </div>
-          <div class="cohort-status">OPERATIONAL</div>
-          <div class="cohort-question">"What information is missing before we decide whether to build?"</div>
-          <div class="cohort-workers">researcher<br>analyst<br>competitor<br>synthesizer<br>monitor</div>
-          <div class="cohort-output-label">Output:</div>
-          <div class="cohort-output">Competitive landscapes, pricing intelligence, strategic gap analysis</div>
-        </div>
-
-        <div class="cohort-card">
-          <div class="cohort-avatar-placeholder">
-            <span class="cohort-emoji-badge">&#x1F3DB;</span>
-          </div>
-          <div class="cohort-header">
-            <span class="cohort-name">AUGUSTUS</span>
-          </div>
-          <div class="cohort-status">OPERATIONAL</div>
-          <div class="cohort-question">"What does the spec say, and what needs to be built first?"</div>
-          <div class="cohort-workers">architect<br>builder<br>reviewer<br>deployer</div>
-          <div class="cohort-output-label">Output:</div>
-          <div class="cohort-output">Shipped code, deployed apps, architecture specs</div>
-        </div>
-
-        <div class="cohort-card">
-          <div class="cohort-avatar-placeholder">
-            <span class="cohort-emoji-badge">&#x1F4B0;</span>
-          </div>
-          <div class="cohort-header">
-            <span class="cohort-name">VESPASIAN</span>
-          </div>
-          <div class="cohort-status">OPERATIONAL</div>
-          <div class="cohort-question">"What's the unit economics look like at scale?"</div>
-          <div class="cohort-workers">pricing-analyst<br>unit-economist<br>exit-modeler</div>
-          <div class="cohort-output-label">Output:</div>
-          <div class="cohort-output">Pricing models, unit economics, revenue strategy</div>
-        </div>
-
-        <div class="cohort-card">
-          <div class="cohort-avatar-placeholder">
-            <span class="cohort-emoji-badge">&#x1F6E3;</span>
-          </div>
-          <div class="cohort-header">
-            <span class="cohort-name">TRAJAN</span>
-          </div>
-          <div class="cohort-status">OPERATIONAL</div>
-          <div class="cohort-question">"Where does this audience live, and what's the fastest way to reach them?"</div>
-          <div class="cohort-workers">strategist<br>content-writer<br>partnerships</div>
-          <div class="cohort-output-label">Output:</div>
-          <div class="cohort-output">Launch plans, GTM strategy, content assets</div>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="section-divider"><span class="dot"></span></div>
-
-    <!-- ===== 12. PIPELINE — Gantt Chart ===== -->
-    <div class="pipeline-section" data-romulus-animate>
-      <div class="section-label">~/legion/pipeline.md</div>
-      <h2 class="section-heading">The Pipeline</h2>
-      <div class="section-body" style="margin-bottom:24px;">A prompt enters. The system classifies, routes, and chains five cohorts automatically. Each stage has a quality gate. The total cycle time is measured and logged.</div>
-      <div class="gantt-chart" id="ganttChart">
-        <div class="gantt-row">
-          <div class="gantt-label"><span class="emoji">⚔️</span> Caesar</div>
-          <div class="gantt-track"><div class="gantt-bar caesar"></div></div>
-          <div class="gantt-time">2m 23s</div>
-        </div>
-        <div class="gantt-row gate">
-          <div class="gantt-label"><span class="emoji" style="color:#22c55e">✓</span> Gate</div>
-          <div class="gantt-track"><div class="gantt-bar gate gate-1"></div></div>
-          <div class="gantt-time">10s</div>
-        </div>
-        <div class="gantt-row">
-          <div class="gantt-label"><span class="emoji">🏛</span> Augustus</div>
-          <div class="gantt-track"><div class="gantt-bar augustus"></div></div>
-          <div class="gantt-time">5m 42s</div>
-        </div>
-        <div class="gantt-row gate">
-          <div class="gantt-label"><span class="emoji" style="color:#22c55e">✓</span> Gate</div>
-          <div class="gantt-track"><div class="gantt-bar gate gate-2"></div></div>
-          <div class="gantt-time">5s</div>
-        </div>
-        <div class="gantt-row">
-          <div class="gantt-label"><span class="emoji">💰</span> Vespasian</div>
-          <div class="gantt-track"><div class="gantt-bar vespasian"></div></div>
-          <div class="gantt-time">48s</div>
-        </div>
-        <div class="gantt-row gate">
-          <div class="gantt-label"><span class="emoji" style="color:#22c55e">✓</span> Gate</div>
-          <div class="gantt-track"><div class="gantt-bar gate gate-3"></div></div>
-          <div class="gantt-time">2s</div>
-        </div>
-        <div class="gantt-row">
-          <div class="gantt-label"><span class="emoji">🛣</span> Trajan</div>
-          <div class="gantt-track"><div class="gantt-bar trajan"></div></div>
-          <div class="gantt-time">31s</div>
-        </div>
-        <div class="gantt-row total">
-          <div class="gantt-label"><span class="emoji" style="color:#fff">🔥</span> Total</div>
-          <div class="gantt-track"><div class="gantt-bar total"></div></div>
-          <div class="gantt-time" style="color:var(--amber);">7m 45s</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="section-divider"><span class="dot"></span></div>
-
-    <!-- ===== 13-16. EXPERIMENTS ===== -->
-    <div class="experiment-section">
-
-      <!-- 13. Experiment 1: Caesar Speed -->
-      <div class="experiment-card" data-romulus-animate>
-        <div class="experiment-label">~/legion/experiments/01-caesar-speed.md</div>
-        <h3 class="experiment-heading">Caesar &mdash; Research Speed</h3>
-        <div class="experiment-comparison">
-          <div>
-            <div class="experiment-col-label">Control</div>
-            <div class="experiment-col-text">~3 hours of manual competitive research, web searches, pricing page audits, and synthesis.</div>
-          </div>
-          <div>
-            <div class="experiment-col-label result-label">Result</div>
-            <div class="experiment-col-text">Five specialized workers produce a ranked competitive landscape with pricing intelligence and strategic gaps in under three minutes.</div>
-          </div>
-        </div>
-        <div class="experiment-metric-callout">
-          <div class="experiment-metric">2.4 min</div>
-          <div class="experiment-metric-context">vs ~3 hours manual</div>
-        </div>
-        <div class="experiment-body">Under three minutes, five specialized workers produced a competitive landscape that would have required hours of manual research. This brief directly informed the decision to prioritize Caveat over three other ideas. Caveat shipped three weeks later.</div>
-        <div class="experiment-insight"><strong style="color:#fff;">Insight:</strong> Specialized agents don't outperform generalists because the underlying models are better. They perform better because the context and output constraints are tuned for one specific question.</div>
+        <p>That was the floor. Everything since has been earned through a real failure.</p>
       </div>
 
-      <!-- 14. Experiment 2: Memory Compounding -->
-      <div class="experiment-card" data-romulus-animate>
-        <div class="experiment-label">~/legion/experiments/02-memory-compound.md</div>
-        <h3 class="experiment-heading">Memory Compounding</h3>
-        <div class="experiment-comparison">
-          <div>
-            <div class="experiment-col-label">Run 1 (Forbidden)</div>
-            <div class="experiment-col-text">0 entities in the knowledge graph. Every task starts blind.</div>
-          </div>
-          <div>
-            <div class="experiment-col-label result-label">Run 3 (Alexa Portfolio)</div>
-            <div class="experiment-col-text">36 entities. 33 relationships. The system loaded prior context from Forbidden, Chronicle, and Legion's own architecture notes before Caesar's workers even started.</div>
-          </div>
+      <!-- Memory Problem -->
+      <div class="sub-act" data-romulus-animate>
+        <div class="sub-act-tag">// memory</div>
+        <h3 class="sub-act-heading">The Memory Problem</h3>
+        <div class="prose">
+          <p><code>MEMORY.md</code> is a flat file. Sessions don't carry context automatically &mdash; you have to design memory. What gets written, when, by whom, in what format. The early daily notes were sparse. Project files were scattered. Nothing linked to anything else.</p>
+
+          <p>The first real upgrade was Obsidian. A vault &mdash; <code>roma-eterna/romulus/</code> &mdash; became the primary memory substrate. Daily notes in <code>03-Daily/</code>, project files in <code>02-Projects/</code>, decisions in <code>04-Decisions/</code>. Backlinks, graph view, semantic search across the whole thing. A knowledge base I could open and read myself &mdash; shared memory between me and the system, not just agent-side persistence.</p>
         </div>
-        <div class="experiment-metric-callout">
-          <div class="experiment-metric">36 entities</div>
-          <div class="experiment-metric-context">33 relationships</div>
-        </div>
-        <div class="experiment-body">The difference between the first task and the third was that the system had 36 prior data points from two completed projects. By the sixth project, Caesar was surfacing competitive context I hadn't explicitly asked for.</div>
-        <div class="experiment-insight"><strong style="color:#fff;">Insight:</strong> The knowledge graph only becomes useful after a threshold &mdash; roughly three projects for our dataset. Before that, it's overhead. After that, it pays for itself.</div>
+        <div class="pull-quote">Good product infrastructure is legible to the humans using it, not just to the machines running it.</div>
       </div>
 
-      <!-- 15. Experiment 3: Synthesizer Fix -->
-      <div class="experiment-card" data-romulus-animate>
-        <div class="experiment-label">~/legion/experiments/03-synth-fix.md</div>
-        <h3 class="experiment-heading">The Synthesizer Fix</h3>
-        <div class="experiment-comparison">
-          <div>
-            <div class="experiment-col-label">Problem</div>
-            <div class="experiment-col-text">The synthesizer worker had a 21-minute timeout. It was outputting the full raw research from every upstream worker &mdash; thousands of words of unfiltered data dump.</div>
-          </div>
-          <div>
-            <div class="experiment-col-label result-label">Fix</div>
-            <div class="experiment-col-text">"KEY FINDINGS" extraction constraint in the system prompt. Output only the 5-8 most important findings. No fluff. No restating the question.</div>
-          </div>
+      <!-- Model Problem -->
+      <div class="sub-act" data-romulus-animate>
+        <div class="sub-act-tag">// model</div>
+        <h3 class="sub-act-heading">The Model Problem</h3>
+        <div class="prose">
+          <p>April 9, 2026. A heavy coding session on MiniMax M2.7 &mdash; 205K context window, which seemed like enough. The session hit 338 messages and 2.5MB. The context overflowed. Three compaction events fired in sequence. Six consecutive edit tool failures &mdash; the model was matching against stale text that no longer existed in the file. The session was gone.</p>
+
+          <p>The lesson was familiar: the failure mode was architectural, not accidental. Model selection is infrastructure.</p>
         </div>
-        <div class="experiment-metric-callout">
-          <div class="experiment-metric">48 seconds</div>
-          <div class="experiment-metric-context">down from 21 min</div>
+        <div class="pull-quote">Picking the wrong model for the wrong job is a design decision that produces failures that look like AI problems but are problems you built yourself into.</div>
+        <div class="prose">
+          <p>After April 9: Grok 4 Fast for coding sessions &mdash; 2M context window. Qwen 3.6 Plus for daily conversation and cron jobs &mdash; cheap, fast, right-sized. Claude Code with Opus 4.7 via subscription for all implementation, never the API. Each model has a defined job, a cost budget, and a context ceiling. The routing rules live in the vault. Every new session starts from them.</p>
         </div>
-        <div class="experiment-body">The fix was a single constraint in the system prompt: extract only the 5&ndash;8 most important findings. Output dropped to a few paragraphs. Processing time dropped by 80%.</div>
-        <div class="experiment-insight"><strong style="color:#fff;">Insight:</strong> Most prompt engineering is subtraction. The synthesizer wasn't failing because it lacked instruction &mdash; it was failing because it had too much to work with.</div>
       </div>
 
-      <!-- 16. Experiment 4: VOIDBREAKER -->
-      <div class="experiment-card" data-romulus-animate>
-        <div class="experiment-label">~/legion/experiments/04-voidbreaker.md</div>
-        <h3 class="experiment-heading">VOIDBREAKER &mdash; One-Shot Build</h3>
-        <div class="experiment-comparison">
-          <div>
-            <div class="experiment-col-label">Prompt</div>
-            <div class="experiment-col-text">"Build a web-based asteroid shooter with retro CRT aesthetics, mobile touch controls, and a void-break mechanic."</div>
-          </div>
-          <div>
-            <div class="experiment-col-label result-label">Result</div>
-            <div class="experiment-col-text">Touch joystick. Particle effects. Game loop. Deployed to GitHub Pages.</div>
-          </div>
-        </div>
-        <div class="experiment-metric-callout">
-          <div class="experiment-metric">1,047 lines</div>
-          <div class="experiment-metric-context">one prompt, one build</div>
-        </div>
-        <div class="experiment-body">One prompt, one build session, deployed. The build was reviewed before shipping and passed on the first pass.</div>
-        <div class="experiment-insight"><strong style="color:#fff;">Insight:</strong> The important part isn't the output size &mdash; it's that Caesar's competitive research on the game genre was already loaded as context before Augustus touched a single file. The pipeline works end to end.</div>
-      </div>
-    </div>
+      <!-- Machine Problem -->
+      <div class="sub-act" data-romulus-animate>
+        <div class="sub-act-tag">// machine</div>
+        <h3 class="sub-act-heading">The Machine Problem</h3>
+        <div class="prose">
+          <p>The MacBook Pro was doing everything &mdash; running the gateway, running cron jobs, running overnight Claude Code sessions &mdash; on a machine that needed to sleep, travel, and hold a full-time job.</p>
 
-    <div class="section-divider"><span class="dot"></span></div>
+          <p>March 30, 2026: Mac Mini migration. A dedicated machine &mdash; <code>romulus-mini</code> &mdash; always on. Auto-login enabled, sleep disabled, FileVault on. A 2TB external SSD for builds, sessions, and storage.</p>
 
-    <!-- ===== 17. WHAT BROKE — Legion Era ===== -->
-    <section class="rom-section" data-romulus-animate>
-      <div class="section-label">~/legion/lessons.md</div>
-      <div class="broke-row">
-        <h2 class="section-heading">What Broke &mdash; Legion Era</h2>
-        <span class="broke-tag">TIMEOUT</span>
+          <p>The morning brief stopped disappearing when the laptop lid closed. Claude Code ran while I slept. Background work became actually background.</p>
+        </div>
       </div>
-      <div class="section-body">
-        <div class="broke-item">
-          <div class="broke-item-title">iOS Build Timeout</div>
-          <p>Augustus uses Claude Code CLI to build native Swift apps. The sandbox has a 15-minute timeout. Scaffolding a real iOS project with SwiftUI, Speech framework, and AI integration takes 20+ minutes. Architectural limitation, not a fixable bug. Workaround: generate key files directly and scaffold manually.</p>
+
+      <!-- Morning Brief Problem -->
+      <div class="sub-act" data-romulus-animate>
+        <div class="sub-act-tag">// brief</div>
+        <h3 class="sub-act-heading">The Morning Brief Problem</h3>
+        <div class="prose">
+          <p>For weeks the morning brief was delivering R train departures from Times Square instead of Prospect Ave.</p>
+
+          <p><code>R16</code> &mdash; the stop ID that looked right in the data &mdash; is Times Square. <code>R34N</code> is Prospect Ave northbound. I had to pull the MTA's GTFS static schedule and cross-reference it manually before the data could be trusted.</p>
         </div>
-        <div class="broke-item">
-          <div class="broke-item-title">Bot-to-Bot Mentions Blocked</div>
-          <p>Discord limits self-bots. The cohort bots can't reliably @mention each other for handoffs. Workaround: database-driven event routing with polling.</p>
+        <div class="pull-quote">Plausible-looking data is not verified data. That's a lesson that applies equally to product analytics, user research, and AI output.</div>
+        <div class="prose">
+          <p>It lives in the vault now. The brief has served the right station ever since.</p>
         </div>
-        <div class="broke-item">
-          <div class="broke-item-title">Alias Matching Contamination</div>
-          <p>The memory alias matcher for project notes was too loose. "Asteroid game" matched "party game" via the keyword "game," loading Forbidden.md as context for an unrelated build. Fix: word-boundary regex and expanded stop words.</p>
+      </div>
+
+      <!-- Memory Backend -->
+      <div class="sub-act" data-romulus-animate>
+        <div class="sub-act-tag">// backend</div>
+        <h3 class="sub-act-heading">The Memory Backend</h3>
+        <div class="prose">
+          <p>April 2026. The Obsidian vault was connected to QMD as the indexed primary memory backend. Not just persistent files &mdash; semantic search across every daily note, project file, and decision. Before each session, the system queries the vault. The context that comes back reflects the full history of a project, not just the last conversation.</p>
+        </div>
+        <div class="pull-quote">The vault is the brain. Sessions are the work. That split is what makes the system compound over time rather than reset.</div>
+      </div>
+
+      <!-- Delegation Pattern -->
+      <div class="sub-act" data-romulus-animate>
+        <div class="sub-act-tag">// delegation</div>
+        <h3 class="sub-act-heading">The Delegation Pattern</h3>
+        <div class="prose">
+          <p>The pattern that governs everything now:</p>
+        </div>
+
+        <ol class="pattern-list">
+          <li>I give direction &mdash; the goal, the constraints, the judgment calls.</li>
+          <li>Romulus writes the spec or prompt file.</li>
+          <li>Claude Code implements against the codebase.</li>
+          <li>Romulus verifies, commits, pushes.</li>
+          <li>Romulus reports back.</li>
+        </ol>
+
+        <div class="prose" style="margin-top: 36px;">
+          <p>Production code isn't written in the main session. Specs and decisions are. This keeps context clean, keeps implementation in the model built for it, and keeps me in the role I should be in: reviewing diffs and making calls, not writing boilerplate.</p>
+
+          <p>The architecture didn't arrive fully formed. It was earned, upgrade by upgrade, from February to May &mdash; each change motivated by a real breakdown in the version before it.</p>
         </div>
       </div>
     </section>
 
     <div class="section-divider"><span class="dot"></span></div>
 
-    <!-- ===== 18. WHAT'S NEXT ===== -->
-    <section class="rom-section" data-romulus-animate>
-      <div class="section-label">~/legion/forward.md</div>
-      <h2 class="section-heading">What's Next</h2>
-      <div class="section-body">
-        <p>The current version works for research and build workflows. The next phase is connecting the pipeline to live business data and automating distribution.</p>
+    <!-- ===== ACT 3 — A TUESDAY ===== -->
+    <section class="act" data-romulus-animate>
+      <div class="act-label">Act 03</div>
+      <h2 class="act-title">A Tuesday</h2>
+
+      <div class="prose">
+        <p>The alarm doesn't fire at 8am. The morning brief does.</p>
+
+        <p>By the time I open Discord on my phone, a message is waiting. NWS weather for Park Slope. R train departures from Prospect Ave northbound toward Canal St. Commute score, 1&ndash;10. Then three curated product signals, filtered for actual signal &mdash; most market noise gets cut before it reaches me.</p>
+
+        <p>I read it on the train. Twenty-six minutes, Prospect Ave to Canal St.</p>
+
+        <p>At Daylight I'm running product &mdash; decisions, roadmaps, team, stakeholders. The day job is demanding and full.</p>
+
+        <p>By 10pm I'm back on Discord. A product question. A half-formed spec. A thought on how a UX flow should work. Responses come back in seconds, and they have context &mdash; not just from this conversation, but from the last three weeks of decisions in the vault.</p>
+
+        <p>A prompt file gets written to the workspace. I type: <em>run it.</em></p>
+
+        <p>Claude Code opens. The session starts. By midnight there's a diff. By 2am a commit has landed. By morning a Vercel preview URL is waiting.</p>
+
+        <p>GitHub Pages for fast proofs of concept. Vercel for real products with staging and production branches. Cron jobs running overnight as the standing team. Discord as the command surface from anywhere.</p>
+
+        <p>And it compounds.</p>
       </div>
-      <div class="forward-grid">
-        <div class="forward-card">
-          <div class="forward-card-title">Revenue Tracking</div>
-          <div class="forward-card-body">Vespasian tracking actual Stripe revenue &mdash; not modeling hypothetical MRR, but watching real numbers move.</div>
-        </div>
-        <div class="forward-card">
-          <div class="forward-card-title">Auto-Posting</div>
-          <div class="forward-card-body">Trajan auto-posting to X &mdash; the launch assets it produces are already write-ready. The missing piece is the posting API.</div>
-        </div>
-        <div class="forward-card">
-          <div class="forward-card-title">Ambient Monitoring</div>
-          <div class="forward-card-body">Caesar ambient monitoring &mdash; flagging when a competitor changes pricing, ships a feature, or gets mentioned in a relevant community.</div>
-        </div>
-        <div class="forward-card">
-          <div class="forward-card-title">LEGIO Dashboard</div>
-          <div class="forward-card-body">A LEGIO command dashboard replacing the Discord terminal. Real-time cohort status. Active pipeline tasks. Memory graph visualization.</div>
-        </div>
-      </div>
-      <div class="thesis-restate">The right model for AI-assisted product work isn't a single brilliant assistant. It's a disciplined force with clear specializations, shared memory, and a single command structure.</div>
+
+      <div class="pull-quote">The system I'm working with in May is materially more capable than the one from February &mdash; not because the software was updated, but because the context accumulated, decision by decision, failure by failure.</div>
     </section>
 
     <div class="section-divider"><span class="dot"></span></div>
 
-    <!-- ===== 19. CONCLUSION ===== -->
-    <section class="rom-section" data-romulus-animate>
-      <div class="section-label">~/romulus/conclusion.md</div>
-      <h2 class="section-heading">What We've Learned</h2>
-      <div class="section-body">
-        <p>The system works because it remembers. Everything else &mdash; the cohorts, the pipeline, the routing &mdash; is infrastructure built on top of persistent memory. Without the Obsidian vault as a shared knowledge base, none of this would be possible. The lesson: if your AI system doesn't have memory, it doesn't have a foundation.</p>
-        <p>The most important design decisions were about what to restrict, not what to enable. Limiting each cohort to its specific question. Restricting synthesizers to KEY FINDINGS only. Keeping humans in the approval loop for build specs. Constraints make agents productive.</p>
-        <p>The system has been running for 69 days. It ships on schedule, runs every morning, and knows every project I've touched. The next test is scaling it &mdash; not in complexity, but in impact. Can this architecture support multiple concurrent projects? Can it connect directly to business metrics? Those are the questions for the next phase.</p>
-      </div>
+    <!-- ===== ACT 4 — THE WORK ===== -->
+    <section class="act" data-romulus-animate>
+      <div class="act-label">Act 04</div>
+      <h2 class="act-title">The Work</h2>
+
+      <!-- Project 01 — Chronicle -->
+      <article class="project" data-romulus-animate>
+        <div class="project-label">Project 01</div>
+        <h3 class="project-name">Chronicle</h3>
+        <p class="project-tagline">One day, on a phone, through Discord.</p>
+        <p class="project-status">Live at <a href="https://thischronicle.com" target="_blank" rel="noopener">thischronicle.com</a>.</p>
+
+        <div class="prose">
+          <p>One historical event per day. One image. Guess the year in three attempts. Monday is warm &mdash; two clues, guiding. Sunday has none.</p>
+
+          <p>The product design is deliberate down to the difficulty arc. Monday eases you in. Wednesday starts to pinch. Saturday's clue is almost poetic &mdash; oblique enough to make you feel something when you get it. Sunday is prestige mode: the image alone, no context, no help. That progression isn't decoration, it's the retention mechanic. The kind of detail that gets designed in, not bolted on.</p>
+
+          <p>The spec was locked March 29, 2026. The build happened the next day &mdash; not at a desk. On my phone, through Discord, with Romulus coordinating and Claude Code running in the background. By end of day: a working Next.js app deployed to Vercel, 90 puzzles seeded, complete scoring logic, share card, stats modal, full difficulty arc across seven days.</p>
+
+          <p>One day.</p>
+
+          <p>The game design, editorial decisions, difficulty curve, and acquisition thesis all required judgment. The implementation didn't require my hands on a keyboard.</p>
+        </div>
+
+        <div class="pull-quote">The longer play: Chronicle is built for a specific exit. The exit is part of the product design.</div>
+
+        <div class="prose">
+          <p>Clean Next.js code from day one. <code>localStorage</code>-only state &mdash; the Wordle model, pre-acquisition. Retention metrics instrumented for D7/D30/D90. No paid tier for an acquirer to unwind. NYT Games is a $9B business with no history game. That's the thesis.</p>
+        </div>
+      </article>
+
+      <!-- Project 02 — Forbidden -->
+      <article class="project" data-romulus-animate>
+        <div class="project-label">Project 02</div>
+        <h3 class="project-name">Forbidden</h3>
+        <p class="project-tagline">Research as product design.</p>
+        <p class="project-status">Live at <a href="https://playforbidden.com" target="_blank" rel="noopener">playforbidden.com</a>.</p>
+
+        <div class="prose">
+          <p>Forbidden started as a question about a gap in the market: the mobile party game space has Heads Up! and very little else. The tabletop space has Taboo, but nobody has rethought it seriously for phones. There was clearly something there. The question was what, exactly.</p>
+
+          <p>I ran the initial product thesis through three AI models independently &mdash; Grok, ChatGPT, and Romulus &mdash; each asked to pressure-test it separately and come back with where it was wrong. The answers converged around a contradiction with the original premise.</p>
+
+          <p>Forbidden isn't digital Taboo. It isn't a Heads Up clone. It's a <em>constraint-based pass-the-phone party game</em> &mdash; one player clues under verbal constraint while the group guesses simultaneously in real time. The game's tension comes from steering a room to an answer while navigating the forbidden words. That's a distinct product slot: different social dynamic, different expansion surface, different monetization path than either comparison.</p>
+        </div>
+
+        <div class="pull-quote">The framing came from the research, not the starting assumption. The research changed the product shape before any code changed.</div>
+
+        <div class="prose">
+          <p>That's the part I find most useful about working this way &mdash; having a system that can pressure-test a thesis from multiple angles before I've committed to building anything. The product design happens earlier and the builds are more intentional because of it.</p>
+
+          <p>Current state: 862-card corpus across six themed decks, a fake-door funnel measuring iOS intent, live at <code>playforbidden.com</code>. The web version is the signal layer. The iOS build waits for signal to justify it.</p>
+        </div>
+      </article>
+
+      <!-- Project 03 — Cherry Street Labs -->
+      <article class="project" data-romulus-animate>
+        <div class="project-label">Project 03</div>
+        <h3 class="project-name">Cherry Street Labs</h3>
+        <p class="project-tagline">The studio.</p>
+        <p class="project-status">Live at <a href="https://cherrystreetlabs.com" target="_blank" rel="noopener">cherrystreetlabs.com</a>.</p>
+
+        <div class="prose">
+          <p>Cherry Street Labs is the entity behind all of it &mdash; the one-person software studio housing Chronicle, Forbidden, and whatever comes next. The name is deliberately understated. The work is supposed to speak for itself.</p>
+
+          <p>The site itself is worth looking at. The hero is an ASCII fluid distortion shader &mdash; a dense monospace character grid running FBM noise with mouse-reactive metaball blobs, rendered in Three.js. The color field runs neon magenta through purple to cyan. It moves like liquid when you interact with it. No build step, no framework, no dependencies beyond a CDN include. Vanilla HTML and about 300 lines of JavaScript.</p>
+
+          <p>The effect came from a piece of generative art I came across &mdash; a WebGL fluid shader someone had posted. I wanted something that would feel technically interesting without feeling like a portfolio template, and without requiring a React app to load. The constraint of no build step was intentional: it forced the implementation to be lean and the result to be fast.</p>
+        </div>
+
+        <div class="pull-quote">Constraints as design inputs, not obstacles.</div>
+
+        <div class="prose">
+          <p>That's a consistent thread in how I build. <code>localStorage</code> for Chronicle because it removes the backend entirely and signals acquirability. GitHub Pages for fast proofs because zero infrastructure means zero friction. Vanilla JS for Cherry Street Labs because the right tool for a static brochure site isn't a framework.</p>
+
+          <p>Cherry Street Labs is the vehicle. The goal is building software that compounds &mdash; products designed to grow, acquire, or generate revenue without requiring a team. The studio framing is deliberate: each project shares infrastructure, decisions, and lessons. What I learn on Chronicle makes Forbidden sharper. What breaks on Forbidden teaches me something about Legion.</p>
+        </div>
+      </article>
+
+      <!-- Project 04 — Legion -->
+      <article class="project" data-romulus-animate>
+        <div class="project-label">Project 04</div>
+        <h3 class="project-name">Legion</h3>
+        <p class="project-tagline">The postmortem.</p>
+        <p class="project-status"><em>Phase 1 complete. Shelved.</em></p>
+
+        <div class="prose">
+          <p>Legion was the most ambitious attempt: a multi-agent orchestration layer running in Discord. Five cohorts, each answering one question and handing off to the next. Caesar &mdash; is this worth building? Augustus &mdash; build it and deploy it. Vespasian &mdash; map the path to $20K MRR. Trajan &mdash; distribute it. One prompt in Discord, fifteen minutes later: a live deployed product, a wealth strategy, and a launch plan.</p>
+
+          <p>Caesar worked well. Fast, clean, structured research and build specs. Augustus scaffolded projects and deployed to GitHub Pages. The Phase 1 architecture held.</p>
+
+          <p>What didn't hold: the seams. When the Noctis test &mdash; a native iOS Swift app &mdash; hit the fifteen-minute timeout on Augustus, the chain stopped. Vespasian and Trajan never ran. State didn't survive across the handoffs. There was no retry logic, no timeout tiering scaled to build complexity, no eval layer to catch when a handoff had silently degraded.</p>
+
+          <p>The architecture was sound. The execution substrate needed more rigor &mdash; durable task state, structured retry patterns, effort-tiered timeouts matched to scope, regression detection at the handoffs. None of that is exotic engineering. It's the careful, unsexy work that makes orchestration reliable rather than impressive in the right conditions.</p>
+        </div>
+
+        <div class="pull-quote">I learned more from Legion not fully working than I did from the parts that did.</div>
+
+        <div class="prose">
+          <p>The things that failed pointed directly at what the next version needs to get right. The lessons are documented in the vault. It's Phase 1 of a longer effort.</p>
+        </div>
+      </article>
     </section>
 
     <div class="section-divider"><span class="dot"></span></div>
 
-    <!-- ===== 20. WHAT WE SHIPPED ===== -->
-    <section class="rom-section" data-romulus-animate>
-      <div class="section-label">~/shipped/</div>
-      <h2 class="section-heading">What We Shipped</h2>
-      <div class="section-body">
-        <p>These projects either shipped through the Legion pipeline or were built alongside Romulus. All of them benefited from persistent memory and the research-to-build loop.</p>
+    <!-- ===== ACT 5 — THE OPEN QUESTION ===== -->
+    <section class="act" data-romulus-animate>
+      <div class="act-label">Act 05</div>
+      <h2 class="act-title">The Open Question</h2>
+
+      <div class="prose">
+        <p>February 3 to May 1. Eighty-seven days.</p>
+
+        <p>One person. One designed system. A Mac Mini running while I sleep. A morning brief landing before the train. Four projects shipped or in flight &mdash; one live and built for acquisition, one in active market validation, one studio holding the rest, one ambitious architectural attempt that taught more than it shipped.</p>
+
+        <p>The thing I keep returning to:</p>
       </div>
-      <div class="shipped-grid">
-        <div class="shipped-card" data-romulus-animate>
-          <span class="shipped-card-status live">LIVE</span>
-          <div class="shipped-card-name">Chronicle</div>
-          <a href="https://thischronicle.com" target="_blank" rel="noopener" class="shipped-card-url">thischronicle.com</a>
-          <div class="shipped-card-body">A daily history guessing game. One event per day, three chances to guess the year. Wordle-style digit feedback across five centuries. 90 hand-curated puzzles.</div>
-          <div class="shipped-card-tech">Next.js + Tailwind + Vercel</div>
-        </div>
-        <div class="shipped-card" data-romulus-animate>
-          <span class="shipped-card-status live">LIVE</span>
-          <div class="shipped-card-name">Caveat</div>
-          <a href="https://trycaveat.com" target="_blank" rel="noopener" class="shipped-card-url">trycaveat.com</a>
-          <div class="shipped-card-body">AI contract analyzer. Upload a PDF, get a risk report in 60 seconds. Built on Next.js 15 + Stripe + GPT-4o. Privacy-first &mdash; contracts are never stored.</div>
-          <div class="shipped-card-tech">Next.js + Stripe + OpenAI</div>
-        </div>
-        <div class="shipped-card" data-romulus-animate>
-          <span class="shipped-card-status live">LIVE</span>
-          <div class="shipped-card-name">Forbidden</div>
-          <a href="https://playforbidden.com" target="_blank" rel="noopener" class="shipped-card-url">playforbidden.com</a>
-          <div class="shipped-card-body">Taboo-style party game with AI-generated themed card decks. Pressure rounds, multiplayer scoring. Designed for groups, played in two minutes.</div>
-          <div class="shipped-card-tech">Next.js + Stripe + Vercel</div>
-        </div>
-        <div class="shipped-card" data-romulus-animate>
-          <span class="shipped-card-status live">LIVE</span>
-          <div class="shipped-card-name">BiblePath</div>
-          <a href="https://apps.apple.com/us/app/my-bible-path/id6759575186" target="_blank" rel="noopener" class="shipped-card-url">apps.apple.com/us/app/my-bible-path</a>
-          <div class="shipped-card-body">iOS app for daily scripture reading and habit building. Clean, focused, local-first design.</div>
-          <div class="shipped-card-tech">Swift + SwiftUI</div>
-        </div>
+
+      <div class="pull-quote">This compounds in a way that feels qualitatively different from just working faster. The decisions accumulate. The failures write lessons the whole system learns from.</div>
+
+      <div class="prose">
+        <p>The vault from May is materially richer than the one from February, and the next project starts from a higher floor because of it.</p>
+
+        <p>I've spent ten years developing the judgment to know what to build, how to scope it, how to make it feel right to the people using it. What's new is having infrastructure that extends that judgment &mdash; that holds context across weeks, surfaces the right decision history at the right moment, and executes overnight while I'm not at the keyboard.</p>
+
+        <p>What happens when a whole product team operates this way? When the AI layer isn't adopted off the shelf but designed &mdash; identity, memory, routing, delegation, all of it considered deliberately?</p>
+
+        <p>I think that's one of the more interesting product and organizational questions of the next few years. I don't have the full answer. But I've been building toward it.</p>
       </div>
     </section>
 
-    <div style="height:80px;"></div>
+    <!-- ===== BYLINE / FOOTER ===== -->
+    <footer class="byline" data-romulus-animate>
+      <div class="byline-rule"></div>
+      <div class="name">Mike Battaglia</div>
+      <div>Senior PM at Daylight <span class="sep">&middot;</span> Founder, Cherry Street Labs</div>
+      <div>Park Slope, Brooklyn <span class="sep">&middot;</span> <a href="index.html">mikebatts.net</a></div>
+    </footer>
 
   </div>
 
   <script>
     (function() {
-      /* ===== PASSWORD GATE ===== */
+      /* ===== PASSWORD GATE (preserved verbatim) ===== */
       var PASSWORD = 'Sfogliatelle!';
       var SESSION_KEY = 'romulus_session';
       var SESSION_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
@@ -1586,8 +967,6 @@
         if (!isSession) saveSession();
         window.scrollTo(0, 0);
         initAnimations();
-        initTerminal();
-        initGantt();
       }
 
       if (!checkSession()) {
@@ -1598,8 +977,8 @@
 
       /* ===== SCROLL ANIMATIONS ===== */
       function initAnimations() {
+        var els = document.querySelectorAll('[data-romulus-animate]');
         if (!('IntersectionObserver' in window)) {
-          var els = document.querySelectorAll('[data-romulus-animate]');
           for (var i = 0; i < els.length; i++) els[i].classList.add('romulus-visible');
           return;
         }
@@ -1610,85 +989,10 @@
               observer.unobserve(entry.target);
             }
           });
-        }, { threshold: 0.08 });
-        var els = document.querySelectorAll('[data-romulus-animate]');
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
         for (var i = 0; i < els.length; i++) observer.observe(els[i]);
-      }
-
-      /* ===== TERMINAL ANIMATION — character-by-character typing with color swap ===== */
-      function initTerminal() {
-        var terminal = document.querySelector('.terminal-window');
-        if (!terminal || !('IntersectionObserver' in window)) return;
-
-        var typing = false;
-
-        function typeAndColor(lines, index, callback) {
-          if (index >= lines.length) {
-            if (callback) callback();
-            return;
-          }
-          var line = lines[index];
-          var text = line.getAttribute('data-text');
-          if (!text || text === '') {
-            setTimeout(function() { typeAndColor(lines, index + 1, callback); }, 100);
-            return;
-          }
-          line.innerHTML = '';
-          var charIndex = 0;
-          var cursor = document.createElement('span');
-          cursor.className = 'cursor';
-          cursor.textContent = '\u25AE';
-          line.appendChild(cursor);
-
-          function typeNext() {
-            if (charIndex < text.length) {
-              if (cursor.parentNode) cursor.parentNode.removeChild(cursor);
-              line.appendChild(document.createTextNode(text[charIndex]));
-              line.appendChild(cursor);
-              charIndex++;
-              setTimeout(typeNext, 14 + Math.random() * 8);
-            } else {
-              var html = line.getAttribute('data-html');
-              if (html) {
-                line.innerHTML = html;
-              }
-              setTimeout(function() { typeAndColor(lines, index + 1, callback); }, 180);
-            }
-          }
-          typing = true;
-          typeNext();
-        }
-
-        var observer = new IntersectionObserver(function(entries) {
-          entries.forEach(function(entry) {
-            if (entry.isIntersecting && !typing) {
-              var lines = terminal.querySelectorAll('.terminal-line');
-              typeAndColor(Array.prototype.slice.call(lines), 0, function() {
-                terminal.classList.add('glow');
-              });
-              observer.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.3 });
-        observer.observe(terminal);
-      }
-
-      /* ===== GANTT CHART ANIMATION ===== */
-      function initGantt() {
-        var chart = document.getElementById('ganttChart');
-        if (!chart || !('IntersectionObserver' in window)) return;
-
-        var observer = new IntersectionObserver(function(entries) {
-          entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-              chart.classList.add('lit');
-              observer.unobserve(chart);
-            }
-          });
-        }, { threshold: 0.3 });
-        observer.observe(chart);
       }
     })();
   </script>
-
-</body></html>
+</body>
+</html>
