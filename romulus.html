@@ -778,6 +778,288 @@
       .hero-meta { flex-direction: column; align-items: center; gap: 6px; }
       .hero-meta .dot { display: none; }
     }
+
+    /* ===== HERO VISUAL COMPOSITION ===== */
+    .hero-visual {
+      position: relative;
+      height: 480px;
+      max-width: 900px;
+      margin: 0 auto 80px;
+      overflow: hidden;
+    }
+    .hero-visual-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(ellipse 70% 50% at 30% 40%, rgba(184,134,11,0.08), transparent),
+        radial-gradient(ellipse 50% 60% at 70% 60%, rgba(198,123,92,0.06), transparent);
+    }
+    .hero-visual-overlay {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(184,134,11,0.035) 1px, transparent 1px);
+      background-size: 6px 6px;
+      mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black, transparent);
+      -webkit-mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black, transparent);
+    }
+    .hero-visual-frames {
+      position: absolute;
+      inset: 0;
+    }
+    .hero-frame {
+      position: absolute;
+      overflow: hidden;
+      border-radius: 8px;
+      border: 1px solid var(--rule-soft);
+      box-shadow: 0 8px 32px rgba(43,43,41,0.08);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+    }
+    .hero-frame:hover { transform: scale(1.03) !important; box-shadow: 0 16px 48px rgba(43,43,41,0.14); }
+    .hero-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(0.6) contrast(1.1) sepia(0.1);
+    }
+    .frame-1 { top: 5%; left: 5%; width: 35%; height: 70%; transform: rotate(-2deg); }
+    .frame-2 { top: 10%; right: 8%; width: 28%; height: 55%; transform: rotate(1.5deg); }
+    .frame-3 { bottom: 5%; left: 35%; width: 22%; height: 40%; transform: rotate(-1deg); z-index: 1; }
+
+    @media (max-width: 768px) {
+      .hero-visual { height: 340px; margin-bottom: 56px; }
+      .frame-1 { width: 45%; height: 60%; left: 0; top: 10%; }
+      .frame-2 { width: 35%; height: 45%; right: 0; top: 0; }
+      .frame-3 { width: 30%; height: 35%; left: 30%; bottom: 0; }
+    }
+
+    /* ===== TIMELINE SPINE ===== */
+    .timeline-spine {
+      display: flex;
+      gap: 0;
+      margin: 0 auto 48px;
+      max-width: var(--measure);
+      position: relative;
+      padding: 0 28px;
+    }
+    .timeline-spine::before {
+      content: '';
+      position: absolute;
+      top: 8px;
+      left: 60px;
+      right: 60px;
+      height: 1px;
+      background: var(--gold-border);
+    }
+    .timeline-node {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      position: relative;
+    }
+    .timeline-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 2px solid var(--bg);
+      box-shadow: 0 0 0 3px var(--gold-border);
+      flex-shrink: 0;
+    }
+    .timeline-date {
+      font-family: 'Inconsolata', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      .timeline-spine { flex-direction: column; align-items: flex-start; gap: 16px; padding: 0 32px; }
+      .timeline-spine::before { left: 44px; right: auto; top: 0; bottom: 0; height: auto; width: 1px; }
+      .timeline-node { flex-direction: row; gap: 16px; }
+    }
+
+    /* ===== FLOATING STATS ===== */
+    .stats-float {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto 80px;
+      padding: 0 32px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+    }
+    .stat-tile {
+      padding: 28px 28px 22px;
+      border-radius: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--rule-soft);
+      text-align: center;
+      flex: 0 0 auto;
+      min-width: 160px;
+      max-width: 200px;
+    }
+    .stat-number {
+      display: block;
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 42px;
+      font-weight: 400;
+      color: var(--text-primary);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-unit {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 8px;
+    }
+    .stat-label {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: var(--text-muted);
+      font-style: italic;
+      line-height: 1.4;
+    }
+    .tile-1 { transform: rotate(-1deg); }
+    .tile-2 { transform: rotate(0.8deg) translateY(-8px); }
+    .tile-3 { transform: rotate(-0.5deg) translateY(4px); }
+    .tile-4 { transform: rotate(1.2deg); }
+
+    @media (max-width: 600px) {
+      .stats-float { flex-direction: column; align-items: center; }
+      .stat-tile { max-width: 280px; width: 100%; transform: none !important; }
+    }
+
+    /* ===== PROJECT CARDS ===== */
+    .project-card {
+      background: var(--bg-dark);
+      border-radius: 16px;
+      overflow: hidden;
+      margin: 0 0 64px;
+      break-inside: avoid;
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 20px 60px rgba(26,25,22,0.12);
+    }
+    .project-card-cover {
+      width: 100%;
+      height: 240px;
+      overflow: hidden;
+      position: relative;
+    }
+    .project-card-cover::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, var(--bg-dark) 0%, transparent 50%);
+    }
+    .project-card-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.7) contrast(1.05);
+    }
+    .project-card-body {
+      padding: 32px 36px 40px;
+    }
+    .project-card-label {
+      font-family: 'Inconsolata', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+      display: block;
+    }
+    .project-card-name {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(26px, 4vw, 36px);
+      font-weight: 400;
+      color: var(--on-dark-primary);
+      line-height: 1.18;
+      margin-bottom: 6px;
+    }
+    .project-card-link {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--on-dark-secondary);
+      margin-bottom: 28px;
+      display: block;
+    }
+    .project-card-link a {
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(184,134,11,0.3);
+      transition: border-color 0.2s;
+    }
+    .project-card-link a:hover { border-color: var(--gold); }
+    .project-card-body p {
+      font-family: 'Inter', sans-serif;
+      font-size: 16.5px;
+      line-height: 1.78;
+      color: var(--on-dark-body);
+      margin-bottom: 1.3em;
+    }
+    .project-card-body p:last-child { margin-bottom: 0; }
+    .project-card-body em {
+      color: var(--on-dark-primary);
+      font-style: italic;
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.04em;
+    }
+    .project-card-body strong { color: var(--on-dark-primary); font-weight: 600; }
+    .project-card-body code {
+      background: rgba(184,134,11,0.16);
+      border: 1px solid rgba(184,134,11,0.28);
+      color: var(--gold);
+    }
+    .project-card-body .pull-quote {
+      color: var(--on-dark-primary);
+      border-left-color: var(--gold);
+      margin: 40px 0 40px 4px;
+      padding-left: 22px;
+    }
+
+    @media (max-width: 640px) {
+      .project-card { margin-bottom: 48px; border-radius: 12px; }
+      .project-card-cover { height: 180px; }
+      .project-card-body { padding: 26px 24px 32px; }
+      .project-card-name { font-size: 24px; }
+      .project-card-body p { font-size: 15.5px; line-height: 1.72; }
+    }
+
+    /* ===== DECORATIVE MARKS ===== */
+    .deco-mark {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+      opacity: 0.5;
+      color: var(--gold);
+    }
+    .interstitial .deco-mark {
+      color: var(--on-dark-secondary);
+      opacity: 0.45;
+    }
+    .deco-laurel {
+      display: flex;
+      justify-content: center;
+      margin: -20px auto 20px;
+      color: var(--gold);
+    }
   </style>
 </head>
 <body class="romulus-page">
@@ -829,7 +1111,24 @@
       </div>
     </header>
 
+    <!-- ===== HERO VISUAL COMPOSITION ===== -->
+    <div class="hero-visual" data-romulus-animate>
+      <div class="hero-visual-bg"></div>
+      <div class="hero-visual-overlay"></div>
+      <div class="hero-visual-frames">
+        <div class="hero-frame frame-1"><img src="images/artifact.jpg" alt="Classical artifact" loading="lazy"></div>
+        <div class="hero-frame frame-2"><img src="images/Backgrounds-1.png" alt="Background texture" loading="lazy"></div>
+        <div class="hero-frame frame-3"><img src="images/01.png" alt="Artifact detail" loading="lazy"></div>
+      </div>
+    </div>
+
     <div class="section-divider"><span class="dot"></span></div>
+    <div class="deco-laurel">
+      <svg width="48" height="20" viewBox="0 0 48 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg" opacity="0.18">
+        <path d="M24 0c0 0-8 4-12 10s-4 10-4 10c4-2 8-2 12-1s8 2 12-1-2-6-4-10-4-8-12-10v0z"/>
+        <path d="M4 6c-2 2-2 4 0 6M44 6c2 2 2 4 0 6M12 2c-1 2-1 3 0 5M36 2c1 2 1 3 0 5"/>
+      </svg>
+    </div>
 
     <!-- ===== ACT 1 — THE IDENTITY ===== -->
     <section class="act" data-romulus-animate>
@@ -865,6 +1164,12 @@
     <aside class="interstitial" data-romulus-animate>
       <div class="interstitial-inner">
         <div class="interstitial-mark">Interlude I</div>
+        <div class="deco-mark">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
+            <path d="M8 12l2 2 4-4" />
+          </svg>
+        </div>
         <p class="interstitial-quote">&ldquo;You don't start with the technology. You start with the person using it.&rdquo;</p>
         <div class="interstitial-attribution">On Identity</div>
       </div>
@@ -877,6 +1182,33 @@
         The Build
         <span class="sub">February 3, 2026. First boot.</span>
       </h2>
+
+      <div class="timeline-spine">
+        <div class="timeline-node">
+          <span class="timeline-dot"></span>
+          <span class="timeline-date">Feb 3</span>
+        </div>
+        <div class="timeline-node">
+          <span class="timeline-dot"></span>
+          <span class="timeline-date">Apr 9</span>
+        </div>
+        <div class="timeline-node">
+          <span class="timeline-dot"></span>
+          <span class="timeline-date">Mar 30</span>
+        </div>
+        <div class="timeline-node">
+          <span class="timeline-dot"></span>
+          <span class="timeline-date">R34N</span>
+        </div>
+        <div class="timeline-node">
+          <span class="timeline-dot"></span>
+          <span class="timeline-date">Apr 2026</span>
+        </div>
+        <div class="timeline-node">
+          <span class="timeline-dot"></span>
+          <span class="timeline-date">pattern</span>
+        </div>
+      </div>
 
       <div class="prose">
         <p>MacBook Pro. OpenClaw installed. Discord integration wired to a private channel &mdash; <code>#roma-eterna</code>. First model: Nvidia Kimi K2.5, a free-tier LLM with 128K context. Flat <code>MEMORY.md</code> as the only persistent memory. The first response landed in Discord and came back clean.</p>
@@ -973,10 +1305,40 @@
       </div>
     </section>
 
+    <!-- ===== FLOATING STATS ===== -->
+    <section class="stats-float" data-romulus-animate>
+      <div class="stat-tile tile-1">
+        <span class="stat-number">87</span>
+        <span class="stat-unit">days</span>
+        <span class="stat-label">from first boot to this moment</span>
+      </div>
+      <div class="stat-tile tile-2">
+        <span class="stat-number">4</span>
+        <span class="stat-unit">products</span>
+        <span class="stat-label">shipped or in flight</span>
+      </div>
+      <div class="stat-tile tile-3">
+        <span class="stat-number">1</span>
+        <span class="stat-unit">system</span>
+        <span class="stat-label">designed to compound</span>
+      </div>
+      <div class="stat-tile tile-4">
+        <span class="stat-number">&infin;</span>
+        <span class="stat-unit">compounding</span>
+        <span class="stat-label">decisions accumulate</span>
+      </div>
+    </section>
+
     <!-- ===== INTERSTITIAL II ===== -->
     <aside class="interstitial" data-romulus-animate>
       <div class="interstitial-inner">
         <div class="interstitial-mark">Interlude II</div>
+        <div class="deco-mark">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
+            <path d="M8 12l2 2 4-4" />
+          </svg>
+        </div>
         <p class="interstitial-quote">&ldquo;The vault is the brain. Sessions are the work.&rdquo;</p>
         <div class="interstitial-attribution">On Memory</div>
       </div>
@@ -1011,6 +1373,12 @@
     </section>
 
     <div class="section-divider"><span class="dot"></span></div>
+    <div class="deco-laurel">
+      <svg width="48" height="20" viewBox="0 0 48 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg" opacity="0.18">
+        <path d="M24 0c0 0-8 4-12 10s-4 10-4 10c4-2 8-2 12-1s8 2 12-1-2-6-4-10-4-8-12-10v0z"/>
+        <path d="M4 6c-2 2-2 4 0 6M44 6c2 2 2 4 0 6M12 2c-1 2-1 3 0 5M36 2c1 2 1 3 0 5"/>
+      </svg>
+    </div>
 
     <!-- ===== ACT 4 — THE WORK ===== -->
     <section class="act" data-romulus-animate>
@@ -1018,13 +1386,15 @@
       <h2 class="act-title">The Work</h2>
 
       <!-- Project 01 — Chronicle -->
-      <article class="project" data-romulus-animate>
-        <div class="project-label">Project 01</div>
-        <h3 class="project-name">Chronicle</h3>
-        <p class="project-tagline">One day, on a phone, through Discord.</p>
-        <p class="project-status">Live at <a href="https://thischronicle.com" target="_blank" rel="noopener">thischronicle.com</a>.</p>
+      <article class="project-card" data-romulus-animate>
+        <div class="project-card-cover">
+          <img src="images/Chronicle-cover.jpg" alt="Chronicle" loading="lazy">
+        </div>
+        <div class="project-card-body">
+          <span class="project-card-label">Project 01</span>
+          <h3 class="project-card-name">Chronicle</h3>
+          <span class="project-card-link">Live at <a href="https://thischronicle.com" target="_blank" rel="noopener">thischronicle.com</a> &mdash; one day, on a phone, through Discord.</span>
 
-        <div class="prose">
           <p>One historical event per day. One image. Guess the year in three attempts. Monday is warm &mdash; two clues, guiding. Sunday has none.</p>
 
           <p>The product design is deliberate down to the difficulty arc. Monday eases you in. Wednesday starts to pinch. Saturday's clue is almost poetic &mdash; oblique enough to make you feel something when you get it. Sunday is prestige mode: the image alone, no context, no help. That progression isn't decoration, it's the retention mechanic. The kind of detail that gets designed in, not bolted on.</p>
@@ -1034,33 +1404,31 @@
           <p>One day.</p>
 
           <p>The game design, editorial decisions, difficulty curve, and acquisition thesis all required judgment. The implementation didn't require my hands on a keyboard.</p>
-        </div>
 
-        <div class="pull-quote">The longer play: Chronicle is built for a specific exit. The exit is part of the product design.</div>
+          <div class="pull-quote">The longer play: Chronicle is built for a specific exit. The exit is part of the product design.</div>
 
-        <div class="prose">
           <p>Clean Next.js code from day one. <code>localStorage</code>-only state &mdash; the Wordle model, pre-acquisition. Retention metrics instrumented for D7/D30/D90. No paid tier for an acquirer to unwind. NYT Games is a $9B business with no history game. That's the thesis.</p>
         </div>
       </article>
 
       <!-- Project 02 — Forbidden -->
-      <article class="project" data-romulus-animate>
-        <div class="project-label">Project 02</div>
-        <h3 class="project-name">Forbidden</h3>
-        <p class="project-tagline">Research as product design.</p>
-        <p class="project-status">Live at <a href="https://playforbidden.com" target="_blank" rel="noopener">playforbidden.com</a>.</p>
+      <article class="project-card" data-romulus-animate>
+        <div class="project-card-cover">
+          <img src="images/Forbidden-cover.jpg" alt="Forbidden" loading="lazy">
+        </div>
+        <div class="project-card-body">
+          <span class="project-card-label">Project 02</span>
+          <h3 class="project-card-name">Forbidden</h3>
+          <span class="project-card-link">Live at <a href="https://playforbidden.com" target="_blank" rel="noopener">playforbidden.com</a> &mdash; research as product design.</span>
 
-        <div class="prose">
           <p>Forbidden started as a question about a gap in the market: the mobile party game space has Heads Up! and very little else. The tabletop space has Taboo, but nobody has rethought it seriously for phones. There was clearly something there. The question was what, exactly.</p>
 
           <p>I ran the initial product thesis through three AI models independently &mdash; Grok, ChatGPT, and Romulus &mdash; each asked to pressure-test it separately and come back with where it was wrong. The answers converged around a contradiction with the original premise.</p>
 
           <p>Forbidden isn't digital Taboo. It isn't a Heads Up clone. It's a <em>constraint-based pass-the-phone party game</em> &mdash; one player clues under verbal constraint while the group guesses simultaneously in real time. The game's tension comes from steering a room to an answer while navigating the forbidden words. That's a distinct product slot: different social dynamic, different expansion surface, different monetization path than either comparison.</p>
-        </div>
 
-        <div class="pull-quote">The framing came from the research, not the starting assumption. The research changed the product shape before any code changed.</div>
+          <div class="pull-quote">The framing came from the research, not the starting assumption. The research changed the product shape before any code changed.</div>
 
-        <div class="prose">
           <p>That's the part I find most useful about working this way &mdash; having a system that can pressure-test a thesis from multiple angles before I've committed to building anything. The product design happens earlier and the builds are more intentional because of it.</p>
 
           <p>Current state: 862-card corpus across six themed decks, a fake-door funnel measuring iOS intent, live at <code>playforbidden.com</code>. The web version is the signal layer. The iOS build waits for signal to justify it.</p>
@@ -1068,23 +1436,23 @@
       </article>
 
       <!-- Project 03 — Cherry Street Labs -->
-      <article class="project" data-romulus-animate>
-        <div class="project-label">Project 03</div>
-        <h3 class="project-name">Cherry Street Labs</h3>
-        <p class="project-tagline">The studio.</p>
-        <p class="project-status">Live at <a href="https://cherrystreetlabs.com" target="_blank" rel="noopener">cherrystreetlabs.com</a>.</p>
+      <article class="project-card" data-romulus-animate>
+        <div class="project-card-cover">
+          <img src="images/artifact.jpg" alt="Cherry Street Labs" loading="lazy">
+        </div>
+        <div class="project-card-body">
+          <span class="project-card-label">Project 03</span>
+          <h3 class="project-card-name">Cherry Street Labs</h3>
+          <span class="project-card-link">Live at <a href="https://cherrystreetlabs.com" target="_blank" rel="noopener">cherrystreetlabs.com</a> &mdash; the studio.</span>
 
-        <div class="prose">
           <p>Cherry Street Labs is the entity behind all of it &mdash; the one-person software studio housing Chronicle, Forbidden, and whatever comes next. The name is deliberately understated. The work is supposed to speak for itself.</p>
 
           <p>The site itself is worth looking at. The hero is an ASCII fluid distortion shader &mdash; a dense monospace character grid running FBM noise with mouse-reactive metaball blobs, rendered in Three.js. The color field runs neon magenta through purple to cyan. It moves like liquid when you interact with it. No build step, no framework, no dependencies beyond a CDN include. Vanilla HTML and about 300 lines of JavaScript.</p>
 
           <p>The effect came from a piece of generative art I came across &mdash; a WebGL fluid shader someone had posted. I wanted something that would feel technically interesting without feeling like a portfolio template, and without requiring a React app to load. The constraint of no build step was intentional: it forced the implementation to be lean and the result to be fast.</p>
-        </div>
 
-        <div class="pull-quote">Constraints as design inputs, not obstacles.</div>
+          <div class="pull-quote">Constraints as design inputs, not obstacles.</div>
 
-        <div class="prose">
           <p>That's a consistent thread in how I build. <code>localStorage</code> for Chronicle because it removes the backend entirely and signals acquirability. GitHub Pages for fast proofs because zero infrastructure means zero friction. Vanilla JS for Cherry Street Labs because the right tool for a static brochure site isn't a framework.</p>
 
           <p>Cherry Street Labs is the vehicle. The goal is building software that compounds &mdash; products designed to grow, acquire, or generate revenue without requiring a team. The studio framing is deliberate: each project shares infrastructure, decisions, and lessons. What I learn on Chronicle makes Forbidden sharper. What breaks on Forbidden teaches me something about Legion.</p>
@@ -1092,13 +1460,15 @@
       </article>
 
       <!-- Project 04 — Legion -->
-      <article class="project" data-romulus-animate>
-        <div class="project-label">Project 04</div>
-        <h3 class="project-name">Legion</h3>
-        <p class="project-tagline">The postmortem.</p>
-        <p class="project-status"><em>Phase 1 complete. Shelved.</em></p>
+      <article class="project-card" data-romulus-animate>
+        <div class="project-card-cover">
+          <img src="images/Caveat-cover.jpg" alt="Legion" loading="lazy">
+        </div>
+        <div class="project-card-body">
+          <span class="project-card-label">Project 04</span>
+          <h3 class="project-card-name">Legion</h3>
+          <span class="project-card-link"><em>Phase 1 complete. Shelved.</em> The postmortem.</span>
 
-        <div class="prose">
           <p>Legion was the most ambitious attempt: a multi-agent orchestration layer running in Discord. Five cohorts, each answering one question and handing off to the next. Caesar &mdash; is this worth building? Augustus &mdash; build it and deploy it. Vespasian &mdash; map the path to $20K MRR. Trajan &mdash; distribute it. One prompt in Discord, fifteen minutes later: a live deployed product, a wealth strategy, and a launch plan.</p>
 
           <p>Caesar worked well. Fast, clean, structured research and build specs. Augustus scaffolded projects and deployed to GitHub Pages. The Phase 1 architecture held.</p>
@@ -1106,11 +1476,9 @@
           <p>What didn't hold: the seams. When the Noctis test &mdash; a native iOS Swift app &mdash; hit the fifteen-minute timeout on Augustus, the chain stopped. Vespasian and Trajan never ran. State didn't survive across the handoffs. There was no retry logic, no timeout tiering scaled to build complexity, no eval layer to catch when a handoff had silently degraded.</p>
 
           <p>The architecture was sound. The execution substrate needed more rigor &mdash; durable task state, structured retry patterns, effort-tiered timeouts matched to scope, regression detection at the handoffs. None of that is exotic engineering. It's the careful, unsexy work that makes orchestration reliable rather than impressive in the right conditions.</p>
-        </div>
 
-        <div class="pull-quote">I learned more from Legion not fully working than I did from the parts that did.</div>
+          <div class="pull-quote">I learned more from Legion not fully working than I did from the parts that did.</div>
 
-        <div class="prose">
           <p>The things that failed pointed directly at what the next version needs to get right. The lessons are documented in the vault. It's Phase 1 of a longer effort.</p>
         </div>
       </article>
@@ -1120,6 +1488,12 @@
     <aside class="interstitial" data-romulus-animate>
       <div class="interstitial-inner">
         <div class="interstitial-mark">Interlude III</div>
+        <div class="deco-mark">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
+            <path d="M8 12l2 2 4-4" />
+          </svg>
+        </div>
         <p class="interstitial-quote">&ldquo;The longer play: Chronicle is built for a specific exit. The exit is part of the product design.&rdquo;</p>
         <div class="interstitial-attribution">On The Work</div>
       </div>
