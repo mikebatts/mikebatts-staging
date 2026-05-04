@@ -61,19 +61,6 @@
     img, svg, video { max-width: 100%; display: block; }
 
     /* ============================================================
-       PAPER GRAIN — barely-there warmth across the entire page
-       ============================================================ */
-    .paper-grain {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 9997;
-      opacity: 0.45;
-      mix-blend-mode: multiply;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.62 0 0 0 0 0.55 0 0 0 0 0.42 0 0 0 0.07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    }
-
-    /* ============================================================
        VIDEO HARNESS — shared by hero, interstitial, and insets
        ============================================================ */
     .video-bg {
@@ -84,21 +71,17 @@
       object-fit: cover;
       z-index: 0;
     }
-    /* Hero: warm classical wash — cream tint, gentle desaturation */
+    /* Hero: natural — let the cream overlay handle the tint */
     .video-bg--hero {
-      filter: contrast(1.02) brightness(1.0) saturate(0.85) sepia(0.03);
+      filter: none;
     }
     /* Dark interstitial: cinematic, drives drama */
     .video-bg--dark {
       filter: contrast(1.08) brightness(0.62) saturate(0.85);
     }
-    /* Portrait insets: editorial, slightly desaturated */
+    /* Portrait insets: natural */
     .video-bg--inset {
-      filter: contrast(1.05) brightness(0.96) saturate(0.82) sepia(0.04);
-    }
-    /* Gate: very soft */
-    .video-bg--gate {
-      filter: contrast(1.0) brightness(1.05) saturate(0.62) sepia(0.10);
+      filter: none;
     }
 
     .scanlines-soft {
@@ -123,6 +106,16 @@
         transparent 3px
       );
     }
+    /* Inset videos: barely-perceptible scanlines, like the texture of an old photograph */
+    .video-frame .scanlines-soft {
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.015) 0px,
+        rgba(0, 0, 0, 0.015) 1px,
+        transparent 1px,
+        transparent 4px
+      );
+    }
 
     /* ============================================================
        PASSWORD GATE — Cream parchment vault
@@ -139,15 +132,6 @@
       overflow: hidden;
     }
     .romulus-gate.hidden { display: none; }
-    .gate-tint {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      background:
-        linear-gradient(180deg, rgba(248, 245, 239, 0.55) 0%, rgba(248, 245, 239, 0.65) 100%),
-        radial-gradient(ellipse at 50% 50%, transparent, rgba(248, 245, 239, 0.35) 80%);
-    }
 
     .gate-card {
       position: relative;
@@ -347,7 +331,7 @@
       overflow: hidden;
       background: var(--cream);
     }
-    /* Wash from bottom-cream up to clear video at top — smooth, single linear gradient */
+    /* Wash from bottom-cream up to clear video at top — smooth, natural blending */
     .hero-overlay {
       position: absolute;
       inset: 0;
@@ -355,13 +339,14 @@
       pointer-events: none;
       background:
         linear-gradient(180deg,
-          rgba(248, 245, 239, 0.10) 0%,
-          rgba(248, 245, 239, 0.05) 25%,
-          rgba(248, 245, 239, 0.15) 55%,
-          rgba(248, 245, 239, 0.45) 75%,
-          rgba(248, 245, 239, 0.85) 88%,
-          rgba(248, 245, 239, 0.95) 94%,
-          rgba(248, 245, 239, 1) 100%);
+          rgba(248, 245, 239, 0.0) 0%,
+          rgba(248, 245, 239, 0.0) 18%,
+          rgba(248, 245, 239, 0.12) 40%,
+          rgba(248, 245, 239, 0.40) 62%,
+          rgba(248, 245, 239, 0.72) 78%,
+          rgba(248, 245, 239, 0.90) 86%,
+          rgba(248, 245, 239, 1.0) 94%,
+          rgba(248, 245, 239, 1.0) 100%);
     }
     .hero-content {
       position: relative;
@@ -376,6 +361,7 @@
       text-transform: uppercase;
       color: var(--crimson);
       margin-bottom: 28px;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
     }
     .hero-mark {
       font-family: 'Source Serif 4', serif;
@@ -394,7 +380,7 @@
       letter-spacing: -0.014em;
       color: var(--ink);
       margin-bottom: 36px;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
     }
     .hero-title em {
       font-style: italic;
@@ -408,7 +394,7 @@
       color: var(--ink-soft);
       max-width: 680px;
       margin: 0 auto 48px;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
     }
     .hero-meta {
       display: flex;
@@ -452,40 +438,11 @@
     }
 
     /* ============================================================
-       SECTION DIVIDER — bronze + dot crest
-       ============================================================ */
-    .section-divider {
-      display: flex;
-      justify-content: center;
-      padding: 80px 0;
-      position: relative;
-    }
-    .section-divider .crest {
-      width: 64px;
-      height: 1px;
-      background: var(--bronze);
-      position: relative;
-    }
-    .section-divider .crest::before,
-    .section-divider .crest::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--bronze);
-      transform: translateY(-50%);
-    }
-    .section-divider .crest::before { left: -18px; }
-    .section-divider .crest::after { right: -18px; }
-
-    /* ============================================================
        ACT
        ============================================================ */
     .act {
       position: relative;
-      padding: 100px 32px;
+      padding: 120px 32px;
       max-width: 1180px;
       margin: 0 auto;
     }
@@ -544,11 +501,9 @@
     .prose code {
       font-family: 'Inconsolata', monospace;
       font-size: 14.5px;
-      background: var(--cream-deep);
       color: var(--crimson-deep);
-      padding: 2px 7px;
+      padding: 1px 5px;
       letter-spacing: 0.02em;
-      border: 1px solid var(--rule-soft);
     }
 
     .pull-quote {
@@ -717,9 +672,7 @@
       inset: 0;
       z-index: 1;
       pointer-events: none;
-      background:
-        linear-gradient(180deg, rgba(26, 25, 22, 0.78) 0%, rgba(26, 25, 22, 0.42) 40%, rgba(26, 25, 22, 0.86) 100%),
-        radial-gradient(ellipse at 50% 60%, rgba(139, 26, 26, 0.15), transparent 60%);
+      background: linear-gradient(180deg, rgba(26, 25, 22, 0.72) 0%, rgba(26, 25, 22, 0.38) 40%, rgba(26, 25, 22, 0.80) 100%);
     }
     /* Cream-to-dark ramp at top, dark-to-cream at bottom — smooth section blending */
     .cinematic-edge-top {
@@ -1077,20 +1030,9 @@
 <body>
 
   <!-- ============================================================
-       PAGE-WIDE PAPER GRAIN
-       ============================================================ -->
-  <div class="paper-grain" aria-hidden="true"></div>
-
-  <!-- ============================================================
-       PASSWORD GATE — Cream parchment vault, bath.mp4 softly behind
+       PASSWORD GATE — Cream parchment vault
        ============================================================ -->
   <div class="romulus-gate" id="gate">
-    <video class="video-bg video-bg--gate" autoplay muted loop playsinline disablepictureinpicture preload="auto" aria-hidden="true" poster="video-refs/bath_1s.jpg">
-      <source src="video-refs/bath.mp4" type="video/mp4">
-    </video>
-    <div class="gate-tint" aria-hidden="true"></div>
-    <div class="scanlines-soft" aria-hidden="true"></div>
-
     <div class="gate-card">
       <div class="gate-eyebrow">Roma Eterna</div>
       <div class="gate-mark">Romulus</div>
@@ -1143,8 +1085,6 @@
       <div class="scroll-cue">Scroll</div>
     </header>
 
-    <div class="section-divider"><span class="crest"></span></div>
-
     <!-- ============================================================
          ACT 1 — THE IDENTITY  (editorial: text + eterna.mp4 inset)
          ============================================================ -->
@@ -1194,8 +1134,6 @@
         </div>
       </div>
     </section>
-
-    <div class="section-divider"><span class="crest"></span></div>
 
     <!-- ============================================================
          ACT 2 — THE BUILD  (with pillars.mp4 inset mid-section)
@@ -1388,8 +1326,6 @@
       </div>
     </section>
 
-    <div class="section-divider"><span class="crest"></span></div>
-
     <!-- ============================================================
          ACT 4 — THE WORK
          ============================================================ -->
@@ -1499,8 +1435,6 @@
         </div>
       </article>
     </section>
-
-    <div class="section-divider"><span class="crest"></span></div>
 
     <!-- ============================================================
          ACT 5 — THE OPEN QUESTION
