@@ -244,12 +244,23 @@
       background: linear-gradient(
         180deg,
         rgba(10, 9, 8, 0.50) 0%,
-        rgba(10, 9, 8, 0.25) 35%,
-        rgba(10, 9, 8, 0.0) 55%,
-        rgba(10, 9, 8, 0.0) 70%,
-        var(--bg) 92%,
-        var(--bg) 100%
+        rgba(10, 9, 8, 0.15) 45%,
+        rgba(10, 9, 8, 0.0) 65%,
+        transparent 78%,
+        var(--bg) 78%
       );
+    }
+
+    /* ASCII dot transition band at hero bottom */
+    .hero-overlay::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      height: 8px;
+      bottom: calc(22% + 0px);
+      background-image: radial-gradient(circle, var(--ink) 0.5px, transparent 0.5px);
+      background-size: 6px 6px;
+      opacity: 0.15;
     }
 
     .hero-content {
@@ -528,10 +539,11 @@
         .cinematic-video {
       position: absolute;
       top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      height: 100%;
-      width: auto;
+      left: 0;
+      width: 100vw;
+      height: 100dvh;
+      object-fit: cover;
+      object-position: center center;
       z-index: 0;
     }
 
@@ -545,10 +557,12 @@
       font-family: 'Source Serif 4', serif;
       font-style: italic;
       font-size: clamp(24px, 4vw, 48px);
-      line-height: 1.30;
+      line-height: 1.35;
       color: rgba(255, 255, 255, 0.94);
       text-shadow: 0 2px 40px rgba(0, 0, 0, 0.50);
       margin-bottom: 20px;
+      width: 100%;
+      max-width: 1000px;
     }
     .cinematic-attr {
       font-family: 'Inconsolata', monospace;
@@ -742,7 +756,7 @@
         background: var(--rule);
         display: block;
       }
-      .cinematic { margin: 40px 0; min-height: 50vh; }
+      .cinematic-video { width: 100%; object-fit: cover; }
     }
 
     @media (max-width: 480px) {
@@ -768,6 +782,7 @@
       [data-romulus-animate] { opacity: 1; transform: none; }
       video { display: none !important; }
       .hero { background: var(--charcoal); }
+      .cinematic .cinematic-video { display: none; }
       .cinematic { background: var(--bg); }
       .cinematic-quote { color: var(--ink); text-shadow: none; }
       .cinematic-attr { color: var(--ink-4); }
