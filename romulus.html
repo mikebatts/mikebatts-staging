@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-wf-page="663100000000000000000000" data-wf-site="5dbdf5d45ad64f500c81ca1f" lang="en">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <title>Romulus &mdash; Mike Battaglia</title>
@@ -10,45 +10,53 @@
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
-  <script type="text/javascript">WebFont.load({google:{families:["Inconsolata:400,700","Inter:300,400,500,600,700","Inter Tight:300,400,500,600,700","Josefin Sans:300,400,500,600,700","Poppins:300,400,500,600,700"]}});</script>
-  <script src="https://use.typekit.net/sbl1ady.js" type="text/javascript"></script>
-  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&family=Inter:wght@300;400;500;600;700&family=Inconsolata:wght@400;500;700&display=swap" rel="stylesheet">
   <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon">
   <link href="images/webclip.png" rel="apple-touch-icon">
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57180566-1"></script>
-  <script type="text/javascript">window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','UA-57180566-1',{'anonymize_ip':false});</script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','UA-57180566-1',{'anonymize_ip':false});</script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-0HCHFJPP3W"></script>
-  <script type="text/javascript">window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0HCHFJPP3W');</script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0HCHFJPP3W');</script>
   <style>
-    /* ===== TOKENS ===== */
+    /* ============================================================
+       GRECO-FUTURISM — TOKENS
+       ============================================================ */
     :root {
       --bg: #F8F5EF;
-      --bg-card: #FFFFFF;
-      --bg-cream-deep: #F1ECE2;
+      --bg-warm: #F1ECDF;
+      --bg-card: #FBF8F1;
       --bg-dark: #1A1916;
+      --bg-dark-deep: #0F0E0C;
       --gold: #B8860B;
+      --gold-bright: #D4A017;
       --gold-deep: #8E6708;
       --gold-soft: rgba(184,134,11,0.10);
       --gold-border: rgba(184,134,11,0.30);
       --copper: #C67B5C;
+      --copper-deep: #A35E40;
+      --marble-vein: rgba(120,98,72,0.10);
       --text-primary: #2B2B29;
-      --text-secondary: #5A5854;
+      --text-secondary: #4F4D49;
       --text-muted: #8A8681;
       --rule: rgba(43,43,41,0.12);
       --rule-soft: rgba(43,43,41,0.07);
-      --on-dark-primary: rgba(255,255,255,0.94);
-      --on-dark-body: rgba(255,255,255,0.74);
-      --on-dark-secondary: rgba(255,255,255,0.55);
-      --on-dark-rule: rgba(255,255,255,0.16);
+      --on-dark-primary: rgba(245,242,234,0.96);
+      --on-dark-body: rgba(245,242,234,0.74);
+      --on-dark-muted: rgba(245,242,234,0.50);
+      --on-dark-rule: rgba(245,242,234,0.16);
       --measure: 680px;
+
+      /* Paper grain — fractal noise */
       --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.16 0 0 0 0 0.13 0 0 0 0 0.10 0 0 0 0.055 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+
+      /* Marble texture — turbulent vein pattern */
+      --marble: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012' numOctaves='3' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 0.47 0 0 0 0 0.38 0 0 0 0 0.28 0 0 0 0.10 0'/%3E%3CfeComposite in2='SourceGraphic' operator='in'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)' opacity='0.5'/%3E%3C/svg%3E");
     }
 
-    /* ===== RESET ===== */
+    /* ============================================================
+       RESET
+       ============================================================ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
 
     body.romulus-page {
@@ -61,11 +69,33 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       text-rendering: optimizeLegibility;
+      overflow-x: hidden;
     }
 
     ::selection { background: rgba(184,134,11,0.32); color: var(--text-primary); }
 
-    /* ===== PASSWORD GATE ===== */
+    /* ============================================================
+       ASCII HALFTONE OVERLAY — universal utility
+       ============================================================ */
+    .ascii-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: radial-gradient(circle, rgba(184,134,11,0.18) 0.5px, transparent 0.6px);
+      background-size: 4px 4px;
+    }
+    .ascii-overlay--dense {
+      background-image: radial-gradient(circle, rgba(245,242,234,0.22) 0.7px, transparent 0.8px);
+      background-size: 3px 3px;
+    }
+    .ascii-overlay--soft {
+      background-image: radial-gradient(circle, rgba(184,134,11,0.10) 0.5px, transparent 0.6px);
+      background-size: 5px 5px;
+    }
+
+    /* ============================================================
+       PASSWORD GATE — Classical Portico
+       ============================================================ */
     .romulus-gate {
       position: fixed;
       inset: 0;
@@ -78,83 +108,158 @@
       padding: 24px;
       overflow: hidden;
     }
-    .romulus-gate::before {
-      content: '';
+    .romulus-gate.hidden { display: none; }
+
+    /* Atmospheric light wash */
+    .gate-atmosphere {
       position: absolute;
       inset: 0;
-      background-image:
-        radial-gradient(ellipse 60% 50% at 50% 30%, rgba(184,134,11,0.10), transparent 70%),
-        radial-gradient(ellipse 80% 60% at 50% 90%, rgba(198,123,92,0.06), transparent 75%);
       pointer-events: none;
+      background-image:
+        radial-gradient(ellipse 70% 60% at 50% 30%, rgba(184,134,11,0.12), transparent 70%),
+        radial-gradient(ellipse 90% 70% at 50% 110%, rgba(198,123,92,0.08), transparent 75%);
     }
-    .romulus-gate.hidden { display: none; }
+
+    /* ASCII halftone behind portico */
+    .gate-halftone {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: radial-gradient(circle, rgba(184,134,11,0.12) 0.6px, transparent 0.8px);
+      background-size: 5px 5px;
+      mask-image: radial-gradient(ellipse 80% 90% at 50% 50%, black, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 90% at 50% 50%, black, transparent 75%);
+      opacity: 0.9;
+    }
+
+    /* Classical columns flanking the gate */
+    .gate-column {
+      position: absolute;
+      bottom: 0;
+      width: 90px;
+      height: min(90vh, 720px);
+      pointer-events: none;
+      opacity: 0.55;
+    }
+    .gate-column--left { left: 4vw; }
+    .gate-column--right { right: 4vw; transform: scaleX(-1); }
+
+    .gate-bust {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 380px;
+      max-width: 40vw;
+      pointer-events: none;
+      opacity: 0.10;
+      mix-blend-mode: multiply;
+    }
+    .gate-bust--left { left: -8vw; }
+    .gate-bust--right { right: -8vw; transform: translateY(-50%) scaleX(-1); }
 
     .gate-card {
       position: relative;
+      z-index: 2;
       background: var(--bg-card);
-      border: 1px solid var(--rule);
-      padding: 56px 48px 44px;
-      max-width: 440px;
+      background-image: var(--marble);
+      background-blend-mode: multiply;
+      padding: 64px 52px 48px;
+      max-width: 460px;
       width: 100%;
       text-align: center;
       box-shadow:
-        0 30px 80px rgba(43,43,41,0.10),
-        0 8px 24px rgba(43,43,41,0.06),
-        inset 0 0 0 6px rgba(248,245,239,0.6),
-        inset 0 0 0 7px rgba(184,134,11,0.18);
+        0 50px 120px rgba(43,43,41,0.16),
+        0 14px 40px rgba(43,43,41,0.08),
+        inset 0 0 0 1px rgba(184,134,11,0.12);
     }
+    /* Inner thin gold border */
     .gate-card::before {
       content: '';
       position: absolute;
-      inset: 14px;
-      border: 1px solid rgba(184,134,11,0.14);
+      inset: 12px;
+      border: 1px solid rgba(184,134,11,0.22);
+      pointer-events: none;
+    }
+    /* Outer hairline */
+    .gate-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid var(--rule);
       pointer-events: none;
     }
 
-    .gate-laurel {
-      width: 76px;
-      height: auto;
-      margin: 0 auto 22px;
-      display: block;
+    .gate-pediment {
+      position: absolute;
+      top: -42px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
       color: var(--gold);
       opacity: 0.85;
+    }
+
+    .gate-laurel {
+      width: 84px;
+      height: auto;
+      margin: 0 auto 20px;
+      display: block;
+      color: var(--gold);
+      opacity: 0.92;
     }
 
     .gate-mark {
       font-family: 'Source Serif 4', Georgia, serif;
       font-style: italic;
-      font-size: 38px;
+      font-size: 44px;
       font-weight: 400;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.005em;
       color: var(--text-primary);
       line-height: 1;
     }
 
     .gate-mark-sub {
       font-family: 'Inconsolata', monospace;
-      font-size: 11px;
+      font-size: 10.5px;
       color: var(--text-muted);
-      letter-spacing: 0.32em;
+      letter-spacing: 0.42em;
       text-transform: uppercase;
-      margin-top: 14px;
+      margin-top: 16px;
+      padding-left: 0.42em;
+      font-weight: 700;
     }
 
     .gate-rule {
-      width: 28px;
+      width: 36px;
       height: 1px;
       background: var(--gold);
-      margin: 24px auto 28px;
-      opacity: 0.7;
+      margin: 28px auto 30px;
+      opacity: 0.8;
+      position: relative;
     }
+    .gate-rule::before, .gate-rule::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 50%;
+      opacity: 0.6;
+    }
+    .gate-rule::before { left: -10px; }
+    .gate-rule::after { right: -10px; }
 
     .gate-label {
       font-family: 'Inconsolata', monospace;
-      font-size: 11px;
-      letter-spacing: 0.26em;
+      font-size: 10.5px;
+      letter-spacing: 0.32em;
       text-transform: uppercase;
       color: var(--gold-deep);
-      margin-bottom: 16px;
+      margin-bottom: 18px;
       font-weight: 700;
+      padding-left: 0.32em;
     }
 
     .gate-input {
@@ -163,37 +268,38 @@
       border: none;
       border-bottom: 1px solid var(--rule);
       border-radius: 0;
-      padding: 12px 4px;
+      padding: 14px 4px;
       font-family: 'Source Serif 4', Georgia, serif;
-      font-size: 18px;
+      font-size: 19px;
       color: var(--text-primary);
       text-align: center;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.08em;
       outline: none;
-      transition: border-color 0.25s;
+      transition: border-color 0.3s;
     }
     .gate-input::placeholder {
       color: var(--text-muted);
       font-style: italic;
       letter-spacing: 0.18em;
+      opacity: 0.7;
     }
     .gate-input:focus { border-color: var(--gold); }
 
     .gate-submit {
-      margin-top: 28px;
+      margin-top: 30px;
       display: inline-block;
       background: var(--text-primary);
       color: var(--bg);
       border: 1px solid var(--text-primary);
       border-radius: 999px;
-      padding: 13px 38px;
+      padding: 14px 42px;
       font-family: 'Inter', sans-serif;
       font-size: 11.5px;
       font-weight: 600;
-      letter-spacing: 0.22em;
+      letter-spacing: 0.26em;
       text-transform: uppercase;
       cursor: pointer;
-      transition: background 0.25s, border-color 0.25s, color 0.25s, transform 0.2s;
+      transition: background 0.3s, border-color 0.3s, color 0.3s, transform 0.2s;
     }
     .gate-submit:hover {
       background: var(--gold);
@@ -205,7 +311,7 @@
       font-family: 'Source Serif 4', Georgia, serif;
       font-style: italic;
       font-size: 14px;
-      color: var(--copper);
+      color: var(--copper-deep);
       margin-top: 18px;
       display: none;
       letter-spacing: 0.01em;
@@ -218,18 +324,39 @@
       40%,80%{transform:translateX(8px)}
     }
 
-    /* ===== CONTENT WRAPPER ===== */
+    .gate-foot {
+      position: absolute;
+      bottom: 28px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-family: 'Inconsolata', monospace;
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      font-weight: 700;
+      opacity: 0.55;
+      padding-left: 0.42em;
+    }
+
+    /* ============================================================
+       CONTENT WRAPPER
+       ============================================================ */
     .romulus-content { display: none; }
     .romulus-content.visible { display: block; }
 
-    /* ===== TOP NAV ===== */
+    /* ============================================================
+       NAV
+       ============================================================ */
     .romulus-nav {
-      padding: 22px 32px;
+      padding: 22px 36px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid var(--rule-soft);
       position: relative;
+      z-index: 2;
     }
     .romulus-nav::after {
       content: '';
@@ -237,8 +364,8 @@
       left: 50%;
       bottom: -3.5px;
       transform: translateX(-50%);
-      width: 6px;
-      height: 6px;
+      width: 7px;
+      height: 7px;
       background: var(--gold);
       border-radius: 50%;
       box-shadow: 0 0 0 4px var(--bg);
@@ -247,7 +374,7 @@
       font-family: 'Inter', sans-serif;
       font-size: 12px;
       font-weight: 500;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--text-secondary);
       text-decoration: none;
@@ -258,84 +385,136 @@
       font-family: 'Inconsolata', monospace;
       font-size: 11px;
       color: var(--text-muted);
-      letter-spacing: 0.22em;
+      letter-spacing: 0.26em;
       text-transform: uppercase;
       font-weight: 700;
     }
 
-    /* ===== EDITORIAL CONTAINER ===== */
+    /* ============================================================
+       MEASURE
+       ============================================================ */
     .measure {
       max-width: var(--measure);
       margin: 0 auto;
       padding: 0 32px;
     }
 
-    /* ===== HERO ===== */
+    /* ============================================================
+       HERO — Classical bust + ASCII halftone
+       ============================================================ */
     .romulus-hero {
       position: relative;
-      padding: 110px 32px 72px;
-      max-width: 760px;
+      padding: 120px 32px 96px;
+      max-width: 880px;
       margin: 0 auto;
       text-align: center;
+      isolation: isolate;
     }
 
-    .hero-mark {
-      font-family: 'Source Serif 4', Georgia, serif;
-      font-style: italic;
-      font-size: clamp(60px, 10vw, 108px);
-      font-weight: 400;
-      color: var(--text-primary);
-      line-height: 1;
-      letter-spacing: 0.005em;
-      margin-bottom: 16px;
+    .hero-bust {
+      position: absolute;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 540px;
+      max-width: 95vw;
+      z-index: -1;
+      opacity: 0.20;
+      mix-blend-mode: multiply;
+      pointer-events: none;
+    }
+
+    .hero-halftone {
+      position: absolute;
+      inset: 40px 0 40px 0;
+      z-index: -1;
+      pointer-events: none;
+      background-image: radial-gradient(circle, rgba(184,134,11,0.20) 0.7px, transparent 0.8px);
+      background-size: 5px 5px;
+      mask-image: radial-gradient(ellipse 50% 55% at 50% 50%, black, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse 50% 55% at 50% 50%, black, transparent 70%);
+      opacity: 0.85;
     }
 
     .hero-eyebrow {
       font-family: 'Inconsolata', monospace;
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.36em;
+      letter-spacing: 0.46em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 44px;
+      margin-bottom: 28px;
       display: inline-flex;
       align-items: center;
-      gap: 14px;
+      gap: 16px;
+      padding-left: 0.46em;
     }
     .hero-eyebrow::before, .hero-eyebrow::after {
       content: '';
       height: 1px;
-      width: 32px;
+      width: 36px;
       background: var(--gold-border);
+    }
+
+    .hero-mark {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(72px, 13vw, 152px);
+      font-weight: 300;
+      color: var(--text-primary);
+      line-height: 0.96;
+      letter-spacing: -0.005em;
+      margin-bottom: 36px;
+      position: relative;
+    }
+    .hero-mark .glyph {
+      display: inline-block;
+      position: relative;
+    }
+    .hero-mark .ord {
+      font-family: 'Inconsolata', monospace;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 0.16em;
+      vertical-align: top;
+      color: var(--gold);
+      letter-spacing: 0.18em;
+      margin-left: 0.3em;
+      position: relative;
+      top: 0.6em;
     }
 
     .hero-title {
       font-family: 'Source Serif 4', Georgia, serif;
-      font-size: clamp(32px, 5.4vw, 54px);
+      font-size: clamp(28px, 4.6vw, 44px);
       font-weight: 400;
       color: var(--text-primary);
-      line-height: 1.14;
-      letter-spacing: -0.014em;
-      margin: 0 auto 28px;
+      line-height: 1.18;
+      letter-spacing: -0.012em;
+      margin: 0 auto 32px;
       max-width: 640px;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold-deep);
     }
 
     .hero-subtitle {
       font-family: 'Source Serif 4', Georgia, serif;
       font-style: italic;
-      font-size: clamp(17px, 2.2vw, 21px);
+      font-size: clamp(17px, 2.2vw, 22px);
       color: var(--text-secondary);
-      line-height: 1.5;
-      font-weight: 400;
-      max-width: 520px;
-      margin: 0 auto 48px;
+      line-height: 1.55;
+      font-weight: 300;
+      max-width: 540px;
+      margin: 0 auto 56px;
     }
 
     .hero-meta {
       font-family: 'Inconsolata', monospace;
-      font-size: 11.5px;
+      font-size: 11px;
       color: var(--text-muted);
-      letter-spacing: 0.16em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       font-weight: 700;
       display: flex;
@@ -353,7 +532,9 @@
     }
     .hero-meta .meta-value { color: var(--text-secondary); }
 
-    /* ===== SECTION DIVIDER ===== */
+    /* ============================================================
+       SECTION DIVIDER
+       ============================================================ */
     .section-divider {
       max-width: var(--measure);
       margin: 0 auto;
@@ -382,36 +563,64 @@
       box-shadow: 0 0 0 5px var(--bg);
     }
 
-    /* ===== ACT ===== */
+    .laurel-mark {
+      display: flex;
+      justify-content: center;
+      margin: -10px auto 24px;
+      color: var(--gold);
+      opacity: 0.55;
+    }
+
+    /* ============================================================
+       ACT
+       ============================================================ */
     .act {
-      padding: 56px 32px 32px;
+      padding: 64px 32px 48px;
       max-width: var(--measure);
       margin: 0 auto;
+      position: relative;
     }
     .act-label {
       font-family: 'Inconsolata', monospace;
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.36em;
+      letter-spacing: 0.42em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 26px;
+      margin-bottom: 24px;
       display: inline-block;
+      padding-left: 0.42em;
+      position: relative;
     }
+    .act-label::before {
+      content: '';
+      display: inline-block;
+      width: 18px;
+      height: 1px;
+      background: var(--gold);
+      vertical-align: middle;
+      margin-right: 14px;
+      margin-left: -32px;
+    }
+
     .act-title {
       font-family: 'Source Serif 4', Georgia, serif;
-      font-size: clamp(34px, 5vw, 48px);
+      font-size: clamp(38px, 5.6vw, 56px);
       font-weight: 400;
       color: var(--text-primary);
-      letter-spacing: -0.016em;
-      line-height: 1.1;
+      letter-spacing: -0.018em;
+      line-height: 1.06;
       margin-bottom: 56px;
+    }
+    .act-title em {
+      font-style: italic;
+      color: var(--gold-deep);
     }
     .act-title .sub {
       display: block;
       font-family: 'Source Serif 4', Georgia, serif;
       font-style: italic;
-      font-weight: 400;
+      font-weight: 300;
       font-size: 19px;
       color: var(--text-muted);
       letter-spacing: 0;
@@ -419,11 +628,13 @@
       line-height: 1.45;
     }
 
-    /* ===== PROSE ===== */
+    /* ============================================================
+       PROSE
+       ============================================================ */
     .prose p {
       font-family: 'Inter', sans-serif;
-      font-size: 17.5px;
-      line-height: 1.8;
+      font-size: 17px;
+      line-height: 1.78;
       color: var(--text-secondary);
       margin-bottom: 1.5em;
       font-weight: 400;
@@ -433,62 +644,81 @@
       color: var(--text-primary);
       font-style: italic;
       font-family: 'Source Serif 4', Georgia, serif;
-      font-size: 1.04em;
+      font-size: 1.06em;
       letter-spacing: -0.005em;
     }
     .prose strong { color: var(--text-primary); font-weight: 600; }
 
-    /* ===== INLINE CODE / PATH PILL ===== */
+    /* ============================================================
+       INLINE CODE
+       ============================================================ */
     code, .path {
       font-family: 'Inconsolata', monospace;
       font-size: 0.92em;
       background: var(--gold-soft);
-      border: 1px solid rgba(184,134,11,0.18);
+      border: 1px solid rgba(184,134,11,0.20);
       border-radius: 3px;
       padding: 2px 7px;
       color: var(--gold-deep);
       white-space: nowrap;
-      font-weight: 500;
+      font-weight: 600;
     }
 
-    /* ===== PULL QUOTE ===== */
+    /* ============================================================
+       PULL QUOTE
+       ============================================================ */
     .pull-quote {
       font-family: 'Source Serif 4', Georgia, serif;
       font-style: italic;
       font-weight: 400;
-      font-size: clamp(22px, 2.8vw, 27px);
+      font-size: clamp(22px, 2.8vw, 28px);
       line-height: 1.42;
       color: var(--text-primary);
       border-left: 2px solid var(--gold);
       padding: 8px 0 8px 28px;
       margin: 56px 0 56px 8px;
-      letter-spacing: -0.005em;
+      letter-spacing: -0.008em;
       position: relative;
     }
+    .pull-quote::before {
+      content: '"';
+      position: absolute;
+      left: 14px;
+      top: -16px;
+      font-size: 56px;
+      color: var(--gold);
+      opacity: 0.4;
+      font-family: 'Source Serif 4', Georgia, serif;
+      line-height: 1;
+    }
 
-    /* ===== SUB-ACT ===== */
-    .sub-act { margin-top: 64px; }
+    /* ============================================================
+       SUB-ACT
+       ============================================================ */
+    .sub-act { margin-top: 72px; }
     .sub-act:first-child { margin-top: 0; }
 
     .sub-act-tag {
       font-family: 'Inconsolata', monospace;
-      font-size: 11.5px;
-      letter-spacing: 0.16em;
+      font-size: 11px;
+      letter-spacing: 0.20em;
       color: var(--gold);
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       font-weight: 700;
     }
     .sub-act-heading {
       font-family: 'Source Serif 4', Georgia, serif;
-      font-size: 26px;
+      font-size: 28px;
       font-weight: 500;
       color: var(--text-primary);
-      letter-spacing: -0.008em;
-      line-height: 1.25;
+      letter-spacing: -0.012em;
+      line-height: 1.22;
       margin-bottom: 28px;
     }
 
-    /* ===== NUMBERED PATTERN LIST ===== */
+    /* ============================================================
+       NUMBERED PATTERN LIST
+       ============================================================ */
     .pattern-list {
       list-style: none;
       counter-reset: pattern;
@@ -498,10 +728,10 @@
     .pattern-list li {
       counter-increment: pattern;
       position: relative;
-      padding: 18px 0 18px 60px;
+      padding: 20px 0 20px 64px;
       border-bottom: 1px solid var(--rule-soft);
       font-family: 'Inter', sans-serif;
-      font-size: 17px;
+      font-size: 16.5px;
       line-height: 1.6;
       color: var(--text-secondary);
     }
@@ -510,99 +740,65 @@
       content: counter(pattern, decimal-leading-zero);
       position: absolute;
       left: 0;
-      top: 18px;
+      top: 20px;
       font-family: 'Inconsolata', monospace;
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.10em;
       color: var(--gold);
-      width: 44px;
+      width: 48px;
     }
 
-    /* ===== PROJECT ENTRY ===== */
-    .project {
-      padding: 80px 0 60px;
-      border-bottom: 1px solid var(--rule-soft);
-    }
-    .project:first-of-type { padding-top: 16px; }
-    .project:last-of-type { border-bottom: none; }
-
-    .project-label {
-      font-family: 'Inconsolata', monospace;
-      font-size: 11.5px;
-      font-weight: 700;
-      letter-spacing: 0.36em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 18px;
-      display: inline-block;
-    }
-    .project-name {
-      font-family: 'Source Serif 4', Georgia, serif;
-      font-size: clamp(30px, 4.4vw, 42px);
-      font-weight: 400;
-      color: var(--text-primary);
-      letter-spacing: -0.014em;
-      line-height: 1.08;
-      margin-bottom: 12px;
-    }
-    .project-tagline {
-      font-family: 'Source Serif 4', Georgia, serif;
-      font-style: italic;
-      font-size: 18px;
-      color: var(--text-secondary);
-      font-weight: 400;
-      margin-bottom: 8px;
-      line-height: 1.4;
-    }
-    .project-status {
-      font-family: 'Inter', sans-serif;
-      font-size: 14.5px;
-      color: var(--text-muted);
-      margin-bottom: 36px;
-      letter-spacing: 0.005em;
-    }
-    .project-status a {
-      color: var(--gold-deep);
-      text-decoration: none;
-      border-bottom: 1px solid var(--gold-border);
-      transition: border-color 0.2s, color 0.2s;
-    }
-    .project-status a:hover {
-      color: var(--gold);
-      border-color: var(--gold);
-    }
-
-    /* ===== INTERSTITIAL (NEW) ===== */
+    /* ============================================================
+       INTERSTITIAL — Dark, classical bust silhouette + ASCII
+       ============================================================ */
     .interstitial {
       background: var(--bg-dark);
       color: var(--on-dark-primary);
-      padding: 110px 32px;
+      padding: 140px 32px;
       position: relative;
       overflow: hidden;
-      margin: 16px 0;
+      margin: 32px 0;
+      isolation: isolate;
     }
+    /* Classical bust as faint background */
+    .interstitial-bust {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 720px;
+      max-width: 100%;
+      max-height: 110%;
+      z-index: 0;
+      opacity: 0.16;
+      pointer-events: none;
+      filter: blur(0.3px);
+    }
+    /* Halftone overlay */
     .interstitial::before {
       content: '';
       position: absolute;
       inset: 0;
-      background-image: radial-gradient(circle, rgba(184,134,11,0.10) 1px, transparent 1.4px);
-      background-size: 6px 6px;
-      opacity: 0.55;
+      z-index: 1;
+      background-image: radial-gradient(circle, rgba(245,242,234,0.13) 0.7px, transparent 0.8px);
+      background-size: 5px 5px;
       pointer-events: none;
     }
+    /* Vignette */
     .interstitial::after {
       content: '';
       position: absolute;
       inset: 0;
+      z-index: 1;
       background:
-        radial-gradient(ellipse 70% 60% at 50% 50%, transparent 0%, rgba(26,25,22,0.5) 65%, rgba(26,25,22,0.92) 100%),
-        linear-gradient(180deg, rgba(184,134,11,0.04) 0%, transparent 30%, transparent 70%, rgba(198,123,92,0.04) 100%);
+        radial-gradient(ellipse 75% 65% at 50% 50%, transparent 0%, rgba(15,14,12,0.55) 70%, rgba(15,14,12,0.94) 100%),
+        linear-gradient(180deg, rgba(184,134,11,0.05) 0%, transparent 30%, transparent 70%, rgba(198,123,92,0.05) 100%);
       pointer-events: none;
     }
     .interstitial-inner {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       max-width: 880px;
       margin: 0 auto;
       text-align: center;
@@ -611,13 +807,14 @@
       font-family: 'Inconsolata', monospace;
       font-size: 10.5px;
       font-weight: 700;
-      letter-spacing: 0.4em;
+      letter-spacing: 0.46em;
       text-transform: uppercase;
       color: var(--gold);
       margin-bottom: 36px;
       display: inline-flex;
       align-items: center;
       gap: 16px;
+      padding-left: 0.46em;
     }
     .interstitial-mark::before, .interstitial-mark::after {
       content: '';
@@ -628,42 +825,219 @@
     .interstitial-quote {
       font-family: 'Source Serif 4', Georgia, serif;
       font-style: italic;
-      font-weight: 400;
-      font-size: clamp(26px, 4vw, 40px);
-      line-height: 1.3;
+      font-weight: 300;
+      font-size: clamp(26px, 4vw, 42px);
+      line-height: 1.28;
       color: var(--on-dark-primary);
-      letter-spacing: -0.012em;
+      letter-spacing: -0.014em;
       max-width: 820px;
       margin: 0 auto;
     }
+    .interstitial-quote::before {
+      content: '"';
+      display: block;
+      font-size: 0.7em;
+      color: var(--gold);
+      opacity: 0.5;
+      line-height: 0.4;
+      margin-bottom: 16px;
+      font-style: normal;
+    }
     .interstitial-attribution {
       font-family: 'Inconsolata', monospace;
-      font-size: 11px;
-      letter-spacing: 0.28em;
+      font-size: 10.5px;
+      letter-spacing: 0.36em;
       text-transform: uppercase;
-      color: var(--on-dark-secondary);
-      margin-top: 32px;
+      color: var(--on-dark-muted);
+      margin-top: 36px;
       font-weight: 700;
+      padding-left: 0.36em;
+    }
+    .interstitial-attribution::before {
+      content: '— ';
+      color: var(--gold);
+      margin-right: 4px;
     }
 
-    /* ===== BYLINE / FOOTER ===== */
+    /* ============================================================
+       FLOATING STATS — Editorial scattered tiles
+       ============================================================ */
+    .stats-float {
+      position: relative;
+      max-width: 880px;
+      margin: 16px auto 96px;
+      padding: 40px 40px 60px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+    .stats-float::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(184,134,11,0.08) 0.5px, transparent 0.6px);
+      background-size: 6px 6px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
+      -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
+      pointer-events: none;
+    }
+    .stat-tile {
+      padding: 26px 22px 22px;
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      box-shadow: 0 14px 36px rgba(43,43,41,0.06);
+      text-align: center;
+      position: relative;
+    }
+    .stat-tile::before {
+      content: '';
+      position: absolute;
+      inset: 6px;
+      border: 1px solid rgba(184,134,11,0.10);
+      pointer-events: none;
+    }
+    .stat-number {
+      display: block;
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-style: italic;
+      font-size: 48px;
+      font-weight: 300;
+      color: var(--text-primary);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-unit {
+      display: block;
+      font-family: 'Inconsolata', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      margin-bottom: 10px;
+      padding-left: 0.22em;
+    }
+    .stat-label {
+      display: block;
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-style: italic;
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+    .tile-1 { transform: rotate(-1.2deg); }
+    .tile-2 { transform: rotate(0.8deg) translateY(-12px); }
+    .tile-3 { transform: rotate(-0.4deg) translateY(6px); }
+    .tile-4 { transform: rotate(1.4deg); }
+
+    /* ============================================================
+       PROJECT — Cream entry styling (no images)
+       ============================================================ */
+    .project {
+      padding: 72px 0 64px;
+      border-bottom: 1px solid var(--rule-soft);
+      position: relative;
+    }
+    .project:first-of-type { padding-top: 24px; }
+    .project:last-of-type { border-bottom: none; }
+
+    .project-numeral {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-style: italic;
+      font-size: 84px;
+      color: var(--gold);
+      opacity: 0.18;
+      line-height: 0.8;
+      position: absolute;
+      top: 48px;
+      right: 0;
+      pointer-events: none;
+      font-weight: 300;
+    }
+
+    .project-label {
+      font-family: 'Inconsolata', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+      display: inline-block;
+      padding-left: 0.42em;
+    }
+    .project-name {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: clamp(34px, 5.4vw, 52px);
+      font-weight: 400;
+      color: var(--text-primary);
+      letter-spacing: -0.018em;
+      line-height: 1.04;
+      margin-bottom: 14px;
+    }
+    .project-name em {
+      font-style: italic;
+      color: var(--gold-deep);
+    }
+    .project-tagline {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-style: italic;
+      font-size: 19px;
+      color: var(--text-secondary);
+      font-weight: 300;
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+    .project-status {
+      font-family: 'Inconsolata', monospace;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .project-status a {
+      color: var(--gold-deep);
+      text-decoration: none;
+      border-bottom: 1px solid var(--gold-border);
+      transition: border-color 0.2s, color 0.2s;
+      letter-spacing: 0.10em;
+    }
+    .project-status a:hover {
+      color: var(--gold);
+      border-color: var(--gold);
+    }
+
+    /* ============================================================
+       BYLINE / FOOTER
+       ============================================================ */
     .byline {
       max-width: var(--measure);
       margin: 0 auto;
-      padding: 110px 32px 88px;
+      padding: 130px 32px 96px;
       text-align: center;
       font-family: 'Inter', sans-serif;
       font-size: 13.5px;
       color: var(--text-muted);
       line-height: 2;
+      position: relative;
+    }
+    .byline-laurel {
+      width: 60px;
+      height: auto;
+      margin: 0 auto 24px;
+      display: block;
+      color: var(--gold);
+      opacity: 0.65;
     }
     .byline-mark {
       font-family: 'Source Serif 4', Georgia, serif;
       font-style: italic;
-      font-size: 40px;
-      font-weight: 400;
+      font-size: 44px;
+      font-weight: 300;
       color: var(--text-primary);
-      letter-spacing: 0.02em;
+      letter-spacing: 0.005em;
       line-height: 1;
       margin-bottom: 0;
     }
@@ -672,15 +1046,16 @@
       height: 1px;
       background: var(--gold);
       margin: 26px auto 32px;
-      opacity: 0.75;
+      opacity: 0.8;
     }
     .byline .name {
       color: var(--text-primary);
-      letter-spacing: 0.18em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       font-size: 12.5px;
       font-weight: 600;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
+      padding-left: 0.22em;
     }
     .byline .sep {
       color: var(--gold);
@@ -696,12 +1071,25 @@
       color: var(--gold-deep);
       border-color: var(--gold);
     }
+    .byline-coda {
+      font-family: 'Inconsolata', monospace;
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.46em;
+      text-transform: uppercase;
+      margin-top: 36px;
+      font-weight: 700;
+      padding-left: 0.46em;
+      opacity: 0.6;
+    }
 
-    /* ===== SCROLL ANIMATIONS ===== */
+    /* ============================================================
+       SCROLL ANIMATIONS
+       ============================================================ */
     [data-romulus-animate] {
       opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
+      transform: translateY(22px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
     }
     [data-romulus-animate].romulus-visible {
       opacity: 1;
@@ -717,59 +1105,87 @@
       html { scroll-behavior: auto; }
     }
 
-    /* ===== MOBILE ===== */
+    /* ============================================================
+       MOBILE
+       ============================================================ */
+    @media (max-width: 760px) {
+      .gate-column { width: 60px; opacity: 0.4; }
+      .gate-column--left { left: 0; }
+      .gate-column--right { right: 0; }
+      .gate-bust { width: 280px; opacity: 0.07; }
+    }
+
     @media (max-width: 640px) {
       .romulus-nav { padding: 18px 22px; }
-      .romulus-hero { padding: 80px 22px 52px; }
-      .act { padding: 48px 22px 16px; }
+      .romulus-hero { padding: 84px 22px 64px; }
+      .act { padding: 52px 22px 24px; }
       .measure { padding: 0 22px; }
       .section-divider { padding: 0 22px; height: 72px; }
       .section-divider::before { left: 22px; right: 22px; }
 
-      .gate-card { padding: 44px 28px 36px; }
+      .gate-card { padding: 52px 30px 40px; }
+      .gate-pediment { width: 160px; top: -34px; }
       .gate-laurel { width: 64px; margin-bottom: 18px; }
-      .gate-mark { font-size: 32px; }
-      .gate-mark-sub { font-size: 10px; }
+      .gate-mark { font-size: 36px; }
+      .gate-mark-sub { font-size: 9.5px; letter-spacing: 0.36em; }
 
-      .hero-mark { font-size: clamp(52px, 16vw, 72px); }
-      .hero-eyebrow { margin-bottom: 32px; }
+      .hero-mark { font-size: clamp(64px, 17vw, 96px); }
+      .hero-eyebrow { margin-bottom: 22px; letter-spacing: 0.34em; }
       .hero-eyebrow::before, .hero-eyebrow::after { width: 18px; }
-      .hero-title { font-size: clamp(28px, 7.6vw, 38px); }
-      .hero-subtitle { font-size: 16.5px; margin-bottom: 36px; }
-      .hero-meta { font-size: 10.5px; gap: 10px; }
+      .hero-title { font-size: clamp(24px, 6.8vw, 32px); }
+      .hero-subtitle { font-size: 16.5px; margin-bottom: 40px; }
+      .hero-meta { font-size: 10px; gap: 10px; }
+      .hero-bust { width: 320px; opacity: 0.13; }
 
-      .act-title { font-size: 30px; margin-bottom: 40px; }
+      .act-label { padding-left: 0; letter-spacing: 0.36em; }
+      .act-label::before { display: none; }
+      .act-title { font-size: 32px; margin-bottom: 40px; }
       .act-title .sub { font-size: 15.5px; }
 
-      .prose p { font-size: 16.5px; line-height: 1.74; }
+      .prose p { font-size: 16px; line-height: 1.74; }
       .pull-quote {
         font-size: 20px;
-        padding-left: 20px;
+        padding-left: 22px;
         margin: 40px 0 40px 0;
       }
-      .sub-act { margin-top: 48px; }
-      .sub-act-heading { font-size: 21px; }
+      .pull-quote::before { left: 8px; top: -10px; font-size: 40px; }
+
+      .sub-act { margin-top: 56px; }
+      .sub-act-heading { font-size: 22px; }
 
       .pattern-list li {
-        padding: 14px 0 14px 48px;
+        padding: 16px 0 16px 50px;
         font-size: 15.5px;
       }
-      .pattern-list li::before { width: 36px; font-size: 12px; }
+      .pattern-list li::before { width: 38px; font-size: 12px; }
 
-      .project { padding: 60px 0 44px; }
-      .project-name { font-size: 28px; }
-      .project-tagline { font-size: 16px; }
-      .project-status { font-size: 13.5px; margin-bottom: 28px; }
-
-      .interstitial { padding: 76px 22px; }
+      .interstitial { padding: 96px 22px; margin: 16px 0; }
       .interstitial-quote { font-size: 22px; }
-      .interstitial-mark { font-size: 9.5px; gap: 10px; margin-bottom: 28px; }
+      .interstitial-mark { font-size: 9.5px; gap: 10px; margin-bottom: 26px; letter-spacing: 0.36em; }
       .interstitial-mark::before, .interstitial-mark::after { width: 26px; }
-      .interstitial-attribution { font-size: 10px; margin-top: 24px; }
+      .interstitial-attribution { font-size: 10px; margin-top: 26px; letter-spacing: 0.28em; }
+      .interstitial-bust { width: 480px; opacity: 0.10; }
 
-      .byline { padding: 88px 22px 64px; font-size: 12.5px; line-height: 1.85; }
-      .byline-mark { font-size: 32px; }
-      .byline .name { font-size: 11.5px; }
+      .stats-float {
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        padding: 32px 20px 48px;
+        margin-bottom: 64px;
+      }
+      .stat-tile { padding: 22px 16px 18px; }
+      .stat-number { font-size: 36px; }
+
+      .project { padding: 56px 0 48px; }
+      .project-numeral { font-size: 56px; top: 36px; }
+      .project-name { font-size: 30px; }
+      .project-tagline { font-size: 16.5px; }
+      .project-status { font-size: 11.5px; margin-bottom: 28px; }
+      .project-label { letter-spacing: 0.34em; padding-left: 0.34em; }
+
+      .byline { padding: 96px 22px 72px; font-size: 12.5px; line-height: 1.85; }
+      .byline-mark { font-size: 34px; }
+      .byline .name { font-size: 11.5px; letter-spacing: 0.18em; }
+      .byline-coda { font-size: 9.5px; letter-spacing: 0.36em; }
 
       code, .path { font-size: 0.9em; padding: 1px 5px; }
     }
@@ -777,306 +1193,130 @@
     @media (max-width: 380px) {
       .hero-meta { flex-direction: column; align-items: center; gap: 6px; }
       .hero-meta .dot { display: none; }
-    }
-
-    /* ===== HERO VISUAL COMPOSITION ===== */
-    .hero-visual {
-      position: relative;
-      height: 480px;
-      max-width: 900px;
-      margin: 0 auto 80px;
-      overflow: hidden;
-    }
-    .hero-visual-bg {
-      position: absolute;
-      inset: 0;
-      background-image:
-        radial-gradient(ellipse 70% 50% at 30% 40%, rgba(184,134,11,0.08), transparent),
-        radial-gradient(ellipse 50% 60% at 70% 60%, rgba(198,123,92,0.06), transparent);
-    }
-    .hero-visual-overlay {
-      position: absolute;
-      inset: 0;
-      background-image: radial-gradient(circle, rgba(184,134,11,0.035) 1px, transparent 1px);
-      background-size: 6px 6px;
-      mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black, transparent);
-      -webkit-mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black, transparent);
-    }
-    .hero-visual-frames {
-      position: absolute;
-      inset: 0;
-    }
-    .hero-frame {
-      position: absolute;
-      overflow: hidden;
-      border-radius: 8px;
-      border: 1px solid var(--rule-soft);
-      box-shadow: 0 8px 32px rgba(43,43,41,0.08);
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
-    }
-    .hero-frame:hover { transform: scale(1.03) !important; box-shadow: 0 16px 48px rgba(43,43,41,0.14); }
-    .hero-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      filter: saturate(0.6) contrast(1.1) sepia(0.1);
-    }
-    .frame-1 { top: 5%; left: 5%; width: 35%; height: 70%; transform: rotate(-2deg); }
-    .frame-2 { top: 10%; right: 8%; width: 28%; height: 55%; transform: rotate(1.5deg); }
-    .frame-3 { bottom: 5%; left: 35%; width: 22%; height: 40%; transform: rotate(-1deg); z-index: 1; }
-
-    @media (max-width: 768px) {
-      .hero-visual { height: 340px; margin-bottom: 56px; }
-      .frame-1 { width: 45%; height: 60%; left: 0; top: 10%; }
-      .frame-2 { width: 35%; height: 45%; right: 0; top: 0; }
-      .frame-3 { width: 30%; height: 35%; left: 30%; bottom: 0; }
-    }
-
-    /* ===== TIMELINE SPINE ===== */
-    .timeline-spine {
-      display: flex;
-      gap: 0;
-      margin: 0 auto 48px;
-      max-width: var(--measure);
-      position: relative;
-      padding: 0 28px;
-    }
-    .timeline-spine::before {
-      content: '';
-      position: absolute;
-      top: 8px;
-      left: 60px;
-      right: 60px;
-      height: 1px;
-      background: var(--gold-border);
-    }
-    .timeline-node {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      position: relative;
-    }
-    .timeline-dot {
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      background: var(--gold);
-      border: 2px solid var(--bg);
-      box-shadow: 0 0 0 3px var(--gold-border);
-      flex-shrink: 0;
-    }
-    .timeline-date {
-      font-family: 'Inconsolata', monospace;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      text-align: center;
-    }
-
-    @media (max-width: 600px) {
-      .timeline-spine { flex-direction: column; align-items: flex-start; gap: 16px; padding: 0 32px; }
-      .timeline-spine::before { left: 44px; right: auto; top: 0; bottom: 0; height: auto; width: 1px; }
-      .timeline-node { flex-direction: row; gap: 16px; }
-    }
-
-    /* ===== FLOATING STATS ===== */
-    .stats-float {
-      position: relative;
-      max-width: 800px;
-      margin: 0 auto 80px;
-      padding: 0 32px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      justify-content: center;
-    }
-    .stat-tile {
-      padding: 28px 28px 22px;
-      border-radius: 12px;
-      background: var(--bg-card);
-      border: 1px solid var(--rule-soft);
-      text-align: center;
-      flex: 0 0 auto;
-      min-width: 160px;
-      max-width: 200px;
-    }
-    .stat-number {
-      display: block;
-      font-family: 'Source Serif 4', Georgia, serif;
-      font-size: 42px;
-      font-weight: 400;
-      color: var(--text-primary);
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-    .stat-unit {
-      display: block;
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--gold);
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      margin-bottom: 8px;
-    }
-    .stat-label {
-      display: block;
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      color: var(--text-muted);
-      font-style: italic;
-      line-height: 1.4;
-    }
-    .tile-1 { transform: rotate(-1deg); }
-    .tile-2 { transform: rotate(0.8deg) translateY(-8px); }
-    .tile-3 { transform: rotate(-0.5deg) translateY(4px); }
-    .tile-4 { transform: rotate(1.2deg); }
-
-    @media (max-width: 600px) {
-      .stats-float { flex-direction: column; align-items: center; }
-      .stat-tile { max-width: 280px; width: 100%; transform: none !important; }
-    }
-
-    /* ===== PROJECT CARDS ===== */
-    .project-card {
-      background: var(--bg-dark);
-      border-radius: 16px;
-      overflow: hidden;
-      margin: 0 0 64px;
-      break-inside: avoid;
-      border: 1px solid rgba(255,255,255,0.06);
-      box-shadow: 0 20px 60px rgba(26,25,22,0.12);
-    }
-    .project-card-cover {
-      width: 100%;
-      height: 240px;
-      overflow: hidden;
-      position: relative;
-    }
-    .project-card-cover::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, var(--bg-dark) 0%, transparent 50%);
-    }
-    .project-card-cover img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: saturate(0.7) contrast(1.05);
-    }
-    .project-card-body {
-      padding: 32px 36px 40px;
-    }
-    .project-card-label {
-      font-family: 'Inconsolata', monospace;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 12px;
-      display: block;
-    }
-    .project-card-name {
-      font-family: 'Source Serif 4', Georgia, serif;
-      font-style: italic;
-      font-size: clamp(26px, 4vw, 36px);
-      font-weight: 400;
-      color: var(--on-dark-primary);
-      line-height: 1.18;
-      margin-bottom: 6px;
-    }
-    .project-card-link {
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      font-style: italic;
-      color: var(--on-dark-secondary);
-      margin-bottom: 28px;
-      display: block;
-    }
-    .project-card-link a {
-      color: var(--gold);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(184,134,11,0.3);
-      transition: border-color 0.2s;
-    }
-    .project-card-link a:hover { border-color: var(--gold); }
-    .project-card-body p {
-      font-family: 'Inter', sans-serif;
-      font-size: 16.5px;
-      line-height: 1.78;
-      color: var(--on-dark-body);
-      margin-bottom: 1.3em;
-    }
-    .project-card-body p:last-child { margin-bottom: 0; }
-    .project-card-body em {
-      color: var(--on-dark-primary);
-      font-style: italic;
-      font-family: 'Source Serif 4', Georgia, serif;
-      font-size: 1.04em;
-    }
-    .project-card-body strong { color: var(--on-dark-primary); font-weight: 600; }
-    .project-card-body code {
-      background: rgba(184,134,11,0.16);
-      border: 1px solid rgba(184,134,11,0.28);
-      color: var(--gold);
-    }
-    .project-card-body .pull-quote {
-      color: var(--on-dark-primary);
-      border-left-color: var(--gold);
-      margin: 40px 0 40px 4px;
-      padding-left: 22px;
-    }
-
-    @media (max-width: 640px) {
-      .project-card { margin-bottom: 48px; border-radius: 12px; }
-      .project-card-cover { height: 180px; }
-      .project-card-body { padding: 26px 24px 32px; }
-      .project-card-name { font-size: 24px; }
-      .project-card-body p { font-size: 15.5px; line-height: 1.72; }
-    }
-
-    /* ===== DECORATIVE MARKS ===== */
-    .deco-mark {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 20px;
-      opacity: 0.5;
-      color: var(--gold);
-    }
-    .interstitial .deco-mark {
-      color: var(--on-dark-secondary);
-      opacity: 0.45;
-    }
-    .deco-laurel {
-      display: flex;
-      justify-content: center;
-      margin: -20px auto 20px;
-      color: var(--gold);
+      .stats-float { grid-template-columns: 1fr; }
+      .stat-tile { transform: none !important; }
     }
   </style>
 </head>
 <body class="romulus-page">
 
-  <!-- ===== PASSWORD GATE (redesigned visual, JS preserved verbatim) ===== -->
+  <!-- ============================================================
+       SHARED SVG DEFS — Classical assets used inline below
+       ============================================================ -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <!-- Doric column silhouette -->
+      <symbol id="column" viewBox="0 0 90 720">
+        <!-- Base / plinth -->
+        <rect x="0" y="700" width="90" height="20" fill="currentColor" opacity="0.9"/>
+        <rect x="6" y="688" width="78" height="14" fill="currentColor" opacity="0.7"/>
+        <rect x="2" y="678" width="86" height="12" fill="currentColor" opacity="0.85"/>
+        <!-- Shaft -->
+        <rect x="14" y="62" width="62" height="616" fill="currentColor" opacity="0.55"/>
+        <!-- Fluting (vertical lines) -->
+        <line x1="22" y1="62" x2="22" y2="678" stroke="currentColor" stroke-width="0.6" opacity="0.35"/>
+        <line x1="30" y1="62" x2="30" y2="678" stroke="currentColor" stroke-width="0.6" opacity="0.35"/>
+        <line x1="38" y1="62" x2="38" y2="678" stroke="currentColor" stroke-width="0.6" opacity="0.35"/>
+        <line x1="45" y1="62" x2="45" y2="678" stroke="currentColor" stroke-width="0.6" opacity="0.35"/>
+        <line x1="52" y1="62" x2="52" y2="678" stroke="currentColor" stroke-width="0.6" opacity="0.35"/>
+        <line x1="60" y1="62" x2="60" y2="678" stroke="currentColor" stroke-width="0.6" opacity="0.35"/>
+        <line x1="68" y1="62" x2="68" y2="678" stroke="currentColor" stroke-width="0.6" opacity="0.35"/>
+        <!-- Capital -->
+        <rect x="10" y="50" width="70" height="14" fill="currentColor" opacity="0.7"/>
+        <rect x="0" y="36" width="90" height="16" fill="currentColor" opacity="0.85"/>
+        <!-- Echinus curve -->
+        <path d="M 4 50 Q 4 38 14 38 L 76 38 Q 86 38 86 50 Z" fill="currentColor" opacity="0.55"/>
+        <!-- Pediment top -->
+        <rect x="0" y="22" width="90" height="14" fill="currentColor" opacity="0.55"/>
+        <polygon points="0,22 90,22 75,4 15,4" fill="currentColor" opacity="0.4"/>
+      </symbol>
+
+      <!-- Roman bust silhouette (3/4 profile abstraction) -->
+      <symbol id="bust" viewBox="0 0 320 400">
+        <!-- Plinth base -->
+        <rect x="60" y="370" width="200" height="30" fill="currentColor" opacity="0.95"/>
+        <rect x="74" y="358" width="172" height="14" fill="currentColor" opacity="0.7"/>
+        <!-- Pedestal -->
+        <path d="M 90 358 L 230 358 L 240 320 L 80 320 Z" fill="currentColor" opacity="0.85"/>
+        <!-- Shoulders / toga drape -->
+        <path d="M 70 320 Q 80 280 110 268 L 210 268 Q 240 280 250 320 Z" fill="currentColor" opacity="0.85"/>
+        <!-- Toga folds -->
+        <path d="M 110 268 Q 130 300 160 312" stroke="currentColor" stroke-width="1.4" fill="none" opacity="0.4"/>
+        <path d="M 150 270 Q 170 296 200 310" stroke="currentColor" stroke-width="1.4" fill="none" opacity="0.4"/>
+        <path d="M 200 270 Q 215 290 230 308" stroke="currentColor" stroke-width="1.4" fill="none" opacity="0.4"/>
+        <!-- Neck -->
+        <path d="M 138 268 L 138 246 Q 138 240 144 240 L 178 240 Q 184 240 184 246 L 184 268 Z" fill="currentColor" opacity="0.85"/>
+        <!-- Head — classical proportions, slight 3/4 turn -->
+        <path d="M 116 152
+                 Q 116 102 154 92
+                 Q 178 86 198 96
+                 Q 218 108 220 144
+                 Q 222 178 218 200
+                 Q 214 222 198 232
+                 Q 184 240 168 240
+                 Q 144 240 132 222
+                 Q 120 204 116 184
+                 Q 114 168 116 152 Z"
+              fill="currentColor" opacity="0.92"/>
+        <!-- Hair / wreath suggestion -->
+        <path d="M 116 152 Q 122 124 142 110 Q 162 100 184 102 Q 206 106 218 130 Q 222 144 220 154
+                 Q 210 138 192 132 Q 176 128 160 132 Q 138 140 122 156 Z"
+              fill="currentColor" opacity="0.7"/>
+        <!-- Curl details -->
+        <circle cx="132" cy="138" r="4" fill="currentColor" opacity="0.45"/>
+        <circle cx="148" cy="124" r="3.5" fill="currentColor" opacity="0.45"/>
+        <circle cx="170" cy="118" r="3.5" fill="currentColor" opacity="0.45"/>
+        <circle cx="194" cy="124" r="4" fill="currentColor" opacity="0.45"/>
+        <!-- Brow ridge -->
+        <path d="M 136 174 Q 156 168 176 172" stroke="currentColor" stroke-width="1.4" fill="none" opacity="0.4"/>
+        <!-- Nose bridge / facial plane -->
+        <path d="M 168 178 L 174 198 L 168 208" stroke="currentColor" stroke-width="1" fill="none" opacity="0.32"/>
+        <!-- Lips -->
+        <path d="M 158 218 Q 168 221 178 218" stroke="currentColor" stroke-width="1" fill="none" opacity="0.35"/>
+        <!-- Jaw shadow -->
+        <path d="M 138 222 Q 144 232 156 236" stroke="currentColor" stroke-width="1" fill="none" opacity="0.28"/>
+      </symbol>
+
+      <!-- Pediment / triangular cornice -->
+      <symbol id="pediment" viewBox="0 0 200 60">
+        <polygon points="0,58 200,58 196,40 4,40" fill="currentColor" opacity="0.6"/>
+        <polygon points="4,40 196,40 100,4" fill="currentColor" opacity="0.4"/>
+        <line x1="100" y1="4" x2="100" y2="58" stroke="currentColor" stroke-width="0.5" opacity="0.3"/>
+      </symbol>
+
+      <!-- Laurel wreath -->
+      <symbol id="laurel" viewBox="0 0 140 56">
+        <path d="M70 50 V14" stroke="currentColor" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+        <path d="M70 22 Q60 22 54 18 Q50 15 52 11 Q58 11 64 14 Q68 17 70 22 Z" fill="currentColor" fill-opacity="0.30" stroke="currentColor" stroke-width="1" stroke-linejoin="round"/>
+        <path d="M70 30 Q56 30 48 25 Q43 21 45 16 Q53 16 60 20 Q67 25 70 30 Z" fill="currentColor" fill-opacity="0.30" stroke="currentColor" stroke-width="1" stroke-linejoin="round"/>
+        <path d="M70 38 Q52 38 42 31 Q36 26 38 20 Q48 20 56 26 Q66 32 70 38 Z" fill="currentColor" fill-opacity="0.30" stroke="currentColor" stroke-width="1" stroke-linejoin="round"/>
+        <path d="M70 22 Q80 22 86 18 Q90 15 88 11 Q82 11 76 14 Q72 17 70 22 Z" fill="currentColor" fill-opacity="0.30" stroke="currentColor" stroke-width="1" stroke-linejoin="round"/>
+        <path d="M70 30 Q84 30 92 25 Q97 21 95 16 Q87 16 80 20 Q73 25 70 30 Z" fill="currentColor" fill-opacity="0.30" stroke="currentColor" stroke-width="1" stroke-linejoin="round"/>
+        <path d="M70 38 Q88 38 98 31 Q104 26 102 20 Q92 20 84 26 Q74 32 70 38 Z" fill="currentColor" fill-opacity="0.30" stroke="currentColor" stroke-width="1" stroke-linejoin="round"/>
+        <circle cx="70" cy="10" r="2.4" fill="currentColor"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- ============================================================
+       PASSWORD GATE — Classical Portico
+       ============================================================ -->
   <div class="romulus-gate" id="gate">
+    <div class="gate-atmosphere"></div>
+    <div class="gate-halftone"></div>
+
+    <!-- Distant busts as faint background statuary -->
+    <svg class="gate-bust gate-bust--left" viewBox="0 0 320 400" aria-hidden="true" style="color: var(--copper-deep);"><use href="#bust"/></svg>
+    <svg class="gate-bust gate-bust--right" viewBox="0 0 320 400" aria-hidden="true" style="color: var(--copper-deep);"><use href="#bust"/></svg>
+
+    <!-- Flanking columns -->
+    <svg class="gate-column gate-column--left" viewBox="0 0 90 720" preserveAspectRatio="xMidYMax meet" aria-hidden="true" style="color: var(--copper-deep);"><use href="#column"/></svg>
+    <svg class="gate-column gate-column--right" viewBox="0 0 90 720" preserveAspectRatio="xMidYMax meet" aria-hidden="true" style="color: var(--copper-deep);"><use href="#column"/></svg>
+
     <div class="gate-card">
-      <svg class="gate-laurel" viewBox="0 0 140 56" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M70 50 V14"/>
-        <path d="M70 22 Q60 22 54 18 Q50 15 52 11 Q58 11 64 14 Q68 17 70 22 Z" fill="currentColor" fill-opacity="0.08"/>
-        <path d="M70 30 Q56 30 48 25 Q43 21 45 16 Q53 16 60 20 Q67 25 70 30 Z" fill="currentColor" fill-opacity="0.08"/>
-        <path d="M70 38 Q52 38 42 31 Q36 26 38 20 Q48 20 56 26 Q66 32 70 38 Z" fill="currentColor" fill-opacity="0.08"/>
-        <path d="M70 22 Q80 22 86 18 Q90 15 88 11 Q82 11 76 14 Q72 17 70 22 Z" fill="currentColor" fill-opacity="0.08"/>
-        <path d="M70 30 Q84 30 92 25 Q97 21 95 16 Q87 16 80 20 Q73 25 70 30 Z" fill="currentColor" fill-opacity="0.08"/>
-        <path d="M70 38 Q88 38 98 31 Q104 26 102 20 Q92 20 84 26 Q74 32 70 38 Z" fill="currentColor" fill-opacity="0.08"/>
-        <circle cx="70" cy="10" r="2.4" fill="currentColor" stroke="none"/>
-      </svg>
+      <!-- Pediment crowning the doorway -->
+      <svg class="gate-pediment" viewBox="0 0 200 60" aria-hidden="true"><use href="#pediment"/></svg>
+      <svg class="gate-laurel" viewBox="0 0 140 56" aria-hidden="true"><use href="#laurel"/></svg>
       <div class="gate-mark">Romulus</div>
       <div class="gate-mark-sub">Roma Eterna</div>
       <div class="gate-rule"></div>
@@ -1085,22 +1325,30 @@
       <button class="gate-submit" id="gateSubmit">Enter</button>
       <div class="gate-error" id="gateError">Incorrect passphrase. Try again.</div>
     </div>
+
+    <div class="gate-foot">MMXXVI &middot; By Invitation</div>
   </div>
 
-  <!-- ===== MAIN CONTENT ===== -->
+  <!-- ============================================================
+       MAIN CONTENT
+       ============================================================ -->
   <div class="romulus-content" id="content">
 
     <!-- ===== TOP NAV ===== -->
     <nav class="romulus-nav">
       <a href="index.html">&larr; mikebatts.net</a>
-      <span class="badge">Case Study &middot; 2026</span>
+      <span class="badge">Case Study &middot; MMXXVI</span>
     </nav>
 
     <!-- ===== HERO ===== -->
     <header class="romulus-hero" data-romulus-animate>
-      <div class="hero-mark">Romulus</div>
+      <!-- Classical bust as faded background -->
+      <svg class="hero-bust" viewBox="0 0 320 400" aria-hidden="true" style="color: var(--copper-deep);"><use href="#bust"/></svg>
+      <div class="hero-halftone"></div>
+
       <div class="hero-eyebrow">Roma Eterna</div>
-      <h1 class="hero-title">How I Built My&nbsp;AI, Then Built With&nbsp;It.</h1>
+      <div class="hero-mark"><span class="glyph">Romulus</span></div>
+      <h1 class="hero-title">How I Built My&nbsp;AI, <em>Then Built With&nbsp;It.</em></h1>
       <p class="hero-subtitle">Eighty-seven days. One designed system. Four products shipped or in&nbsp;flight.</p>
       <div class="hero-meta">
         <span><span class="meta-value">Feb 3</span> &rarr; <span class="meta-value">May 1, 2026</span></span>
@@ -1111,26 +1359,14 @@
       </div>
     </header>
 
-    <!-- ===== HERO VISUAL COMPOSITION ===== -->
-    <div class="hero-visual" data-romulus-animate>
-      <div class="hero-visual-bg"></div>
-      <div class="hero-visual-overlay"></div>
-      <div class="hero-visual-frames">
-        <div class="hero-frame frame-1"><img src="images/artifact.jpg" alt="Classical artifact" loading="lazy"></div>
-        <div class="hero-frame frame-2"><img src="images/Backgrounds-1.png" alt="Background texture" loading="lazy"></div>
-        <div class="hero-frame frame-3"><img src="images/01.png" alt="Artifact detail" loading="lazy"></div>
-      </div>
-    </div>
-
     <div class="section-divider"><span class="dot"></span></div>
-    <div class="deco-laurel">
-      <svg width="48" height="20" viewBox="0 0 48 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg" opacity="0.18">
-        <path d="M24 0c0 0-8 4-12 10s-4 10-4 10c4-2 8-2 12-1s8 2 12-1-2-6-4-10-4-8-12-10v0z"/>
-        <path d="M4 6c-2 2-2 4 0 6M44 6c2 2 2 4 0 6M12 2c-1 2-1 3 0 5M36 2c1 2 1 3 0 5"/>
-      </svg>
+    <div class="laurel-mark">
+      <svg width="56" height="22" viewBox="0 0 140 56" aria-hidden="true"><use href="#laurel"/></svg>
     </div>
 
-    <!-- ===== ACT 1 — THE IDENTITY ===== -->
+    <!-- ============================================================
+         ACT 1 — THE IDENTITY
+         ============================================================ -->
     <section class="act" data-romulus-animate>
       <div class="act-label">Act 01</div>
       <h2 class="act-title">The Identity</h2>
@@ -1154,7 +1390,7 @@
       <div class="pull-quote">You don't start with the technology. You start with the person using it.</div>
 
       <div class="prose">
-        <p>This is the instinct that comes from ten years of building products for people. Here the person using it was me, and the product was my own operating system. I designed it the same way I'd design anything else: identity first, constraints defined, goals clear, then go build.</p>
+        <p>This is the instinct that comes from ten years of building products for people &mdash; you don't start with the technology, you start with the person using it. Here the person using it was me, and the product was my own operating system. I designed it the same way I'd design anything else: identity first, constraints defined, goals clear, then go build.</p>
 
         <p>Roman gravitas, worn lightly. But the intention was real.</p>
       </div>
@@ -1162,53 +1398,23 @@
 
     <!-- ===== INTERSTITIAL I ===== -->
     <aside class="interstitial" data-romulus-animate>
+      <svg class="interstitial-bust" viewBox="0 0 320 400" aria-hidden="true" style="color: rgba(245,242,234,1);"><use href="#bust"/></svg>
       <div class="interstitial-inner">
         <div class="interstitial-mark">Interlude I</div>
-        <div class="deco-mark">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
-            <path d="M8 12l2 2 4-4" />
-          </svg>
-        </div>
-        <p class="interstitial-quote">&ldquo;You don't start with the technology. You start with the person using it.&rdquo;</p>
+        <p class="interstitial-quote">You don't start with the technology. You start with the person using it.</p>
         <div class="interstitial-attribution">On Identity</div>
       </div>
     </aside>
 
-    <!-- ===== ACT 2 — THE BUILD ===== -->
+    <!-- ============================================================
+         ACT 2 — THE BUILD
+         ============================================================ -->
     <section class="act" data-romulus-animate>
       <div class="act-label">Act 02</div>
       <h2 class="act-title">
         The Build
         <span class="sub">February 3, 2026. First boot.</span>
       </h2>
-
-      <div class="timeline-spine">
-        <div class="timeline-node">
-          <span class="timeline-dot"></span>
-          <span class="timeline-date">Feb 3</span>
-        </div>
-        <div class="timeline-node">
-          <span class="timeline-dot"></span>
-          <span class="timeline-date">Apr 9</span>
-        </div>
-        <div class="timeline-node">
-          <span class="timeline-dot"></span>
-          <span class="timeline-date">Mar 30</span>
-        </div>
-        <div class="timeline-node">
-          <span class="timeline-dot"></span>
-          <span class="timeline-date">R34N</span>
-        </div>
-        <div class="timeline-node">
-          <span class="timeline-dot"></span>
-          <span class="timeline-date">Apr 2026</span>
-        </div>
-        <div class="timeline-node">
-          <span class="timeline-dot"></span>
-          <span class="timeline-date">pattern</span>
-        </div>
-      </div>
 
       <div class="prose">
         <p>MacBook Pro. OpenClaw installed. Discord integration wired to a private channel &mdash; <code>#roma-eterna</code>. First model: Nvidia Kimi K2.5, a free-tier LLM with 128K context. Flat <code>MEMORY.md</code> as the only persistent memory. The first response landed in Discord and came back clean.</p>
@@ -1225,7 +1431,7 @@
 
           <p>The first real upgrade was Obsidian. A vault &mdash; <code>roma-eterna/romulus/</code> &mdash; became the primary memory substrate. Daily notes in <code>03-Daily/</code>, project files in <code>02-Projects/</code>, decisions in <code>04-Decisions/</code>. Backlinks, graph view, semantic search across the whole thing. A knowledge base I could open and read myself &mdash; shared memory between me and the system, not just agent-side persistence.</p>
         </div>
-        <div class="pull-quote">Good product infrastructure is legible to the humans using it, not just to the machines running it.</div>
+        <div class="pull-quote">That distinction matters. Good product infrastructure is legible to the humans using it, not just to the machines running it.</div>
       </div>
 
       <!-- Model Problem -->
@@ -1235,10 +1441,8 @@
         <div class="prose">
           <p>April 9, 2026. A heavy coding session on MiniMax M2.7 &mdash; 205K context window, which seemed like enough. The session hit 338 messages and 2.5MB. The context overflowed. Three compaction events fired in sequence. Six consecutive edit tool failures &mdash; the model was matching against stale text that no longer existed in the file. The session was gone.</p>
 
-          <p>The lesson was familiar: the failure mode was architectural, not accidental. Model selection is infrastructure.</p>
-        </div>
-        <div class="pull-quote">Picking the wrong model for the wrong job is a design decision that produces failures that look like AI problems but are problems you built yourself into.</div>
-        <div class="prose">
+          <p>The lesson was familiar: the failure mode was architectural, not accidental. Model selection is infrastructure. Picking the wrong model for the wrong job is a design decision that produces failures that look like AI problems but are problems you built yourself into.</p>
+
           <p>After April 9: Grok 4 Fast for coding sessions &mdash; 2M context window. Qwen 3.6 Plus for daily conversation and cron jobs &mdash; cheap, fast, right-sized. Claude Code with Opus 4.7 via subscription for all implementation, never the API. Each model has a defined job, a cost budget, and a context ceiling. The routing rules live in the vault. Every new session starts from them.</p>
         </div>
       </div>
@@ -1278,7 +1482,7 @@
         <div class="prose">
           <p>April 2026. The Obsidian vault was connected to QMD as the indexed primary memory backend. Not just persistent files &mdash; semantic search across every daily note, project file, and decision. Before each session, the system queries the vault. The context that comes back reflects the full history of a project, not just the last conversation.</p>
         </div>
-        <div class="pull-quote">The vault is the brain. Sessions are the work. That split is what makes the system compound over time rather than reset.</div>
+        <div class="pull-quote">The vault is the brain. Sessions are the work. That split is deliberate, and it's what makes the system compound over time rather than reset.</div>
       </div>
 
       <!-- Delegation Pattern -->
@@ -1305,46 +1509,19 @@
       </div>
     </section>
 
-    <!-- ===== FLOATING STATS ===== -->
-    <section class="stats-float" data-romulus-animate>
-      <div class="stat-tile tile-1">
-        <span class="stat-number">87</span>
-        <span class="stat-unit">days</span>
-        <span class="stat-label">from first boot to this moment</span>
-      </div>
-      <div class="stat-tile tile-2">
-        <span class="stat-number">4</span>
-        <span class="stat-unit">products</span>
-        <span class="stat-label">shipped or in flight</span>
-      </div>
-      <div class="stat-tile tile-3">
-        <span class="stat-number">1</span>
-        <span class="stat-unit">system</span>
-        <span class="stat-label">designed to compound</span>
-      </div>
-      <div class="stat-tile tile-4">
-        <span class="stat-number">&infin;</span>
-        <span class="stat-unit">compounding</span>
-        <span class="stat-label">decisions accumulate</span>
-      </div>
-    </section>
-
     <!-- ===== INTERSTITIAL II ===== -->
     <aside class="interstitial" data-romulus-animate>
+      <svg class="interstitial-bust" viewBox="0 0 320 400" aria-hidden="true" style="color: rgba(245,242,234,1);"><use href="#bust"/></svg>
       <div class="interstitial-inner">
         <div class="interstitial-mark">Interlude II</div>
-        <div class="deco-mark">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
-            <path d="M8 12l2 2 4-4" />
-          </svg>
-        </div>
-        <p class="interstitial-quote">&ldquo;The vault is the brain. Sessions are the work.&rdquo;</p>
+        <p class="interstitial-quote">The vault is the brain. Sessions are the work.</p>
         <div class="interstitial-attribution">On Memory</div>
       </div>
     </aside>
 
-    <!-- ===== ACT 3 — A TUESDAY ===== -->
+    <!-- ============================================================
+         ACT 3 — A TUESDAY (with floating stat tiles)
+         ============================================================ -->
     <section class="act" data-romulus-animate>
       <div class="act-label">Act 03</div>
       <h2 class="act-title">A Tuesday</h2>
@@ -1366,35 +1543,60 @@
 
         <p>GitHub Pages for fast proofs of concept. Vercel for real products with staging and production branches. Cron jobs running overnight as the standing team. Discord as the command surface from anywhere.</p>
 
-        <p>And it compounds.</p>
+        <p>And it compounds. The vault from Tuesday shapes Wednesday's brief. The decision from this sprint informs the next one. The system I'm working with in May is materially more capable than the one from February &mdash; not because the software was updated, but because the context accumulated, decision by decision, failure by failure.</p>
       </div>
-
-      <div class="pull-quote">The system I'm working with in May is materially more capable than the one from February &mdash; not because the software was updated, but because the context accumulated, decision by decision, failure by failure.</div>
     </section>
 
-    <div class="section-divider"><span class="dot"></span></div>
-    <div class="deco-laurel">
-      <svg width="48" height="20" viewBox="0 0 48 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg" opacity="0.18">
-        <path d="M24 0c0 0-8 4-12 10s-4 10-4 10c4-2 8-2 12-1s8 2 12-1-2-6-4-10-4-8-12-10v0z"/>
-        <path d="M4 6c-2 2-2 4 0 6M44 6c2 2 2 4 0 6M12 2c-1 2-1 3 0 5M36 2c1 2 1 3 0 5"/>
-      </svg>
-    </div>
+    <!-- ===== FLOATING STATS — scattered editorial tiles ===== -->
+    <section class="stats-float" data-romulus-animate aria-label="Project metrics">
+      <div class="stat-tile tile-1">
+        <span class="stat-number">87</span>
+        <span class="stat-unit">days</span>
+        <span class="stat-label">first boot to today</span>
+      </div>
+      <div class="stat-tile tile-2">
+        <span class="stat-number">4</span>
+        <span class="stat-unit">products</span>
+        <span class="stat-label">shipped or in flight</span>
+      </div>
+      <div class="stat-tile tile-3">
+        <span class="stat-number">1</span>
+        <span class="stat-unit">system</span>
+        <span class="stat-label">designed to compound</span>
+      </div>
+      <div class="stat-tile tile-4">
+        <span class="stat-number">&infin;</span>
+        <span class="stat-unit">Compounding</span>
+        <span class="stat-label">decisions accumulate</span>
+      </div>
+    </section>
 
-    <!-- ===== ACT 4 — THE WORK ===== -->
+    <!-- ===== INTERSTITIAL III ===== -->
+    <aside class="interstitial" data-romulus-animate>
+      <svg class="interstitial-bust" viewBox="0 0 320 400" aria-hidden="true" style="color: rgba(245,242,234,1);"><use href="#bust"/></svg>
+      <div class="interstitial-inner">
+        <div class="interstitial-mark">Interlude III</div>
+        <p class="interstitial-quote">Good product infrastructure is legible to the humans using it, not just to the machines running it.</p>
+        <div class="interstitial-attribution">On The Work</div>
+      </div>
+    </aside>
+
+    <!-- ============================================================
+         ACT 4 — THE WORK
+         ============================================================ -->
     <section class="act" data-romulus-animate>
       <div class="act-label">Act 04</div>
       <h2 class="act-title">The Work</h2>
 
       <!-- Project 01 — Chronicle -->
-      <article class="project-card" data-romulus-animate>
-        <div class="project-card-cover">
-          <img src="images/Chronicle-cover.jpg" alt="Chronicle" loading="lazy">
-        </div>
-        <div class="project-card-body">
-          <span class="project-card-label">Project 01</span>
-          <h3 class="project-card-name">Chronicle</h3>
-          <span class="project-card-link">Live at <a href="https://thischronicle.com" target="_blank" rel="noopener">thischronicle.com</a> &mdash; one day, on a phone, through Discord.</span>
+      <article class="project" data-romulus-animate>
+        <div class="project-numeral">I</div>
+        <span class="project-label">Project 01</span>
+        <h3 class="project-name">Chronicle</h3>
+        <p class="project-tagline">One day, on a phone, through Discord.</p>
+        <p class="project-status">Live at <a href="https://thischronicle.com" target="_blank" rel="noopener">thischronicle.com</a></p>
 
+        <div class="prose">
           <p>One historical event per day. One image. Guess the year in three attempts. Monday is warm &mdash; two clues, guiding. Sunday has none.</p>
 
           <p>The product design is deliberate down to the difficulty arc. Monday eases you in. Wednesday starts to pinch. Saturday's clue is almost poetic &mdash; oblique enough to make you feel something when you get it. Sunday is prestige mode: the image alone, no context, no help. That progression isn't decoration, it's the retention mechanic. The kind of detail that gets designed in, not bolted on.</p>
@@ -1404,31 +1606,34 @@
           <p>One day.</p>
 
           <p>The game design, editorial decisions, difficulty curve, and acquisition thesis all required judgment. The implementation didn't require my hands on a keyboard.</p>
+        </div>
 
-          <div class="pull-quote">The longer play: Chronicle is built for a specific exit. The exit is part of the product design.</div>
+        <div class="pull-quote">The longer play: Chronicle is built for a specific exit. The exit is part of the product design.</div>
 
+        <div class="prose">
           <p>Clean Next.js code from day one. <code>localStorage</code>-only state &mdash; the Wordle model, pre-acquisition. Retention metrics instrumented for D7/D30/D90. No paid tier for an acquirer to unwind. NYT Games is a $9B business with no history game. That's the thesis.</p>
         </div>
       </article>
 
       <!-- Project 02 — Forbidden -->
-      <article class="project-card" data-romulus-animate>
-        <div class="project-card-cover">
-          <img src="images/Forbidden-cover.jpg" alt="Forbidden" loading="lazy">
-        </div>
-        <div class="project-card-body">
-          <span class="project-card-label">Project 02</span>
-          <h3 class="project-card-name">Forbidden</h3>
-          <span class="project-card-link">Live at <a href="https://playforbidden.com" target="_blank" rel="noopener">playforbidden.com</a> &mdash; research as product design.</span>
+      <article class="project" data-romulus-animate>
+        <div class="project-numeral">II</div>
+        <span class="project-label">Project 02</span>
+        <h3 class="project-name">Forbidden</h3>
+        <p class="project-tagline">Research as product design.</p>
+        <p class="project-status">Live at <a href="https://playforbidden.com" target="_blank" rel="noopener">playforbidden.com</a></p>
 
+        <div class="prose">
           <p>Forbidden started as a question about a gap in the market: the mobile party game space has Heads Up! and very little else. The tabletop space has Taboo, but nobody has rethought it seriously for phones. There was clearly something there. The question was what, exactly.</p>
 
           <p>I ran the initial product thesis through three AI models independently &mdash; Grok, ChatGPT, and Romulus &mdash; each asked to pressure-test it separately and come back with where it was wrong. The answers converged around a contradiction with the original premise.</p>
 
           <p>Forbidden isn't digital Taboo. It isn't a Heads Up clone. It's a <em>constraint-based pass-the-phone party game</em> &mdash; one player clues under verbal constraint while the group guesses simultaneously in real time. The game's tension comes from steering a room to an answer while navigating the forbidden words. That's a distinct product slot: different social dynamic, different expansion surface, different monetization path than either comparison.</p>
+        </div>
 
-          <div class="pull-quote">The framing came from the research, not the starting assumption. The research changed the product shape before any code changed.</div>
+        <div class="pull-quote">The framing came from the research, not the starting assumption. The research changed the product shape before any code changed.</div>
 
+        <div class="prose">
           <p>That's the part I find most useful about working this way &mdash; having a system that can pressure-test a thesis from multiple angles before I've committed to building anything. The product design happens earlier and the builds are more intentional because of it.</p>
 
           <p>Current state: 862-card corpus across six themed decks, a fake-door funnel measuring iOS intent, live at <code>playforbidden.com</code>. The web version is the signal layer. The iOS build waits for signal to justify it.</p>
@@ -1436,39 +1641,39 @@
       </article>
 
       <!-- Project 03 — Cherry Street Labs -->
-      <article class="project-card" data-romulus-animate>
-        <div class="project-card-cover">
-          <img src="images/artifact.jpg" alt="Cherry Street Labs" loading="lazy">
-        </div>
-        <div class="project-card-body">
-          <span class="project-card-label">Project 03</span>
-          <h3 class="project-card-name">Cherry Street Labs</h3>
-          <span class="project-card-link">Live at <a href="https://cherrystreetlabs.com" target="_blank" rel="noopener">cherrystreetlabs.com</a> &mdash; the studio.</span>
+      <article class="project" data-romulus-animate>
+        <div class="project-numeral">III</div>
+        <span class="project-label">Project 03</span>
+        <h3 class="project-name"><em>Cherry Street Labs</em></h3>
+        <p class="project-tagline">The studio.</p>
+        <p class="project-status">Live at <a href="https://cherrystreetlabs.com" target="_blank" rel="noopener">cherrystreetlabs.com</a></p>
 
+        <div class="prose">
           <p>Cherry Street Labs is the entity behind all of it &mdash; the one-person software studio housing Chronicle, Forbidden, and whatever comes next. The name is deliberately understated. The work is supposed to speak for itself.</p>
 
           <p>The site itself is worth looking at. The hero is an ASCII fluid distortion shader &mdash; a dense monospace character grid running FBM noise with mouse-reactive metaball blobs, rendered in Three.js. The color field runs neon magenta through purple to cyan. It moves like liquid when you interact with it. No build step, no framework, no dependencies beyond a CDN include. Vanilla HTML and about 300 lines of JavaScript.</p>
 
           <p>The effect came from a piece of generative art I came across &mdash; a WebGL fluid shader someone had posted. I wanted something that would feel technically interesting without feeling like a portfolio template, and without requiring a React app to load. The constraint of no build step was intentional: it forced the implementation to be lean and the result to be fast.</p>
+        </div>
 
-          <div class="pull-quote">Constraints as design inputs, not obstacles.</div>
+        <div class="pull-quote">Constraints as design inputs, not obstacles.</div>
 
-          <p>That's a consistent thread in how I build. <code>localStorage</code> for Chronicle because it removes the backend entirely and signals acquirability. GitHub Pages for fast proofs because zero infrastructure means zero friction. Vanilla JS for Cherry Street Labs because the right tool for a static brochure site isn't a framework.</p>
+        <div class="prose">
+          <p>That's a consistent thread in how I build &mdash; <code>localStorage</code> for Chronicle because it removes the backend entirely and signals acquirability. GitHub Pages for fast proofs because zero infrastructure means zero friction. Vanilla JS for Cherry Street Labs because the right tool for a static brochure site isn't a framework.</p>
 
           <p>Cherry Street Labs is the vehicle. The goal is building software that compounds &mdash; products designed to grow, acquire, or generate revenue without requiring a team. The studio framing is deliberate: each project shares infrastructure, decisions, and lessons. What I learn on Chronicle makes Forbidden sharper. What breaks on Forbidden teaches me something about Legion.</p>
         </div>
       </article>
 
       <!-- Project 04 — Legion -->
-      <article class="project-card" data-romulus-animate>
-        <div class="project-card-cover">
-          <img src="images/Caveat-cover.jpg" alt="Legion" loading="lazy">
-        </div>
-        <div class="project-card-body">
-          <span class="project-card-label">Project 04</span>
-          <h3 class="project-card-name">Legion</h3>
-          <span class="project-card-link"><em>Phase 1 complete. Shelved.</em> The postmortem.</span>
+      <article class="project" data-romulus-animate>
+        <div class="project-numeral">IV</div>
+        <span class="project-label">Project 04</span>
+        <h3 class="project-name">Legion</h3>
+        <p class="project-tagline">The postmortem.</p>
+        <p class="project-status">Phase 1 complete &middot; Shelved</p>
 
+        <div class="prose">
           <p>Legion was the most ambitious attempt: a multi-agent orchestration layer running in Discord. Five cohorts, each answering one question and handing off to the next. Caesar &mdash; is this worth building? Augustus &mdash; build it and deploy it. Vespasian &mdash; map the path to $20K MRR. Trajan &mdash; distribute it. One prompt in Discord, fifteen minutes later: a live deployed product, a wealth strategy, and a launch plan.</p>
 
           <p>Caesar worked well. Fast, clean, structured research and build specs. Augustus scaffolded projects and deployed to GitHub Pages. The Phase 1 architecture held.</p>
@@ -1476,30 +1681,19 @@
           <p>What didn't hold: the seams. When the Noctis test &mdash; a native iOS Swift app &mdash; hit the fifteen-minute timeout on Augustus, the chain stopped. Vespasian and Trajan never ran. State didn't survive across the handoffs. There was no retry logic, no timeout tiering scaled to build complexity, no eval layer to catch when a handoff had silently degraded.</p>
 
           <p>The architecture was sound. The execution substrate needed more rigor &mdash; durable task state, structured retry patterns, effort-tiered timeouts matched to scope, regression detection at the handoffs. None of that is exotic engineering. It's the careful, unsexy work that makes orchestration reliable rather than impressive in the right conditions.</p>
+        </div>
 
-          <div class="pull-quote">I learned more from Legion not fully working than I did from the parts that did.</div>
+        <div class="pull-quote">I learned more from Legion not fully working than I did from the parts that did.</div>
 
+        <div class="prose">
           <p>The things that failed pointed directly at what the next version needs to get right. The lessons are documented in the vault. It's Phase 1 of a longer effort.</p>
         </div>
       </article>
     </section>
 
-    <!-- ===== INTERSTITIAL III ===== -->
-    <aside class="interstitial" data-romulus-animate>
-      <div class="interstitial-inner">
-        <div class="interstitial-mark">Interlude III</div>
-        <div class="deco-mark">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
-            <path d="M8 12l2 2 4-4" />
-          </svg>
-        </div>
-        <p class="interstitial-quote">&ldquo;The longer play: Chronicle is built for a specific exit. The exit is part of the product design.&rdquo;</p>
-        <div class="interstitial-attribution">On The Work</div>
-      </div>
-    </aside>
-
-    <!-- ===== ACT 5 — THE OPEN QUESTION ===== -->
+    <!-- ============================================================
+         ACT 5 — THE OPEN QUESTION
+         ============================================================ -->
     <section class="act" data-romulus-animate>
       <div class="act-label">Act 05</div>
       <h2 class="act-title">The Open Question</h2>
@@ -1509,29 +1703,25 @@
 
         <p>One person. One designed system. A Mac Mini running while I sleep. A morning brief landing before the train. Four projects shipped or in flight &mdash; one live and built for acquisition, one in active market validation, one studio holding the rest, one ambitious architectural attempt that taught more than it shipped.</p>
 
-        <p>The thing I keep returning to:</p>
-      </div>
-
-      <div class="pull-quote">This compounds in a way that feels qualitatively different from just working faster. The decisions accumulate. The failures write lessons the whole system learns from.</div>
-
-      <div class="prose">
-        <p>The vault from May is materially richer than the one from February, and the next project starts from a higher floor because of it.</p>
+        <p>The thing I keep returning to: this compounds in a way that feels qualitatively different from just working faster. The decisions accumulate. The failures write lessons the whole system learns from. The vault from May is materially richer than the one from February, and the next project starts from a higher floor because of it.</p>
 
         <p>I've spent ten years developing the judgment to know what to build, how to scope it, how to make it feel right to the people using it. What's new is having infrastructure that extends that judgment &mdash; that holds context across weeks, surfaces the right decision history at the right moment, and executes overnight while I'm not at the keyboard.</p>
 
-        <p>What happens when a whole product team operates this way? When the AI layer isn't adopted off the shelf but designed &mdash; identity, memory, routing, delegation, all of it considered deliberately?</p>
-
-        <p>I think that's one of the more interesting product and organizational questions of the next few years. I don't have the full answer. But I've been building toward it.</p>
+        <p>What happens when a whole product team operates this way? When the AI layer isn't adopted off the shelf but designed &mdash; identity, memory, routing, delegation, all of it considered deliberately? I think that's one of the more interesting product and organizational questions of the next few years. I don't have the full answer. But I've been building toward it.</p>
       </div>
     </section>
 
-    <!-- ===== BYLINE / FOOTER ===== -->
+    <!-- ============================================================
+         BYLINE / FOOTER
+         ============================================================ -->
     <footer class="byline" data-romulus-animate>
+      <svg class="byline-laurel" viewBox="0 0 140 56" aria-hidden="true"><use href="#laurel"/></svg>
       <div class="byline-mark">Romulus</div>
       <div class="byline-rule"></div>
       <div class="name">Mike Battaglia</div>
       <div>Senior PM at Daylight <span class="sep">&middot;</span> Founder, Cherry Street Labs</div>
       <div>Park Slope, Brooklyn <span class="sep">&middot;</span> <a href="index.html">mikebatts.net</a></div>
+      <div class="byline-coda">Roma Eterna &middot; MMXXVI</div>
     </footer>
 
   </div>
