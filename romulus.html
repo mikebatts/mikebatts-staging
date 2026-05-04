@@ -510,7 +510,6 @@
       justify-content: center;
       text-align: center;
       overflow: hidden;
-      background: var(--charcoal);
       margin: 80px 0;
     }
     .cinematic-video {
@@ -521,20 +520,7 @@
       object-fit: cover;
       z-index: 0;
     }
-    .cinematic-overlay {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-      background: linear-gradient(
-        180deg,
-        var(--bg) 0%,
-        rgba(10, 9, 8, 0.80) 16%,
-        rgba(10, 9, 8, 0.50) 50%,
-        rgba(10, 9, 8, 0.80) 84%,
-        var(--bg) 100%
-      );
-    }
+
     .cinematic-inner {
       position: relative;
       z-index: 3;
@@ -771,7 +757,6 @@
       .cinematic { background: var(--bg); }
       .cinematic-quote { color: var(--ink); text-shadow: none; }
       .cinematic-attr { color: var(--ink-4); }
-      .cinematic-overlay { display: none; }
     }
   </style>
 </head>
@@ -1006,7 +991,6 @@
       <video class="cinematic-video" autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-hidden="true" poster="video-refs/bath_1s.jpg">
         <source src="video-refs/bath.mp4" type="video/mp4">
       </video>
-      <div class="cinematic-overlay" aria-hidden="true"></div>
 
       <div class="cinematic-inner">
         <p class="cinematic-quote">The vault is the brain. Sessions are the work.</p>
