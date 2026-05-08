@@ -396,11 +396,45 @@
     }
     .prose code {
       font-family: 'Inconsolata', monospace;
-      font-size: 14px;
-      background: var(--bg-warm);
-      padding: 2px 6px;
-      border-radius: 3px;
+      font-size: 0.92em;
+      background: rgba(122, 22, 22, 0.045);
+      padding: 1px 6px;
+      border-radius: 2px;
+      color: var(--accent-strong);
+      letter-spacing: 0.005em;
+    }
+
+    /* Lead paragraph — first beat in select sections gets larger leading */
+    .prose .lead, .lead p:first-child {
+      font-size: 19px;
+      line-height: 1.65;
       color: var(--ink);
+      letter-spacing: -0.005em;
+    }
+    .prose p.lead { color: var(--ink); }
+
+    /* Flourish — small ornamental break between sub-acts */
+    .flourish {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 56px 0 48px;
+      max-width: var(--measure);
+    }
+    .flourish::before, .flourish::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+    .flourish-mark {
+      font-family: 'Inconsolata', monospace;
+      font-size: 10px;
+      letter-spacing: 0.6em;
+      text-transform: uppercase;
+      color: var(--ink-4);
+      padding: 0 4px;
     }
 
     .pull-quote {
@@ -558,11 +592,66 @@
       align-self: start;
     }
 
+    /* Long-scroll sticky media — used in Architecture / Work where the right
+       column carries multiple sub-acts. Tighter media column, more room for
+       text; sticky pin a touch lower for comfort. */
+    .editorial.long-scroll,
+    .editorial.long-scroll.reverse {
+      grid-template-columns: minmax(0, 0.62fr) minmax(0, 1.38fr);
+      gap: 64px;
+    }
+    .editorial.long-scroll .editorial-media {
+      top: 96px;
+    }
+    .editorial.long-scroll .media-frame {
+      aspect-ratio: 3/4.2;
+    }
+
     .media-frame {
       position: relative;
       overflow: hidden;
       background: var(--bg-warm);
       aspect-ratio: 3/4;
+    }
+
+    /* Bookend media — landscape inset that introduces a section
+       (used as the visual lead-in for the Forward View) */
+    .bookend-media {
+      position: relative;
+      overflow: hidden;
+      background: var(--bg-warm);
+      aspect-ratio: 21/9;
+      max-width: 100%;
+      margin: 8px 0 56px;
+    }
+    .bookend-media video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .bookend-media .bookend-cap {
+      position: absolute;
+      left: 24px;
+      bottom: 20px;
+      font-family: 'Inconsolata', monospace;
+      font-size: 10px;
+      letter-spacing: 0.40em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.62);
+      text-shadow: 0 1px 16px rgba(0, 0, 0, 0.5);
+      z-index: 2;
+    }
+    .bookend-media::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg,
+        rgba(10, 9, 8, 0.0) 0%,
+        rgba(10, 9, 8, 0.0) 60%,
+        rgba(10, 9, 8, 0.45) 100%);
+      pointer-events: none;
     }
 
     .media-frame video {
@@ -694,26 +783,54 @@
 
 
     /* ============================================================
-       STATS — clean, no cards, vertical rules
+       STATS — receipts panel, eyebrow framed, count-up animated
        ============================================================ */
+    .stats-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 88px 32px 96px;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+    .stats-eyebrow {
+      font-family: 'Inconsolata', monospace;
+      font-size: 10px;
+      letter-spacing: 0.55em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    .stats-heading {
+      font-family: 'Source Serif 4', serif;
+      font-style: italic;
+      font-size: clamp(15px, 1.4vw, 17px);
+      color: var(--ink-3);
+      text-align: center;
+      margin-bottom: 56px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.5;
+    }
     .stats {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 64px 32px;
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
     }
 
     .stat {
       text-align: center;
-      padding: 40px 20px;
+      padding: 16px 20px;
       position: relative;
     }
 
     .stat + .stat::before {
       content: '';
       position: absolute;
-      left: 0; top: 20%; bottom: 20%;
+      left: 0; top: 14%; bottom: 14%;
       width: 1px;
       background: var(--rule);
     }
@@ -721,19 +838,43 @@
     .stat-num {
       display: block;
       font-family: 'Source Serif 4', serif;
-      font-size: clamp(40px, 5vw, 60px);
+      font-size: clamp(44px, 5.4vw, 68px);
       font-weight: 400;
       line-height: 1;
       color: var(--ink);
-      margin-bottom: 12px;
+      margin-bottom: 14px;
+      letter-spacing: -0.015em;
+      font-feature-settings: 'lnum' 1, 'tnum' 1;
     }
+    .stat-num .stat-prefix,
+    .stat-num .stat-suffix {
+      color: var(--ink-3);
+      font-size: 0.55em;
+      vertical-align: 0.32em;
+      letter-spacing: 0;
+      margin: 0 0.04em;
+    }
+    /* Number visibility is governed by the .stats-wrap data-romulus-animate
+       fade-in; the count-up animation handles the value reveal. */
 
     .stat-label {
       font-family: 'Inconsolata', monospace;
       font-size: 10px;
-      letter-spacing: 0.35em;
+      letter-spacing: 0.32em;
       text-transform: uppercase;
       color: var(--ink-4);
+      line-height: 1.6;
+    }
+    .stat-context {
+      display: block;
+      font-family: 'Source Serif 4', serif;
+      font-style: italic;
+      font-size: 12px;
+      letter-spacing: 0;
+      color: var(--ink-4);
+      text-transform: none;
+      margin-top: 6px;
+      line-height: 1.4;
     }
 
     /* ============================================================
@@ -869,26 +1010,42 @@
       .editorial.reverse .editorial-text { order: 2; }
       .editorial.reverse .editorial-media { order: 1; }
       .editorial-media { position: static; }
+      .editorial.long-scroll .editorial-media { position: static; top: auto; }
+      .editorial.long-scroll .media-frame { aspect-ratio: 16/10; }
       .media-frame { aspect-ratio: 16/10; max-width: 480px; margin: 0 auto; }
-      .stats { grid-template-columns: repeat(2, 1fr); padding: 48px 24px; }
+      .bookend-media { aspect-ratio: 16/9; }
+      .stats-wrap { padding: 64px 24px 72px; }
+      .stats-heading { margin-bottom: 36px; }
+      .stats { grid-template-columns: repeat(2, 1fr); padding: 0; }
       .stat + .stat::before { display: none; }
       .stat:nth-child(2)::before,
       .stat:nth-child(4)::before {
         content: '';
         position: absolute;
-        left: 0; top: 20%; bottom: 20%;
+        left: 0; top: 14%; bottom: 14%;
         width: 1px;
         background: var(--rule);
         display: block;
       }
+      .stat:nth-child(3) { padding-top: 36px; }
+      .stat:nth-child(4) { padding-top: 36px; }
       .act { padding: 80px 24px; }
       .project { padding: 64px 0; }
+      .frame { padding: 96px 24px 32px; }
+      .mode-list li { grid-template-columns: 1fr; gap: 4px; }
+      .mode-list .mode-name { font-size: 17px; }
+      .routing-row { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); }
+      .routing-row .rt-cost { grid-column: 1 / -1; text-align: left; padding-top: 2px; }
+      .flourish { margin: 44px 0 36px; }
     }
 
     @media (max-width: 480px) {
-      .stats { grid-template-columns: 1fr; padding: 40px 20px; }
+      .stats-wrap { padding: 48px 20px 56px; }
+      .stats { grid-template-columns: 1fr; }
+      .stat { padding: 18px 12px; }
       .stat::before { display: none !important; }
-      .stat + .stat { border-top: 1px solid var(--rule); }
+      .stat + .stat { border-top: 1px solid var(--rule); padding-top: 24px; }
+      .stat:nth-child(3), .stat:nth-child(4) { padding-top: 24px; }
       .act { padding: 64px 20px; }
       .project { padding: 48px 0; }
       .project:first-of-type { padding-top: 24px; }
@@ -905,6 +1062,10 @@
       .pattern-list li { padding-left: 40px; }
       .pull-quote { margin: 36px 0; padding-left: 18px; }
       .sub-act { padding: 40px 0 4px; }
+      .frame { padding: 80px 20px 24px; }
+      .frame .frame-prose p { font-size: 16px; line-height: 1.6; }
+      .bookend-media { aspect-ratio: 4/3; }
+      .bookend-media .bookend-cap { left: 16px; bottom: 14px; font-size: 9px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -919,7 +1080,8 @@
       .cinematic { background: var(--bg); }
       .cinematic .cinematic-video { display: none; }
       .cinematic-quote { color: var(--ink); text-shadow: none; }
-
+      .bookend-media::after { display: none; }
+      .bookend-media .bookend-cap { color: var(--ink-3); text-shadow: none; }
     }
   </style>
 </head>
@@ -988,7 +1150,7 @@
 
         <p>I treated it as <em>infrastructure</em> &mdash; something with an identity, a memory architecture, a routing layer, and a delegation pattern. I designed it the way I'd design any product: identity first, constraints defined, goals clear, then build. I run product at <a href="https://godaylight.com/" target="_blank" rel="noopener" style="color: var(--ink); border-bottom: 1px solid var(--rule); text-decoration: none;">Daylight</a> by day; this work happens nights and weekends. Designing the AI as infrastructure was the only way to ship four products in three months without quitting the&nbsp;job.</p>
 
-        <p>Week one, I rejected the trending pile. Boring problems, real money, speed to first dollar. Romulus had to support that bet, not just be impressive. From February 3 to May 1, I used what I built to ship a daily history game, a party-game thesis sharpened through multi-model cross-validation, a fullstack Gmail client (17,000 lines of code in two days, no keyboard time from me), a research-validated infrastructure play, and a multi-agent orchestration system that taught more than it shipped.</p>
+        <p>Week one, I rejected the trending pile. Boring problems, real money, speed to first dollar. Romulus had to support that bet, not just be impressive. From February 3 to May 1, I used what I built to ship a daily history game, a party-game thesis sharpened through multi-model cross-validation, a fullstack Gmail client (17,000 lines of code in two days, no keyboard time from me), a research-validated infrastructure thesis, and a multi-agent orchestration system that taught more than it shipped.</p>
 
         <p><strong>The thesis is simple: designed AI compounds. Adopted AI doesn't.</strong> Everything that follows is the proof.</p>
       </div>
@@ -1012,7 +1174,7 @@
 
             <p>The answer took the shape of <code>SOUL.md</code> &mdash; a product spec for a personality. Who is Romulus? What does he believe? How does he speak? What is he <em>for</em>? Then <code>USER.md</code>: my context, my background, my actual goals. Then <code>IDENTITY.md</code>, <code>MEMORY.md</code>, <code>AGENTS.md</code>, <code>HEARTBEAT.md</code>, <code>TOOLS.md</code>. All of it in place before a cron job ran, before a model was selected, before a line of code was written.</p>
 
-            <p>Inside <code>SOUL.md</code>, four contextual modes &mdash; the design exhibit:</p>
+            <p>Inside <code>SOUL.md</code>, four contextual modes:</p>
           </div>
 
           <ul class="mode-list" aria-label="SOUL.md contextual modes">
@@ -1048,51 +1210,10 @@
 
     <!-- ============================================================
          ACT 2 — THE ARCHITECTURE
-         Three principles, each anchored to the pressure that forced it.
+         Single section · sticky media on left · all 3 principles on right
          ============================================================ -->
-    <section class="act act-narrow" data-romulus-animate>
-      <div class="act-label">Act 02</div>
-      <h2 class="act-title">
-        The Architecture
-        <span class="sub">February 3, 2026. First boot. Three principles, earned upgrade by upgrade.</span>
-      </h2>
-
-      <div class="prose">
-        <p>MacBook Pro. OpenClaw installed. Discord wired to a private channel, <code>#roma-eterna</code>. Flat <code>MEMORY.md</code> as the only persistent memory. The first response landed clean. Then the system started breaking against itself, and the architecture had to be designed in response.</p>
-      </div>
-
-      <!-- PRINCIPLE 1 — Memory Split -->
-      <div class="sub-act" data-romulus-animate>
-        <div class="sub-act-tag">// principle 01</div>
-        <h3 class="sub-act-heading">Memory: vault as brain, sessions as work</h3>
-        <div class="prose">
-          <p>Memory is the first design decision, not the last. <code>MEMORY.md</code> as a flat file was the equivalent of a notebook with no chapters. It worked for the first few days, then became unreadable. Every breakdown after that was a memory architecture failure in disguise.</p>
-
-          <p>The split that mattered emerged in four phases:</p>
-        </div>
-
-        <ol class="pattern-list">
-          <li>Phase 1 &mdash; Flat <code>MEMORY.md</code>. Sessions wrote here. The notebook with no chapters.</li>
-          <li>Phase 2 &mdash; Obsidian vault. Daily notes, project files, decisions, all wikilinked. A graph, not a list.</li>
-          <li>Phase 3 &mdash; QMD as the semantic layer over the vault. 340 files indexed. Context retrieved by meaning, not keyword.</li>
-          <li>Phase 4 &mdash; Wiki vault. 27 sources ingested. The shared memory layer the system queries before every session.</li>
-        </ol>
-
-        <div class="prose" style="margin-top: 32px;">
-          <p>Sessions are ephemeral. The vault persists. Every session writes to it; the next one reads from it before it opens. Context survives across weeks. The system stops resetting.</p>
-        </div>
-
-        <div class="pull-quote">The vault is the brain. Sessions are the work. That split is what makes the system compound over time rather than reset.</div>
-
-        <div class="prose">
-          <p>The same instinct shows up in trust boundaries. For weeks the morning brief delivered R train departures from Times Square instead of Prospect Ave &mdash; <code>R16</code> looked right in the data; <code>R34N</code> is the actual Prospect Ave northbound stop. Plausible-looking data isn't verified data. In an AI system that synthesizes plausibility, the verification habit <em>is</em> the trust boundary. The lesson generalizes &mdash; product analytics, user research, AI output, all the same shape.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Editorial inset: Principle 2 with sky2.mp4 -->
     <section class="act" data-romulus-animate>
-      <div class="editorial reverse">
+      <div class="editorial reverse long-scroll">
         <aside class="editorial-media">
           <figure class="media-frame">
             <video autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-hidden="true" poster="video-refs/pillars_1s.jpg">
@@ -1103,69 +1224,112 @@
         </aside>
 
         <div class="editorial-text">
-          <div class="sub-act-tag">// principle 02</div>
-          <h3 class="sub-act-heading">Routing: one model per job, costed</h3>
-          <div class="prose">
-            <p>Model selection is infrastructure, not preference. I learned this on April 9 &mdash; a heavy Legion coding session on MiniMax M2.7. 205K context window, which seemed like enough. The session hit 338 messages and 2.5MB. Context overflowed. Three compaction events fired in sequence. Six consecutive edit-tool failures &mdash; the model was matching against stale text that no longer existed in the file. The session was gone.</p>
-
-            <p>The routing rules got written that night, in blood, into <code>TOOLS.md</code> and <code>AGENTS.md</code>. Each model gets a defined job, a cost budget, and a context ceiling.</p>
-          </div>
-
-          <div class="routing-table" role="list" aria-label="Production model routing">
-            <div class="routing-row" role="listitem">
-              <span class="rt-model">Qwen 3.6 Plus</span>
-              <span class="rt-job">Daily chat, crons, morning briefs</span>
-              <span class="rt-cost">$0.40 / $2.00&nbsp;per&nbsp;M</span>
-            </div>
-            <div class="routing-row" role="listitem">
-              <span class="rt-model">Claude Code (Opus)</span>
-              <span class="rt-job">All coding. Subscription, never API.</span>
-              <span class="rt-cost">flat</span>
-            </div>
-            <div class="routing-row" role="listitem">
-              <span class="rt-model">Grok 4 Fast</span>
-              <span class="rt-job">Heavy sessions. 2M context window.</span>
-              <span class="rt-cost">$0.20 / $0.50&nbsp;per&nbsp;M</span>
-            </div>
-            <div class="routing-row rt-deprecated" role="listitem">
-              <span class="rt-model">MiniMax M2.7</span>
-              <span class="rt-job">Demoted after April 9. Quick chat only.</span>
-              <span class="rt-cost">&mdash;</span>
-            </div>
-          </div>
+          <div class="act-label">Act 02</div>
+          <h2 class="act-title">
+            The Architecture
+            <span class="sub">February 3, 2026. First boot. Three principles, earned upgrade by upgrade.</span>
+          </h2>
 
           <div class="prose">
-            <p>Cost discipline followed. A balance-monitor cron runs three times a day. Target: under $15/day burn. Budget is a design constraint, the same shape as latency or context length.</p>
-
-            <p>The routing layer needed a machine that could hold it. March 30 &mdash; Mac Mini migration. A dedicated host, <code>romulus-mini</code>, always on. Auto-login, sleep disabled, FileVault on. The morning brief stopped disappearing when the laptop lid closed. Claude Code ran while I slept. Background work became actually background.</p>
+            <p class="lead">MacBook Pro. OpenClaw installed. Discord wired to a private channel, <code>#roma-eterna</code>. Flat <code>MEMORY.md</code> as the only persistent memory. The first response landed clean. Then the system started breaking against itself, and the architecture had to be designed in response.</p>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <section class="act act-narrow" data-romulus-animate>
-      <!-- PRINCIPLE 3 — Delegation Pattern -->
-      <div class="sub-act" data-romulus-animate>
-        <div class="sub-act-tag">// principle 03</div>
-        <h3 class="sub-act-heading">Delegation: the spec is the contract</h3>
-        <div class="prose">
-          <p>The pattern that governs everything now:</p>
-        </div>
+          <!-- PRINCIPLE 1 — Memory Split -->
+          <div class="sub-act" data-romulus-animate>
+            <div class="sub-act-tag">// principle 01</div>
+            <h3 class="sub-act-heading">Memory: vault as brain, sessions as work</h3>
+            <div class="prose">
+              <p>Memory is the first design decision, not the last. <code>MEMORY.md</code> as a flat file was the equivalent of a notebook with no chapters. It worked for the first few days, then became unreadable. Every breakdown after that was a memory architecture failure in disguise.</p>
 
-        <ol class="pattern-list">
-          <li>I give direction &mdash; the goal, the constraints, the judgment calls.</li>
-          <li>Romulus writes the spec or prompt file.</li>
-          <li>Claude Code implements against the codebase.</li>
-          <li>Romulus verifies, commits, pushes through staging.</li>
-          <li>Romulus reports back.</li>
-        </ol>
+              <p>The split that mattered emerged in four phases:</p>
+            </div>
 
-        <div class="prose" style="margin-top: 36px;">
-          <p>I write specs and prompts. <em>I don't write production code.</em> A good spec produces a good build. A vague spec produces vague output. The spec is the contract between me and the implementer &mdash; same instinct as a PRD between PM and engineer.</p>
+            <ol class="pattern-list">
+              <li>Flat <code>MEMORY.md</code>. Sessions wrote here. The notebook with no chapters.</li>
+              <li>Obsidian vault. Daily notes, project files, decisions, all wikilinked. A graph, not a list.</li>
+              <li>QMD as the semantic layer over the vault. 340 files indexed. Context retrieved by meaning, not keyword.</li>
+              <li>Wiki vault. 27 sources ingested. The shared memory layer the system queries before every session.</li>
+            </ol>
 
-          <p>Engineering rigor is part of the substrate. Every project goes through a staging branch first; Vercel auto-deploys staging on push; production only after review. <em>Never push directly to main. Never run <code>vercel --prod</code></em>. Both rules learned from real incidents in February.</p>
+            <div class="prose" style="margin-top: 32px;">
+              <p>Sessions are ephemeral. The vault persists. Every session writes to it; the next one reads from it before it opens. Context survives across weeks. The system stops resetting.</p>
+            </div>
 
-          <p>The architecture didn't arrive fully formed. It was earned, upgrade by upgrade, February to May &mdash; each change motivated by a real breakdown in the version before it. Identity, memory, routing, delegation. Four design decisions in stack order. The same order any product gets designed.</p>
+            <div class="pull-quote">The vault is the brain. Sessions are the work. That split is what makes the system compound over time rather than reset.</div>
+
+            <div class="prose">
+              <p>The same instinct shows up in trust boundaries. For weeks the morning brief delivered R train departures from Times Square instead of Prospect Ave &mdash; <code>R16</code> looked right in the data; <code>R34N</code> is the actual Prospect Ave northbound stop. Plausible-looking data isn't verified data. In an AI system that synthesizes plausibility, the verification habit <em>is</em> the trust boundary. The lesson generalizes &mdash; product analytics, user research, AI output, all the same shape.</p>
+            </div>
+          </div>
+
+          <div class="flourish" aria-hidden="true"><span class="flourish-mark">&middot; &middot; &middot;</span></div>
+
+          <!-- PRINCIPLE 2 — Model Routing -->
+          <div class="sub-act" data-romulus-animate>
+            <div class="sub-act-tag">// principle 02</div>
+            <h3 class="sub-act-heading">Routing: one model per job, costed</h3>
+            <div class="prose">
+              <p>Model selection is infrastructure, not preference. I learned this on April 9 &mdash; a heavy Legion coding session on MiniMax M2.7. 205K context window, which seemed like enough. The session hit 338 messages and 2.5MB. Context overflowed. Three compaction events fired in sequence. Six consecutive edit-tool failures &mdash; the model was matching against stale text that no longer existed in the file. The session was gone.</p>
+
+              <p>The routing rules got written that night, in blood, into <code>TOOLS.md</code> and <code>AGENTS.md</code>. Each model gets a defined job, a cost budget, and a context ceiling.</p>
+            </div>
+
+            <div class="routing-table" role="list" aria-label="Production model routing">
+              <div class="routing-row" role="listitem">
+                <span class="rt-model">Qwen 3.6 Plus</span>
+                <span class="rt-job">Daily chat, crons, morning briefs</span>
+                <span class="rt-cost">$0.40 / $2.00&nbsp;per&nbsp;M</span>
+              </div>
+              <div class="routing-row" role="listitem">
+                <span class="rt-model">Claude Code (Opus)</span>
+                <span class="rt-job">All coding. Subscription, never API.</span>
+                <span class="rt-cost">flat</span>
+              </div>
+              <div class="routing-row" role="listitem">
+                <span class="rt-model">Grok 4 Fast</span>
+                <span class="rt-job">Heavy sessions. 2M context window.</span>
+                <span class="rt-cost">$0.20 / $0.50&nbsp;per&nbsp;M</span>
+              </div>
+              <div class="routing-row rt-deprecated" role="listitem">
+                <span class="rt-model">MiniMax M2.7</span>
+                <span class="rt-job">Demoted after April 9. Quick chat only.</span>
+                <span class="rt-cost">&mdash;</span>
+              </div>
+            </div>
+
+            <div class="prose">
+              <p>Cost discipline followed. A balance-monitor cron runs three times a day. Target: under $15/day burn. Budget is a design constraint, the same shape as latency or context length.</p>
+
+              <p>The routing layer needed a machine that could hold it. March 30 &mdash; Mac Mini migration. A dedicated host, <code>romulus-mini</code>, always on. Auto-login, sleep disabled, FileVault on. The morning brief stopped disappearing when the laptop lid closed. Claude Code ran while I slept. Background work became actually background.</p>
+            </div>
+          </div>
+
+          <div class="flourish" aria-hidden="true"><span class="flourish-mark">&middot; &middot; &middot;</span></div>
+
+          <!-- PRINCIPLE 3 — Delegation Pattern -->
+          <div class="sub-act" data-romulus-animate>
+            <div class="sub-act-tag">// principle 03</div>
+            <h3 class="sub-act-heading">Delegation: the spec is the contract</h3>
+            <div class="prose">
+              <p>The pattern that governs everything now:</p>
+            </div>
+
+            <ol class="pattern-list">
+              <li>I give direction &mdash; the goal, the constraints, the judgment calls.</li>
+              <li>Romulus writes the spec or prompt file.</li>
+              <li>Claude Code implements against the codebase.</li>
+              <li>Romulus verifies, commits, pushes through staging.</li>
+              <li>Romulus reports back.</li>
+            </ol>
+
+            <div class="prose" style="margin-top: 36px;">
+              <p>I write specs and prompts. <em>I don't write production code.</em> A good spec produces a good build. A vague spec produces vague output. The spec is the contract between me and the implementer &mdash; same instinct as a PRD between PM and engineer.</p>
+
+              <p>Engineering rigor is part of the substrate. Every project goes through a staging branch first; Vercel auto-deploys staging on push; production only after review. <em>Never push directly to main. Never run <code>vercel --prod</code></em>. Both rules learned from real incidents in February.</p>
+
+              <p>The architecture didn't arrive fully formed. It was earned, upgrade by upgrade, February to May &mdash; each change motivated by a real breakdown in the version before it. Identity, memory, routing, delegation. Four design decisions in stack order. The same order any product gets designed.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1202,149 +1366,185 @@
     </section>
 
     <!-- ===== STORY STATS — real numbers, each tells a story ===== -->
-    <section class="stats" data-romulus-animate aria-label="Receipts">
-      <div class="stat">
-        <span class="stat-num">29</span>
-        <span class="stat-label">Projects in vault</span>
-      </div>
-      <div class="stat">
-        <span class="stat-num">17K</span>
-        <span class="stat-label">LOC, 2 days, no keyboard</span>
-      </div>
-      <div class="stat">
-        <span class="stat-num">338</span>
-        <span class="stat-label">Messages, April&nbsp;9</span>
-      </div>
-      <div class="stat">
-        <span class="stat-num">$15</span>
-        <span class="stat-label">Per-day burn target</span>
+    <section class="stats-wrap" data-romulus-animate aria-label="Receipts">
+      <div class="stats-eyebrow">// receipts</div>
+      <div class="stats-heading">Real numbers from a real system. Each one tells a story.</div>
+      <div class="stats" id="storyStats">
+        <div class="stat">
+          <span class="stat-num" data-target="29" data-counted="false">
+            <span class="stat-value">0</span>
+          </span>
+          <span class="stat-label">Projects in&nbsp;vault</span>
+          <span class="stat-context">Wikilinked, daily-noted, decision-anchored</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num" data-target="17" data-suffix="K" data-counted="false">
+            <span class="stat-value">0</span><span class="stat-suffix">K</span>
+          </span>
+          <span class="stat-label">LOC, 2 days</span>
+          <span class="stat-context">Via, fullstack &mdash; no keyboard time</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num" data-target="338" data-counted="false">
+            <span class="stat-value">0</span>
+          </span>
+          <span class="stat-label">Messages, Apr&nbsp;9</span>
+          <span class="stat-context">The session that died, in receipts</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num" data-target="15" data-prefix="$" data-counted="false">
+            <span class="stat-prefix">$</span><span class="stat-value">0</span>
+          </span>
+          <span class="stat-label">Per-day burn</span>
+          <span class="stat-context">Production AI as a budget line</span>
+        </div>
       </div>
     </section>
 
     <!-- ============================================================
          ACT 4 — THE WORK
-         CSL as studio frame · 3 flagships + research showcase + postmortem
+         Sticky media on left · CSL frame + 3 flagships + research + postmortem
          ============================================================ -->
-    <section class="act act-narrow" data-romulus-animate>
-      <div class="act-label">Act 04</div>
-      <h2 class="act-title">
-        The Work
-        <span class="sub">Five outputs. Each one anchored to a different capability the system enabled.</span>
-      </h2>
+    <section class="act" data-romulus-animate>
+      <div class="editorial reverse long-scroll">
+        <aside class="editorial-media">
+          <figure class="media-frame">
+            <video autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-hidden="true" poster="video-refs/eterna_1s.jpg">
+              <source src="video-refs/eterna.mp4" type="video/mp4">
+            </video>
+          </figure>
+          <figcaption class="media-cap">Plate III &middot; Eterna</figcaption>
+        </aside>
 
-      <div class="prose">
-        <p><em>Cherry Street Labs</em> is the studio that houses all of it &mdash; the one-person software outfit at <a href="https://cherrystreetlabs.com" target="_blank" rel="noopener">cherrystreetlabs.com</a>. The site itself is its own argument: an ASCII fluid distortion hero in vanilla JS and Three.js, no build step, ~300 lines of code. Constraints as design inputs, not obstacles. The studio framing is deliberate &mdash; each project shares infrastructure, decisions, and lessons. What I learn on one makes the next sharper.</p>
+        <div class="editorial-text">
+          <div class="act-label">Act 04</div>
+          <h2 class="act-title">
+            The Work
+            <span class="sub">Five outputs. Each one anchored to a different capability the system enabled.</span>
+          </h2>
+
+          <div class="prose">
+            <p class="lead"><em>Cherry Street Labs</em> is the studio that houses all of it &mdash; the one-person software outfit at <a href="https://cherrystreetlabs.com" target="_blank" rel="noopener">cherrystreetlabs.com</a>. The site itself is its own argument: an ASCII fluid distortion hero in vanilla JS and Three.js, no build step, ~300 lines of code. Constraints as design inputs, not obstacles. The studio framing is deliberate &mdash; each project shares infrastructure, decisions, and lessons. What I learn on one makes the next sharper.</p>
+          </div>
+
+          <!-- Project I — Chronicle -->
+          <article class="project" data-romulus-animate>
+            <div class="project-num">Project I</div>
+            <h3 class="project-name">Chronicle</h3>
+            <p class="project-tagline">One day, on a phone, through Discord.</p>
+            <p class="project-status">Live at <a href="https://thischronicle.com" target="_blank" rel="noopener">thischronicle.com</a></p>
+
+            <div class="prose">
+              <p>One historical event per day. One image. Guess the year in three attempts. Monday is warm &mdash; two clues, guiding. Sunday has none. The difficulty arc isn't decoration, it's the retention mechanic. Designed in, not bolted on.</p>
+
+              <p>The spec was locked March 29, 2026. The build happened the next day &mdash; not at a desk. On my phone, through Discord, Romulus coordinating, Claude Code running in the background. By end of day: a working Next.js app deployed to Vercel, 90 puzzles seeded, complete scoring logic, share card, stats modal, full seven-day difficulty arc.</p>
+
+              <p>The longer play: Chronicle is built for a specific exit. <code>localStorage</code>-only state, the Wordle model pre-acquisition. Retention metrics instrumented for D7/D30/D90. No paid tier for an acquirer to unwind. NYT Games is a $9B business with no history game. That's the thesis.</p>
+            </div>
+
+            <div class="proof-tag">Ship in a day, from a phone, while not at a desk. The delegation pattern works at speed.</div>
+          </article>
+
+          <!-- Project II — Forbidden -->
+          <article class="project" data-romulus-animate>
+            <div class="project-num">Project II</div>
+            <h3 class="project-name">Forbidden</h3>
+            <p class="project-tagline">Research as product design.</p>
+            <p class="project-status">Live at <a href="https://playforbidden.com" target="_blank" rel="noopener">playforbidden.com</a></p>
+
+            <div class="prose">
+              <p>Forbidden started as a question about a gap in the market &mdash; the mobile party game space has <em>Heads Up!</em> and very little else, the tabletop space has <em>Taboo</em>, nobody has rethought it seriously for phones. There was clearly something there. The question was what, exactly.</p>
+
+              <p>I ran the initial product thesis through three AI models independently &mdash; Grok, ChatGPT, and Romulus &mdash; each asked to pressure-test it separately and come back with where it was wrong. The answers converged around a contradiction with the original premise. Forbidden isn't digital <em>Taboo</em>. It isn't a <em>Heads Up</em> clone. It's a <em>constraint-based pass-the-phone party game</em>: one player clues under verbal constraint while the group guesses simultaneously, in real time. The tension comes from steering a room to an answer while navigating the forbidden words.</p>
+
+              <p>The reframe happened April 8, before a single line of game logic was written. 862-card corpus across six themed decks. A fake-door funnel measures iOS intent on the web build. The web version is the signal layer; the iOS build waits for signal to justify it.</p>
+            </div>
+
+            <div class="pull-quote">The framing came from the research, not the starting assumption. The research changed the product shape before any code changed.</div>
+
+            <div class="proof-tag">Pressure-test a thesis across multiple models before committing. Research-as-design at startup-killing speed.</div>
+          </article>
+
+          <!-- Project III — Via -->
+          <article class="project" data-romulus-animate>
+            <div class="project-num">Project III</div>
+            <h3 class="project-name">Via</h3>
+            <p class="project-tagline">Superhuman, at a fraction of the price.</p>
+            <p class="project-status">Built April 17&ndash;18, 2026 &middot; Awaiting deploy</p>
+
+            <div class="prose">
+              <p>An AI-powered Gmail client. Fast inbox triage, read receipts, calendar integration. Liquid-glass design system matching the iOS 26 aesthetic. Edge runtime for pixel tracking. Smart triage running on <code>gpt-4o-mini</code> through OpenRouter.</p>
+
+              <p>Built in two days. <strong>17,000 lines of code. 143 files. 18 API routes. 28 Vitest tests passing.</strong> Four phases plus three fix passes &mdash; P0, P1, P2. Six commits. None of it written by me; all of it directed by me.</p>
+
+              <p>Spec to working build through the delegation pattern, end to end. The spec was the contract. Claude Code did the implementation against it. Romulus verified, committed, pushed through staging. I reviewed the staging URL and made the calls. The pattern that worked on a one-day game scaled to a fullstack app with auth, OAuth, Prisma, and a real product surface.</p>
+            </div>
+
+            <div class="proof-tag">The delegation pattern scales. From a Wordle-style game in a day to a fullstack app in two.</div>
+          </article>
+
+          <!-- Research Showcase — AgentForge -->
+          <article class="project" data-romulus-animate>
+            <div class="project-num">Research IV</div>
+            <h3 class="project-name">AgentForge</h3>
+            <p class="project-tagline">Vercel for DeFi MCP servers.</p>
+            <p class="project-status">Researched April 28, 2026 &middot; Build in queue</p>
+
+            <div class="prose">
+              <p>Hosted MCP infrastructure for autonomous AI agents transacting onchain. The thesis: every DeFi MCP server today is a self-hosted proof of concept. Nobody owns the production backend slot &mdash; <em>plug-and-play hosted MCP for agents</em>. Meanwhile, 19% of all onchain transactions are now agent-driven. 76% of stablecoin transfer volume. 165M+ x402 transactions logged.</p>
+
+              <p>The research-to-decision pipeline ran in a single day. Three rounds of Grok validation. YC RFS Summer 2026 alignment. Competitor teardown across hosted vs self-hosted. X-signal analysis pulled the agent-volume numbers. Phase&nbsp;1 scope locked: hosting + x402 billing + observability + security. 15 beta testers identified through X.</p>
+
+              <p>No code yet &mdash; that's the point. The case for building gets made before the building starts. Most of what kills early projects is the wrong thesis, not the wrong implementation. The system was designed to catch the thesis before it became code.</p>
+            </div>
+
+            <div class="proof-tag">Pre-build research rigor at startup-killing speed. The thesis gets validated before the implementation begins.</div>
+          </article>
+
+          <!-- Postmortem — Legion -->
+          <article class="project" data-romulus-animate>
+            <div class="project-num">Postmortem V</div>
+            <h3 class="project-name">Legion</h3>
+            <p class="project-tagline">The architecture was sound. The substrate wasn't.</p>
+            <p class="project-status">Phase 2A in progress</p>
+
+            <div class="prose">
+              <p>The most ambitious attempt: a multi-agent orchestration layer running in Discord. Five cohorts, each answering one question and handing off to the next. <em>Caesar</em> &mdash; is this worth building? <em>Augustus</em> &mdash; build and deploy it. <em>Vespasian</em> &mdash; map the path to $20K MRR. <em>Trajan</em> &mdash; distribute it. <em>Romulus</em> &mdash; the orchestrator, deciding what gets sequenced when. One Discord prompt, fifteen minutes later: a live deployed product, a wealth strategy, and a launch plan.</p>
+
+              <p>First successful run April 9. Caesar produced a complete competitive landscape on Forbidden &mdash; 72% confidence, 80% opportunity score, 12 competitors mapped &mdash; delivered to <code>#legion</code>. Caesar worked. Augustus worked on small builds. The Phase 1 architecture held.</p>
+
+              <p>What didn't hold: the seams. When the Noctis test &mdash; a native iOS Swift app &mdash; hit the fifteen-minute timeout on Augustus, the chain stopped. Vespasian and Trajan never ran. State didn't survive across handoffs. There was no retry logic, no timeout tiering scaled to build complexity, no eval layer to catch when a handoff had silently degraded.</p>
+            </div>
+
+            <div class="pull-quote">The architecture was sound. The execution substrate wasn't ready. Recognizing the difference is engineering maturity.</div>
+
+            <div class="prose">
+              <p>Phase 2A is the response: an effort-tier system (Tier 1 / Tier 2 / Tier 3 timeouts matched to build scope), durable task state, structured retry patterns, regression detection at the handoffs. None of it exotic. It's the careful, unsexy work that turns orchestration from impressive-in-the-right-conditions into reliable.</p>
+            </div>
+
+            <div class="proof-tag">Knowing when the idea is right and the substrate isn't &mdash; and building the substrate next, not abandoning the idea.</div>
+          </article>
+        </div>
       </div>
-
-      <!-- Project I — Chronicle -->
-      <article class="project" data-romulus-animate>
-        <div class="project-num">Project I</div>
-        <h3 class="project-name">Chronicle</h3>
-        <p class="project-tagline">One day, on a phone, through Discord.</p>
-        <p class="project-status">Live at <a href="https://thischronicle.com" target="_blank" rel="noopener">thischronicle.com</a></p>
-
-        <div class="prose">
-          <p>One historical event per day. One image. Guess the year in three attempts. Monday is warm &mdash; two clues, guiding. Sunday has none. The difficulty arc isn't decoration, it's the retention mechanic. Designed in, not bolted on.</p>
-
-          <p>The spec was locked March 29, 2026. The build happened the next day &mdash; not at a desk. On my phone, through Discord, Romulus coordinating, Claude Code running in the background. By end of day: a working Next.js app deployed to Vercel, 90 puzzles seeded, complete scoring logic, share card, stats modal, full seven-day difficulty arc.</p>
-
-          <p>The longer play: Chronicle is built for a specific exit. <code>localStorage</code>-only state, the Wordle model pre-acquisition. Retention metrics instrumented for D7/D30/D90. No paid tier for an acquirer to unwind. NYT Games is a $9B business with no history game. That's the thesis.</p>
-        </div>
-
-        <div class="proof-tag">Ship in a day, from a phone, while not at a desk. The delegation pattern works at speed.</div>
-      </article>
-
-      <!-- Project II — Forbidden -->
-      <article class="project" data-romulus-animate>
-        <div class="project-num">Project II</div>
-        <h3 class="project-name">Forbidden</h3>
-        <p class="project-tagline">Research as product design.</p>
-        <p class="project-status">Live at <a href="https://playforbidden.com" target="_blank" rel="noopener">playforbidden.com</a></p>
-
-        <div class="prose">
-          <p>Forbidden started as a question about a gap in the market &mdash; the mobile party game space has <em>Heads Up!</em> and very little else, the tabletop space has <em>Taboo</em>, nobody has rethought it seriously for phones. There was clearly something there. The question was what, exactly.</p>
-
-          <p>I ran the initial product thesis through three AI models independently &mdash; Grok, ChatGPT, and Romulus &mdash; each asked to pressure-test it separately and come back with where it was wrong. The answers converged around a contradiction with the original premise. Forbidden isn't digital <em>Taboo</em>. It isn't a <em>Heads Up</em> clone. It's a <em>constraint-based pass-the-phone party game</em>: one player clues under verbal constraint while the group guesses simultaneously, in real time. The tension comes from steering a room to an answer while navigating the forbidden words.</p>
-
-          <p>The reframe happened April 8, before a single line of game logic was written. 862-card corpus across six themed decks. A fake-door funnel measures iOS intent on the web build. The web version is the signal layer; the iOS build waits for signal to justify it.</p>
-        </div>
-
-        <div class="pull-quote">The framing came from the research, not the starting assumption. The research changed the product shape before any code changed.</div>
-
-        <div class="proof-tag">Pressure-test a thesis across multiple models before committing. Research-as-design at startup-killing speed.</div>
-      </article>
-
-      <!-- Project III — Via (NEW in V2) -->
-      <article class="project" data-romulus-animate>
-        <div class="project-num">Project III</div>
-        <h3 class="project-name">Via</h3>
-        <p class="project-tagline">Superhuman, at a fraction of the price.</p>
-        <p class="project-status">Built April 17&ndash;18, 2026 &middot; Awaiting deploy</p>
-
-        <div class="prose">
-          <p>An AI-powered Gmail client. Fast inbox triage, read receipts, calendar integration. Liquid-glass design system matching the iOS 26 aesthetic. Edge runtime for pixel tracking. Smart triage running on <code>gpt-4o-mini</code> through OpenRouter.</p>
-
-          <p>Built in two days. <strong>17,000 lines of code. 143 files. 18 API routes. 28 Vitest tests passing.</strong> Four phases plus three fix passes &mdash; P0, P1, P2. Six commits. None of it written by me; all of it directed by me.</p>
-
-          <p>Spec to working build through the delegation pattern, end to end. The spec was the contract. Claude Code did the implementation against it. Romulus verified, committed, pushed through staging. I reviewed the staging URL and made the calls. The pattern that worked on a one-day game scaled to a fullstack app with auth, OAuth, Prisma, and a real product surface.</p>
-        </div>
-
-        <div class="proof-tag">The delegation pattern scales. From a Wordle-style game in a day to a fullstack app in two.</div>
-      </article>
-
-      <!-- Research Showcase — AgentForge (NEW in V2) -->
-      <article class="project" data-romulus-animate>
-        <div class="project-num">Research IV</div>
-        <h3 class="project-name">AgentForge</h3>
-        <p class="project-tagline">Vercel for DeFi MCP servers.</p>
-        <p class="project-status">Researched April 28, 2026 &middot; Build in queue</p>
-
-        <div class="prose">
-          <p>Hosted MCP infrastructure for autonomous AI agents transacting onchain. The thesis: every DeFi MCP server today is a self-hosted proof of concept. Nobody owns the production backend slot &mdash; "plug-and-play hosted MCP for agents" &mdash; and 19% of all onchain transactions are now agent-driven, 76% of stablecoin transfer volume, 165M+ x402 transactions logged.</p>
-
-          <p>The research-to-decision pipeline ran in a single day. Three rounds of Grok validation. YC RFS Summer 2026 alignment. Competitor teardown across hosted vs self-hosted. Real X-signal analysis to pull the agent-volume numbers. Phase&nbsp;1 scope locked: hosting + x402 billing + observability + security. 15 beta testers identified through X.</p>
-
-          <p>No code yet &mdash; that's the point. The case for building gets made before the building starts. Most of what kills early projects is the wrong thesis, not the wrong implementation. The system was designed to catch the thesis before it became code.</p>
-        </div>
-
-        <div class="proof-tag">Pre-build research rigor at startup-killing speed. The thesis gets validated before the implementation begins.</div>
-      </article>
-
-      <!-- Postmortem — Legion -->
-      <article class="project" data-romulus-animate>
-        <div class="project-num">Postmortem V</div>
-        <h3 class="project-name">Legion</h3>
-        <p class="project-tagline">The architecture was sound. The substrate wasn't.</p>
-        <p class="project-status">Phase 2A in progress</p>
-
-        <div class="prose">
-          <p>The most ambitious attempt: a multi-agent orchestration layer running in Discord. Five cohorts, each answering one question and handing off to the next. <em>Caesar</em> &mdash; is this worth building? <em>Augustus</em> &mdash; build and deploy it. <em>Vespasian</em> &mdash; map the path to $20K MRR. <em>Trajan</em> &mdash; distribute it. <em>Romulus</em> &mdash; the orchestrator, deciding what gets sequenced when. One Discord prompt, fifteen minutes later: a live deployed product, a wealth strategy, and a launch plan.</p>
-
-          <p>First successful run April 9. Caesar produced a complete competitive landscape on Forbidden &mdash; 72% confidence, 80% opportunity score, 12 competitors mapped &mdash; delivered to <code>#legion</code>. Caesar worked. Augustus worked on small builds. The Phase 1 architecture held.</p>
-
-          <p>What didn't hold: the seams. When the Noctis test &mdash; a native iOS Swift app &mdash; hit the fifteen-minute timeout on Augustus, the chain stopped. Vespasian and Trajan never ran. State didn't survive across handoffs. There was no retry logic, no timeout tiering scaled to build complexity, no eval layer to catch when a handoff had silently degraded.</p>
-        </div>
-
-        <div class="pull-quote">The architecture was sound. The execution substrate wasn't ready. Recognizing the difference is engineering maturity.</div>
-
-        <div class="prose">
-          <p>Phase 2A is the response: an effort-tier system (Tier 1 / Tier 2 / Tier 3 timeouts matched to build scope), durable task state, structured retry patterns, regression detection at the handoffs. None of it exotic. It's the careful, unsexy work that turns orchestration from impressive-in-the-right-conditions into reliable.</p>
-        </div>
-
-        <div class="proof-tag">Knowing when the idea is right and the substrate isn't &mdash; and building the substrate next, not abandoning the idea.</div>
-      </article>
     </section>
 
     <!-- ============================================================
          ACT 5 — THE FORWARD VIEW
-         A POV, not an open question.
+         Bookend: landscape inset media as visual lead-in, then POV close
          ============================================================ -->
     <section class="act act-narrow" data-romulus-animate>
       <div class="act-label">Act 05</div>
       <h2 class="act-title">The Forward View</h2>
 
+      <figure class="bookend-media">
+        <video autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-hidden="true">
+          <source src="video-refs/green-scene.mp4" type="video/mp4">
+        </video>
+        <figcaption class="bookend-cap">Plate IV &middot; Horizon</figcaption>
+      </figure>
+
       <div class="prose">
-        <p>What's about to happen to small product teams: the operator who designs their own AI infrastructure becomes the operator who can run an entire product line. Not faster. <em>Differently shaped.</em></p>
+        <p class="lead">What's about to happen to small product teams: the operator who designs their own AI infrastructure becomes the operator who can run an entire product line. Not faster. <em>Differently shaped.</em></p>
 
         <p>This isn't a productivity story. It's about which work a single PM can hold. Roadmaps that update themselves against your decision history. Research synthesis run across three models in parallel before you commit. Overnight execution as the standing background. Institutional memory that used to require a team of five &mdash; and that grows with every project rather than resetting at every onboarding.</p>
 
@@ -1417,6 +1617,7 @@
         window.scrollTo(0, 0);
         initAnimations();
         initNavScroll();
+        initStatsCountUp();
       }
 
       if (!checkSession()) {
@@ -1441,6 +1642,59 @@
           });
         }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
         for (var i = 0; i < els.length; i++) observer.observe(els[i]);
+      }
+
+      /* ===== STATS COUNT-UP ON SCROLL ===== */
+      function initStatsCountUp() {
+        var nums = document.querySelectorAll('.stat-num[data-target]');
+        if (!nums.length) return;
+
+        var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        function animate(el) {
+          var target = parseInt(el.getAttribute('data-target'), 10);
+          var valueEl = el.querySelector('.stat-value');
+          if (!valueEl || isNaN(target)) return;
+          el.setAttribute('data-counted', 'true');
+
+          if (prefersReduced) {
+            valueEl.textContent = String(target);
+            return;
+          }
+
+          var duration = 1400;
+          var start = performance.now();
+          var ease = function(t) { return 1 - Math.pow(1 - t, 3); }; // cubic ease-out
+
+          function tick(now) {
+            var t = Math.min(1, (now - start) / duration);
+            var eased = ease(t);
+            var value = Math.round(eased * target);
+            valueEl.textContent = String(value);
+            if (t < 1) {
+              requestAnimationFrame(tick);
+            } else {
+              valueEl.textContent = String(target);
+            }
+          }
+          requestAnimationFrame(tick);
+        }
+
+        if (!('IntersectionObserver' in window)) {
+          for (var i = 0; i < nums.length; i++) animate(nums[i]);
+          return;
+        }
+
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting && entry.target.getAttribute('data-counted') === 'false') {
+              animate(entry.target);
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.4 });
+
+        for (var j = 0; j < nums.length; j++) observer.observe(nums[j]);
       }
 
       /* ===== NAV BACKGROUND TOGGLE ON SCROLL ===== */
