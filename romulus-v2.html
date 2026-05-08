@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Romulus &mdash; Mike Battaglia</title>
+  <meta content="Romulus &mdash; Designing AI as Infrastructure" property="og:title">
+  <meta content="Romulus &mdash; Designing AI as Infrastructure" property="twitter:title">
+  <meta content="A case study in designing AI as infrastructure &mdash; and using it to ship four products in 87 days." name="description">
+  <meta content="A case study in designing AI as infrastructure &mdash; and using it to ship four products in 87 days." property="og:description">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta name="theme-color" content="#F2EDE5">
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&family=Inter:wght@300;400;500;600;700&family=Inconsolata:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon">
+  <link href="images/webclip.png" rel="apple-touch-icon">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57180566-1"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','UA-57180566-1',{'anonymize_ip':false});</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0HCHFJPP3W"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0HCHFJPP3W');</script>
+  <style>
+    /* ============================================================
+       ROMULUS V12 — DESIGNED-AI CASE STUDY · EDITORIAL RESTRUCTURE
+       Thesis-driven · Three principles · Forward-view close
+       ============================================================ */
+    :root {
+      --bg: #F2EDE5;
+      --bg-warm: #EBE4D8;
+      --ink: #141310;
+      --ink-2: #2E2C28;
+      --ink-3: #5C5850;
+      --ink-4: #8A8578;
+      --rule: rgba(20, 19, 16, 0.08);
+      --accent: #7A1616;
+      --accent-strong: #5C0F0F;
+      --gold: #A8840A;
+      --charcoal: #0A0908;
+      --measure: 640px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--ink-2);
+      font-family: 'Inter', sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    ::selection { background: var(--accent); color: #fff; }
+
+    img, svg, video { max-width: 100%; display: block; }
+
+    /* ============================================================
+       PASSWORD GATE — Sharpest possible
+       ============================================================ */
+    .romulus-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 9000;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .romulus-gate.hidden { display: none; }
+
+    .gate-card {
+      text-align: center;
+      max-width: 360px;
+      width: 100%;
+      padding: 40px 28px 32px;
+    }
+
+    .gate-mark {
+      font-family: 'Source Serif 4', serif;
+      font-style: italic;
+      font-size: clamp(36px, 7vw, 56px);
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 6px;
+      letter-spacing: -0.01em;
+      line-height: 1;
+    }
+
+    .gate-sub {
+      font-family: 'Inconsolata', monospace;
+      font-size: 10px;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--ink-4);
+      margin-bottom: 32px;
+    }
+
+    .gate-line {
+      width: 32px;
+      height: 1px;
+      background: var(--ink-4);
+      margin: 0 auto 28px;
+    }
+
+    .gate-label {
+      font-family: 'Inconsolata', monospace;
+      font-size: 9px;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--ink-4);
+      margin-bottom: 14px;
+    }
+
+    .gate-input {
+      width: 100%;
+      padding: 12px 0;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--ink-4);
+      text-align: center;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      color: var(--ink);
+      outline: none;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+      transition: border-color 0.2s;
+    }
+    .gate-input::placeholder { color: var(--ink-4); font-size: 13px; letter-spacing: 0.1em; }
+    .gate-input:focus { border-bottom-color: var(--accent); }
+
+    .gate-submit {
+      width: 100%;
+      padding: 12px 20px;
+      background: var(--ink);
+      color: var(--bg);
+      border: none;
+      font-family: 'Inconsolata', monospace;
+      font-size: 10px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .gate-submit:hover { opacity: 0.75; }
+
+    .gate-error {
+      display: none;
+      margin-top: 12px;
+      font-family: 'Inconsolata', monospace;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+    .gate-error.visible { display: block; }
+
+    .gate-foot {
+      margin-top: 28px;
+      font-family: 'Inconsolata', monospace;
+      font-size: 9px;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--ink-4);
+    }
+
+    /* ============================================================
+       MAIN
+       ============================================================ */
+    .romulus-content { display: none; }
+    .romulus-content.visible { display: block; }
+
+    /* ============================================================
+       NAV — invisible over hero, cream after
+       ============================================================ */
+    .romulus-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: max(16px, env(safe-area-inset-top)) max(28px, env(safe-area-inset-right)) 16px max(28px, env(safe-area-inset-left));
+      font-family: 'Inconsolata', monospace;
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      background: none;
+      transition: background 0.4s ease;
+    }
+    .romulus-nav a {
+      color: rgba(255, 255, 255, 0.50);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .romulus-nav a:hover { color: #fff; }
+    .romulus-nav .badge { color: rgba(255, 255, 255, 0.35); }
+
+    .romulus-nav.nav-light {
+      background: var(--bg);
+    }
+    .romulus-nav.nav-light a { color: var(--ink-3); }
+    .romulus-nav.nav-light a:hover { color: var(--accent); }
+    .romulus-nav.nav-light .badge { color: var(--ink-4); }
+
+    /* ============================================================
+       HERO — scene.mp4, dramatic, video-centric, no cream overlay
+       ============================================================ */
+    .hero {
+      position: relative;
+      height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      color: #fff;
+    }
+
+    .hero-media {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    /* Uniform 4% black over the video; gradient overlay stacks above */
+    .hero-media::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: rgba(0, 0, 0, 0.04);
+      pointer-events: none;
+    }
+
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: none;
+      color: rgba(255, 255, 255, 1);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+      background-image: linear-gradient(
+        180deg,
+        rgba(10, 9, 8, 0.55) 0%,
+        rgba(10, 9, 8, 0.18) 38%,
+        rgba(10, 9, 8, 0.00) 70%,
+        rgba(10, 9, 8, 0.40) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      padding: 0 34px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      vertical-align: bottom;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Inconsolata', monospace;
+      font-size: 10px;
+      letter-spacing: 0.7em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.50);
+      margin-bottom: 20px;
+    }
+
+    .hero-title {
+      font-family: 'Source Serif 4', serif;
+      font-size: clamp(34px, 7vw, 64px);
+      font-weight: 400;
+      line-height: 1.04;
+      letter-spacing: -0.018em;
+      color: rgba(255, 255, 255, 0.96);
+      margin-bottom: 0;
+    }
+
+    .hero-title-italic {
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.70);
+      margin-bottom: 32px;
+    }
+
+    .hero-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.55);
+      max-width: 540px;
+      margin: 0 auto 32px;
+      line-height: 1.7;
+    }
+
+    .hero-meta {
+      font-family: 'Inconsolata', monospace;
+      font-size: 10px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    .meta-dot {
+      display: inline-block;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
+      margin: 0 14px;
+      vertical-align: middle;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: max(40px, calc(env(safe-area-inset-bottom) + 24px));
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      font-family: 'Inconsolata', monospace;
+      font-size: 9px;
+      letter-spacing: 0.6em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.25);
+    }
+
+    /* ============================================================
+       ACT
+       ============================================================ */
+    .act {
+      position: relative;
+      padding: 100px 32px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    /* Legacy alias — sections previously narrower now share .act width for consistency */
+    .act-narrow { max-width: 1100px; }
+
+    .act-label {
+      font-family: 'Inconsolata', monospace;
+      font-size: 10px;
+      letter-spacing: 0.55em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .act-title {
+      font-family: 'Source Serif 4', serif;
+      font-size: clamp(32px, 5.2vw, 68px);
+      font-weight: 400;
+      line-height: 1.06;
+      color: var(--ink);
+      margin-bottom: 52px;
+      letter-spacing: -0.01em;
+    }
+    .act-title em { font-style: italic; color: var(--accent); }
+    .act-title .sub {
+      display: block;
+      font-size: clamp(14px, 1.5vw, 16px);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--ink-4);
+      letter-spacing: 0;
+      margin-top: 14px;
+    }
+
+    /* ============================================================
+       PROSE
+       ============================================================ */
+    .prose { max-width: var(--measure); }
+    .prose p {
+      color: var(--ink-2);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+    .prose p:last-child { margin-bottom: 0; }
+    .prose em {
+      font-family: 'Source Serif 4', serif;
+      font-style: italic;
+      color: var(--ink);
+    }
+    .prose code {
+      font-family: 'Inconsolata', monospace;
+      font-size: 14px;
+      background: var(--bg-warm);
+      padding: 2px 6px;
+      border-radius: 3px;
+      color: var(--ink);
+    }
+
+    .pull-quote {
+      font-family: 'Source Serif 4', serif;
+      font-style: italic;
+      font-size: clamp(20px, 2.4vw, 26px);
+      line-height: 1.40;
+      color: var(--ink);
+      border-left: 2px solid var(--accent);
+      padding: 4px 0 4px 24px;
+      margin: 52px 0;
+      max-width: var(--measure);
+    }
+
+    /* ============================================================
+       ROUTING TABLE — model routing with cost data
+       ============================================================ */
+    .routing-table {
+      max-width: var(--measure);
+      margin: 32px 0 36px;
+      border-top: 1px solid var(--rule);
+    }
+    .routing-row {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr) minmax(0, 0.7fr);
+      gap: 20px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--rule);
+      font-size: 15px;
+      align-items: baseline;
+    }
+    .routing-row .rt-model {
+      font-family: 'Source Serif 4', serif;
+      font-size: 17px;
+      color: var(--ink);
+    }
+    .routing-row .rt-job {
+      color: var(--ink-2);
+      line-height: 1.5;
+    }
+    .routing-row .rt-cost {
+      font-family: 'Inconsolata', monospace;
+      font-size: 13px;
+      color: var(--ink-3);
+      letter-spacing: 0.02em;
+      text-align: right;
+    }
+    .routing-row.rt-deprecated .rt-model,
+    .routing-row.rt-deprecated .rt-job { color: var(--ink-4); text-decoration: line-through; text-decoration-color: var(--ink-4); }
+    .routing-row.rt-deprecated .rt-cost { color: var(--ink-4); }
+
+    /* ============================================================
+       PROOF TAG — "What this proved" italic line under projects
+       ============================================================ */
+    .proof-tag {
+      font-family: 'Source Serif 4', serif;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--accent);
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid var(--rule);
+      max-width: var(--measure);
+    }
+    .proof-tag::before {
+      content: 'What this proved \\2014 ';
+      color: var(--ink-4);
+      font-style: normal;
+      font-family: 'Inconsolata', monospace;
+      font-size: 10px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    /* ============================================================
+       MODE LIST — Jarvis / Consigliere / Cohort / Roman as design exhibit
+       ============================================================ */
+    .mode-list {
+      list-style: none;
+      max-width: var(--measure);
+      margin: 24px 0 8px;
+      padding: 0;
+      border-top: 1px solid var(--rule);
+    }
+    .mode-list li {
+      display: grid;
+      grid-template-columns: minmax(120px, 0.5fr) minmax(0, 1fr);
+      gap: 24px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--rule);
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    .mode-list .mode-name {
+      font-family: 'Source Serif 4', serif;
+      font-style: italic;
+      color: var(--ink);
+    }
+    .mode-list .mode-desc { color: var(--ink-2); }
+
+    /* ============================================================
+       FRAME — opening thesis section
+       ============================================================ */
+    .frame {
+      padding: 120px 32px 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .frame .frame-eyebrow {
+      font-family: 'Inconsolata', monospace;
+      font-size: 10px;
+      letter-spacing: 0.55em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .frame .frame-prose {
+      max-width: var(--measure);
+    }
+    .frame .frame-prose p {
+      font-family: 'Source Serif 4', serif;
+      font-size: clamp(18px, 1.6vw, 21px);
+      line-height: 1.6;
+      color: var(--ink-2);
+      margin-bottom: 22px;
+    }
+    .frame .frame-prose p:last-child { margin-bottom: 0; }
+    .frame .frame-prose em { color: var(--ink); font-style: italic; }
+    .frame .frame-prose strong {
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    /* ============================================================
+       EDITORIAL GRID — text + portrait video insets, clean rectangles
+       ============================================================ */
+    .editorial {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.7fr);
+      gap: 56px;
+      align-items: start;
+    }
+    .editorial.reverse { grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr); }
+    .editorial.reverse .editorial-text { order: 2; }
+    .editorial.reverse .editorial-media { order: 1; }
+
+    .editorial-text { min-width: 0; }
+    .editorial-text .prose { max-width: none; }
+
+    .editorial-media {
+      position: sticky;
+      top: 80px;
+      align-self: start;
+    }
+
+    .media-frame {
+      position: relative;
+      overflow: hidden;
+      background: var(--bg-warm);
+      aspect-ratio: 3/4;
+    }
+
+    .media-frame video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .media-frame::before { content: none; }
+    .media-frame::after { content: none; }
+
+    .media-cap {
+      margin-top: 12px;
+      font-family: 'Inconsolata', monospace;
+      font-size: 10px;
+      letter-spacing: 0.30em;
+      text-transform: uppercase;
+      color: var(--ink-4);
+    }
+
+    /* ============================================================
+       SUB-ACT
+       ============================================================ */
+    .sub-act { padding: 56px 0 8px; }
+    .sub-act-tag {
+      font-family: 'Inconsolata', monospace;
+      font-size: 10px;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-bottom: 14px;
+    }
+    .sub-act-heading {
+      font-family: 'Source Serif 4', serif;
+      font-size: clamp(24px, 3.2vw, 36px);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 28px;
+    }
+
+    /* ============================================================
+       PATTERN LIST
+       ============================================================ */
+    .pattern-list {
+      list-style: none;
+      counter-reset: pl;
+      margin: 8px 0 0;
+      max-width: var(--measure);
+    }
+    .pattern-list li {
+      counter-increment: pl;
+      position: relative;
+      padding-left: 48px;
+      margin-bottom: 20px;
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--ink-2);
+    }
+    .pattern-list li::before {
+      content: counter(pl, upper-roman);
+      position: absolute;
+      left: 0; top: 0;
+      font-family: 'Source Serif 4', serif;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--accent);
+      width: 32px;
+    }
+
+    /* ============================================================
+       CINEMATIC INTERSTITIAL — bath.mp4 (the dramatic dark moment)
+       ============================================================ */
+    .cinematic {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    .cinematic-wrap {
+      position: relative;
+      width: 100%;
+    }
+
+    .cinematic .cinematic-inner {
+      min-height: 100dvh;
+      padding: 80px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+        .cinematic-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      z-index: 0;
+    }
+
+    .cinematic-inner {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+        .cinematic-quote {
+      font-family: 'Source Serif 4', serif;
+      font-style: italic;
+      font-size: clamp(16px, 2.5vw, 26px);
+      line-height: 1.15;
+      color: rgba(255, 255, 255, 0.94);
+      text-shadow: 0 2px 40px rgba(0, 0, 0, 0.50);
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+
+    /* ============================================================
+       STATS — clean, no cards, vertical rules
+       ============================================================ */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 64px 32px;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 40px 20px;
+      position: relative;
+    }
+
+    .stat + .stat::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 20%; bottom: 20%;
+      width: 1px;
+      background: var(--rule);
+    }
+
+    .stat-num {
+      display: block;
+      font-family: 'Source Serif 4', serif;
+      font-size: clamp(40px, 5vw, 60px);
+      font-weight: 400;
+      line-height: 1;
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+
+    .stat-label {
+      font-family: 'Inconsolata', monospace;
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--ink-4);
+    }
+
+    /* ============================================================
+       PROJECTS
+       ============================================================ */
+    .project {
+      padding: 80px 0;
+      border-top: 1px solid var(--rule);
+      max-width: var(--measure);
+    }
+    .project:first-of-type { border-top: none; padding-top: 40px; }
+
+    .project-num {
+      font-family: 'Inconsolata', monospace;
+      font-size: 10px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-bottom: 16px;
+    }
+
+    .project-name {
+      font-family: 'Source Serif 4', serif;
+      font-size: clamp(28px, 4.6vw, 52px);
+      font-weight: 400;
+      line-height: 1.08;
+      color: var(--ink);
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+    .project-name em { font-style: italic; }
+
+    .project-tagline {
+      font-family: 'Source Serif 4', serif;
+      font-style: italic;
+      font-size: clamp(15px, 1.8vw, 19px);
+      color: var(--ink-3);
+      margin-bottom: 14px;
+      line-height: 1.4;
+    }
+
+    .project-status {
+      font-family: 'Inconsolata', monospace;
+      font-size: 11px;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: var(--ink-4);
+      margin-bottom: 36px;
+    }
+    .project-status a {
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid;
+      transition: color 0.2s;
+    }
+    .project-status a:hover { color: var(--accent); }
+
+    /* ============================================================
+       BYLINE / FOOTER
+       ============================================================ */
+    .byline {
+      padding: 120px 32px;
+      text-align: center;
+      border-top: 1px solid var(--rule);
+    }
+    .byline-inner { max-width: 480px; margin: 0 auto; }
+    .byline-mark {
+      font-family: 'Source Serif 4', serif;
+      font-style: italic;
+      font-size: 28px;
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+    .byline-line {
+      width: 32px; height: 1px;
+      background: var(--ink-4);
+      margin: 0 auto 24px;
+    }
+    .byline-name {
+      font-family: 'Source Serif 4', serif;
+      font-size: 20px;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+    .byline-role {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      color: var(--ink-3);
+      line-height: 1.7;
+    }
+    .byline-role .dot { color: var(--ink-4); margin: 0 6px; }
+    .byline-role a {
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid;
+      transition: color 0.2s;
+    }
+    .byline-role a:hover { color: var(--accent); }
+    .byline-coda {
+      margin-top: 28px;
+      font-family: 'Inconsolata', monospace;
+      font-size: 9px;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--ink-4);
+    }
+
+    /* ============================================================
+       SCROLL ANIMATIONS
+       ============================================================ */
+    [data-romulus-animate] {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .romulus-visible { opacity: 1; transform: none; }
+
+    .hero[data-romulus-animate] { opacity: 1; transform: none; transition: none; }
+    .hero[data-romulus-animate] .hero-content {
+      opacity: 1; transform: none;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 1024px) {
+      .act { padding: 88px 28px; }
+    }
+
+    @media (max-width: 800px) {
+      .editorial, .editorial.reverse { grid-template-columns: 1fr; gap: 36px; }
+      .editorial.reverse .editorial-text { order: 2; }
+      .editorial.reverse .editorial-media { order: 1; }
+      .editorial-media { position: static; }
+      .media-frame { aspect-ratio: 16/10; max-width: 480px; margin: 0 auto; }
+      .stats { grid-template-columns: repeat(2, 1fr); padding: 48px 24px; }
+      .stat + .stat::before { display: none; }
+      .stat:nth-child(2)::before,
+      .stat:nth-child(4)::before {
+        content: '';
+        position: absolute;
+        left: 0; top: 20%; bottom: 20%;
+        width: 1px;
+        background: var(--rule);
+        display: block;
+      }
+      .act { padding: 80px 24px; }
+      .project { padding: 64px 0; }
+    }
+
+    @media (max-width: 480px) {
+      .stats { grid-template-columns: 1fr; padding: 40px 20px; }
+      .stat::before { display: none !important; }
+      .stat + .stat { border-top: 1px solid var(--rule); }
+      .act { padding: 64px 20px; }
+      .project { padding: 48px 0; }
+      .project:first-of-type { padding-top: 24px; }
+      .hero-content { padding: 0 20px; gap: 14px; }
+      .byline { padding: 72px 20px; }
+      .romulus-nav {
+        padding: max(14px, env(safe-area-inset-top)) max(18px, env(safe-area-inset-right)) 14px max(18px, env(safe-area-inset-left));
+        font-size: 9px;
+        letter-spacing: 0.25em;
+      }
+      .hero-meta { font-size: 9px; letter-spacing: 0.22em; }
+      .meta-dot { margin: 0 8px; }
+      .hero-scroll { display: none; }
+      .pattern-list li { padding-left: 40px; }
+      .pull-quote { margin: 36px 0; padding-left: 18px; }
+      .sub-act { padding: 40px 0 4px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+      }
+      [data-romulus-animate] { opacity: 1; transform: none; }
+      video { display: none !important; }
+      .hero { background: var(--charcoal); }
+      .cinematic .cinematic-video { display: none; }
+      .cinematic { background: var(--bg); }
+      .cinematic .cinematic-video { display: none; }
+      .cinematic-quote { color: var(--ink); text-shadow: none; }
+
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       PASSWORD GATE
+       ============================================================ -->
+  <div class="romulus-gate" id="gate">
+    <div class="gate-card">
+      <div class="gate-mark">Romulus</div>
+      <div class="gate-sub">A Case Study</div>
+      <div class="gate-line"></div>
+      <div class="gate-label">Access Required</div>
+      <input type="password" class="gate-input" id="gateInput" placeholder="passphrase" autocomplete="off" />
+      <button class="gate-submit" id="gateSubmit">Enter</button>
+      <div class="gate-error" id="gateError">Incorrect passphrase. Try again.</div>
+      <div class="gate-foot">MMXXVI</div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MAIN CONTENT
+       ============================================================ -->
+  <div class="romulus-content" id="content">
+
+    <!-- ===== TOP NAV ===== -->
+    <nav class="romulus-nav" id="topNav">
+      <a href="index.html">&larr; mikebatts.net</a>
+      <span class="badge">Case Study &middot; MMXXVI</span>
+    </nav>
+
+    <!-- ============================================================
+         HERO — full-bleed cinematic video, thesis-anchored desc
+         ============================================================ -->
+    <header class="hero" id="hero" data-romulus-animate>
+      <div class="hero-media">
+        <video class="hero-video" autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-hidden="true" poster="video-refs/scene_1s.jpg">
+          <source src="video-refs/market.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay" aria-hidden="true"></div>
+      </div>
+
+      <div class="hero-content">
+        <h1 class="hero-title">Romulus</h1>
+        <p class="hero-desc">A case study in designing AI as infrastructure &mdash; and using it to ship four products in 87&nbsp;days.</p>
+        <div class="hero-meta">
+          <span>Feb 3 &rarr; May 1, 2026</span>
+          <span class="meta-dot"></span>
+          <span>Brooklyn, NY</span>
+          <span class="meta-dot"></span>
+          <span>Mike Battaglia</span>
+        </div>
+      </div>
+
+      <div class="hero-scroll">scroll</div>
+    </header>
+
+    <!-- ============================================================
+         FRAME — Opening thesis (NEW in V2)
+         ============================================================ -->
+    <section class="frame" data-romulus-animate>
+      <div class="frame-eyebrow">The Frame</div>
+      <div class="frame-prose">
+        <p>Most product teams treat AI as a tool. Open ChatGPT, paste a prompt, copy the result. The model is borrowed. The context resets every conversation. The compounding never starts.</p>
+
+        <p>I treated it as <em>infrastructure</em> &mdash; something with an identity, a memory architecture, a routing layer, and a delegation pattern. I designed it the way I'd design any product: identity first, constraints defined, goals clear, then build. I run product at <a href="https://godaylight.com/" target="_blank" rel="noopener" style="color: var(--ink); border-bottom: 1px solid var(--rule); text-decoration: none;">Daylight</a> by day; this work happens nights and weekends. Designing the AI as infrastructure was the only way to ship four products in three months without quitting the&nbsp;job.</p>
+
+        <p>Week one, I rejected the trending pile. Boring problems, real money, speed to first dollar. Romulus had to support that bet, not just be impressive. From February 3 to May 1, I used what I built to ship a daily history game, a party-game thesis sharpened through multi-model cross-validation, a fullstack Gmail client (17,000 lines of code in two days, no keyboard time from me), a research-validated infrastructure play, and a multi-agent orchestration system that taught more than it shipped.</p>
+
+        <p><strong>The thesis is simple: designed AI compounds. Adopted AI doesn't.</strong> Everything that follows is the proof.</p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ACT 1 — THE IDENTITY
+         ============================================================ -->
+    <section class="act" data-romulus-animate>
+      <div class="act-narrow">
+        <div class="act-label">Act 01</div>
+        <h2 class="act-title">The Identity</h2>
+      </div>
+
+      <div class="editorial">
+        <div class="editorial-text">
+          <div class="prose">
+            <p>The name came first. <em>Romulus</em> &mdash; the founder-king of Rome. Not a conqueror. An architect of systems that outlasted him. The name wasn't decoration; it was the first design decision, and it set the tone for everything that followed.</p>
+
+            <p>Before I wrote a single prompt, I asked a harder question: <em>what should this thing actually be?</em></p>
+
+            <p>The answer took the shape of <code>SOUL.md</code> &mdash; a product spec for a personality. Who is Romulus? What does he believe? How does he speak? What is he <em>for</em>? Then <code>USER.md</code>: my context, my background, my actual goals. Then <code>IDENTITY.md</code>, <code>MEMORY.md</code>, <code>AGENTS.md</code>, <code>HEARTBEAT.md</code>, <code>TOOLS.md</code>. All of it in place before a cron job ran, before a model was selected, before a line of code was written.</p>
+
+            <p>Inside <code>SOUL.md</code>, four contextual modes &mdash; the design exhibit:</p>
+          </div>
+
+          <ul class="mode-list" aria-label="SOUL.md contextual modes">
+            <li><span class="mode-name">Jarvis</span><span class="mode-desc">Crisp reports. When speed matters.</span></li>
+            <li><span class="mode-name">Consigliere</span><span class="mode-desc">Strategic counsel. When stakes are high enough to push back.</span></li>
+            <li><span class="mode-name">Cohort</span><span class="mode-desc">Collaborative build mode. When a session is going sideways at midnight.</span></li>
+            <li><span class="mode-name">Roman</span><span class="mode-desc">Milestone gravitas. For the moments that matter.</span></li>
+          </ul>
+
+          <div class="prose">
+            <p>And one hard rule, called <em>The Fortress</em>: nothing leaves the system without an explicit ask. No messages sent. No accounts created. No money spent. No production deploys. AI safety as a product design decision, not an afterthought.</p>
+          </div>
+        </div>
+
+        <aside class="editorial-media">
+          <figure class="media-frame">
+            <video autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-hidden="true" poster="video-refs/eterna_1s.jpg">
+              <source src="video-refs/gateway.mp4" type="video/mp4">
+            </video>
+          </figure>
+          <figcaption class="media-cap">Plate I &middot; Roma Eterna</figcaption>
+        </aside>
+      </div>
+
+      <div class="act-narrow">
+        <div class="pull-quote">I designed AI the same way I'd design any product. Identity first. Constraints defined. Goals clear. Then build.</div>
+
+        <div class="prose">
+          <p>The naming wasn't ornament &mdash; it scaled. Every cohort, every project, every artifact got a Roman name. Identity-gated, identity-named, identity-first. Ten years of building products for people taught me to start with the person using it. Here, the person was me. The product was my own operating system.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ACT 2 — THE ARCHITECTURE
+         Three principles, each anchored to the pressure that forced it.
+         ============================================================ -->
+    <section class="act act-narrow" data-romulus-animate>
+      <div class="act-label">Act 02</div>
+      <h2 class="act-title">
+        The Architecture
+        <span class="sub">February 3, 2026. First boot. Three principles, earned upgrade by upgrade.</span>
+      </h2>
+
+      <div class="prose">
+        <p>MacBook Pro. OpenClaw installed. Discord wired to a private channel, <code>#roma-eterna</code>. Flat <code>MEMORY.md</code> as the only persistent memory. The first response landed clean. Then the system started breaking against itself, and the architecture had to be designed in response.</p>
+      </div>
+
+      <!-- PRINCIPLE 1 — Memory Split -->
+      <div class="sub-act" data-romulus-animate>
+        <div class="sub-act-tag">// principle 01</div>
+        <h3 class="sub-act-heading">Memory: vault as brain, sessions as work</h3>
+        <div class="prose">
+          <p>Memory is the first design decision, not the last. <code>MEMORY.md</code> as a flat file was the equivalent of a notebook with no chapters. It worked for the first few days, then became unreadable. Every breakdown after that was a memory architecture failure in disguise.</p>
+
+          <p>The split that mattered emerged in four phases:</p>
+        </div>
+
+        <ol class="pattern-list">
+          <li>Phase 1 &mdash; Flat <code>MEMORY.md</code>. Sessions wrote here. The notebook with no chapters.</li>
+          <li>Phase 2 &mdash; Obsidian vault. Daily notes, project files, decisions, all wikilinked. A graph, not a list.</li>
+          <li>Phase 3 &mdash; QMD as the semantic layer over the vault. 340 files indexed. Context retrieved by meaning, not keyword.</li>
+          <li>Phase 4 &mdash; Wiki vault. 27 sources ingested. The shared memory layer the system queries before every session.</li>
+        </ol>
+
+        <div class="prose" style="margin-top: 32px;">
+          <p>Sessions are ephemeral. The vault persists. Every session writes to it; the next one reads from it before it opens. Context survives across weeks. The system stops resetting.</p>
+        </div>
+
+        <div class="pull-quote">The vault is the brain. Sessions are the work. That split is what makes the system compound over time rather than reset.</div>
+
+        <div class="prose">
+          <p>The same instinct shows up in trust boundaries. For weeks the morning brief delivered R train departures from Times Square instead of Prospect Ave &mdash; <code>R16</code> looked right in the data; <code>R34N</code> is the actual Prospect Ave northbound stop. Plausible-looking data isn't verified data. In an AI system that synthesizes plausibility, the verification habit <em>is</em> the trust boundary. The lesson generalizes &mdash; product analytics, user research, AI output, all the same shape.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Editorial inset: Principle 2 with sky2.mp4 -->
+    <section class="act" data-romulus-animate>
+      <div class="editorial reverse">
+        <aside class="editorial-media">
+          <figure class="media-frame">
+            <video autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-hidden="true" poster="video-refs/pillars_1s.jpg">
+              <source src="video-refs/sky2.mp4" type="video/mp4">
+            </video>
+          </figure>
+          <figcaption class="media-cap">Plate II &middot; Propylaea</figcaption>
+        </aside>
+
+        <div class="editorial-text">
+          <div class="sub-act-tag">// principle 02</div>
+          <h3 class="sub-act-heading">Routing: one model per job, costed</h3>
+          <div class="prose">
+            <p>Model selection is infrastructure, not preference. I learned this on April 9 &mdash; a heavy Legion coding session on MiniMax M2.7. 205K context window, which seemed like enough. The session hit 338 messages and 2.5MB. Context overflowed. Three compaction events fired in sequence. Six consecutive edit-tool failures &mdash; the model was matching against stale text that no longer existed in the file. The session was gone.</p>
+
+            <p>The routing rules got written that night, in blood, into <code>TOOLS.md</code> and <code>AGENTS.md</code>. Each model gets a defined job, a cost budget, and a context ceiling.</p>
+          </div>
+
+          <div class="routing-table" role="list" aria-label="Production model routing">
+            <div class="routing-row" role="listitem">
+              <span class="rt-model">Qwen 3.6 Plus</span>
+              <span class="rt-job">Daily chat, crons, morning briefs</span>
+              <span class="rt-cost">$0.40 / $2.00&nbsp;per&nbsp;M</span>
+            </div>
+            <div class="routing-row" role="listitem">
+              <span class="rt-model">Claude Code (Opus)</span>
+              <span class="rt-job">All coding. Subscription, never API.</span>
+              <span class="rt-cost">flat</span>
+            </div>
+            <div class="routing-row" role="listitem">
+              <span class="rt-model">Grok 4 Fast</span>
+              <span class="rt-job">Heavy sessions. 2M context window.</span>
+              <span class="rt-cost">$0.20 / $0.50&nbsp;per&nbsp;M</span>
+            </div>
+            <div class="routing-row rt-deprecated" role="listitem">
+              <span class="rt-model">MiniMax M2.7</span>
+              <span class="rt-job">Demoted after April 9. Quick chat only.</span>
+              <span class="rt-cost">&mdash;</span>
+            </div>
+          </div>
+
+          <div class="prose">
+            <p>Cost discipline followed. A balance-monitor cron runs three times a day. Target: under $15/day burn. Budget is a design constraint, the same shape as latency or context length.</p>
+
+            <p>The routing layer needed a machine that could hold it. March 30 &mdash; Mac Mini migration. A dedicated host, <code>romulus-mini</code>, always on. Auto-login, sleep disabled, FileVault on. The morning brief stopped disappearing when the laptop lid closed. Claude Code ran while I slept. Background work became actually background.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="act act-narrow" data-romulus-animate>
+      <!-- PRINCIPLE 3 — Delegation Pattern -->
+      <div class="sub-act" data-romulus-animate>
+        <div class="sub-act-tag">// principle 03</div>
+        <h3 class="sub-act-heading">Delegation: the spec is the contract</h3>
+        <div class="prose">
+          <p>The pattern that governs everything now:</p>
+        </div>
+
+        <ol class="pattern-list">
+          <li>I give direction &mdash; the goal, the constraints, the judgment calls.</li>
+          <li>Romulus writes the spec or prompt file.</li>
+          <li>Claude Code implements against the codebase.</li>
+          <li>Romulus verifies, commits, pushes through staging.</li>
+          <li>Romulus reports back.</li>
+        </ol>
+
+        <div class="prose" style="margin-top: 36px;">
+          <p>I write specs and prompts. <em>I don't write production code.</em> A good spec produces a good build. A vague spec produces vague output. The spec is the contract between me and the implementer &mdash; same instinct as a PRD between PM and engineer.</p>
+
+          <p>Engineering rigor is part of the substrate. Every project goes through a staging branch first; Vercel auto-deploys staging on push; production only after review. <em>Never push directly to main. Never run <code>vercel --prod</code></em>. Both rules learned from real incidents in February.</p>
+
+          <p>The architecture didn't arrive fully formed. It was earned, upgrade by upgrade, February to May &mdash; each change motivated by a real breakdown in the version before it. Identity, memory, routing, delegation. Four design decisions in stack order. The same order any product gets designed.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CINEMATIC INTERSTITIAL — bath.mp4 (the dramatic dark moment)
+         ============================================================ -->
+    <aside class="cinematic" data-romulus-animate>
+      <video class="cinematic-video" autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-hidden="true" poster="video-refs/bath_1s.jpg">
+        <source src="video-refs/night-scene-2.mp4" type="video/mp4">
+      </video>
+
+      <div class="cinematic-inner">
+        <p class="cinematic-quote">The vault is the brain. Sessions are the work.</p>
+      </div>
+    </aside>
+
+    <!-- ============================================================
+         ACT 3 — A TUESDAY
+         ============================================================ -->
+    <section class="act act-narrow" data-romulus-animate>
+      <div class="act-label">Act 03</div>
+      <h2 class="act-title">A Tuesday</h2>
+
+      <div class="prose">
+        <p>The alarm doesn't fire at 8am. The morning brief does. NWS weather for Park Slope. R train departures from Prospect Ave northbound. Commute score. Three curated product signals, the rest of the noise filtered before it reaches me. I read it on the train.</p>
+
+        <p>At Daylight I run product &mdash; decisions, roadmaps, team, stakeholders. Demanding and full. Romulus is silent during the day; the system was designed for that.</p>
+
+        <p>By 10pm I'm back on Discord. A product question. A half-formed spec. Responses come back in seconds and they carry context &mdash; not just from this conversation but from three weeks of decisions in the vault. A prompt file gets written. I type <em>run it.</em> By midnight there's a diff. By 2am a commit has landed. By morning a Vercel preview URL is waiting.</p>
+
+        <p>The vault from Tuesday shapes Wednesday's brief. The decision from this sprint informs the next one. Not because the software was updated &mdash; because the context accumulated. That's the compounding.</p>
+      </div>
+    </section>
+
+    <!-- ===== STORY STATS — real numbers, each tells a story ===== -->
+    <section class="stats" data-romulus-animate aria-label="Receipts">
+      <div class="stat">
+        <span class="stat-num">29</span>
+        <span class="stat-label">Projects in vault</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">17K</span>
+        <span class="stat-label">LOC, 2 days, no keyboard</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">338</span>
+        <span class="stat-label">Messages, April&nbsp;9</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">$15</span>
+        <span class="stat-label">Per-day burn target</span>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ACT 4 — THE WORK
+         CSL as studio frame · 3 flagships + research showcase + postmortem
+         ============================================================ -->
+    <section class="act act-narrow" data-romulus-animate>
+      <div class="act-label">Act 04</div>
+      <h2 class="act-title">
+        The Work
+        <span class="sub">Five outputs. Each one anchored to a different capability the system enabled.</span>
+      </h2>
+
+      <div class="prose">
+        <p><em>Cherry Street Labs</em> is the studio that houses all of it &mdash; the one-person software outfit at <a href="https://cherrystreetlabs.com" target="_blank" rel="noopener">cherrystreetlabs.com</a>. The site itself is its own argument: an ASCII fluid distortion hero in vanilla JS and Three.js, no build step, ~300 lines of code. Constraints as design inputs, not obstacles. The studio framing is deliberate &mdash; each project shares infrastructure, decisions, and lessons. What I learn on one makes the next sharper.</p>
+      </div>
+
+      <!-- Project I — Chronicle -->
+      <article class="project" data-romulus-animate>
+        <div class="project-num">Project I</div>
+        <h3 class="project-name">Chronicle</h3>
+        <p class="project-tagline">One day, on a phone, through Discord.</p>
+        <p class="project-status">Live at <a href="https://thischronicle.com" target="_blank" rel="noopener">thischronicle.com</a></p>
+
+        <div class="prose">
+          <p>One historical event per day. One image. Guess the year in three attempts. Monday is warm &mdash; two clues, guiding. Sunday has none. The difficulty arc isn't decoration, it's the retention mechanic. Designed in, not bolted on.</p>
+
+          <p>The spec was locked March 29, 2026. The build happened the next day &mdash; not at a desk. On my phone, through Discord, Romulus coordinating, Claude Code running in the background. By end of day: a working Next.js app deployed to Vercel, 90 puzzles seeded, complete scoring logic, share card, stats modal, full seven-day difficulty arc.</p>
+
+          <p>The longer play: Chronicle is built for a specific exit. <code>localStorage</code>-only state, the Wordle model pre-acquisition. Retention metrics instrumented for D7/D30/D90. No paid tier for an acquirer to unwind. NYT Games is a $9B business with no history game. That's the thesis.</p>
+        </div>
+
+        <div class="proof-tag">Ship in a day, from a phone, while not at a desk. The delegation pattern works at speed.</div>
+      </article>
+
+      <!-- Project II — Forbidden -->
+      <article class="project" data-romulus-animate>
+        <div class="project-num">Project II</div>
+        <h3 class="project-name">Forbidden</h3>
+        <p class="project-tagline">Research as product design.</p>
+        <p class="project-status">Live at <a href="https://playforbidden.com" target="_blank" rel="noopener">playforbidden.com</a></p>
+
+        <div class="prose">
+          <p>Forbidden started as a question about a gap in the market &mdash; the mobile party game space has <em>Heads Up!</em> and very little else, the tabletop space has <em>Taboo</em>, nobody has rethought it seriously for phones. There was clearly something there. The question was what, exactly.</p>
+
+          <p>I ran the initial product thesis through three AI models independently &mdash; Grok, ChatGPT, and Romulus &mdash; each asked to pressure-test it separately and come back with where it was wrong. The answers converged around a contradiction with the original premise. Forbidden isn't digital <em>Taboo</em>. It isn't a <em>Heads Up</em> clone. It's a <em>constraint-based pass-the-phone party game</em>: one player clues under verbal constraint while the group guesses simultaneously, in real time. The tension comes from steering a room to an answer while navigating the forbidden words.</p>
+
+          <p>The reframe happened April 8, before a single line of game logic was written. 862-card corpus across six themed decks. A fake-door funnel measures iOS intent on the web build. The web version is the signal layer; the iOS build waits for signal to justify it.</p>
+        </div>
+
+        <div class="pull-quote">The framing came from the research, not the starting assumption. The research changed the product shape before any code changed.</div>
+
+        <div class="proof-tag">Pressure-test a thesis across multiple models before committing. Research-as-design at startup-killing speed.</div>
+      </article>
+
+      <!-- Project III — Via (NEW in V2) -->
+      <article class="project" data-romulus-animate>
+        <div class="project-num">Project III</div>
+        <h3 class="project-name">Via</h3>
+        <p class="project-tagline">Superhuman, at a fraction of the price.</p>
+        <p class="project-status">Built April 17&ndash;18, 2026 &middot; Awaiting deploy</p>
+
+        <div class="prose">
+          <p>An AI-powered Gmail client. Fast inbox triage, read receipts, calendar integration. Liquid-glass design system matching the iOS 26 aesthetic. Edge runtime for pixel tracking. Smart triage running on <code>gpt-4o-mini</code> through OpenRouter.</p>
+
+          <p>Built in two days. <strong>17,000 lines of code. 143 files. 18 API routes. 28 Vitest tests passing.</strong> Four phases plus three fix passes &mdash; P0, P1, P2. Six commits. None of it written by me; all of it directed by me.</p>
+
+          <p>Spec to working build through the delegation pattern, end to end. The spec was the contract. Claude Code did the implementation against it. Romulus verified, committed, pushed through staging. I reviewed the staging URL and made the calls. The pattern that worked on a one-day game scaled to a fullstack app with auth, OAuth, Prisma, and a real product surface.</p>
+        </div>
+
+        <div class="proof-tag">The delegation pattern scales. From a Wordle-style game in a day to a fullstack app in two.</div>
+      </article>
+
+      <!-- Research Showcase — AgentForge (NEW in V2) -->
+      <article class="project" data-romulus-animate>
+        <div class="project-num">Research IV</div>
+        <h3 class="project-name">AgentForge</h3>
+        <p class="project-tagline">Vercel for DeFi MCP servers.</p>
+        <p class="project-status">Researched April 28, 2026 &middot; Build in queue</p>
+
+        <div class="prose">
+          <p>Hosted MCP infrastructure for autonomous AI agents transacting onchain. The thesis: every DeFi MCP server today is a self-hosted proof of concept. Nobody owns the production backend slot &mdash; "plug-and-play hosted MCP for agents" &mdash; and 19% of all onchain transactions are now agent-driven, 76% of stablecoin transfer volume, 165M+ x402 transactions logged.</p>
+
+          <p>The research-to-decision pipeline ran in a single day. Three rounds of Grok validation. YC RFS Summer 2026 alignment. Competitor teardown across hosted vs self-hosted. Real X-signal analysis to pull the agent-volume numbers. Phase&nbsp;1 scope locked: hosting + x402 billing + observability + security. 15 beta testers identified through X.</p>
+
+          <p>No code yet &mdash; that's the point. The case for building gets made before the building starts. Most of what kills early projects is the wrong thesis, not the wrong implementation. The system was designed to catch the thesis before it became code.</p>
+        </div>
+
+        <div class="proof-tag">Pre-build research rigor at startup-killing speed. The thesis gets validated before the implementation begins.</div>
+      </article>
+
+      <!-- Postmortem — Legion -->
+      <article class="project" data-romulus-animate>
+        <div class="project-num">Postmortem V</div>
+        <h3 class="project-name">Legion</h3>
+        <p class="project-tagline">The architecture was sound. The substrate wasn't.</p>
+        <p class="project-status">Phase 2A in progress</p>
+
+        <div class="prose">
+          <p>The most ambitious attempt: a multi-agent orchestration layer running in Discord. Five cohorts, each answering one question and handing off to the next. <em>Caesar</em> &mdash; is this worth building? <em>Augustus</em> &mdash; build and deploy it. <em>Vespasian</em> &mdash; map the path to $20K MRR. <em>Trajan</em> &mdash; distribute it. <em>Romulus</em> &mdash; the orchestrator, deciding what gets sequenced when. One Discord prompt, fifteen minutes later: a live deployed product, a wealth strategy, and a launch plan.</p>
+
+          <p>First successful run April 9. Caesar produced a complete competitive landscape on Forbidden &mdash; 72% confidence, 80% opportunity score, 12 competitors mapped &mdash; delivered to <code>#legion</code>. Caesar worked. Augustus worked on small builds. The Phase 1 architecture held.</p>
+
+          <p>What didn't hold: the seams. When the Noctis test &mdash; a native iOS Swift app &mdash; hit the fifteen-minute timeout on Augustus, the chain stopped. Vespasian and Trajan never ran. State didn't survive across handoffs. There was no retry logic, no timeout tiering scaled to build complexity, no eval layer to catch when a handoff had silently degraded.</p>
+        </div>
+
+        <div class="pull-quote">The architecture was sound. The execution substrate wasn't ready. Recognizing the difference is engineering maturity.</div>
+
+        <div class="prose">
+          <p>Phase 2A is the response: an effort-tier system (Tier 1 / Tier 2 / Tier 3 timeouts matched to build scope), durable task state, structured retry patterns, regression detection at the handoffs. None of it exotic. It's the careful, unsexy work that turns orchestration from impressive-in-the-right-conditions into reliable.</p>
+        </div>
+
+        <div class="proof-tag">Knowing when the idea is right and the substrate isn't &mdash; and building the substrate next, not abandoning the idea.</div>
+      </article>
+    </section>
+
+    <!-- ============================================================
+         ACT 5 — THE FORWARD VIEW
+         A POV, not an open question.
+         ============================================================ -->
+    <section class="act act-narrow" data-romulus-animate>
+      <div class="act-label">Act 05</div>
+      <h2 class="act-title">The Forward View</h2>
+
+      <div class="prose">
+        <p>What's about to happen to small product teams: the operator who designs their own AI infrastructure becomes the operator who can run an entire product line. Not faster. <em>Differently shaped.</em></p>
+
+        <p>This isn't a productivity story. It's about which work a single PM can hold. Roadmaps that update themselves against your decision history. Research synthesis run across three models in parallel before you commit. Overnight execution as the standing background. Institutional memory that used to require a team of five &mdash; and that grows with every project rather than resetting at every onboarding.</p>
+
+        <p>The next two years will sort early companies into two groups. The first group designs an AI infrastructure layer the way they'd design any other system &mdash; identity, memory, routing, delegation, safety boundaries &mdash; and runs lean on the leverage that creates. The second group consumes tools off the shelf and ends up with committees adopting them. The first group will ship more, more cheaply, with smaller teams. The second will hire to keep up and won't catch up.</p>
+      </div>
+
+      <div class="pull-quote">I built Romulus to find out which group I wanted to be in. The answer became clear by week three.</div>
+    </section>
+
+    <!-- ============================================================
+         BYLINE / FOOTER
+         ============================================================ -->
+    <footer class="byline" data-romulus-animate>
+      <div class="byline-inner">
+        <div class="byline-mark">Romulus</div>
+        <div class="byline-line"></div>
+        <div class="byline-name">Mike Battaglia</div>
+        <div class="byline-role">Senior PM at Daylight <span class="dot">&middot;</span> Founder, Cherry Street Labs</div>
+        <div class="byline-role">Park Slope, Brooklyn <span class="dot">&middot;</span> <a href="index.html">mikebatts.net</a> <span class="dot">&middot;</span> <a href="mailto:mbattaglia92@gmail.com?subject=Romulus%20%E2%80%94%20Case%20Study">email</a></div>
+        <div class="byline-role" style="margin-top: 18px; font-size: 13px; color: var(--ink-4);">This page is gated for the same reason the system is. Identity-first, identity-gated. The passphrase belongs only to the people the work is for.</div>
+        <div class="byline-coda">Roma Eterna &middot; MMXXVI</div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    (function() {
+      /* ===== PASSWORD GATE ===== */
+      var PASSWORD = 'Sfogliatelle!';
+      var SESSION_KEY = 'romulus_session';
+      var SESSION_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
+
+      function checkSession() {
+        try {
+          var stored = localStorage.getItem(SESSION_KEY);
+          if (stored) {
+            var data = JSON.parse(stored);
+            if (data.ts && (Date.now() - data.ts < SESSION_TTL_MS)) {
+              unlock(true);
+              return true;
+            }
+          }
+        } catch(e) {}
+        return false;
+      }
+
+      function saveSession() {
+        try {
+          localStorage.setItem(SESSION_KEY, JSON.stringify({ ts: Date.now() }));
+        } catch(e) {}
+      }
+
+      var gate = document.getElementById('gate');
+      var content = document.getElementById('content');
+      var input = document.getElementById('gateInput');
+      var submit = document.getElementById('gateSubmit');
+      var error = document.getElementById('gateError');
+
+      function unlock(isSession) {
+        if (!isSession) {
+          if (input.value !== PASSWORD) {
+            error.classList.add('visible');
+            return;
+          }
+        }
+        gate.classList.add('hidden');
+        content.classList.add('visible');
+        if (!isSession) saveSession();
+        window.scrollTo(0, 0);
+        initAnimations();
+        initNavScroll();
+      }
+
+      if (!checkSession()) {
+        submit.addEventListener('click', function() { unlock(false); });
+        input.addEventListener('keydown', function(e) { if (e.key === 'Enter') unlock(false); });
+        input.addEventListener('input', function() { error.classList.remove('visible'); });
+      }
+
+      /* ===== SCROLL ANIMATIONS ===== */
+      function initAnimations() {
+        var els = document.querySelectorAll('[data-romulus-animate]');
+        if (!('IntersectionObserver' in window)) {
+          for (var i = 0; i < els.length; i++) els[i].classList.add('romulus-visible');
+          return;
+        }
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('romulus-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+        for (var i = 0; i < els.length; i++) observer.observe(els[i]);
+      }
+
+      /* ===== NAV BACKGROUND TOGGLE ON SCROLL ===== */
+      function initNavScroll() {
+        var nav = document.getElementById('topNav');
+        var hero = document.getElementById('hero');
+        if (!nav || !hero) return;
+
+        function checkScroll() {
+          if (window.scrollY > hero.offsetHeight * 0.65) {
+            nav.classList.add('nav-light');
+          } else {
+            nav.classList.remove('nav-light');
+          }
+        }
+        window.addEventListener('scroll', checkScroll, { passive: true });
+        checkScroll();
+      }
+    })();
+  </script>
+</body>
+</html>
