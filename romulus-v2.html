@@ -592,21 +592,6 @@
       align-self: start;
     }
 
-    /* Long-scroll sticky media — used in Architecture / Work where the right
-       column carries multiple sub-acts. Tighter media column, more room for
-       text; sticky pin a touch lower for comfort. */
-    .editorial.long-scroll,
-    .editorial.long-scroll.reverse {
-      grid-template-columns: minmax(0, 0.62fr) minmax(0, 1.38fr);
-      gap: 64px;
-    }
-    .editorial.long-scroll .editorial-media {
-      top: 96px;
-    }
-    .editorial.long-scroll .media-frame {
-      aspect-ratio: 3/4.2;
-    }
-
     .media-frame {
       position: relative;
       overflow: hidden;
@@ -1010,8 +995,6 @@
       .editorial.reverse .editorial-text { order: 2; }
       .editorial.reverse .editorial-media { order: 1; }
       .editorial-media { position: static; }
-      .editorial.long-scroll .editorial-media { position: static; top: auto; }
-      .editorial.long-scroll .media-frame { aspect-ratio: 16/10; }
       .media-frame { aspect-ratio: 16/10; max-width: 480px; margin: 0 auto; }
       .bookend-media { aspect-ratio: 16/9; }
       .stats-wrap { padding: 64px 24px 72px; }
@@ -1210,10 +1193,10 @@
 
     <!-- ============================================================
          ACT 2 — THE ARCHITECTURE
-         Single section · sticky media on left · all 3 principles on right
+         Single section · sticky media on left (Act 1 proportions)
          ============================================================ -->
     <section class="act" data-romulus-animate>
-      <div class="editorial reverse long-scroll">
+      <div class="editorial reverse">
         <aside class="editorial-media">
           <figure class="media-frame">
             <video autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-hidden="true" poster="video-refs/pillars_1s.jpg">
@@ -1403,10 +1386,10 @@
 
     <!-- ============================================================
          ACT 4 — THE WORK
-         Sticky media on left · CSL frame + 3 flagships + research + postmortem
+         Sticky media on right (Act 1 proportions) · CSL + 3 flagships + research + postmortem
          ============================================================ -->
     <section class="act" data-romulus-animate>
-      <div class="editorial reverse long-scroll">
+      <div class="editorial">
         <aside class="editorial-media">
           <figure class="media-frame">
             <video autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-hidden="true" poster="video-refs/eterna_1s.jpg">
