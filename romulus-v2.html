@@ -58,7 +58,10 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
     body {
       background: var(--bg);
       color: var(--ink-2);
@@ -153,6 +156,7 @@
       padding: 42px 30px 34px;
       border: 1px solid var(--rule);
       background: rgba(242, 237, 229, 0.72);
+      -webkit-backdrop-filter: blur(16px);
       backdrop-filter: blur(16px);
     }
 
@@ -274,6 +278,7 @@
     .romulus-nav.nav-light {
       background: rgba(242, 237, 229, 0.92);
       border-bottom-color: var(--rule);
+      -webkit-backdrop-filter: blur(16px);
       backdrop-filter: blur(16px);
     }
 
@@ -622,11 +627,72 @@
       gap: 10px;
     }
 
-    .artifact-frame.loop-artifact {
-      min-height: 210px;
+    .loop-image-slot {
+      position: relative;
       height: 210px;
+      border: 1px solid var(--rule);
+      background:
+        linear-gradient(135deg, rgba(122, 22, 22, 0.08), transparent 48%),
+        rgba(235, 228, 216, 0.80);
+      overflow: hidden;
+      display: grid;
+      place-items: center;
       padding: 18px;
-      gap: 14px;
+      margin: 0;
+    }
+
+    .loop-image-slot img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .loop-image-slot.has-image .loop-image-placeholder,
+    .loop-image-slot img[src] ~ .loop-image-placeholder {
+      display: none;
+    }
+
+    .loop-image-slot::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.28;
+      background-image:
+        linear-gradient(var(--rule) 1px, transparent 1px),
+        linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+      background-size: 24px 24px;
+      pointer-events: none;
+    }
+
+    .loop-image-placeholder {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 10px;
+      text-align: center;
+      max-width: 260px;
+    }
+
+    .loop-image-label,
+    .loop-image-path {
+      font-family: 'Inconsolata', monospace;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .loop-image-label {
+      font-size: 10px;
+      color: var(--accent);
+    }
+
+    .loop-image-path {
+      font-size: 9px;
+      line-height: 1.45;
+      color: var(--ink-4);
+      word-break: break-word;
     }
 
     .artifact-frame.project-artifact {
@@ -836,6 +902,7 @@
       padding: 18px;
       border: 1px solid var(--rule);
       background: rgba(242, 237, 229, 0.88);
+      -webkit-backdrop-filter: blur(12px);
       backdrop-filter: blur(12px);
       z-index: 2;
       box-shadow: 0 18px 50px rgba(20, 19, 16, 0.05);
@@ -944,13 +1011,13 @@
       font-size: 27px;
       line-height: 1.08;
       color: var(--ink);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .layer-num {
       font-size: 10px;
       color: var(--accent);
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
     .layer-copy {
@@ -986,51 +1053,10 @@
 
     .role-card {
       background: var(--bg);
-      padding: 28px 22px 24px;
-      min-height: 238px;
+      padding: 30px 22px 24px;
+      min-height: 248px;
       position: relative;
       overflow: hidden;
-      isolation: isolate;
-    }
-
-    .role-card::before {
-      content: '';
-      position: absolute;
-      left: 22px;
-      top: 24px;
-      width: 38px;
-      height: 1px;
-      background: var(--accent);
-      opacity: 0;
-      transform: scaleX(0);
-      transform-origin: left center;
-      z-index: 0;
-      transition:
-        opacity 0.55s var(--ease),
-        transform 0.75s var(--ease);
-      transition-delay: var(--role-stagger, 0ms);
-      pointer-events: none;
-    }
-
-    .role-card::after {
-      content: '';
-      position: absolute;
-      left: 22px;
-      top: 25px;
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background: var(--accent);
-      opacity: 0;
-      transform: scale(0.4);
-      z-index: 1;
-      transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
-      pointer-events: none;
-    }
-
-    .role-card > * {
-      position: relative;
-      z-index: 2;
     }
 
     .role-card:nth-child(1) { --role-stagger: 0ms; }
@@ -1043,11 +1069,11 @@
     .role-card:nth-child(8) { --role-stagger: 490ms; }
 
     .role-icon-wrap {
-      width: 46px;
-      height: 46px;
+      width: 52px;
+      height: 52px;
       position: relative;
       color: var(--accent);
-      margin: 8px 0 22px;
+      margin: 0 0 22px;
       opacity: 0;
       transform: translateY(10px);
       transition:
@@ -1059,20 +1085,9 @@
     .role-icon {
       position: relative;
       z-index: 1;
-      width: 44px;
-      height: 44px;
+      width: 52px;
+      height: 52px;
       overflow: visible;
-    }
-
-    .role-card.romulus-visible::before {
-      opacity: 1;
-      transform: scaleX(1);
-    }
-
-    .role-card.romulus-visible::after {
-      opacity: 1;
-      transform: scale(1);
-      transition-delay: calc(var(--role-stagger, 0ms) + 260ms);
     }
 
     .role-card.romulus-visible .role-icon-wrap {
@@ -1086,22 +1101,31 @@
     .role-icon polyline,
     .role-icon rect {
       stroke: currentColor;
-      stroke-width: 1.55;
+      stroke-width: 1.45;
       fill: none;
       stroke-linecap: round;
       stroke-linejoin: round;
       vector-effect: non-scaling-stroke;
     }
 
+    .role-icon .shade {
+      fill: rgba(122, 22, 22, 0.055);
+      stroke: none;
+    }
+
     .role-icon .draw {
-      stroke-dasharray: 150;
-      stroke-dashoffset: 150;
+      stroke-dasharray: 180;
+      stroke-dashoffset: 180;
       animation: none;
     }
 
     .role-icon .fine {
       opacity: 0.58;
-      stroke-width: 1.15;
+      stroke-width: 1.05;
+    }
+
+    .role-icon .ghost {
+      opacity: 0.34;
     }
 
     .role-icon .dot,
@@ -1113,10 +1137,6 @@
       opacity: 0;
       transform: scale(0.3);
       animation: none;
-    }
-
-    .role-icon .fill-soft {
-      fill: rgba(122, 22, 22, 0.045);
     }
 
     .role-card.romulus-visible .role-icon .draw {
@@ -1203,6 +1223,7 @@
       padding: 28px;
       border: 1px solid rgba(20, 19, 16, 0.12);
       background: rgba(242, 237, 229, 0.78);
+      -webkit-backdrop-filter: blur(12px);
       backdrop-filter: blur(12px);
       z-index: 2;
     }
@@ -1379,48 +1400,94 @@
        FAILURE MODES
        ============================================================ */
 
-    .failure-stack {
+    .failure-ledger {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-      max-width: 850px;
-      margin-top: 44px;
+      gap: 0;
+      max-width: 980px;
+      margin-top: 46px;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
     }
 
-    .failure-card {
-      border: 1px solid var(--rule);
-      background: var(--bg-card);
-      padding: 24px;
+    .failure-event {
       display: grid;
-      grid-template-columns: minmax(150px, 0.4fr) minmax(0, 1fr);
-      gap: 28px;
+      grid-template-columns: 118px minmax(0, 1fr);
+      gap: 34px;
+      padding: 30px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .failure-event:last-child {
+      border-bottom: none;
+    }
+
+    .failure-stamp {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      padding-left: 22px;
+    }
+
+    .failure-stamp::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 7px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .failure-index {
+      font-family: 'Source Serif 4', serif;
+      font-style: italic;
+      font-size: 34px;
+      line-height: 0.9;
+      color: var(--ink);
     }
 
     .failure-date {
       font-size: 10px;
       color: var(--accent);
-      margin-bottom: 12px;
+      margin-bottom: 0;
     }
 
     .failure-name {
       font-family: 'Source Serif 4', serif;
-      font-size: 24px;
+      font-size: clamp(24px, 3vw, 36px);
       line-height: 1.1;
       color: var(--ink);
+      margin-bottom: 20px;
     }
 
-    .failure-body p {
+    .failure-compare {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+    }
+
+    .failure-panel {
+      background: var(--bg);
+      padding: 18px;
+    }
+
+    .failure-panel p {
       font-size: 15px;
       line-height: 1.66;
       color: var(--ink-2);
-      margin-bottom: 14px;
+      margin: 0;
     }
 
-    .failure-body p:last-child { margin-bottom: 0; }
-
     .failure-label {
+      display: block;
       font-size: 10px;
-      color: var(--ink-4);
+      color: var(--accent);
+      margin-bottom: 9px;
     }
 
     /* ============================================================
@@ -1667,6 +1734,30 @@
       font-feature-settings: 'lnum' 1, 'tnum' 1;
     }
 
+    .stat-icon {
+      width: 42px;
+      height: 42px;
+      margin: 0 auto 18px;
+      color: var(--accent);
+    }
+
+    .stat-icon path,
+    .stat-icon circle,
+    .stat-icon rect,
+    .stat-icon line,
+    .stat-icon polyline {
+      stroke: currentColor;
+      stroke-width: 1.45;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .stat-icon .soft {
+      fill: rgba(122, 22, 22, 0.045);
+    }
+
     .stat-prefix,
     .stat-suffix {
       color: var(--ink-3);
@@ -1847,11 +1938,11 @@
 
     .byline {
       padding: 120px 32px;
-      text-align: center;
+      text-align: left;
       border-top: 1px solid var(--rule);
     }
 
-    .byline-inner { max-width: 560px; margin: 0 auto; }
+    .byline-inner { max-width: var(--wide); margin: 0 auto; }
 
     .byline-mark {
       font-family: 'Source Serif 4', serif;
@@ -1865,7 +1956,7 @@
       width: 32px;
       height: 1px;
       background: var(--ink-4);
-      margin: 0 auto 24px;
+      margin: 0 0 24px;
     }
 
     .byline-name {
@@ -1895,6 +1986,7 @@
 
     .footer-note {
       margin-top: 18px;
+      max-width: 560px;
       font-size: 13px;
       color: var(--ink-4);
     }
@@ -2060,7 +2152,7 @@
         padding: 20px;
       }
 
-      .artifact-frame.loop-artifact {
+      .loop-image-slot {
         height: 180px;
         min-height: 180px;
       }
@@ -2070,9 +2162,18 @@
         padding: 42px 0;
       }
 
-      .failure-card {
+      .failure-event,
+      .failure-compare {
         grid-template-columns: 1fr;
-        gap: 18px;
+      }
+
+      .failure-event {
+        gap: 20px;
+      }
+
+      .failure-stamp {
+        flex-direction: row;
+        align-items: baseline;
       }
 
       .data-row {
@@ -2332,13 +2433,13 @@
       <div class="layer-grid">
         <article class="layer-card">
           <div class="layer-card-inner">
-            <h3 class="layer-title">Identity</h3>
+            <div class="layer-num">Layer 01</div>
             <div class="artifact-frame layer-artifact" aria-label="SOUL.md identity artifact">
               <div class="artifact-label">SOUL.md</div>
               <div class="artifact-lines"><span></span><span></span><span></span></div>
               <div class="artifact-meta">Modes · voice · authority</div>
             </div>
-            <div class="layer-num">Layer 01</div>
+            <h3 class="layer-title">Identity</h3>
             <p class="layer-copy"><strong>SOUL.md</strong> came first. Personality before capability. Modes before tasks. Role clarity before execution.</p>
             <p class="small-note">You cannot manage an agent whose role is undefined.</p>
           </div>
@@ -2346,13 +2447,13 @@
 
         <article class="layer-card">
           <div class="layer-card-inner">
-            <h3 class="layer-title">Memory</h3>
+            <div class="layer-num">Layer 02</div>
             <div class="artifact-frame layer-artifact" aria-label="Vault memory artifact">
               <div class="artifact-label">Vault Graph</div>
               <div class="artifact-lines"><span></span><span></span><span></span></div>
               <div class="artifact-meta">Daily notes · projects · decisions</div>
             </div>
-            <div class="layer-num">Layer 02</div>
+            <h3 class="layer-title">Memory</h3>
             <p class="layer-copy">Flat files became an Obsidian vault, then QMD semantic search, then a queryable wiki layer. Context stopped resetting.</p>
             <p class="small-note">Vault as brain. Sessions as work.</p>
           </div>
@@ -2360,13 +2461,13 @@
 
         <article class="layer-card">
           <div class="layer-card-inner">
-            <h3 class="layer-title">Research</h3>
+            <div class="layer-num">Layer 03</div>
             <div class="artifact-frame layer-artifact" aria-label="Research signal board artifact">
               <div class="artifact-label">Signal Board</div>
               <div class="artifact-lines"><span></span><span></span><span></span></div>
               <div class="artifact-meta">Market · X · competitors</div>
             </div>
-            <div class="layer-num">Layer 03</div>
+            <h3 class="layer-title">Research</h3>
             <p class="layer-copy">Brave Search, X signal scans, Firecrawl, local scripts, and multi-model pressure testing before build decisions.</p>
             <p class="small-note">Research before implementation.</p>
           </div>
@@ -2374,13 +2475,13 @@
 
         <article class="layer-card">
           <div class="layer-card-inner">
-            <h3 class="layer-title">Routing</h3>
+            <div class="layer-num">Layer 04</div>
             <div class="artifact-frame layer-artifact" aria-label="Model routing matrix artifact">
               <div class="artifact-label">Routing Matrix</div>
               <div class="artifact-lines"><span></span><span></span><span></span></div>
               <div class="artifact-meta">Job · cost · context · risk</div>
             </div>
-            <div class="layer-num">Layer 04</div>
+            <h3 class="layer-title">Routing</h3>
             <p class="layer-copy">Each model got a job description, cost ceiling, context expectation, and known failure mode.</p>
             <p class="small-note">Models as contributors.</p>
           </div>
@@ -2388,13 +2489,13 @@
 
         <article class="layer-card">
           <div class="layer-card-inner">
-            <h3 class="layer-title">Delegation</h3>
+            <div class="layer-num">Layer 05</div>
             <div class="artifact-frame layer-artifact" aria-label="Spec to implementation artifact">
               <div class="artifact-label">Spec Contract</div>
               <div class="artifact-lines"><span></span><span></span><span></span></div>
               <div class="artifact-meta">Direction → build → verify</div>
             </div>
-            <div class="layer-num">Layer 05</div>
+            <h3 class="layer-title">Delegation</h3>
             <p class="layer-copy">Direction became specs. Specs became implementation. Implementation went through verification and staging.</p>
             <p class="small-note">The spec became the contract.</p>
           </div>
@@ -2402,13 +2503,13 @@
 
         <article class="layer-card">
           <div class="layer-card-inner">
-            <h3 class="layer-title">Governance</h3>
+            <div class="layer-num">Layer 06</div>
             <div class="artifact-frame layer-artifact" aria-label="Fortress governance artifact">
               <div class="artifact-label">Fortress</div>
               <div class="artifact-lines"><span></span><span></span><span></span></div>
               <div class="artifact-meta">Approvals · money · deploys</div>
             </div>
-            <div class="layer-num">Layer 06</div>
+            <h3 class="layer-title">Governance</h3>
             <p class="layer-copy">The Fortress: no messages, money, accounts, public posts, credentials, or production deploys without explicit approval.</p>
             <p class="small-note">Delegation without boundaries is risk.</p>
           </div>
@@ -2460,12 +2561,15 @@
         <article class="role-card">
           <div class="role-icon-wrap">
             <svg class="role-icon" viewBox="0 0 48 48" aria-hidden="true">
-              <circle class="draw fill-soft" cx="22" cy="22" r="11"></circle>
-              <path class="draw" d="M30 30l10 10"></path>
-              <path class="draw fine" d="M14 22h16"></path>
-              <path class="draw fine" d="M22 14v16"></path>
-              <circle class="node" cx="17" cy="17" r="2"></circle>
-              <circle class="node" cx="27" cy="25" r="2"></circle>
+              <path class="shade" d="M10 11h22v22H10z"></path>
+              <circle class="draw" cx="21" cy="21" r="10.5"></circle>
+              <path class="draw" d="M28.5 28.5 39 39"></path>
+              <path class="draw fine" d="M15 17.5h11.5M14 22h14M16.5 26.5h8.5"></path>
+              <path class="draw fine ghost" d="M21 10.5v21M10.5 21h21"></path>
+              <path class="draw fine" d="M15.5 15.5c4-2.5 8.4-2.3 12 .7"></path>
+              <circle class="node" cx="17.5" cy="19" r="1.55"></circle>
+              <circle class="node" cx="24.8" cy="24.6" r="1.55"></circle>
+              <circle class="node" cx="27.3" cy="15.8" r="1.35"></circle>
             </svg>
           </div>
           <h3 class="role-title">Research Lead</h3>
@@ -2475,13 +2579,17 @@
         <article class="role-card">
           <div class="role-icon-wrap">
             <svg class="role-icon" viewBox="0 0 48 48" aria-hidden="true">
-              <path class="draw" d="M8 34h32"></path>
-              <path class="draw" d="M24 8v26"></path>
-              <path class="draw" d="M13 22h22"></path>
-              <path class="draw fine" d="M16 14h16"></path>
-              <path class="draw" d="m24 8-7 6"></path>
-              <path class="draw" d="m24 8 7 6"></path>
-              <circle class="node" cx="24" cy="22" r="2"></circle>
+              <path class="shade" d="M15 11h19l-4 6 4 6H15z"></path>
+              <path class="draw" d="M24 7.5v33"></path>
+              <path class="draw" d="M11 39.5h26"></path>
+              <path class="draw" d="M15 11h19l-4 6 4 6H15"></path>
+              <path class="draw fine" d="M15 17h15"></path>
+              <path class="draw fine" d="M13 33c3.8-6 8.7-8.8 14.5-8.6 3.8.1 6.1-1.4 7.5-4.2"></path>
+              <path class="draw fine" d="M15 33.5l4-3.3 4.1 2.1 5-6 5.3.9"></path>
+              <path class="draw" d="m35 20.2-1.4 5.1-4.7-2.4"></path>
+              <circle class="node" cx="19" cy="30.2" r="1.45"></circle>
+              <circle class="node" cx="28.1" cy="26.3" r="1.45"></circle>
+              <circle class="node" cx="33.4" cy="27.2" r="1.45"></circle>
             </svg>
           </div>
           <h3 class="role-title">Product Strategist</h3>
@@ -2491,15 +2599,16 @@
         <article class="role-card">
           <div class="role-icon-wrap">
             <svg class="role-icon" viewBox="0 0 48 48" aria-hidden="true">
-              <path class="draw fill-soft" d="M13 8h17l5 5v27H13z"></path>
-              <path class="draw fine" d="M30 8v6h5"></path>
-              <path class="draw" d="M18 20h12"></path>
-              <path class="draw" d="M18 26h10"></path>
-              <path class="draw" d="M18 32h8"></path>
-              <path class="draw fine" d="m31 36 8-8"></path>
-              <path class="draw fine" d="m36 28 3 3"></path>
-              <circle class="node" cx="18" cy="20" r="1.6"></circle>
-              <circle class="node" cx="18" cy="26" r="1.6"></circle>
+              <path class="shade" d="M13 7.5h18l5 5V41H13z"></path>
+              <path class="draw" d="M13 7.5h18l5 5V41H13z"></path>
+              <path class="draw fine" d="M31 7.5v6h5"></path>
+              <path class="draw" d="M18 18.5h14M18 24h11M18 29.5h14"></path>
+              <path class="draw fine" d="M18 35h7.5M29 35l2.2 2.3 5.3-6.4"></path>
+              <path class="draw" d="M10.5 37.5 14 36.6 27.2 23.4l-2.8-2.8L11.2 33.8z"></path>
+              <path class="draw fine" d="m22.8 22.2 2.8 2.8"></path>
+              <circle class="node" cx="18" cy="18.5" r="1.25"></circle>
+              <circle class="node" cx="18" cy="24" r="1.25"></circle>
+              <circle class="node" cx="18" cy="29.5" r="1.25"></circle>
             </svg>
           </div>
           <h3 class="role-title">Spec Writer</h3>
@@ -2509,19 +2618,17 @@
         <article class="role-card">
           <div class="role-icon-wrap">
             <svg class="role-icon" viewBox="0 0 48 48" aria-hidden="true">
-              <circle class="draw fill-soft" cx="24" cy="24" r="5"></circle>
-              <path class="draw" d="M24 19V8"></path>
-              <path class="draw" d="M24 29v11"></path>
-              <path class="draw" d="M19 24H8"></path>
-              <path class="draw" d="M29 24h11"></path>
-              <path class="draw fine" d="M14 14l6 6"></path>
-              <path class="draw fine" d="M34 14l-6 6"></path>
-              <path class="draw fine" d="M14 34l6-6"></path>
-              <path class="draw fine" d="M34 34l-6-6"></path>
-              <circle class="node" cx="24" cy="8" r="2"></circle>
-              <circle class="node" cx="40" cy="24" r="2"></circle>
-              <circle class="node" cx="24" cy="40" r="2"></circle>
-              <circle class="node" cx="8" cy="24" r="2"></circle>
+              <circle class="shade" cx="24" cy="24" r="7.5"></circle>
+              <circle class="draw" cx="24" cy="24" r="5"></circle>
+              <path class="draw" d="M24 19V9M24 29v10M19 24H9M29 24h10"></path>
+              <path class="draw fine" d="M20.5 20.5 13 13M27.5 20.5 35 13M27.5 27.5 35 35M20.5 27.5 13 35"></path>
+              <path class="draw fine" d="M16 9h8M32 24v-6c0-2.8-2.2-5-5-5h-3"></path>
+              <path class="draw fine" d="M32 39h-8M16 24v6c0 2.8 2.2 5 5 5h3"></path>
+              <path class="draw fine ghost" d="M21.5 24h5M24 21.5v5"></path>
+              <circle class="node" cx="24" cy="9" r="1.8"></circle>
+              <circle class="node" cx="39" cy="24" r="1.8"></circle>
+              <circle class="node" cx="24" cy="39" r="1.8"></circle>
+              <circle class="node" cx="9" cy="24" r="1.8"></circle>
             </svg>
           </div>
           <h3 class="role-title">Delegation Manager</h3>
@@ -2531,13 +2638,17 @@
         <article class="role-card">
           <div class="role-icon-wrap">
             <svg class="role-icon" viewBox="0 0 48 48" aria-hidden="true">
-              <rect class="draw fill-soft" x="8" y="10" width="32" height="26" rx="2"></rect>
-              <path class="draw fine" d="M8 17h32"></path>
-              <path class="draw" d="M14 31c5-12 15 4 20-7"></path>
-              <path class="draw fine" d="M14 24h6"></path>
-              <path class="draw fine" d="M28 24h6"></path>
-              <circle class="node" cx="14" cy="31" r="2"></circle>
-              <circle class="node" cx="34" cy="24" r="2"></circle>
+              <rect class="shade" x="7.5" y="9" width="33" height="29" rx="2.5"></rect>
+              <rect class="draw" x="7.5" y="9" width="33" height="29" rx="2.5"></rect>
+              <path class="draw fine" d="M7.5 16h33M16 16v22M31 16v22"></path>
+              <path class="draw fine ghost" d="M12 24h24M24 19v15"></path>
+              <path class="draw" d="M12.5 31.5c4.8-11.8 12.1 3.9 22.7-9.4"></path>
+              <path class="draw fine" d="M12.5 31.5h6M35.2 22.1h-6.2"></path>
+              <path class="draw fine" d="M17.5 25.3l4.8-2.2M29.6 26.2l4.2-2.9"></path>
+              <circle class="node" cx="12.5" cy="31.5" r="1.55"></circle>
+              <circle class="node" cx="21.9" cy="23.2" r="1.55"></circle>
+              <circle class="node" cx="29.8" cy="26.1" r="1.55"></circle>
+              <circle class="node" cx="35.2" cy="22.1" r="1.55"></circle>
             </svg>
           </div>
           <h3 class="role-title">Design Lead</h3>
@@ -2547,10 +2658,15 @@
         <article class="role-card">
           <div class="role-icon-wrap">
             <svg class="role-icon" viewBox="0 0 48 48" aria-hidden="true">
-              <path class="draw fill-soft" d="M7 24s6.5-10 17-10 17 10 17 10-6.5 10-17 10S7 24 7 24z"></path>
+              <path class="shade" d="M7 24s6.5-9 17-9 17 9 17 9-6.5 9-17 9S7 24 7 24z"></path>
+              <path class="draw" d="M7 24s6.5-9 17-9 17 9 17 9-6.5 9-17 9S7 24 7 24z"></path>
               <circle class="draw" cx="24" cy="24" r="5"></circle>
-              <path class="draw" d="m32 35 3.5 3.5L42 30"></path>
-              <circle class="node" cx="24" cy="24" r="1.8"></circle>
+              <path class="draw fine ghost" d="M18 24h12M24 18v12"></path>
+              <path class="draw fine" d="M10 37h13M10 41h17M35 10h5M35 14h3"></path>
+              <path class="draw" d="m32 35 3.6 3.6L42 30"></path>
+              <path class="draw fine" d="M32.5 31.8h8.5"></path>
+              <circle class="node" cx="24" cy="24" r="1.65"></circle>
+              <circle class="node" cx="35.6" cy="38.6" r="1.35"></circle>
             </svg>
           </div>
           <h3 class="role-title">Reviewer</h3>
@@ -2560,14 +2676,16 @@
         <article class="role-card">
           <div class="role-icon-wrap">
             <svg class="role-icon" viewBox="0 0 48 48" aria-hidden="true">
-              <path class="draw fill-soft" d="M14 34V13h20v21"></path>
-              <path class="draw" d="M10 34h28"></path>
-              <path class="draw" d="M19 20h10"></path>
-              <path class="draw" d="M19 26h10"></path>
-              <path class="draw" d="M24 34v7"></path>
-              <path class="draw fine" d="M32 15c4 2 6 5 6 9"></path>
-              <path class="draw fine" d="m38 24-3-3"></path>
-              <circle class="node" cx="24" cy="41" r="2"></circle>
+              <path class="shade" d="M12 34V16.5C12 12.4 15.4 9 19.5 9h9c4.1 0 7.5 3.4 7.5 7.5V34z"></path>
+              <path class="draw" d="M12 34V16.5C12 12.4 15.4 9 19.5 9h9c4.1 0 7.5 3.4 7.5 7.5V34"></path>
+              <path class="draw" d="M8.5 34h31M14 39h20"></path>
+              <path class="draw fine" d="M17 34v-8h14v8M18 19h12M18 24h12M24 13.5V34"></path>
+              <path class="draw" d="M34 17h7M37.5 13.5 41 17l-3.5 3.5"></path>
+              <path class="draw fine" d="M24 39v4M20 43h8"></path>
+              <circle class="node" cx="18" cy="34" r="1.35"></circle>
+              <circle class="node" cx="24" cy="34" r="1.35"></circle>
+              <circle class="node" cx="30" cy="34" r="1.35"></circle>
+              <circle class="node" cx="24" cy="43" r="1.35"></circle>
             </svg>
           </div>
           <h3 class="role-title">Release Manager</h3>
@@ -2577,21 +2695,18 @@
         <article class="role-card">
           <div class="role-icon-wrap">
             <svg class="role-icon" viewBox="0 0 48 48" aria-hidden="true">
-              <circle class="draw fill-soft" cx="24" cy="24" r="8"></circle>
-              <path class="draw" d="M24 8v8"></path>
-              <path class="draw" d="M24 32v8"></path>
-              <path class="draw" d="M8 24h8"></path>
-              <path class="draw" d="M32 24h8"></path>
-              <path class="draw fine" d="m14 14 5 5"></path>
-              <path class="draw fine" d="m34 14-5 5"></path>
-              <path class="draw fine" d="m14 34 5-5"></path>
-              <path class="draw fine" d="m34 34-5-5"></path>
-              <path class="draw" d="M21 24h6"></path>
-              <path class="draw" d="M24 21v6"></path>
-              <circle class="node" cx="24" cy="8" r="2"></circle>
-              <circle class="node" cx="40" cy="24" r="2"></circle>
-              <circle class="node" cx="24" cy="40" r="2"></circle>
-              <circle class="node" cx="8" cy="24" r="2"></circle>
+              <circle class="shade" cx="24" cy="24" r="10"></circle>
+              <path class="draw" d="M24 10a14 14 0 0 1 12.3 20.7"></path>
+              <path class="draw" d="M24 38a14 14 0 0 1-12.3-20.7"></path>
+              <path class="draw" d="m33.5 13.2 4.1-1.3-1.2 4.2"></path>
+              <path class="draw" d="m14.5 34.8-4.1 1.3 1.2-4.2"></path>
+              <circle class="draw" cx="24" cy="24" r="6.2"></circle>
+              <path class="draw fine" d="M20.5 24h7M24 20.5v7M14 40h20M17 43.5h14"></path>
+              <path class="draw fine ghost" d="M12 24h6M30 24h6M24 12v6M24 30v6"></path>
+              <circle class="node" cx="24" cy="10" r="1.45"></circle>
+              <circle class="node" cx="36.3" cy="30.7" r="1.45"></circle>
+              <circle class="node" cx="24" cy="38" r="1.45"></circle>
+              <circle class="node" cx="11.7" cy="17.3" r="1.45"></circle>
             </svg>
           </div>
           <h3 class="role-title">Postmortem Owner</h3>
@@ -2617,98 +2732,97 @@
           <div class="loop-visual active" data-loop-visual="0">
             <div class="loop-visual-kicker">01 · Frame</div>
             <div class="loop-visual-title">What are we actually trying to learn?</div>
-            <div class="artifact-frame loop-artifact" aria-label="Product question card artifact">
-              <div class="artifact-label">Question Card</div>
-              <div class="artifact-row"><strong>Audience</strong><span>defined</span></div>
-              <div class="artifact-row"><strong>Constraint</strong><span>explicit</span></div>
-              <div class="artifact-row"><strong>Signal</strong><span>measurable</span></div>
-            </div>
+            <!-- Swap-ready: add <img src="..." alt=""> inside .loop-image-slot. -->
+            <figure class="loop-image-slot" data-image-key="frame" data-image-path="assets/romulus-loop-01-frame.png" aria-label="Image slot for product question card">
+              <div class="loop-image-placeholder">
+                <div class="loop-image-label">Image Slot · Frame</div>
+                <div class="loop-image-path">assets/romulus-loop-01-frame.png</div>
+              </div>
+            </figure>
             <p class="loop-visual-copy">The loop starts with a decision artifact: audience, constraint, and success signal before any implementation work begins.</p>
           </div>
 
           <div class="loop-visual" data-loop-visual="1">
             <div class="loop-visual-kicker">02 · Research</div>
             <div class="loop-visual-title">Follow the pain, money, and timing.</div>
-            <div class="artifact-frame loop-artifact" aria-label="Research signal board artifact">
-              <div class="artifact-label">Signal Board</div>
-              <div class="artifact-nodes" aria-hidden="true">
-                <div class="artifact-node primary">Pain</div>
-                <div class="artifact-node">Money</div>
-                <div class="artifact-node">Timing</div>
+            <figure class="loop-image-slot" data-image-key="research" data-image-path="assets/romulus-loop-02-research.png" aria-label="Image slot for research board">
+              <div class="loop-image-placeholder">
+                <div class="loop-image-label">Image Slot · Research</div>
+                <div class="loop-image-path">assets/romulus-loop-02-research.png</div>
               </div>
-              <div class="artifact-meta">Competitors · pricing · distribution</div>
-            </div>
+            </figure>
             <p class="loop-visual-copy">Research is structured around pain, money, and timing so trend heat does not masquerade as opportunity.</p>
           </div>
 
           <div class="loop-visual" data-loop-visual="2">
             <div class="loop-visual-kicker">03 · Pressure Test</div>
             <div class="loop-visual-title">Use models to find the contradiction.</div>
-            <div class="artifact-frame loop-artifact" aria-label="Multi-model critique artifact">
-              <div class="artifact-label">Critique Stack</div>
-              <div class="artifact-row"><strong>Grok</strong><span>market edge</span></div>
-              <div class="artifact-row"><strong>ChatGPT</strong><span>product logic</span></div>
-              <div class="artifact-row"><strong>Romulus</strong><span>decision memo</span></div>
-            </div>
+            <figure class="loop-image-slot" data-image-key="pressure-test" data-image-path="assets/romulus-loop-03-pressure-test.png" aria-label="Image slot for multi-model critique">
+              <div class="loop-image-placeholder">
+                <div class="loop-image-label">Image Slot · Pressure Test</div>
+                <div class="loop-image-path">assets/romulus-loop-03-pressure-test.png</div>
+              </div>
+            </figure>
             <p class="loop-visual-copy">Independent model critique is used to expose contradictions before code makes the wrong idea expensive.</p>
           </div>
 
           <div class="loop-visual" data-loop-visual="3">
             <div class="loop-visual-kicker">04 · Spec</div>
             <div class="loop-visual-title">The spec becomes the contract.</div>
-            <div class="artifact-frame loop-artifact" aria-label="Spec contract artifact">
-              <div class="artifact-label">CLAUDE.md</div>
-              <div class="artifact-lines"><span></span><span></span><span></span></div>
-              <div class="artifact-meta">Requirements · constraints · acceptance criteria</div>
-            </div>
+            <figure class="loop-image-slot" data-image-key="spec" data-image-path="assets/romulus-loop-04-spec.png" aria-label="Image slot for spec contract">
+              <div class="loop-image-placeholder">
+                <div class="loop-image-label">Image Slot · Spec</div>
+                <div class="loop-image-path">assets/romulus-loop-04-spec.png</div>
+              </div>
+            </figure>
             <p class="loop-visual-copy">The spec holds requirements, constraints, acceptance criteria, and the quality bar in one executable contract.</p>
           </div>
 
           <div class="loop-visual" data-loop-visual="4">
             <div class="loop-visual-kicker">05 · Route</div>
             <div class="loop-visual-title">Choose the right contributor.</div>
-            <div class="artifact-frame loop-artifact" aria-label="Contributor routing artifact">
-              <div class="artifact-label">Routing Matrix</div>
-              <div class="artifact-row"><strong>Ops</strong><span>Qwen</span></div>
-              <div class="artifact-row"><strong>Build</strong><span>Claude Code</span></div>
-              <div class="artifact-row"><strong>Context</strong><span>Grok</span></div>
-            </div>
+            <figure class="loop-image-slot" data-image-key="route" data-image-path="assets/romulus-loop-05-route.png" aria-label="Image slot for routing matrix">
+              <div class="loop-image-placeholder">
+                <div class="loop-image-label">Image Slot · Route</div>
+                <div class="loop-image-path">assets/romulus-loop-05-route.png</div>
+              </div>
+            </figure>
             <p class="loop-visual-copy">Routing assigns work by contributor strength, context window, cost profile, and known failure mode.</p>
           </div>
 
           <div class="loop-visual" data-loop-visual="5">
             <div class="loop-visual-kicker">06 · Delegate</div>
             <div class="loop-visual-title">Implementation happens against the contract.</div>
-            <div class="artifact-frame loop-artifact" aria-label="Claude Code execution receipt artifact">
-              <div class="artifact-label">Execution Receipt</div>
-              <div class="artifact-row"><strong>Branch</strong><span>created</span></div>
-              <div class="artifact-row"><strong>Build</strong><span>running</span></div>
-              <div class="artifact-row"><strong>Commit</strong><span>pending review</span></div>
-            </div>
+            <figure class="loop-image-slot" data-image-key="delegate" data-image-path="assets/romulus-loop-06-delegate.png" aria-label="Image slot for implementation delegation">
+              <div class="loop-image-placeholder">
+                <div class="loop-image-label">Image Slot · Delegate</div>
+                <div class="loop-image-path">assets/romulus-loop-06-delegate.png</div>
+              </div>
+            </figure>
             <p class="loop-visual-copy">Delegation is tracked through concrete receipts: branch, build, commit, and review state.</p>
           </div>
 
           <div class="loop-visual" data-loop-visual="6">
             <div class="loop-visual-kicker">07 · Verify + Stage</div>
             <div class="loop-visual-title">Trust comes after inspection.</div>
-            <div class="artifact-frame loop-artifact" aria-label="Verification and staging artifact">
-              <div class="artifact-label">Staging Receipt</div>
-              <div class="artifact-row"><strong>Tests</strong><span>pass</span></div>
-              <div class="artifact-row"><strong>Preview</strong><span>reviewed</span></div>
-              <div class="artifact-row"><strong>Prod</strong><span>human gate</span></div>
-            </div>
+            <figure class="loop-image-slot" data-image-key="verify-stage" data-image-path="assets/romulus-loop-07-verify-stage.png" aria-label="Image slot for verification and staging">
+              <div class="loop-image-placeholder">
+                <div class="loop-image-label">Image Slot · Verify + Stage</div>
+                <div class="loop-image-path">assets/romulus-loop-07-verify-stage.png</div>
+              </div>
+            </figure>
             <p class="loop-visual-copy">Trust is earned through tests, preview review, diff inspection, and an explicit production gate.</p>
           </div>
 
           <div class="loop-visual" data-loop-visual="7">
             <div class="loop-visual-kicker">08 · Remember</div>
             <div class="loop-visual-title">The next loop starts smarter.</div>
-            <div class="artifact-frame loop-artifact" aria-label="Vault writeback artifact">
-              <div class="artifact-label">Vault Writeback</div>
-              <div class="artifact-row"><strong>Daily Note</strong><span>captured</span></div>
-              <div class="artifact-row"><strong>Project Note</strong><span>updated</span></div>
-              <div class="artifact-row"><strong>Decision</strong><span>linked</span></div>
-            </div>
+            <figure class="loop-image-slot" data-image-key="remember" data-image-path="assets/romulus-loop-08-remember.png" aria-label="Image slot for vault writeback">
+              <div class="loop-image-placeholder">
+                <div class="loop-image-label">Image Slot · Remember</div>
+                <div class="loop-image-path">assets/romulus-loop-08-remember.png</div>
+              </div>
+            </figure>
             <p class="loop-visual-copy">The useful residue gets written back into memory so the next product loop starts with more context.</p>
           </div>
         </aside>
@@ -2970,48 +3084,84 @@
         <span class="sub">The failures are the part I trust most. They made the system real.</span>
       </h2>
 
-      <div class="failure-stack">
-        <article class="failure-card">
-          <div>
-            <div class="failure-date">Feb 12</div>
+      <div class="failure-ledger" aria-label="Failure modes and system upgrades">
+        <article class="failure-event">
+          <div class="failure-stamp">
+            <div class="failure-index">I</div>
+            <time class="failure-date" datetime="2026-02-12">Feb 12</time>
+          </div>
+          <div class="failure-content">
             <h3 class="failure-name">“Never Bullshit Mike”</h3>
-          </div>
-          <div class="failure-body">
-            <p><span class="failure-label">What happened</span><br>Romulus said it was “researching now” for 30 minutes without actually calling the tools. I caught it after three status checks.</p>
-            <p><span class="failure-label">What changed</span><br>Trust became a protocol. If the system says it is doing something, it has to be doing it already. Progress theater became unacceptable.</p>
+            <div class="failure-compare">
+              <div class="failure-panel">
+                <span class="failure-label">Failure</span>
+                <p>Romulus said it was “researching now” for 30 minutes without actually calling the tools. I caught it after three status checks.</p>
+              </div>
+              <div class="failure-panel">
+                <span class="failure-label">System Upgrade</span>
+                <p>Trust became a protocol. If the system says it is doing something, it has to be doing it already. Progress theater became unacceptable.</p>
+              </div>
+            </div>
           </div>
         </article>
 
-        <article class="failure-card">
-          <div>
-            <div class="failure-date">Feb 13</div>
+        <article class="failure-event">
+          <div class="failure-stamp">
+            <div class="failure-index">II</div>
+            <time class="failure-date" datetime="2026-02-13">Feb 13</time>
+          </div>
+          <div class="failure-content">
             <h3 class="failure-name">Plausible data was wrong</h3>
-          </div>
-          <div class="failure-body">
-            <p><span class="failure-label">What happened</span><br>The morning brief used <code>R16</code> for the R train instead of <code>R34N</code>. The wrong stop ID looked plausible and produced a wrong commute.</p>
-            <p><span class="failure-label">What changed</span><br>Verification became a product requirement. Plausibility is not correctness. Source data has to be cross-checked.</p>
+            <div class="failure-compare">
+              <div class="failure-panel">
+                <span class="failure-label">Failure</span>
+                <p>The morning brief used <code>R16</code> for the R train instead of <code>R34N</code>. The wrong stop ID looked plausible and produced a wrong commute.</p>
+              </div>
+              <div class="failure-panel">
+                <span class="failure-label">System Upgrade</span>
+                <p>Verification became a product requirement. Plausibility is not correctness. Source data has to be cross-checked.</p>
+              </div>
+            </div>
           </div>
         </article>
 
-        <article class="failure-card">
-          <div>
-            <div class="failure-date">Apr 9</div>
+        <article class="failure-event">
+          <div class="failure-stamp">
+            <div class="failure-index">III</div>
+            <time class="failure-date" datetime="2026-04-09">Apr 9</time>
+          </div>
+          <div class="failure-content">
             <h3 class="failure-name">Context overflow killed a session</h3>
-          </div>
-          <div class="failure-body">
-            <p><span class="failure-label">What happened</span><br>A 338-message Legion session overflowed MiniMax M2.7 three times and produced six edit failures. The model was matching against stale text.</p>
-            <p><span class="failure-label">What changed</span><br>Context window became an operational constraint. Model routing became a first-class management decision.</p>
+            <div class="failure-compare">
+              <div class="failure-panel">
+                <span class="failure-label">Failure</span>
+                <p>A 338-message Legion session overflowed MiniMax M2.7 three times and produced six edit failures. The model was matching against stale text.</p>
+              </div>
+              <div class="failure-panel">
+                <span class="failure-label">System Upgrade</span>
+                <p>Context window became an operational constraint. Model routing became a first-class management decision.</p>
+              </div>
+            </div>
           </div>
         </article>
 
-        <article class="failure-card">
-          <div>
-            <div class="failure-date">Apr 11</div>
-            <h3 class="failure-name">Legion broke at the seams</h3>
+        <article class="failure-event">
+          <div class="failure-stamp">
+            <div class="failure-index">IV</div>
+            <time class="failure-date" datetime="2026-04-11">Apr 11</time>
           </div>
-          <div class="failure-body">
-            <p><span class="failure-label">What happened</span><br>A native iOS build exceeded a 15-minute timeout. Downstream cohorts never ran. State did not survive the failed handoff.</p>
-            <p><span class="failure-label">What changed</span><br>Phase 2A became durable state, tiered timeouts, checkpoints, retries, and evals. Agent orchestration fails at the seams, not the demo path.</p>
+          <div class="failure-content">
+            <h3 class="failure-name">Legion broke at the seams</h3>
+            <div class="failure-compare">
+              <div class="failure-panel">
+                <span class="failure-label">Failure</span>
+                <p>A native iOS build exceeded a 15-minute timeout. Downstream cohorts never ran. State did not survive the failed handoff.</p>
+              </div>
+              <div class="failure-panel">
+                <span class="failure-label">System Upgrade</span>
+                <p>Phase 2A became durable state, tiered timeouts, checkpoints, retries, and evals. Agent orchestration fails at the seams, not the demo path.</p>
+              </div>
+            </div>
           </div>
         </article>
       </div>
@@ -3028,6 +3178,14 @@
 
       <div class="stats" id="storyStats">
         <div class="stat">
+          <svg class="stat-icon" viewBox="0 0 48 48" aria-hidden="true">
+            <rect class="soft" x="11" y="8" width="26" height="32" rx="2"></rect>
+            <path d="M17 17h14"></path>
+            <path d="M17 23h14"></path>
+            <path d="M17 29h9"></path>
+            <path d="M32 36l6 6"></path>
+            <path d="M16 40l-6 4"></path>
+          </svg>
           <span class="stat-num" data-target="340" data-counted="false">
             <span class="stat-value">0</span>
           </span>
@@ -3036,6 +3194,13 @@
         </div>
 
         <div class="stat">
+          <svg class="stat-icon" viewBox="0 0 48 48" aria-hidden="true">
+            <circle class="soft" cx="24" cy="24" r="13"></circle>
+            <path d="M24 11v26"></path>
+            <path d="M11 24h26"></path>
+            <path d="M16 16l16 16"></path>
+            <path d="M32 16 16 32"></path>
+          </svg>
           <span class="stat-num" data-target="30" data-suffix="+" data-counted="false">
             <span class="stat-value">0</span><span class="stat-suffix">+</span>
           </span>
@@ -3044,6 +3209,13 @@
         </div>
 
         <div class="stat">
+          <svg class="stat-icon" viewBox="0 0 48 48" aria-hidden="true">
+            <path class="soft" d="M9 36h30V12H9z"></path>
+            <path d="M14 32l7-8 6 5 8-13"></path>
+            <path d="M14 16v16h21"></path>
+            <path d="M35 16h-6"></path>
+            <path d="M35 16v6"></path>
+          </svg>
           <span class="stat-num" data-target="74" data-suffix="%" data-counted="false">
             <span class="stat-value">0</span><span class="stat-suffix">%</span>
           </span>
@@ -3052,6 +3224,15 @@
         </div>
 
         <div class="stat">
+          <svg class="stat-icon" viewBox="0 0 48 48" aria-hidden="true">
+            <circle class="soft" cx="24" cy="24" r="9"></circle>
+            <path d="M24 8v8"></path>
+            <path d="M24 32v8"></path>
+            <path d="M8 24h8"></path>
+            <path d="M32 24h8"></path>
+            <path d="M21 24h6"></path>
+            <path d="M24 21v6"></path>
+          </svg>
           <span class="stat-num" data-target="338" data-counted="false">
             <span class="stat-value">0</span>
           </span>
@@ -3436,15 +3617,15 @@
         <div class="byline-name">Mike Battaglia</div>
         <div class="byline-role">Senior PM at Daylight <span class="dot">·</span> Founder, Cherry Street Labs</div>
         <div class="byline-role">
-          Park Slope, Brooklyn
+          Brooklyn, NY
           <span class="dot">·</span>
           <a href="index.html">mikebatts.net</a>
           <span class="dot">·</span>
           <a href="mailto:mbattaglia92@gmail.com?subject=Romulus%20Case%20Study">email</a>
         </div>
-        <div class="byline-role footer-note">
+        <!-- <div class="byline-role footer-note">
           This page is gated for the same reason the system is: identity-first, authority-bounded, and meant for the people the work is for.
-        </div>
+        </div> -->
         <div class="byline-coda">Roma Eterna · MMXXVI</div>
       </div>
     </footer>
