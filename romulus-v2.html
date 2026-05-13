@@ -701,18 +701,46 @@
       margin: 0;
     }
 
-    .loop-image-slot img {
+    .loop-image-slot img,
+    .loop-image-slot video {
       position: absolute;
       inset: 0;
       z-index: 2;
       width: 100%;
       height: 100%;
       object-fit: cover;
+      border: 0;
+      pointer-events: none;
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-touch-callout: none;
+    }
+
+    .loop-image-slot video {
+      z-index: 3;
+      background: transparent;
     }
 
     .loop-image-slot.has-image .loop-image-placeholder,
-    .loop-image-slot img[src] ~ .loop-image-placeholder {
+    .loop-image-slot.has-video .loop-image-placeholder,
+    .loop-image-slot img[src] ~ .loop-image-placeholder,
+    .loop-image-slot video[src] ~ .loop-image-placeholder {
       display: none;
+    }
+
+    .loop-image-slot.video-blocked video,
+    .loop-image-slot.video-failed video {
+      display: none;
+    }
+
+    .loop-image-slot video::-webkit-media-controls,
+    .loop-image-slot video::-webkit-media-controls-enclosure,
+    .loop-image-slot video::-webkit-media-controls-panel,
+    .loop-image-slot video::-webkit-media-controls-play-button,
+    .loop-image-slot video::-webkit-media-controls-start-playback-button {
+      display: none !important;
+      -webkit-appearance: none;
+      opacity: 0;
     }
 
     .loop-image-slot::before {
@@ -2324,6 +2352,10 @@
         display: none !important;
       }
 
+      .loop-image-slot.has-video .loop-image-placeholder {
+        display: block;
+      }
+
       .hero-video {
         transform: none;
         will-change: auto;
@@ -2787,36 +2819,51 @@
 
       <div class="loop-scroll" id="loopScroll">
         <aside class="loop-stage" aria-label="Operating loop visual stage">
-          <!-- Swap-ready: add <img src="..." alt=""> inside each .loop-image-slot. -->
-          <figure class="loop-visual loop-image-slot active" data-loop-visual="0" data-image-key="frame" data-image-path="assets/romulus-loop-01-frame.png" aria-label="Image slot for product question card">
+          <figure class="loop-visual loop-image-slot has-video active" data-loop-visual="0" data-image-key="frame" data-video-path="video-refs/r3/01.mp4" data-poster-path="video-refs/r3/01.jpg" aria-label="Product question video">
+            <img class="loop-video-fallback" src="video-refs/r3/01.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true">
+            <video data-loop-video src="video-refs/r3/01.mp4" poster="video-refs/r3/01.jpg" autoplay muted loop playsinline webkit-playsinline preload="metadata" disablepictureinpicture disableremoteplayback controlslist="nodownload noplaybackrate noremoteplayback" x-webkit-airplay="deny" aria-hidden="true"></video>
             <div class="loop-image-placeholder" aria-hidden="true"></div>
           </figure>
 
-          <figure class="loop-visual loop-image-slot" data-loop-visual="1" data-image-key="research" data-image-path="video-refs/gateway.mp4" aria-label="Image slot for research board">
+          <figure class="loop-visual loop-image-slot has-video" data-loop-visual="1" data-image-key="research" data-video-path="video-refs/r3/02.mp4" data-poster-path="video-refs/r3/02.jpg" aria-label="Research board video">
+            <img class="loop-video-fallback" src="video-refs/r3/02.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true">
+            <video data-loop-video src="video-refs/r3/02.mp4" poster="video-refs/r3/02.jpg" autoplay muted loop playsinline webkit-playsinline preload="metadata" disablepictureinpicture disableremoteplayback controlslist="nodownload noplaybackrate noremoteplayback" x-webkit-airplay="deny" aria-hidden="true"></video>
             <div class="loop-image-placeholder" aria-hidden="true"></div>
           </figure>
 
-          <figure class="loop-visual loop-image-slot" data-loop-visual="2" data-image-key="pressure-test" data-image-path="assets/romulus-loop-03-pressure-test.png" aria-label="Image slot for multi-model critique">
+          <figure class="loop-visual loop-image-slot has-video" data-loop-visual="2" data-image-key="pressure-test" data-video-path="video-refs/r3/03.mp4" data-poster-path="video-refs/r3/03.jpg" aria-label="Multi-model critique video">
+            <img class="loop-video-fallback" src="video-refs/r3/03.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true">
+            <video data-loop-video src="video-refs/r3/03.mp4" poster="video-refs/r3/03.jpg" autoplay muted loop playsinline webkit-playsinline preload="metadata" disablepictureinpicture disableremoteplayback controlslist="nodownload noplaybackrate noremoteplayback" x-webkit-airplay="deny" aria-hidden="true"></video>
             <div class="loop-image-placeholder" aria-hidden="true"></div>
           </figure>
 
-          <figure class="loop-visual loop-image-slot" data-loop-visual="3" data-image-key="spec" data-image-path="assets/romulus-loop-04-spec.png" aria-label="Image slot for spec contract">
+          <figure class="loop-visual loop-image-slot has-video" data-loop-visual="3" data-image-key="spec" data-video-path="video-refs/r3/04.mp4" data-poster-path="video-refs/r3/04.jpg" aria-label="Spec contract video">
+            <img class="loop-video-fallback" src="video-refs/r3/04.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true">
+            <video data-loop-video src="video-refs/r3/04.mp4" poster="video-refs/r3/04.jpg" autoplay muted loop playsinline webkit-playsinline preload="metadata" disablepictureinpicture disableremoteplayback controlslist="nodownload noplaybackrate noremoteplayback" x-webkit-airplay="deny" aria-hidden="true"></video>
             <div class="loop-image-placeholder" aria-hidden="true"></div>
           </figure>
 
-          <figure class="loop-visual loop-image-slot" data-loop-visual="4" data-image-key="route" data-image-path="assets/romulus-loop-05-route.png" aria-label="Image slot for routing matrix">
+          <figure class="loop-visual loop-image-slot has-video" data-loop-visual="4" data-image-key="route" data-video-path="video-refs/r3/05.mp4" data-poster-path="video-refs/r3/05.jpg" aria-label="Routing matrix video">
+            <img class="loop-video-fallback" src="video-refs/r3/05.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true">
+            <video data-loop-video src="video-refs/r3/05.mp4" poster="video-refs/r3/05.jpg" autoplay muted loop playsinline webkit-playsinline preload="metadata" disablepictureinpicture disableremoteplayback controlslist="nodownload noplaybackrate noremoteplayback" x-webkit-airplay="deny" aria-hidden="true"></video>
             <div class="loop-image-placeholder" aria-hidden="true"></div>
           </figure>
 
-          <figure class="loop-visual loop-image-slot" data-loop-visual="5" data-image-key="delegate" data-image-path="assets/romulus-loop-06-delegate.png" aria-label="Image slot for implementation delegation">
+          <figure class="loop-visual loop-image-slot has-video" data-loop-visual="5" data-image-key="delegate" data-video-path="video-refs/r3/06.mp4" data-poster-path="video-refs/r3/06.jpg" aria-label="Implementation delegation video">
+            <img class="loop-video-fallback" src="video-refs/r3/06.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true">
+            <video data-loop-video src="video-refs/r3/06.mp4" poster="video-refs/r3/06.jpg" autoplay muted loop playsinline webkit-playsinline preload="metadata" disablepictureinpicture disableremoteplayback controlslist="nodownload noplaybackrate noremoteplayback" x-webkit-airplay="deny" aria-hidden="true"></video>
             <div class="loop-image-placeholder" aria-hidden="true"></div>
           </figure>
 
-          <figure class="loop-visual loop-image-slot" data-loop-visual="6" data-image-key="verify-stage" data-image-path="assets/romulus-loop-07-verify-stage.png" aria-label="Image slot for verification and staging">
+          <figure class="loop-visual loop-image-slot has-video" data-loop-visual="6" data-image-key="verify-stage" data-video-path="video-refs/r3/07.mp4" data-poster-path="video-refs/r3/07.jpg" aria-label="Verification and staging video">
+            <img class="loop-video-fallback" src="video-refs/r3/07.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true">
+            <video data-loop-video src="video-refs/r3/07.mp4" poster="video-refs/r3/07.jpg" autoplay muted loop playsinline webkit-playsinline preload="metadata" disablepictureinpicture disableremoteplayback controlslist="nodownload noplaybackrate noremoteplayback" x-webkit-airplay="deny" aria-hidden="true"></video>
             <div class="loop-image-placeholder" aria-hidden="true"></div>
           </figure>
 
-          <figure class="loop-visual loop-image-slot" data-loop-visual="7" data-image-key="remember" data-image-path="assets/romulus-loop-08-remember.png" aria-label="Image slot for vault writeback">
+          <figure class="loop-visual loop-image-slot has-video" data-loop-visual="7" data-image-key="remember" data-video-path="video-refs/r3/08.mp4" data-poster-path="video-refs/r3/08.jpg" aria-label="Vault writeback video">
+            <img class="loop-video-fallback" src="video-refs/r3/08.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true">
+            <video data-loop-video src="video-refs/r3/08.mp4" poster="video-refs/r3/08.jpg" autoplay muted loop playsinline webkit-playsinline preload="metadata" disablepictureinpicture disableremoteplayback controlslist="nodownload noplaybackrate noremoteplayback" x-webkit-airplay="deny" aria-hidden="true"></video>
             <div class="loop-image-placeholder" aria-hidden="true"></div>
           </figure>
         </aside>
@@ -3685,6 +3732,7 @@
         initNavScroll();
         initHeroParallax();
         initStatsCountUp();
+        initLoopVideos();
         initLoopScroll();
       }
 
@@ -3730,6 +3778,79 @@
       }
 
       /* ============================================================
+         OPERATING LOOP VIDEOS
+         ============================================================ */
+
+      function prepareLoopVideo(video) {
+        var slot = video.closest('.loop-image-slot');
+
+        video.muted = true;
+        video.defaultMuted = true;
+        video.loop = true;
+        video.autoplay = true;
+        video.controls = false;
+        video.playsInline = true;
+        video.setAttribute('muted', '');
+        video.setAttribute('loop', '');
+        video.setAttribute('autoplay', '');
+        video.setAttribute('playsinline', '');
+        video.setAttribute('webkit-playsinline', '');
+        video.setAttribute('disableremoteplayback', '');
+        video.setAttribute('controlslist', 'nodownload noplaybackrate noremoteplayback');
+        video.setAttribute('x-webkit-airplay', 'deny');
+        video.removeAttribute('controls');
+
+        try {
+          video.disablePictureInPicture = true;
+        } catch(e) {}
+
+        if (slot && !video.dataset.loopVideoGuarded) {
+          video.dataset.loopVideoGuarded = 'true';
+
+          video.addEventListener('error', function() {
+            slot.classList.add('video-failed');
+          });
+        }
+      }
+
+      function playLoopVideo(video) {
+        prepareLoopVideo(video);
+
+        var promise = video.play();
+        if (promise && promise.catch) {
+          promise.catch(function() {
+            var slot = video.closest('.loop-image-slot');
+            if (slot) slot.classList.add('video-blocked');
+          });
+        }
+      }
+
+      function initLoopVideos() {
+        var videos = document.querySelectorAll('[data-loop-video]');
+        if (!videos.length) return;
+
+        videos.forEach(function(video) {
+          prepareLoopVideo(video);
+        });
+
+        var active = document.querySelector('[data-loop-visual].active video');
+        if (active) playLoopVideo(active);
+      }
+
+      function syncLoopVideoPlayback(visuals) {
+        visuals.forEach(function(visual) {
+          var video = visual.querySelector('video');
+          if (!video) return;
+
+          if (visual.classList.contains('active')) {
+            playLoopVideo(video);
+          } else {
+            video.pause();
+          }
+        });
+      }
+
+      /* ============================================================
          OPERATING LOOP STICKY HIGHLIGHT
          ============================================================ */
 
@@ -3747,6 +3868,8 @@
           visuals.forEach(function(visual) {
             visual.classList.toggle('active', visual.getAttribute('data-loop-visual') === String(index));
           });
+
+          syncLoopVideoPlayback(visuals);
         }
 
         if (!('IntersectionObserver' in window)) {
