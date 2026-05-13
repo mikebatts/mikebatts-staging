@@ -704,6 +704,7 @@
     .loop-image-slot img {
       position: absolute;
       inset: 0;
+      z-index: 2;
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -718,6 +719,7 @@
       content: '';
       position: absolute;
       inset: 0;
+      z-index: 0;
       opacity: 0.28;
       background-image:
         linear-gradient(var(--rule) 1px, transparent 1px),
@@ -727,32 +729,36 @@
     }
 
     .loop-image-placeholder {
-      position: relative;
+      position: absolute;
+      inset: 0;
       z-index: 1;
-      display: grid;
-      gap: 10px;
-      text-align: center;
-      max-width: 260px;
+      pointer-events: none;
     }
 
-    .loop-image-label,
-    .loop-image-path {
-      font-family: 'Inconsolata', monospace;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
+    .loop-image-placeholder::before,
+    .loop-image-placeholder::after {
+      content: '';
+      position: absolute;
+      pointer-events: none;
     }
 
-    .loop-image-label {
-      font-size: 10px;
-      color: var(--accent);
+    .loop-image-placeholder::before {
+      inset: 22px;
+      border: 1px solid rgba(20, 19, 16, 0.14);
+      background:
+        linear-gradient(135deg, rgba(255, 252, 246, 0.32), transparent 42%),
+        linear-gradient(180deg, transparent 0%, rgba(20, 19, 16, 0.04) 100%);
     }
 
-    .loop-image-path {
-      font-size: 9px;
-      line-height: 1.45;
-      color: var(--ink-4);
-      word-break: break-word;
+    .loop-image-placeholder::after {
+      left: 50%;
+      top: 50%;
+      width: 38%;
+      aspect-ratio: 1;
+      border: 1px solid rgba(122, 22, 22, 0.18);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(122, 22, 22, 0.07), transparent 62%);
+      transform: translate(-50%, -50%);
     }
 
     .artifact-frame.project-artifact {
@@ -1249,73 +1255,32 @@
     .loop-stage {
       position: sticky;
       top: 96px;
-      height: calc(100dvh - 132px);
-      min-height: 540px;
-      border: 1px solid var(--rule);
-      background:
-        radial-gradient(circle at 50% 42%, rgba(122, 22, 22, 0.10), transparent 34%),
-        var(--bg-card);
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .loop-stage-grid {
-      position: absolute;
-      inset: 0;
-      opacity: 0.28;
-      background-image:
-        linear-gradient(var(--rule) 1px, transparent 1px),
-        linear-gradient(90deg, var(--rule) 1px, transparent 1px);
-      background-size: 28px 28px;
+      width: min(100%, 420px);
+      aspect-ratio: 2 / 3;
+      height: auto;
+      min-height: 0;
+      justify-self: center;
     }
 
     .loop-visual {
       position: absolute;
-      inset: 26px;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      aspect-ratio: 2 / 3;
+      min-height: 0;
+      margin: 0;
       opacity: 0;
       transform: translateY(16px) scale(0.985);
       transition: opacity 0.55s var(--ease), transform 0.55s var(--ease);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 28px;
-      border: 1px solid rgba(20, 19, 16, 0.12);
-      background: rgba(242, 237, 229, 0.78);
-      -webkit-backdrop-filter: blur(12px);
-      backdrop-filter: blur(12px);
+      padding: 0;
       z-index: 2;
+      pointer-events: none;
     }
 
     .loop-visual.active {
       opacity: 1;
       transform: translateY(0) scale(1);
-    }
-
-    .loop-visual-kicker {
-      font-family: 'Inconsolata', monospace;
-      font-weight: 600;
-      font-size: 10px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--accent);
-    }
-
-    .loop-visual-title {
-      font-family: 'Source Serif 4', serif;
-      font-style: italic;
-      font-size: clamp(28px, 3.6vw, 46px);
-      line-height: 1.02;
-      color: var(--ink);
-      max-width: 360px;
-    }
-
-    .loop-visual-copy {
-      font-size: 14px;
-      line-height: 1.6;
-      color: var(--ink-3);
-      max-width: 390px;
     }
 
     .loop-steps {
@@ -1370,6 +1335,27 @@
       font-size: 16px;
       line-height: 1.72;
       color: var(--ink-3);
+    }
+
+    .loop-step-support {
+      max-width: 560px;
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--rule);
+      font-size: 15px;
+      line-height: 1.66;
+      color: var(--ink-2);
+    }
+
+    .loop-step-support strong {
+      display: block;
+      font-family: 'Source Serif 4', serif;
+      font-style: italic;
+      font-size: clamp(20px, 2.4vw, 28px);
+      font-weight: 400;
+      line-height: 1.12;
+      color: var(--ink);
+      margin-bottom: 8px;
     }
 
     /* ============================================================
@@ -2104,7 +2090,8 @@
       }
 
       .loop-stage {
-        height: 560px;
+        width: min(100%, 380px);
+        height: auto;
       }
 
       .layer-grid {
@@ -2212,18 +2199,9 @@
       }
 
       .loop-stage {
-        height: 520px;
-        min-height: 520px;
-      }
-
-      .loop-visual {
-        inset: 18px;
-        padding: 20px;
-      }
-
-      .loop-image-slot {
-        height: 180px;
-        min-height: 180px;
+        width: min(100%, 320px);
+        height: auto;
+        min-height: 0;
       }
 
       .loop-step {
@@ -2359,8 +2337,14 @@
       .loop-visual {
         opacity: 1;
         position: relative;
+        left: auto;
+        top: auto;
         inset: auto;
-        margin: 16px;
+        width: min(100%, 320px);
+        height: auto;
+        min-height: 0;
+        margin: 16px auto;
+        transform: none;
       }
     }
   </style>
@@ -2803,104 +2787,38 @@
 
       <div class="loop-scroll" id="loopScroll">
         <aside class="loop-stage" aria-label="Operating loop visual stage">
-          <div class="loop-stage-grid" aria-hidden="true"></div>
+          <!-- Swap-ready: add <img src="..." alt=""> inside each .loop-image-slot. -->
+          <figure class="loop-visual loop-image-slot active" data-loop-visual="0" data-image-key="frame" data-image-path="assets/romulus-loop-01-frame.png" aria-label="Image slot for product question card">
+            <div class="loop-image-placeholder" aria-hidden="true"></div>
+          </figure>
 
-          <div class="loop-visual active" data-loop-visual="0">
-            <div class="loop-visual-kicker">01 · Frame</div>
-            <div class="loop-visual-title">What are we actually trying to learn?</div>
-            <!-- Swap-ready: add <img src="..." alt=""> inside .loop-image-slot. -->
-            <figure class="loop-image-slot" data-image-key="frame" data-image-path="assets/romulus-loop-01-frame.png" aria-label="Image slot for product question card">
-              <div class="loop-image-placeholder">
-                <div class="loop-image-label">Image Slot · Frame</div>
-                <div class="loop-image-path">/Users/michaelbattaglia/Library/Mobile Documents/com~apple~CloudDocs/Projects/romulus/mikebatts/video-refs/gateway.mp4</div>
-              </div>
-            </figure>
-            <p class="loop-visual-copy">The loop starts with a decision artifact: audience, constraint, and success signal before any implementation work begins.</p>
-          </div>
+          <figure class="loop-visual loop-image-slot" data-loop-visual="1" data-image-key="research" data-image-path="video-refs/gateway.mp4" aria-label="Image slot for research board">
+            <div class="loop-image-placeholder" aria-hidden="true"></div>
+          </figure>
 
-          <div class="loop-visual" data-loop-visual="1">
-            <div class="loop-visual-kicker">02 · Research</div>
-            <div class="loop-visual-title">Follow the pain, money, and timing.</div>
-            <figure class="loop-image-slot" data-image-key="research" data-image-path="video-refs/gateway.mp4" aria-label="Image slot for research board">
-              <div class="loop-image-placeholder">
-                <div class="loop-image-label">Image Slot · Research</div>
-                <div class="loop-image-path">video-refs/gateway.mp4</div>
-              </div>
-            </figure>
-            <p class="loop-visual-copy">Research is structured around pain, money, and timing so trend heat does not masquerade as opportunity.</p>
-          </div>
+          <figure class="loop-visual loop-image-slot" data-loop-visual="2" data-image-key="pressure-test" data-image-path="assets/romulus-loop-03-pressure-test.png" aria-label="Image slot for multi-model critique">
+            <div class="loop-image-placeholder" aria-hidden="true"></div>
+          </figure>
 
-          <div class="loop-visual" data-loop-visual="2">
-            <div class="loop-visual-kicker">03 · Pressure Test</div>
-            <div class="loop-visual-title">Use models to find the contradiction.</div>
-            <figure class="loop-image-slot" data-image-key="pressure-test" data-image-path="assets/romulus-loop-03-pressure-test.png" aria-label="Image slot for multi-model critique">
-              <div class="loop-image-placeholder">
-                <div class="loop-image-label">Image Slot · Pressure Test</div>
-                <div class="loop-image-path">assets/romulus-loop-03-pressure-test.png</div>
-              </div>
-            </figure>
-            <p class="loop-visual-copy">Independent model critique is used to expose contradictions before code makes the wrong idea expensive.</p>
-          </div>
+          <figure class="loop-visual loop-image-slot" data-loop-visual="3" data-image-key="spec" data-image-path="assets/romulus-loop-04-spec.png" aria-label="Image slot for spec contract">
+            <div class="loop-image-placeholder" aria-hidden="true"></div>
+          </figure>
 
-          <div class="loop-visual" data-loop-visual="3">
-            <div class="loop-visual-kicker">04 · Spec</div>
-            <div class="loop-visual-title">The spec becomes the contract.</div>
-            <figure class="loop-image-slot" data-image-key="spec" data-image-path="assets/romulus-loop-04-spec.png" aria-label="Image slot for spec contract">
-              <div class="loop-image-placeholder">
-                <div class="loop-image-label">Image Slot · Spec</div>
-                <div class="loop-image-path">assets/romulus-loop-04-spec.png</div>
-              </div>
-            </figure>
-            <p class="loop-visual-copy">The spec holds requirements, constraints, acceptance criteria, and the quality bar in one executable contract.</p>
-          </div>
+          <figure class="loop-visual loop-image-slot" data-loop-visual="4" data-image-key="route" data-image-path="assets/romulus-loop-05-route.png" aria-label="Image slot for routing matrix">
+            <div class="loop-image-placeholder" aria-hidden="true"></div>
+          </figure>
 
-          <div class="loop-visual" data-loop-visual="4">
-            <div class="loop-visual-kicker">05 · Route</div>
-            <div class="loop-visual-title">Choose the right contributor.</div>
-            <figure class="loop-image-slot" data-image-key="route" data-image-path="assets/romulus-loop-05-route.png" aria-label="Image slot for routing matrix">
-              <div class="loop-image-placeholder">
-                <div class="loop-image-label">Image Slot · Route</div>
-                <div class="loop-image-path">assets/romulus-loop-05-route.png</div>
-              </div>
-            </figure>
-            <p class="loop-visual-copy">Routing assigns work by contributor strength, context window, cost profile, and known failure mode.</p>
-          </div>
+          <figure class="loop-visual loop-image-slot" data-loop-visual="5" data-image-key="delegate" data-image-path="assets/romulus-loop-06-delegate.png" aria-label="Image slot for implementation delegation">
+            <div class="loop-image-placeholder" aria-hidden="true"></div>
+          </figure>
 
-          <div class="loop-visual" data-loop-visual="5">
-            <div class="loop-visual-kicker">06 · Delegate</div>
-            <div class="loop-visual-title">Implementation happens against the contract.</div>
-            <figure class="loop-image-slot" data-image-key="delegate" data-image-path="assets/romulus-loop-06-delegate.png" aria-label="Image slot for implementation delegation">
-              <div class="loop-image-placeholder">
-                <div class="loop-image-label">Image Slot · Delegate</div>
-                <div class="loop-image-path">assets/romulus-loop-06-delegate.png</div>
-              </div>
-            </figure>
-            <p class="loop-visual-copy">Delegation is tracked through concrete receipts: branch, build, commit, and review state.</p>
-          </div>
+          <figure class="loop-visual loop-image-slot" data-loop-visual="6" data-image-key="verify-stage" data-image-path="assets/romulus-loop-07-verify-stage.png" aria-label="Image slot for verification and staging">
+            <div class="loop-image-placeholder" aria-hidden="true"></div>
+          </figure>
 
-          <div class="loop-visual" data-loop-visual="6">
-            <div class="loop-visual-kicker">07 · Verify + Stage</div>
-            <div class="loop-visual-title">Trust comes after inspection.</div>
-            <figure class="loop-image-slot" data-image-key="verify-stage" data-image-path="assets/romulus-loop-07-verify-stage.png" aria-label="Image slot for verification and staging">
-              <div class="loop-image-placeholder">
-                <div class="loop-image-label">Image Slot · Verify + Stage</div>
-                <div class="loop-image-path">assets/romulus-loop-07-verify-stage.png</div>
-              </div>
-            </figure>
-            <p class="loop-visual-copy">Trust is earned through tests, preview review, diff inspection, and an explicit production gate.</p>
-          </div>
-
-          <div class="loop-visual" data-loop-visual="7">
-            <div class="loop-visual-kicker">08 · Remember</div>
-            <div class="loop-visual-title">The next loop starts smarter.</div>
-            <figure class="loop-image-slot" data-image-key="remember" data-image-path="assets/romulus-loop-08-remember.png" aria-label="Image slot for vault writeback">
-              <div class="loop-image-placeholder">
-                <div class="loop-image-label">Image Slot · Remember</div>
-                <div class="loop-image-path">assets/romulus-loop-08-remember.png</div>
-              </div>
-            </figure>
-            <p class="loop-visual-copy">The useful residue gets written back into memory so the next product loop starts with more context.</p>
-          </div>
+          <figure class="loop-visual loop-image-slot" data-loop-visual="7" data-image-key="remember" data-image-path="assets/romulus-loop-08-remember.png" aria-label="Image slot for vault writeback">
+            <div class="loop-image-placeholder" aria-hidden="true"></div>
+          </figure>
         </aside>
 
         <div class="loop-steps">
@@ -2909,6 +2827,7 @@
               <div class="loop-step-num">01</div>
               <h3 class="loop-step-title">Frame the product question</h3>
               <p class="loop-step-copy">The first job is not prompting. It is deciding what we are trying to learn, prove, build, or kill. A vague question poisons the entire loop.</p>
+              <p class="loop-step-support"><strong>What are we actually trying to learn?</strong> The loop starts with a decision artifact: audience, constraint, and success signal before any implementation work begins.</p>
             </div>
           </article>
 
@@ -2917,6 +2836,7 @@
               <div class="loop-step-num">02</div>
               <h3 class="loop-step-title">Research the terrain</h3>
               <p class="loop-step-copy">Markets, competitors, pricing, customer pain, timing, distribution, and path to first dollar. Romulus was instructed not to ask permission to research. Just do it.</p>
+              <p class="loop-step-support"><strong>Follow the pain, money, and timing.</strong> Research is structured around pain, money, and timing so trend heat does not masquerade as opportunity.</p>
             </div>
           </article>
 
@@ -2925,6 +2845,7 @@
               <div class="loop-step-num">03</div>
               <h3 class="loop-step-title">Pressure-test the thesis</h3>
               <p class="loop-step-copy">Grok, ChatGPT, Claude, and Romulus were used as independent critics. The goal was not agreement. The goal was to find the contradiction before code made it expensive.</p>
+              <p class="loop-step-support"><strong>Use models to find the contradiction.</strong> Independent model critique is used to expose contradictions before code makes the wrong idea expensive.</p>
             </div>
           </article>
 
@@ -2933,6 +2854,7 @@
               <div class="loop-step-num">04</div>
               <h3 class="loop-step-title">Write the spec</h3>
               <p class="loop-step-copy">Product requirements, technical requirements, acceptance criteria, edge cases, and known risks. The spec is where product judgment becomes executable.</p>
+              <p class="loop-step-support"><strong>The spec becomes the contract.</strong> The spec holds requirements, constraints, acceptance criteria, and the quality bar in one executable contract.</p>
             </div>
           </article>
 
@@ -2941,6 +2863,7 @@
               <div class="loop-step-num">05</div>
               <h3 class="loop-step-title">Route the work</h3>
               <p class="loop-step-copy">Different contributors for different jobs: Qwen for operations, Claude Code for implementation, Grok for long-context work, and deprecated models kept away from critical paths.</p>
+              <p class="loop-step-support"><strong>Choose the right contributor.</strong> Routing assigns work by contributor strength, context window, cost profile, and known failure mode.</p>
             </div>
           </article>
 
@@ -2949,6 +2872,7 @@
               <div class="loop-step-num">06</div>
               <h3 class="loop-step-title">Delegate implementation</h3>
               <p class="loop-step-copy">Claude Code builds against a spec, not vibes. I do not hand-write production code; I own direction, constraints, review, and release decisions.</p>
+              <p class="loop-step-support"><strong>Implementation happens against the contract.</strong> Delegation is tracked through concrete receipts: branch, build, commit, and review state.</p>
             </div>
           </article>
 
@@ -2957,6 +2881,7 @@
               <div class="loop-step-num">07</div>
               <h3 class="loop-step-title">Verify and stage</h3>
               <p class="loop-step-copy">Build, lint, test, inspect, push to staging, review preview, then decide. No direct production deploys. No <code>vercel --prod</code> from the agent.</p>
+              <p class="loop-step-support"><strong>Trust comes after inspection.</strong> Trust is earned through tests, preview review, diff inspection, and an explicit production gate.</p>
             </div>
           </article>
 
@@ -2965,6 +2890,7 @@
               <div class="loop-step-num">08</div>
               <h3 class="loop-step-title">Write back to memory</h3>
               <p class="loop-step-copy">Daily notes, project notes, decision records, and postmortems make the next product bet sharper. This is where the system compounds.</p>
+              <p class="loop-step-support"><strong>The next loop starts smarter.</strong> The useful residue gets written back into memory so the next product loop starts with more context.</p>
             </div>
           </article>
         </div>
