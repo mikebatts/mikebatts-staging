@@ -1311,6 +1311,10 @@
       transform: translateY(0) scale(1);
     }
 
+    .loop-mobile-media {
+      display: none;
+    }
+
     .loop-steps {
       display: flex;
       flex-direction: column;
@@ -2227,14 +2231,24 @@
       }
 
       .loop-stage {
-        width: min(100%, 320px);
-        height: auto;
-        min-height: 0;
+        display: none;
       }
 
       .loop-step {
+        display: block;
         min-height: auto;
-        padding: 42px 0;
+        padding: 48px 0;
+        opacity: 1;
+      }
+
+      .loop-mobile-media {
+        display: block;
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        aspect-ratio: 2 / 3;
+        padding: 0;
+        margin: 0 0 28px;
       }
 
       .failure-event,
@@ -2870,6 +2884,9 @@
 
         <div class="loop-steps">
           <article class="loop-step active" data-loop-step="0">
+            <figure class="loop-mobile-media loop-image-slot has-image" aria-hidden="true">
+              <img src="video-refs/r3/01.jpg" alt="" loading="lazy" decoding="async">
+            </figure>
             <div class="loop-step-inner">
               <div class="loop-step-num">01</div>
               <h3 class="loop-step-title">Frame the product question</h3>
@@ -2879,6 +2896,9 @@
           </article>
 
           <article class="loop-step" data-loop-step="1">
+            <figure class="loop-mobile-media loop-image-slot has-image" aria-hidden="true">
+              <img src="video-refs/r3/02.jpg" alt="" loading="lazy" decoding="async">
+            </figure>
             <div class="loop-step-inner">
               <div class="loop-step-num">02</div>
               <h3 class="loop-step-title">Research the terrain</h3>
@@ -2888,6 +2908,9 @@
           </article>
 
           <article class="loop-step" data-loop-step="2">
+            <figure class="loop-mobile-media loop-image-slot has-image" aria-hidden="true">
+              <img src="video-refs/r3/03.jpg" alt="" loading="lazy" decoding="async">
+            </figure>
             <div class="loop-step-inner">
               <div class="loop-step-num">03</div>
               <h3 class="loop-step-title">Pressure-test the thesis</h3>
@@ -2897,6 +2920,9 @@
           </article>
 
           <article class="loop-step" data-loop-step="3">
+            <figure class="loop-mobile-media loop-image-slot has-image" aria-hidden="true">
+              <img src="video-refs/r3/04.jpg" alt="" loading="lazy" decoding="async">
+            </figure>
             <div class="loop-step-inner">
               <div class="loop-step-num">04</div>
               <h3 class="loop-step-title">Write the spec</h3>
@@ -2906,6 +2932,9 @@
           </article>
 
           <article class="loop-step" data-loop-step="4">
+            <figure class="loop-mobile-media loop-image-slot has-image" aria-hidden="true">
+              <img src="video-refs/r3/05.jpg" alt="" loading="lazy" decoding="async">
+            </figure>
             <div class="loop-step-inner">
               <div class="loop-step-num">05</div>
               <h3 class="loop-step-title">Route the work</h3>
@@ -2915,6 +2944,9 @@
           </article>
 
           <article class="loop-step" data-loop-step="5">
+            <figure class="loop-mobile-media loop-image-slot has-image" aria-hidden="true">
+              <img src="video-refs/r3/06.jpg" alt="" loading="lazy" decoding="async">
+            </figure>
             <div class="loop-step-inner">
               <div class="loop-step-num">06</div>
               <h3 class="loop-step-title">Delegate implementation</h3>
@@ -2924,6 +2956,9 @@
           </article>
 
           <article class="loop-step" data-loop-step="6">
+            <figure class="loop-mobile-media loop-image-slot has-image" aria-hidden="true">
+              <img src="video-refs/r3/07.jpg" alt="" loading="lazy" decoding="async">
+            </figure>
             <div class="loop-step-inner">
               <div class="loop-step-num">07</div>
               <h3 class="loop-step-title">Verify and stage</h3>
@@ -2933,6 +2968,9 @@
           </article>
 
           <article class="loop-step" data-loop-step="7">
+            <figure class="loop-mobile-media loop-image-slot has-image" aria-hidden="true">
+              <img src="video-refs/r3/08.jpg" alt="" loading="lazy" decoding="async">
+            </figure>
             <div class="loop-step-inner">
               <div class="loop-step-num">08</div>
               <h3 class="loop-step-title">Write back to memory</h3>
