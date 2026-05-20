@@ -1921,7 +1921,9 @@
 
     .cinematic {
       position: relative;
-      min-height: 74dvh;
+      box-sizing: border-box;
+      min-height: 100vh;
+      min-height: 100dvh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1936,7 +1938,8 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.82;
+      opacity: 0.94;
+      filter: saturate(1.08) contrast(1.04);
     }
 
     .cinematic::after {
@@ -1944,8 +1947,8 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at 50% 40%, rgba(122, 22, 22, 0.14), transparent 36%),
-        linear-gradient(180deg, rgba(10, 9, 8, 0.40), rgba(10, 9, 8, 0.72));
+        radial-gradient(circle at 50% 40%, rgba(183, 133, 58, 0.12), transparent 38%),
+        linear-gradient(180deg, rgba(10, 9, 8, 0.18), rgba(10, 9, 8, 0.54));
     }
 
     .cinematic-inner {
@@ -2465,11 +2468,11 @@
       <div class="prose">
         <p class="lead">Most teams use AI as a tool: open a chat, paste a prompt, copy the result, lose the context.</p>
 
-        <p>But product work does not happen in isolated prompts. It depends on memory, prioritization, taste, sequencing, validation, constraints, and judgment. A stateless assistant can help with a task. It cannot manage a product surface over time.</p>
+        <p>Product work does not happen in isolated prompts. It depends on memory, prioritization, taste, sequencing, validation, constraints, and judgment. A stateless assistant can help with a task. It cannot manage a product surface over time.</p>
 
-        <p>So I stopped treating AI like a chat window and started designing it like an operating model. Romulus became the orchestration layer: identity, memory, research, model routing, delegation, verification, governance, and feedback loops.</p>
+        <p>I stopped treating AI like a chat window and started designing it like an operating model. Romulus became the orchestration layer: identity, memory, research, model routing, delegation, verification, governance, and feedback loops.</p>
 
-        <p>By day, I run product at <a class="inline-link" href="https://godaylight.com/" target="_blank" rel="noopener">Daylight</a>. Nights and weekends became the lab. The constraint was real: limited time, limited attention, real cost ceilings, and no tolerance for a system that only worked when I was staring at it.</p>
+        <p>The constraint was real: limited time, limited attention, real cost ceilings, and no tolerance for a system that only worked when I was staring at it.</p>
       </div>
 
       <div class="pull-quote">
@@ -2633,9 +2636,9 @@
           <h2 class="section-title">The human is still the product lead.</h2>
 
           <div class="prose">
-            <p class="lead">My job was not to hand-write every line of code. My job was to decide what was worth building, define the shape of the work, create the spec, choose the right execution path, review the output, catch failure modes, and decide what happened next.</p>
+            <p class="lead">My job was not to hand-write every line of code. My job was to decide what was worth building, define the shape of the work, choose the right execution path, review the output, catch failures, and keep a hand on the wheel.</p>
 
-            <p>In practice, I was managing a synthetic product team: Romulus as orchestrator, Claude Code as implementation layer, long-context models as research and reasoning contributors, and myself as product lead.</p>
+            <p>I was managing a synthetic product team: Romulus as the orchestrator, Claude Code as the implementation layer, long-context models as research and reasoning contributors, and myself as product lead.</p>
 
             <p>“Using AI” is easy to say and increasingly meaningless. Managing AI work is different, that distinction matters. It means creating role clarity, asking sharper questions, defining acceptance criteria, routing work to the right contributor, inspecting outputs, and building enough memory that the system learns from yesterday.</p>
           </div>
@@ -2699,7 +2702,7 @@
             </svg>
           </div>
           <h3 class="role-title">Product Strategist</h3>
-          <p class="role-copy">Choose what to build, park, kill, or reframe. Stop chasing bait. Follow pain, money, and timing.</p>
+          <p class="role-copy">Choose what to build, park, kill, or reframe. Stop chasing bait. Follow pain, revenue, and timing.</p>
         </article>
 
         <article class="role-card">
@@ -2903,7 +2906,7 @@
               <div class="loop-step-num">02</div>
               <h3 class="loop-step-title">Research the terrain</h3>
               <p class="loop-step-copy">Markets, competitors, pricing, customer pain, timing, distribution, and path to first dollar. Romulus was instructed not to ask permission to research. Just do it.</p>
-              <p class="loop-step-support"><strong>Follow the pain, money, and timing.</strong> Research is structured around pain, money, and timing so trend heat does not masquerade as opportunity.</p>
+              <p class="loop-step-support"><strong>Follow the pain, opportunity, and timing.</strong> Research is structured around pain, opportunity, and timing so trend heat does not masquerade as opportunity.</p>
             </div>
           </article>
 
@@ -2915,7 +2918,7 @@
               <div class="loop-step-num">03</div>
               <h3 class="loop-step-title">Pressure-test the thesis</h3>
               <p class="loop-step-copy">Grok, ChatGPT, Claude, and Romulus were used as independent critics. The goal was not agreement. The goal was to find the contradiction before code made it expensive.</p>
-              <p class="loop-step-support"><strong>Use models to find the contradiction.</strong> Independent model critique is used to expose contradictions before code makes the wrong idea expensive.</p>
+              <p class="loop-step-support"><strong>Use models to find the contradiction.</strong> Independent model critique is used to expose contradictions before research validations are hallucinated and code makes the wrong idea expensive.</p>
             </div>
           </article>
 
@@ -3058,7 +3061,7 @@
       <div class="editorial">
         <div class="editorial-text">
           <div class="prose">
-            <p class="lead">The name came first. <em>Romulus</em>: founder, builder, architect of systems. It was not decoration. It was the first design decision.</p>
+            <p class="lead">The name came first. <em>Romulus</em>: founder, builder, architect of systems, the founder of Rome. It was not decoration. It was the first design decision.</p>
 
             <p>Before I wrote a prompt, I wrote <code>SOUL.md</code>: a product spec for a personality. Who is Romulus? What does he believe? How does he speak? When should he push back? When should he disappear?</p>
 
