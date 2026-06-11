@@ -37,6 +37,30 @@
        ROMULUS V3.1 — AI-NATIVE PRODUCT MANAGEMENT CASE STUDY
        ============================================================ */
 
+    /* ============================================================
+       ROMULUS — DESIGN PASS (JUN 11, 2026)
+       Direction: one cinematic voice — Source Serif at extreme scale
+       over film, mono receipts, Inter for the long read. Cut the
+       glass chrome; let type and motion carry the craft.
+       Key moves:
+         1. Hero recommitted to the cinematic viewport: glass chrome
+            stripped, 13vw serif title directly over film, stronger
+            scrim + vignette + subtle static grain.
+         2. True type hierarchy: 600 upright serif section titles,
+            300 italic for the poetic lines, mono tracking tightened
+            from 0.18em to 0.14em.
+         3. GSAP + ScrollTrigger + SplitText layered ON TOP of the
+            existing data-romulus-animate contract (IO system stays;
+            full CSS fallback if the CDN never loads). Eyebrow →
+            split title lines → body beat; scrubbed cinematic break;
+            receipt-print stats reveal.
+         4. Micro-interactions: drawn left-to-right underlines, a
+            return gesture on the nav back link, gate submit hover,
+            global focus-visible states.
+         5. Thesis moment: section 10 title set as the centered
+            300-italic display line the page is remembered by.
+       ============================================================ */
+
     :root {
       --bg: #F2EDE5;
       --bg-warm: #EBE4D8;
@@ -79,6 +103,12 @@
     img, svg, video { max-width: 100%; display: block; }
     a { color: inherit; }
 
+    :focus { outline: none; }
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
     /* ============================================================
        TYPOGRAPHIC SYSTEM
        Better mono readability: slightly larger, less tracking, stronger weight.
@@ -115,7 +145,7 @@
       font-family: 'Inconsolata', monospace;
       font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.14em;
     }
 
     .eyebrow {
@@ -222,12 +252,16 @@
       border: none;
       font-size: 11px;
       cursor: pointer;
-      transition: opacity 0.2s, transform 0.2s;
+      transition: background 0.3s var(--ease), transform 0.2s var(--ease);
     }
 
     .gate-submit:hover {
-      opacity: 0.82;
+      background: var(--accent);
       transform: translateY(-1px);
+    }
+
+    .gate-submit:active {
+      transform: translateY(0);
     }
 
     .gate-error {
@@ -267,12 +301,17 @@
     }
 
     .romulus-nav a {
+      display: inline-block;
       color: rgba(255, 255, 255, 0.56);
       text-decoration: none;
-      transition: color 0.2s;
+      transition: color 0.2s, transform 0.35s var(--ease);
     }
 
-    .romulus-nav a:hover { color: #fff; }
+    /* The back link reads as a return gesture: it pulls left on hover. */
+    .romulus-nav a:hover {
+      color: #fff;
+      transform: translateX(-4px);
+    }
     .romulus-nav .badge { color: rgba(255, 255, 255, 0.38); }
 
     .romulus-nav.nav-light {
@@ -310,12 +349,16 @@
       z-index: 0;
     }
 
+    /* Tint + static film grain. Grain is an inline SVG so it costs no request;
+       intensity lives in the rect's opacity (keep ≤ 0.06). */
     .hero-media::before {
       content: '';
       position: absolute;
       inset: 0;
       z-index: 1;
-      background: rgba(0, 0, 0, 0.10);
+      background-color: rgba(0, 0, 0, 0.10);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+      background-size: 161px 161px;
       pointer-events: none;
     }
 
@@ -334,19 +377,22 @@
       will-change: transform;
     }
 
+    /* Type sits directly on film now — scrim is heavier in the center band
+       and vignetted at the edges so the title always clears contrast. */
     .hero-overlay {
       position: absolute;
       inset: 0;
       pointer-events: none;
       z-index: 2;
       background:
-        radial-gradient(circle at 50% 45%, rgba(122, 22, 22, 0.12), transparent 38%),
+        radial-gradient(circle at 50% 42%, rgba(122, 22, 22, 0.10), transparent 40%),
+        radial-gradient(ellipse at 50% 50%, transparent 52%, rgba(10, 9, 8, 0.42) 100%),
         linear-gradient(
           180deg,
-          rgba(10, 9, 8, 0.62) 0%,
-          rgba(10, 9, 8, 0.30) 40%,
-          rgba(10, 9, 8, 0.12) 70%,
-          rgba(10, 9, 8, 0.58) 100%
+          rgba(10, 9, 8, 0.60) 0%,
+          rgba(10, 9, 8, 0.30) 36%,
+          rgba(10, 9, 8, 0.34) 64%,
+          rgba(10, 9, 8, 0.70) 100%
         );
     }
 
@@ -360,48 +406,24 @@
       align-items: center;
     }
 
+    /* The glass card is retired as chrome — the element stays (Webflow-safe)
+       but the cinematic viewport carries the hero now: type directly on film. */
     .hero-glass-card {
       position: relative;
-      width: min(100%, 860px);
-      padding: clamp(30px, 5vw, 62px) clamp(24px, 5vw, 68px);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: 30px;
-      background:
-        linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02) 42%, rgba(10, 9, 8, 0.055) 100%),
-        rgba(14, 13, 11, 0.055);
-      -webkit-backdrop-filter: blur(8px) saturate(1.10) contrast(1.02);
-      backdrop-filter: blur(8px) saturate(1.10) contrast(1.02);
-      box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.18),
-        inset 0 -1px 0 rgba(255, 255, 255, 0.035),
-        0 26px 72px rgba(0, 0, 0, 0.16);
-      overflow: hidden;
-      isolation: isolate;
+      width: min(100%, 960px);
+      padding: 0;
+      border: none;
+      border-radius: 0;
+      background: none;
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      box-shadow: none;
+      overflow: visible;
     }
 
     .hero-glass-card::before,
     .hero-glass-card::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .hero-glass-card::before {
-      background:
-        radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.14), transparent 28%),
-        radial-gradient(circle at 84% 18%, rgba(255, 255, 255, 0.045), transparent 30%),
-        linear-gradient(100deg, transparent 0%, rgba(255, 255, 255, 0.04) 46%, transparent 58%);
-      opacity: 0.52;
-    }
-
-    .hero-glass-card::after {
-      inset: 1px;
-      border-radius: 29px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.055) 100%);
-      mix-blend-mode: soft-light;
+      content: none;
     }
 
     .hero-glass-card > * {
@@ -415,26 +437,28 @@
       margin-bottom: 20px;
     }
 
+    /* Extreme display moment: the hero word lives in its own weight class. */
     .hero-title {
       font-family: 'Source Serif 4', serif;
-      font-size: clamp(46px, 8vw, 96px);
-      font-weight: 400;
-      line-height: 0.96;
-      letter-spacing: -0.024em;
+      font-size: clamp(64px, 13vw, 188px);
+      font-weight: 360;
+      line-height: 0.9;
+      letter-spacing: -0.035em;
       color: rgba(255, 255, 255, 0.98);
-      margin-bottom: 20px;
-      text-shadow: 0 2px 22px rgba(0, 0, 0, 0.34);
+      margin-bottom: 24px;
+      text-shadow: 0 2px 36px rgba(0, 0, 0, 0.42);
     }
 
     .hero-kicker {
       font-family: 'Source Serif 4', serif;
       font-style: italic;
-      font-size: clamp(20px, 3vw, 36px);
-      line-height: 1.16;
-      color: rgba(255, 255, 255, 0.86);
-      max-width: 780px;
-      margin-bottom: 28px;
-      text-shadow: 0 2px 18px rgba(0, 0, 0, 0.26);
+      font-weight: 300;
+      font-size: clamp(19px, 2.5vw, 33px);
+      line-height: 1.22;
+      color: rgba(255, 255, 255, 0.90);
+      max-width: 680px;
+      margin: 0 auto;
+      text-shadow: 0 2px 18px rgba(0, 0, 0, 0.30);
     }
 
     .hero-desc {
@@ -449,8 +473,10 @@
 
     .hero-meta {
       font-size: 11px;
-      color: rgba(255, 255, 255, 0.40);
-      margin-top: 28px;
+      color: rgba(255, 255, 255, 0.46);
+      margin-top: 38px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.16);
     }
 
     .meta-dot {
@@ -463,18 +489,38 @@
       vertical-align: middle;
     }
 
+    /* Curated micro-detail: a hairline that draws itself, then the word. */
     .hero-scroll {
       position: absolute;
       bottom: max(40px, calc(env(safe-area-inset-bottom) + 24px));
       left: 50%;
       transform: translateX(-50%);
       z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
       font-family: 'Inconsolata', monospace;
       font-weight: 600;
       font-size: 10px;
-      letter-spacing: 0.26em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.28);
+      color: rgba(255, 255, 255, 0.34);
+    }
+
+    .hero-scroll::before {
+      content: '';
+      width: 1px;
+      height: 56px;
+      background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.6));
+      animation: scrollDraw 2.8s var(--ease) infinite;
+    }
+
+    @keyframes scrollDraw {
+      0%   { transform: scaleY(0); transform-origin: top; }
+      45%  { transform: scaleY(1); transform-origin: top; }
+      55%  { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
     }
 
     /* ============================================================
@@ -491,14 +537,16 @@
     .section-tight { padding-top: 72px; }
     .section-border { border-top: 1px solid var(--rule); }
 
+    /* Display voice: 600 upright for section titles, 300 italic for the
+       poetic lines. Body (Inter) never competes with either. */
     .section-title {
       font-family: 'Source Serif 4', serif;
       font-size: clamp(34px, 5.4vw, 72px);
-      font-weight: 400;
-      line-height: 1.04;
+      font-weight: 600;
+      line-height: 1.02;
       color: var(--ink);
       margin-bottom: 44px;
-      letter-spacing: -0.014em;
+      letter-spacing: -0.022em;
       max-width: 940px;
     }
 
@@ -559,27 +607,35 @@
       letter-spacing: 0.005em;
     }
 
+    /* Underline draws left-to-right in accent over the resting hairline. */
     .inline-link {
       color: var(--ink);
       text-decoration: none;
-      border-bottom: 1px solid var(--rule-strong);
-      transition: color 0.2s, border-color 0.2s;
+      padding-bottom: 2px;
+      background-image:
+        linear-gradient(var(--accent), var(--accent)),
+        linear-gradient(var(--rule-strong), var(--rule-strong));
+      background-size: 0% 1px, 100% 1px;
+      background-position: 0 100%, 0 100%;
+      background-repeat: no-repeat;
+      transition: background-size 0.45s var(--ease), color 0.2s;
     }
 
     .inline-link:hover {
       color: var(--accent);
-      border-color: var(--accent);
+      background-size: 100% 1px, 100% 1px;
     }
 
     .pull-quote {
       font-family: 'Source Serif 4', serif;
       font-style: italic;
-      font-size: clamp(22px, 2.5vw, 32px);
-      line-height: 1.34;
+      font-weight: 300;
+      font-size: clamp(23px, 2.7vw, 36px);
+      line-height: 1.3;
       color: var(--ink);
       border-left: 2px solid var(--accent);
-      padding: 4px 0 4px 24px;
-      margin: 52px 0;
+      padding: 4px 0 4px 26px;
+      margin: 56px 0;
       max-width: var(--measure);
     }
 
@@ -1800,22 +1856,24 @@
       background: var(--rule);
     }
 
+    /* Receipts are the proof moment: numbers in the display weight class,
+       labels clearly subordinate. */
     .stat-num {
       display: block;
       font-family: 'Source Serif 4', serif;
-      font-size: clamp(42px, 5vw, 64px);
+      font-size: clamp(48px, 6vw, 84px);
       font-weight: 400;
       line-height: 1;
       color: var(--ink);
       margin-bottom: 14px;
-      letter-spacing: -0.016em;
+      letter-spacing: -0.02em;
       font-feature-settings: 'lnum' 1, 'tnum' 1;
     }
 
     .stat-icon {
-      width: 42px;
-      height: 42px;
-      margin: 0 auto 18px;
+      width: 36px;
+      height: 36px;
+      margin: 0 auto 16px;
       color: var(--accent);
     }
 
@@ -1861,6 +1919,18 @@
       text-transform: none;
       margin-top: 6px;
       line-height: 1.4;
+    }
+
+    /* The mono date stamp closes the receipt — "this is data". */
+    .stats-stamp {
+      margin-top: 56px;
+      text-align: center;
+      font-family: 'Inconsolata', monospace;
+      font-weight: 600;
+      font-size: 10px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--ink-4);
     }
 
     /* ============================================================
@@ -1932,11 +2002,15 @@
       text-align: center;
     }
 
+    /* 120% height gives the scroll-scrubbed parallax (GSAP) room to travel
+       without exposing edges. */
     .cinematic-video {
       position: absolute;
-      inset: 0;
+      left: 0;
+      right: 0;
+      top: -10%;
       width: 100%;
-      height: 100%;
+      height: 120%;
       object-fit: cover;
       opacity: 0.94;
       filter: saturate(1.08) contrast(1.04);
@@ -1961,11 +2035,12 @@
     .cinematic-quote {
       font-family: 'Source Serif 4', serif;
       font-style: italic;
-      font-size: clamp(28px, 5vw, 64px);
+      font-weight: 300;
+      font-size: clamp(30px, 5.4vw, 70px);
       line-height: 1.06;
       color: rgba(255, 255, 255, 0.94);
       text-shadow: 0 2px 40px rgba(0, 0, 0, 0.50);
-      letter-spacing: -0.01em;
+      letter-spacing: -0.014em;
     }
 
     .cinematic-sub {
@@ -2011,6 +2086,42 @@
       color: rgba(255, 255, 255, 0.64);
       text-shadow: 0 1px 16px rgba(0, 0, 0, 0.5);
       z-index: 2;
+    }
+
+    /* ============================================================
+       THESIS MOMENT — Section 10's title is the line the page is
+       remembered by. Centered, 300 italic, generous air.
+       ============================================================ */
+
+    .thesis-section {
+      text-align: center;
+      padding-top: 148px;
+    }
+
+    .thesis-section .section-title {
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(40px, 6.6vw, 98px);
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      max-width: 1020px;
+      margin: 0 auto 72px;
+    }
+
+    .thesis-section .bookend-media {
+      margin: 0 0 64px;
+    }
+
+    .thesis-section .prose {
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .thesis-section .pull-quote {
+      border-left: none;
+      padding: 0;
+      margin: 76px auto 0;
+      text-align: center;
     }
 
     /* ============================================================
@@ -2093,6 +2204,15 @@
     .romulus-visible {
       opacity: 1;
       transform: none;
+    }
+
+    /* When GSAP choreography is live, sections un-hide instantly and motion
+       moves to their children. The IO contract above still runs (role-card
+       icons depend on .romulus-visible) and remains the no-CDN fallback. */
+    html.gsap-active [data-romulus-animate] {
+      opacity: 1;
+      transform: none;
+      transition: none;
     }
 
     .hero[data-romulus-animate] {
@@ -2193,15 +2313,6 @@
 
       .hero-content {
         padding: 0 20px;
-      }
-
-      .hero-glass-card {
-        padding: 30px 22px;
-        border-radius: 24px;
-      }
-
-      .hero-glass-card::after {
-        border-radius: 23px;
       }
 
       .hero-meta {
@@ -2314,6 +2425,14 @@
 
       .byline {
         padding: 76px 20px;
+      }
+
+      .thesis-section {
+        padding-top: 96px;
+      }
+
+      .stats-stamp {
+        margin-top: 40px;
       }
 
       .system-orbit {
@@ -3330,6 +3449,9 @@
           <span class="stat-context">The Legion session that made routing real</span>
         </div>
       </div>
+
+      <!-- Design detail, not content: the mono stamp that closes the receipt. -->
+      <div class="stats-stamp" aria-hidden="true">Feb 03 — May 01 · MMXXVI</div>
     </section>
 
     <!-- ============================================================
@@ -3673,7 +3795,7 @@
     <!-- ============================================================
          10 — FORWARD VIEW
          ============================================================ -->
-    <section class="section" data-romulus-animate>
+    <section class="section thesis-section" data-romulus-animate>
       <div class="eyebrow">10 · Forward View</div>
       <h2 class="section-title">Small teams will not just become faster. They will become differently shaped.</h2>
 
@@ -3713,6 +3835,10 @@
           <span class="dot">·</span>
           <a href="mailto:mbattaglia92@gmail.com?subject=Romulus%20Case%20Study">email</a>
         </div>
+        <!-- COPY: consider restoring the line below — it reframes the password
+             gate as intent rather than friction, and it's a strong closing beat:
+             "This page is gated for the same reason the system is: identity-first,
+             authority-bounded, and meant for the people the work is for." -->
         <!-- <div class="byline-role footer-note">
           This page is gated for the same reason the system is: identity-first, authority-bounded, and meant for the people the work is for.
         </div> -->
@@ -3720,6 +3846,13 @@
       </div>
     </footer>
   </div>
+
+  <!-- GSAP 3.13 + ScrollTrigger + SplitText (all free as of 3.13) — the only
+       added dependency. Deferred so they never block first paint; the page
+       falls back to the original IntersectionObserver reveals without them. -->
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
 
   <script>
     (function() {
@@ -3775,6 +3908,7 @@
         initStatsCountUp();
         initLoopVideos();
         initLoopScroll();
+        initMotion();
       }
 
       if (!checkSession()) {
@@ -4067,6 +4201,165 @@
 
         window.addEventListener('scroll', checkScroll, { passive: true });
         checkScroll();
+      }
+
+      /* ============================================================
+         GSAP CHOREOGRAPHY
+         Layered on top of the data-romulus-animate contract. If the
+         CDN never loads (or reduced motion is set), nothing here
+         runs and the original IO fade system carries the page.
+         ============================================================ */
+
+      function initMotion() {
+        var reduceMotion = window.matchMedia &&
+          window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduceMotion) return;
+
+        var started = false;
+
+        function setup() {
+          if (started || !window.gsap || !window.ScrollTrigger) return;
+          started = true;
+
+          gsap.registerPlugin(ScrollTrigger);
+
+          var hasSplit = false;
+          try {
+            if (window.SplitText) {
+              gsap.registerPlugin(SplitText);
+              hasSplit = true;
+            }
+          } catch (e) {}
+
+          document.documentElement.classList.add('gsap-active');
+
+          /* --- Hero intro: masked character rise, then kicker, meta, scroll --- */
+          var heroTitle = document.querySelector('.hero-title');
+          var intro = gsap.timeline({ defaults: { ease: 'power4.out' } });
+
+          var titleDone = false;
+          if (heroTitle && hasSplit) {
+            try {
+              var heroSplit = new SplitText(heroTitle, { type: 'chars', mask: 'chars' });
+              intro.from(heroSplit.chars, { yPercent: 112, duration: 1.15, stagger: 0.045 });
+              titleDone = true;
+            } catch (e) {}
+          }
+          if (heroTitle && !titleDone) {
+            intro.from(heroTitle, { autoAlpha: 0, y: 36, duration: 1.1 });
+          }
+          intro.from('.hero-kicker', { autoAlpha: 0, y: 22, duration: 0.9 }, '-=0.72');
+          intro.from('.hero-meta', { autoAlpha: 0, y: 14, duration: 0.8 }, '-=0.55');
+          intro.from('.hero-scroll', { autoAlpha: 0, duration: 0.9 }, '-=0.5');
+
+          /* --- Section choreography: eyebrow → split title lines → body beat --- */
+          var sections = document.querySelectorAll('.section[data-romulus-animate], footer[data-romulus-animate]');
+
+          sections.forEach(function(section) {
+            var eyebrow = section.querySelector(':scope > .eyebrow');
+            var title = section.querySelector(':scope > .section-title');
+            var rest = [];
+            var flat = [];
+
+            Array.prototype.forEach.call(section.children, function(child) {
+              if (child === eyebrow || child === title) return;
+              if (child.classList.contains('loop-scroll')) {
+                flat.push(child); // alpha only: contains position:sticky internals
+              } else {
+                rest.push(child);
+              }
+            });
+
+            var tl = gsap.timeline({
+              defaults: { ease: 'power3.out' },
+              scrollTrigger: { trigger: section, start: 'top 76%', once: true }
+            });
+
+            if (eyebrow) {
+              tl.from(eyebrow, { autoAlpha: 0, y: 14, duration: 0.5 });
+            }
+
+            if (title) {
+              var lines = null;
+              if (hasSplit && !title.querySelector('.sub')) {
+                try {
+                  lines = new SplitText(title, { type: 'lines', mask: 'lines' }).lines;
+                } catch (e) { lines = null; }
+              }
+              if (lines && lines.length) {
+                tl.from(lines, { yPercent: 108, duration: 0.95, stagger: 0.07 }, '-=0.3');
+              } else {
+                tl.from(title, { autoAlpha: 0, y: 26, duration: 0.95 }, '-=0.3');
+              }
+            }
+
+            if (rest.length) {
+              tl.from(rest, {
+                autoAlpha: 0, y: 20, duration: 0.95, stagger: 0.09,
+                clearProps: 'transform'
+              }, title || eyebrow ? '-=0.55' : 0);
+            }
+            if (flat.length) {
+              tl.from(flat, { autoAlpha: 0, duration: 0.95 }, '-=0.7');
+            }
+          });
+
+          /* --- Media settles in: long cubic-out scale on frames --- */
+          gsap.utils.toArray('.editorial-media .artifact-frame, .system-orbit, .bookend-media, .media-frame').forEach(function(el) {
+            gsap.from(el, {
+              scale: 0.965, duration: 1.4, ease: 'power3.out',
+              clearProps: 'transform',
+              scrollTrigger: { trigger: el, start: 'top 85%', once: true }
+            });
+          });
+
+          /* --- Receipts print: eyebrow, heading, stats, stamp --- */
+          var statsWrap = document.querySelector('.stats-wrap');
+          if (statsWrap) {
+            var receipt = gsap.timeline({
+              defaults: { ease: 'power3.out' },
+              scrollTrigger: { trigger: statsWrap, start: 'top 72%', once: true }
+            });
+            receipt.from('.stats-eyebrow', { autoAlpha: 0, y: 12, duration: 0.5 });
+            receipt.from('.stats-heading', { autoAlpha: 0, y: 16, duration: 0.7 }, '-=0.25');
+            receipt.from('.stat', { autoAlpha: 0, y: 26, duration: 0.8, stagger: 0.12 }, '-=0.35');
+            receipt.from('.stats-stamp', { autoAlpha: 0, duration: 0.6 }, '-=0.2');
+          }
+
+          /* --- Cinematic break: scroll-scrubbed parallax + quote rise --- */
+          var cinematic = document.querySelector('.cinematic');
+          if (cinematic) {
+            gsap.fromTo('.cinematic-video', { yPercent: -7 }, {
+              yPercent: 7, ease: 'none',
+              scrollTrigger: {
+                trigger: cinematic, start: 'top bottom', end: 'bottom top', scrub: true
+              }
+            });
+            gsap.from('.cinematic-inner', {
+              autoAlpha: 0, y: 30, duration: 1.2, ease: 'power3.out',
+              scrollTrigger: { trigger: cinematic, start: 'top 68%', once: true }
+            });
+          }
+
+          ScrollTrigger.refresh();
+        }
+
+        function startWhenReady() {
+          if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(setup, setup);
+          } else {
+            setup();
+          }
+        }
+
+        if (window.gsap && window.ScrollTrigger) {
+          startWhenReady();
+        } else if (document.readyState === 'loading') {
+          // Deferred CDN scripts execute before DOMContentLoaded.
+          document.addEventListener('DOMContentLoaded', startWhenReady);
+        } else {
+          window.addEventListener('load', startWhenReady);
+        }
       }
     })();
   </script>
