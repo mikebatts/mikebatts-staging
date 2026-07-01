@@ -25,81 +25,64 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta property="og:image" content="#">
   <style>
-    /* Daylight-branded case-study visuals only. Scoped to .dl- — does not affect the site design system. */
-    .dl-viz {
-      background: #FFF7E9;
-      border: 1px solid rgba(30, 30, 30, 0.10);
-      border-radius: 16px;
-      padding: 36px 32px;
-      margin: 8px 0 4px;
-    }
-    .dl-eyebrow {
-      font-family: Inconsolata, monospace;
-      font-size: 12px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: #A09B93;
-      margin-bottom: 22px;
-    }
-    .dl-flow {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 8px;
-    }
-    .dl-step {
-      background: #FFFFFF;
-      border: 1px solid rgba(30, 30, 30, 0.10);
-      border-radius: 6px;
-      padding: 9px 13px;
-      font-family: Inter, sans-serif;
-      font-size: 13px;
-      line-height: 1;
-      color: #111111;
-      white-space: nowrap;
-    }
-    .dl-step.dl-accent {
-      background: #F66F00;
-      border-color: #F66F00;
-      color: #FFFFFF;
-    }
-    .dl-step.dl-soft {
-      background: #F7EED9;
-      border-color: rgba(30, 30, 30, 0.06);
-    }
-    .dl-arrow {
-      color: #DACAB6;
-      font-size: 13px;
-      font-family: Inter, sans-serif;
-    }
-    .dl-split {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 8px;
-    }
-    .dl-lane {
-      flex: 1 1 240px;
-      background: #F7EED9;
-      border: 1px solid rgba(30, 30, 30, 0.06);
-      border-radius: 6px;
-      padding: 18px 18px 20px;
-    }
-    .dl-lane-label {
-      font-family: Inconsolata, monospace;
-      font-size: 12px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: #F66F00;
-      margin-bottom: 12px;
-    }
-    .dl-lane p {
-      font-family: Inter, sans-serif;
-      font-size: 13px;
-      line-height: 1.5;
-      color: #4C2806;
-      margin: 0;
-    }
+    /* ---- Daylight-branded case-study visuals. Scoped to .dl-. Does NOT touch the mikebatts.net design system. ---- */
+    .dl-card{position:relative;background:#FFF7E9;border:1px solid rgba(30,30,30,0.10);border-radius:16px;padding:40px 36px;margin:8px 0 4px;overflow:hidden}
+    .dl-card.dark{background:#111111;border-color:#111111}
+    .dl-glow{position:absolute;pointer-events:none;width:520px;height:520px;border-radius:50%;right:-180px;top:-160px;
+      background:radial-gradient(circle at center,rgba(246,111,0,0.45) 0%,rgba(252,204,60,0.12) 45%,rgba(252,204,60,0) 70%)}
+    .dl-eyebrow{position:relative;font-family:Inconsolata,monospace;font-size:12px;letter-spacing:0.07em;text-transform:uppercase;color:#A09B93;margin-bottom:6px}
+    .dl-card.dark .dl-eyebrow{color:#DACAB6}
+    .dl-title{position:relative;font-family:'Inter Tight',sans-serif;font-size:22px;font-weight:600;letter-spacing:-0.02em;color:#111111;margin-bottom:26px;line-height:1.15}
+    .dl-card.dark .dl-title{color:#FFF7E9}
+
+    /* row of steps */
+    .dl-flow{position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+    .dl-step{background:#FFFFFF;border:1px solid rgba(30,30,30,0.10);border-radius:6px;padding:9px 13px;font-family:Inter,sans-serif;font-size:13px;line-height:1;color:#111111;white-space:nowrap}
+    .dl-step.soft{background:#F7EED9;border-color:rgba(30,30,30,0.06)}
+    .dl-step.accent{background:#F66F00;border-color:#F66F00;color:#FFFFFF}
+    .dl-step.ghost{background:transparent;border:1px dashed rgba(30,30,30,0.22);color:#4C2806}
+    .dl-arrow{color:#DACAB6;font-size:13px;font-family:Inter,sans-serif}
+
+    /* hero orchestration */
+    .dl-cap{position:relative;font-family:Inconsolata,monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:#A09B93;margin-top:12px}
+    .dl-bar{position:relative;display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(90deg,#F66F00 0%,#FF8A2B 100%);color:#fff;border-radius:8px;padding:16px 18px;margin:18px 0;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:15px;letter-spacing:-0.01em}
+    .dl-bar small{font-family:Inconsolata,monospace;font-weight:400;font-size:11px;letter-spacing:0.05em;text-transform:uppercase;opacity:0.85}
+    .dl-parties{position:relative;display:flex;flex-wrap:wrap;gap:8px}
+    .dl-party{flex:1 1 0;min-width:120px;text-align:center;background:#F7EED9;border:1px solid rgba(30,30,30,0.06);border-radius:6px;padding:12px 10px;font-family:Inter,sans-serif;font-size:13px;color:#4C2806}
+    .dl-connect{position:relative;text-align:center;color:#DACAB6;font-size:16px;margin:2px 0}
+
+    /* timeline */
+    .dl-time{position:relative;display:flex;flex-wrap:wrap;gap:0}
+    .dl-phase{flex:1 1 18%;min-width:150px;padding:0 14px 4px 0;border-top:2px solid #F0E5CF;margin-top:8px;position:relative}
+    .dl-phase::before{content:"";position:absolute;top:-6px;left:0;width:10px;height:10px;border-radius:50%;background:#F66F00}
+    .dl-phase.staged::before{background:#DACAB6}
+    .dl-phase .n{font-family:Inconsolata,monospace;font-size:11px;color:#A09B93;margin:12px 0 4px}
+    .dl-phase .t{font-family:'Inter Tight',sans-serif;font-size:14px;font-weight:600;color:#111;letter-spacing:-0.01em;line-height:1.2}
+
+    /* two-column split */
+    .dl-split{position:relative;display:flex;flex-wrap:wrap;gap:12px}
+    .dl-lane{flex:1 1 240px;background:#F7EED9;border:1px solid rgba(30,30,30,0.06);border-radius:8px;padding:20px}
+    .dl-lane .l{font-family:Inconsolata,monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:#F66F00;margin-bottom:10px}
+    .dl-lane p{font-family:Inter,sans-serif;font-size:13px;line-height:1.55;color:#4C2806;margin:0}
+
+    /* anchor timing diagram */
+    .dl-anchor{position:relative;background:#fff;border:1px solid rgba(30,30,30,0.08);border-radius:8px;padding:18px 18px 14px;margin-top:4px}
+    .dl-track{display:flex;align-items:center;gap:6px;margin:8px 0}
+    .dl-tk-label{font-family:Inconsolata,monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.05em;color:#A09B93;min-width:120px}
+    .dl-tick{flex:1;height:8px;border-radius:4px;background:#F0E5CF;position:relative}
+    .dl-tick.fill{background:linear-gradient(90deg,#FCCC3C,#F66F00)}
+    .dl-flag{background:#111;color:#fff;border-radius:4px;padding:5px 9px;font-family:Inter,sans-serif;font-size:12px;white-space:nowrap}
+
+    /* exceptions branch */
+    .dl-branch{position:relative;display:flex;flex-wrap:wrap;align-items:stretch;gap:10px}
+    .dl-branch .col{flex:1 1 200px;border-radius:8px;padding:16px 16px 18px}
+    .dl-branch .happy{background:#F7EED9;border:1px solid rgba(30,30,30,0.06)}
+    .dl-branch .edge{background:#fff;border:1px dashed rgba(246,111,0,0.5)}
+    .dl-branch .l{font-family:Inconsolata,monospace;font-size:11px;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:10px}
+    .dl-branch .happy .l{color:#A09B93}
+    .dl-branch .edge .l{color:#F66F00}
+    .dl-branch ul{margin:0;padding-left:16px}
+    .dl-branch li{font-family:Inter,sans-serif;font-size:12.5px;line-height:1.6;color:#4C2806}
   </style>
 </head>
 <body class="portv3">
@@ -113,58 +96,92 @@
     </div>
   </div>
 
+  <!-- HERO: one journey, five parties -->
   <div class="w-layout-blockcontainer container-30 embedsmedia w-container">
-    <div class="dl-viz">
-      <div class="dl-eyebrow">Origination — lead to activation</div>
+    <div class="dl-card">
+      <div class="dl-glow"></div>
+      <div class="dl-eyebrow">The core challenge</div>
+      <div class="dl-title">One simple journey on the surface.<br>A five-party, regulated machine underneath.</div>
       <div class="dl-flow">
-        <div class="dl-step">Lead</div>
-        <div class="dl-arrow">→</div>
-        <div class="dl-step">Quote</div>
-        <div class="dl-arrow">→</div>
-        <div class="dl-step">Contract</div>
-        <div class="dl-arrow">→</div>
-        <div class="dl-step">Credit</div>
-        <div class="dl-arrow">→</div>
-        <div class="dl-step">Design</div>
-        <div class="dl-arrow">→</div>
-        <div class="dl-step">Permitting</div>
-        <div class="dl-arrow">→</div>
-        <div class="dl-step">Install</div>
-        <div class="dl-arrow">→</div>
-        <div class="dl-step dl-accent">Activation</div>
+        <div class="dl-step">Sign once</div><div class="dl-arrow">→</div>
+        <div class="dl-step">Go solar</div><div class="dl-arrow">→</div>
+        <div class="dl-step">Power on</div><div class="dl-arrow">→</div>
+        <div class="dl-step accent">One clear monthly bill</div>
       </div>
+      <div class="dl-cap">What the homeowner experiences</div>
+      <div class="dl-bar">Daylight <small>· system of record &amp; trust layer</small></div>
+      <div class="dl-parties">
+        <div class="dl-party">Installer</div>
+        <div class="dl-party">Financing party</div>
+        <div class="dl-party">Payments</div>
+        <div class="dl-party">Provider</div>
+      </div>
+      <div class="dl-cap">What Daylight orchestrates behind it</div>
     </div>
   </div>
 
   <div class="w-layout-blockcontainer container-29 pport3 casestudybody w-container">
     <div class="port3 header work casestudy">
       <div class="port3-h1 work">Context</div>
-      <div class="port3-h1 subhead bodyodyody">Going solar is one of the most opaque, high-stakes purchases a homeowner ever makes — tangled financing, high-pressure sales, and almost no visibility once the panels are on the roof.<br><br>Daylight is building a consumer energy platform to make that whole experience clear, fair, and human. I lead product across it.</div>
+      <div class="port3-h1 subhead bodyodyody">A homeowner going solar signs one agreement and expects one clear bill. Behind that simplicity sits a regulated, multi-year financing arrangement, a forecasted billing engine, money moving between financiers, and a physical install that has to pass inspection before a single dollar is charged.<br><br>Daylight is the consumer energy platform that makes all of that feel like nothing at all to the person on the couch. I lead product across it — the homeowner app, the operator workflows, and the billing experience that ties them together.</div>
     </div>
     <div class="port3 header work casestudy">
       <div class="port3-h1 work">Problem</div>
-      <div class="port3-h1 subhead bodyodyody">The work lives on two hard surfaces. On the business side, installers and sales teams move a homeowner through a long, fragile pipeline — lead, quote, contract, credit, design, permitting, install, activation — each step with its own states, handoffs, and ways to stall.<br><br>On the consumer side, homeowners are left in the dark: confusing bills, no real view into what their system produces, and silence after the sale.</div>
+      <div class="port3-h1 subhead bodyodyody">Solar is one of the most opaque, high-trust purchases a person makes — and it runs on machinery most homeowners never see: five parties, a decade-plus billing relationship, and dozens of states where a deal can stall or a payment can fail silently.<br><br>Get it wrong and trust evaporates in a category already seen as predatory. The product challenge is to orchestrate the whole machine while showing the homeowner a single, calm, trustworthy experience.</div>
+    </div>
+  </div>
+
+  <!-- 10-PHASE JOURNEY -->
+  <div class="w-layout-blockcontainer container-30 embedsmedia w-container">
+    <div class="dl-card">
+      <div class="dl-eyebrow">The journey · end to end</div>
+      <div class="dl-title">Ten phases, from first quote to long-run reconciliation.</div>
+      <div class="dl-time">
+        <div class="dl-phase"><div class="n">01</div><div class="t">Origination &amp; qualification</div></div>
+        <div class="dl-phase"><div class="n">02</div><div class="t">Onboarding &amp; signing</div></div>
+        <div class="dl-phase"><div class="n">03</div><div class="t">Billing setup</div></div>
+        <div class="dl-phase"><div class="n">04</div><div class="t">Payment setup</div></div>
+        <div class="dl-phase staged"><div class="n">05</div><div class="t">Delivery, install &amp; PTO</div></div>
+        <div class="dl-phase"><div class="n">06</div><div class="t">First statement &amp; billing</div></div>
+        <div class="dl-phase"><div class="n">07</div><div class="t">Making payments</div></div>
+        <div class="dl-phase"><div class="n">08</div><div class="t">Failed payments &amp; recovery</div></div>
+        <div class="dl-phase"><div class="n">09</div><div class="t">Production true-up</div></div>
+        <div class="dl-phase"><div class="n">10</div><div class="t">Remittance &amp; reconciliation</div></div>
+      </div>
     </div>
   </div>
 
   <div class="w-layout-blockcontainer container-29 pport3 casestudybody w-container">
     <div class="port3 header work casestudy">
-      <div class="port3-h1 work">Role</div>
-      <div class="port3-h1 subhead bodyodyody">I own 0-to-1 product strategy across design, engineering, and execution — translating a messy, regulated, multi-party business into product surfaces people can actually trust. I partner across leadership, engineering, design, and go-to-market to turn strategy into shipped product.</div>
+      <div class="port3-h1 work">My role</div>
+      <div class="port3-h1 subhead bodyodyody">I own 0-to-1 product strategy across design, engineering, and execution. I model the end-to-end journey, define the states and the edge cases, and turn a five-party regulated machine into product surfaces homeowners trust and operators can actually run — partnering across leadership, engineering, design, and go-to-market to ship it.</div>
     </div>
   </div>
 
+  <!-- ORIGINATION PIPELINE + split -->
   <div class="w-layout-blockcontainer container-30 embedsmedia w-container">
-    <div class="dl-viz">
-      <div class="dl-eyebrow">Two surfaces, one system</div>
-      <div class="dl-split">
+    <div class="dl-card">
+      <div class="dl-glow"></div>
+      <div class="dl-eyebrow">Operator side · origination</div>
+      <div class="dl-title">Carrying a customer from lead to activation without dropping the deal.</div>
+      <div class="dl-flow">
+        <div class="dl-step">Lead</div><div class="dl-arrow">→</div>
+        <div class="dl-step">Quote</div><div class="dl-arrow">→</div>
+        <div class="dl-step">Contract</div><div class="dl-arrow">→</div>
+        <div class="dl-step">Credit</div><div class="dl-arrow">→</div>
+        <div class="dl-step">Design</div><div class="dl-arrow">→</div>
+        <div class="dl-step">Permitting</div><div class="dl-arrow">→</div>
+        <div class="dl-step">Install</div><div class="dl-arrow">→</div>
+        <div class="dl-step accent">Activation (PTO)</div>
+      </div>
+      <div class="dl-split" style="margin-top:22px">
         <div class="dl-lane">
-          <div class="dl-lane-label">B2B — Origination</div>
-          <p>Portals that carry a customer from lead through quote, contract, credit, design, documentation, install, and payments. Product judgment lives in the workflow states, permissions, operational handoffs, and review loops.</p>
+          <div class="l">The work</div>
+          <p>Modeling workflow states, permissions, document collection, review loops, and the operational handoffs between sales, installer, and back office — so a deal keeps moving instead of stalling.</p>
         </div>
         <div class="dl-lane">
-          <div class="dl-lane-label">B2C — Homeowner app</div>
-          <p>Clear visibility into the energy system, billing, usage, production, referrals, onboarding, and what happens after install. Bringing transparency to a category that often feels opaque.</p>
+          <div class="l">Why it's hard</div>
+          <p>Every step has its own failure modes and its own owner. The product has to make the current state, the blocker, and the next action obvious to whoever is holding the deal right now.</p>
         </div>
       </div>
     </div>
@@ -172,28 +189,70 @@
 
   <div class="w-layout-blockcontainer container-29 pport3 casestudybody w-container">
     <div class="port3 header work casestudy">
-      <div class="port3-h1 work">Business side</div>
-      <div class="port3-h1 subhead bodyodyody">I designed the origination and installer workflows that carry a customer from lead to activation — modeling the states, permissions, document collection, and operational handoffs that keep a deal moving without dropping it. Getting the workflow logic right is what lets sales orgs and installers move fast without things falling through the cracks.</div>
-    </div>
-    <div class="port3 header work casestudy">
-      <div class="port3-h1 work">Consumer side</div>
-      <div class="port3-h1 subhead bodyodyody">I shaped the homeowner experience: clearer billing, real visibility into energy production and usage, onboarding, referrals, and the whole story after install. The goal is simple — take a category that feels predatory and opaque, and make it feel transparent and trustworthy.</div>
+      <div class="port3-h1 work">Billing that just works</div>
+      <div class="port3-h1 subhead bodyodyody">Billing can&#x27;t start until the system is switched on and approved to operate — then it has to settle into a rhythm the homeowner can count on. The tricky part is timing: the start date and the annual cycles anchor to when the system goes live, while the monthly cadence stays fixed. I designed the experience so none of that complexity lands on the homeowner — just a predictable bill, on the same day, every month.</div>
     </div>
   </div>
 
+  <!-- BILLING TIMING -->
   <div class="w-layout-blockcontainer container-30 embedsmedia w-container">
-    <div class="dl-viz">
-      <div class="dl-eyebrow">Homeowner clarity — after the sale</div>
-      <div class="dl-flow">
-        <div class="dl-step dl-soft">Onboarding</div>
-        <div class="dl-arrow">→</div>
-        <div class="dl-step dl-soft">System visibility</div>
-        <div class="dl-arrow">→</div>
-        <div class="dl-step dl-soft">Clear billing</div>
-        <div class="dl-arrow">→</div>
-        <div class="dl-step dl-soft">Production &amp; usage</div>
-        <div class="dl-arrow">→</div>
-        <div class="dl-step dl-accent">Referrals</div>
+    <div class="dl-card">
+      <div class="dl-eyebrow">Billing · what anchors to what</div>
+      <div class="dl-title">Anchored to power-on. Steady every month after.</div>
+      <div class="dl-anchor">
+        <div class="dl-track">
+          <div class="dl-tk-label">System live (PTO)</div>
+          <div class="dl-flag">First bill begins</div>
+          <div class="dl-tick fill"></div>
+          <div class="dl-flag">Annual cycles</div>
+        </div>
+        <div class="dl-track">
+          <div class="dl-tk-label">Monthly cadence</div>
+          <div class="dl-step soft">Statement</div>
+          <div class="dl-arrow">→</div>
+          <div class="dl-step soft">Due date</div>
+          <div class="dl-arrow">→</div>
+          <div class="dl-step soft">Autopay</div>
+          <div class="dl-arrow">→</div>
+          <div class="dl-step accent">Paid</div>
+          <div class="dl-tk-label" style="min-width:auto;margin-left:8px">fixed, every month</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="w-layout-blockcontainer container-29 pport3 casestudybody w-container">
+    <div class="port3 header work casestudy">
+      <div class="port3-h1 work">Designing the unhappy path</div>
+      <div class="port3-h1 subhead bodyodyody">The real product work lives in the edge cases. A bank account that won&#x27;t verify. A returned payment. A homeowner drifting toward delinquency. I designed the flows that catch these early, explain them in plain language, and give people a clear way back — because in a trust-heavy category, how you handle the bad day matters more than the good one.</div>
+    </div>
+  </div>
+
+  <!-- EXCEPTION BRANCHES -->
+  <div class="w-layout-blockcontainer container-30 embedsmedia w-container">
+    <div class="dl-card">
+      <div class="dl-glow"></div>
+      <div class="dl-eyebrow">Resilience · happy path vs. edge cases</div>
+      <div class="dl-title">The system has to be honest on the worst day, not just the best one.</div>
+      <div class="dl-branch">
+        <div class="col happy">
+          <div class="l">Happy path</div>
+          <ul>
+            <li>Bank verified</li>
+            <li>Autopay active</li>
+            <li>Charged on the due date</li>
+            <li>Payment posts, homeowner sees it clearly</li>
+          </ul>
+        </div>
+        <div class="col edge">
+          <div class="l">Edge cases I designed for</div>
+          <ul>
+            <li>Verification fails → guided re-entry</li>
+            <li>Payment returned → clear notice, easy retry</li>
+            <li>Drifting to delinquency → early, plain-language nudges</li>
+            <li>Recovery without eroding trust</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -201,14 +260,11 @@
   <div class="w-layout-blockcontainer container-29 pport3 casestudybody w-container">
     <div class="port3 header work casestudy">
       <div class="port3-h1 work">How I work</div>
-      <div class="port3-h1 subhead bodyodyody">I built scalable design systems and rapid prototyping workflows for iOS and web, and defined 0-to-1 principles for early product development — so the team could move fast without losing craft. Across all of it I move between Figma, prototype, and production, close to both the design and the code.</div>
+      <div class="port3-h1 subhead bodyodyody">I built scalable design systems and rapid prototyping workflows for iOS and web, and defined 0-to-1 principles for early product development — so the team can move fast without losing craft. I move between Figma, prototype, and production, close to both the design and the code.</div>
     </div>
-  </div>
-
-  <div class="w-layout-blockcontainer container-29 pport3 casestudybody w-container">
     <div class="port3 header work casestudy">
       <div class="port3-h1 work">Impact</div>
-      <div class="port3-h1 subhead bodyodyody">The through-line is trust — bringing clarity to a category that badly needs it, on both sides of the transaction.<br><br>Daylight is the strongest proof that I can operate as a product, design, and engineering bridge inside a real, messy, regulated business, translate executive direction into shipped product, and give users something they can actually understand.</div>
+      <div class="port3-h1 subhead bodyodyody">Daylight is the clearest proof of the thing I do best: take a genuinely complex, regulated, multi-party system and make it feel simple and trustworthy.<br><br>It&#x27;s a bet that the same instinct — modeling messy systems, designing for the edge cases, and shipping surfaces people trust — is exactly what fintech, energy, and AI-native products need next.</div>
     </div>
   </div>
 
