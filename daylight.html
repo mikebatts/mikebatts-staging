@@ -25,64 +25,172 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta property="og:image" content="#">
   <style>
-    /* ---- Daylight-branded case-study visuals. Scoped to .dl-. Does NOT touch the mikebatts.net design system. ---- */
-    .dl-card{position:relative;background:#FFF7E9;border:1px solid rgba(30,30,30,0.10);border-radius:16px;padding:40px 36px;margin:8px 0 4px;overflow:hidden}
+    /* ---- Daylight-branded case-study visuals. Scoped to .dl-. Page chrome untouched. ---- */
+    .dl-wide{max-width:720px}
+
+    .dl-card{position:relative;background:#FFF7E9;border:1px solid rgba(30,30,30,0.10);border-radius:16px;padding:36px 32px;margin:8px 0 4px;overflow:hidden}
     .dl-card.dark{background:#111111;border-color:#111111}
     .dl-glow{position:absolute;pointer-events:none;width:520px;height:520px;border-radius:50%;right:-180px;top:-160px;
-      background:radial-gradient(circle at center,rgba(246,111,0,0.45) 0%,rgba(252,204,60,0.12) 45%,rgba(252,204,60,0) 70%)}
-    .dl-eyebrow{position:relative;font-family:Inconsolata,monospace;font-size:12px;letter-spacing:0.07em;text-transform:uppercase;color:#A09B93;margin-bottom:6px}
+      background:radial-gradient(circle at center,rgba(246,111,0,0.40) 0%,rgba(252,204,60,0.10) 45%,rgba(252,204,60,0) 70%)}
+    .dl-eyebrow{position:relative;font-family:Inconsolata,monospace;font-size:12px;letter-spacing:0.05em;text-transform:uppercase;color:#A09B93;margin-bottom:6px}
     .dl-card.dark .dl-eyebrow{color:#DACAB6}
-    .dl-title{position:relative;font-family:'Inter Tight',sans-serif;font-size:22px;font-weight:600;letter-spacing:-0.02em;color:#111111;margin-bottom:26px;line-height:1.15}
+    .dl-title{position:relative;font-family:'Inter Tight',sans-serif;font-size:22px;font-weight:600;letter-spacing:-0.02em;color:#111111;margin-bottom:24px;line-height:1.15;max-width:30ch}
     .dl-card.dark .dl-title{color:#FFF7E9}
+    .dl-cap{position:relative;font-family:Inconsolata,monospace;font-size:11px;letter-spacing:0.05em;text-transform:uppercase;color:#A09B93;margin-top:14px;line-height:1.5}
+    .dl-card.dark .dl-cap{color:rgba(218,202,182,0.75)}
 
-    /* row of steps */
-    .dl-flow{position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
-    .dl-step{background:#FFFFFF;border:1px solid rgba(30,30,30,0.10);border-radius:6px;padding:9px 13px;font-family:Inter,sans-serif;font-size:13px;line-height:1;color:#111111;white-space:nowrap}
-    .dl-step.soft{background:#F7EED9;border-color:rgba(30,30,30,0.06)}
-    .dl-step.accent{background:#F66F00;border-color:#F66F00;color:#FFFFFF}
-    .dl-step.ghost{background:transparent;border:1px dashed rgba(30,30,30,0.22);color:#4C2806}
-    .dl-arrow{color:#DACAB6;font-size:13px;font-family:Inter,sans-serif}
+    /* ============ V1 · HERO ============ */
+    .dl-journey{position:relative;display:grid;grid-template-columns:repeat(4,1fr);background:#FFFFFF;border:1px solid rgba(30,30,30,0.10);border-radius:6px;overflow:hidden}
+    .dl-jstep{padding:14px 12px;font-family:'Inter Tight',sans-serif;font-size:13.5px;font-weight:500;color:#111;border-left:1px solid rgba(30,30,30,0.08);text-align:center;line-height:1.3}
+    .dl-jstep:first-child{border-left:none}
+    .dl-jstep.accent{background:#F66F00;color:#fff}
+    .dl-jstep .n{display:block;font-family:Inconsolata,monospace;font-size:10px;letter-spacing:0.06em;color:#A09B93;margin-bottom:3px}
+    .dl-jstep.accent .n{color:rgba(255,255,255,0.75)}
+    .dl-bar{position:relative;display:flex;align-items:baseline;justify-content:center;gap:10px;background:linear-gradient(90deg,#F66F00 0%,#FF8A2B 60%,#FCCC3C 130%);color:#fff;border-radius:6px;padding:16px 18px;margin:14px 0;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:15px;letter-spacing:-0.01em;flex-wrap:wrap;text-align:center}
+    .dl-bar small{font-family:Inconsolata,monospace;font-weight:400;font-size:11px;letter-spacing:0.04em;text-transform:uppercase;opacity:0.9}
+    .dl-parties{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+    .dl-party{text-align:center;background:#F7EED9;border:1px solid rgba(30,30,30,0.06);border-radius:6px;padding:13px 8px;font-family:Inter,sans-serif;font-size:13px;color:#4C2806}
 
-    /* hero orchestration */
-    .dl-cap{position:relative;font-family:Inconsolata,monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:#A09B93;margin-top:12px}
-    .dl-bar{position:relative;display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(90deg,#F66F00 0%,#FF8A2B 100%);color:#fff;border-radius:8px;padding:16px 18px;margin:18px 0;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:15px;letter-spacing:-0.01em}
-    .dl-bar small{font-family:Inconsolata,monospace;font-weight:400;font-size:11px;letter-spacing:0.05em;text-transform:uppercase;opacity:0.85}
-    .dl-parties{position:relative;display:flex;flex-wrap:wrap;gap:8px}
-    .dl-party{flex:1 1 0;min-width:120px;text-align:center;background:#F7EED9;border:1px solid rgba(30,30,30,0.06);border-radius:6px;padding:12px 10px;font-family:Inter,sans-serif;font-size:13px;color:#4C2806}
-    .dl-connect{position:relative;text-align:center;color:#DACAB6;font-size:16px;margin:2px 0}
+    /* ============ V2 · PLATFORM MAP ============ */
+    .dl-surfaces{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .dl-surface{background:#FFFFFF;border:1px solid rgba(30,30,30,0.10);border-radius:6px;padding:18px 16px;display:flex;flex-direction:column;gap:6px}
+    .dl-surface.anchor{background:#111111;border-color:#111111}
+    .dl-surface .tag{font-family:Inconsolata,monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:#F66F00}
+    .dl-surface .nm{font-family:'Inter Tight',sans-serif;font-size:15px;font-weight:600;letter-spacing:-0.01em;color:#111;line-height:1.2}
+    .dl-surface.anchor .nm{color:#FFF7E9}
+    .dl-surface p{font-family:Inter,sans-serif;font-size:12.5px;line-height:1.5;color:#6b665e;margin:0}
+    .dl-surface.anchor p{color:#DACAB6}
 
-    /* timeline */
-    .dl-time{position:relative;display:flex;flex-wrap:wrap;gap:0}
-    .dl-phase{flex:1 1 18%;min-width:150px;padding:0 14px 4px 0;border-top:2px solid #F0E5CF;margin-top:8px;position:relative}
-    .dl-phase::before{content:"";position:absolute;top:-6px;left:0;width:10px;height:10px;border-radius:50%;background:#F66F00}
-    .dl-phase.staged::before{background:#DACAB6}
-    .dl-phase .n{font-family:Inconsolata,monospace;font-size:11px;color:#A09B93;margin:12px 0 4px}
-    .dl-phase .t{font-family:'Inter Tight',sans-serif;font-size:14px;font-weight:600;color:#111;letter-spacing:-0.01em;line-height:1.2}
+    /* ============ V3 · GATED LIFECYCLE (signature) ============ */
+    .dl-rail{position:relative;list-style:none;margin:0;padding:0}
+    .dl-rail::before{content:"";position:absolute;left:15px;top:10px;bottom:10px;width:2px;background:#F0E5CF}
+    .dl-phase{position:relative;padding:0 0 6px 48px}
+    .dl-phase .dot{position:absolute;left:6px;top:2px;width:20px;height:20px;border-radius:50%;background:#F66F00;border:4px solid #FFF7E9;box-shadow:0 0 0 1px rgba(246,111,0,0.35)}
+    .dl-phase .ph-head{display:flex;align-items:baseline;gap:10px;margin-bottom:8px}
+    .dl-phase .ph-n{font-family:Inconsolata,monospace;font-size:11px;letter-spacing:0.06em;color:#A09B93}
+    .dl-phase .ph-t{font-family:'Inter Tight',sans-serif;font-size:16.5px;font-weight:600;letter-spacing:-0.015em;color:#111;line-height:1.2}
+    .dl-conds{display:grid;grid-template-columns:1fr 1fr;gap:5px 14px;background:#FFFFFF;border:1px solid rgba(30,30,30,0.08);border-radius:6px;padding:12px 14px;margin-bottom:14px}
+    .dl-cond{position:relative;font-family:Inter,sans-serif;font-size:12.5px;line-height:1.45;color:#4C2806;padding-left:16px}
+    .dl-cond::before{content:"";position:absolute;left:0;top:6px;width:7px;height:7px;border-radius:2px;background:#FCCC3C}
+    .dl-gate{position:relative;display:inline-flex;align-items:center;gap:7px;margin:0 0 16px -48px;transform:translateX(0);margin-left:0;padding:5px 10px 5px 34px;border:1px dashed rgba(246,111,0,0.55);border-radius:100px;background:#FFF7E9}
+    .dl-gate::before{content:"";position:absolute;left:11px;top:50%;transform:translateY(-50%);width:10px;height:10px;border-radius:50%;background:#FFF7E9;border:3px solid #F66F00}
+    .dl-gate span{font-family:Inconsolata,monospace;font-size:10.5px;letter-spacing:0.07em;text-transform:uppercase;color:#F66F00}
+    .dl-phase:last-child{padding-bottom:0}
+    .dl-phase:last-child .dl-conds{margin-bottom:0}
 
-    /* two-column split */
-    .dl-split{position:relative;display:flex;flex-wrap:wrap;gap:12px}
-    .dl-lane{flex:1 1 240px;background:#F7EED9;border:1px solid rgba(30,30,30,0.06);border-radius:8px;padding:20px}
-    .dl-lane .l{font-family:Inconsolata,monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:#F66F00;margin-bottom:10px}
-    .dl-lane p{font-family:Inter,sans-serif;font-size:13px;line-height:1.55;color:#4C2806;margin:0}
+    /* ============ V4 · WHO'S ON IT ============ */
+    .dl-matrix{position:relative;display:grid;grid-template-columns:104px repeat(6,1fr);gap:4px;align-items:stretch}
+    .dl-mx-corner{grid-column:1}
+    .dl-mx-ph{font-family:Inconsolata,monospace;font-size:10.5px;letter-spacing:0.04em;text-transform:uppercase;color:#A09B93;text-align:center;padding:6px 2px;line-height:1.3;align-self:end}
+    .dl-mx-party{font-family:'Inter Tight',sans-serif;font-size:13px;font-weight:600;color:#111;display:flex;align-items:center;padding-right:6px}
+    .dl-mx-cell{background:#FFFFFF;border:1px solid rgba(30,30,30,0.07);border-radius:6px;min-height:38px;display:flex;align-items:center;justify-content:center}
+    .dl-mx-cell.lead::after{content:"";width:12px;height:12px;border-radius:50%;background:#F66F00}
+    .dl-mx-cell.on::after{content:"";width:12px;height:12px;border-radius:50%;border:2.5px solid #DACAB6}
+    .dl-legend{display:flex;gap:18px;margin-top:14px;flex-wrap:wrap}
+    .dl-legend .li{display:flex;align-items:center;gap:7px;font-family:Inconsolata,monospace;font-size:11px;letter-spacing:0.05em;text-transform:uppercase;color:#A09B93}
+    .dl-legend .k1{width:12px;height:12px;border-radius:50%;background:#F66F00}
+    .dl-legend .k2{width:12px;height:12px;border-radius:50%;border:2.5px solid #DACAB6}
+    .dl-phaselist{display:none;grid-template-columns:1fr;gap:8px}
+    .dl-pl-item{background:#FFFFFF;border:1px solid rgba(30,30,30,0.08);border-radius:6px;padding:12px 14px}
+    .dl-pl-item .t{display:flex;gap:8px;align-items:baseline;font-family:'Inter Tight',sans-serif;font-size:14px;font-weight:600;color:#111;margin-bottom:4px}
+    .dl-pl-item .t .n{font-family:Inconsolata,monospace;font-size:10.5px;font-weight:400;color:#A09B93}
+    .dl-pl-item p{font-family:Inter,sans-serif;font-size:12.5px;line-height:1.5;color:#4C2806;margin:0}
+    .dl-pl-item p b{color:#F66F00;font-weight:600}
 
-    /* anchor timing diagram */
-    .dl-anchor{position:relative;background:#fff;border:1px solid rgba(30,30,30,0.08);border-radius:8px;padding:18px 18px 14px;margin-top:4px}
-    .dl-track{display:flex;align-items:center;gap:6px;margin:8px 0}
-    .dl-tk-label{font-family:Inconsolata,monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.05em;color:#A09B93;min-width:120px}
-    .dl-tick{flex:1;height:8px;border-radius:4px;background:#F0E5CF;position:relative}
-    .dl-tick.fill{background:linear-gradient(90deg,#FCCC3C,#F66F00)}
-    .dl-flag{background:#111;color:#fff;border-radius:4px;padding:5px 9px;font-family:Inter,sans-serif;font-size:12px;white-space:nowrap}
+    /* ============ V5 · HOMEOWNER APP ============ */
+    .dl-duo{position:relative;display:grid;grid-template-columns:240px 1fr;gap:22px;align-items:stretch}
+    .dl-phone{background:#111;border-radius:28px;padding:10px;align-self:start}
+    .dl-screen{background:#FFFDF8;border-radius:20px;padding:16px 14px;display:flex;flex-direction:column;gap:10px}
+    .dl-stat{background:#F7EED9;border-radius:6px;padding:12px}
+    .dl-stat .l{font-family:Inconsolata,monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:#A09B93;margin-bottom:4px}
+    .dl-stat .v{font-family:'Inter Tight',sans-serif;font-size:17px;font-weight:600;letter-spacing:-0.01em;color:#111}
+    .dl-batt{display:flex;align-items:center;gap:8px;background:#F7EED9;border-radius:6px;padding:12px}
+    .dl-batt .track{flex:1;height:8px;border-radius:4px;background:#F0E5CF;overflow:hidden}
+    .dl-batt .fill{width:72%;height:100%;border-radius:4px;background:linear-gradient(90deg,#FCCC3C,#F66F00)}
+    .dl-batt .l{font-family:Inconsolata,monospace;font-size:10px;letter-spacing:0.05em;text-transform:uppercase;color:#A09B93;white-space:nowrap}
+    .dl-event{background:#111;border-radius:6px;padding:12px;color:#FFF7E9}
+    .dl-event .l{font-family:Inconsolata,monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:#FCCC3C;margin-bottom:4px}
+    .dl-event .v{font-family:Inter,sans-serif;font-size:12px;line-height:1.45;color:#FFF7E9}
+    .dl-payrow{display:flex;justify-content:space-between;align-items:center;background:#F66F00;border-radius:6px;padding:12px 14px}
+    .dl-payrow .l{font-family:'Inter Tight',sans-serif;font-size:13px;font-weight:600;color:#fff}
+    .dl-payrow .a{font-family:Inconsolata,monospace;font-size:11px;letter-spacing:0.04em;text-transform:uppercase;color:rgba(255,255,255,0.85)}
+    .dl-sys{display:flex;flex-direction:column;justify-content:space-between;gap:6px}
+    .dl-node{display:flex;align-items:center;gap:12px;background:#FFFFFF;border:1px solid rgba(30,30,30,0.08);border-radius:6px;padding:12px 14px}
+    .dl-node .ic{width:10px;height:10px;border-radius:50%;background:#F66F00;flex:none}
+    .dl-node.soft .ic{background:#FCCC3C}
+    .dl-node .nm{font-family:'Inter Tight',sans-serif;font-size:14px;font-weight:600;color:#111}
+    .dl-node .ds{font-family:Inter,sans-serif;font-size:12px;color:#6b665e;margin-left:auto;text-align:right;line-height:1.35}
+    .dl-flowdown{display:flex;justify-content:center;color:#DACAB6;font-size:13px;line-height:1;font-family:Inter,sans-serif}
 
-    /* exceptions branch */
-    .dl-branch{position:relative;display:flex;flex-wrap:wrap;align-items:stretch;gap:10px}
-    .dl-branch .col{flex:1 1 200px;border-radius:8px;padding:16px 16px 18px}
-    .dl-branch .happy{background:#F7EED9;border:1px solid rgba(30,30,30,0.06)}
-    .dl-branch .edge{background:#fff;border:1px dashed rgba(246,111,0,0.5)}
-    .dl-branch .l{font-family:Inconsolata,monospace;font-size:11px;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:10px}
-    .dl-branch .happy .l{color:#A09B93}
-    .dl-branch .edge .l{color:#F66F00}
-    .dl-branch ul{margin:0;padding-left:16px}
-    .dl-branch li{font-family:Inter,sans-serif;font-size:12.5px;line-height:1.6;color:#4C2806}
+    /* ============ V6 · ANCHOR VS CADENCE ============ */
+    .dl-track{position:relative;background:#FFFFFF;border:1px solid rgba(30,30,30,0.08);border-radius:6px;padding:16px;margin-top:10px}
+    .dl-track .tl{font-family:Inconsolata,monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:#F66F00;margin-bottom:10px}
+    .dl-track.muted .tl{color:#A09B93}
+    .dl-seg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+    .dl-seg .s{background:#F7EED9;border:1px solid rgba(30,30,30,0.05);border-radius:6px;padding:10px 8px;text-align:center;font-family:Inter,sans-serif;font-size:12.5px;line-height:1.3;color:#4C2806}
+    .dl-seg .s .m{display:block;font-family:Inconsolata,monospace;font-size:10px;letter-spacing:0.05em;text-transform:uppercase;color:#A09B93;margin-bottom:3px}
+    .dl-seg .s.hot{background:#F66F00;border-color:#F66F00;color:#fff}
+    .dl-seg .s.hot .m{color:rgba(255,255,255,0.8)}
+    .dl-seg .s.done{background:#111;border-color:#111;color:#FFF7E9}
+    .dl-seg .s.done .m{color:#FCCC3C}
+
+    /* ============ V7 · BILL FORMULA ============ */
+    .dl-layers{position:relative;display:flex;flex-direction:column;gap:0;max-width:520px}
+    .dl-layer{background:#FFFFFF;border:1px solid rgba(30,30,30,0.09);border-radius:6px;padding:14px 16px;display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:center}
+    .dl-layer .lt{font-family:'Inter Tight',sans-serif;font-size:14.5px;font-weight:600;letter-spacing:-0.01em;color:#111}
+    .dl-layer .ld{grid-column:1;font-family:Inter,sans-serif;font-size:12px;line-height:1.45;color:#6b665e}
+    .dl-layer.total{background:#F66F00;border-color:#F66F00}
+    .dl-layer.total .lt,.dl-layer.total .ld{color:#fff}
+    .dl-layer.total .ld{color:rgba(255,255,255,0.85)}
+    .dl-op{display:flex;justify-content:center;padding:4px 0}
+    .dl-op span{display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:26px;padding:0 9px;border-radius:100px;background:#F7EED9;border:1px solid rgba(30,30,30,0.07);font-family:Inconsolata,monospace;font-size:12px;letter-spacing:0.04em;text-transform:uppercase;color:#4C2806}
+    .dl-bars{grid-row:1 / span 2;grid-column:2;display:flex;align-items:flex-end;gap:3px;height:44px}
+    .dl-bars i{width:7px;border-radius:2px 2px 0 0;background:#FCCC3C;display:block}
+    .dl-bars i.hi{background:#F66F00}
+    .dl-fade{grid-row:1 / span 2;grid-column:2;display:flex;align-items:flex-end;gap:3px;height:44px}
+    .dl-fade i{width:7px;border-radius:2px 2px 0 0;background:#DACAB6;display:block}
+
+    /* ============ V8 · APPROVAL WATERFALL (dark) ============ */
+    .dl-ap{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:22px}
+    .dl-ap h4{font-family:Inconsolata,monospace;font-size:11px;letter-spacing:0.07em;text-transform:uppercase;color:#DACAB6;margin:0 0 12px;font-weight:400}
+    .dl-ap-col{position:relative}
+    .dl-mile{position:relative;padding-left:22px;margin-bottom:10px}
+    .dl-mile::before{content:"";position:absolute;left:0;top:5px;width:9px;height:9px;border-radius:50%;background:#FCCC3C}
+    .dl-mile::after{content:"";position:absolute;left:4px;top:18px;bottom:-14px;width:1px;background:rgba(252,204,60,0.30)}
+    .dl-mile:last-child::after{display:none}
+    .dl-mile .t{font-family:'Inter Tight',sans-serif;font-size:14.5px;font-weight:600;color:#FFF7E9;line-height:1.25}
+    .dl-mile .d{font-family:Inconsolata,monospace;font-size:10.5px;letter-spacing:0.05em;text-transform:uppercase;color:rgba(218,202,182,0.7);margin-top:2px}
+    .dl-step8{background:#1C1C1C;border:1px solid rgba(255,247,233,0.14);border-radius:6px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+    .dl-step8 .t{font-family:'Inter Tight',sans-serif;font-size:14px;font-weight:600;color:#FFF7E9}
+    .dl-step8 .r{font-family:Inconsolata,monospace;font-size:10.5px;letter-spacing:0.05em;text-transform:uppercase;color:#A09B93;text-align:right}
+    .dl-step8.paid{background:#F66F00;border-color:#F66F00}
+    .dl-step8.paid .t{color:#fff}
+    .dl-step8.paid .r{color:rgba(255,255,255,0.85)}
+    .dl-ledger{grid-column:1 / -1;border-top:1px dashed rgba(255,247,233,0.22);padding-top:12px;font-family:Inconsolata,monospace;font-size:11px;letter-spacing:0.05em;text-transform:uppercase;color:rgba(218,202,182,0.8);line-height:1.7}
+
+    /* ============ RESPONSIVE ============ */
+    @media (max-width: 700px){
+      .dl-surfaces{grid-template-columns:1fr 1fr}
+      .dl-duo{grid-template-columns:1fr}
+      .dl-phone{max-width:260px;margin:0 auto;width:100%}
+      .dl-ap{grid-template-columns:1fr}
+      .dl-conds{grid-template-columns:1fr}
+    }
+    @media (max-width: 560px){
+      .dl-card{padding:26px 20px}
+      .dl-title{font-size:19px}
+      .dl-journey{grid-template-columns:1fr 1fr}
+      .dl-jstep{border-top:1px solid rgba(30,30,30,0.08);border-left:none}
+      .dl-jstep:nth-child(1),.dl-jstep:nth-child(2){border-top:none}
+      .dl-jstep:nth-child(2n){border-left:1px solid rgba(30,30,30,0.08)}
+      .dl-parties{grid-template-columns:1fr 1fr}
+      .dl-surfaces{grid-template-columns:1fr}
+      .dl-matrix{display:none}
+      .dl-legend{display:none}
+      .dl-phaselist{display:grid}
+      .dl-seg{grid-template-columns:1fr 1fr}
+      .dl-glow{width:340px;height:340px;right:-140px;top:-140px}
+    }
   </style>
 </head>
 <body class="portv3">
@@ -96,24 +204,24 @@
     </div>
   </div>
 
-  <!-- HERO: one journey, five parties -->
+  <!-- V1 · HERO: one journey, five parties -->
   <div class="w-layout-blockcontainer container-30 embedsmedia w-container">
     <div class="dl-card">
       <div class="dl-glow"></div>
       <div class="dl-eyebrow">The core challenge</div>
-      <div class="dl-title">One simple journey on the surface.<br>A five-party, regulated machine underneath.</div>
-      <div class="dl-flow">
-        <div class="dl-step">Sign once</div><div class="dl-arrow">→</div>
-        <div class="dl-step">Go solar</div><div class="dl-arrow">→</div>
-        <div class="dl-step">Power on</div><div class="dl-arrow">→</div>
-        <div class="dl-step accent">One clear monthly bill</div>
+      <div class="dl-title">One simple journey on the surface. A five-party machine underneath.</div>
+      <div class="dl-journey">
+        <div class="dl-jstep"><span class="n">01</span>Sign once</div>
+        <div class="dl-jstep"><span class="n">02</span>Go solar</div>
+        <div class="dl-jstep"><span class="n">03</span>Power on</div>
+        <div class="dl-jstep accent"><span class="n">04</span>One clear bill</div>
       </div>
       <div class="dl-cap">What the homeowner experiences</div>
       <div class="dl-bar">Daylight <small>· system of record &amp; trust layer</small></div>
       <div class="dl-parties">
         <div class="dl-party">Installer</div>
         <div class="dl-party">Financing party</div>
-        <div class="dl-party">Payments</div>
+        <div class="dl-party">Payment processor</div>
         <div class="dl-party">Provider</div>
       </div>
       <div class="dl-cap">What Daylight orchestrates behind it</div>
@@ -123,65 +231,230 @@
   <div class="w-layout-blockcontainer container-29 pport3 casestudybody w-container">
     <div class="port3 header work casestudy">
       <div class="port3-h1 work">Context</div>
-      <div class="port3-h1 subhead bodyodyody">A homeowner going solar signs one agreement and expects one clear bill. Behind that simplicity sits a regulated, multi-year financing arrangement, a forecasted billing engine, money moving between financiers, and a physical install that has to pass inspection before a single dollar is charged.<br><br>Daylight is the consumer energy platform that makes all of that feel like nothing at all to the person on the couch. I lead product across it — the homeowner app, the operator workflows, and the billing experience that ties them together.</div>
+      <div class="port3-h1 subhead bodyodyody">Going solar is one of the biggest trust decisions a homeowner ever makes, in a category famous for bad sales and broken promises. It isn&#x27;t signing a lease on a car. It&#x27;s construction on your roof: inspections, township approvals, utility permission to operate, contractors, document management, financing, and payments moving between five parties over a decades-long agreement.<br><br>Daylight is the consumer energy platform that makes all of that feel like one simple, white-glove journey. I joined as the founding product engineer and have designed and architected the platform end to end — the origination portal, the homeowner app, billing, partner payments, and the design system that ties them together.</div>
     </div>
     <div class="port3 header work casestudy">
       <div class="port3-h1 work">Problem</div>
-      <div class="port3-h1 subhead bodyodyody">Solar is one of the most opaque, high-trust purchases a person makes — and it runs on machinery most homeowners never see: five parties, a decade-plus billing relationship, and dozens of states where a deal can stall or a payment can fail silently.<br><br>Get it wrong and trust evaporates in a category already seen as predatory. The product challenge is to orchestrate the whole machine while showing the homeowner a single, calm, trustworthy experience.</div>
+      <div class="port3-h1 subhead bodyodyody">The hard problem wasn&#x27;t any single screen. It was orchestration: how do you move a home through sale, verification, engineering, permitting, construction, and activation — with a sales rep, a reviewer, an installer, and a homeowner all playing their part at once — without the deal stalling and without the homeowner ever feeling the machinery?<br><br>Every phase has its own owner, its own failure modes, and its own paperwork. The product has to make the current state, the blocker, and the next action obvious to whoever is holding the project right now — and keep the homeowner&#x27;s experience calm the whole way through.</div>
     </div>
   </div>
 
-  <!-- 10-PHASE JOURNEY -->
-  <div class="w-layout-blockcontainer container-30 embedsmedia w-container">
+  <!-- V2 · PLATFORM MAP -->
+  <div class="w-layout-blockcontainer container-30 embedsmedia dl-wide w-container">
     <div class="dl-card">
-      <div class="dl-eyebrow">The journey · end to end</div>
-      <div class="dl-title">Ten phases, from first quote to long-run reconciliation.</div>
-      <div class="dl-time">
-        <div class="dl-phase"><div class="n">01</div><div class="t">Origination &amp; qualification</div></div>
-        <div class="dl-phase"><div class="n">02</div><div class="t">Onboarding &amp; signing</div></div>
-        <div class="dl-phase"><div class="n">03</div><div class="t">Billing setup</div></div>
-        <div class="dl-phase"><div class="n">04</div><div class="t">Payment setup</div></div>
-        <div class="dl-phase staged"><div class="n">05</div><div class="t">Delivery, install &amp; PTO</div></div>
-        <div class="dl-phase"><div class="n">06</div><div class="t">First statement &amp; billing</div></div>
-        <div class="dl-phase"><div class="n">07</div><div class="t">Making payments</div></div>
-        <div class="dl-phase"><div class="n">08</div><div class="t">Failed payments &amp; recovery</div></div>
-        <div class="dl-phase"><div class="n">09</div><div class="t">Production true-up</div></div>
-        <div class="dl-phase"><div class="n">10</div><div class="t">Remittance &amp; reconciliation</div></div>
+      <div class="dl-eyebrow">The platform</div>
+      <div class="dl-title">One platform. Five surfaces. Each its own product problem.</div>
+      <div class="dl-surfaces">
+        <div class="dl-surface anchor">
+          <div class="tag">Daylight</div>
+          <div class="nm">System of record</div>
+          <p>Every surface reads from, and writes to, one source of truth.</p>
+        </div>
+        <div class="dl-surface">
+          <div class="tag">B2B · Web</div>
+          <div class="nm">Origination portal</div>
+          <p>Sales, reviewers &amp; installers move projects through six gated phases.</p>
+        </div>
+        <div class="dl-surface">
+          <div class="tag">B2C · iOS</div>
+          <div class="nm">Homeowner app</div>
+          <p>Bill pay, live energy visibility, and grid events on your phone.</p>
+        </div>
+        <div class="dl-surface">
+          <div class="tag">Money in</div>
+          <div class="nm">Billing</div>
+          <p>Contract-month billing anchored to the day the system powers on.</p>
+        </div>
+        <div class="dl-surface">
+          <div class="tag">Money out</div>
+          <div class="nm">Partner payments</div>
+          <p>Milestone payouts to installers &amp; sales orgs, with a full approval chain.</p>
+        </div>
+        <div class="dl-surface">
+          <div class="tag">Energy</div>
+          <div class="nm">Grid services</div>
+          <p>Device telemetry, storm response, and virtual power plant events.</p>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="w-layout-blockcontainer container-29 pport3 casestudybody w-container">
     <div class="port3 header work casestudy">
-      <div class="port3-h1 work">My role</div>
-      <div class="port3-h1 subhead bodyodyody">I own 0-to-1 product strategy across design, engineering, and execution. I model the end-to-end journey, define the states and the edge cases, and turn a five-party regulated machine into product surfaces homeowners trust and operators can actually run — partnering across leadership, engineering, design, and go-to-market to ship it.</div>
+      <div class="port3-h1 work">1 · The origination portal</div>
+      <div class="port3-h1 subhead bodyodyody">The portal carries a project through six gated phases — origination, document verification, CAD design &amp; true-up, permitting &amp; interconnection, installation, and permission to operate. A project can&#x27;t advance until its phase is genuinely complete: contracts generated and signed, identity and title verified, designs approved, inspections passed. Each phase carries its own review gate, where a dedicated reviewer approves the work or sends it back with structured, actionable feedback.<br><br>The turning-point release was nailing the signing moment: exactly what we need from a customer at the point of signing their agreement — city-specific disclosures, identity verification, and contract signature in one guided flow that educates them on what they&#x27;re signing up for. High-stakes paperwork, as little friction as possible.</div>
     </div>
   </div>
 
-  <!-- ORIGINATION PIPELINE + split -->
-  <div class="w-layout-blockcontainer container-30 embedsmedia w-container">
+  <!-- V3 · GATED LIFECYCLE -->
+  <div class="w-layout-blockcontainer container-30 embedsmedia dl-wide w-container">
     <div class="dl-card">
       <div class="dl-glow"></div>
-      <div class="dl-eyebrow">Operator side · origination</div>
-      <div class="dl-title">Carrying a customer from lead to activation without dropping the deal.</div>
-      <div class="dl-flow">
-        <div class="dl-step">Lead</div><div class="dl-arrow">→</div>
-        <div class="dl-step">Quote</div><div class="dl-arrow">→</div>
-        <div class="dl-step">Contract</div><div class="dl-arrow">→</div>
-        <div class="dl-step">Credit</div><div class="dl-arrow">→</div>
-        <div class="dl-step">Design</div><div class="dl-arrow">→</div>
-        <div class="dl-step">Permitting</div><div class="dl-arrow">→</div>
-        <div class="dl-step">Install</div><div class="dl-arrow">→</div>
-        <div class="dl-step accent">Activation (PTO)</div>
+      <div class="dl-eyebrow">Project lifecycle · six phases, every transition earned</div>
+      <div class="dl-title">Forward motion is earned, phase by phase.</div>
+      <ol class="dl-rail">
+        <li class="dl-phase">
+          <span class="dot"></span>
+          <div class="ph-head"><span class="ph-n">01</span><span class="ph-t">Origination</span></div>
+          <div class="dl-conds">
+            <div class="dl-cond">Customer &amp; installer assigned</div>
+            <div class="dl-cond">System, equipment &amp; pricing complete</div>
+            <div class="dl-cond">Agreement generated</div>
+            <div class="dl-cond">Utility bills collected</div>
+          </div>
+          <div class="dl-gate"><span>Gate · all origination checks pass</span></div>
+        </li>
+        <li class="dl-phase">
+          <span class="dot"></span>
+          <div class="ph-head"><span class="ph-n">02</span><span class="ph-t">Document verification</span></div>
+          <div class="dl-conds">
+            <div class="dl-cond">Agreement signed by homeowner</div>
+            <div class="dl-cond">Identity verified</div>
+            <div class="dl-cond">Title verified</div>
+            <div class="dl-cond">Reviewer approves the package</div>
+          </div>
+          <div class="dl-gate"><span>Gate · review approved</span></div>
+        </li>
+        <li class="dl-phase">
+          <span class="dot"></span>
+          <div class="ph-head"><span class="ph-n">03</span><span class="ph-t">CAD design &amp; true-up</span></div>
+          <div class="dl-conds">
+            <div class="dl-cond">Site survey scheduled &amp; completed</div>
+            <div class="dl-cond">Design approved with the customer</div>
+            <div class="dl-cond">Work order signed</div>
+            <div class="dl-cond">Design review approved</div>
+          </div>
+          <div class="dl-gate"><span>Gate · as-designed matches as-sold</span></div>
+        </li>
+        <li class="dl-phase">
+          <span class="dot"></span>
+          <div class="ph-head"><span class="ph-n">04</span><span class="ph-t">Permitting &amp; interconnection</span></div>
+          <div class="dl-conds">
+            <div class="dl-cond">Local permits approved</div>
+            <div class="dl-cond">Utility interconnection approved</div>
+          </div>
+          <div class="dl-gate"><span>Gate · review approved</span></div>
+        </li>
+        <li class="dl-phase">
+          <span class="dot"></span>
+          <div class="ph-head"><span class="ph-n">05</span><span class="ph-t">Installation</span></div>
+          <div class="dl-conds">
+            <div class="dl-cond">Install photos reviewed</div>
+            <div class="dl-cond">Close-out package approved</div>
+          </div>
+          <div class="dl-gate"><span>Gate · inspection passes</span></div>
+        </li>
+        <li class="dl-phase">
+          <span class="dot"></span>
+          <div class="ph-head"><span class="ph-n">06</span><span class="ph-t">Permission to operate</span></div>
+          <div class="dl-conds">
+            <div class="dl-cond">PTO approval letter on file</div>
+            <div class="dl-cond">Billing onboarding completed</div>
+            <div class="dl-cond">Certificates signed</div>
+            <div class="dl-cond">Final review approved — billing may begin</div>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="w-layout-blockcontainer container-29 pport3 casestudybody w-container">
+    <div class="port3 header work casestudy">
+      <div class="port3-h1 work">Everyone plays their role at once</div>
+      <div class="port3-h1 subhead bodyodyody">A sales rep moves the deal through document verification. A reviewer approves or rejects with reasons. An installer runs site survey, CAD design, and true-up amendments so what gets installed matches what was sold — then carries it through inspection to permission to operate. The homeowner signs, uploads, and stays informed.<br><br>Each party sees their own view of the same project, scoped by role and organization, and the handoffs between them are explicit product surfaces — not emails and spreadsheets.</div>
+    </div>
+  </div>
+
+  <!-- V4 · WHO'S ON IT -->
+  <div class="w-layout-blockcontainer container-30 embedsmedia dl-wide w-container">
+    <div class="dl-card">
+      <div class="dl-eyebrow">Four roles · one project</div>
+      <div class="dl-title">Who&#x27;s carrying the project, phase by phase.</div>
+      <div class="dl-matrix">
+        <div class="dl-mx-corner"></div>
+        <div class="dl-mx-ph">01<br>Orig.</div>
+        <div class="dl-mx-ph">02<br>Docs</div>
+        <div class="dl-mx-ph">03<br>Design</div>
+        <div class="dl-mx-ph">04<br>Permits</div>
+        <div class="dl-mx-ph">05<br>Install</div>
+        <div class="dl-mx-ph">06<br>PTO</div>
+
+        <div class="dl-mx-party">Homeowner</div>
+        <div class="dl-mx-cell on"></div>
+        <div class="dl-mx-cell lead"></div>
+        <div class="dl-mx-cell on"></div>
+        <div class="dl-mx-cell"></div>
+        <div class="dl-mx-cell"></div>
+        <div class="dl-mx-cell on"></div>
+
+        <div class="dl-mx-party">Sales</div>
+        <div class="dl-mx-cell lead"></div>
+        <div class="dl-mx-cell lead"></div>
+        <div class="dl-mx-cell on"></div>
+        <div class="dl-mx-cell"></div>
+        <div class="dl-mx-cell"></div>
+        <div class="dl-mx-cell"></div>
+
+        <div class="dl-mx-party">Installer</div>
+        <div class="dl-mx-cell on"></div>
+        <div class="dl-mx-cell"></div>
+        <div class="dl-mx-cell lead"></div>
+        <div class="dl-mx-cell lead"></div>
+        <div class="dl-mx-cell lead"></div>
+        <div class="dl-mx-cell lead"></div>
+
+        <div class="dl-mx-party">Reviewer</div>
+        <div class="dl-mx-cell"></div>
+        <div class="dl-mx-cell on"></div>
+        <div class="dl-mx-cell on"></div>
+        <div class="dl-mx-cell on"></div>
+        <div class="dl-mx-cell on"></div>
+        <div class="dl-mx-cell on"></div>
       </div>
-      <div class="dl-split" style="margin-top:22px">
-        <div class="dl-lane">
-          <div class="l">The work</div>
-          <p>Modeling workflow states, permissions, document collection, review loops, and the operational handoffs between sales, installer, and back office — so a deal keeps moving instead of stalling.</p>
+      <div class="dl-legend">
+        <div class="li"><span class="k1"></span>Leads the phase</div>
+        <div class="li"><span class="k2"></span>Active in the phase</div>
+      </div>
+      <div class="dl-phaselist">
+        <div class="dl-pl-item"><div class="t"><span class="n">01</span>Origination</div><p><b>Sales leads.</b> Homeowner shares info; installer scoped in.</p></div>
+        <div class="dl-pl-item"><div class="t"><span class="n">02</span>Document verification</div><p><b>Homeowner signs.</b> Sales carries the package; reviewer approves.</p></div>
+        <div class="dl-pl-item"><div class="t"><span class="n">03</span>CAD design &amp; true-up</div><p><b>Installer leads.</b> Homeowner approves design; reviewer signs off.</p></div>
+        <div class="dl-pl-item"><div class="t"><span class="n">04</span>Permitting &amp; interconnection</div><p><b>Installer leads.</b> Reviewer approves the filings.</p></div>
+        <div class="dl-pl-item"><div class="t"><span class="n">05</span>Installation</div><p><b>Installer leads.</b> Reviewer checks photos &amp; close-out.</p></div>
+        <div class="dl-pl-item"><div class="t"><span class="n">06</span>Permission to operate</div><p><b>Installer finishes.</b> Homeowner onboards to billing; final review.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="w-layout-blockcontainer container-29 pport3 casestudybody w-container">
+    <div class="port3 header work casestudy">
+      <div class="port3-h1 work">2 · The homeowner app</div>
+      <div class="port3-h1 subhead bodyodyody">After activation, Daylight lives on the homeowner&#x27;s phone. The iOS app is where they pay their bill, watch their panels produce, see their battery charge and discharge, and understand their home&#x27;s energy in real time — down to per-device production and storage.<br><br>During grid events, the app shows homeowners how their system is responding — riding through severe weather, avoiding blackouts, keeping the power on. The category&#x27;s history made people feel sold to; the app is designed to make them feel informed.</div>
+    </div>
+  </div>
+
+  <!-- V5 · HOMEOWNER ENERGY PICTURE -->
+  <div class="w-layout-blockcontainer container-30 embedsmedia w-container">
+    <div class="dl-card">
+      <div class="dl-eyebrow">B2C · iOS</div>
+      <div class="dl-title">The home&#x27;s energy, made legible.</div>
+      <div class="dl-duo">
+        <div class="dl-phone">
+          <div class="dl-screen">
+            <div class="dl-stat"><div class="l">Solar production · today</div><div class="v">Producing now</div></div>
+            <div class="dl-batt"><span class="l">Battery</span><div class="track"><div class="fill"></div></div></div>
+            <div class="dl-event"><div class="l">Grid event</div><div class="v">Storm response active — your battery is holding charge.</div></div>
+            <div class="dl-payrow"><span class="l">Pay bill</span><span class="a">Autopay on</span></div>
+          </div>
         </div>
-        <div class="dl-lane">
-          <div class="l">Why it's hard</div>
-          <p>Every step has its own failure modes and its own owner. The product has to make the current state, the blocker, and the next action obvious to whoever is holding the deal right now.</p>
+        <div class="dl-sys">
+          <div class="dl-node"><span class="ic"></span><span class="nm">Panels</span><span class="ds">Micro-inverter production, per device</span></div>
+          <div class="dl-flowdown">↓</div>
+          <div class="dl-node soft"><span class="ic"></span><span class="nm">Battery</span><span class="ds">Storage, charge &amp; discharge</span></div>
+          <div class="dl-flowdown">↓</div>
+          <div class="dl-node"><span class="ic"></span><span class="nm">Home</span><span class="ds">Live usage &amp; consumption</span></div>
+          <div class="dl-flowdown">↓</div>
+          <div class="dl-node soft"><span class="ic"></span><span class="nm">Grid</span><span class="ds">Events, storm response, VPP</span></div>
         </div>
       </div>
     </div>
@@ -189,69 +462,69 @@
 
   <div class="w-layout-blockcontainer container-29 pport3 casestudybody w-container">
     <div class="port3 header work casestudy">
-      <div class="port3-h1 work">Billing that just works</div>
-      <div class="port3-h1 subhead bodyodyody">Billing can&#x27;t start until the system is switched on and approved to operate — then it has to settle into a rhythm the homeowner can count on. The tricky part is timing: the start date and the annual cycles anchor to when the system goes live, while the monthly cadence stays fixed. I designed the experience so none of that complexity lands on the homeowner — just a predictable bill, on the same day, every month.</div>
+      <div class="port3-h1 work">3 · Billing that earns trust</div>
+      <div class="port3-h1 subhead bodyodyody">Billing doesn&#x27;t start until the system is verified as energized. From that anchor date, billing runs in contract months with a fixed rhythm: statement, due date, autopay. The amount itself is dynamic — it reflects the system&#x27;s expected seasonal production, the contract&#x27;s annual escalator, and even long-run panel degradation — but none of that lands on the homeowner. They connect a bank account once, autopay handles the rest, and the bill arrives predictably every month.<br><br>The engineering under it is built for money-grade correctness: a project can never be billed twice for the same period, payments can&#x27;t double-fire, and every failure state — a bank account that won&#x27;t verify, a returned payment — resolves to a clear notice and an easy way back.</div>
     </div>
   </div>
 
-  <!-- BILLING TIMING -->
+  <!-- V6 · ANCHOR VS CADENCE -->
   <div class="w-layout-blockcontainer container-30 embedsmedia w-container">
     <div class="dl-card">
-      <div class="dl-eyebrow">Billing · what anchors to what</div>
+      <div class="dl-eyebrow">Billing · what anchors vs. what repeats</div>
       <div class="dl-title">Anchored to power-on. Steady every month after.</div>
-      <div class="dl-anchor">
-        <div class="dl-track">
-          <div class="dl-tk-label">System live (PTO)</div>
-          <div class="dl-flag">First bill begins</div>
-          <div class="dl-tick fill"></div>
-          <div class="dl-flag">Annual cycles</div>
-        </div>
-        <div class="dl-track">
-          <div class="dl-tk-label">Monthly cadence</div>
-          <div class="dl-step soft">Statement</div>
-          <div class="dl-arrow">→</div>
-          <div class="dl-step soft">Due date</div>
-          <div class="dl-arrow">→</div>
-          <div class="dl-step soft">Autopay</div>
-          <div class="dl-arrow">→</div>
-          <div class="dl-step accent">Paid</div>
-          <div class="dl-tk-label" style="min-width:auto;margin-left:8px">fixed, every month</div>
+      <div class="dl-track">
+        <div class="tl">Anchored to the energization date</div>
+        <div class="dl-seg">
+          <div class="s hot"><span class="m">Day 0</span>System energized</div>
+          <div class="s"><span class="m">Month 1</span>First bill</div>
+          <div class="s"><span class="m">Year 2</span>Escalator steps</div>
+          <div class="s"><span class="m">Year 3+</span>Annual cycles</div>
         </div>
       </div>
+      <div class="dl-track muted">
+        <div class="tl">Fixed monthly rhythm · repeats</div>
+        <div class="dl-seg">
+          <div class="s"><span class="m">1</span>Statement</div>
+          <div class="s"><span class="m">2</span>Due date</div>
+          <div class="s"><span class="m">3</span>Autopay runs</div>
+          <div class="s done"><span class="m">4</span>Paid</div>
+        </div>
+      </div>
+      <div class="dl-cap">The homeowner sees none of the machinery — just the same predictable bill, every month.</div>
     </div>
   </div>
 
-  <div class="w-layout-blockcontainer container-29 pport3 casestudybody w-container">
-    <div class="port3 header work casestudy">
-      <div class="port3-h1 work">Designing the unhappy path</div>
-      <div class="port3-h1 subhead bodyodyody">The real product work lives in the edge cases. A bank account that won&#x27;t verify. A returned payment. A homeowner drifting toward delinquency. I designed the flows that catch these early, explain them in plain language, and give people a clear way back — because in a trust-heavy category, how you handle the bad day matters more than the good one.</div>
-    </div>
-  </div>
-
-  <!-- EXCEPTION BRANCHES -->
+  <!-- V7 · HOW A BILL IS COMPUTED -->
   <div class="w-layout-blockcontainer container-30 embedsmedia w-container">
     <div class="dl-card">
-      <div class="dl-glow"></div>
-      <div class="dl-eyebrow">Resilience · happy path vs. edge cases</div>
-      <div class="dl-title">The system has to be honest on the worst day, not just the best one.</div>
-      <div class="dl-branch">
-        <div class="col happy">
-          <div class="l">Happy path</div>
-          <ul>
-            <li>Bank verified</li>
-            <li>Autopay active</li>
-            <li>Charged on the due date</li>
-            <li>Payment posts, homeowner sees it clearly</li>
-          </ul>
+      <div class="dl-eyebrow">Billing · under the hood</div>
+      <div class="dl-title">Every bill is a model, not a flat fee.</div>
+      <div class="dl-layers">
+        <div class="dl-layer">
+          <div class="lt">Contract rate</div>
+          <div class="ld">The price per unit of energy, set in the agreement.</div>
         </div>
-        <div class="col edge">
-          <div class="l">Edge cases I designed for</div>
-          <ul>
-            <li>Verification fails → guided re-entry</li>
-            <li>Payment returned → clear notice, easy retry</li>
-            <li>Drifting to delinquency → early, plain-language nudges</li>
-            <li>Recovery without eroding trust</li>
-          </ul>
+        <div class="dl-op"><span>×</span></div>
+        <div class="dl-layer">
+          <div class="lt">Seasonal production</div>
+          <div class="ld">Expected output, month by month, for the home&#x27;s region.</div>
+          <div class="dl-bars"><i style="height:30%"></i><i style="height:38%"></i><i style="height:52%"></i><i style="height:66%"></i><i style="height:84%"></i><i class="hi" style="height:100%"></i><i class="hi" style="height:96%"></i><i style="height:88%"></i><i style="height:70%"></i><i style="height:54%"></i><i style="height:38%"></i><i style="height:28%"></i></div>
+        </div>
+        <div class="dl-op"><span>×</span></div>
+        <div class="dl-layer">
+          <div class="lt">System health</div>
+          <div class="ld">Long-run panel degradation, priced in from day one.</div>
+          <div class="dl-fade"><i style="height:100%"></i><i style="height:97%"></i><i style="height:94%"></i><i style="height:91%"></i><i style="height:88%"></i><i style="height:85%"></i></div>
+        </div>
+        <div class="dl-op"><span>↑ steps once a year</span></div>
+        <div class="dl-layer">
+          <div class="lt">Annual escalator</div>
+          <div class="ld">The contract&#x27;s yearly rate step, compounding on each anniversary.</div>
+        </div>
+        <div class="dl-op"><span>=</span></div>
+        <div class="dl-layer total">
+          <div class="lt">A predictable monthly bill</div>
+          <div class="ld">All of it computed for the homeowner. None of it their problem.</div>
         </div>
       </div>
     </div>
@@ -259,12 +532,57 @@
 
   <div class="w-layout-blockcontainer container-29 pport3 casestudybody w-container">
     <div class="port3 header work casestudy">
-      <div class="port3-h1 work">How I work</div>
-      <div class="port3-h1 subhead bodyodyody">I built scalable design systems and rapid prototyping workflows for iOS and web, and defined 0-to-1 principles for early product development — so the team can move fast without losing craft. I move between Figma, prototype, and production, close to both the design and the code.</div>
+      <div class="port3-h1 work">4 · Paying the parties</div>
+      <div class="port3-h1 subhead bodyodyody">A solar project isn&#x27;t just billed — it pays out. Installers and sales organizations earn milestone payments as a project hits real construction gates: contract signed, work ordered, system installed, utility approval granted. I designed the system that generates those invoices automatically from project events and moves them through a multi-role approval chain — operations, capital markets, disbursement — with versioned, encrypted banking details and a full audit trail on every decision.<br><br>This is the unglamorous half of trust: the homeowner-facing promise only holds if the six other people touching the project get paid correctly, on schedule, every time.</div>
+    </div>
+  </div>
+
+  <!-- V8 · APPROVAL WATERFALL (dark) -->
+  <div class="w-layout-blockcontainer container-30 embedsmedia dl-wide w-container">
+    <div class="dl-card dark">
+      <div class="dl-eyebrow">Partner payments · the money the homeowner never sees</div>
+      <div class="dl-title">Project events trigger payouts. Every payout earns its approval.</div>
+      <div class="dl-ap">
+        <div class="dl-ap-col">
+          <h4>Milestones · trigger invoices</h4>
+          <div class="dl-mile"><div class="t">Contract signed</div><div class="d">Deal is real</div></div>
+          <div class="dl-mile"><div class="t">Work ordered</div><div class="d">Construction committed</div></div>
+          <div class="dl-mile"><div class="t">System installed</div><div class="d">Verified with photos</div></div>
+          <div class="dl-mile"><div class="t">Utility approval</div><div class="d">System energized</div></div>
+        </div>
+        <div class="dl-ap-col">
+          <h4>Approval chain · every invoice</h4>
+          <div class="dl-step8"><span class="t">Operations review</span><span class="r">Work verified</span></div>
+          <div class="dl-step8"><span class="t">Capital markets</span><span class="r">Funding source</span></div>
+          <div class="dl-step8"><span class="t">Disbursement</span><span class="r">Payment run</span></div>
+          <div class="dl-step8 paid"><span class="t">Paid</span><span class="r">Confirmed &amp; logged</span></div>
+        </div>
+        <div class="dl-ledger">Every decision logged · banking details versioned &amp; encrypted · payment history immutable</div>
+      </div>
+      <div class="dl-cap">These diagrams are built in the Daylight design system — the case study is the demo.</div>
+    </div>
+  </div>
+
+  <div class="w-layout-blockcontainer container-29 pport3 casestudybody w-container">
+    <div class="port3 header work casestudy">
+      <div class="port3-h1 work">5 · The design system</div>
+      <div class="port3-h1 subhead bodyodyody">Solar software looks like the industry&#x27;s reputation: dated, dense, transactional. We built the design system to be the opposite — scalable, tasteful, joyful. We thought hard about how energy should be represented: warm instead of clinical, confident instead of salesy.<br><br>The system spans the web portal and iOS, with rapid prototyping workflows and 0-to-1 principles that let a small team ship fast without losing craft. I move between Figma, prototype, and production code daily.</div>
     </div>
     <div class="port3 header work casestudy">
-      <div class="port3-h1 work">Impact</div>
-      <div class="port3-h1 subhead bodyodyody">Daylight is the clearest proof of the thing I do best: take a genuinely complex, regulated, multi-party system and make it feel simple and trustworthy.<br><br>It&#x27;s a bet that the same instinct — modeling messy systems, designing for the edge cases, and shipping surfaces people trust — is exactly what fintech, energy, and AI-native products need next.</div>
+      <div class="port3-h1 work">Running the floor</div>
+      <div class="port3-h1 subhead bodyodyody">I ran product as founding product engineer and manager: a team of four engineers plus marketing, organized into pods working in parallel, with ticketing, roadmaps, and review discipline I set up and maintained. I stayed deeply embedded in every body of work — designing the surfaces, architecting the backend, writing the systems briefs that aligned external partners — while translating leadership&#x27;s vision into a shippable roadmap. Connective tissue, not a layer of management.</div>
+    </div>
+    <div class="port3 header work casestudy">
+      <div class="port3-h1 work">Traction</div>
+      <div class="port3-h1 subhead bodyodyody">Since going live, homeowners have signed 200+ agreements, and six construction organizations run their operations in the portal — a close feedback loop we&#x27;ve been iterating with ever since. Those numbers validated the original product bets, and now they&#x27;re compounding with scale. Design is never done; we&#x27;re still learning every week.</div>
+    </div>
+    <div class="port3 header work casestudy">
+      <div class="port3-h1 work">What&#x27;s next</div>
+      <div class="port3-h1 subhead bodyodyody">Two things are in motion: a field companion app for sales reps — origination in your pocket, for getting leads in and moving deals from anywhere — and DayFi, our work bringing solar agreements on-chain.</div>
+    </div>
+    <div class="port3 header work casestudy">
+      <div class="port3-h1 work">Why it matters</div>
+      <div class="port3-h1 subhead bodyodyody">Daylight is the clearest proof of the thing I do best: modeling a genuinely complex, regulated, multi-party system — and shipping the surfaces that make it feel simple and trustworthy to every person inside it.<br><br>That same instinct is exactly what fintech, energy, and AI-native products need next.</div>
     </div>
   </div>
 
