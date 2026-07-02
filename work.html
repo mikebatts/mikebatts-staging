@@ -56,12 +56,26 @@
       60% { box-shadow: 0 0 0 5px rgba(34, 197, 94, 0); }
       100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
     }
-    .work-tag.beta i { background: #f59e0b; animation: none; }
+    .work-tag.beta i { background: #f59e0b; animation: betaBreathe 2.8s ease-in-out infinite; }
+    @keyframes betaBreathe {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(0.72); opacity: 0.55; }
+    }
     .work-tag.fill { background: #f4f4f5; border-color: #f4f4f5; }
+    .work-tag.fill.solo {
+      background: linear-gradient(110deg, #f4f4f5 42%, #fcfcfc 50%, #f4f4f5 58%);
+      background-size: 240% 100%;
+      animation: soloSheen 6s linear infinite;
+    }
+    @keyframes soloSheen {
+      0% { background-position: 130% 0; }
+      38% { background-position: -40% 0; }
+      100% { background-position: -40% 0; }
+    }
     .work-tag.muted { color: #a8adb5; border-color: #ededef; }
     .work-tag.dashed { border-style: dashed; }
     @media (prefers-reduced-motion: reduce) {
-      .work-tag i { animation: none; }
+      .work-tag i, .work-tag.fill.solo { animation: none; }
     }
     @keyframes workFadeIn {
       from { opacity: 0; transform: translateY(16px); }
@@ -108,7 +122,7 @@
   <div class="w-layout-blockcontainer container-30 list-work w-container">
     <a href="https://waitlayer.com" target="_blank" class="w-inline-block"><img src="images/WaitLayer-cover.png" loading="lazy" width="1200" alt="WaitLayer" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px"></a>
     <a href="https://waitlayer.com" target="_blank" class="link-block-12 w-inline-block">
-      <div class="port3-h1 title">WaitLayer<span class="work-tag beta"><i></i>Beta</span><span class="work-tag fill">Solo&nbsp;build</span></div>
+      <div class="port3-h1 title">WaitLayer<span class="work-tag beta"><i></i>Beta</span><span class="work-tag fill solo">Solo&nbsp;build</span></div>
     </a>
     <div class="port3-h1 title date work-desc">A verified attention network for AI coding agents — earn from real wait states in your terminal.</div>
     <div class="port3-h1 title date work-year">2026</div>
@@ -117,7 +131,7 @@
   <div class="w-layout-blockcontainer container-30 list-work w-container">
     <a href="https://www.knicksparade.cam/" target="_blank" class="w-inline-block"><img src="images/KnicksParade-cover.png" loading="lazy" width="1200" alt="KnicksParade" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px"></a>
     <a href="https://www.knicksparade.cam/" target="_blank" class="link-block-12 w-inline-block">
-      <div class="port3-h1 title">KnicksParade<span class="work-tag"><i></i>Live</span><span class="work-tag fill">Solo&nbsp;build</span></div>
+      <div class="port3-h1 title">KnicksParade<span class="work-tag"><i></i>Live</span><span class="work-tag fill solo">Solo&nbsp;build</span></div>
     </a>
     <div class="port3-h1 title date work-desc">A relive view of the Knicks Championship Parade — Canyon of Heroes street cameras.</div>
     <div class="port3-h1 title date work-year">2026</div>
@@ -126,7 +140,7 @@
   <div class="w-layout-blockcontainer container-30 list-work w-container">
     <a href="https://ratmap.nyc" target="_blank" class="w-inline-block"><img src="images/RatMap-cover.jpg" loading="lazy" width="1200" alt="RatMap NYC" srcset="images/RatMap-cover.jpg 1200w" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px"></a>
     <a href="https://ratmap.nyc" target="_blank" class="link-block-12 w-inline-block">
-      <div class="port3-h1 title">RatMap NYC<span class="work-tag"><i></i>Live</span><span class="work-tag fill">Solo&nbsp;build</span></div>
+      <div class="port3-h1 title">RatMap NYC<span class="work-tag"><i></i>Live</span><span class="work-tag fill solo">Solo&nbsp;build</span></div>
     </a>
     <div class="port3-h1 title date work-desc">A free map of every reported rat sighting in NYC.</div>
     <div class="port3-h1 title date work-year">2026</div>
@@ -135,7 +149,7 @@
   <div class="w-layout-blockcontainer container-30 list-work w-container">
     <a href="https://playforbidden.com" target="_blank" class="w-inline-block"><img src="images/Forbidden-cover.jpg" loading="lazy" width="1200" alt="Forbidden" srcset="images/Forbidden-cover.jpg 1200w" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px"></a>
     <a href="https://playforbidden.com" target="_blank" class="link-block-12 w-inline-block">
-      <div class="port3-h1 title">Forbidden<span class="work-tag"><i></i>Live</span><span class="work-tag fill">Solo&nbsp;build</span></div>
+      <div class="port3-h1 title">Forbidden<span class="work-tag"><i></i>Live</span><span class="work-tag fill solo">Solo&nbsp;build</span></div>
     </a>
     <div class="port3-h1 title date work-desc">A two-player word game. Say the word. Not the forbidden ones.</div>
     <div class="port3-h1 title date work-year">2026</div>
@@ -144,7 +158,7 @@
   <div class="w-layout-blockcontainer container-30 list-work w-container">
     <a href="https://thischronicle.com" target="_blank" class="w-inline-block"><img src="images/Chronicle-cover.jpg" loading="lazy" width="1200" alt="Chronicle" srcset="images/Chronicle-cover-p-500.jpg 500w, images/Chronicle-cover-p-800.jpg 800w, images/Chronicle-cover-p-1080.jpg 1080w, images/Chronicle-cover-p-1600.jpg 1600w, images/Chronicle-cover-p-2000.jpg 2000w, images/Chronicle-cover.jpg 3120w" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px"></a>
     <a href="https://thischronicle.com" target="_blank" class="link-block-12 w-inline-block">
-      <div class="port3-h1 title">Chronicle<span class="work-tag"><i></i>Live</span><span class="work-tag fill">Solo&nbsp;build</span></div>
+      <div class="port3-h1 title">Chronicle<span class="work-tag"><i></i>Live</span><span class="work-tag fill solo">Solo&nbsp;build</span></div>
     </a>
     <div class="port3-h1 title date work-desc">A daily history guessing game — one event, three chances to guess the year.</div>
     <div class="port3-h1 title date work-year">2026</div>
@@ -153,7 +167,7 @@
   <div class="w-layout-blockcontainer container-30 list-work w-container">
     <a href="https://trycaveat.com" target="_blank" class="w-inline-block"><img src="images/Caveat-cover.jpg" loading="lazy" alt="Caveat" srcset="images/Caveat-cover-p-500.jpg 500w, images/Caveat-cover-p-800.jpg 800w, images/Caveat-cover-p-1080.jpg 1080w, images/Caveat-cover-p-1600.jpg 1600w, images/Caveat-cover-p-2000.jpg 2000w, images/Caveat-cover.jpg 3120w" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px"></a>
     <a href="https://trycaveat.com" target="_blank" class="link-block-12 w-inline-block">
-      <div class="port3-h1 title">Caveat<span class="work-tag"><i></i>Live</span><span class="work-tag fill">Solo&nbsp;build</span></div>
+      <div class="port3-h1 title">Caveat<span class="work-tag"><i></i>Live</span><span class="work-tag fill solo">Solo&nbsp;build</span></div>
     </a>
     <div class="port3-h1 title date work-desc">AI contract analyzer — upload any PDF or DOCX, get a risk report in 60 seconds.</div>
     <div class="port3-h1 title date work-year">2026</div>
@@ -162,7 +176,7 @@
   <div class="w-layout-blockcontainer container-30 list-work w-container">
     <a href="https://apps.apple.com/us/app/my-bible-path/id6759575186" target="_blank" class="w-inline-block"><img src="images/BiblePath-cover.jpg" loading="lazy" width="1200" alt="Bible Path" srcset="images/BiblePath-cover-p-500.jpg 500w, images/BiblePath-cover-p-800.jpg 800w, images/BiblePath-cover-p-1080.jpg 1080w, images/BiblePath-cover-p-1600.jpg 1600w, images/BiblePath-cover-p-2000.jpg 2000w, images/BiblePath-cover.jpg 3120w" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px"></a>
     <a href="https://apps.apple.com/us/app/my-bible-path/id6759575186" target="_blank" class="link-block-12 w-inline-block">
-      <div class="port3-h1 title">Bible Path<span class="work-tag"><i></i>App&nbsp;Store</span><span class="work-tag fill">Solo&nbsp;build</span></div>
+      <div class="port3-h1 title">Bible Path<span class="work-tag"><i></i>App&nbsp;Store</span><span class="work-tag fill solo">Solo&nbsp;build</span></div>
     </a>
     <div class="port3-h1 title date work-desc">A Bible reading companion that guides you through God&#x27;s word daily.</div>
     <div class="port3-h1 title date work-year">2026</div>
