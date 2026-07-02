@@ -56,7 +56,6 @@
       60% { box-shadow: 0 0 0 5px rgba(34, 197, 94, 0); }
       100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
     }
-    .work-tag.beta { color: #b45309; border-color: #fef3c7; background: #fffbeb; }
     .work-tag.beta i { background: #f59e0b; animation: betaBreathe 2.8s ease-in-out infinite; }
     @keyframes betaBreathe {
       0%, 100% { transform: scale(1); opacity: 1; }
@@ -70,6 +69,13 @@
       background-size: 260% 100%;
       background-position: -35% 0;
       animation: soloSheen 4.5s linear infinite;
+    }
+    .work-tag.solo.amber {
+      color: #b45309;
+      border-color: #fef3c7;
+      background: linear-gradient(110deg, #fffbeb 40%, #fffdf6 50%, #fffbeb 60%);
+      background-size: 260% 100%;
+      background-position: -35% 0;
     }
     @keyframes soloSheen {
       0% { background-position: 135% 0; }
@@ -126,7 +132,7 @@
   <div class="w-layout-blockcontainer container-30 list-work w-container">
     <a href="waitlayer-case-study.html" class="w-inline-block"><img src="images/WaitLayer-cover.png" loading="lazy" width="1200" alt="WaitLayer" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px"></a>
     <a href="waitlayer-case-study.html" class="link-block-12 w-inline-block">
-      <div class="port3-h1 title">WaitLayer<span class="work-tag beta"><i></i>Beta</span><span class="work-tag solo">Solo&nbsp;build</span></div>
+      <div class="port3-h1 title">WaitLayer<span class="work-tag beta"><i></i>Beta</span><span class="work-tag solo amber">Solo&nbsp;build</span></div>
     </a>
     <div class="port3-h1 title date work-desc">A verified attention network for AI coding agents — earn from real wait states in your terminal.</div>
     <div class="port3-h1 title date work-year">2026</div>
