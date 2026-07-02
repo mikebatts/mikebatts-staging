@@ -32,7 +32,7 @@
     .dl-card.dark{background:#111111;border-color:#111111}
     .dl-eyebrow{position:relative;font-family:Inconsolata,monospace;font-size:11px;font-weight:500;letter-spacing:0.09em;text-transform:uppercase;color:#A09B93;margin-bottom:10px}
     .dl-card.dark .dl-eyebrow{color:rgba(218,202,182,0.85)}
-    .dl-title{position:relative;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:28px;letter-spacing:0;color:#111111;margin-bottom:34px;line-height:1.08;max-width:24ch}
+    .dl-title{position:relative;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:28px;letter-spacing:0;color:#111111;margin-bottom:34px;line-height:1.08;max-width:24ch;text-wrap:balance}
     .dl-card.dark .dl-title{color:#FFF7E9}
     .dl-cap{position:relative;font-family:Inconsolata,monospace;font-size:11px;letter-spacing:0.07em;text-transform:uppercase;color:#A09B93;margin-top:18px;line-height:1.6}
     .dl-card.dark .dl-cap{color:rgba(218,202,182,0.65)}
@@ -41,7 +41,7 @@
     /* page section headers (chrome side) */
     .dl-ov{font-family:Inconsolata,monospace;font-size:11px;font-weight:500;letter-spacing:0.09em;text-transform:uppercase;color:#F66F00;margin-bottom:10px}
     .dl-ov.mut{color:#A09B93}
-    .dl-st{font-family:'Inter Tight',sans-serif;font-size:23px;font-weight:600;letter-spacing:-0.02em;color:#111;line-height:1.15;margin-bottom:14px}
+    .dl-st{font-family:'Inter Tight',sans-serif;font-size:23px;font-weight:600;letter-spacing:-0.02em;color:#111;line-height:1.15;margin-bottom:14px;text-wrap:balance}
 
     /* ============ tracker (hero journey + billing anchor) ============ */
     .dl-jt{position:relative;margin-top:6px}
@@ -68,7 +68,7 @@
     .dl-ix .no{font-family:Inconsolata,monospace;font-size:11px;color:#A09B93}
     .dl-ix .nm{font-family:'Inter Tight',sans-serif;font-size:16px;font-weight:600;letter-spacing:-0.01em;color:#111}
     .dl-ix .tg{font-family:Inconsolata,monospace;font-size:10.5px;letter-spacing:0.07em;text-transform:uppercase;color:#F66F00;text-align:right;white-space:nowrap}
-    .dl-ix .ds{grid-column:2 / 4;font-family:Inter,sans-serif;font-size:12.5px;line-height:1.5;color:#8a857c;max-width:46ch}
+    .dl-ix .row{padding:17px 2px 17px 0}
 
     /* ============ lifecycle rail ============ */
     .dl-rail{position:relative;list-style:none;margin:0;padding:0}
@@ -80,9 +80,7 @@
     .dl-phase .ph-head{display:flex;align-items:baseline;gap:10px;margin-bottom:10px}
     .dl-phase .ph-n{font-family:Inconsolata,monospace;font-size:10.5px;letter-spacing:0.06em;color:#A09B93}
     .dl-phase .ph-t{font-family:'Inter Tight',sans-serif;font-size:16.5px;font-weight:600;letter-spacing:-0.015em;color:#111;line-height:1.2}
-    .dl-conds{display:grid;grid-template-columns:1fr 1fr;gap:6px 24px;margin-bottom:14px}
-    .dl-cond{position:relative;font-family:Inter,sans-serif;font-size:12.5px;line-height:1.5;color:#4C2806;padding-left:15px}
-    .dl-cond::before{content:"✓";position:absolute;left:0;top:0;font-family:Inconsolata,monospace;font-size:10.5px;color:#A09B93}
+    .dl-line{font-family:Inter,sans-serif;font-size:12.5px;line-height:1.7;color:#8a857c;margin-bottom:14px;max-width:56ch}
     .dl-gate{font-family:Inconsolata,monospace;font-size:10.5px;font-weight:500;letter-spacing:0.09em;text-transform:uppercase;color:#A09B93;display:flex;align-items:center;gap:10px}
     .dl-gate::before{content:"";width:7px;height:7px;border-radius:50%;border:1.3px solid #A09B93;box-sizing:border-box;flex:none;margin-left:-35px;background:#FFF7E9;position:relative;z-index:1}
     .dl-gate::after{content:"";flex:1;height:1px;background:rgba(30,30,30,0.10)}
@@ -108,12 +106,12 @@
     .dl-pl-item p{font-family:Inter,sans-serif;font-size:12.5px;line-height:1.5;color:#4C2806;margin:0}
     .dl-pl-item p b{color:#F66F00;font-weight:600}
 
-    /* ============ iOS drop-in placeholders ============ */
-    .dl-shots{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .dl-shot{aspect-ratio:9/19.2;border:1.5px dashed rgba(76,40,6,0.30);border-radius:24px;background:rgba(247,238,217,0.45);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:14px;text-align:center}
-    .dl-shot .nm{font-family:'Inter Tight',sans-serif;font-size:13.5px;font-weight:600;color:#4C2806}
-    .dl-shot .m{font-family:Inconsolata,monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#A09B93;line-height:1.7}
-    .dl-shot-img{width:100%;border-radius:24px;border:1px solid rgba(30,30,30,0.10);display:block}
+    /* ============ iPhone 16 mocks ============ */
+    .dl-shots{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .dl-iphone{position:relative;background:#0b0b0c;border-radius:28px;padding:6px;box-shadow:0 0 0 1px rgba(0,0,0,0.30),inset 0 0 0 1.5px rgba(255,255,255,0.09)}
+    .dl-iphone img{display:block;width:100%;border:none;border-radius:23px;aspect-ratio:1206/2622;object-fit:cover}
+    .dl-iphone::after{content:"";position:absolute;top:calc(6px + 2.3%);left:50%;transform:translateX(-50%);width:31%;height:2.3%;background:#000;border-radius:100px}
+    .dl-shotcap{margin-top:12px;text-align:center;font-family:Inconsolata,monospace;font-size:10.5px;letter-spacing:0.07em;text-transform:uppercase;color:#A09B93}
 
     /* ============ billing cadence row ============ */
     .dl-month{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(30,30,30,0.12);margin-top:8px}
@@ -160,7 +158,6 @@
     /* ============ responsive ============ */
     @media (max-width: 700px){
       .dl-ap{grid-template-columns:1fr}
-      .dl-conds{grid-template-columns:1fr}
       .dl-ap .dl-chain{margin-top:10px}
     }
     @media (max-width: 560px){
@@ -177,7 +174,8 @@
       .dl-month .m{padding-bottom:12px}
       .dl-month .m:nth-child(3){border-left:none;padding-left:0}
       .dl-shots{gap:10px}
-      .dl-shot{border-radius:16px}
+      .dl-iphone{border-radius:17px;padding:4px}
+      .dl-iphone img{border-radius:14px}
       .dl-gate::before{margin-left:-32px}
     }
   </style>
@@ -201,10 +199,10 @@
       <div class="dl-jt">
         <div class="line"></div>
         <div class="steps">
-          <div class="st"><span class="n">01</span><span class="t">Sign once</span></div>
-          <div class="st"><span class="n">02</span><span class="t">Go solar</span></div>
-          <div class="st"><span class="n">03</span><span class="t">Power on</span></div>
-          <div class="st hot"><span class="n">04</span><span class="t">One clear bill</span></div>
+          <div class="st"><span class="t">Sign once</span></div>
+          <div class="st"><span class="t">Go solar</span></div>
+          <div class="st"><span class="t">Power on</span></div>
+          <div class="st hot"><span class="t">One clear bill</span></div>
         </div>
       </div>
       <div class="dl-cap">What the homeowner experiences</div>
@@ -240,23 +238,18 @@
       <div class="dl-ix">
         <div class="row">
           <div class="no">01</div><div class="nm">Origination portal</div><div class="tg">B2B · Web</div>
-          <div class="ds">Sales, reviewers &amp; installers move projects through six gated phases.</div>
         </div>
         <div class="row">
           <div class="no">02</div><div class="nm">Homeowner app</div><div class="tg">B2C · iOS</div>
-          <div class="ds">Bill pay, live energy visibility, and grid events on your phone.</div>
         </div>
         <div class="row">
           <div class="no">03</div><div class="nm">Billing</div><div class="tg">Money in</div>
-          <div class="ds">Contract-month billing anchored to the day the system powers on.</div>
         </div>
         <div class="row">
           <div class="no">04</div><div class="nm">Partner payments</div><div class="tg">Money out</div>
-          <div class="ds">Milestone payouts to installers &amp; sales orgs, with a full approval chain.</div>
         </div>
         <div class="row">
           <div class="no">05</div><div class="nm">Design system</div><div class="tg">Craft</div>
-          <div class="ds">One visual language across web and iOS, from Figma to production.</div>
         </div>
       </div>
     </div>
@@ -279,63 +272,37 @@
         <li class="dl-phase">
           <span class="dot"></span>
           <div class="ph-head"><span class="ph-n">01</span><span class="ph-t">Origination</span></div>
-          <div class="dl-conds">
-            <div class="dl-cond">Customer &amp; installer assigned</div>
-            <div class="dl-cond">System, equipment &amp; pricing complete</div>
-            <div class="dl-cond">Agreement generated</div>
-            <div class="dl-cond">Utility bills collected</div>
-          </div>
+          <div class="dl-line">Customer &amp; installer assigned · system &amp; pricing complete · agreement generated</div>
           <div class="dl-gate">Gate · all origination checks pass</div>
         </li>
         <li class="dl-phase">
           <span class="dot"></span>
           <div class="ph-head"><span class="ph-n">02</span><span class="ph-t">Document verification</span></div>
-          <div class="dl-conds">
-            <div class="dl-cond">Agreement signed by homeowner</div>
-            <div class="dl-cond">Identity verified</div>
-            <div class="dl-cond">Title verified</div>
-            <div class="dl-cond">Reviewer approves the package</div>
-          </div>
+          <div class="dl-line">Agreement signed · identity &amp; title verified</div>
           <div class="dl-gate">Gate · review approved</div>
         </li>
         <li class="dl-phase">
           <span class="dot"></span>
           <div class="ph-head"><span class="ph-n">03</span><span class="ph-t">CAD design &amp; true-up</span></div>
-          <div class="dl-conds">
-            <div class="dl-cond">Site survey scheduled &amp; completed</div>
-            <div class="dl-cond">Design approved with the customer</div>
-            <div class="dl-cond">Work order signed</div>
-            <div class="dl-cond">Design review approved</div>
-          </div>
+          <div class="dl-line">Site survey · design approved with the customer · work order signed</div>
           <div class="dl-gate">Gate · as-designed matches as-sold</div>
         </li>
         <li class="dl-phase">
           <span class="dot"></span>
           <div class="ph-head"><span class="ph-n">04</span><span class="ph-t">Permitting &amp; interconnection</span></div>
-          <div class="dl-conds">
-            <div class="dl-cond">Local permits approved</div>
-            <div class="dl-cond">Utility interconnection approved</div>
-          </div>
+          <div class="dl-line">Local permits · utility interconnection</div>
           <div class="dl-gate">Gate · review approved</div>
         </li>
         <li class="dl-phase">
           <span class="dot"></span>
           <div class="ph-head"><span class="ph-n">05</span><span class="ph-t">Installation</span></div>
-          <div class="dl-conds">
-            <div class="dl-cond">Install photos reviewed</div>
-            <div class="dl-cond">Close-out package approved</div>
-          </div>
+          <div class="dl-line">Install photos · close-out package</div>
           <div class="dl-gate">Gate · inspection passes</div>
         </li>
         <li class="dl-phase final">
           <span class="dot"></span>
           <div class="ph-head"><span class="ph-n">06</span><span class="ph-t">Permission to operate</span></div>
-          <div class="dl-conds">
-            <div class="dl-cond">PTO approval letter on file</div>
-            <div class="dl-cond">Billing onboarding completed</div>
-            <div class="dl-cond">Certificates signed</div>
-            <div class="dl-cond">Final review approved</div>
-          </div>
+          <div class="dl-line">PTO letter · billing onboarding · certificates signed</div>
           <div class="dl-gate hot">Gate · billing may begin</div>
         </li>
       </ol>
@@ -426,24 +393,20 @@
     <div class="dl-card">
       <div class="dl-eyebrow">B2C · iOS</div>
       <div class="dl-title">The home&#x27;s energy, made legible.</div>
-      <!-- MIKE: drop real screens in — replace each .dl-shot div with:
-           <img class="dl-shot-img" src="images/ios-home.png" alt="Daylight iOS — home">
-           (keep the 3-across grid; portrait screenshots, ideally 1179×2556 or any 9:19.5) -->
       <div class="dl-shots">
-        <div class="dl-shot">
-          <div class="nm">Home &amp; energy</div>
-          <div class="m">iOS screen<br>drop in</div>
+        <div>
+          <div class="dl-iphone"><img src="images/ios-overview.png" alt="Daylight iOS — home &amp; energy summary"></div>
+          <div class="dl-shotcap">Home &amp; energy</div>
         </div>
-        <div class="dl-shot">
-          <div class="nm">Grid event</div>
-          <div class="m">iOS screen<br>drop in</div>
+        <div>
+          <div class="dl-iphone"><img src="images/ios-breakdown.png" alt="Daylight iOS — energy breakdown"></div>
+          <div class="dl-shotcap">Energy breakdown</div>
         </div>
-        <div class="dl-shot">
-          <div class="nm">Bill pay</div>
-          <div class="m">iOS screen<br>drop in</div>
+        <div>
+          <div class="dl-iphone"><img src="images/ios-payments.png" alt="Daylight iOS — payments"></div>
+          <div class="dl-shotcap">Payments</div>
         </div>
       </div>
-      <div class="dl-cap">Production · battery · grid events · autopay — live from the home&#x27;s own devices</div>
     </div>
   </div>
 
@@ -463,10 +426,10 @@
       <div class="dl-jt">
         <div class="line"></div>
         <div class="steps">
-          <div class="st hot"><span class="n">Day 0</span><span class="t">System energized</span><span class="sub">The anchor date</span></div>
-          <div class="st"><span class="n">Month 1</span><span class="t">First bill</span><span class="sub">Contract months begin</span></div>
-          <div class="st"><span class="n">Year 2</span><span class="t">Escalator steps</span><span class="sub">On the anniversary</span></div>
-          <div class="st"><span class="n">Year 3+</span><span class="t">Annual cycles</span><span class="sub">Same rhythm, for decades</span></div>
+          <div class="st hot"><span class="n">Day 0</span><span class="t">System energized</span></div>
+          <div class="st"><span class="n">Month 1</span><span class="t">First bill</span></div>
+          <div class="st"><span class="n">Year 2</span><span class="t">Escalator steps</span></div>
+          <div class="st"><span class="n">Year 3+</span><span class="t">Annual cycles</span></div>
         </div>
       </div>
       <div class="dl-cap" style="margin-top:26px">Every month, fixed</div>
@@ -530,10 +493,10 @@
         <div>
           <h4>Milestones · trigger invoices</h4>
           <ul class="dl-mrail">
-            <li class="dl-mile"><div class="t">Contract signed</div><div class="d">Deal is real</div></li>
-            <li class="dl-mile"><div class="t">Work ordered</div><div class="d">Construction committed</div></li>
-            <li class="dl-mile"><div class="t">System installed</div><div class="d">Verified with photos</div></li>
-            <li class="dl-mile"><div class="t">Utility approval</div><div class="d">System energized</div></li>
+            <li class="dl-mile"><div class="t">Contract signed</div></li>
+            <li class="dl-mile"><div class="t">Work ordered</div></li>
+            <li class="dl-mile"><div class="t">System installed</div></li>
+            <li class="dl-mile"><div class="t">Utility approval</div></li>
           </ul>
         </div>
         <div>
@@ -545,7 +508,7 @@
             <li class="paid"><span class="t">Paid</span><span class="r">Confirmed &amp; logged</span></li>
           </ul>
         </div>
-        <div class="dl-ledger">Every decision logged · banking details versioned &amp; encrypted · payment history immutable</div>
+        <div class="dl-ledger">Every decision logged · banking versioned &amp; encrypted</div>
       </div>
     </div>
   </div>
