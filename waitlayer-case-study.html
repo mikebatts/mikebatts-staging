@@ -26,8 +26,8 @@
   <meta property="og:image" content="#">
   <style>
     /* ---- WaitLayer case-study system. Scoped to .wl-. WaitLayer brand: white + near-black terminal,
-         IBM Plex Mono labels, Instrument Serif editorial, green #16a34a = verified, amber = pending, red = fraud.
-         Same discipline as Daylight: hairlines, one accent per visual, brand-reveal motion. ---- */
+         IBM Plex Mono labels, Instrument Serif editorial, green #16a34a = verified. One accent per visual.
+         Eyebrows: one phrase, no compound "a · b". ---- */
     .wl-wide{max-width:720px}
 
     .wl-card{position:relative;background:#fafafa;border:1px solid rgba(10,10,10,0.10);border-radius:16px;padding:56px 48px;margin:8px 0 4px;overflow:hidden}
@@ -43,22 +43,48 @@
     .wl-ov{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;line-height:1.35;color:#16a34a;margin-bottom:10px}
     .wl-ov.mut{color:#9ca3af}
     .wl-st{font-family:'Inter Tight',sans-serif;font-size:23px;font-weight:600;letter-spacing:-0.02em;color:#111;line-height:1.15;margin-bottom:14px;text-wrap:balance}
-    .wl-meta{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.04em;margin-top:6px}
+    .wl-meta{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.04em;color:#9ca3af;margin-top:8px}
     .wl-meta a{color:#6b7280;text-decoration:none;border-bottom:1px solid #e5e7eb;transition:color .15s,border-color .15s}
     .wl-meta a:hover{color:#111;border-color:#111}
 
+    /* work-card tag parity (mirrors work.html) */
+    .work-tag{display:inline-flex;align-items:center;gap:5px;vertical-align:2px;margin-left:8px;padding:3px 9px;border:1px solid #e5e7eb;border-radius:100px;font-family:Inter,sans-serif;font-size:10.5px;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;color:#6b7280;background:#fff;white-space:nowrap}
+    .work-tag + .work-tag{margin-left:5px}
+    .work-tag i{width:5px;height:5px;border-radius:50%;background:#22c55e;animation:tagPulse 2.6s ease-out infinite}
+    @keyframes tagPulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,0.35)}60%{box-shadow:0 0 0 5px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+    .work-tag.beta i{background:#f59e0b;animation:betaBreathe 2.8s ease-in-out infinite}
+    @keyframes betaBreathe{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(0.72);opacity:0.55}}
+    .work-tag.solo{color:#57534e;border-color:#ece5d8;background:linear-gradient(110deg,#f1ece1 40%,#fbf8f2 50%,#f1ece1 60%);background-size:260% 100%;background-position:-35% 0;animation:soloSheen 4.5s linear infinite}
+    @keyframes soloSheen{0%{background-position:135% 0}45%{background-position:-35% 0}100%{background-position:-35% 0}}
+
     /* ============ terminal chrome ============ */
-    .wl-term{position:relative;background:#0c0c0c;border-radius:10px;border:1px solid rgba(255,255,255,0.09);overflow:hidden}
-    .wl-tbar{display:flex;align-items:center;gap:6px;padding:11px 14px;border-bottom:1px solid rgba(255,255,255,0.08)}
-    .wl-tbar i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,0.14);display:block}
-    .wl-tbar span{margin-left:8px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:rgba(255,255,255,0.35)}
-    .wl-tbody{padding:20px 20px 22px;font-family:'IBM Plex Mono',monospace;font-size:13px;line-height:2.0;color:rgba(255,255,255,0.82);overflow-x:auto}
-    .wl-tbody .dim{color:rgba(255,255,255,0.38)}
-    .wl-tbody .grn{color:#22c55e}
-    .wl-tbody .amb{color:#f59e0b}
-    .wl-tbody .red{color:#ef4444}
-    .wl-tbody .spin{display:inline-block;animation:wlSpin 1.1s steps(4) infinite}
-    @keyframes wlSpin{0%{content:"⠋"}}
+    .wl-term{position:relative;background:#0c0c0c;border-radius:14px;border:1px solid #1c1c1c;overflow:hidden}
+    .wl-tbar{display:flex;align-items:center;gap:7px;padding:12px 16px;border-bottom:1px solid #181818}
+    .wl-tbar i{width:11px;height:11px;border-radius:50%;display:block;opacity:0.9}
+    .wl-tbar i.r{background:#ff5f56}.wl-tbar i.y{background:#ffbd2e}.wl-tbar i.g{background:#27c93f}
+    .wl-tbar span{margin-left:8px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#5b5b5b}
+    .wl-tbody{padding:20px 22px 18px;font-family:'IBM Plex Mono',monospace;font-size:13px;line-height:1.5;color:#cfcfcf;min-height:230px}
+    .wl-tbody .dim{color:#5b5b5b}
+    .wl-tbody .mid{color:#9a9a9a}
+    .wl-tbody .grn{color:#16a34a}
+
+    /* hero loop phases */
+    .wl-lp{opacity:0;transition:opacity .45s ease,transform .5s cubic-bezier(.2,.7,.3,1)}
+    .wl-loop.p1 .wl-lp1,.wl-loop.p2 .wl-lp1,.wl-loop.p3 .wl-lp1,.wl-loop.p4 .wl-lp1{opacity:1}
+    .wl-loop.p2 .wl-lp2,.wl-loop.p3 .wl-lp2,.wl-loop.p4 .wl-lp2{opacity:1;transform:none}
+    .wl-loop.p3 .wl-lp3,.wl-loop.p4 .wl-lp3{opacity:1}
+    .wl-loop.p4 .wl-lp4{opacity:1;transform:none}
+    .wl-lp1{margin-top:12px;height:20px;display:flex;align-items:center;gap:8px;white-space:nowrap;overflow:hidden}
+    .wl-lp2{margin-top:14px;border:1px solid #1e1e1e;border-radius:8px;background:#0f0f0f;padding:11px 13px;display:flex;align-items:center;gap:10px;transform:translateY(6px);min-width:0}
+    .wl-lp2 .chip{width:15px;height:15px;border-radius:4px;background:#13111a;display:inline-flex;align-items:center;justify-content:center;flex:none;color:#fff;font-size:8px}
+    .wl-lp2 .sp{color:#6f6f6f;flex:none;font-size:11px;letter-spacing:0.06em;text-transform:uppercase}
+    .wl-lp2 .nm{color:#e8e8e8;flex:none}
+    .wl-lp2 .ds{color:#9a9a9a;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .wl-lp3{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;min-height:18px;font-size:12px;color:#bdbdbd}
+    .wl-lp3 span{display:inline-flex;align-items:center;gap:6px}
+    .wl-lp3 b{color:#16a34a;font-weight:400}
+    .wl-lp4{margin-top:16px;padding-top:14px;border-top:1px solid #181818;display:flex;align-items:center;gap:12px;transform:translateY(4px);font-size:14px;color:#16a34a}
+    .wl-lp4 .dot{width:6px;height:6px;border-radius:50%;background:#16a34a}
     .wl-claim{font-family:'Instrument Serif',Georgia,serif;font-size:26px;line-height:1.2;color:#0a0a0a;margin-top:30px;max-width:26ch;text-wrap:balance}
     .wl-card.dark .wl-claim{color:#fafafa}
 
@@ -67,21 +93,25 @@
     .wl-ledger2 h4{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;margin:0 0 6px;padding-bottom:10px;border-bottom:1px solid rgba(10,10,10,0.12)}
     .wl-ledger2 .no h4{color:#b91c1c}
     .wl-ledger2 .yes h4{color:#16a34a}
+    .wl-ledger2 .amb h4{color:#d97706}
     .wl-ledger2 ul{list-style:none;margin:0;padding:0}
     .wl-ledger2 li{position:relative;font-family:'IBM Plex Sans',sans-serif;font-size:13.5px;line-height:1.5;color:#374151;padding:9px 0 9px 22px;border-bottom:1px solid rgba(10,10,10,0.06)}
     .wl-ledger2 li:last-child{border-bottom:none}
     .wl-ledger2 li::before{position:absolute;left:0;top:9px;font-family:'IBM Plex Mono',monospace;font-size:12px}
     .wl-ledger2 .no li::before{content:"✕";color:rgba(185,28,28,0.55)}
     .wl-ledger2 .yes li::before{content:"✓";color:#16a34a}
+    .wl-ledger2 .amb li::before{content:"○";color:#d97706}
 
     /* ============ probe chart ============ */
-    .wl-chart{position:relative;margin-top:6px}
+    .wl-stats{display:grid;grid-template-columns:repeat(4,auto);justify-content:start;gap:8px 40px;margin-bottom:26px}
+    .wl-stats .k{display:block;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.05em;text-transform:uppercase;color:rgba(255,255,255,0.38);margin-bottom:5px}
+    .wl-stats b{font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:500;color:#fafafa}
+    .wl-stats b.amb{color:#f59e0b}
     .wl-chart svg{display:block;width:100%;height:auto}
-    .wl-chart .lbl{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.04em;fill:rgba(255,255,255,0.45)}
-    .wl-chart .lblB{fill:rgba(255,255,255,0.8)}
-    .wl-verdict{margin-top:18px;padding-top:14px;border-top:1px dashed rgba(255,255,255,0.16);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.04em;color:#22c55e}
+    .wl-chart .tick{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.04em;fill:rgba(255,255,255,0.35)}
+    .wl-verdict{margin-top:22px;padding-top:16px;border-top:1px dashed rgba(255,255,255,0.16);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.04em;line-height:1.7;color:#16a34a}
 
-    /* ============ 4-stage rail (detect→bill) ============ */
+    /* ============ 4-stage rail ============ */
     .wl-rail{position:relative;list-style:none;margin:0;padding:0}
     .wl-rail::before{content:"";position:absolute;left:4px;top:10px;bottom:8px;width:1px;background:rgba(10,10,10,0.18)}
     .wl-stage{position:relative;padding:0 0 32px 32px}
@@ -101,31 +131,46 @@
     .wl-neq{display:flex;align-items:center;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:#9ca3af}
     .wl-neq::before,.wl-neq::after{content:"";flex:1;height:1px;background:rgba(10,10,10,0.12)}
 
-    /* ============ economics ============ */
-    .wl-econ{display:grid;grid-template-columns:1fr 1fr;gap:0 48px;align-items:start}
-    .wl-cpm .big{font-family:'IBM Plex Mono',monospace;font-size:44px;font-weight:500;letter-spacing:-0.02em;color:#0a0a0a;line-height:1;margin:8px 0 10px}
-    .wl-cpm .sub{font-family:'IBM Plex Sans',sans-serif;font-size:13px;line-height:1.6;color:rgba(55,65,81,0.7);max-width:30ch;text-wrap:pretty}
+    /* ============ economics (simplified) ============ */
+    .wl-econ{display:grid;grid-template-columns:1fr 1fr;gap:0 48px;align-items:end}
+    .wl-cpm .big{font-family:'IBM Plex Mono',monospace;font-size:44px;font-weight:500;letter-spacing:-0.02em;color:#0a0a0a;line-height:1;margin:0 0 10px}
+    .wl-cpm .sub{font-family:'IBM Plex Sans',sans-serif;font-size:13px;line-height:1.55;color:rgba(55,65,81,0.7);max-width:24ch;text-wrap:pretty}
     .wl-stack{list-style:none;margin:0;padding:0}
     .wl-stack li{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:12px 0;border-bottom:1px solid rgba(10,10,10,0.10);font-family:'IBM Plex Sans',sans-serif;font-size:14px;color:#111}
     .wl-stack li span{font-family:'IBM Plex Mono',monospace;font-size:13px;color:#6b7280;white-space:nowrap}
     .wl-stack li.total{border-bottom:none;border-top:2px solid #16a34a;margin-top:2px;padding-top:14px}
     .wl-stack li.total b{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:21px;letter-spacing:0}
     .wl-stack li.total span{color:#16a34a;font-weight:500}
-    .wl-econlbl{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.05em;text-transform:uppercase;color:#8a8a8a;margin-bottom:4px}
 
     /* ============ checkpoint readout ============ */
     .wl-check{list-style:none;margin:0;padding:0;font-family:'IBM Plex Mono',monospace;font-size:13px;line-height:1.5}
     .wl-check li{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.78)}
     .wl-check li:last-child{border-bottom:none}
-    .wl-check .r{white-space:nowrap;color:#22c55e}
+    .wl-check .r{white-space:nowrap;color:#16a34a}
     .wl-check .r .neg{color:#ef4444}
 
-    /* ============ closing CTA ============ */
-    .wl-cta{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.03em;margin-top:10px}
-    .wl-cta a{color:#111;text-decoration:none;border-bottom:1px solid #d1d5db;transition:border-color .15s}
-    .wl-cta a:hover{border-color:#111}
+    /* ============ lessons w/ icons ============ */
+    .wl-les{display:grid;grid-template-columns:40px 1fr;gap:4px 18px;align-items:start;padding:18px 0;border-bottom:1px solid rgba(10,10,10,0.08)}
+    .wl-les:last-child{border-bottom:none}
+    .wl-les .ic{grid-row:1 / span 2;align-self:center;width:26px;height:26px}
+    .wl-les .ic path,.wl-les .ic circle,.wl-les .ic rect,.wl-les .ic line{stroke:#0a0a0a;stroke-opacity:0.65;stroke-width:1.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .wl-les .t{font-family:'Inter Tight',sans-serif;font-size:15.5px;font-weight:600;letter-spacing:-0.01em;color:#111}
+    .wl-les .d{grid-column:2;font-family:'IBM Plex Sans',sans-serif;font-size:13px;line-height:1.5;color:rgba(55,65,81,0.7);max-width:50ch;text-wrap:pretty}
 
-    /* ============ scroll reveals (brand-consistent with site) ============ */
+    /* ============ bookend ============ */
+    .wl-book{text-align:left}
+    .wl-book .big{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(30px,5.4vw,46px);line-height:1.05;color:#fafafa;max-width:16ch;text-wrap:balance;margin:6px 0 22px}
+    .wl-book .sub{font-family:'IBM Plex Sans',sans-serif;font-size:14px;line-height:1.65;color:rgba(255,255,255,0.55);max-width:46ch;text-wrap:pretty;margin:0 0 34px}
+    .wl-prompt{display:block;font-family:'IBM Plex Mono',monospace;font-size:15px;color:#cfcfcf;text-decoration:none;border-top:1px solid #181818;padding-top:22px;transition:color .15s}
+    .wl-prompt .d{color:#5b5b5b}
+    .wl-prompt .u{color:#fafafa;border-bottom:1px solid rgba(255,255,255,0.25);transition:border-color .15s}
+    .wl-prompt:hover .u{border-color:#fafafa}
+    .wl-prompt .cur{display:inline-block;width:8px;height:16px;background:#16a34a;vertical-align:-2px;margin-left:7px;animation:wlBlink 1.1s steps(1) infinite}
+    @keyframes wlBlink{50%{opacity:0}}
+    .wl-book .beta{display:inline-flex;align-items:center;gap:7px;margin-top:26px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.45)}
+    .wl-book .beta i{width:6px;height:6px;border-radius:50%;background:#16a34a;animation:tagPulse 2.6s ease-out infinite}
+
+    /* ============ scroll reveals ============ */
     .w-mod-js .wl-card{opacity:0;transform:translate3d(0,24px,0);transition:opacity 1s cubic-bezier(0.16,1.08,0.38,0.98),transform 1s cubic-bezier(0.16,1.08,0.38,0.98)}
     .w-mod-js .wl-card.wl-in{opacity:1;transform:none}
     .w-mod-js .wl-card .wl-s{opacity:0;transform:translate3d(0,12px,0);transition:opacity .8s cubic-bezier(0.16,1.08,0.38,0.98) calc(.15s + var(--i,0)*.055s),transform .8s cubic-bezier(0.16,1.08,0.38,0.98) calc(.15s + var(--i,0)*.055s)}
@@ -134,21 +179,25 @@
     .w-mod-js .wl-in .wl-rail::before{transform:scaleY(1)}
     @media (prefers-reduced-motion: reduce){
       .w-mod-js .wl-card,.w-mod-js .wl-card .wl-s,.w-mod-js .wl-rail::before{opacity:1 !important;transform:none !important;transition:none !important}
+      .work-tag i,.work-tag.solo,.wl-prompt .cur{animation:none !important}
     }
 
     /* ============ responsive ============ */
     @media (max-width: 700px){
       .wl-ledger2{grid-template-columns:1fr;gap:26px 0}
       .wl-econ{grid-template-columns:1fr;gap:30px 0}
+      .wl-stats{grid-template-columns:repeat(2,auto);gap:16px 32px}
     }
     @media (max-width: 560px){
       .wl-card{padding:30px 22px}
       .wl-title{font-size:24px}
       .wl-claim{font-size:22px}
       .wl-cpm .big{font-size:36px}
-      .wl-tbody{font-size:11.5px;padding:16px 14px 18px}
+      .wl-tbody{font-size:11px;padding:16px 14px 18px}
+      .wl-lp2 .ds{display:none}
       .wl-check{font-size:11.5px}
       .wl-check li{gap:10px}
+      .wl-prompt{font-size:13px}
     }
   </style>
 </head>
@@ -158,23 +207,24 @@
       <a href="index.html" class="w-inline-block"><img src="images/avi.png" loading="lazy" width="1104" sizes="40px" alt="" srcset="images/avi-p-500.png 500w, images/avi-p-800.png 800w, images/avi-p-1080.png 1080w, images/avi-p-1600.png 1600w, images/avi-p-2000.png 2000w, images/avi.png 2208w" class="image-39"></a>
     </div>
     <div class="port3 header work casestudy">
-      <div class="port3-h1 work">WaitLayer</div>
-      <div class="port3-h1 subhead">2026 ∙ Founder · Solo build — building a verified attention network for AI coding agents</div>
-      <div class="wl-meta"><a href="https://waitlayer.com" target="_blank">waitlayer.com ↗</a></div>
+      <div class="port3-h1 work">WaitLayer<span class="work-tag beta"><i></i>Beta</span><span class="work-tag solo">Solo&nbsp;build</span></div>
+      <div class="port3-h1 subhead">A verified attention network for AI coding agents — earn from real wait states in your terminal.</div>
+      <div class="wl-meta">2026 · Founder · <a href="https://waitlayer.com" target="_blank">waitlayer.com ↗</a></div>
     </div>
   </div>
 
-  <!-- V1 · HERO: the sponsor line in situ -->
+  <!-- V1 · HERO: the product loop (ported from waitlayer.com's HeroLoop) -->
   <div class="w-layout-blockcontainer container-30 embedsmedia w-container">
     <div class="wl-card dark">
-      <div class="wl-eyebrow">The product · one tasteful line</div>
+      <div class="wl-eyebrow">The product</div>
       <div class="wl-term">
-        <div class="wl-tbar"><i></i><i></i><i></i><span>~/dev/agent — waitlayer claude</span></div>
-        <div class="wl-tbody">
-          <div><span class="dim">$</span> waitlayer claude</div>
-          <div><span class="amb">✻</span> Compacting conversation… <span class="dim">(claude is working)</span></div>
-          <div><b>Sponsored:</b> Acme Postgres — the serverless database for AI agents</div>
-          <div class="dim">wait verified by local wrapper · <span class="grn">● established 7.2s</span></div>
+        <div class="wl-tbar"><i class="r"></i><i class="y"></i><i class="g"></i><span>claude — ~/projects/waitlayer</span></div>
+        <div class="wl-tbody wl-loop" id="wl-loop">
+          <div><span class="dim">&gt;</span> refactor the auth middleware to use the session helper</div>
+          <div class="wl-lp wl-lp1"><span class="grn" id="wl-spin">⠋</span><span class="mid" id="wl-work">Forging…</span><span class="dim" id="wl-sub">8s · ↑ 2.1k tokens</span></div>
+          <div class="wl-lp wl-lp2"><span class="chip">▲</span><span class="sp">Sponsored</span><span class="nm">Railway</span><span class="dim">·</span><span class="ds">Deploy from your terminal in minutes</span></div>
+          <div class="wl-lp wl-lp3"><span><b>✓</b> signature valid</span><span><b>✓</b> not a duplicate</span><span><b>✓</b> fraud-cleared</span></div>
+          <div class="wl-lp wl-lp4"><span class="dot"></span>verified · +$0.014 earned</div>
         </div>
       </div>
       <div class="wl-claim">WaitLayer does not bill a surface until it can prove the wait.</div>
@@ -225,7 +275,7 @@
           </ul>
         </div>
       </div>
-      <div class="wl-cap">Enforced in code: the event schema has no field that could carry work content, and the build fails if a banned field appears.</div>
+      <div class="wl-cap">Enforced in code — the event schema has no field that could carry work content.</div>
     </div>
   </div>
 
@@ -238,28 +288,41 @@
     <div class="port3 header work casestudy">
       <div class="wl-ov">The probe</div>
       <div class="wl-st">The failed assumption</div>
-      <div class="port3-h1 subhead bodyodyody">A sponsor impression is only legitimate if it appears during a real wait. So before billing anything, one question had to be answered: can Claude&#x27;s statusLine actually detect an active wait?<br><br>I built a probe harness — <em>waitlayer probe start</em>, use Claude normally, <em>waitlayer probe report</em> — measuring update cadence, API-duration deltas, wall-clock liveness, and payload shape. Field names and timings, never content.<br><br>The answer was no. The counters behaved like post-completion values: flat during a sustained model call, then jumping all at once when it finished. In one run, the counter sat still through an entire long think — then jumped 55 seconds in a single step after completion. The statusLine could show content. It could not prove a live wait.<br><br>So we refused to bill it. The statusLine surface shipped permanently non-billable — and the backend has a structural backstop so it can never bill, even if the flag were flipped by mistake. The first obvious implementation wasn&#x27;t good enough for the trust bar. So it doesn&#x27;t earn.</div>
+      <div class="port3-h1 subhead bodyodyody">A sponsor impression is only legitimate if it appears during a real wait. Which raised an uncomfortable question about the wedge itself: could Claude&#x27;s statusLine actually tell when the agent was working?<br><br>Rather than assume, I built a probe. Run it, use Claude normally for a while, and it quietly samples what the statusLine can see — update cadence, counter deltas, payload shape. Field names and timings, never content.<br><br>The statusLine turned out to be a rearview mirror. Its counters sat flat through an entire long think, then recorded the whole wait in one lump after the answer arrived — fifty-five seconds appearing in a single step, after the fact. It could show a sponsor line. It just couldn&#x27;t prove anyone was waiting when the line showed.<br><br>That left one honest option: ship it permanently non-billable. The backend even has a structural backstop so the statusLine can never bill, even if its flag were flipped by mistake. The first obvious implementation wasn&#x27;t good enough for the trust bar — so it doesn&#x27;t earn.</div>
     </div>
   </div>
 
   <!-- V3 · PROBE VERDICT CHART -->
   <div class="w-layout-blockcontainer container-30 embedsmedia w-container">
     <div class="wl-card dark">
-      <div class="wl-eyebrow">Probe result · can the statusLine prove a wait?</div>
+      <div class="wl-eyebrow">The probe</div>
       <div class="wl-title">Flat during the think. One jump after.</div>
+      <div class="wl-stats">
+        <div><span class="k">samples</span><b>243</b></div>
+        <div><span class="k">window</span><b>121 s</b></div>
+        <div><span class="k">during the wait</span><b>flat</b></div>
+        <div><span class="k">after completion</span><b class="amb">+55,643 ms</b></div>
+      </div>
       <div class="wl-chart">
-        <svg viewBox="0 0 560 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <line x1="40" y1="170" x2="540" y2="170" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
-          <line x1="40" y1="20" x2="40" y2="170" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
-          <polyline points="40,166 540,52" stroke="rgba(255,255,255,0.30)" stroke-width="1.4" stroke-dasharray="3 4"/>
-          <polyline points="40,160 400,160 404,64 540,60" stroke="#f59e0b" stroke-width="1.8"/>
-          <text x="60" y="148" class="lbl">api_duration · flat during the wait</text>
-          <text x="530" y="52" text-anchor="end" class="lbl lblB">+55,643 ms in one step</text>
-          <text x="150" y="52" class="lbl">wall clock · advancing</text>
-          <text x="40" y="192" class="lbl">243 samples · 121 s · single long think</text>
+        <svg viewBox="0 0 560 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="wlg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f59e0b" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#f59e0b" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <line x1="0" y1="40" x2="560" y2="40" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <line x1="0" y1="95" x2="560" y2="95" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <line x1="0" y1="150" x2="560" y2="150" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <path d="M0 150 L400 150 L404 44 L560 40 L560 150 Z" fill="url(#wlg)"/>
+          <path d="M0 150 L400 150 L404 44 L560 40" stroke="#f59e0b" stroke-width="1.8"/>
+          <circle cx="402" cy="97" r="3" fill="#f59e0b"/>
+          <text x="0" y="172" class="tick">0 s</text>
+          <text x="392" y="172" class="tick">completion</text>
+          <text x="560" y="172" text-anchor="end" class="tick">121 s</text>
         </svg>
       </div>
-      <div class="wl-verdict">DECISION · claude_statusline → vai_eligible: false — billable proof moves to the owned runtime</div>
+      <div class="wl-verdict">DECISION · claude_statusline → vai_eligible: false</div>
     </div>
   </div>
 
@@ -274,7 +337,7 @@
   <!-- V4 · DETECT → BRIDGE → RENDER → BILL -->
   <div class="w-layout-blockcontainer container-30 embedsmedia w-container">
     <div class="wl-card">
-      <div class="wl-eyebrow">The proof pipeline</div>
+      <div class="wl-eyebrow">The pipeline</div>
       <div class="wl-title">Detect. Bridge. Render. Bill.</div>
       <ol class="wl-rail">
         <li class="wl-stage">
@@ -312,7 +375,7 @@
   <!-- V5 · BILLABILITY LADDER -->
   <div class="w-layout-blockcontainer container-30 embedsmedia w-container">
     <div class="wl-card">
-      <div class="wl-eyebrow">Proof-gated · every step filters</div>
+      <div class="wl-eyebrow">Proof-gated</div>
       <div class="wl-title">Rendered is not billable. Billable is not paid.</div>
       <div class="wl-rung">
         <div class="t">Rendered sponsor line</div>
@@ -349,43 +412,41 @@
     </div>
   </div>
 
-  <!-- V6 · ECONOMICS -->
+  <!-- V6 · ECONOMICS (simplified) -->
   <div class="w-layout-blockcontainer container-30 embedsmedia w-container">
     <div class="wl-card">
-      <div class="wl-eyebrow">Unit economics · why CPM-only failed</div>
+      <div class="wl-eyebrow">Unit economics</div>
       <div class="wl-title">From 1.4 cents to an earnback stack.</div>
       <div class="wl-econ">
         <div class="wl-cpm">
-          <div class="wl-econlbl">CPM-only</div>
           <div class="big">$0.014</div>
-          <div class="sub">Developer share of one verified impression at a $20 CPM. Heavy usage still summed to single digits a month.</div>
+          <div class="sub">One verified impression, CPM-only. The model that failed.</div>
         </div>
         <div>
-          <div class="wl-econlbl">The earnback stack · illustrative month</div>
           <ul class="wl-stack">
-            <li>Base verified impressions <span>≈ $97.50</span></li>
-            <li>Qualified sponsor actions <span>3 × $20</span></li>
-            <li>Compute-credit boost <span>$40</span></li>
-            <li class="total"><b>AI-compute earnback</b> <span>≈ $197 / mo</span></li>
+            <li>Verified impressions <span>≈ $97.50</span></li>
+            <li>Qualified actions <span>$60</span></li>
+            <li>Compute credits <span>$40</span></li>
+            <li class="total"><b>One illustrative month</b> <span>≈ $197</span></li>
           </ul>
         </div>
       </div>
-      <div class="wl-cap">Illustrative, not guaranteed. Requires funded campaigns, verified usage, fraud review, and campaign fill.</div>
+      <div class="wl-cap">Illustrative, not guaranteed.</div>
     </div>
   </div>
 
   <div class="w-layout-blockcontainer container-29 pport3 casestudybody w-container">
     <div class="port3 header work casestudy">
       <div class="wl-ov">Proof</div>
-      <div class="wl-st">Validation: the checkpoint</div>
-      <div class="port3-h1 subhead bodyodyody">The internal loop ran end-to-end on a real machine: real Postgres, real API, real CLI, real interactive Claude. The sponsor line appeared in 25 of 25 samples during a 7.25-second verified wait and disappeared at idle. A click redirected correctly and created zero earnings. A signed qualified action created a pending-review credit; a bad signature was rejected; an unattributed action was rejected. The privacy inspection came back clean. Nothing auto-paid. Rollback disabled billability.<br><br>And one unplanned validation: during testing, an accidental rapid-fire render path triggered the fraud system, which correctly rejected all 115 events as velocity farming. The anti-farming defenses caught their first farmer — me.</div>
+      <div class="wl-st">The day it stopped being a theory</div>
+      <div class="port3-h1 subhead bodyodyody">The checkpoint ran on one real machine with nothing mocked — Postgres, the API, the CLI, and an interactive Claude session doing actual work. I watched the sponsor line hold through a seven-second verified wait, twenty-five samples out of twenty-five, then vanish the instant the agent went idle.<br><br>Then I spent the afternoon trying to break it. Clicked the sponsor line: attribution recorded, zero earnings. Forged a callback signature: rejected. Sent an action with no impression to claim: rejected. Read the privacy log like a skeptic would: timings and reason codes, nothing else.<br><br>The best moment wasn&#x27;t scripted. A rapid-fire render path I triggered by accident lit up the fraud system, which calmly rejected all 115 events as velocity farming. The first farmer WaitLayer ever caught was its own founder.</div>
     </div>
   </div>
 
   <!-- V7 · CHECKPOINT READOUT -->
   <div class="w-layout-blockcontainer container-30 embedsmedia w-container">
     <div class="wl-card dark">
-      <div class="wl-eyebrow">Checkpoint · real Postgres, real API, real CLI, real Claude</div>
+      <div class="wl-eyebrow">The checkpoint</div>
       <div class="wl-title">The loop, proven end to end.</div>
       <ul class="wl-check">
         <li>render gated by a real verified wait <span class="r">25/25 ✓</span></li>
@@ -405,22 +466,89 @@
     <div class="port3 header work casestudy">
       <div class="wl-ov mut">The marketplace</div>
       <div class="wl-st">The cold start, and what we didn&#x27;t build</div>
-      <div class="port3-h1 subhead bodyodyody">The two-sided problem is explicit: developers want meaningful earnback, sponsors want verified outcomes, and neither commits first. The plan runs on proof — a small cohort of high-usage founding developers, a handful of founding sponsors funding bounded pools, compute credits creating real early value, and weekly proof reports turning verified data into the sales asset.<br><br>Just as deliberate is what doesn&#x27;t exist yet: no public billability, no automatic payouts, no plugin sprawl across other agents, no self-serve sponsor marketplace, no earnings guarantees anywhere in the copy. The moat isn&#x27;t another integration — it&#x27;s accumulated proof: real VAIs, real fraud decisions, real review history, real renewals.</div>
+      <div class="port3-h1 subhead bodyodyody">The two-sided problem is explicit: developers want meaningful earnback, sponsors want verified outcomes, and neither commits first. The plan runs on proof — a small cohort of high-usage founding developers, a handful of founding sponsors funding bounded pools, compute credits creating real early value, and weekly proof reports turning verified data into the sales asset.<br><br>Just as deliberate is what doesn&#x27;t exist yet: no public billability, no automatic payouts, no plugin sprawl across other agents, no self-serve sponsor marketplace, no earnings guarantees anywhere in the copy. The moat isn&#x27;t another integration — it&#x27;s accumulated proof.</div>
     </div>
     <div class="port3 header work casestudy">
-      <div class="wl-ov mut">Where it stands</div>
-      <div class="wl-st">Status, honestly</div>
-      <div class="port3-h1 subhead bodyodyody">Validated: wait detection, render gating, privacy-safe telemetry, click attribution, signed qualified actions, manual review, compute-credit lifecycle, fraud velocity rejection, rollback.<br><br>Not yet validated: sponsor demand at scale, developer retention, real payout behavior, long-term fraud rates. The internal loop is complete and checkpointed; the product is in private-beta readiness, not public. That&#x27;s the point — a marketplace needs one verified, auditable, sponsor-funded loop before it needs scale.</div>
+      <div class="wl-ov mut">Status</div>
+      <div class="wl-st">Where it stands</div>
+      <div class="port3-h1 subhead bodyodyody">WaitLayer today is an internal product with an external posture: the loop is proven, the copy promises nothing it can&#x27;t deliver, and the next milestone is a private beta with founding developers and sponsors. What&#x27;s left to prove isn&#x27;t mechanics — it&#x27;s the market.</div>
     </div>
-    <div class="port3 header work casestudy">
-      <div class="wl-ov mut">Lessons</div>
-      <div class="wl-st">What I learned</div>
-      <div class="port3-h1 subhead bodyodyody">The obvious implementation is not the right architecture — the statusLine got us started; the owned runtime made it defensible.<br><br>Monetization math must shape product strategy — the calculator&#x27;s bad news was the best product input we got.<br><br>Developer trust is a feature, not a legal afterthought — the privacy allowlist and manual review are the product.<br><br>A marketplace needs proof before scale — the first goal was one verified loop, not a thousand users.<br><br>Outcome data is the moat — renders are easy to copy; verified actions, fraud decisions, and renewals compound.</div>
+  </div>
+
+  <!-- V8 · SCORECARD -->
+  <div class="w-layout-blockcontainer container-30 embedsmedia w-container">
+    <div class="wl-card">
+      <div class="wl-eyebrow">Scorecard</div>
+      <div class="wl-title">Proven — and not yet.</div>
+      <div class="wl-ledger2">
+        <div class="yes">
+          <h4>Validated</h4>
+          <ul>
+            <li>Wait detection</li>
+            <li>Render gating</li>
+            <li>Privacy-safe telemetry</li>
+            <li>Click attribution</li>
+            <li>Signed qualified actions</li>
+            <li>Manual review</li>
+            <li>Compute-credit lifecycle</li>
+            <li>Fraud velocity rejection</li>
+          </ul>
+        </div>
+        <div class="amb">
+          <h4>Not yet</h4>
+          <ul>
+            <li>Sponsor demand at scale</li>
+            <li>Developer retention</li>
+            <li>Real payout behavior</li>
+            <li>Long-term fraud rates</li>
+          </ul>
+        </div>
+      </div>
+      <div class="wl-cap">A marketplace needs one verified, auditable loop before it needs scale.</div>
     </div>
-    <div class="port3 header work casestudy">
-      <div class="wl-st" style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:26px">Don&#x27;t bill what you can&#x27;t prove.</div>
-      <div class="port3-h1 subhead bodyodyody">The most important outcome wasn&#x27;t a terminal integration. It was that principle — and an internal loop that now proves it end to end. The next step is turning that proof into the first sponsor-funded developer earnback pool.</div>
-      <div class="wl-cta"><a href="https://waitlayer.com" target="_blank">WaitLayer is live in private beta — waitlayer.com ↗</a></div>
+  </div>
+
+  <!-- V9 · LESSONS -->
+  <div class="w-layout-blockcontainer container-30 embedsmedia w-container">
+    <div class="wl-card">
+      <div class="wl-eyebrow">Lessons</div>
+      <div class="wl-title">What building it taught me.</div>
+      <div class="wl-les">
+        <svg class="ic" viewBox="0 0 24 24"><rect x="4" y="12.5" width="12" height="7.5" rx="1"/><rect x="8" y="4" width="12" height="7.5" rx="1"/></svg>
+        <div class="t">The obvious implementation is rarely the right architecture</div>
+        <div class="d">The statusLine got us started. The owned runtime made it defensible.</div>
+      </div>
+      <div class="wl-les">
+        <svg class="ic" viewBox="0 0 24 24"><circle cx="7.5" cy="7.5" r="2.6"/><circle cx="16.5" cy="16.5" r="2.6"/><line x1="18.5" y1="5.5" x2="5.5" y2="18.5"/></svg>
+        <div class="t">Monetization math must shape product strategy</div>
+        <div class="d">The calculator&#x27;s bad news was the best product input we got.</div>
+      </div>
+      <div class="wl-les">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M12 3.5l7 3v5.2c0 4.6-3 8-7 9.3-4-1.3-7-4.7-7-9.3V6.5l7-3Z"/></svg>
+        <div class="t">Developer trust is a feature</div>
+        <div class="d">The privacy allowlist and manual review are the product, not paperwork.</div>
+      </div>
+      <div class="wl-les">
+        <svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M8.4 12.3l2.5 2.5 4.9-5"/></svg>
+        <div class="t">A marketplace needs proof before scale</div>
+        <div class="d">The first goal was one verified loop, not a thousand users.</div>
+      </div>
+      <div class="wl-les">
+        <svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="6.5" stroke-dasharray="2.5 3"/><circle cx="12" cy="12" r="9.5"/></svg>
+        <div class="t">Outcome data is the moat</div>
+        <div class="d">Renders are easy to copy. Verified actions, fraud decisions, and renewals compound.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- V10 · BOOKEND -->
+  <div class="w-layout-blockcontainer container-30 embedsmedia w-container">
+    <div class="wl-card dark wl-book">
+      <div class="wl-eyebrow">The principle</div>
+      <div class="big">Don&#x27;t bill what you can&#x27;t prove.</div>
+      <p class="sub">The internal loop now proves it end to end. The next step is turning that proof into the first sponsor-funded developer earnback pool.</p>
+      <a class="wl-prompt" href="https://waitlayer.com" target="_blank"><span class="d">$</span> open <span class="u">waitlayer.com</span><span class="cur"></span></a>
+      <div class="beta"><i></i>Private beta</div>
     </div>
   </div>
 
@@ -429,7 +557,8 @@
   <script src="js/webflow.js" type="text/javascript"></script>
   <script type="text/javascript">
   (function(){
-    var sel='.wl-tbody > div,.wl-ledger2 li,.wl-stage,.wl-rung,.wl-neq,.wl-check li,.wl-stack li,.wl-cpm,.wl-claim,.wl-verdict';
+    /* stagger + reveal */
+    var sel='.wl-tbody > div:not(.wl-lp),.wl-ledger2 li,.wl-stage,.wl-rung,.wl-neq,.wl-check li,.wl-stack li,.wl-cpm,.wl-claim,.wl-verdict,.wl-stats > div,.wl-les,.wl-book .big,.wl-book .sub,.wl-prompt,.wl-book .beta';
     document.querySelectorAll('.wl-card').forEach(function(card){
       var i=0;
       card.querySelectorAll(sel).forEach(function(el){
@@ -452,6 +581,31 @@
     setTimeout(function(){
       if(!document.querySelector('.wl-card.wl-in')){document.querySelectorAll('.wl-card').forEach(reveal);}
     },5000);
+
+    /* hero loop — ported from waitlayer.com HeroLoop (5-phase machine) */
+    var loop=document.getElementById('wl-loop');
+    if(loop){
+      var SPIN='⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏';
+      var PHASE_MS=[650,1500,950,1350,1900];
+      var spinEl=document.getElementById('wl-spin');
+      var workEl=document.getElementById('wl-work');
+      var subEl=document.getElementById('wl-sub');
+      var reduced=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(reduced){
+        loop.className='wl-tbody wl-loop p4';
+        spinEl.textContent='✓';workEl.textContent='done · 8.2s';subEl.textContent='';
+      }else{
+        var p=0,s=0;
+        setInterval(function(){s=(s+1)%SPIN.length;if(p===1||p===2){spinEl.textContent=SPIN[s];}},90);
+        var step=function(){
+          loop.className='wl-tbody wl-loop p'+p;
+          if(p===1||p===2){spinEl.textContent=SPIN[s];workEl.textContent='Forging…';subEl.textContent='8s · ↑ 2.1k tokens';}
+          if(p>=3){spinEl.textContent='✓';workEl.textContent='done · 8.2s';subEl.textContent='';}
+          setTimeout(function(){p=(p+1)%5;step();},PHASE_MS[p]);
+        };
+        step();
+      }
+    }
   })();
   </script>
 </body>
