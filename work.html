@@ -63,11 +63,11 @@
       font-size: 10px;
       line-height: 1;
       display: inline-block;
-      animation: acqTwinkle 3.4s ease-in-out infinite;
+      animation: acqGlow 4.8s ease-in-out infinite;
     }
-    @keyframes acqTwinkle {
-      0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.85; }
-      50% { transform: scale(1.3) rotate(45deg); opacity: 1; }
+    @keyframes acqGlow {
+      0%, 100% { opacity: 0.5; text-shadow: none; }
+      50% { opacity: 1; text-shadow: 0 0 7px rgba(139, 92, 246, 0.45); }
     }
     @keyframes betaBreathe {
       0%, 100% { transform: scale(1); opacity: 1; }
@@ -252,7 +252,7 @@
   <div class="w-layout-blockcontainer container-30 list-work w-container">
     <a href="stir-splits.html" class="w-inline-block"><img src="images/stir-cover.jpg" loading="lazy" width="1560" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px" alt="Stir Splits" srcset="images/stir-cover-p-500.jpg 500w, images/stir-cover-p-800.jpg 800w, images/stir-cover-p-1080.jpg 1080w, images/stir-cover-p-1600.jpg 1600w, images/stir-cover-p-2000.jpg 2000w, images/stir-cover-p-2600.jpg 2600w, images/stir-cover.jpg 3120w"></a>
     <a href="stir-splits.html" class="link-block-12 w-inline-block">
-      <div class="port3-h1 title">Stir Splits<span class="work-tag fill">Company</span></div>
+      <div class="port3-h1 title">Stir Splits<span class="work-tag muted">Deprecated</span><span class="work-tag fill">Company</span></div>
     </a>
     <div class="port3-h1 title date work-desc">Automated revenue splits for creative collaborators.</div>
     <div class="port3-h1 title date work-year">2021</div>
