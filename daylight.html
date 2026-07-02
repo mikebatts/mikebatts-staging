@@ -631,9 +631,7 @@
     function unlock(){
       try{sessionStorage.setItem('dl-unlocked','1');}catch(e){}
       document.documentElement.classList.remove('dl-locked');
-      gate.style.display='flex';
-      gate.classList.add('dl-bye');
-      setTimeout(function(){gate.style.display='none';},500);
+      gate.style.display='none';
       window.scrollTo(0,0);
     }
     function check(){
