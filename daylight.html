@@ -40,6 +40,13 @@
     .dl-cap{position:relative;font-family:Inconsolata,monospace;font-size:12px;letter-spacing:0.05em;text-transform:uppercase;color:#A09B93;margin-top:18px;line-height:1.35}
     .dl-card.dark .dl-cap{color:rgba(218,202,182,0.65)}
 
+    /* header meta + work-card tag parity (mirrors work.html) */
+    .dl-meta{font-family:Inconsolata,monospace;font-size:12px;letter-spacing:0.04em;color:#9ca3af;margin-top:8px}
+    .dl-meta a{color:#6b7280;text-decoration:none;border-bottom:1px solid #e5e7eb;transition:color .15s,border-color .15s}
+    .dl-meta a:hover{color:#111;border-color:#111}
+    .work-tag{display:inline-flex;align-items:center;gap:5px;vertical-align:2px;margin-left:8px;padding:3px 9px;border:1px solid #e5e7eb;border-radius:100px;font-family:Inter,sans-serif;font-size:10.5px;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;color:#6b7280;background:#fff;white-space:nowrap}
+    .work-tag.fill{background:#f4f4f5;border-color:#f4f4f5}
+
     /* page section headers (chrome side) */
     .dl-ov{font-family:Inconsolata,monospace;font-size:12px;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;line-height:1.35;color:#F66F00;margin-bottom:10px}
     .dl-ov.mut{color:#A09B93}
@@ -234,8 +241,9 @@
       <a href="index.html" class="w-inline-block"><img src="images/avi.png" loading="lazy" width="1104" sizes="40px" alt="" srcset="images/avi-p-500.png 500w, images/avi-p-800.png 800w, images/avi-p-1080.png 1080w, images/avi-p-1600.png 1600w, images/avi-p-2000.png 2000w, images/avi.png 2208w" class="image-39"></a>
     </div>
     <div class="port3 header work casestudy">
-      <div class="port3-h1 work">Daylight</div>
-      <div class="port3-h1 subhead">2024–Present ∙ Senior PM · Product Engineer</div>
+      <div class="port3-h1 work">Daylight<span class="work-tag fill">Company</span></div>
+      <div class="port3-h1 subhead">Consumer energy platform — product across B2B origination workflows and the B2C homeowner app.</div>
+      <div class="dl-meta">2024–Present · Senior PM · Product Engineer · <a href="https://godaylight.com" target="_blank">godaylight.com ↗</a></div>
     </div>
   </div>
 
