@@ -189,9 +189,46 @@
       .dl-iphone{border-radius:17px;padding:4px}
       .dl-iphone img{border-radius:14px}
     }
+
+    /* ============ password gate (mikebatts.net chrome) ============ */
+    html.dl-locked{overflow:hidden}
+    html.dl-locked body > *:not(#dl-gate){visibility:hidden}
+    #dl-gate{display:none;position:fixed;inset:0;z-index:99999;background:#fff;visibility:visible}
+    html.dl-locked #dl-gate{display:flex;align-items:center;justify-content:center;padding:24px}
+    #dl-gate.dl-bye{opacity:0;transition:opacity .45s cubic-bezier(0.4,0,0.2,1);pointer-events:none}
+    .dl-gate-box{width:100%;max-width:320px;text-align:left}
+    .dl-gate-box img{width:40px;height:40px;border-radius:50%;display:block;margin-bottom:20px}
+    .dl-gate-t{font-family:Inter,sans-serif;font-size:16px;font-weight:400;color:#000;margin-bottom:4px}
+    .dl-gate-s{font-family:Inter,sans-serif;font-size:16px;line-height:24px;color:#9ca3af;margin-bottom:28px}
+    #dl-pass{display:block;width:100%;font-family:Inter,sans-serif;font-size:16px;color:#111;background:transparent;border:none;border-bottom:1px solid #d1d5db;border-radius:0;padding:8px 0;outline:none;transition:border-color .15s}
+    #dl-pass:focus{border-bottom-color:#111}
+    #dl-pass::placeholder{color:#c7cbd1}
+    .dl-gate-row{display:flex;align-items:center;gap:14px;margin-top:22px}
+    #dl-go{font-family:Inter,sans-serif;font-size:14px;font-weight:500;color:#fff;background:#111;border:none;border-radius:6px;padding:10px 20px;cursor:pointer;transition:opacity .15s}
+    #dl-go:hover{opacity:0.8}
+    .dl-gate-err{font-family:Inter,sans-serif;font-size:13px;color:#b91c1c;visibility:hidden}
+    .dl-gate-err.on{visibility:visible}
+    .dl-gate-back{display:inline-block;margin-top:34px;font-family:Inter,sans-serif;font-size:13px;color:#9ca3af;text-decoration:none}
+    .dl-gate-back:hover{color:#111}
   </style>
+  <script type="text/javascript">
+    try{if(sessionStorage.getItem('dl-unlocked')!=='1'){document.documentElement.classList.add('dl-locked');}}catch(e){document.documentElement.classList.add('dl-locked');}
+  </script>
 </head>
 <body class="portv3">
+  <div id="dl-gate">
+    <div class="dl-gate-box">
+      <img src="images/avi.png" alt="Mike Battaglia">
+      <div class="dl-gate-t">Daylight — Case Study</div>
+      <div class="dl-gate-s">This one&#x27;s private for now. Enter the password to view.</div>
+      <input id="dl-pass" type="password" placeholder="Password" autocomplete="off" autocapitalize="off" spellcheck="false">
+      <div class="dl-gate-row">
+        <button id="dl-go" type="button">View case study</button>
+        <span class="dl-gate-err" id="dl-err">That&#x27;s not it. Try again.</span>
+      </div>
+      <a class="dl-gate-back" href="work.html">&larr; Back to work</a>
+    </div>
+  </div>
   <div class="w-layout-blockcontainer container-29 pport3 w-container">
     <div class="port3">
       <a href="index.html" class="w-inline-block"><img src="images/avi.png" loading="lazy" width="1104" sizes="40px" alt="" srcset="images/avi-p-500.png 500w, images/avi-p-800.png 800w, images/avi-p-1080.png 1080w, images/avi-p-1600.png 1600w, images/avi-p-2000.png 2000w, images/avi.png 2208w" class="image-39"></a>
@@ -551,7 +588,7 @@
     <div class="port3 header work casestudy">
       <div class="dl-ov mut">The through-line</div>
       <div class="dl-st">Why it matters</div>
-      <div class="port3-h1 subhead bodyodyody">Daylight is the clearest proof of the thing I do best: modeling a genuinely complex, regulated, multi-party system — and shipping the surfaces that make it feel simple and trustworthy to every person inside it.<br><br>That same instinct is exactly what fintech, energy, and AI-native products need next.</div>
+      <div class="port3-h1 subhead bodyodyody">Daylight is the clearest proof of the thing I do best: modeling a genuinely complex, regulated, multi-party system — and shipping the surfaces that make it feel simple and trustworthy to every person inside it.<br><br>That same instinct is exactly what energy and AI need next.</div>
     </div>
   </div>
 
@@ -583,6 +620,36 @@
     setTimeout(function(){
       if(!document.querySelector('.dl-card.dl-in')){document.querySelectorAll('.dl-card').forEach(reveal);}
     },5000);
+  })();
+
+  /* password gate */
+  (function(){
+    var HASH='0e3690809a8ee4fc9e8baf5d93346f92d0b0670be7e60266eb9f2224b05d3bf0';
+    var gate=document.getElementById('dl-gate');
+    if(!gate||!document.documentElement.classList.contains('dl-locked')){return;}
+    var input=document.getElementById('dl-pass'),err=document.getElementById('dl-err');
+    function unlock(){
+      try{sessionStorage.setItem('dl-unlocked','1');}catch(e){}
+      document.documentElement.classList.remove('dl-locked');
+      gate.style.display='flex';
+      gate.classList.add('dl-bye');
+      setTimeout(function(){gate.style.display='none';},500);
+      window.scrollTo(0,0);
+    }
+    function check(){
+      var v=input.value;
+      if(!v){return;}
+      if(window.crypto&&crypto.subtle){
+        crypto.subtle.digest('SHA-256',new TextEncoder().encode(v)).then(function(buf){
+          var hex=Array.prototype.map.call(new Uint8Array(buf),function(b){return b.toString(16).padStart(2,'0');}).join('');
+          if(hex===HASH){unlock();}else{err.classList.add('on');input.select();}
+        });
+      }else{err.classList.add('on');input.select();}
+    }
+    document.getElementById('dl-go').addEventListener('click',check);
+    input.addEventListener('keydown',function(e){if(e.key==='Enter'){check();}});
+    input.addEventListener('input',function(){err.classList.remove('on');});
+    setTimeout(function(){input.focus();},50);
   })();
   </script>
 </body>
