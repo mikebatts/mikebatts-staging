@@ -57,6 +57,18 @@
       100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
     }
     .work-tag.beta i { background: #f59e0b; animation: betaBreathe 2.8s ease-in-out infinite; }
+    .work-tag.acq b {
+      color: #8b5cf6;
+      font-weight: 400;
+      font-size: 10px;
+      line-height: 1;
+      display: inline-block;
+      animation: acqTwinkle 3.4s ease-in-out infinite;
+    }
+    @keyframes acqTwinkle {
+      0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.85; }
+      50% { transform: scale(1.3) rotate(45deg); opacity: 1; }
+    }
     @keyframes betaBreathe {
       0%, 100% { transform: scale(1); opacity: 1; }
       50% { transform: scale(0.72); opacity: 0.55; }
@@ -85,7 +97,7 @@
     .work-tag.muted { color: #a8adb5; border-color: #ededef; }
     .work-tag.dashed { border-style: dashed; }
     @media (prefers-reduced-motion: reduce) {
-      .work-tag i, .work-tag.solo { animation: none; }
+      .work-tag i, .work-tag.solo, .work-tag.acq b { animation: none; }
     }
     @keyframes workFadeIn {
       from { opacity: 0; transform: translateY(16px); }
@@ -123,7 +135,7 @@
       <img src="images/daylight-logo-white.svg" alt="Daylight" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:34%;height:auto;border:none;border-radius:0">
     </a>
     <a href="daylight.html" class="link-block-12 w-inline-block">
-      <div class="port3-h1 title">Daylight<span class="work-tag fill">Company</span></div>
+      <div class="port3-h1 title">Daylight<span class="work-tag"><i></i>Live</span><span class="work-tag fill">Company</span></div>
     </a>
     <div class="port3-h1 title date work-desc">Consumer energy platform — product across B2B origination workflows and the B2C homeowner app.</div>
     <div class="port3-h1 title date work-year">2024–Present</div>
@@ -204,7 +216,7 @@
   <div class="w-layout-blockcontainer container-30 list-work w-container">
     <a href="mirror-embeds.html" class="w-inline-block"><img src="images/Embeds.jpg" loading="lazy" width="1560" alt="Mirror Embeds" srcset="images/Embeds-p-500.jpg 500w, images/Embeds-p-800.jpg 800w, images/Embeds-p-1080.jpg 1080w, images/Embeds-p-1600.jpg 1600w, images/Embeds-p-2000.jpg 2000w, images/Embeds-p-2600.jpg 2600w, images/Embeds.jpg 3120w" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px"></a>
     <a href="mirror-embeds.html" class="link-block-12 w-inline-block">
-      <div class="port3-h1 title">Mirror Embeds<span class="work-tag fill">Company</span></div>
+      <div class="port3-h1 title">Mirror Embeds<span class="work-tag acq"><b>✦</b>Acquired</span><span class="work-tag fill">Company</span></div>
     </a>
     <div class="port3-h1 title date work-desc">Composable NFT embeds for Mirror — drove 200k+ mints across the ecosystem.</div>
     <div class="port3-h1 title date work-year">2023</div>
@@ -213,7 +225,7 @@
   <div class="w-layout-blockcontainer container-30 list-work w-container">
     <a href="mirror-subscriptions.html" class="w-inline-block"><img src="images/Subscriptions.jpg" loading="lazy" width="1560" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px" alt="Mirror Subscriptions" srcset="images/Subscriptions-p-500.jpg 500w, images/Subscriptions-p-800.jpg 800w, images/Subscriptions-p-1080.jpg 1080w, images/Subscriptions-p-1600.jpg 1600w, images/Subscriptions-p-2000.jpg 2000w, images/Subscriptions-p-2600.jpg 2600w, images/Subscriptions.jpg 3120w"></a>
     <a href="mirror-subscriptions.html" class="link-block-12 w-inline-block">
-      <div class="port3-h1 title">Mirror Subscriptions<span class="work-tag fill">Company</span></div>
+      <div class="port3-h1 title">Mirror Subscriptions<span class="work-tag acq"><b>✦</b>Acquired</span><span class="work-tag fill">Company</span></div>
     </a>
     <div class="port3-h1 title date work-desc">Web3 subscriptions — email + wallet distribution for collectable writing.</div>
     <div class="port3-h1 title date work-year">2023</div>
@@ -222,7 +234,7 @@
   <div class="w-layout-blockcontainer container-30 list-work w-container">
     <a href="mirror-writing-nfts.html" class="w-inline-block"><img src="images/probwnft.jpg" loading="lazy" width="1777.5" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px" alt="Mirror Writing NFTs" srcset="images/probwnft-p-500.jpg 500w, images/probwnft-p-800.jpg 800w, images/probwnft-p-1080.jpg 1080w, images/probwnft-p-1600.jpg 1600w, images/probwnft-p-2000.jpg 2000w, images/probwnft-p-2600.jpg 2600w, images/probwnft.jpg 3120w"></a>
     <a href="mirror-writing-nfts.html" class="link-block-12 w-inline-block">
-      <div class="port3-h1 title">Mirror Writing NFTs<span class="work-tag fill">Company</span></div>
+      <div class="port3-h1 title">Mirror Writing NFTs<span class="work-tag acq"><b>✦</b>Acquired</span><span class="work-tag fill">Company</span></div>
     </a>
     <div class="port3-h1 title date work-desc">Turn published writing into limited-edition, on-chain collectibles.</div>
     <div class="port3-h1 title date work-year">2022</div>
