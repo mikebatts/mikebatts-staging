@@ -43,11 +43,25 @@
       background: #fff;
       white-space: nowrap;
     }
+    .work-tag + .work-tag { margin-left: 5px; }
     .work-tag i {
       width: 5px;
       height: 5px;
       border-radius: 50%;
       background: #22c55e;
+      animation: tagPulse 2.6s ease-out infinite;
+    }
+    @keyframes tagPulse {
+      0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.35); }
+      60% { box-shadow: 0 0 0 5px rgba(34, 197, 94, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+    }
+    .work-tag.beta i { background: #f59e0b; animation: none; }
+    .work-tag.fill { background: #f4f4f5; border-color: #f4f4f5; }
+    .work-tag.muted { color: #a8adb5; border-color: #ededef; }
+    .work-tag.dashed { border-style: dashed; }
+    @media (prefers-reduced-motion: reduce) {
+      .work-tag i { animation: none; }
     }
     @keyframes workFadeIn {
       from { opacity: 0; transform: translateY(16px); }
@@ -85,7 +99,7 @@
       <img src="images/daylight-logo-white.svg" alt="Daylight" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:34%;height:auto;border:none;border-radius:0">
     </a>
     <a href="daylight.html" class="link-block-12 w-inline-block">
-      <div class="port3-h1 title">Daylight</div>
+      <div class="port3-h1 title">Daylight<span class="work-tag fill">In-house</span></div>
     </a>
     <div class="port3-h1 title date work-desc">Consumer energy platform — product across B2B origination workflows and the B2C homeowner app.</div>
     <div class="port3-h1 title date work-year">2024–Present</div>
@@ -94,7 +108,7 @@
   <div class="w-layout-blockcontainer container-30 list-work w-container">
     <a href="https://waitlayer.com" target="_blank" class="w-inline-block"><img src="images/WaitLayer-cover.png" loading="lazy" width="1200" alt="WaitLayer" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px"></a>
     <a href="https://waitlayer.com" target="_blank" class="link-block-12 w-inline-block">
-      <div class="port3-h1 title">WaitLayer<span class="work-tag"><i></i>Live</span></div>
+      <div class="port3-h1 title">WaitLayer<span class="work-tag beta"><i></i>Beta</span><span class="work-tag fill">Solo&nbsp;build</span></div>
     </a>
     <div class="port3-h1 title date work-desc">A verified attention network for AI coding agents — earn from real wait states in your terminal.</div>
     <div class="port3-h1 title date work-year">2026</div>
@@ -103,7 +117,7 @@
   <div class="w-layout-blockcontainer container-30 list-work w-container">
     <a href="https://www.knicksparade.cam/" target="_blank" class="w-inline-block"><img src="images/KnicksParade-cover.png" loading="lazy" width="1200" alt="KnicksParade" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px"></a>
     <a href="https://www.knicksparade.cam/" target="_blank" class="link-block-12 w-inline-block">
-      <div class="port3-h1 title">KnicksParade<span class="work-tag"><i></i>Live</span></div>
+      <div class="port3-h1 title">KnicksParade<span class="work-tag"><i></i>Live</span><span class="work-tag fill">Solo&nbsp;build</span></div>
     </a>
     <div class="port3-h1 title date work-desc">A relive view of the Knicks Championship Parade — Canyon of Heroes street cameras.</div>
     <div class="port3-h1 title date work-year">2026</div>
@@ -112,7 +126,7 @@
   <div class="w-layout-blockcontainer container-30 list-work w-container">
     <a href="https://ratmap.nyc" target="_blank" class="w-inline-block"><img src="images/RatMap-cover.jpg" loading="lazy" width="1200" alt="RatMap NYC" srcset="images/RatMap-cover.jpg 1200w" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px"></a>
     <a href="https://ratmap.nyc" target="_blank" class="link-block-12 w-inline-block">
-      <div class="port3-h1 title">RatMap NYC<span class="work-tag"><i></i>Live</span></div>
+      <div class="port3-h1 title">RatMap NYC<span class="work-tag"><i></i>Live</span><span class="work-tag fill">Solo&nbsp;build</span></div>
     </a>
     <div class="port3-h1 title date work-desc">A free map of every reported rat sighting in NYC.</div>
     <div class="port3-h1 title date work-year">2026</div>
@@ -121,7 +135,7 @@
   <div class="w-layout-blockcontainer container-30 list-work w-container">
     <a href="https://playforbidden.com" target="_blank" class="w-inline-block"><img src="images/Forbidden-cover.jpg" loading="lazy" width="1200" alt="Forbidden" srcset="images/Forbidden-cover.jpg 1200w" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px"></a>
     <a href="https://playforbidden.com" target="_blank" class="link-block-12 w-inline-block">
-      <div class="port3-h1 title">Forbidden<span class="work-tag"><i></i>Live</span></div>
+      <div class="port3-h1 title">Forbidden<span class="work-tag"><i></i>Live</span><span class="work-tag fill">Solo&nbsp;build</span></div>
     </a>
     <div class="port3-h1 title date work-desc">A two-player word game. Say the word. Not the forbidden ones.</div>
     <div class="port3-h1 title date work-year">2026</div>
@@ -130,7 +144,7 @@
   <div class="w-layout-blockcontainer container-30 list-work w-container">
     <a href="https://thischronicle.com" target="_blank" class="w-inline-block"><img src="images/Chronicle-cover.jpg" loading="lazy" width="1200" alt="Chronicle" srcset="images/Chronicle-cover-p-500.jpg 500w, images/Chronicle-cover-p-800.jpg 800w, images/Chronicle-cover-p-1080.jpg 1080w, images/Chronicle-cover-p-1600.jpg 1600w, images/Chronicle-cover-p-2000.jpg 2000w, images/Chronicle-cover.jpg 3120w" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px"></a>
     <a href="https://thischronicle.com" target="_blank" class="link-block-12 w-inline-block">
-      <div class="port3-h1 title">Chronicle<span class="work-tag"><i></i>Live</span></div>
+      <div class="port3-h1 title">Chronicle<span class="work-tag"><i></i>Live</span><span class="work-tag fill">Solo&nbsp;build</span></div>
     </a>
     <div class="port3-h1 title date work-desc">A daily history guessing game — one event, three chances to guess the year.</div>
     <div class="port3-h1 title date work-year">2026</div>
@@ -139,7 +153,7 @@
   <div class="w-layout-blockcontainer container-30 list-work w-container">
     <a href="https://trycaveat.com" target="_blank" class="w-inline-block"><img src="images/Caveat-cover.jpg" loading="lazy" alt="Caveat" srcset="images/Caveat-cover-p-500.jpg 500w, images/Caveat-cover-p-800.jpg 800w, images/Caveat-cover-p-1080.jpg 1080w, images/Caveat-cover-p-1600.jpg 1600w, images/Caveat-cover-p-2000.jpg 2000w, images/Caveat-cover.jpg 3120w" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px"></a>
     <a href="https://trycaveat.com" target="_blank" class="link-block-12 w-inline-block">
-      <div class="port3-h1 title">Caveat<span class="work-tag"><i></i>Live</span></div>
+      <div class="port3-h1 title">Caveat<span class="work-tag"><i></i>Live</span><span class="work-tag fill">Solo&nbsp;build</span></div>
     </a>
     <div class="port3-h1 title date work-desc">AI contract analyzer — upload any PDF or DOCX, get a risk report in 60 seconds.</div>
     <div class="port3-h1 title date work-year">2026</div>
@@ -148,7 +162,7 @@
   <div class="w-layout-blockcontainer container-30 list-work w-container">
     <a href="https://apps.apple.com/us/app/my-bible-path/id6759575186" target="_blank" class="w-inline-block"><img src="images/BiblePath-cover.jpg" loading="lazy" width="1200" alt="Bible Path" srcset="images/BiblePath-cover-p-500.jpg 500w, images/BiblePath-cover-p-800.jpg 800w, images/BiblePath-cover-p-1080.jpg 1080w, images/BiblePath-cover-p-1600.jpg 1600w, images/BiblePath-cover-p-2000.jpg 2000w, images/BiblePath-cover.jpg 3120w" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px"></a>
     <a href="https://apps.apple.com/us/app/my-bible-path/id6759575186" target="_blank" class="link-block-12 w-inline-block">
-      <div class="port3-h1 title">Bible Path<span class="work-tag"><i></i>App&nbsp;Store</span></div>
+      <div class="port3-h1 title">Bible Path<span class="work-tag"><i></i>App&nbsp;Store</span><span class="work-tag fill">Solo&nbsp;build</span></div>
     </a>
     <div class="port3-h1 title date work-desc">A Bible reading companion that guides you through God&#x27;s word daily.</div>
     <div class="port3-h1 title date work-year">2026</div>
@@ -157,7 +171,7 @@
   <div class="w-layout-blockcontainer container-30 list-work w-container">
     <a href="https://www.usesparky.com/" target="_blank" class="w-inline-block"><img src="images/Sparky-cover.jpg" loading="lazy" width="1560" alt="Sparky" srcset="images/Sparky-cover-p-500.jpg 500w, images/Sparky-cover-p-800.jpg 800w, images/Sparky-cover-p-1080.jpg 1080w, images/Sparky-cover-p-1600.jpg 1600w, images/Sparky-cover-p-2000.jpg 2000w, images/Sparky-cover-p-2600.jpg 2600w, images/Sparky-cover.jpg 3120w" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px"></a>
     <a href="https://www.usesparky.com/" target="_blank" class="link-block-12 w-inline-block">
-      <div class="port3-h1 title">Sparky</div>
+      <div class="port3-h1 title">Sparky<span class="work-tag muted">Deprecated</span></div>
     </a>
     <div class="port3-h1 title date work-desc">The A.I. co-pilot for eCommerce analytics.</div>
     <div class="port3-h1 title date work-year">2024</div>
@@ -166,7 +180,7 @@
   <div class="w-layout-blockcontainer container-30 list-work w-container">
     <a href="mirror-embeds.html" class="w-inline-block"><img src="images/Embeds.jpg" loading="lazy" width="1560" alt="Mirror Embeds" srcset="images/Embeds-p-500.jpg 500w, images/Embeds-p-800.jpg 800w, images/Embeds-p-1080.jpg 1080w, images/Embeds-p-1600.jpg 1600w, images/Embeds-p-2000.jpg 2000w, images/Embeds-p-2600.jpg 2600w, images/Embeds.jpg 3120w" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px"></a>
     <a href="mirror-embeds.html" class="link-block-12 w-inline-block">
-      <div class="port3-h1 title">Mirror Embeds</div>
+      <div class="port3-h1 title">Mirror Embeds<span class="work-tag fill">In-house</span></div>
     </a>
     <div class="port3-h1 title date work-desc">Composable NFT embeds for Mirror — drove 200k+ mints across the ecosystem.</div>
     <div class="port3-h1 title date work-year">2023</div>
@@ -175,7 +189,7 @@
   <div class="w-layout-blockcontainer container-30 list-work w-container">
     <a href="mirror-subscriptions.html" class="w-inline-block"><img src="images/Subscriptions.jpg" loading="lazy" width="1560" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px" alt="Mirror Subscriptions" srcset="images/Subscriptions-p-500.jpg 500w, images/Subscriptions-p-800.jpg 800w, images/Subscriptions-p-1080.jpg 1080w, images/Subscriptions-p-1600.jpg 1600w, images/Subscriptions-p-2000.jpg 2000w, images/Subscriptions-p-2600.jpg 2600w, images/Subscriptions.jpg 3120w"></a>
     <a href="mirror-subscriptions.html" class="link-block-12 w-inline-block">
-      <div class="port3-h1 title">Mirror Subscriptions</div>
+      <div class="port3-h1 title">Mirror Subscriptions<span class="work-tag fill">In-house</span></div>
     </a>
     <div class="port3-h1 title date work-desc">Web3 subscriptions — email + wallet distribution for collectable writing.</div>
     <div class="port3-h1 title date work-year">2023</div>
@@ -184,7 +198,7 @@
   <div class="w-layout-blockcontainer container-30 list-work w-container">
     <a href="mirror-writing-nfts.html" class="w-inline-block"><img src="images/probwnft.jpg" loading="lazy" width="1777.5" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px" alt="Mirror Writing NFTs" srcset="images/probwnft-p-500.jpg 500w, images/probwnft-p-800.jpg 800w, images/probwnft-p-1080.jpg 1080w, images/probwnft-p-1600.jpg 1600w, images/probwnft-p-2000.jpg 2000w, images/probwnft-p-2600.jpg 2600w, images/probwnft.jpg 3120w"></a>
     <a href="mirror-writing-nfts.html" class="link-block-12 w-inline-block">
-      <div class="port3-h1 title">Mirror Writing NFTs</div>
+      <div class="port3-h1 title">Mirror Writing NFTs<span class="work-tag fill">In-house</span></div>
     </a>
     <div class="port3-h1 title date work-desc">Turn published writing into limited-edition, on-chain collectibles.</div>
     <div class="port3-h1 title date work-year">2022</div>
@@ -193,7 +207,7 @@
   <div class="w-layout-blockcontainer container-30 list-work w-container">
     <a href="listen-together.html" class="w-inline-block"><img src="images/listen-together-cover.jpg" loading="lazy" width="1777.5" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px" alt="Listen Together" srcset="images/listen-together-cover-p-500.jpg 500w, images/listen-together-cover-p-800.jpg 800w, images/listen-together-cover-p-1080.jpg 1080w, images/listen-together-cover-p-1600.jpg 1600w, images/listen-together-cover-p-2000.jpg 2000w, images/listen-together-cover-p-2600.jpg 2600w, images/listen-together-cover.jpg 3120w"></a>
     <a href="listen-together.html" class="link-block-12 w-inline-block">
-      <div class="port3-h1 title">Listen Together</div>
+      <div class="port3-h1 title">Listen Together<span class="work-tag dashed">Concept</span></div>
     </a>
     <div class="port3-h1 title date work-desc">A collaborative listening concept for Spotify.</div>
     <div class="port3-h1 title date work-year">2022</div>
@@ -202,7 +216,7 @@
   <div class="w-layout-blockcontainer container-30 list-work w-container">
     <a href="stir-splits.html" class="w-inline-block"><img src="images/stir-cover.jpg" loading="lazy" width="1560" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px" alt="Stir Splits" srcset="images/stir-cover-p-500.jpg 500w, images/stir-cover-p-800.jpg 800w, images/stir-cover-p-1080.jpg 1080w, images/stir-cover-p-1600.jpg 1600w, images/stir-cover-p-2000.jpg 2000w, images/stir-cover-p-2600.jpg 2600w, images/stir-cover.jpg 3120w"></a>
     <a href="stir-splits.html" class="link-block-12 w-inline-block">
-      <div class="port3-h1 title">Stir Splits</div>
+      <div class="port3-h1 title">Stir Splits<span class="work-tag fill">In-house</span></div>
     </a>
     <div class="port3-h1 title date work-desc">Automated revenue splits for creative collaborators.</div>
     <div class="port3-h1 title date work-year">2021</div>
