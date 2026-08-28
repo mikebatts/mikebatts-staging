@@ -140,6 +140,20 @@ body.home .image-39 {
 .pf-frame > img.pf-lead-still {
   display: none;
 }
+/* Romulus feature: the market loop deliberately FILLS its 1200/630 card
+   (object-fit: cover), unlike the contained artwork on every other card, so
+   the 3:2 source reads as a designed cover rather than a letterboxed still.
+   Motion video by default, static still under reduced motion — a pure CSS
+   swap handled below. These rules follow the base .pf-frame media rules so the
+   cover fill and the still's hidden default win on equal specificity by source
+   order; only the Romulus card is affected, never WaitLayer/other cover art. */
+.pf-frame > video.pf-romulus-video {
+  object-fit: cover;
+}
+.pf-frame > img.pf-romulus-still {
+  display: none;
+  object-fit: cover;
+}
 /* Daylight wordmark: centered by the grid cell (place-self), never by a
    transform, so hover and the reduced-motion video/still swap can never
    shift it. Explicit stacking above the media, intrinsic-safe size cap. */
@@ -336,10 +350,12 @@ body.home .image-39 {
 .pf-lead:hover .pf-frame > img:not(.pf-logo-overlay),
 .pf-lead:hover .pf-frame > video,
 .pf-feature:hover .pf-frame > img,
+.pf-feature:hover .pf-frame > video,
 .pf-tile:hover .pf-frame > img,
 .pf-lead:focus-visible .pf-frame > img:not(.pf-logo-overlay),
 .pf-lead:focus-visible .pf-frame > video,
 .pf-feature:focus-visible .pf-frame > img,
+.pf-feature:focus-visible .pf-frame > video,
 .pf-tile:focus-visible .pf-frame > img {
   transform: none;
 }
@@ -448,6 +464,13 @@ body.home .image-39 {
     display: none;
   }
   .pf-frame > img.pf-lead-still {
+    display: block;
+  }
+  /* Same swap for the Romulus feature loop: hide the video, reveal its still. */
+  .pf-frame > video.pf-romulus-video {
+    display: none;
+  }
+  .pf-frame > img.pf-romulus-still {
     display: block;
   }
   /* The intro relies on a Webflow load animation; guarantee it is legible

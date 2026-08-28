@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Romulus — Mike Battaglia</title>
+  <title>Romulus — Building a Production AI Agent · Mike Battaglia</title>
 
   <meta content="Romulus — Designing the Management System for a Synthetic Product Team" property="og:title">
   <meta content="Romulus — Designing the Management System for a Synthetic Product Team" property="twitter:title">
@@ -55,7 +55,7 @@
             split title lines → body beat; scrubbed cinematic break;
             receipt-print stats reveal.
          4. Micro-interactions: drawn left-to-right underlines, a
-            return gesture on the nav back link, gate submit hover,
+            return gesture on the nav back link,
             global focus-visible states.
          5. Thesis moment: section 10 title set as the centered
             300-italic display line the page is remembered by.
@@ -131,11 +131,6 @@
     .failure-label,
     .stats-eyebrow,
     .stat-label,
-    .gate-sub,
-    .gate-label,
-    .gate-submit,
-    .gate-error,
-    .gate-foot,
     .hero-eyebrow,
     .hero-meta,
     .romulus-nav,
@@ -160,131 +155,42 @@
       line-height: 1.6;
     }
 
-    /* ============================================================
-       PASSWORD GATE
-       ============================================================ */
-
-    .romulus-gate {
-      position: fixed;
-      inset: 0;
-      z-index: 9000;
-      background:
-        radial-gradient(circle at 50% 15%, rgba(122, 22, 22, 0.045), transparent 34%),
-        var(--bg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-    }
-
-    .romulus-gate.hidden { display: none; }
-
-    .gate-card {
-      text-align: center;
-      max-width: 380px;
-      width: 100%;
-      padding: 42px 30px 34px;
-      border: 1px solid var(--rule);
-      background: rgba(242, 237, 229, 0.72);
-      -webkit-backdrop-filter: blur(16px);
-      backdrop-filter: blur(16px);
-    }
-
-    .gate-mark {
-      font-family: 'Source Serif 4', serif;
-      font-style: italic;
-      font-size: clamp(38px, 7vw, 58px);
-      font-weight: 400;
-      color: var(--ink);
-      margin-bottom: 6px;
-      letter-spacing: -0.015em;
-      line-height: 1;
-    }
-
-    .gate-sub {
-      font-size: 11px;
-      color: var(--ink-4);
-      margin-bottom: 32px;
-    }
-
-    .gate-line {
-      width: 32px;
-      height: 1px;
-      background: var(--ink-4);
-      margin: 0 auto 28px;
-    }
-
-    .gate-label {
-      font-size: 10px;
-      color: var(--ink-4);
-      margin-bottom: 14px;
-    }
-
-    .gate-input {
-      width: 100%;
-      padding: 12px 0;
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid var(--ink-4);
-      text-align: center;
-      font-family: 'Inter', sans-serif;
-      font-size: 15px;
-      color: var(--ink);
-      outline: none;
-      letter-spacing: 0.05em;
-      margin-bottom: 16px;
-      transition: border-color 0.2s;
-    }
-
-    .gate-input::placeholder {
-      color: var(--ink-4);
-      font-size: 13px;
-      letter-spacing: 0.1em;
-    }
-
-    .gate-input:focus { border-bottom-color: var(--accent); }
-
-    .gate-submit {
-      width: 100%;
-      padding: 12px 20px;
-      background: var(--ink);
-      color: var(--bg);
-      border: none;
-      font-size: 11px;
-      cursor: pointer;
-      transition: background 0.3s var(--ease), transform 0.2s var(--ease);
-    }
-
-    .gate-submit:hover {
-      background: var(--accent);
-      transform: translateY(-1px);
-    }
-
-    .gate-submit:active {
-      transform: translateY(0);
-    }
-
-    .gate-error {
-      display: none;
-      margin-top: 12px;
-      font-size: 10px;
-      color: var(--accent);
-    }
-
-    .gate-error.visible { display: block; }
-
-    .gate-foot {
-      margin-top: 28px;
-      font-size: 10px;
+    .receipt-strip {
+      margin-top: 9px;
+      font-family: 'Inconsolata', monospace;
+      font-size: 11.5px;
+      letter-spacing: 0.07em;
       color: var(--ink-4);
     }
-
+    .receipt-strip strong { color: var(--ink-3); font-weight: 700; }
+    .receipt-strip .rs-dot { color: var(--rule-strong); padding: 0 2px; }
+  
+    .art-motif { display: block; width: 100%; height: auto; padding: 6px 4px 2px; box-sizing: border-box; }
+    .art-motif .mk { stroke: rgba(46,44,40,0.5); stroke-width: 1.7; stroke-linecap: round; fill: none; }
+    .art-motif .mk.fine { stroke-width: 1.2; stroke: rgba(46,44,40,0.34); }
+    .art-motif .ma { fill: var(--accent); }
+    .art-motif .ma-line { stroke: var(--accent); stroke-width: 2; stroke-linecap: round; fill: none; }
+    .art-motif .mdot { fill: rgba(46,44,40,0.55); }
+    .art-motif .mdotr { fill: none; stroke: rgba(46,44,40,0.4); stroke-width: 1.4; }
+    .art-motif [pathLength] { stroke-dasharray: 1; stroke-dashoffset: 1; }
+    .art-motif circle, .art-motif .ma, .art-motif .mdot, .art-motif .mdotr, .art-motif rect.ma { opacity: 0; }
+    .art-motif.on [pathLength] { animation: mDraw 0.9s cubic-bezier(0.65,0,0.15,1) forwards; }
+    .art-motif.on circle, .art-motif.on .ma, .art-motif.on .mdot, .art-motif.on .mdotr { animation: mFade 0.5s ease forwards; }
+    .art-motif.on .d1 { animation-delay: 0.05s; }
+    .art-motif.on .d2 { animation-delay: 0.4s; }
+    .art-motif.on .d3 { animation-delay: 0.75s; }
+    @keyframes mDraw { to { stroke-dashoffset: 0; } }
+    @keyframes mFade { to { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .art-motif [pathLength] { stroke-dasharray: none; stroke-dashoffset: 0; animation: none; }
+      .art-motif circle, .art-motif .ma, .art-motif .mdot, .art-motif .mdotr { opacity: 1; animation: none !important; }
+    }
+  
     /* ============================================================
        MAIN / NAV
        ============================================================ */
 
-    .romulus-content { display: none; }
-    .romulus-content.visible { display: block; }
+    .romulus-content { display: block; }
 
     .romulus-nav {
       position: fixed;
@@ -1218,6 +1124,20 @@
     .role-card:nth-child(7) { --role-stagger: 420ms; }
     .role-card:nth-child(8) { --role-stagger: 490ms; }
 
+    
+    .role-numeral {
+      font-family: 'Source Serif 4', serif;
+      font-size: 30px;
+      line-height: 1;
+      color: var(--accent);
+      margin: 0 0 20px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+      transition-delay: var(--role-stagger, 0ms);
+    }
+    .role-card.romulus-visible .role-numeral { opacity: 1; transform: none; }
+  
     .role-icon-wrap {
       width: 52px;
       height: 52px;
@@ -1836,6 +1756,15 @@
       line-height: 1.52;
     }
 
+
+    html.gsap-active .stats:not(.stats-live) .stat { opacity: 0; transform: translateY(14px); }
+    .stats-live .stat { animation: statRise 0.75s var(--ease) both; }
+    .stats-live .stat:nth-child(1) { animation-delay: 0s; }
+    .stats-live .stat:nth-child(2) { animation-delay: 0.12s; }
+    .stats-live .stat:nth-child(3) { animation-delay: 0.24s; }
+    .stats-live .stat:nth-child(4) { animation-delay: 0.36s; }
+    @keyframes statRise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  
     .stats {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -2515,26 +2444,162 @@
         transform: none;
       }
     }
+    /* ---- v3: The Brief (TL;DR card) + inscription details ---- */
+    .brief-section {
+      background: var(--bg-warm);
+      border-top: 1px solid var(--gold);
+      border-bottom: 1px solid var(--rule);
+    }
+    .brief-lede {
+      font-family: 'Source Serif 4', serif;
+      font-size: clamp(1.35rem, 2.6vw, 1.9rem);
+      line-height: 1.35;
+      max-width: var(--measure);
+      margin: 0 0 1.1rem;
+    }
+    .brief-body {
+      max-width: var(--measure);
+      color: var(--charcoal);
+      margin-bottom: 2.2rem;
+    }
+    .brief-close {
+      font-family: 'Source Serif 4', serif;
+      font-style: italic;
+      color: var(--charcoal);
+      margin-top: 2.2rem;
+    }
+    .media-cap {
+      border-top: 3px double var(--rule);
+      padding-top: 0.55rem;
+    }
+    .eyebrow .numeral {
+      color: var(--gold);
+      opacity: 0.45;
+      font-variant: small-caps;
+      letter-spacing: 0.12em;
+      margin-left: 0.5em;
+    }
+    /* ---- v4: overhaul details ---- */
+    .forged-stamp {
+      display: inline-block;
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(176, 141, 87, 0.45);
+      padding: 0.14rem 0.5rem;
+      border-radius: 2px;
+      margin-left: 0.45rem;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+    .pars-divider {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      max-width: 980px;
+      margin: 5rem auto 0;
+      padding: 0 clamp(1.25rem, 5vw, 4rem);
+    }
+    .pars-divider::before,
+    .pars-divider::after {
+      content: "";
+      flex: 1;
+      border-top: 3px double var(--rule);
+    }
+    .pars-label {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+    .failure-stamp::after {
+      content: '';
+      position: absolute;
+      left: 3.5px;
+      top: 20px;
+      bottom: -38px;
+      border-left: 1px solid var(--rule);
+    }
+    .failure-event:last-child .failure-stamp::after { display: none; }
+    /* ---- v5: tabula index, mini-grid, polish ---- */
+    .tabula {
+      max-width: 980px;
+      margin: 2.6rem auto 0;
+      border-top: 3px double var(--rule);
+      border-bottom: 3px double var(--rule);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+    .tabula a {
+      display: block;
+      padding: 0.85rem 1rem;
+      text-decoration: none;
+      color: var(--charcoal);
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-right: 1px solid var(--rule);
+      transition: color 0.2s var(--ease), background 0.2s var(--ease);
+    }
+    .tabula a:last-child { border-right: none; }
+    .tabula a:hover { color: var(--accent-strong); background: var(--bg-warm); }
+    .tabula a .t-num { color: var(--gold); margin-right: 0.5em; }
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+      margin-top: 2.4rem;
+    }
+    .mini-cell {
+      background: var(--bg);
+      padding: 1.15rem 1.25rem;
+    }
+    .mini-name {
+      font-family: 'Source Serif 4', serif;
+      font-size: 1.05rem;
+      margin-bottom: 0.3rem;
+    }
+    .mini-name a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--rule); }
+    .mini-name a:hover { border-color: var(--gold); }
+    .mini-status {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.45rem;
+    }
+    .mini-copy { font-size: 0.85rem; line-height: 1.5; color: var(--charcoal); }
+    .mini-intro {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 3.4rem;
+    }
+    html { scroll-behavior: smooth; }
+    .eyebrow[id] { scroll-margin-top: 3.5rem; }
+    @media (max-width: 640px) {
+      .pars-label { letter-spacing: 0.18em; font-size: 0.65rem; }
+      .forged-stamp { display: inline-block; margin-left: 0; margin-top: 0.4rem; }
+      .tabula { grid-template-columns: repeat(2, 1fr); }
+      .tabula a { border-bottom: 1px solid var(--rule); }
+    }
+  </style>
+  <style>
+    html.anim-failsafe .stats:not(.stats-live) .stat { opacity: 1 !important; transform: none !important; }
   </style>
 </head>
 
 <body>
-  <!-- ============================================================
-       PASSWORD GATE
-       ============================================================ -->
-  <div class="romulus-gate" id="gate">
-    <div class="gate-card">
-      <div class="gate-mark">Romulus</div>
-      <div class="gate-sub">A Case Study</div>
-      <div class="gate-line"></div>
-      <div class="gate-label">Access Required</div>
-      <input type="password" class="gate-input" id="gateInput" placeholder="passphrase" autocomplete="off">
-      <button class="gate-submit" id="gateSubmit">Enter</button>
-      <div class="gate-error" id="gateError">Incorrect passphrase. Try again.</div>
-      <div class="gate-foot">MMXXVI</div>
-    </div>
-  </div>
-
   <!-- ============================================================
        MAIN CONTENT
        ============================================================ -->
@@ -2566,7 +2631,7 @@
           </p> -->
         </div>
         <div class="hero-meta">
-          <span>Feb 3 &rarr; May 1, 2026</span>
+          <span>Feb 3, 2026 &rarr; ongoing</span>
           <span class="meta-dot"></span>
           <span>Brooklyn, NY</span>
           <span class="meta-dot"></span>
@@ -2578,84 +2643,90 @@
     </header>
 
     <!-- ============================================================
-         01 — THE QUESTION
+         00 — THE BRIEF (v3 TL;DR)
+         ============================================================ -->
+    <section class="section brief-section" data-romulus-animate>
+      <div class="eyebrow">00 · The Brief</div>
+      <div class="brief-lede">One operator. One synthetic team. Six months of continuous operation.</div>
+      <div class="brief-body">
+        <p>Romulus is a production agent system I designed, built, and still run daily: durable memory, model routing, research pipelines, delegation contracts, and governance boundaries. It is not a demo &mdash; it manages real product work while I sleep.</p>
+      </div>
+
+      <div class="stats" id="briefStats">
+        <div class="stat">
+          <span class="stat-num" data-target="6" data-counted="false">
+            <span class="stat-value">0</span>
+          </span>
+          <span class="stat-label">Months in operation</span>
+          <span class="stat-context">Continuous, not a weekend demo</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num" data-target="30" data-suffix="+" data-counted="false">
+            <span class="stat-value">0</span><span class="stat-suffix">+</span>
+          </span>
+          <span class="stat-label">Ideas through the loop</span>
+          <span class="stat-context">Researched, pressure-tested, built or killed</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num" data-target="7" data-counted="false">
+            <span class="stat-value">0</span>
+          </span>
+          <span class="stat-label">Live product surfaces</span>
+          <span class="stat-context">Maintained by one operator plus the system</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num" data-target="24" data-suffix="/7" data-counted="false">
+            <span class="stat-value">0</span><span class="stat-suffix">/7</span>
+          </span>
+          <span class="stat-label">Always on</span>
+          <span class="stat-context">Briefs, monitors, and delegated builds run unattended</span>
+        </div>
+      </div>
+
+      <div class="brief-close">The products are evidence. The operating model is the point.</div>
+
+      <nav class="tabula" aria-label="Case study index">
+        <a href="#constraint"><span class="t-num">I</span>The Constraint</a>
+        <a href="#system"><span class="t-num">II</span>The Team</a>
+        <a href="#loop"><span class="t-num">III</span>The Loop</a>
+        <a href="#failures"><span class="t-num">IV</span>The Failures</a>
+        <a href="#bets"><span class="t-num">V</span>The Bets</a>
+        <a href="#transfer"><span class="t-num">VI</span>The Transfer</a>
+      </nav>
+    </section>
+
+    <div class="pars-divider" aria-hidden="true"><span class="pars-label">Pars I · The System</span></div>
+
+    <!-- ============================================================
+         01 — THE CONSTRAINT
          ============================================================ -->
     <section class="section" data-romulus-animate>
-      <div class="eyebrow">01 · The Question</div>
-      <h2 class="section-title">What does product management become when the team is partly synthetic?</h2>
+      <div class="eyebrow" id="constraint">01 · The Constraint</div>
+      <h2 class="section-title">I had ten hours a week and product ambitions that needed sixty.</h2>
 
       <div class="prose">
-        <p class="lead">Most teams use AI as a tool: open a chat, paste a prompt, copy the result, lose the context.</p>
+        <p class="lead">A full-time product job by day. A queue of product bets I believed in. And no version of the math where one person's nights and weekends could research, validate, design, build, ship, and learn from all of them.</p>
 
-        <p>Product work does not happen in isolated prompts. It depends on memory, prioritization, taste, sequencing, validation, constraints, and judgment. A stateless assistant can help with a task. It cannot manage a product surface over time.</p>
+        <p>The conventional answer is to pick one thing. I tried a different answer: hire a team that doesn't exist. Not a chat window I paste prompts into &mdash; an operating model with memory, roles, budgets, boundaries, and a manager. I named it Romulus and ran it the way I would run a team, because that is what it had to be.</p>
 
-        <p>I stopped treating AI like a chat window and started designing it like an operating model. Romulus became the orchestration layer: identity, memory, research, model routing, delegation, verification, governance, and feedback loops.</p>
-
-        <p>The constraint was real: limited time, limited attention, real cost ceilings, and no tolerance for a system that only worked when I was staring at it.</p>
+        <p>The constraint shaped every design decision that follows: limited time, limited attention, real cost ceilings, and zero tolerance for a system that only worked while I was staring at it.</p>
       </div>
 
       <div class="pull-quote">
-        I was not trying to build faster. I was trying to learn how to manage AI work.
+        I was not trying to build faster. I was learning to manage work I don't do with my own hands &mdash; which is the job.
       </div>
 
-      <div class="system-orbit" aria-label="Romulus system diagram">
-        <div class="orbit-ring r1" aria-hidden="true"></div>
-        <div class="orbit-ring r2" aria-hidden="true"></div>
-        <div class="orbit-ring r3" aria-hidden="true"></div>
-
-        <div class="orbit-line l1" aria-hidden="true"></div>
-        <div class="orbit-line l2" aria-hidden="true"></div>
-        <div class="orbit-line l3" aria-hidden="true"></div>
-        <div class="orbit-line l4" aria-hidden="true"></div>
-        <div class="orbit-line l5" aria-hidden="true"></div>
-
-        <div class="orbit-center">
-          <div>
-            <div class="orbit-center-title">Product<br>Judgment</div>
-            <div class="orbit-center-sub">Mike</div>
-          </div>
-        </div>
-
-        <article class="orbit-node n-mike">
-          <div class="orbit-node-label">Human Lead</div>
-          <div class="orbit-node-title">Direction</div>
-          <p class="orbit-node-copy">Taste, prioritization, constraints, strategy, review, and final authority.</p>
-        </article>
-
-        <article class="orbit-node n-romulus">
-          <div class="orbit-node-label">Orchestrator</div>
-          <div class="orbit-node-title">Romulus</div>
-          <p class="orbit-node-copy">Memory, research, specs, routing, verification, reporting, and continuity.</p>
-        </article>
-
-        <article class="orbit-node n-models">
-          <div class="orbit-node-label">Contributors</div>
-          <div class="orbit-node-title">Models + Tools</div>
-          <p class="orbit-node-copy">Claude Code, Grok, Qwen, OpenRouter, scripts, APIs, GitHub, Vercel.</p>
-        </article>
-
-        <article class="orbit-node n-products">
-          <div class="orbit-node-label">Evidence</div>
-          <div class="orbit-node-title">Product Bets</div>
-          <p class="orbit-node-copy">Chronicle, Forbidden, Via, AgentForge, Legion, Cherry Street Labs.</p>
-        </article>
-
-        <article class="orbit-node n-vault">
-          <div class="orbit-node-label">Learning Loop</div>
-          <div class="orbit-node-title">The Vault</div>
-          <p class="orbit-node-copy">Daily notes, project notes, decisions, postmortems, semantic retrieval.</p>
-        </article>
-      </div>
+      
     </section>
 
     <!-- ============================================================
          02 — THE SYSTEM I DESIGNED
          ============================================================ -->
     <section class="section section-border" data-romulus-animate>
-      <div class="eyebrow">02 · The System I Designed</div>
+      <div class="eyebrow" id="system">02 · The Team I Hired</div>
       <h2 class="section-title">
-        Not a chatbot. Not a coding agent. A product operating system.
-        <span class="sub">Romulus has six designed layers: identity, memory, research, routing, delegation, and governance.</span>
+        Six layers, each one hired for a reason.
+        <span class="sub">Identity, memory, research, routing, delegation, governance. Half were designed up front. Half were forged by a failure you'll meet below.</span>
       </h2>
 
       <div class="layer-grid">
@@ -2663,13 +2734,10 @@
           <div class="layer-card-inner">
             <div class="layer-num">Layer 01</div>
             <div class="artifact-frame layer-artifact" aria-label="SOUL.md identity artifact">
-              <div class="artifact-label">SOUL.md</div>
-              <div class="artifact-lines"><span></span><span></span><span></span></div>
-              <div class="artifact-meta">Modes · voice · authority</div>
-            </div>
+              <svg class="art-motif" viewBox="0 0 240 122" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M44 84 C 86 26, 122 96, 178 36" class="mk d1" pathLength="1"/><circle cx="178" cy="36" r="4" class="ma d3"/></svg></div>
             <h3 class="layer-title">Identity</h3>
             <p class="layer-copy"><strong>SOUL.md</strong> came first. Personality before capability. Modes before tasks. Role clarity before execution.</p>
-            <p class="small-note">You cannot manage an agent whose role is undefined.</p>
+            <p class="small-note">You cannot manage an agent whose role is undefined. <span class="forged-stamp">Designed on day one</span></p>
           </div>
         </article>
 
@@ -2677,10 +2745,7 @@
           <div class="layer-card-inner">
             <div class="layer-num">Layer 02</div>
             <div class="artifact-frame layer-artifact" aria-label="Vault memory artifact">
-              <div class="artifact-label">Vault Graph</div>
-              <div class="artifact-lines"><span></span><span></span><span></span></div>
-              <div class="artifact-meta">Daily notes · projects · decisions</div>
-            </div>
+              <svg class="art-motif" viewBox="0 0 240 122" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="44" y1="28" x2="196" y2="28" class="mk d1" pathLength="1"/><line x1="44" y1="50" x2="196" y2="50" class="mk d1" pathLength="1"/><line x1="44" y1="72" x2="196" y2="72" class="mk d2" pathLength="1"/><line x1="44" y1="94" x2="196" y2="94" class="mk d2" pathLength="1"/><circle cx="120" cy="50" r="4.5" class="ma d3"/><line x1="120" y1="55" x2="120" y2="94" class="mk fine d3" pathLength="1"/></svg></div>
             <h3 class="layer-title">Memory</h3>
             <p class="layer-copy">Flat files became an Obsidian vault, then QMD semantic search, then a queryable wiki layer. Context stopped resetting.</p>
             <p class="small-note">Vault as brain. Sessions as work.</p>
@@ -2691,10 +2756,7 @@
           <div class="layer-card-inner">
             <div class="layer-num">Layer 03</div>
             <div class="artifact-frame layer-artifact" aria-label="Research signal board artifact">
-              <div class="artifact-label">Signal Board</div>
-              <div class="artifact-lines"><span></span><span></span><span></span></div>
-              <div class="artifact-meta">Market · X · competitors</div>
-            </div>
+              <svg class="art-motif" viewBox="0 0 240 122" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M92 102 A 28 28 0 0 1 148 102" class="mk d1" pathLength="1"/><path d="M68 102 A 52 52 0 0 1 172 102" class="mk d2" pathLength="1"/><path d="M44 102 A 76 76 0 0 1 196 102" class="mk fine d3" pathLength="1"/><circle cx="120" cy="50" r="4" class="ma d3"/><line x1="112" y1="102" x2="128" y2="102" class="ma-line d1" pathLength="1"/></svg></div>
             <h3 class="layer-title">Research</h3>
             <p class="layer-copy">Brave Search, X signal scans, Firecrawl, local scripts, and multi-model pressure testing before build decisions.</p>
             <p class="small-note">Research before implementation.</p>
@@ -2705,13 +2767,10 @@
           <div class="layer-card-inner">
             <div class="layer-num">Layer 04</div>
             <div class="artifact-frame layer-artifact" aria-label="Model routing matrix artifact">
-              <div class="artifact-label">Routing Matrix</div>
-              <div class="artifact-lines"><span></span><span></span><span></span></div>
-              <div class="artifact-meta">Job · cost · context · risk</div>
-            </div>
+              <svg class="art-motif" viewBox="0 0 240 122" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M40 61 H 100" class="mk d1" pathLength="1"/><path d="M100 61 C 124 61, 128 29, 152 29 H 200" class="mk fine d2" pathLength="1"/><path d="M100 61 H 200" class="mk fine d2" pathLength="1"/><path d="M100 61 C 124 61, 128 93, 152 93 H 200" class="ma-line d3" pathLength="1"/><circle cx="100" cy="61" r="3.5" class="mdot d2"/></svg></div>
             <h3 class="layer-title">Routing</h3>
             <p class="layer-copy">Each model got a job description, cost ceiling, context expectation, and known failure mode.</p>
-            <p class="small-note">Models as contributors.</p>
+            <p class="small-note">Models as contributors. <span class="forged-stamp">Forged by Failure III</span></p>
           </div>
         </article>
 
@@ -2719,13 +2778,10 @@
           <div class="layer-card-inner">
             <div class="layer-num">Layer 05</div>
             <div class="artifact-frame layer-artifact" aria-label="Spec to implementation artifact">
-              <div class="artifact-label">Spec Contract</div>
-              <div class="artifact-lines"><span></span><span></span><span></span></div>
-              <div class="artifact-meta">Direction → build → verify</div>
-            </div>
+              <svg class="art-motif" viewBox="0 0 240 122" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M32 61 H 68" class="mk d1" pathLength="1"/><path d="M68 61 C 84 61, 86 31, 102 31 H 138 C 154 31, 156 61, 172 61" class="mk fine d2" pathLength="1"/><path d="M68 61 H 172" class="mk fine d2" pathLength="1"/><path d="M68 61 C 84 61, 86 91, 102 91 H 138 C 154 91, 156 61, 172 61" class="mk fine d2" pathLength="1"/><path d="M172 61 H 208" class="mk d3" pathLength="1"/><line x1="172" y1="47" x2="172" y2="75" class="ma-line d3" pathLength="1"/></svg></div>
             <h3 class="layer-title">Delegation</h3>
             <p class="layer-copy">Direction became specs. Specs became implementation. Implementation went through verification and staging.</p>
-            <p class="small-note">The spec became the contract.</p>
+            <p class="small-note">The spec became the contract. <span class="forged-stamp">Hardened by Failure IV</span></p>
           </div>
         </article>
 
@@ -2733,10 +2789,7 @@
           <div class="layer-card-inner">
             <div class="layer-num">Layer 06</div>
             <div class="artifact-frame layer-artifact" aria-label="Fortress governance artifact">
-              <div class="artifact-label">Fortress</div>
-              <div class="artifact-lines"><span></span><span></span><span></span></div>
-              <div class="artifact-meta">Approvals · money · deploys</div>
-            </div>
+              <svg class="art-motif" viewBox="0 0 240 122" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="120" cy="61" r="5" class="mdot d1"/><rect x="76" y="25" width="88" height="72" class="ma-line d2" pathLength="1"/><rect x="60" y="13" width="120" height="96" class="mk fine d3" pathLength="1"/></svg></div>
             <h3 class="layer-title">Governance</h3>
             <p class="layer-copy">The Fortress: no messages, money, accounts, public posts, credentials, or production deploys without explicit approval.</p>
             <p class="small-note">Delegation without boundaries is risk.</p>
@@ -2751,29 +2804,21 @@
     <section class="section" data-romulus-animate>
       <div class="editorial">
         <div class="editorial-text">
-          <div class="eyebrow">03 · PMing the AI</div>
-          <h2 class="section-title">The human is still the product lead.</h2>
+          <div class="eyebrow">03 · The Management Job</div>
+          <h2 class="section-title">I stopped writing the code. The job got harder, not easier.</h2>
 
           <div class="prose">
-            <p class="lead">My job was not to hand-write every line of code. My job was to decide what was worth building, define the shape of the work, choose the right execution path, review the output, catch failures, and keep a hand on the wheel.</p>
+            <p class="lead">Everything a manager owes a team, I owed this one: role clarity, sharp questions, acceptance criteria, honest review, and consequences when the work came back wrong.</p>
 
-            <p>I was managing a synthetic product team: Romulus as the orchestrator, Claude Code as the implementation layer, long-context models as research and reasoning contributors, and myself as product lead.</p>
+            <p>The org chart was small but real. Romulus orchestrated. Claude Code implemented. Long-context models researched and reasoned. I decided what was worth building, defined the shape of the work, inspected everything, and owned every release.</p>
 
-            <p>“Using AI” is easy to say and increasingly meaningless. Managing AI work is different, that distinction matters. It means creating role clarity, asking sharper questions, defining acceptance criteria, routing work to the right contributor, inspecting outputs, and building enough memory that the system learns from yesterday.</p>
+            <p>&ldquo;Using AI&rdquo; is table stakes and increasingly meaningless. What I practiced for six months is the part that doesn't commoditize: managing work I don't perform with my own hands, done by contributors who are confidently wrong in ways a junior engineer never is. The biggest lesson reads like management because it is management: when an agent loops, the task was never articulated — the fix is upstream, in the spec, not in more tokens.</p>
           </div>
         </div>
 
         <aside class="editorial-media">
           <figure class="artifact-frame compact" aria-label="Synthetic team role architecture">
-            <div class="artifact-label">Team Map</div>
-            <div class="artifact-nodes" aria-hidden="true">
-              <div class="artifact-node primary">Mike</div>
-              <div class="artifact-node">Romulus</div>
-              <div class="artifact-node">Claude Code</div>
-              <div class="artifact-node">Grok</div>
-              <div class="artifact-node">Qwen</div>
-              <div class="artifact-node">Vault</div>
-            </div>
+            <svg class="art-motif" viewBox="0 0 240 122" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="120" cy="24" r="5" class="ma d1"/><circle cx="120" cy="57" r="9" class="mk d1" fill="none"/><line x1="120" y1="29" x2="120" y2="48" class="mk fine d2" pathLength="1"/><line x1="120" y1="66" x2="76" y2="92" class="mk fine d2" pathLength="1"/><circle cx="76" cy="96" r="4" class="mdot d3"/><line x1="120" y1="66" x2="120" y2="92" class="mk fine d2" pathLength="1"/><circle cx="120" cy="96" r="4" class="mdot d3"/><line x1="120" y1="66" x2="164" y2="92" class="mk fine d2" pathLength="1"/><circle cx="164" cy="96" r="4" class="mdot d3"/></svg>
             <div>
               <div class="artifact-title">Role architecture</div>
               <div class="artifact-copy">
@@ -2787,156 +2832,49 @@
 
       <div class="role-grid" aria-label="Mike's responsibilities managing Romulus">
         <article class="role-card">
-          <div class="role-icon-wrap">
-            <svg class="role-icon" viewBox="0 0 48 48" aria-hidden="true">
-              <path class="shade" d="M10 11h22v22H10z"></path>
-              <circle class="draw" cx="21" cy="21" r="10.5"></circle>
-              <path class="draw" d="M28.5 28.5 39 39"></path>
-              <path class="draw fine" d="M15 17.5h11.5M14 22h14M16.5 26.5h8.5"></path>
-              <path class="draw fine ghost" d="M21 10.5v21M10.5 21h21"></path>
-              <path class="draw fine" d="M15.5 15.5c4-2.5 8.4-2.3 12 .7"></path>
-              <circle class="node" cx="17.5" cy="19" r="1.55"></circle>
-              <circle class="node" cx="24.8" cy="24.6" r="1.55"></circle>
-              <circle class="node" cx="27.3" cy="15.8" r="1.35"></circle>
-            </svg>
-          </div>
+          <div class="role-numeral">I</div>
           <h3 class="role-title">Research Lead</h3>
           <p class="role-copy">Define the question, inspect markets, scan competitors, find signal, and decide what evidence is enough.</p>
         </article>
 
         <article class="role-card">
-          <div class="role-icon-wrap">
-            <svg class="role-icon" viewBox="0 0 48 48" aria-hidden="true">
-              <path class="shade" d="M15 11h19l-4 6 4 6H15z"></path>
-              <path class="draw" d="M24 7.5v33"></path>
-              <path class="draw" d="M11 39.5h26"></path>
-              <path class="draw" d="M15 11h19l-4 6 4 6H15"></path>
-              <path class="draw fine" d="M15 17h15"></path>
-              <path class="draw fine" d="M13 33c3.8-6 8.7-8.8 14.5-8.6 3.8.1 6.1-1.4 7.5-4.2"></path>
-              <path class="draw fine" d="M15 33.5l4-3.3 4.1 2.1 5-6 5.3.9"></path>
-              <path class="draw" d="m35 20.2-1.4 5.1-4.7-2.4"></path>
-              <circle class="node" cx="19" cy="30.2" r="1.45"></circle>
-              <circle class="node" cx="28.1" cy="26.3" r="1.45"></circle>
-              <circle class="node" cx="33.4" cy="27.2" r="1.45"></circle>
-            </svg>
-          </div>
+          <div class="role-numeral">II</div>
           <h3 class="role-title">Product Strategist</h3>
           <p class="role-copy">Choose what to build, park, kill, or reframe. Stop chasing bait. Follow pain, revenue, and timing.</p>
         </article>
 
         <article class="role-card">
-          <div class="role-icon-wrap">
-            <svg class="role-icon" viewBox="0 0 48 48" aria-hidden="true">
-              <path class="shade" d="M13 7.5h18l5 5V41H13z"></path>
-              <path class="draw" d="M13 7.5h18l5 5V41H13z"></path>
-              <path class="draw fine" d="M31 7.5v6h5"></path>
-              <path class="draw" d="M18 18.5h14M18 24h11M18 29.5h14"></path>
-              <path class="draw fine" d="M18 35h7.5M29 35l2.2 2.3 5.3-6.4"></path>
-              <path class="draw" d="M10.5 37.5 14 36.6 27.2 23.4l-2.8-2.8L11.2 33.8z"></path>
-              <path class="draw fine" d="m22.8 22.2 2.8 2.8"></path>
-              <circle class="node" cx="18" cy="18.5" r="1.25"></circle>
-              <circle class="node" cx="18" cy="24" r="1.25"></circle>
-              <circle class="node" cx="18" cy="29.5" r="1.25"></circle>
-            </svg>
-          </div>
+          <div class="role-numeral">III</div>
           <h3 class="role-title">Spec Writer</h3>
           <p class="role-copy">Turn fuzzy product direction into implementation-ready contracts with constraints and acceptance criteria.</p>
         </article>
 
         <article class="role-card">
-          <div class="role-icon-wrap">
-            <svg class="role-icon" viewBox="0 0 48 48" aria-hidden="true">
-              <circle class="shade" cx="24" cy="24" r="7.5"></circle>
-              <circle class="draw" cx="24" cy="24" r="5"></circle>
-              <path class="draw" d="M24 19V9M24 29v10M19 24H9M29 24h10"></path>
-              <path class="draw fine" d="M20.5 20.5 13 13M27.5 20.5 35 13M27.5 27.5 35 35M20.5 27.5 13 35"></path>
-              <path class="draw fine" d="M16 9h8M32 24v-6c0-2.8-2.2-5-5-5h-3"></path>
-              <path class="draw fine" d="M32 39h-8M16 24v6c0 2.8 2.2 5 5 5h3"></path>
-              <path class="draw fine ghost" d="M21.5 24h5M24 21.5v5"></path>
-              <circle class="node" cx="24" cy="9" r="1.8"></circle>
-              <circle class="node" cx="39" cy="24" r="1.8"></circle>
-              <circle class="node" cx="24" cy="39" r="1.8"></circle>
-              <circle class="node" cx="9" cy="24" r="1.8"></circle>
-            </svg>
-          </div>
+          <div class="role-numeral">IV</div>
           <h3 class="role-title">Delegation Manager</h3>
           <p class="role-copy">Route the work to the right model, tool, or implementation layer based on job type and failure mode.</p>
         </article>
 
         <article class="role-card">
-          <div class="role-icon-wrap">
-            <svg class="role-icon" viewBox="0 0 48 48" aria-hidden="true">
-              <rect class="shade" x="7.5" y="9" width="33" height="29" rx="2.5"></rect>
-              <rect class="draw" x="7.5" y="9" width="33" height="29" rx="2.5"></rect>
-              <path class="draw fine" d="M7.5 16h33M16 16v22M31 16v22"></path>
-              <path class="draw fine ghost" d="M12 24h24M24 19v15"></path>
-              <path class="draw" d="M12.5 31.5c4.8-11.8 12.1 3.9 22.7-9.4"></path>
-              <path class="draw fine" d="M12.5 31.5h6M35.2 22.1h-6.2"></path>
-              <path class="draw fine" d="M17.5 25.3l4.8-2.2M29.6 26.2l4.2-2.9"></path>
-              <circle class="node" cx="12.5" cy="31.5" r="1.55"></circle>
-              <circle class="node" cx="21.9" cy="23.2" r="1.55"></circle>
-              <circle class="node" cx="29.8" cy="26.1" r="1.55"></circle>
-              <circle class="node" cx="35.2" cy="22.1" r="1.55"></circle>
-            </svg>
-          </div>
+          <div class="role-numeral">V</div>
           <h3 class="role-title">Design Lead</h3>
           <p class="role-copy">Set the interaction model, product shape, aesthetic direction, quality bar, and user-facing logic.</p>
         </article>
 
         <article class="role-card">
-          <div class="role-icon-wrap">
-            <svg class="role-icon" viewBox="0 0 48 48" aria-hidden="true">
-              <path class="shade" d="M7 24s6.5-9 17-9 17 9 17 9-6.5 9-17 9S7 24 7 24z"></path>
-              <path class="draw" d="M7 24s6.5-9 17-9 17 9 17 9-6.5 9-17 9S7 24 7 24z"></path>
-              <circle class="draw" cx="24" cy="24" r="5"></circle>
-              <path class="draw fine ghost" d="M18 24h12M24 18v12"></path>
-              <path class="draw fine" d="M10 37h13M10 41h17M35 10h5M35 14h3"></path>
-              <path class="draw" d="m32 35 3.6 3.6L42 30"></path>
-              <path class="draw fine" d="M32.5 31.8h8.5"></path>
-              <circle class="node" cx="24" cy="24" r="1.65"></circle>
-              <circle class="node" cx="35.6" cy="38.6" r="1.35"></circle>
-            </svg>
-          </div>
+          <div class="role-numeral">VI</div>
           <h3 class="role-title">Reviewer</h3>
           <p class="role-copy">Inspect builds, read diffs, test flows, compare against specs, and reject plausible-but-wrong output.</p>
         </article>
 
         <article class="role-card">
-          <div class="role-icon-wrap">
-            <svg class="role-icon" viewBox="0 0 48 48" aria-hidden="true">
-              <path class="shade" d="M12 34V16.5C12 12.4 15.4 9 19.5 9h9c4.1 0 7.5 3.4 7.5 7.5V34z"></path>
-              <path class="draw" d="M12 34V16.5C12 12.4 15.4 9 19.5 9h9c4.1 0 7.5 3.4 7.5 7.5V34"></path>
-              <path class="draw" d="M8.5 34h31M14 39h20"></path>
-              <path class="draw fine" d="M17 34v-8h14v8M18 19h12M18 24h12M24 13.5V34"></path>
-              <path class="draw" d="M34 17h7M37.5 13.5 41 17l-3.5 3.5"></path>
-              <path class="draw fine" d="M24 39v4M20 43h8"></path>
-              <circle class="node" cx="18" cy="34" r="1.35"></circle>
-              <circle class="node" cx="24" cy="34" r="1.35"></circle>
-              <circle class="node" cx="30" cy="34" r="1.35"></circle>
-              <circle class="node" cx="24" cy="43" r="1.35"></circle>
-            </svg>
-          </div>
+          <div class="role-numeral">VII</div>
           <h3 class="role-title">Release Manager</h3>
           <p class="role-copy">Keep staging branches, Vercel previews, human review gates, and production discipline intact.</p>
         </article>
 
         <article class="role-card">
-          <div class="role-icon-wrap">
-            <svg class="role-icon" viewBox="0 0 48 48" aria-hidden="true">
-              <circle class="shade" cx="24" cy="24" r="10"></circle>
-              <path class="draw" d="M24 10a14 14 0 0 1 12.3 20.7"></path>
-              <path class="draw" d="M24 38a14 14 0 0 1-12.3-20.7"></path>
-              <path class="draw" d="m33.5 13.2 4.1-1.3-1.2 4.2"></path>
-              <path class="draw" d="m14.5 34.8-4.1 1.3 1.2-4.2"></path>
-              <circle class="draw" cx="24" cy="24" r="6.2"></circle>
-              <path class="draw fine" d="M20.5 24h7M24 20.5v7M14 40h20M17 43.5h14"></path>
-              <path class="draw fine ghost" d="M12 24h6M30 24h6M24 12v6M24 30v6"></path>
-              <circle class="node" cx="24" cy="10" r="1.45"></circle>
-              <circle class="node" cx="36.3" cy="30.7" r="1.45"></circle>
-              <circle class="node" cx="24" cy="38" r="1.45"></circle>
-              <circle class="node" cx="11.7" cy="17.3" r="1.45"></circle>
-            </svg>
-          </div>
+          <div class="role-numeral">VIII</div>
           <h3 class="role-title">Postmortem Owner</h3>
           <p class="role-copy">Turn failure modes into architecture: routing, validation, durable state, retries, evals, and better protocols.</p>
         </article>
@@ -2947,7 +2885,7 @@
          04 — OPERATING LOOP WITH STICKY MEDIA
          ============================================================ -->
     <section class="section section-border" data-romulus-animate>
-      <div class="eyebrow">04 · The Operating Loop</div>
+      <div class="eyebrow" id="loop">04 · The Operating Loop</div>
       <h2 class="section-title">
         The apps were outputs. The loop was the product.
         <span class="sub">Every product bet moved through the same managed system: frame, research, validate, spec, route, delegate, verify, stage, remember, improve.</span>
@@ -3025,7 +2963,7 @@
               <div class="loop-step-num">02</div>
               <h3 class="loop-step-title">Research the terrain</h3>
               <p class="loop-step-copy">Markets, competitors, pricing, customer pain, timing, distribution, and path to first dollar. Romulus was instructed not to ask permission to research. Just do it.</p>
-              <p class="loop-step-support"><strong>Follow the pain, opportunity, and timing.</strong> Research is structured around pain, opportunity, and timing so trend heat does not masquerade as opportunity.</p>
+              <p class="loop-step-support"><strong>Follow the pain, opportunity, and timing.</strong> Structure keeps trend heat from masquerading as opportunity.</p>
             </div>
           </article>
 
@@ -3037,7 +2975,7 @@
               <div class="loop-step-num">03</div>
               <h3 class="loop-step-title">Pressure-test the thesis</h3>
               <p class="loop-step-copy">Grok, ChatGPT, Claude, and Romulus were used as independent critics. The goal was not agreement. The goal was to find the contradiction before code made it expensive.</p>
-              <p class="loop-step-support"><strong>Use models to find the contradiction.</strong> Independent model critique is used to expose contradictions before research validations are hallucinated and code makes the wrong idea expensive.</p>
+              <p class="loop-step-support"><strong>Use models to find the contradiction.</strong> Agreement is cheap; a contradiction surfaced before build is the save.</p>
             </div>
           </article>
 
@@ -3049,7 +2987,7 @@
               <div class="loop-step-num">04</div>
               <h3 class="loop-step-title">Write the spec</h3>
               <p class="loop-step-copy">Product requirements, technical requirements, acceptance criteria, edge cases, and known risks. The spec is where product judgment becomes executable.</p>
-              <p class="loop-step-support"><strong>The spec becomes the contract.</strong> The spec holds requirements, constraints, acceptance criteria, and the quality bar in one executable contract.</p>
+              <p class="loop-step-support"><strong>The spec becomes the contract.</strong> One executable artifact holds the constraints, the acceptance criteria, and the quality bar.</p>
             </div>
           </article>
 
@@ -3061,7 +2999,7 @@
               <div class="loop-step-num">05</div>
               <h3 class="loop-step-title">Route the work</h3>
               <p class="loop-step-copy">Different contributors for different jobs: Qwen for operations, Claude Code for implementation, Grok for long-context work, and deprecated models kept away from critical paths.</p>
-              <p class="loop-step-support"><strong>Choose the right contributor.</strong> Routing assigns work by contributor strength, context window, cost profile, and known failure mode.</p>
+              <p class="loop-step-support"><strong>Choose the right contributor.</strong> Assignment weighs strength, context window, cost, and known failure mode.</p>
             </div>
           </article>
 
@@ -3085,7 +3023,7 @@
               <div class="loop-step-num">07</div>
               <h3 class="loop-step-title">Verify and stage</h3>
               <p class="loop-step-copy">Build, lint, test, inspect, push to staging, review preview, then decide. No direct production deploys. No <code>vercel --prod</code> from the agent.</p>
-              <p class="loop-step-support"><strong>Trust comes after inspection.</strong> Trust is earned through tests, preview review, diff inspection, and an explicit production gate.</p>
+              <p class="loop-step-support"><strong>Trust comes after inspection.</strong> Tests, preview review, diff inspection, and an explicit production gate.</p>
             </div>
           </article>
 
@@ -3097,7 +3035,7 @@
               <div class="loop-step-num">08</div>
               <h3 class="loop-step-title">Write back to memory</h3>
               <p class="loop-step-copy">Daily notes, project notes, decision records, and postmortems make the next product bet sharper. This is where the system compounds.</p>
-              <p class="loop-step-support"><strong>The next loop starts smarter.</strong> The useful residue gets written back into memory so the next product loop starts with more context.</p>
+              <p class="loop-step-support"><strong>The next loop starts smarter.</strong> The useful residue of every bet gets written back into memory.</p>
             </div>
           </article>
         </div>
@@ -3111,17 +3049,8 @@
       <div class="editorial reverse">
         <aside class="editorial-media">
           <figure class="artifact-frame" aria-label="Memory architecture artifact">
-            <div class="artifact-label">Memory Architecture</div>
-            <div class="artifact-row"><strong>MEMORY.md</strong><span>flat file</span></div>
-            <div class="artifact-row"><strong>Obsidian</strong><span>linked vault</span></div>
-            <div class="artifact-row"><strong>QMD</strong><span>semantic index</span></div>
-            <div class="artifact-row"><strong>Wiki Layer</strong><span>session retrieval</span></div>
-            <div>
-              <div class="artifact-title">Vault as brain. Sessions as work.</div>
-              <div class="artifact-copy">
-                Decisions and project memory persist outside the chat so the next session starts with accumulated context.
-              </div>
-            </div>
+            <svg class="art-motif" viewBox="0 0 240 122" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="44" y1="28" x2="196" y2="28" class="mk d1" pathLength="1"/><line x1="44" y1="50" x2="196" y2="50" class="mk d1" pathLength="1"/><line x1="44" y1="72" x2="196" y2="72" class="mk d2" pathLength="1"/><line x1="44" y1="94" x2="196" y2="94" class="mk d2" pathLength="1"/><circle cx="120" cy="50" r="4.5" class="ma d3"/><line x1="120" y1="55" x2="120" y2="94" class="mk fine d3" pathLength="1"/></svg></div>
+            <div class="receipt-strip"><strong>MEMORY.md</strong> flat file <span class="rs-dot">&middot;</span> <strong>Obsidian</strong> linked vault <span class="rs-dot">&middot;</span> <strong>QMD</strong> semantic index <span class="rs-dot">&middot;</span> <strong>Wiki Layer</strong> session retrieval</div>
           </figure>
           <figcaption class="media-cap">Plate II · The Vault</figcaption>
         </aside>
@@ -3198,16 +3127,8 @@
 
         <aside class="editorial-media">
           <figure class="artifact-frame compact" aria-label="SOUL.md operating modes artifact">
-            <div class="artifact-label">SOUL.md</div>
-            <div class="artifact-row"><strong>Jarvis</strong><span>briefs</span></div>
-            <div class="artifact-row"><strong>Consigliere</strong><span>pushback</span></div>
-            <div class="artifact-row"><strong>Fortress</strong><span>authority boundary</span></div>
-            <div>
-              <div class="artifact-title">Identity before autonomy</div>
-              <div class="artifact-copy">
-                The operating modes made behavior legible before the system became useful enough to trust.
-              </div>
-            </div>
+            <svg class="art-motif" viewBox="0 0 240 122" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M44 84 C 86 26, 122 96, 178 36" class="mk d1" pathLength="1"/><circle cx="178" cy="36" r="4" class="ma d3"/></svg></div>
+            <div class="receipt-strip"><strong>Jarvis</strong> briefs <span class="rs-dot">&middot;</span> <strong>Consigliere</strong> pushback <span class="rs-dot">&middot;</span> <strong>Fortress</strong> authority boundary</div>
           </figure>
           <figcaption class="media-cap">Plate III · SOUL.md</figcaption>
         </aside>
@@ -3252,16 +3173,8 @@
 
         <aside class="editorial-media">
           <figure class="artifact-frame compact" aria-label="Model routing matrix artifact">
-            <div class="artifact-label">Routing Matrix</div>
-            <div class="artifact-row"><strong>Qwen</strong><span>ops / low cost</span></div>
-            <div class="artifact-row"><strong>Claude Code</strong><span>implementation</span></div>
-            <div class="artifact-row"><strong>Grok</strong><span>long context</span></div>
-            <div>
-              <div class="artifact-title">Every contributor has a job</div>
-              <div class="artifact-copy">
-                Routing is product management: pick the model by task, context window, budget, and known failure mode.
-              </div>
-            </div>
+            <svg class="art-motif" viewBox="0 0 240 122" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M40 61 H 100" class="mk d1" pathLength="1"/><path d="M100 61 C 124 61, 128 29, 152 29 H 200" class="mk fine d2" pathLength="1"/><path d="M100 61 H 200" class="mk fine d2" pathLength="1"/><path d="M100 61 C 124 61, 128 93, 152 93 H 200" class="ma-line d3" pathLength="1"/><circle cx="100" cy="61" r="3.5" class="mdot d2"/></svg></div>
+            <div class="receipt-strip"><strong>Qwen</strong> ops / low cost <span class="rs-dot">&middot;</span> <strong>Claude Code</strong> implementation <span class="rs-dot">&middot;</span> <strong>Grok</strong> long context</div>
           </figure>
           <figcaption class="media-cap">Plate IV · Routing Layer</figcaption>
         </aside>
@@ -3287,7 +3200,8 @@
          07 — FAILURE MODES
          ============================================================ -->
     <section class="section" data-romulus-animate>
-      <div class="eyebrow">07 · Failure Modes</div>
+      <div class="pars-divider" aria-hidden="true" style="margin-bottom: 3rem;"><span class="pars-label">Pars II · The Proof</span></div>
+      <div class="eyebrow" id="failures">07 · Failure Modes</div>
       <h2 class="section-title">
         Every serious upgrade came from something breaking.
         <span class="sub">The failures are the part I trust most. They made the system real.</span>
@@ -3373,6 +3287,46 @@
             </div>
           </div>
         </article>
+
+        <article class="failure-event">
+          <div class="failure-stamp">
+            <div class="failure-index">V</div>
+            <time class="failure-date" datetime="2026-06-29">Jun 29</time>
+          </div>
+          <div class="failure-content">
+            <h3 class="failure-name">The system said it was healthy. It wasn&rsquo;t.</h3>
+            <div class="failure-compare">
+              <div class="failure-panel">
+                <span class="failure-label">Failure</span>
+                <p>A five-day authentication outage hid behind green status checks: the diagnostic reported models as available while every real call failed. The dashboard was checking configuration, not reality.</p>
+              </div>
+              <div class="failure-panel">
+                <span class="failure-label">System Upgrade</span>
+                <p>&ldquo;Verify before claiming&rdquo; became protocol: health checks must exercise the real work product &mdash; a live probe, a forced real run &mdash; never a proxy. No claim of &ldquo;healthy&rdquo; or &ldquo;fixed&rdquo; without evidence.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="failure-event">
+          <div class="failure-stamp">
+            <div class="failure-index">VI</div>
+            <time class="failure-date" datetime="2026-07-05">Jul 5</time>
+          </div>
+          <div class="failure-content">
+            <h3 class="failure-name">Model migration without regression</h3>
+            <div class="failure-compare">
+              <div class="failure-panel">
+                <span class="failure-label">Failure</span>
+                <p>The primary reasoning model was scheduled to leave the subscription with three days&rsquo; notice. Swapping models blind had burned the system before &mdash; same prompts, different failure modes.</p>
+              </div>
+              <div class="failure-panel">
+                <span class="failure-label">System Upgrade</span>
+                <p>An eval harness came first: golden tasks, a scoring rubric, a quality bar, and a candidate-vs-baseline diff. The harness turned out to be the point: an eval suite is the only manager that scales, and it now gates every model change the way OKRs gate a quarter. Migration became a measured decision instead of a hope. Skills that scored low got patched, not blamed.</p>
+              </div>
+            </div>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -3382,49 +3336,27 @@
     <section class="stats-wrap" data-romulus-animate aria-label="Receipts">
       <div class="stats-eyebrow">// receipts that matter</div>
       <div class="stats-heading">
-        Not “how many apps did AI make?” The better question is whether the operating system became more capable, cheaper to run, and harder to fool.
+        Not “how many apps did AI make?” The receipts that matter are decisions: what got shipped, what got killed before it cost anything, and whether the system got harder to fool.
       </div>
 
       <div class="stats" id="storyStats">
         <div class="stat">
-          <svg class="stat-icon" viewBox="0 0 48 48" aria-hidden="true">
-            <rect class="soft" x="11" y="8" width="26" height="32" rx="2"></rect>
-            <path d="M17 17h14"></path>
-            <path d="M17 23h14"></path>
-            <path d="M17 29h9"></path>
-            <path d="M32 36l6 6"></path>
-            <path d="M16 40l-6 4"></path>
-          </svg>
-          <span class="stat-num" data-target="340" data-counted="false">
+          <span class="stat-num" data-target="3" data-counted="false">
             <span class="stat-value">0</span>
           </span>
-          <span class="stat-label">Indexed files</span>
-          <span class="stat-context">Memory + sessions, semantically searchable</span>
+          <span class="stat-label">Shipped live</span>
+          <span class="stat-context">Two more killed before a line of code was written</span>
         </div>
 
         <div class="stat">
-          <svg class="stat-icon" viewBox="0 0 48 48" aria-hidden="true">
-            <circle class="soft" cx="24" cy="24" r="13"></circle>
-            <path d="M24 11v26"></path>
-            <path d="M11 24h26"></path>
-            <path d="M16 16l16 16"></path>
-            <path d="M32 16 16 32"></path>
-          </svg>
-          <span class="stat-num" data-target="30" data-suffix="+" data-counted="false">
-            <span class="stat-value">0</span><span class="stat-suffix">+</span>
+          <span class="stat-num" data-target="2" data-counted="false">
+            <span class="stat-value">0</span>
           </span>
-          <span class="stat-label">Ideas evaluated</span>
-          <span class="stat-context">Researched, killed, parked, reframed, or built</span>
+          <span class="stat-label">Killed before code</span>
+          <span class="stat-context">The cheapest expensive decisions the system made</span>
         </div>
 
         <div class="stat">
-          <svg class="stat-icon" viewBox="0 0 48 48" aria-hidden="true">
-            <path class="soft" d="M9 36h30V12H9z"></path>
-            <path d="M14 32l7-8 6 5 8-13"></path>
-            <path d="M14 16v16h21"></path>
-            <path d="M35 16h-6"></path>
-            <path d="M35 16v6"></path>
-          </svg>
           <span class="stat-num" data-target="74" data-suffix="%" data-counted="false">
             <span class="stat-value">0</span><span class="stat-suffix">%</span>
           </span>
@@ -3433,32 +3365,23 @@
         </div>
 
         <div class="stat">
-          <svg class="stat-icon" viewBox="0 0 48 48" aria-hidden="true">
-            <circle class="soft" cx="24" cy="24" r="9"></circle>
-            <path d="M24 8v8"></path>
-            <path d="M24 32v8"></path>
-            <path d="M8 24h8"></path>
-            <path d="M32 24h8"></path>
-            <path d="M21 24h6"></path>
-            <path d="M24 21v6"></path>
-          </svg>
-          <span class="stat-num" data-target="338" data-counted="false">
+          <span class="stat-num" data-target="6" data-counted="false">
             <span class="stat-value">0</span>
           </span>
-          <span class="stat-label">Message failure</span>
-          <span class="stat-context">The Legion session that made routing real</span>
+          <span class="stat-label">Dated postmortems</span>
+          <span class="stat-context">Every failure became architecture, on the record</span>
         </div>
       </div>
 
       <!-- Design detail, not content: the mono stamp that closes the receipt. -->
-      <div class="stats-stamp" aria-hidden="true">Feb 03 — May 01 · MMXXVI</div>
+      <div class="stats-stamp" aria-hidden="true">Feb 03 — ongoing · MMXXVI</div>
     </section>
 
     <!-- ============================================================
          08 — PRODUCT BETS
          ============================================================ -->
     <section class="section" data-romulus-animate>
-      <div class="eyebrow">08 · Product Bets</div>
+      <div class="eyebrow" id="bets">08 · Product Bets</div>
       <h2 class="section-title">
         Product bets managed through the operating loop.
         <span class="sub">The impressive part is not that several things shipped. In 2026, shipping small apps quickly is table stakes. The interesting question is what changed in the product process: what got researched, killed, reframed, delegated, verified, and learned.</span>
@@ -3480,13 +3403,8 @@
               <span class="status-note">D7 / D30 / D90 instrumented</span>
             </div>
             <div class="artifact-frame project-artifact" aria-label="Chronicle product receipt artifact">
-              <div class="artifact-label">Product Receipt</div>
-              <div class="artifact-nodes" aria-hidden="true">
-                <div class="artifact-node primary">90 puzzles</div>
-                <div class="artifact-node">7-day arc</div>
-                <div class="artifact-node">Share card</div>
-              </div>
-              <div class="artifact-meta">Daily history game · localStorage state · retention loop</div>
+              <svg class="art-motif" viewBox="0 0 240 122" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="36" y1="61" x2="204" y2="61" class="mk d1" pathLength="1"/><line x1="60" y1="55" x2="60" y2="67" class="mk fine d1" pathLength="1"/><line x1="90" y1="55" x2="90" y2="67" class="mk fine d1" pathLength="1"/><line x1="120" y1="55" x2="120" y2="67" class="mk fine d1" pathLength="1"/><line x1="150" y1="55" x2="150" y2="67" class="mk fine d1" pathLength="1"/><line x1="180" y1="55" x2="180" y2="67" class="mk fine d1" pathLength="1"/><circle cx="78" cy="36" r="5" class="mdotr d2"/><line x1="78" y1="41" x2="78" y2="55" class="mk fine d2" pathLength="1"/><circle cx="164" cy="42" r="5" class="mdotr d2"/><line x1="164" y1="47" x2="164" y2="55" class="mk fine d2" pathLength="1"/><circle cx="120" cy="61" r="4.5" class="ma d3"/></svg>
+              
             </div>
           </div>
 
@@ -3526,13 +3444,8 @@
               <span class="status-note">Market validation funnel</span>
             </div>
             <div class="artifact-frame project-artifact" aria-label="Forbidden validation artifact">
-              <div class="artifact-label">Validation Funnel</div>
-              <div class="artifact-nodes" aria-hidden="true">
-                <div class="artifact-node primary">862 cards</div>
-                <div class="artifact-node">6 themes</div>
-                <div class="artifact-node">iOS intent</div>
-              </div>
-              <div class="artifact-meta">Constraint-based pass-the-phone game · thesis reframed before build</div>
+              <svg class="art-motif" viewBox="0 0 240 122" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="41" y1="61" x2="63" y2="61" stroke-linecap="round" class="mk d1" pathLength="1" style="stroke-width:10"/><line x1="75" y1="61" x2="97" y2="61" stroke-linecap="round" class="mk d1" pathLength="1" style="stroke-width:10"/><line x1="109" y1="61" x2="131" y2="61" stroke-linecap="round" class="mk d2" pathLength="1" style="stroke-width:10"/><line x1="143" y1="61" x2="165" y2="61" stroke-linecap="round" class="mk d2" pathLength="1" style="stroke-width:10"/><line x1="177" y1="61" x2="199" y2="61" stroke-linecap="round" class="mk d2" pathLength="1" style="stroke-width:10"/><line x1="104" y1="76" x2="136" y2="46" class="ma-line d3" pathLength="1"/></svg>
+              
             </div>
           </div>
 
@@ -3561,21 +3474,58 @@
           </div>
         </article>
 
-        <!-- Via -->
+        <!-- WaitLayer -->
         <article class="project-card">
           <div>
             <div class="project-index">Product Bet III</div>
+            <h3 class="project-name">WaitLayer</h3>
+            <div class="project-status">
+              <span class="status-chip status-live">Beta</span>
+              <span class="status-note">Attention network for AI agents</span>
+            </div>
+            <div class="artifact-frame project-artifact" aria-label="WaitLayer artifact">
+              <svg class="art-motif" viewBox="0 0 240 122" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="32" y1="61" x2="92" y2="61" class="mk d1" pathLength="1"/><line x1="148" y1="61" x2="208" y2="61" class="mk d1" pathLength="1"/><line x1="92" y1="61" x2="148" y2="61" stroke-dasharray="3 6" class="mk fine d2" pathLength="1"/><line x1="110" y1="61" x2="110" y2="49" class="ma-line d3" pathLength="1"/><line x1="120" y1="61" x2="120" y2="43" class="ma-line d3" pathLength="1"/><line x1="130" y1="61" x2="130" y2="37" class="ma-line d3" pathLength="1"/></svg>
+              
+            </div>
+          </div>
+
+          <div class="project-detail">
+            <div class="project-block wide">
+              <div class="project-block-label">Product Question</div>
+              <p class="project-block-copy">When agents do the work, where does human attention go?</p>
+            </div>
+
+            <div class="project-block">
+              <div class="project-block-label">My Role</div>
+              <p class="project-block-copy">Defined the thesis, the trust boundary, the developer-experience bar, and the milestone gates. Chose what M0 had to prove before M1 earned investment.</p>
+            </div>
+
+            <div class="project-block">
+              <div class="project-block-label">Romulus’ Role</div>
+              <p class="project-block-copy">Competitive landscape research, spec drafting, build coordination through the delegation loop, verification, and milestone tracking.</p>
+            </div>
+
+            <div class="project-block wide">
+              <div class="project-block-label">Outcome</div>
+              <p class="project-block-copy">An attention network for AI coding agents: a CLI and runtime layer that routes agent wait-states to the human who can unblock them, with privacy-safe events. M0 shipped and in beta; M1 gated on beta signal, not enthusiasm.</p>
+            </div>
+
+            <div class="project-proof">The most AI-native product surface is the one the agents themselves need.</div>
+          </div>
+        </article>
+
+        <!-- Via -->
+        <article class="project-card">
+          <div>
+            <div class="project-index">Product Bet IV</div>
             <h3 class="project-name">Via</h3>
             <div class="project-status">
-              <span class="status-chip status-queued">Awaiting Deploy</span>
+              <span class="status-chip status-queued">Built · Parked</span>
               <span class="status-note">Built April 17–18, 2026</span>
             </div>
             <div class="artifact-frame project-artifact" aria-label="Via fullstack build receipt artifact">
-              <div class="artifact-label">Fullstack Build</div>
-              <div class="artifact-row"><strong>143</strong><span>files</span></div>
-              <div class="artifact-row"><strong>18</strong><span>API routes</span></div>
-              <div class="artifact-row"><strong>28</strong><span>passing tests</span></div>
-            </div>
+              <svg class="art-motif" viewBox="0 0 240 122" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="60" y="26" width="120" height="16" rx="3" class="mk d1" pathLength="1"/><rect x="60" y="53" width="120" height="16" rx="3" class="mk d1" pathLength="1"/><rect x="60" y="80" width="120" height="16" rx="3" class="mk d2" pathLength="1"/><line x1="120" y1="20" x2="120" y2="102" class="ma-line d3" pathLength="1"/></svg></div>
+            <div class="receipt-strip"><strong>143</strong> files <span class="rs-dot">&middot;</span> <strong>18</strong> API routes <span class="rs-dot">&middot;</span> <strong>28</strong> passing tests</div>
           </div>
 
           <div class="project-detail">
@@ -3591,12 +3541,12 @@
 
             <div class="project-block">
               <div class="project-block-label">Romulus’ Role</div>
-              <p class="project-block-copy">24K-word product spec, execution monitoring, verification, commit/report loop, and P0/P1/P2 fix tracking.</p>
+              <p class="project-block-copy">A product spec tight enough that implementation ran without mid-build clarification, plus execution monitoring, verification, commit/report loop, and P0/P1/P2 fix tracking.</p>
             </div>
 
             <div class="project-block wide">
               <div class="project-block-label">Outcome</div>
-              <p class="project-block-copy">AI-powered Gmail client: 143 files, 18 API routes, 28 passing tests, OAuth, Prisma, calendar integration, read receipts, smart triage, and a liquid-glass design system.</p>
+              <p class="project-block-copy">AI-powered Gmail client: 143 files, 18 API routes, 28 passing tests, OAuth, Prisma, calendar integration, read receipts, smart triage, and a liquid-glass design system. Parked deliberately: the build proved the delegation loop at fullstack scale; shipping it as a product was a different bet with a different market, and the system&rsquo;s job is to keep those honest.</p>
             </div>
 
             <div class="project-proof">The quality of the build depended on the quality of management. I did not hand-write production code; I owned direction, spec, review, and release decisions.</div>
@@ -3606,18 +3556,15 @@
         <!-- AgentForge -->
         <article class="project-card">
           <div>
-            <div class="project-index">Research Bet IV</div>
+            <div class="project-index">Research Bet V</div>
             <h3 class="project-name">AgentForge</h3>
             <div class="project-status">
               <span class="status-chip status-research">Research Complete</span>
               <span class="status-chip status-queued">Build Queued</span>
             </div>
             <div class="artifact-frame project-artifact" aria-label="AgentForge research map artifact">
-              <div class="artifact-label">Research Map</div>
-              <div class="artifact-row"><strong>15</strong><span>beta testers</span></div>
-              <div class="artifact-row"><strong>DeFi</strong><span>highest-scoring vertical</span></div>
-              <div class="artifact-row"><strong>MCP</strong><span>hosted thesis</span></div>
-            </div>
+              <svg class="art-motif" viewBox="0 0 240 122" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M56 84 L 92 40 L 128 70 L 168 34" class="mk fine d2" pathLength="1"/><line x1="168" y1="34" x2="184" y2="88" class="mk fine d2" pathLength="1"/><circle cx="56" cy="84" r="3.5" class="mdot d1"/><circle cx="92" cy="40" r="3.5" class="mdot d1"/><circle cx="128" cy="70" r="3.5" class="mdot d1"/><circle cx="184" cy="88" r="3.5" class="mdot d1"/><circle cx="168" cy="34" r="5" class="ma d3"/></svg></div>
+            <div class="receipt-strip"><strong>15</strong> beta testers <span class="rs-dot">&middot;</span> <strong>DeFi</strong> highest-scoring vertical <span class="rs-dot">&middot;</span> <strong>MCP</strong> hosted thesis</div>
           </div>
 
           <div class="project-detail">
@@ -3648,7 +3595,7 @@
         <!-- Legion -->
         <article class="project-card">
           <div>
-            <div class="project-index">Postmortem V</div>
+            <div class="project-index">Postmortem VI</div>
             <h3 class="project-name">Legion</h3>
             <div class="project-status">
               <span class="status-chip status-postmortem">Postmortem</span>
@@ -3656,14 +3603,8 @@
               <span class="status-note">Phase 1 live</span>
             </div>
             <div class="artifact-frame project-artifact" aria-label="Legion cohort orchestration artifact">
-              <div class="artifact-label">Cohort Map</div>
-              <div class="artifact-nodes" aria-hidden="true">
-                <div class="artifact-node primary">Caesar</div>
-                <div class="artifact-node">Augustus</div>
-                <div class="artifact-node">Vespasian</div>
-                <div class="artifact-node">Trajan</div>
-              </div>
-              <div class="artifact-meta">Durable state · tiered timeouts · checkpoints · evals</div>
+              <svg class="art-motif" viewBox="0 0 240 122" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="84" y1="96" x2="84" y2="40" stroke-linecap="round" class="mk d1" pathLength="1" style="stroke-width:9"/><line x1="108" y1="96" x2="108" y2="30" stroke-linecap="round" class="mk d1" pathLength="1" style="stroke-width:9"/><line x1="132" y1="96" x2="132" y2="46" stroke-linecap="round" class="mk d2" pathLength="1" style="stroke-width:9"/><line x1="156" y1="96" x2="156" y2="36" stroke-linecap="round" class="mk d2" pathLength="1" style="stroke-width:9"/><line x1="70" y1="64" x2="170" y2="64" class="ma-line d3" pathLength="1"/></svg>
+              
             </div>
           </div>
 
@@ -3675,7 +3616,7 @@
 
             <div class="project-block">
               <div class="project-block-label">What Worked</div>
-              <p class="project-block-copy">Caesar worked. It could take a raw product idea, research the market, map competitors, score opportunity, and return a structured build spec in Discord.</p>
+              <p class="project-block-copy">The research cohort worked. It could take a raw product idea, research the market, map competitors, score opportunity, and return a structured build spec in Discord.</p>
             </div>
 
             <div class="project-block">
@@ -3690,7 +3631,7 @@
 
             <div class="project-block">
               <div class="project-block-label">Romulus’ Role</div>
-              <p class="project-block-copy">Coordinator across cohorts: Caesar for research, Augustus for build, Vespasian for monetization, Trajan for distribution, with Romulus deciding sequence.</p>
+              <p class="project-block-copy">Coordinator across four specialized cohorts &mdash; research, build, monetization, and distribution &mdash; with Romulus deciding sequence.</p>
             </div>
 
             <div class="project-block wide">
@@ -3705,7 +3646,7 @@
         <!-- Cherry Street Labs -->
         <article class="project-card">
           <div>
-            <div class="project-index">Studio Layer VI</div>
+            <div class="project-index">Studio Layer VII</div>
             <h3 class="project-name">Cherry Street Labs</h3>
             <div class="project-status">
               <span class="status-chip status-live">Live</span>
@@ -3713,13 +3654,8 @@
               <span class="status-note">Studio identity layer</span>
             </div>
             <div class="artifact-frame project-artifact" aria-label="Cherry Street Labs studio surface artifact">
-              <div class="artifact-label">Studio Surface</div>
-              <div class="artifact-nodes" aria-hidden="true">
-                <div class="artifact-node primary">Identity</div>
-                <div class="artifact-node">Product lab</div>
-                <div class="artifact-node">Public surface</div>
-              </div>
-              <div class="artifact-meta">The container that makes the operating model legible.</div>
+              <svg class="art-motif" viewBox="0 0 240 122" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="44" y1="92" x2="196" y2="92" class="mk d1" pathLength="1"/><rect x="72" y="56" width="28" height="36" rx="2" class="mk d2" pathLength="1"/><rect x="112" y="40" width="30" height="52" rx="2" class="mk d2" pathLength="1"/><rect x="154" y="64" width="26" height="28" rx="2" class="mk d2" pathLength="1"/><rect x="123" y="74" width="8" height="18" class="ma d3"/></svg>
+              
             </div>
           </div>
 
@@ -3748,21 +3684,40 @@
           </div>
         </article>
       </div>
+
+      <div class="mini-intro">// also shipped through the loop, between the bets</div>
+      <div class="mini-grid" aria-label="Additional shipped products">
+        <div class="mini-cell">
+          <div class="mini-status">Live · Open Source</div>
+          <div class="mini-name"><a href="https://ratmap.nyc" target="_blank" rel="noopener">RatMap NYC</a></div>
+          <div class="mini-copy">Every publicly-reported rat sighting, inspection, and 311 complaint in New York, on one free map.</div>
+        </div>
+        
+        <div class="mini-cell">
+          <div class="mini-status">App Store</div>
+          <div class="mini-name">Bible Path</div>
+          <div class="mini-copy">A daily scripture companion, taken from spec to Apple review through the delegation loop.</div>
+        </div>
+        <div class="mini-cell">
+          <div class="mini-status">Live · Same-Day Build</div>
+          <div class="mini-name">Knicks Parade Cam</div>
+          <div class="mini-copy">Live street cameras along the Canyon of Heroes &mdash; conceived, built, and shipped the day of the parade.</div>
+        </div>
+      </div>
     </section>
 
     <!-- ============================================================
          09 — WHAT CHANGED
          ============================================================ -->
     <section class="section section-border" data-romulus-animate>
+      <div class="pars-divider" aria-hidden="true" style="margin-bottom: 3rem;"><span class="pars-label">Pars III · The Transfer</span></div>
       <div class="eyebrow">09 · What Changed</div>
-      <h2 class="section-title">Romulus made the cost of ambiguous thinking obvious.</h2>
+      <h2 class="section-title">The system's real output was a sharper operator.</h2>
 
       <div class="prose">
-        <p class="lead">The biggest change was not speed. It was managerial clarity.</p>
+        <p class="lead">Romulus made the cost of ambiguous thinking obvious, daily, and billable. A token workforce fails exactly like a human one — same politics of context, same bloat, same fix: define what good looks like, then gate on it.</p>
 
-        <p>A vague ask produced a vague spec. A vague spec produced a vague build. The system forced me to become more precise about goals, constraints, acceptance criteria, and what good looked like before implementation began.</p>
-
-        <p>That is the part I would take into any AI-native product team: not just the ability to use tools, but the ability to define the operating model around them.</p>
+        <p>A vague ask produced a vague spec, which produced a vague build, which produced a rejected review &mdash; my time, wasted by my own imprecision. Five months of that feedback loop trains you the way real management does: goals, constraints, acceptance criteria, and what good looks like, defined before anything runs.</p>
       </div>
 
       <div class="before-after" aria-label="Before and after Romulus">
@@ -3790,14 +3745,18 @@
           </ul>
         </div>
       </div>
+
+      <div class="pull-quote">
+        Any AI-native team needs this operating layer. Most don&rsquo;t have anyone who has actually built one.
+      </div>
     </section>
 
     <!-- ============================================================
          10 — FORWARD VIEW
          ============================================================ -->
     <section class="section thesis-section" data-romulus-animate>
-      <div class="eyebrow">10 · Forward View</div>
-      <h2 class="section-title">Small teams will not just become faster. They will become differently shaped.</h2>
+      <div class="eyebrow" id="transfer">10 · What I'd Do With a Real Team</div>
+      <h2 class="section-title">Every primitive here scales from a team of one to a team of forty.</h2>
 
       <figure class="bookend-media">
         <video autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-hidden="true" poster="video-refs/scene_1s.jpg">
@@ -3807,15 +3766,15 @@
       </figure>
 
       <div class="prose">
-        <p class="lead">The advantage will not go to teams with the most AI tools. It will go to teams that know how to manage AI work.</p>
+        <p class="lead">The advantage will not go to teams with the most AI tools. It will go to teams where someone has designed the operating model around them &mdash; and most teams haven't.</p>
 
-        <p>Memory, routing, delegation, review, authority, cost, and learning loops. Those are the new management primitives. The operator who can design that layer can hold more product surface with fewer people, fewer meetings, and less reset cost.</p>
+        <p>On day one, that looks concrete: specs written as contracts agents and engineers can both execute. Work routed by capability, cost, and failure mode instead of habit. Evals built before migrations, not after incidents. Memory designed so context compounds across sprints instead of resetting. A verification gate no output crosses without evidence &mdash; human or synthetic.</p>
 
-        <p>That is what Romulus was built to test. Not whether AI could generate code. That part is obvious now. The more interesting question is whether one product operator can design a system where research, validation, implementation, release, and memory reinforce each other over time.</p>
+        <p>I didn't read about these primitives. I ran them for six months, alone, under real constraints, with receipts. The next version of this system gets built inside a team &mdash; where the leverage multiplies.</p>
       </div>
 
       <div class="pull-quote">
-        The products are evidence. The operating model is the point.
+        The products are evidence. The operating model is the point. The operator is the part that transfers.
       </div>
     </section>
 
@@ -3827,7 +3786,7 @@
         <div class="byline-mark">Romulus</div>
         <div class="byline-line"></div>
         <div class="byline-name">Mike Battaglia</div>
-        <div class="byline-role">Senior PM at Daylight <span class="dot">·</span> Founder, Cherry Street Labs</div>
+        <div class="byline-role">Product · Design · AI — Daylight by day <span class="dot">·</span> Founder, Cherry Street Labs</div>
         <div class="byline-role">
           Brooklyn, NY
           <span class="dot">·</span>
@@ -3835,13 +3794,6 @@
           <span class="dot">·</span>
           <a href="mailto:mbattaglia92@gmail.com?subject=Romulus%20Case%20Study">email</a>
         </div>
-        <!-- COPY: consider restoring the line below — it reframes the password
-             gate as intent rather than friction, and it's a strong closing beat:
-             "This page is gated for the same reason the system is: identity-first,
-             authority-bounded, and meant for the people the work is for." -->
-        <!-- <div class="byline-role footer-note">
-          This page is gated for the same reason the system is: identity-first, authority-bounded, and meant for the people the work is for.
-        </div> -->
         <div class="byline-coda">Roma Eterna · MMXXVI</div>
       </div>
     </footer>
@@ -3856,71 +3808,51 @@
 
   <script>
     (function() {
-      /* ============================================================
-         PASSWORD GATE
-         ============================================================ */
+      if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+      function romBoot() {
+        [initAnimations, initNavScroll, initHeroParallax, initStatsCountUp,
+         initLoopVideos, initLoopScroll, initMotion].forEach(function (f) {
+          try { f(); } catch (e) { /* one failed init must not kill the rest */ }
+        });
+        window.scrollTo(0, 0);
+      }
+      if (document.readyState === 'complete') { romBoot(); }
+      else { window.addEventListener('load', romBoot); }
 
-      var PASSWORD = 'Sfogliatelle!';
-      var SESSION_KEY = 'romulus_session_v31';
-      var SESSION_TTL_MS = 24 * 60 * 60 * 1000;
-
-      var gate = document.getElementById('gate');
-      var content = document.getElementById('content');
-      var input = document.getElementById('gateInput');
-      var submit = document.getElementById('gateSubmit');
-      var error = document.getElementById('gateError');
-
-      function checkSession() {
+      /* stats counter must not wait for full load — wire it as soon as the
+         DOM exists; guarded by data-fired/data-counted so double-init is a no-op */
+      function statsEarly() { try { initStatsCountUp(); } catch (e) {} }
+      if (document.readyState !== 'loading') { statsEarly(); }
+      else { document.addEventListener('DOMContentLoaded', statsEarly); }
+      setTimeout(function () {
         try {
-          var stored = localStorage.getItem(SESSION_KEY);
-          if (stored) {
-            var data = JSON.parse(stored);
-            if (data.ts && (Date.now() - data.ts < SESSION_TTL_MS)) {
-              unlock(true);
-              return true;
+          if (window.gsap && window.ScrollTrigger) { ScrollTrigger.refresh(); }
+          document.documentElement.classList.add('anim-failsafe');
+        } catch (e) {}
+      }, 5000);
+
+      /* viewport rescue: any element an animation left hidden while it is
+         on screen gets released — runs after boot and on scroll settle */
+      (function () {
+        var t = null;
+        function rescue() {
+          var els = document.querySelectorAll('#content [style*="visibility: hidden"], #content [style*="visibility:hidden"]');
+          for (var i = 0; i < els.length; i++) {
+            var r = els[i].getBoundingClientRect();
+            if (r.top < window.innerHeight && r.bottom > 0) {
+              if (window.gsap) { try { gsap.set(els[i], { clearProps: 'all' }); continue; } catch (e) {} }
+              els[i].style.visibility = 'visible';
+              els[i].style.opacity = '1';
+              els[i].style.transform = 'none';
             }
           }
-        } catch(e) {}
-        return false;
-      }
-
-      function saveSession() {
-        try {
-          localStorage.setItem(SESSION_KEY, JSON.stringify({ ts: Date.now() }));
-        } catch(e) {}
-      }
-
-      function unlock(isSession) {
-        if (!isSession && input.value !== PASSWORD) {
-          error.classList.add('visible');
-          return;
         }
-
-        gate.classList.add('hidden');
-        content.classList.add('visible');
-
-        if (!isSession) saveSession();
-
-        window.scrollTo(0, 0);
-        initAnimations();
-        initNavScroll();
-        initHeroParallax();
-        initStatsCountUp();
-        initLoopVideos();
-        initLoopScroll();
-        initMotion();
-      }
-
-      if (!checkSession()) {
-        submit.addEventListener('click', function() { unlock(false); });
-        input.addEventListener('keydown', function(e) {
-          if (e.key === 'Enter') unlock(false);
-        });
-        input.addEventListener('input', function() {
-          error.classList.remove('visible');
-        });
-      }
-
+        window.addEventListener('scroll', function () {
+          clearTimeout(t); t = setTimeout(rescue, 250);
+        }, { passive: true });
+        setTimeout(rescue, 3000);
+        setTimeout(rescue, 6000);
+      })();
       /* ============================================================
          SCROLL ANIMATIONS
          ============================================================ */
@@ -4137,11 +4069,11 @@
             return;
           }
 
-          var duration = 1400;
+          var duration = 1100;
           var start = performance.now();
 
           function ease(t) {
-            return 1 - Math.pow(1 - t, 3);
+            return 1 - Math.pow(1 - t, 4);
           }
 
           function tick(now) {
@@ -4164,21 +4096,66 @@
           return;
         }
 
+        var bands = [];
+        for (var i = 0; i < nums.length; i++) {
+          var band = nums[i].closest ? nums[i].closest('.stats') : null;
+          if (band && bands.indexOf(band) === -1) bands.push(band);
+        }
+
+        function fireBand(band) {
+          if (band.getAttribute('data-fired') === '1') return;
+          band.setAttribute('data-fired', '1');
+          band.classList.add('stats-live');
+          var mine = band.querySelectorAll('.stat-num[data-target]');
+          for (var k = 0; k < mine.length; k++) {
+            (function (el, idx) {
+              setTimeout(function () {
+                if (el.getAttribute('data-counted') === 'false') animate(el);
+              }, 200 + idx * 130);
+            })(mine[k], k);
+          }
+        }
+
+        /* failsafe: poll each band, fire only when actually on screen */
+        setTimeout(function check() {
+          var pending = false;
+          for (var b = 0; b < bands.length; b++) {
+            if (bands[b].getAttribute('data-fired') === '1') continue;
+            var r = bands[b].getBoundingClientRect();
+            if (r.top < window.innerHeight && r.bottom > 0) { fireBand(bands[b]); }
+            else { pending = true; }
+          }
+          if (pending) setTimeout(check, 1200);
+        }, 2500);
+
+        if (!bands.length) {
+          for (var m = 0; m < nums.length; m++) animate(nums[m]);
+          return;
+        }
+
+        /* third belt: any real scroll re-checks band visibility */
+        var scrollT = null;
+        window.addEventListener('scroll', function () {
+          clearTimeout(scrollT);
+          scrollT = setTimeout(function () {
+            for (var b = 0; b < bands.length; b++) {
+              if (bands[b].getAttribute('data-fired') === '1') continue;
+              var r = bands[b].getBoundingClientRect();
+              if (r.top < window.innerHeight * 0.9 && r.bottom > 0) fireBand(bands[b]);
+            }
+          }, 200);
+        }, { passive: true });
+
         var observer = new IntersectionObserver(function(entries) {
           entries.forEach(function(entry) {
-            if (
-              entry.isIntersecting &&
-              entry.target.getAttribute('data-counted') === 'false'
-            ) {
-              animate(entry.target);
+            if (entry.isIntersecting) {
+              fireBand(entry.target);
               observer.unobserve(entry.target);
             }
           });
-        }, { threshold: 0.4 });
+        }, { threshold: 0.35 });
 
-        for (var j = 0; j < nums.length; j++) {
-          observer.observe(nums[j]);
-        }
+        for (var b2 = 0; b2 < bands.length; b2++) observer.observe(bands[b2]);
       }
 
       /* ============================================================
@@ -4232,6 +4209,16 @@
           } catch (e) {}
 
           document.documentElement.classList.add('gsap-active');
+
+          /* re-measure after layout settles — boot now runs at load, and
+             stale trigger positions were stranding content hidden */
+          setTimeout(function () { try { ScrollTrigger.refresh(); } catch (e) {} }, 600);
+          setTimeout(function () { try { ScrollTrigger.refresh(); } catch (e) {} }, 2400);
+          if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(function () {
+              try { ScrollTrigger.refresh(); } catch (e) {}
+            });
+          }
 
           /* --- Hero intro: masked character rise, then kicker, meta, scroll --- */
           var heroTitle = document.querySelector('.hero-title');
@@ -4363,5 +4350,17 @@
       }
     })();
   </script>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('.art-motif');
+  if (!els.length) return;
+  if (!('IntersectionObserver' in window)) { els.forEach(function(e){e.classList.add('on');}); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
+  }, { threshold: 0.3 });
+  els.forEach(function(e){ io.observe(e); });
+})();
+</script>
 </body>
 </html>

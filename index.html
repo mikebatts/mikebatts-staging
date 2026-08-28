@@ -9,7 +9,7 @@
   <link href="css/normalize.css" rel="stylesheet" type="text/css">
   <link href="css/webflow.css" rel="stylesheet" type="text/css">
   <link href="css/mike-battaglia.webflow.css" rel="stylesheet" type="text/css">
-  <link href="css/portfolio.css?v=20260828-c" rel="stylesheet" type="text/css">
+  <link href="css/portfolio.css?v=20260828" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
@@ -107,7 +107,10 @@
     <!-- Third feature: Romulus -->
     <a href="romulus.html" class="pf-feature">
       <span class="pf-frame">
-        <img src="images/romulus-cover.jpg" width="1200" height="630" loading="lazy" alt="Romulus — a personal AI agent with durable memory and its own governance" sizes="(max-width: 767px) 100vw, 720px">
+        <video class="pf-romulus-video" autoplay loop muted playsinline preload="metadata" width="1200" height="630" poster="video-refs/market_1s.jpg" aria-label="Romulus interface, looping preview">
+          <source src="video-refs/market.mp4" type="video/mp4">
+        </video>
+        <img class="pf-romulus-still" src="video-refs/market_1s.jpg" width="1200" height="630" loading="lazy" alt="Romulus — a personal AI agent with durable memory and its own governance">
       </span>
       <span class="pf-cap">
         <span class="pf-title">Romulus<span class="work-tag"><i></i>Live</span><span class="work-tag solo">Solo&nbsp;build</span><span class="pf-arrow" aria-hidden="true">→</span></span>
@@ -118,6 +121,17 @@
 
     <!-- Recent solo builds -->
     <div class="pf-grid">
+      <a href="https://tavola.nyc" target="_blank" rel="noopener noreferrer" class="pf-tile">
+        <span class="pf-frame">
+          <img src="images/Tavola-cover.png" width="1200" height="630" loading="lazy" alt="Tavola — an NYC dining concierge over text" sizes="(max-width: 767px) 100vw, 346px">
+        </span>
+        <span class="pf-cap">
+          <span class="pf-title">Tavola<span class="work-tag"><i></i>Live</span><span class="work-tag solo">Solo&nbsp;build</span><span class="pf-arrow" aria-hidden="true">→</span></span>
+          <span class="pf-desc">An NYC dining concierge over text — share the restaurant TikToks you save, get a text when there&#x27;s a table.</span>
+          <span class="pf-year">2026</span>
+        </span>
+      </a>
+
       <a href="https://www.knicksparade.cam/" target="_blank" rel="noopener noreferrer" class="pf-tile">
         <span class="pf-frame">
           <img src="images/KnicksParade-cover.png" width="1200" height="630" loading="lazy" alt="KnicksParade — Canyon of Heroes street-camera replay" sizes="(max-width: 767px) 100vw, 346px">
