@@ -1,0 +1,467 @@
+/* ==========================================================================
+   portfolio.css — Phase 1 homepage-as-portfolio (staging only)
+   Scoped, additive layer on top of the Webflow identity. All new selectors
+   are prefixed .pf-* and the page-level overrides are scoped to body.home so
+   the shared Webflow stylesheet and the legacy pages are left untouched.
+   ========================================================================== */
+
+/* The Webflow .portv3 body is locked to height:100vh for the single-screen
+   intro. The portfolio scrolls, so release the height on the home page only. */
+body.portv3.home {
+  height: auto;
+  min-height: 100vh;
+}
+
+/* --- Work section shell -------------------------------------------------- */
+.pf-work {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 8px 0 120px;
+  font-family: Inter, sans-serif;
+  color: #111;
+}
+
+.pf-work a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Quiet editorial section label + hairline */
+.pf-eyebrow {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin: 0 0 28px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(0, 0, 0, 0.09);
+}
+.pf-eyebrow .pf-kicker {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #9ca3af;
+}
+.pf-eyebrow .pf-note {
+  font-size: 13px;
+  color: #c2c6cd;
+  margin-left: auto;
+}
+
+/* Directional affordance shared by feature + archive links */
+.pf-arrow {
+  display: inline-block;
+  margin-left: 6px;
+  color: #c2c6cd;
+  font-weight: 400;
+  transform: translateX(0);
+  transition: transform 0.25s ease, color 0.25s ease, opacity 0.25s ease;
+}
+
+/* --- Media frame --------------------------------------------------------- */
+.pf-frame {
+  position: relative;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #f6f6f5;
+}
+.pf-frame > img:not(.pf-logo-overlay),
+.pf-frame > video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: none;
+  border-radius: 0;
+  transform: scale(1);
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+/* Lead media: motion video by default, static poster under reduced motion.
+   Pure CSS swap, no JS — the reduced-motion rule lives near the bottom.
+   Specificity matches the cover rule above (0,2,1) and wins on source order. */
+.pf-frame > img.pf-lead-still {
+  display: none;
+}
+.pf-logo-overlay {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 32%;
+  height: auto;
+  border: none;
+  border-radius: 0;
+  pointer-events: none;
+}
+
+/* --- Caption block ------------------------------------------------------- */
+.pf-cap {
+  display: block;
+  margin-top: 16px;
+}
+.pf-title {
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: #111;
+  letter-spacing: -0.005em;
+}
+.pf-desc {
+  display: block;
+  margin-top: 5px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: #6b7280;
+  max-width: 46ch;
+}
+.pf-year {
+  display: block;
+  margin-top: 6px;
+  font-size: 12.5px;
+  letter-spacing: 0.02em;
+  color: #b8bcc4;
+}
+
+/* --- Lead flagship (Daylight) ------------------------------------------- */
+.pf-lead {
+  display: block;
+  margin-bottom: 56px;
+}
+.pf-lead .pf-frame {
+  aspect-ratio: 1200 / 630;
+}
+.pf-lead .pf-cap {
+  margin-top: 20px;
+}
+.pf-lead .pf-title {
+  font-size: 20px;
+  font-weight: 500;
+}
+.pf-lead .pf-desc {
+  font-size: 15.5px;
+  max-width: 52ch;
+}
+
+/* --- Secondary feature (WaitLayer): wider, letterboxed crop ------------- */
+.pf-feature {
+  display: block;
+  margin-bottom: 48px;
+}
+.pf-feature .pf-frame {
+  aspect-ratio: 24 / 10;
+}
+.pf-feature .pf-title {
+  font-size: 18px;
+}
+.pf-feature .pf-desc {
+  font-size: 15px;
+}
+
+/* --- Grid of recent solo builds ----------------------------------------- */
+.pf-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px 28px;
+  margin-bottom: 8px;
+}
+.pf-tile {
+  display: block;
+}
+.pf-tile .pf-frame {
+  aspect-ratio: 16 / 10;
+  border-radius: 10px;
+}
+.pf-tile .pf-cap {
+  margin-top: 13px;
+}
+
+/* --- Earlier work: heading + a couple of tiles, then compact archive ---- */
+.pf-earlier {
+  margin-top: 64px;
+}
+
+/* --- Compact archive rows ----------------------------------------------- */
+.pf-archive {
+  margin-top: 8px;
+  border-top: 1px solid rgba(0, 0, 0, 0.09);
+}
+.pf-row {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  min-height: 46px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  transition: opacity 0.25s ease;
+}
+.pf-row-head {
+  flex: 0 0 auto;
+  min-width: 168px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #111;
+}
+.pf-row-desc {
+  flex: 1 1 auto;
+  font-size: 14px;
+  line-height: 1.45;
+  color: #9ca3af;
+}
+.pf-row-year {
+  flex: 0 0 auto;
+  font-size: 12.5px;
+  letter-spacing: 0.02em;
+  color: #c2c6cd;
+  text-align: right;
+}
+
+/* --- Contact ending ------------------------------------------------------ */
+.pf-contact {
+  margin-top: 72px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(0, 0, 0, 0.09);
+}
+.pf-contact-line {
+  font-size: 15px;
+  line-height: 1.55;
+  color: #6b7280;
+}
+.pf-contact-line a {
+  color: #111;
+  transition: opacity 0.25s ease;
+}
+.pf-contact-links {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  font-size: 14px;
+}
+.pf-contact-links a {
+  color: #9ca3af;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  transition: opacity 0.25s ease;
+}
+
+/* --- Hover / focus (pointers + keyboard) -------------------------------- */
+.pf-lead:hover .pf-frame > img,
+.pf-lead:hover .pf-frame > video,
+.pf-feature:hover .pf-frame > img,
+.pf-tile:hover .pf-frame > img,
+.pf-lead:focus-visible .pf-frame > img,
+.pf-lead:focus-visible .pf-frame > video,
+.pf-feature:focus-visible .pf-frame > img,
+.pf-tile:focus-visible .pf-frame > img {
+  transform: scale(1.035);
+}
+.pf-lead:hover .pf-arrow,
+.pf-feature:hover .pf-arrow,
+.pf-tile:hover .pf-arrow,
+.pf-row:hover .pf-arrow,
+.pf-lead:focus-visible .pf-arrow,
+.pf-feature:focus-visible .pf-arrow,
+.pf-tile:focus-visible .pf-arrow,
+.pf-row:focus-within .pf-arrow {
+  color: #6b7280;
+  transform: translateX(3px);
+}
+.pf-row:hover {
+  opacity: 0.55;
+}
+.pf-contact-line a:hover,
+.pf-contact-links a:hover {
+  opacity: 0.5;
+}
+
+/* Visible, consistent focus ring for keyboard users */
+.pf-work a:focus-visible {
+  outline: 2px solid #111;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+.pf-work a:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* --- Responsive: designed for 390px, not merely collapsed --------------- */
+@media screen and (max-width: 767px) {
+  .pf-work {
+    max-width: none;
+    padding-bottom: 88px;
+  }
+  .pf-eyebrow .pf-note {
+    display: none;
+  }
+  .pf-lead {
+    margin-bottom: 44px;
+  }
+  .pf-lead .pf-title {
+    font-size: 18px;
+  }
+  /* Match the source artwork ratio (1200x630) at mobile widths so the full
+     WaitLayer composition — left logo and headline start — stays legible.
+     The desktop 24/10 letterbox intentionally crops top/bottom, but that same
+     cover crop lops off the sides once the frame is narrower than the source. */
+  .pf-feature .pf-frame {
+    aspect-ratio: 1200 / 630;
+  }
+  .pf-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .pf-earlier {
+    margin-top: 52px;
+  }
+  .pf-row {
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    padding: 15px 0;
+  }
+  .pf-row-head {
+    min-width: 0;
+    flex: 1 1 100%;
+    order: 1;
+    display: flex;
+    align-items: center;
+  }
+  .pf-row-year {
+    order: 2;
+    flex: 0 0 auto;
+    margin-left: auto;
+    text-align: left;
+  }
+  .pf-row-desc {
+    order: 3;
+    flex: 1 1 100%;
+  }
+  /* Year sits on the title line on mobile */
+  .pf-row {
+    align-items: baseline;
+  }
+}
+
+/* --- Motion / no-JS safety ---------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .pf-frame > img,
+  .pf-frame > video,
+  .pf-arrow {
+    transition: none;
+  }
+  .pf-lead:hover .pf-frame > img,
+  .pf-lead:hover .pf-frame > video,
+  .pf-feature:hover .pf-frame > img,
+  .pf-tile:hover .pf-frame > img {
+    transform: none;
+  }
+  .pf-lead:hover .pf-arrow,
+  .pf-feature:hover .pf-arrow,
+  .pf-tile:hover .pf-arrow,
+  .pf-row:hover .pf-arrow {
+    transform: none;
+  }
+  /* Swap the autoplaying lead loop for its still poster frame.
+     Specificity 0,2,1 to override the cover/base rules above. */
+  .pf-frame > video.pf-lead-video {
+    display: none;
+  }
+  .pf-frame > img.pf-lead-still {
+    display: block;
+  }
+  /* The intro relies on a Webflow load animation; guarantee it is legible
+     when motion is reduced. */
+  .home [data-w-id] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* If JavaScript never runs, Webflow can't reveal the intro — show it. */
+html:not(.w-mod-js) .home [data-w-id] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* ==========================================================================
+   Status / provenance tags — preserved verbatim from work.html so the
+   taxonomy and its honest labels stay identical across the site.
+   ========================================================================== */
+.work-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  vertical-align: 2px;
+  margin-left: 8px;
+  padding: 3px 9px;
+  border: 1px solid #e5e7eb;
+  border-radius: 100px;
+  font-family: Inter, sans-serif;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #6b7280;
+  background: #fff;
+  white-space: nowrap;
+}
+.work-tag + .work-tag { margin-left: 5px; }
+.work-tag i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: tagPulse 2.6s ease-out infinite;
+}
+@keyframes tagPulse {
+  0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.35); }
+  60% { box-shadow: 0 0 0 5px rgba(34, 197, 94, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+}
+.work-tag.beta i { background: #f59e0b; animation: betaBreathe 2.8s ease-in-out infinite; }
+.work-tag.acq b {
+  color: #8b5cf6;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 1;
+  display: inline-block;
+  animation: acqGlow 4.8s ease-in-out infinite;
+}
+@keyframes acqGlow {
+  0%, 100% { opacity: 0.5; text-shadow: none; }
+  50% { opacity: 1; text-shadow: 0 0 7px rgba(139, 92, 246, 0.45); }
+}
+@keyframes betaBreathe {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(0.72); opacity: 0.55; }
+}
+.work-tag.fill { background: #f4f4f5; border-color: #f4f4f5; }
+.work-tag.solo {
+  color: #15803d;
+  border-color: #dcfce7;
+  background: linear-gradient(110deg, #f0fdf4 40%, #fafffc 50%, #f0fdf4 60%);
+  background-size: 260% 100%;
+  background-position: -35% 0;
+  animation: soloSheen 4.5s linear infinite;
+}
+.work-tag.solo.amber {
+  color: #b45309;
+  border-color: #fef3c7;
+  background: linear-gradient(110deg, #fffbeb 40%, #fffdf6 50%, #fffbeb 60%);
+  background-size: 260% 100%;
+  background-position: -35% 0;
+}
+@keyframes soloSheen {
+  0% { background-position: 135% 0; }
+  45% { background-position: -35% 0; }
+  100% { background-position: -35% 0; }
+}
+.work-tag.muted { color: #a8adb5; border-color: #ededef; }
+.work-tag.dashed { border-style: dashed; }
+@media (prefers-reduced-motion: reduce) {
+  .work-tag i, .work-tag.solo, .work-tag.acq b { animation: none; }
+}
