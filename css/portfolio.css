@@ -12,6 +12,33 @@ body.portv3.home {
   min-height: 100vh;
 }
 
+/* --- Intro alignment ----------------------------------------------------- */
+/* Match the intro to the work section: same 720px editorial width and left
+   edge. Both are centered inside the body.portv3 horizontal padding (85px
+   desktop / 24px mobile), so equal max-widths give identical left edges. The
+   24px mobile gutter is inherited from that body padding and stays intact. */
+body.home .container-29.pport3 {
+  max-width: 720px;
+}
+
+/* Intro links: one horizontal, wrap-friendly nav under the bio — same
+   footer treatment (.pf-contact-links), one row at 720px, clean wrap at 390px. */
+.pf-intro-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 20px;
+  margin-top: 4px;
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+}
+.pf-intro-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
 /* --- Work section shell -------------------------------------------------- */
 .pf-work {
   max-width: 720px;
@@ -63,21 +90,23 @@ body.portv3.home {
   position: relative;
   display: block;
   width: 100%;
+  /* Every card shares one 1200/630 frame; artwork is contained, never cropped,
+     so mixed sources (1200x630, 2400x1260, RatMap 1280x720) all show in full. */
+  aspect-ratio: 1200 / 630;
   overflow: hidden;
   border-radius: 12px;
   border: 1px solid rgba(0, 0, 0, 0.08);
   background: #f6f6f5;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 .pf-frame > img:not(.pf-logo-overlay),
 .pf-frame > video {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   border: none;
   border-radius: 0;
-  transform: scale(1);
-  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 /* Lead media: motion video by default, static poster under reduced motion.
    Pure CSS swap, no JS — the reduced-motion rule lives near the bottom.
@@ -85,16 +114,23 @@ body.portv3.home {
 .pf-frame > img.pf-lead-still {
   display: none;
 }
+/* Daylight wordmark: mathematically centered on the frame at all times.
+   Absolute center, explicit z-index above both video and still, intrinsic-safe
+   size cap, and no transform/transition so hover and the reduced-motion
+   video/still swap can never shift it. */
 .pf-logo-overlay {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  z-index: 2;
   width: 32%;
+  max-width: 384px;
   height: auto;
   border: none;
   border-radius: 0;
   pointer-events: none;
+  transition: none;
 }
 
 /* --- Caption block ------------------------------------------------------- */
@@ -131,9 +167,6 @@ body.portv3.home {
   display: block;
   margin-bottom: 56px;
 }
-.pf-lead .pf-frame {
-  aspect-ratio: 1200 / 630;
-}
 .pf-lead .pf-cap {
   margin-top: 20px;
 }
@@ -146,13 +179,10 @@ body.portv3.home {
   max-width: 52ch;
 }
 
-/* --- Secondary feature (WaitLayer): wider, letterboxed crop ------------- */
+/* --- Secondary feature (WaitLayer) -------------------------------------- */
 .pf-feature {
   display: block;
   margin-bottom: 48px;
-}
-.pf-feature .pf-frame {
-  aspect-ratio: 24 / 10;
 }
 .pf-feature .pf-title {
   font-size: 18px;
@@ -172,7 +202,6 @@ body.portv3.home {
   display: block;
 }
 .pf-tile .pf-frame {
-  aspect-ratio: 16 / 10;
   border-radius: 10px;
 }
 .pf-tile .pf-cap {
@@ -250,15 +279,17 @@ body.portv3.home {
 }
 
 /* --- Hover / focus (pointers + keyboard) -------------------------------- */
-.pf-lead:hover .pf-frame > img,
-.pf-lead:hover .pf-frame > video,
-.pf-feature:hover .pf-frame > img,
-.pf-tile:hover .pf-frame > img,
-.pf-lead:focus-visible .pf-frame > img,
-.pf-lead:focus-visible .pf-frame > video,
-.pf-feature:focus-visible .pf-frame > img,
-.pf-tile:focus-visible .pf-frame > img {
-  transform: scale(1.035);
+/* Restrained response only: a slightly stronger frame hairline and an
+   extremely subtle shadow. No media scales, translates, or moves — the card
+   and artwork stay put; the arrow below carries the directional cue. */
+.pf-lead:hover .pf-frame,
+.pf-feature:hover .pf-frame,
+.pf-tile:hover .pf-frame,
+.pf-lead:focus-visible .pf-frame,
+.pf-feature:focus-visible .pf-frame,
+.pf-tile:focus-visible .pf-frame {
+  border-color: rgba(0, 0, 0, 0.18);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 .pf-lead:hover .pf-arrow,
 .pf-feature:hover .pf-arrow,
@@ -304,13 +335,6 @@ body.portv3.home {
   .pf-lead .pf-title {
     font-size: 18px;
   }
-  /* Match the source artwork ratio (1200x630) at mobile widths so the full
-     WaitLayer composition — left logo and headline start — stays legible.
-     The desktop 24/10 letterbox intentionally crops top/bottom, but that same
-     cover crop lops off the sides once the frame is narrower than the source. */
-  .pf-feature .pf-frame {
-    aspect-ratio: 1200 / 630;
-  }
   .pf-grid {
     grid-template-columns: 1fr;
     gap: 36px;
@@ -348,16 +372,8 @@ body.portv3.home {
 
 /* --- Motion / no-JS safety ---------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
-  .pf-frame > img,
-  .pf-frame > video,
   .pf-arrow {
     transition: none;
-  }
-  .pf-lead:hover .pf-frame > img,
-  .pf-lead:hover .pf-frame > video,
-  .pf-feature:hover .pf-frame > img,
-  .pf-tile:hover .pf-frame > img {
-    transform: none;
   }
   .pf-lead:hover .pf-arrow,
   .pf-feature:hover .pf-arrow,
