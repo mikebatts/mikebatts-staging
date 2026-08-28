@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en" class="ray-page" data-wf-site="5dbdf5d45ad64f500c81ca1f">
+<head>
+  <meta charset="utf-8">
+  <title>Ray 2A · Operational support inside Daylight · Mike Battaglia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ray 2A is the operational support layer inside Daylight's origination portal. It answers from live project data and published process knowledge, and turns requests into guarded, confirmable actions. A case study on product, design, and engineering by Mike Battaglia.">
+  <meta name="theme-color" content="#FFF7E9">
+  <meta name="author" content="Mike Battaglia">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Ray 2A · Ask anything. Trust the answer.">
+  <meta property="og:description" content="The operational support layer inside Daylight's origination portal. Grounded answers, guarded actions, honest escalation. A case study by Mike Battaglia.">
+  <meta property="og:image" content="images/og-image.png">
+  <meta property="og:site_name" content="Mike Battaglia">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ray 2A · Ask anything. Trust the answer.">
+  <meta name="twitter:description" content="The operational support layer inside Daylight's origination portal. A case study by Mike Battaglia.">
+  <meta name="twitter:image" content="images/og-image.png">
+
+  <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon">
+  <link href="images/webclip.png" rel="apple-touch-icon">
+
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
+  <link href="css/ray.css" rel="stylesheet" type="text/css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+  <script type="text/javascript">WebFont.load({ google: { families: ["Instrument Serif:400","Inter:300,400,500,600,700","Inter Tight:400,500,600,700","Inconsolata:400,500,700"] } });</script>
+  <script type="text/javascript">document.documentElement.classList.add('js-on');</script>
+</head>
+<body>
+  <a class="ray-skip" href="#ray-main">Skip to content</a>
+
+  <!-- ============================ HERO ============================ -->
+  <header class="ray-hero">
+    <div class="ray-wrap">
+      <nav class="ray-nav" aria-label="Case study">
+        <div class="ray-nav-left">
+          <a class="ray-navlink back" href="daylight.html">&larr;&nbsp;Daylight</a>
+          <a class="ray-navlink" href="index.html">
+            <img class="avi" src="images/avi.png" alt="" width="26" height="26" loading="lazy">
+            Mike Battaglia
+          </a>
+        </div>
+        <span class="ray-nav-status"><span class="dot" aria-hidden="true"></span>Internal beta · 2026</span>
+      </nav>
+    </div>
+
+    <div class="ray-wrap">
+      <div class="ray-hero-grid">
+        <div class="ray-hero-copy">
+          <p class="ray-eyebrow"><span class="tick" aria-hidden="true"></span>Daylight · Ray 2A</p>
+          <h1 class="ray-display ray-hero-title">Ask anything.<br>Trust the answer.</h1>
+          <p class="ray-hero-intro">Ray is the operational support layer inside Daylight's origination portal. It answers from live project data and published process knowledge, and turns requests into guarded, confirmable actions.</p>
+          <p class="ray-hero-role"><b>Product, design, and engineering</b> · Mike Battaglia · 2026</p>
+          <p class="ray-hero-micro">Ray moves while working. He comes to rest with an answer.</p>
+        </div>
+
+        <div class="ray-hero-figure">
+          <div class="ray-avatar">
+            <span class="ray-avatar-field" aria-hidden="true"></span>
+            <span class="ray-avatar-ring" aria-hidden="true"></span>
+            <div class="ray-avatar-disc">
+              <video id="ray-hero-video" src="images/ray-avatar-loop.mp4" poster="images/ray-avatar-poster.png"
+                     muted loop playsinline autoplay preload="metadata" aria-hidden="true" tabindex="-1"></video>
+              <img class="poster-fallback" src="images/ray-avatar-poster.png" alt="" aria-hidden="true">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="ray-main">
+
+    <!-- ==================== DISCOVERY TRIGGER ==================== -->
+    <section class="ray-section ray-discovery" aria-labelledby="disc-h">
+      <div class="ray-wrap reveal">
+        <p class="ray-eyebrow"><span class="tick" aria-hidden="true"></span>Where it started</p>
+        <h2 class="ray-h2" id="disc-h">The answers already existed. Trust did not.</h2>
+        <p class="ray-lead">A read-only analysis of project notes surfaced a quiet failure. People were asking real operational questions, and the thread went nowhere.</p>
+
+        <div class="ray-evidence-row">
+          <div class="ray-stat stagger">
+            <div class="num">1,813</div>
+            <div class="lbl">production notes analyzed, read only</div>
+            <div class="src">Product discovery</div>
+          </div>
+          <div class="ray-stat stagger">
+            <div class="num">67%</div>
+            <div class="lbl">of threads had no reply at all</div>
+            <div class="src">No response</div>
+          </div>
+          <div class="ray-stat stagger">
+            <div class="num">54%</div>
+            <div class="lbl">of direct questions went unanswered</div>
+            <div class="src">Question, then silence</div>
+          </div>
+        </div>
+
+        <p class="ray-lead stagger">Many of those questions already had answers, sitting in live project state or in published process knowledge. The real product problem was never generating text. It was making an answer trustworthy and actionable in the exact place the work happens.</p>
+
+        <div class="ray-authornote stagger">
+          <img class="avi" src="images/avi.png" alt="Mike Battaglia" width="34" height="34" loading="lazy">
+          <p>Built on the team's shared Ray chat foundation. <b>I led the Ray 2A productization across product, interaction design, and engineering.</b></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== INTERACTIVE DEMO ==================== -->
+    <section class="ray-section" aria-labelledby="demo-h">
+      <div class="ray-wrap reveal">
+        <div class="ray-demo-head">
+          <span class="ray-demo-tag"><span class="sq" aria-hidden="true"></span>Illustrative interaction</span>
+          <h2 class="ray-h2" id="demo-h">See how Ray answers.</h2>
+          <p class="ray-lead">Pick a question. Ray reaches for a tool, narrates the step, and settles on a grounded answer with its sources. This is a rebuild of the real behavior, using fictional records.</p>
+        </div>
+
+        <div class="ray-demo" id="ray-demo">
+          <!-- portal context rail, fictional -->
+          <aside class="ray-demo-rail" aria-label="Sample project context">
+            <div class="k">Sample project</div>
+            <div class="proj">Maple Street residence</div>
+            <div class="phase">Design review</div>
+            <ul class="ray-demo-steps" id="ray-steps" aria-hidden="true">
+              <li class="done">Origination</li>
+              <li class="now">Document verification</li>
+              <li>CAD design &amp; true-up</li>
+              <li>Permitting</li>
+              <li>Installation</li>
+            </ul>
+          </aside>
+
+          <!-- conversation -->
+          <div class="ray-demo-convo">
+            <div class="ray-demo-topbar">
+              <span class="ray-demo-mini">
+                <video id="ray-demo-video" src="images/ray-avatar-loop.mp4" poster="images/ray-avatar-poster.png"
+                       muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+              </span>
+              <span>
+                <span class="who">Ray</span>
+                <span class="st" id="ray-presence"> · at rest</span>
+              </span>
+            </div>
+
+            <div class="ray-demo-body">
+              <p class="ray-demo-question" id="ray-question" aria-hidden="false">Why can't this project advance?</p>
+
+              <p class="ray-demo-working" id="ray-working" hidden aria-live="assertive">
+                <span class="pulse" aria-hidden="true"></span><span id="ray-working-text">Working</span>
+              </p>
+
+              <div class="ray-answers" id="ray-answers" aria-live="polite">
+
+                <!-- Answer 1 · blocker / next action / responsibility -->
+                <div class="ray-answer" data-answer="1">
+                  <div class="ray-answer-in">
+                    <span class="a-tag">Grounded answer · illustrative</span>
+                    <p class="a-line">This project can't advance because a required step in the current phase is still open.</p>
+                    <ul class="ray-fields">
+                      <li><span class="f-k">Blocker</span><span class="f-v hot">Title verification has not cleared</span></li>
+                      <li><span class="f-k">Also true</span><span class="f-v">The signed agreement is in and identity is verified</span></li>
+                      <li><span class="f-k">Next action</span><span class="f-v">Confirm title, or request an updated title document from the homeowner</span></li>
+                      <li><span class="f-k">Owner</span><span class="f-v">Assigned reviewer</span></li>
+                    </ul>
+                  </div>
+                  <p class="ray-sources"><b>Sources</b> project stage record, open review items · <b>Freshness</b> checked this turn</p>
+                </div>
+
+                <!-- Answer 2 · document list -->
+                <div class="ray-answer" data-answer="2" hidden>
+                  <div class="ray-answer-in">
+                    <span class="a-tag">Grounded answer · illustrative</span>
+                    <p class="a-line">Two items are still outstanding for this phase.</p>
+                    <ul class="ray-docs">
+                      <li>
+                        <span class="d-name"><span class="ray-dot miss" aria-hidden="true"></span>Proof of title</span>
+                        <span class="d-state miss">Not received</span>
+                        <span class="d-view">Portal only</span>
+                      </li>
+                      <li>
+                        <span class="d-name"><span class="ray-dot miss" aria-hidden="true"></span>Signed work order</span>
+                        <span class="d-state miss">Pending design</span>
+                        <span class="d-view">Portal only</span>
+                      </li>
+                      <li>
+                        <span class="d-name"><span class="ray-dot ok" aria-hidden="true"></span>Government ID</span>
+                        <span class="d-state ok">Received</span>
+                        <span class="d-view">Portal only</span>
+                      </li>
+                      <li>
+                        <span class="d-name"><span class="ray-dot ok" aria-hidden="true"></span>Utility bill</span>
+                        <span class="d-state ok">Received</span>
+                        <span class="d-view">Portal only</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <p class="ray-sources"><b>Sources</b> document checklist for this phase · <b>Freshness</b> checked this turn</p>
+                </div>
+
+                <!-- Answer 3 · proposed action / confirm -->
+                <div class="ray-answer" data-answer="3" hidden>
+                  <div class="ray-answer-in">
+                    <span class="a-tag">Grounded answer · illustrative</span>
+                    <p class="a-line">No project data or published article resolves this on its own, so Ray does not guess. He can hand it to a person.</p>
+                    <div class="ray-proposal" id="ray-proposal" aria-live="polite">
+                      <div class="p-head">Proposed action</div>
+                      <div class="p-body" id="ray-proposal-body">
+                        <p class="p-title">Escalate to a human</p>
+                        <p class="p-desc">Create a support handoff for this project with your question and the current stage. A person reviews it and replies. Nothing runs until you confirm.</p>
+                        <button class="ray-btn primary" type="button" id="ray-confirm">Confirm request</button>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="ray-sources"><b>Sources</b> none available · <b>Freshness</b> Ray could not verify an answer, so he escalated instead</p>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="ray-demo-foot">
+              <p class="prompt-lbl">Ask Ray</p>
+              <ul class="ray-prompts" role="group" aria-label="Sample questions">
+                <li>
+                  <button class="ray-prompt" type="button" data-prompt="1" data-q="Why can't this project advance?"
+                          data-work="Checking project stage and open review items." aria-pressed="true">
+                    <span class="txt">Why can't this project advance?</span><span class="arrow" aria-hidden="true">&rarr;</span>
+                  </button>
+                </li>
+                <li>
+                  <button class="ray-prompt" type="button" data-prompt="2" data-q="What documents are still missing?"
+                          data-work="Reading the document checklist for this phase." aria-pressed="false">
+                    <span class="txt">What documents are still missing?</span><span class="arrow" aria-hidden="true">&rarr;</span>
+                  </button>
+                </li>
+                <li>
+                  <button class="ray-prompt" type="button" data-prompt="3" data-q="I need help from a person."
+                          data-work="No source resolves this. Preparing a human handoff." aria-pressed="false">
+                    <span class="txt">I need help from a person.</span><span class="arrow" aria-hidden="true">&rarr;</span>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <p class="ray-demo-note reveal"><span class="sq" aria-hidden="true"></span>A product demonstration using fictional records. No live customer data.</p>
+      </div>
+    </section>
+
+    <!-- ==================== SURFACES ==================== -->
+    <section class="ray-section ray-surfaces" aria-labelledby="surf-h">
+      <div class="ray-wrap reveal">
+        <p class="ray-eyebrow"><span class="tick" aria-hidden="true"></span>Where Ray lives</p>
+        <h2 class="ray-h2" id="surf-h">One assistant. Three surfaces.</h2>
+        <p class="ray-lead">The same grounded assistant meets people where they already work, without pulling them out of the project in front of them.</p>
+
+        <div class="ray-surface-grid">
+          <article class="ray-surface stagger">
+            <div class="s-num">01</div>
+            <h3 class="s-name">Full page</h3>
+            <p class="s-desc">Durable history and deep work. A dedicated place to think through a project and keep the thread.</p>
+            <div class="ray-schem full" aria-hidden="true">
+              <div class="bar"><i></i><i></i><i></i></div>
+              <div class="body">
+                <div class="ln w85"></div><div class="ln w70"></div>
+                <div class="ln w50 hot"></div><div class="ln w40"></div><div class="ln w70"></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="ray-surface stagger">
+            <div class="s-num">02</div>
+            <h3 class="s-name">Drawer</h3>
+            <p class="s-desc">Project context stays visible while asking. Ray opens beside the work, not on top of it.</p>
+            <div class="ray-schem drawer" aria-hidden="true">
+              <div class="bar"><i></i><i></i><i></i></div>
+              <div class="body">
+                <div class="ctx"><div class="ln w85"></div><div class="ln w50"></div><div class="ln w70"></div><div class="ln w40"></div></div>
+                <div class="panel"><span class="disc"></span><div class="ln w85"></div><div class="ln w70 hot"></div><div class="ln w50"></div></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="ray-surface stagger">
+            <div class="s-num">03</div>
+            <h3 class="s-name">Pop-out</h3>
+            <p class="s-desc">Ray can sit beside the portal without portal chrome. A floating window that follows the work across screens.</p>
+            <div class="ray-schem popout" aria-hidden="true">
+              <div class="win"></div>
+              <div class="float"><span class="disc"></span><div class="ln w85"></div><div class="ln w50 hot"></div><div class="ln w70"></div></div>
+            </div>
+          </article>
+        </div>
+
+        <div class="ray-mobile-callout reveal">
+          <div class="ray-phone" aria-hidden="true">
+            <span class="notch"></span>
+            <span class="launch"></span>
+            <div class="sheet"><div class="ln"></div><div class="ln w60"></div><div class="ln"></div><div class="ln w60"></div></div>
+          </div>
+          <div class="m-copy">
+            <h3>And a mobile lane built for the phone.</h3>
+            <p>A <b>top-right launcher</b> opens a <b>full-screen drawer</b> with safe-area handling. The composer uses a <b>16px font to stop Safari from zooming</b>, and scroll is contained so the page underneath stays put. Small surface, same guarantees.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TRUST ARCHITECTURE ==================== -->
+    <section class="ray-section" aria-labelledby="trust-h">
+      <div class="ray-wrap reveal">
+        <p class="ray-eyebrow"><span class="tick" aria-hidden="true"></span>The hard part</p>
+        <h2 class="ray-h2" id="trust-h">Trust is architecture, not tone.</h2>
+        <p class="ray-lead">Every answer runs the same path. The model never reaches data directly, and it never acts on its own.</p>
+
+        <div class="ray-trust-grid">
+          <ol class="ray-flow stagger" aria-label="How a request flows">
+            <li><span class="node" aria-hidden="true"></span><div class="step">Question</div><div class="gloss">Someone asks in the portal, inside a project or across the process knowledge.</div></li>
+            <li><span class="node" aria-hidden="true"></span><div class="step">Viewer-scoped tools</div><div class="gloss">Ray reaches only for tools the current viewer is already allowed to use.</div></li>
+            <li><span class="node" aria-hidden="true"></span><div class="step">Live data or published knowledge</div><div class="gloss">Tools read real project state, or the published help-center articles.</div></li>
+            <li><span class="node" aria-hidden="true"></span><div class="step">Grounded answer or proposal</div><div class="gloss">Ray answers with sources, or proposes an action. Never both silently.</div></li>
+            <li><span class="node" aria-hidden="true"></span><div class="step">Explicit confirmation</div><div class="gloss">A proposal waits. The person confirms before anything happens.</div></li>
+            <li class="terminal"><span class="node" aria-hidden="true"></span><div class="step">Existing guarded operation</div><div class="gloss">Confirmed work runs through the portal's own guarded operation, not a new path.</div></li>
+          </ol>
+
+          <div class="ray-invariants stagger">
+            <p class="ray-invariants-title">Invariants, always on</p>
+            <div class="iv"><span class="mk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><p>Reauthorize every project-bound turn.</p></div>
+            <div class="iv"><span class="mk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><p>Cite only sources that actually ran.</p></div>
+            <div class="iv"><span class="mk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><p>No source means "I could not verify that."</p></div>
+            <div class="iv"><span class="mk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><p>A proposal is not execution.</p></div>
+            <div class="iv"><span class="mk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><p>Confirm rechecks visibility and capability.</p></div>
+            <div class="iv"><span class="mk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><p>Sensitive and destructive actions stay out of the catalog.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PRODUCT DECISIONS ==================== -->
+    <section class="ray-section ray-surfaces" aria-labelledby="dec-h">
+      <div class="ray-wrap reveal">
+        <p class="ray-eyebrow"><span class="tick" aria-hidden="true"></span>Product decisions</p>
+        <h2 class="ray-h2" id="dec-h">Three choices that shaped Ray.</h2>
+        <p class="ray-lead">Not a feature list. The calls that decided how it should feel to trust an assistant with real work.</p>
+
+        <div class="ray-decisions">
+          <article class="ray-decision stagger">
+            <div>
+              <div class="d-idx">Decision 01</div>
+              <h3 class="d-title">Stay in context</h3>
+            </div>
+            <p class="d-body">The answer is worth less if you have to leave the project to get it. Ray ships as a <b>persistent drawer and a pop-out</b>, and its turns run <b>server-side so they survive navigation</b>. You can move around the portal and the work Ray is doing does not fall on the floor.</p>
+          </article>
+
+          <article class="ray-decision stagger">
+            <div>
+              <div class="d-idx">Decision 02</div>
+              <h3 class="d-title">Narrate the work</h3>
+            </div>
+            <p class="d-body">A silent spinner asks for blind trust. Instead Ray shows the <b>actual tool step in plain language while the avatar moves</b>, then comes to rest on a settled answer <b>with its sources and freshness</b>. You watch the reasoning happen, so you can judge the result.</p>
+          </article>
+
+          <article class="ray-decision stagger">
+            <div>
+              <div class="d-idx">Decision 03</div>
+              <h3 class="d-title">Escalate honestly</h3>
+            </div>
+            <p class="d-body">When project data and knowledge cannot explain the issue, the right move is a person, not a confident guess. Ray hands off to <b>human support</b>, with <b>deduplication and rate limits</b> so one problem does not turn into a pile of tickets.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== EVIDENCE + SHIPPED BOUNDARY ==================== -->
+    <section class="ray-section ray-evidence" aria-labelledby="ev-h">
+      <div class="ray-wrap reveal">
+        <p class="ray-eyebrow on-dark"><span class="tick" aria-hidden="true"></span>Merged PR evidence</p>
+        <h2 class="ray-h2" id="ev-h">What shipped, and what did not.</h2>
+        <p class="ray-lead">These are receipts from the merged productization, not outcome analytics. Usage and impact metrics have not been measured, so they are not claimed here.</p>
+
+        <div class="ray-receipts">
+          <div class="ray-receipt stagger">
+            <div class="r-num">28</div>
+            <div class="r-lbl">published process articles in the knowledge lane</div>
+            <div class="ray-receipt-src">Portal knowledge</div>
+          </div>
+          <div class="ray-receipt stagger">
+            <div class="r-num">11/12</div>
+            <div class="r-lbl">reference questions returned the correct article first</div>
+            <div class="ray-receipt-src">PR reference set</div>
+          </div>
+          <div class="ray-receipt stagger">
+            <div class="r-num">480</div>
+            <div class="r-lbl">relevant tests reported passing in the merged PR</div>
+            <div class="ray-receipt-src">As reported in PR</div>
+          </div>
+          <div class="ray-receipt stagger">
+            <div class="r-num">110</div>
+            <div class="r-lbl">files changed in the merged productization</div>
+            <div class="ray-receipt-src">Merged diff</div>
+          </div>
+        </div>
+
+        <ul class="ray-ledger">
+          <li class="stagger">
+            <span class="l-id">#1338</span>
+            <span><span class="l-name">Foundation</span><span class="l-desc">Shared Ray chat foundation, built by the Daylight team</span></span>
+            <span class="ray-status merged"><span class="d" aria-hidden="true"></span>Merged</span>
+          </li>
+          <li class="stagger">
+            <span class="l-id">#1562</span>
+            <span><span class="l-name">Ray 2A</span><span class="l-desc">Mike-led operational productization across the origination portal</span></span>
+            <span class="ray-status merged"><span class="d" aria-hidden="true"></span>Merged</span>
+          </li>
+          <li class="stagger">
+            <span class="l-id">#1926</span>
+            <span><span class="l-name">Beta feedback</span><span class="l-desc">Live Sheets, cross-project note search, project inquiry traces, admin Activity Log, review and rejection feedback, ticket resolution state</span></span>
+            <span class="ray-status dev"><span class="d" aria-hidden="true"></span>In development</span>
+          </li>
+          <li class="stagger">
+            <span class="l-id">#1932 / #1935</span>
+            <span><span class="l-name">Retrieval + Customer Ray B</span><span class="l-desc">Guarded hybrid retrieval on pgvector, evaluated for no regression on a lexical set, and a customer-only iOS support lane with strict audience binding</span></span>
+            <span class="ray-status dev"><span class="d" aria-hidden="true"></span>In development</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ==================== CLOSING ==================== -->
+    <section class="ray-section ray-closing" aria-labelledby="close-h">
+      <div class="ray-wrap narrow reveal">
+        <p class="ray-eyebrow"><span class="tick" aria-hidden="true"></span>The lesson</p>
+        <h2 class="ray-h2" id="close-h">Usefulness was the easy half.</h2>
+        <p class="ray-lead">Getting an assistant to say something helpful is not hard anymore. The hard part was everything around the answer. Permission, so it only ever sees what the viewer sees. Grounding, so every claim points at a source that actually ran. Action boundaries, so it can propose but never quietly execute. And graceful escalation, so it knows when to stop and hand the problem to a person.</p>
+        <p class="ray-lead">Ray started from the team's shared chat foundation. My work was turning that into something the portal could trust with real projects, on the surfaces where the work already happens. That is the part I am proud of.</p>
+
+        <div class="ray-closing-links">
+          <a class="ray-outlink solid" href="daylight.html">&larr;&nbsp;Back to the Daylight case study</a>
+          <a class="ray-outlink ghost" href="index.html">Mike Battaglia</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="ray-footer">
+    <div class="ray-wrap">
+      <span class="fmeta"><b>Ray 2A</b> · Daylight · Internal beta 2026</span>
+      <span class="fmeta">Product, design, and engineering · Mike Battaglia</span>
+    </div>
+  </footer>
+
+  <script src="js/ray-case-study.js" defer></script>
+</body>
+</html>
