@@ -18,7 +18,16 @@ body.portv3.home {
    desktop / 24px mobile), so equal max-widths give identical left edges. The
    24px mobile gutter is inherited from that body padding and stays intact. */
 body.home .container-29.pport3 {
+  width: 100%;
   max-width: 720px;
+  box-sizing: border-box;
+}
+
+/* Defensive: Webflow constrains the avatar to width:40px but leaves height
+   from the intrinsic ratio. Keep height derived from that width so responsive
+   srcset source selection can never distort the rendered box. */
+body.home .image-39 {
+  height: auto;
 }
 
 /* Intro links: one horizontal, wrap-friendly nav under the bio — same
@@ -27,16 +36,30 @@ body.home .container-29.pport3 {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 2px 20px;
-  margin-top: 4px;
+  gap: 4px 24px;
+  margin-top: 8px;
   font-family: Inter, sans-serif;
   font-size: 16px;
   line-height: 24px;
 }
+/* Calm contact row: subtle gray at rest, black on hover/focus. Overrides the
+   webflow link-51/link-52 colors (single-class, lower specificity). */
 .pf-intro-nav a {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
+  color: #9ca3af;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+.pf-intro-nav a:hover,
+.pf-intro-nav a:focus-visible {
+  color: #111;
+  opacity: 1;
+}
+.pf-intro-nav a:focus-visible {
+  outline: 2px solid #111;
+  outline-offset: 4px;
+  border-radius: 3px;
 }
 
 /* --- Work section shell -------------------------------------------------- */
@@ -87,8 +110,10 @@ body.home .container-29.pport3 {
 
 /* --- Media frame --------------------------------------------------------- */
 .pf-frame {
-  position: relative;
-  display: block;
+  /* Single-cell grid: media and the optional logo overlay share one "stack"
+     cell, so the logo is centered by the grid — no transform math to drift. */
+  display: grid;
+  grid-template-areas: "stack";
   width: 100%;
   /* Every card shares one 1200/630 frame; artwork is contained, never cropped,
      so mixed sources (1200x630, 2400x1260, RatMap 1280x720) all show in full. */
@@ -101,6 +126,7 @@ body.home .container-29.pport3 {
 }
 .pf-frame > img:not(.pf-logo-overlay),
 .pf-frame > video {
+  grid-area: stack;
   display: block;
   width: 100%;
   height: 100%;
@@ -114,15 +140,12 @@ body.home .container-29.pport3 {
 .pf-frame > img.pf-lead-still {
   display: none;
 }
-/* Daylight wordmark: mathematically centered on the frame at all times.
-   Absolute center, explicit z-index above both video and still, intrinsic-safe
-   size cap, and no transform/transition so hover and the reduced-motion
-   video/still swap can never shift it. */
+/* Daylight wordmark: centered by the grid cell (place-self), never by a
+   transform, so hover and the reduced-motion video/still swap can never
+   shift it. Explicit stacking above the media, intrinsic-safe size cap. */
 .pf-logo-overlay {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  grid-area: stack;
+  place-self: center;
   z-index: 2;
   width: 32%;
   max-width: 384px;
@@ -130,6 +153,7 @@ body.home .container-29.pport3 {
   border: none;
   border-radius: 0;
   pointer-events: none;
+  transform: none;
   transition: none;
 }
 
@@ -218,34 +242,44 @@ body.home .container-29.pport3 {
   margin-top: 8px;
   border-top: 1px solid rgba(0, 0, 0, 0.09);
 }
+/* A designed ledger: four aligned columns — title | tags | description | year.
+   Separate spans (not tags nested in the title) so every column lines up. */
 .pf-row {
-  display: flex;
+  display: grid;
+  grid-template-columns: 188px 128px 1fr auto;
   align-items: baseline;
-  gap: 16px;
+  column-gap: 20px;
   min-height: 46px;
   padding: 14px 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.07);
   transition: opacity 0.25s ease;
 }
-.pf-row-head {
-  flex: 0 0 auto;
-  min-width: 168px;
+.pf-row-title {
   font-size: 15px;
   font-weight: 500;
   color: #111;
 }
+.pf-row-tags {
+  display: inline-flex;
+  align-items: center;
+}
+/* Tag sits in its own column, so drop the leading margin it carries inline. */
+.pf-row-tags .work-tag {
+  margin-left: 0;
+}
 .pf-row-desc {
-  flex: 1 1 auto;
   font-size: 14px;
   line-height: 1.45;
   color: #9ca3af;
+  transition: color 0.2s ease;
 }
 .pf-row-year {
-  flex: 0 0 auto;
   font-size: 12.5px;
   letter-spacing: 0.02em;
   color: #c2c6cd;
   text-align: right;
+  white-space: nowrap;
+  transition: color 0.2s ease;
 }
 
 /* --- Contact ending ------------------------------------------------------ */
@@ -291,6 +325,24 @@ body.home .container-29.pport3 {
   border-color: rgba(0, 0, 0, 0.18);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
+/* Safeguard: no hover/focus state may transform or move the Daylight overlay
+   or the media. The logo stays grid-centered with transform:none at all times. */
+.pf-lead:hover .pf-logo-overlay,
+.pf-lead:focus-within .pf-logo-overlay,
+.pf-lead:focus-visible .pf-logo-overlay {
+  transform: none;
+  place-self: center;
+}
+.pf-lead:hover .pf-frame > img:not(.pf-logo-overlay),
+.pf-lead:hover .pf-frame > video,
+.pf-feature:hover .pf-frame > img,
+.pf-tile:hover .pf-frame > img,
+.pf-lead:focus-visible .pf-frame > img:not(.pf-logo-overlay),
+.pf-lead:focus-visible .pf-frame > video,
+.pf-feature:focus-visible .pf-frame > img,
+.pf-tile:focus-visible .pf-frame > img {
+  transform: none;
+}
 .pf-lead:hover .pf-arrow,
 .pf-feature:hover .pf-arrow,
 .pf-tile:hover .pf-arrow,
@@ -302,8 +354,17 @@ body.home .container-29.pport3 {
   color: #6b7280;
   transform: translateX(3px);
 }
-.pf-row:hover {
-  opacity: 0.55;
+/* Hover/focus strengthens legibility: modestly darken the description and year
+   instead of fading the whole row. The row does not move or resize. */
+.pf-row:hover .pf-row-desc,
+.pf-row:focus-visible .pf-row-desc,
+.pf-row:focus-within .pf-row-desc {
+  color: #6b7280;
+}
+.pf-row:hover .pf-row-year,
+.pf-row:focus-visible .pf-row-year,
+.pf-row:focus-within .pf-row-year {
+  color: #9ca3af;
 }
 .pf-contact-line a:hover,
 .pf-contact-links a:hover {
@@ -342,31 +403,31 @@ body.home .container-29.pport3 {
   .pf-earlier {
     margin-top: 52px;
   }
+  /* Compact mobile ledger: title + year share the first line, tag(s) hold a
+     stable second row, description spans the full width on a third row. */
   .pf-row {
-    flex-wrap: wrap;
-    gap: 4px 12px;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "title year"
+      "tags  tags"
+      "desc  desc";
+    column-gap: 12px;
+    row-gap: 5px;
     padding: 15px 0;
+    align-items: baseline;
   }
-  .pf-row-head {
-    min-width: 0;
-    flex: 1 1 100%;
-    order: 1;
-    display: flex;
-    align-items: center;
+  .pf-row-title {
+    grid-area: title;
   }
-  .pf-row-year {
-    order: 2;
-    flex: 0 0 auto;
-    margin-left: auto;
-    text-align: left;
+  .pf-row-tags {
+    grid-area: tags;
   }
   .pf-row-desc {
-    order: 3;
-    flex: 1 1 100%;
+    grid-area: desc;
   }
-  /* Year sits on the title line on mobile */
-  .pf-row {
-    align-items: baseline;
+  .pf-row-year {
+    grid-area: year;
+    text-align: right;
   }
 }
 
