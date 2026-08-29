@@ -12,6 +12,34 @@ body.portv3.home {
   min-height: 100vh;
 }
 
+/* Vesuvius Challenge cover: a code-native echo of the volcanic art direction. */
+.pf-vesuvius-frame{position:relative;display:block;aspect-ratio:1200/630;background:#071f2d;overflow:hidden;isolation:isolate}
+.pf-vesuvius-frame::after{content:"";position:absolute;inset:0;z-index:8;pointer-events:none;opacity:.18;mix-blend-mode:soft-light;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.26'/%3E%3C/svg%3E")}
+.pf-vesuvius-sun{position:absolute;right:6%;top:-21%;width:50%;aspect-ratio:1;border-radius:50%;background:#ff5b22;box-shadow:0 0 90px rgba(255,91,34,.25);z-index:-2}
+.pf-vesuvius-sun::after{content:"";position:absolute;inset:0;border-radius:inherit;background:repeating-radial-gradient(circle,transparent 0 8px,rgba(7,31,45,.13) 9px 10px)}
+.pf-vesuvius-mountain{position:absolute;left:35%;right:-7%;bottom:0;transform-origin:center bottom;transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+.pf-vesuvius:hover .pf-vesuvius-mountain.back{transform:translateY(-3%) scale(1.02)}
+.pf-vesuvius:hover .pf-vesuvius-mountain.front{transform:scale(1.035)}
+.pf-vesuvius-mountain.back{height:73%;background:#123b49;clip-path:polygon(0 100%,12% 75%,29% 67%,41% 39%,52% 22%,61% 43%,71% 50%,82% 73%,100% 84%,100% 100%);z-index:-1}
+.pf-vesuvius-mountain.front{height:62%;background:linear-gradient(135deg,#081923 0 44%,#0d303c 45% 73%,#071822 74%);clip-path:polygon(0 100%,18% 77%,34% 62%,48% 32%,55% 9%,62% 43%,74% 62%,100% 84%,100% 100%)}
+.pf-vesuvius-mountain.front::after{content:"";position:absolute;left:51%;top:12%;width:10%;height:78%;background:#ff5b22;clip-path:polygon(48% 0,78% 17%,60% 42%,100% 100%,56% 78%,34% 44%,0 20%)}
+.pf-vesuvius-scan{position:absolute;left:32%;right:0;top:45%;height:1px;background:linear-gradient(90deg,transparent,#ff5b22 15% 88%,transparent);box-shadow:0 0 14px #ff5b22;z-index:4;transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+.pf-vesuvius:hover .pf-vesuvius-scan{transform:translateY(72px)}
+.pf-vesuvius-city{position:absolute;left:31%;right:0;bottom:0;height:19%;display:flex;align-items:end;gap:3%;border-bottom:9px solid #020b10;z-index:3}
+.pf-vesuvius-city i{display:block;width:8%;height:72%;background:#020b10;clip-path:polygon(12% 0,88% 0,100% 12%,85% 20%,82% 100%,18% 100%,15% 20%,0 12%)}
+.pf-vesuvius-city i:nth-child(2){height:92%}.pf-vesuvius-city i:nth-child(3){height:55%}.pf-vesuvius-city i:nth-child(4){height:78%}.pf-vesuvius-city i:nth-child(5){height:48%}.pf-vesuvius-city i:nth-child(6){height:65%}
+.pf-vesuvius-scroll{position:absolute;right:2.5%;bottom:5%;width:17%;aspect-ratio:1;border:1px solid rgba(242,235,217,.25);border-radius:50%;background:rgba(7,31,45,.84);z-index:5}
+.pf-vesuvius-scroll::before,.pf-vesuvius-scroll::after,.pf-vesuvius-scroll i{content:"";position:absolute;border-radius:50%;border:6px solid #ff5b22}
+.pf-vesuvius-scroll::before{inset:17%;border-width:7px 3px 3px 7px;transform:rotate(24deg)}.pf-vesuvius-scroll::after{inset:34%;border-width:5px 6px 3px 2px;transform:rotate(-18deg)}.pf-vesuvius-scroll i{inset:46%;border-width:3px;background:#ff5b22}
+.pf-vesuvius-type{position:absolute;left:5%;top:10%;z-index:5;color:#f2ebd9;display:flex;flex-direction:column}
+.pf-vesuvius-type b{font-family:Georgia,serif;font-weight:400;font-size:clamp(40px,5.2vw,78px);line-height:.77;letter-spacing:-.07em}
+.pf-vesuvius-type small{font-family:monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#ff5b22;margin-top:18px}
+
+@media(max-width:767px){
+  .pf-vesuvius-type b{font-size:clamp(38px,13vw,66px)}
+  .pf-vesuvius-type{left:6%;top:12%}.pf-vesuvius-mountain{left:23%}.pf-vesuvius-city{left:18%}.pf-vesuvius-scroll{width:22%;right:2%}
+}
+
 /* --- Intro alignment ----------------------------------------------------- */
 /* Match the intro to the work section: same 720px editorial width and left
    edge. Both are centered inside the body.portv3 horizontal padding (85px
@@ -565,3 +593,6 @@ html:not(.w-mod-js) .home [data-w-id] {
 @media (prefers-reduced-motion: reduce) {
   .work-tag i, .work-tag.solo, .work-tag.acq b { animation: none; }
 }
+
+/* Keep the Vesuvius cover on its mineral-night field after generic frame rules. */
+.pf-work .pf-vesuvius-frame { background: #071f2d; }

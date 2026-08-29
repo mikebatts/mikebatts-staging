@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en" class="vs-page">
+<head>
+  <meta charset="utf-8">
+  <title>Beneath the ash · The Vesuvius Challenge · Mike Battaglia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="An ongoing attempt to recover ancient writing from unopened Herculaneum scrolls, and the research system built to tell ink from illusion.">
+  <meta name="theme-color" content="#071f2d">
+  <meta name="author" content="Mike Battaglia">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Beneath the ash · The Vesuvius Challenge">
+  <meta property="og:description" content="Reading a 2,000-year-old scroll without opening it.">
+  <meta property="og:image" content="images/vesuvius-atlas.jpg">
+  <meta property="og:site_name" content="Mike Battaglia">
+  <meta name="twitter:card" content="summary_large_image">
+  <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon">
+  <link href="images/webclip.png" rel="apple-touch-icon">
+  <link rel="preload" href="fonts/ATCArquette-Regular.otf" as="font" type="font/otf" crossorigin="anonymous">
+  <link rel="preload" href="fonts/ATCArquette-Medium.otf" as="font" type="font/otf" crossorigin="anonymous">
+  <link rel="preload" href="fonts/Quarto-Light.otf" as="font" type="font/otf" crossorigin="anonymous">
+  <link href="css/vesuvius.css?v=1" rel="stylesheet">
+  <link href="css/daylight-gate.css?v=3" rel="stylesheet">
+  <style>html.dl-locked{overflow:hidden}html.dl-locked body>*:not(#dl-gate){visibility:hidden}#dl-gate{display:none}html.dl-locked #dl-gate{display:flex}</style>
+  <script>try{if(sessionStorage.getItem('dl-unlocked')!=='1'){document.documentElement.classList.add('dl-locked')}}catch(e){document.documentElement.classList.add('dl-locked')}</script>
+</head>
+<body>
+  <div id="dl-gate" role="dialog" aria-modal="true" aria-labelledby="dl-gate-t">
+    <div class="dl-gate-box">
+      <div class="dl-gate-mark"><img src="images/avi.png" alt="Mike Battaglia" width="2208" height="2296"><span class="dl-gate-wm">Case study</span></div>
+      <h1 class="dl-gate-t" id="dl-gate-t">Vesuvius, up close.</h1>
+      <p class="dl-gate-s">This collection is private for now. Enter the password to view.</p>
+      <form class="dl-gate-form" id="dl-gate-form" novalidate>
+        <label class="dl-gate-field" for="dl-pass"><span class="dl-gate-lbl">Password</span><input id="dl-pass" name="password" type="password" autocomplete="current-password" inputmode="text" placeholder="Enter password"></label>
+        <div class="dl-gate-row"><button id="dl-go" type="submit">View case study <span aria-hidden="true">→</span></button><span class="dl-gate-err" id="dl-err" role="status" aria-live="polite"></span></div>
+      </form>
+      <a class="dl-gate-back" href="index.html"><span aria-hidden="true">←</span> Back to portfolio</a>
+    </div>
+  </div>
+
+  <a class="vs-skip" href="#story">Skip to the story</a>
+  <div class="vs-progress" aria-hidden="true"><span></span></div>
+
+  <header class="vs-nav" id="vs-nav">
+    <a class="vs-brand" href="index.html" aria-label="Mike Battaglia, portfolio home">
+      <img src="images/avi.png" alt="" width="40" height="40">
+      <span>Mike Battaglia</span>
+    </a>
+    <span class="vs-nav-title">The Vesuvius Challenge</span>
+    <a class="vs-nav-back" href="index.html">All work <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main id="story">
+    <section class="vs-hero" aria-labelledby="vs-title">
+      <div class="vs-hero-copy">
+        <p class="vs-kicker">The Vesuvius Challenge · Independent research · Ongoing</p>
+        <h1 id="vs-title">Reading what<br>fire buried.</h1>
+        <p class="vs-hero-deck">The Vesuvius Challenge is an open competition to recover writing from ancient scrolls carbonized by Mount Vesuvius in 79 CE. They are too fragile to open. I am building a research system to read them without touching them.</p>
+        <a class="vs-text-link" href="#challenge">See how it works <span aria-hidden="true">↓</span></a>
+      </div>
+
+      <div class="vs-hero-art" aria-hidden="true">
+        <div class="vs-sun"></div>
+        <div class="vs-ash vs-ash-a"></div>
+        <div class="vs-ash vs-ash-b"></div>
+        <div class="vs-mountain vs-mountain-back"></div>
+        <div class="vs-mountain vs-mountain-front"></div>
+        <div class="vs-crater"></div>
+        <div class="vs-scan-line"></div>
+        <div class="vs-ruins"><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="vs-scroll-core"><span></span></div>
+        <div class="vs-art-caption"><b>Herculaneum</b><span>Buried 79 CE</span></div>
+      </div>
+    </section>
+
+    <section class="vs-intro" id="challenge" aria-labelledby="vs-intro-title">
+      <p class="vs-kicker">The challenge, in plain English</p>
+      <h2 id="vs-intro-title">The only way to open the scroll <br>is to never open it at all.</h2>
+      <p class="vs-lede">Nearly two thousand years ago, the eruption turned a library of papyrus scrolls into brittle blocks of carbon. Pull one apart and it can disappear. So researchers use X-rays and software to look inside, separate the crushed layers, and search for ink that the human eye cannot see.</p>
+
+      <div class="vs-objective">
+        <span>My immediate goal</span>
+        <p>Recover at least ten readable characters from one unopened scroll, with enough physical evidence for an expert to believe they are real.</p>
+      </div>
+
+      <div class="vs-process" data-process>
+        <div class="vs-process-copy">
+          <article class="vs-process-step is-active" data-process-step="scan">
+            <span>Scan</span>
+            <h3>Look inside without touching it.</h3>
+            <p>A high-resolution CT scanner captures the scroll as thousands of X-ray slices, like a medical scan with far more detail.</p>
+          </article>
+          <article class="vs-process-step" data-process-step="unwrap">
+            <span>Unwrap</span>
+            <h3>Flatten a crushed layer in software.</h3>
+            <p>The scan is reconstructed into a three-dimensional scroll. One warped sheet is traced and digitally flattened into a readable surface.</p>
+          </article>
+          <article class="vs-process-step" data-process-step="detect">
+            <span>Detect</span>
+            <h3>Ask a model where ink may remain.</h3>
+            <p>Carbon ink and carbonized papyrus look almost identical. A model searches for tiny physical differences hidden in the scan.</p>
+          </article>
+          <article class="vs-process-step" data-process-step="prove">
+            <span>Prove</span>
+            <h3>Trace every mark back to the scroll.</h3>
+            <p>A plausible letter is not enough. It must survive false-positive tests and map back through the flattened surface to the exact place in the original CT scan.</p>
+          </article>
+        </div>
+
+        <div class="vs-process-stage" aria-hidden="true">
+          <div class="vs-stage-grid"></div>
+          <div class="vs-stage-object is-scan" data-process-visual>
+            <div class="vs-volume"><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="vs-layer"><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="vs-flat"><b>α</b><b>ρ</b><b>χ</b><b>ή</b></div>
+            <div class="vs-proof"><span>Surface</span><i></i><span>CT</span></div>
+          </div>
+          <div class="vs-stage-status"><span data-process-index>01</span><b data-process-name>CT volume</b></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="vs-first-signal vs-dark" aria-labelledby="vs-signal-title">
+      <div class="vs-signal-copy">
+        <p class="vs-kicker">The first attack</p>
+        <h2 id="vs-signal-title">At first,<br>signal was everywhere.</h2>
+        <p>On August 18, I ran released ink models across surfaces from an unopened scroll. Different models lit up the same places. That looked promising.</p>
+        <p>Then I looked closer. The “letters” were seams, fibers, edges, rings, and the natural texture of papyrus.</p>
+      </div>
+      <div class="vs-signal-field" aria-label="Illustration of model agreement resolving into papyrus texture">
+        <div class="vs-signal-map map-one"></div>
+        <div class="vs-signal-map map-two"></div>
+        <div class="vs-signal-map map-three"></div>
+        <div class="vs-signal-reticle"><span>Shared signal</span><i></i></div>
+        <div class="vs-signal-verdict"><span>Looked repeatable</span><b>Was not text</b></div>
+      </div>
+      <blockquote>Several models can agree<br>and still be wrong.</blockquote>
+    </section>
+
+    <section class="vs-pivot" aria-labelledby="vs-pivot-title">
+      <div class="vs-pivot-head">
+        <p class="vs-kicker">The pivot</p>
+        <h2 id="vs-pivot-title">I stopped asking, “Does this look like a letter?”</h2>
+        <p>I started asking a harder question: “What would prove that it is not one?”</p>
+      </div>
+
+      <div class="vs-bento">
+        <article class="vs-bento-lead">
+          <div class="vs-bento-image vs-image-scale">
+            <img src="images/vesuvius-title-photo.png" alt="A published fragment of PHerc0139 showing known ink across the papyrus surface" width="2200" height="724" loading="lazy">
+            <div class="vs-image-window"><span>Published text</span><i></i></div>
+          </div>
+          <div class="vs-bento-copy"><span>Known-text control</span><h3>Prove the instrument on writing we already know exists.</h3><p>Before claiming a new discovery, I connected published Greek text back to exact pixels, the flattened surface, and the parent CT scan.</p></div>
+        </article>
+        <article class="vs-bento-small vs-bento-orange">
+          <span>Geometry first</span>
+          <h3>Same scale.<br>Same direction.<br>Same physical place.</h3>
+          <div class="vs-coordinate"><i></i><i></i><i></i><i></i><b>CT</b></div>
+        </article>
+        <article class="vs-bento-small vs-bento-cream">
+          <span>Fail closed</span>
+          <h3>A failed test ends the path. It never becomes a prettier claim.</h3>
+          <div class="vs-seal"><span>PASS</span><span>FAIL</span><i></i></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="vs-closures vs-dark" aria-labelledby="vs-closures-title">
+      <div class="vs-closures-head">
+        <p class="vs-kicker">Learning through closure</p>
+        <h2 id="vs-closures-title">Every dead end made the next experiment harder to fool.</h2>
+        <p>These were not discarded attempts. Each one removed a tempting explanation and left behind a stronger test.</p>
+      </div>
+      <div class="vs-accordion" data-accordion>
+        <article class="vs-acc-item is-open">
+          <button type="button" aria-expanded="true"><span>Hard negatives</span><b>Teaching the model what ink is not</b><i aria-hidden="true">+</i></button>
+          <div class="vs-acc-body"><p>The first training treatment used 82 examples of papyrus texture that had fooled the model. It made false positives worse everywhere, so I retired it instead of tuning around the result.</p><strong>What it taught me</strong><p>A small pile of “bad examples” can move the entire model in the wrong direction.</p></div>
+        </article>
+        <article class="vs-acc-item">
+          <button type="button" aria-expanded="false"><span>Normalization</span><b>Making different scans look alike</b><i aria-hidden="true">+</i></button>
+          <div class="vs-acc-body"><p>I tested whether a simple brightness and contrast correction could close the gap between scrolls. The production pipeline effectively erased the change.</p><strong>What it taught me</strong><p>The remaining problem was not a simple image-calibration mismatch.</p></div>
+        </article>
+        <article class="vs-acc-item">
+          <button type="button" aria-expanded="false"><span>Representation model</span><b>A promising path without clean provenance</b><i aria-hidden="true">+</i></button>
+          <div class="vs-acc-body"><p>A self-supervised 3D model looked useful, but the published training history and physical geometry could not support the clean comparison I needed.</p><strong>What it taught me</strong><p>A sophisticated model cannot rescue an experiment whose inputs cannot be traced honestly.</p></div>
+        </article>
+        <article class="vs-acc-item">
+          <button type="button" aria-expanded="false"><span>Infrastructure drift</span><b>When building the lab became the work</b><i aria-hidden="true">+</i></button>
+          <div class="vs-acc-body"><p>I built storage, distributed compute, watchdogs, receipts, and hundreds of tests before obtaining a meaningful scientific metric. The system was safer, but the question had disappeared.</p><strong>What it taught me</strong><p>Return to one causal question and the cheapest test that can kill it.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="vs-cohort" aria-labelledby="vs-cohort-title">
+      <div class="vs-cohort-intro">
+        <p class="vs-kicker">Building a research organization</p>
+        <h2 id="vs-cohort-title">Introducing<br>Cohors Vesuviana.</h2>
+        <p>I turned the work into a small autonomous research cohort. Six specialized agents can investigate, build, challenge, monitor, and govern an experiment, while I remain the sole orchestrator and approval gate.</p>
+      </div>
+      <div class="vs-cohort-system">
+        <div class="vs-cohort-core"><span>Romulus</span><b>Orchestration</b><i></i></div>
+        <article style="--i:0"><span>Minerva</span><b>Strategy</b><p>Chooses the question worth answering.</p></article>
+        <article style="--i:1"><span>Vulcan</span><b>Engineering</b><p>Builds the experimental machinery.</p></article>
+        <article style="--i:2"><span>Diana</span><b>First Letters</b><p>Hunts for defensible unread signal.</p></article>
+        <article style="--i:3"><span>Veritas</span><b>Scientific audit</b><p>Attempts to break every claim.</p></article>
+        <article style="--i:4"><span>Mercury</span><b>Intelligence</b><p>Monitors new data and prior art.</p></article>
+        <article style="--i:5"><span>Terminus</span><b>Boundaries</b><p>Controls compute, permissions, and spend.</p></article>
+      </div>
+      <div class="vs-cohort-rule"><span>One immutable question</span><i></i><span>Independent challenge</span><i></i><span>One sealed answer</span></div>
+    </section>
+
+    <section class="vs-known vs-dark" aria-labelledby="vs-known-title">
+      <div class="vs-known-head">
+        <p class="vs-kicker">Proving the known world</p>
+        <h2 id="vs-known-title">Before searching the dark, <br>I proved the entire path in daylight.</h2>
+        <p>On a scroll whose text had already been published, the system traced 51 known characters across four separate wraps all the way back to their exact locations inside the CT scan.</p>
+      </div>
+      <div class="vs-known-visual">
+        <img class="vs-known-atlas vs-image-scale" src="images/vesuvius-atlas.jpg" alt="An atlas of published PHerc0139 papyrus fragments used as known-text controls" width="1258" height="986" loading="lazy">
+        <div class="vs-known-detail">
+          <span>Published title fragment</span>
+          <div class="vs-known-toggle" data-known-toggle>
+            <button type="button" class="is-active" data-known-view="surface" aria-pressed="true">Surface</button>
+            <button type="button" data-known-view="ink" aria-pressed="false">Known ink</button>
+          </div>
+          <div class="vs-known-stack">
+            <img data-known-image="surface" class="is-active" src="images/vesuvius-title-photo.png" alt="Published title fragment on the papyrus surface" width="2200" height="724" loading="lazy">
+            <img data-known-image="ink" src="images/vesuvius-title-ink.png" alt="Known ink isolated on the same title fragment" width="2200" height="724" loading="lazy">
+          </div>
+          <div class="vs-known-chain"><span>Published image</span><i></i><span>Surface pixel</span><i></i><span>Original CT</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="vs-discovery" aria-labelledby="vs-discovery-title">
+      <div class="vs-discovery-copy">
+        <p class="vs-kicker">The key discovery</p>
+        <h2 id="vs-discovery-title">The useful signal was not how strongly the model saw ink.</h2>
+        <p>It was <em>where</em> the model chose to see ink at all.</p>
+        <p class="vs-plain">In plain English: known text regions were not brighter. They were covered by more small ink predictions. That narrower behavior survived every frozen test and became the first foundation-grade signal in the program.</p>
+      </div>
+      <div class="vs-coverage" aria-label="Illustration comparing prediction intensity with prediction coverage">
+        <div class="vs-coverage-row">
+          <span>Intensity</span>
+          <div class="vs-pixels intensity"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <b>Not the carrier</b>
+        </div>
+        <div class="vs-coverage-row is-answer">
+          <span>Coverage</span>
+          <div class="vs-pixels coverage"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <b>The signal survived</b>
+        </div>
+        <div class="vs-coverage-note">Known-text control · PHerc1667</div>
+      </div>
+    </section>
+
+    <section class="vs-unread vs-dark" aria-labelledby="vs-unread-title">
+      <div class="vs-unread-copy">
+        <p class="vs-kicker">The unread strike</p>
+        <h2 id="vs-unread-title">Then I froze the rule<br>and tested the unknown.</h2>
+        <p>Six surfaces from unopened scroll PHerc1447. No tuning after seeing the data. No intensity shortcuts. Every candidate had to be letter-sized and beat a chance comparison.</p>
+      </div>
+      <div class="vs-unread-field" aria-hidden="true">
+        <div class="vs-unread-grid">
+          <span style="--x:9%;--y:22%;--s:18px"></span><span style="--x:24%;--y:64%;--s:12px"></span><span style="--x:42%;--y:38%;--s:22px"></span><span style="--x:58%;--y:72%;--s:16px"></span><span style="--x:73%;--y:28%;--s:20px"></span><span style="--x:88%;--y:55%;--s:11px"></span>
+        </div>
+        <div class="vs-unread-sweep"></div>
+        <div class="vs-unread-terminal"><span>6 surfaces tested</span><b>No letter-scale candidates above chance</b></div>
+      </div>
+      <div class="vs-unread-verdict">
+        <span>The honest result</span>
+        <h3>No letters yet.</h3>
+        <p>The known-text signal did not transfer into defensible letter-shaped structures on this tranche. That is not a discovery claim. It is a clean boundary around what the current model can do.</p>
+      </div>
+    </section>
+
+    <section class="vs-now" aria-labelledby="vs-now-title">
+      <div class="vs-now-sticky">
+        <p class="vs-kicker">Where the work stands</p>
+        <h2 id="vs-now-title">A much more truthful instrument.</h2>
+      </div>
+      <div class="vs-now-content">
+        <p class="vs-now-lede">The Vesuvius work is still running. There is no victory lap here. The result so far is a research system that knows more precisely what it knows, what it does not, and what it must prove next.</p>
+        <div class="vs-now-item"><span>Proven</span><h3>The scan-to-score pipeline works.</h3><p>Known writing can be traced from a published image to a flattened surface and back into the original CT volume.</p></div>
+        <div class="vs-now-item"><span>Discovered</span><h3>Spatial coverage carries the current signal.</h3><p>The model distinguishes known-text regions through where it predicts ink, not stronger prediction intensity.</p></div>
+        <div class="vs-now-item"><span>Not proven</span><h3>No unopened-scroll letters have survived.</h3><p>The first frozen PHerc1447 reconnaissance returned no candidates above chance.</p></div>
+        <div class="vs-now-item"><span>Next</span><h3>Choose the next causal bet.</h3><p>The cohort must decide whether to test a new training hypothesis or acquire better-provenanced scroll surfaces. That decision is intentionally not frozen yet.</p></div>
+        <p class="vs-asof">Status verified August 29, 2026. The case study will evolve with the research.</p>
+      </div>
+    </section>
+
+    <section class="vs-close vs-dark" aria-labelledby="vs-close-title">
+      <div class="vs-close-art" aria-hidden="true"><div></div><span></span><i></i></div>
+      <div class="vs-close-copy">
+        <p class="vs-kicker">Ongoing excavation</p>
+        <h2 id="vs-close-title">Somewhere inside the scroll, a voice is waiting.</h2>
+        <p>The job is not to make the signal look convincing. It is to build an instrument worthy of believing it.</p>
+        <a href="index.html">Back to selected work <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/vendor/gsap.min.js"></script>
+  <script src="js/vendor/ScrollTrigger.min.js"></script>
+  <script src="js/vesuvius.js?v=1"></script>
+  <script src="js/daylight-gate.js?v=3"></script>
+</body>
+</html>
