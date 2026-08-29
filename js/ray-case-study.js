@@ -1,16 +1,21 @@
 /* ==========================================================================
    Ray case study — page behavior
    - scroll reveals (progressive, degrades to fully visible)
-   - reading progress bar
-   - one morphing "system stage": a sticky, four-movement reveal driven by scroll
-     progress. Degrades to a legible stacked layout with no JS and on mobile.
-   - offscreen video pause (IntersectionObserver, optional)
-   - reactive signature field (canvas) that responds to typing / thinking / rest
+   - reading progress is CSS-native (animation-timeline:scroll); no JS scroll
+     listener. This file only adds the js-on class that fades the current in.
+   - trust architecture: four guarantees scroll beside a CSS position:sticky
+     panel. An IntersectionObserver marks the active guarantee and drives the
+     routing diagram's state. No manual scroll/resize listeners, no pinned
+     giant-height track. Degrades to a legible stack with no JS and on mobile.
+   - signature field (chat topbar canvas): reactive to typing / thinking / rest.
+   - hero routing field (canvas): evidence lanes assemble toward Ray, then
+     settle. Poster-first, lazy, DPR-capped, paused offscreen/hidden, skipped
+     under reduced motion and Save-Data.
    - a working chat rebuild: real composer, local deterministic response engine,
      streamed status, grounded answers, propose-then-confirm (support + document
      placement), document concierge, repeat turns, short memory, reset.
-   Honors prefers-reduced-motion. No network calls. Nothing here touches a backend.
-   All records are fictional. Nothing is ever sent.
+   Honors prefers-reduced-motion. No network calls. Nothing here touches a
+   backend. All records are fictional. Nothing is ever sent.
    ========================================================================== */
 (function () {
   'use strict';
@@ -22,6 +27,11 @@
 
   var pointerFine = false;
   try { pointerFine = window.matchMedia && window.matchMedia('(pointer: fine)').matches; } catch (e) {}
+
+  var saveData = false;
+  try { saveData = !!(navigator.connection && navigator.connection.saveData); } catch (e) { saveData = false; }
+
+  var hasIO = 'IntersectionObserver' in window;
 
   /* -------------------------------------------------------------- */
   /* Scroll reveals                                                 */
@@ -35,10 +45,16 @@
       for (var i = 0; i < kids.length; i++) { kids[i].style.setProperty('--i', i); }
     });
 
-    if (reduceMotion || !('IntersectionObserver' in window)) {
+    if (reduceMotion || !hasIO) {
       reveals.forEach(function (b) { b.classList.add('in'); });
       return;
     }
+
+    var vh = window.innerHeight || 800;
+    reveals.forEach(function (b) {
+      var r = b.getBoundingClientRect();
+      if (r.top < vh * 0.95) { b.classList.add('in'); }
+    });
 
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
@@ -49,160 +65,90 @@
       });
     }, { threshold: 0.08, rootMargin: '0px 0px -6% 0px' });
 
-    reveals.forEach(function (b) { io.observe(b); });
+    reveals.forEach(function (b) { if (!b.classList.contains('in')) { io.observe(b); } });
 
     // Failsafe: never leave content stranded hidden if the observer misfires
     // (full-page capture tooling, background tabs, odd viewports).
-    setTimeout(function () { reveals.forEach(function (b) { b.classList.add('in'); }); }, 2600);
+    setTimeout(function () { reveals.forEach(function (b) { b.classList.add('in'); }); }, 2800);
   }
 
   /* -------------------------------------------------------------- */
-  /* Reading progress bar                                           */
+  /* Hero load choreography — flip the switch, CSS carries the rest */
   /* -------------------------------------------------------------- */
-  function setupProgress() {
-    var bar = document.getElementById('ray-progress-bar');
-    if (!bar) { return; }
-    var ticking = false;
-    function update() {
-      var doc = document.documentElement;
-      var max = (doc.scrollHeight - window.innerHeight);
-      var pct = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
-      bar.style.width = (pct * 100).toFixed(2) + '%';
-      ticking = false;
-    }
-    function onScroll() {
-      if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-    update();
+  function setupHero() {
+    var hero = document.querySelector('.ray-hero');
+    if (!hero) { return; }
+    if (reduceMotion) { hero.classList.add('hero-in'); return; }
+    window.requestAnimationFrame(function () {
+      window.requestAnimationFrame(function () { hero.classList.add('hero-in'); });
+    });
+    setTimeout(function () { hero.classList.add('hero-in'); }, 2600);
   }
 
   /* -------------------------------------------------------------- */
-  /* System stage — one sticky visual that morphs across 4 movements */
-  /* Default (no JS / reduced motion / mobile): a readable stack.     */
+  /* Trust architecture — four guarantees drive a sticky state panel */
+  /* No pinned track, no scroll listener. IntersectionObserver only. */
   /* -------------------------------------------------------------- */
-  function setupSystemStage() {
+  function setupTrustArchitecture() {
     var section = document.getElementById('ray-system');
     if (!section) { return; }
-    var track = section.querySelector('.sys');
-    var sticky = document.getElementById('sys-sticky');
-    var convo = section.querySelector('.sys-convo');
-    var moves = section.querySelectorAll('.sys-move');
-    if (!track || !sticky || !convo || !moves.length) { return; }
-    var COUNT = moves.length;
+    var diagram = document.getElementById('sys-diagram');
+    var stateLabel = document.getElementById('sys-diagram-state');
+    var moves = Array.prototype.slice.call(section.querySelectorAll('.sys-move'));
+    if (!moves.length) { return; }
 
-    // Movement stepper — only rendered visible in pinned mode (CSS-gated).
-    var titles = ['Find the right evidence', 'Check who is asking', 'Answer in context', 'Act with permission'];
-    var steps = document.createElement('div');
-    steps.className = 'sys-steps';
-    steps.setAttribute('aria-hidden', 'true');
-    for (var i = 0; i < COUNT; i++) {
-      var ss = document.createElement('div');
-      ss.className = 'ss';
-      ss.setAttribute('data-s', String(i + 1));
-      ss.innerHTML = '<span class="ss-n">' + (i + 1) + '</span><span class="ss-t"></span>';
-      ss.querySelector('.ss-t').textContent = titles[i] || ('Movement ' + (i + 1));
-      steps.appendChild(ss);
-    }
-    convo.appendChild(steps);
+    var STATE_LABEL = {
+      evidence: 'retrieving',
+      authority: 'authorizing',
+      context: 'binding context',
+      action: 'awaiting confirm',
+      settled: 'settled'
+    };
 
-    var mq = window.matchMedia('(min-width:901px)');
-    var pinned = false, ticking = false;
-    var moveList = Array.prototype.slice.call(moves);
-
-    function setMv(n) {
-      if (section.getAttribute('data-mv') !== String(n)) { section.setAttribute('data-mv', String(n)); }
+    function activate(move) {
+      moves.forEach(function (m) { m.classList.toggle('is-active', m === move); });
+      var st = move.getAttribute('data-state') || 'settled';
+      if (diagram) { diagram.setAttribute('data-state', st); }
+      if (stateLabel) { stateLabel.textContent = STATE_LABEL[st] || st; }
     }
 
-    // Continuous transition between movements. The wipe is compressed into a
-    // narrow scroll band so most of the scroll shows one clean movement; inside
-    // the band the incoming movement is revealed top-to-bottom while the outgoing
-    // one fades out in sync, so there is never a lingering double-text ghost.
-    function smoothBand(a, b, x) { if (x <= a) { return 0; } if (x >= b) { return 1; } var t = (x - a) / (b - a); return t * t * (3 - 2 * t); }
-    function applyMovements(f) {
-      var base = Math.floor(f); if (base < 0) { base = 0; } else if (base > COUNT - 1) { base = COUNT - 1; }
-      var frac = f - base; if (frac < 0) { frac = 0; } else if (frac > 1) { frac = 1; }
-      var next = Math.min(COUNT - 1, base + 1);
-      var e = smoothBand(0.40, 0.60, frac);
-      for (var i = 0; i < moveList.length; i++) {
-        var m = moveList[i], s = m.style;
-        if (i === next && next !== base) {
-          var pct = e * 116 - 8;
-          var mask = 'linear-gradient(180deg,#000 ' + (pct - 10).toFixed(1) + '%, transparent ' + pct.toFixed(1) + '%)';
-          s.opacity = '1'; s.transform = 'none'; s.pointerEvents = e > 0.5 ? 'auto' : 'none'; s.zIndex = '2';
-          s.webkitMaskImage = mask; s.maskImage = mask;
-        } else if (i === base) {
-          s.opacity = (next !== base ? (1 - e) : 1).toFixed(3); s.transform = 'none';
-          s.pointerEvents = e < 0.5 ? 'auto' : 'none'; s.zIndex = '1';
-          s.webkitMaskImage = 'none'; s.maskImage = 'none';
-        } else {
-          s.opacity = '0'; s.pointerEvents = 'none'; s.zIndex = '0';
-          s.webkitMaskImage = 'none'; s.maskImage = 'none';
-        }
-      }
-      setMv((frac >= 0.5 ? next : base) + 1);
+    // First guarantee is active by default so the panel is never blank.
+    activate(moves[0]);
+
+    if (reduceMotion || !hasIO) {
+      // Settled, legible: leave the first active, diagram shows the settled node.
+      if (diagram) { diagram.setAttribute('data-state', 'settled'); }
+      if (stateLabel) { stateLabel.textContent = STATE_LABEL.settled; }
+      moves.forEach(function (m) { m.classList.add('is-active'); });
+      return;
     }
-    function clearMovements() {
-      for (var i = 0; i < moveList.length; i++) {
-        var s = moveList[i].style;
-        s.opacity = ''; s.transform = ''; s.pointerEvents = ''; s.zIndex = '';
-        s.webkitMaskImage = ''; s.maskImage = '';
-      }
-    }
-    function compute() {
-      try {
-        var rect = track.getBoundingClientRect();
-        var scrollable = track.offsetHeight - window.innerHeight;
-        var p = scrollable > 0 ? (-rect.top) / scrollable : 0;
-        if (p < 0) { p = 0; } else if (p > 1) { p = 1; }
-        applyMovements(p * COUNT);
-      } catch (err) {
-        /* a single bad frame must never wedge the scroll handler */
-      } finally {
-        ticking = false;
-      }
-    }
-    function onScroll() {
-      if (!pinned || ticking) { return; }
-      ticking = true;
-      window.requestAnimationFrame(compute);
-    }
-    function enable() {
-      if (pinned) { return; }
-      pinned = true;
-      section.classList.add('is-pinned', 'sys-wipe');
-      // Scroll length per movement (vh). Kept under 100vh so the section stays
-      // snappy and the whole page lands inside the target desktop height.
-      track.style.height = (COUNT * 74) + 'vh';
-      window.addEventListener('scroll', onScroll, { passive: true });
-      compute();
-    }
-    function disable() {
-      if (!pinned) { return; }
-      pinned = false;
-      section.classList.remove('is-pinned', 'sys-wipe');
-      track.style.height = '';
-      window.removeEventListener('scroll', onScroll);
-      clearMovements();
-      setMv(1);
-    }
-    function evaluate() {
-      if (!reduceMotion && mq.matches) { enable(); } else { disable(); }
-    }
-    evaluate();
-    if (mq.addEventListener) { mq.addEventListener('change', evaluate); }
-    else if (mq.addListener) { mq.addListener(evaluate); }
-    window.addEventListener('resize', function () { if (pinned) { onScroll(); } }, { passive: true });
+
+    // Track which guarantees are in the activation band; the last one to enter
+    // (deepest into the read) wins, so the panel follows the reading position.
+    // A thin activation line at viewport centre. Exactly one guarantee overlaps
+    // it at a time, so tall cards activate reliably regardless of their height.
+    var visible = {};
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var idx = moves.indexOf(entry.target);
+        if (idx < 0) { return; }
+        visible[idx] = entry.isIntersecting;
+      });
+      var chosen = -1;
+      for (var i = 0; i < moves.length; i++) { if (visible[i]) { chosen = i; } }
+      if (chosen >= 0) { activate(moves[chosen]); }
+    }, { threshold: 0, rootMargin: '-50% 0px -50% 0px' });
+    moves.forEach(function (m) { io.observe(m); });
   }
 
   /* -------------------------------------------------------------- */
-  /* Hero video                                                     */
+  /* Hero video — plays as the empty-state identity, paused offscreen */
+  /* Save-Data / reduced motion hold the poster.                     */
   /* -------------------------------------------------------------- */
   function setupHeroVideo() {
     var video = document.getElementById('ray-hero-video');
     if (!video) { return; }
-    if (reduceMotion) {
+    if (reduceMotion || saveData) {
       try { video.removeAttribute('autoplay'); video.pause(); } catch (e) {}
       return;
     }
@@ -211,7 +157,7 @@
       if (p && typeof p.catch === 'function') { p.catch(function () {}); }
     };
     tryPlay();
-    if ('IntersectionObserver' in window) {
+    if (hasIO) {
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) { tryPlay(); } else { try { video.pause(); } catch (e) {} }
@@ -222,7 +168,161 @@
   }
 
   /* -------------------------------------------------------------- */
+  /* Hero routing field (Canvas 2D)                                 */
+  /* Evidence lanes converge toward Ray and settle. Progressive     */
+  /* enhancement over the static SVG poster: lazy, DPR-capped, one  */
+  /* RAF, paused offscreen/hidden. Skipped under reduced motion /   */
+  /* Save-Data / no 2D context. Never the only carrier of meaning.  */
+  /* -------------------------------------------------------------- */
+  function setupHeroField() {
+    var canvas = document.getElementById('ray-field');
+    if (!canvas || reduceMotion || saveData) { return; }
+    var ctx = canvas.getContext ? canvas.getContext('2d') : null;
+    if (!ctx) { return; }
+
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var w = 0, h = 0, cx = 0, cy = 0, ring = 0;
+    var t = 0, energy = 0, target = 0.5, raf = null, running = false, started = false;
+    var lanes = [];
+
+    function build() {
+      var r = canvas.getBoundingClientRect();
+      w = Math.max(1, Math.round(r.width));
+      h = Math.max(1, Math.round(r.height));
+      canvas.width = Math.round(w * dpr);
+      canvas.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      cx = w * 0.5; cy = h * 0.5;
+      ring = Math.min(w, h) * 0.24; // matches the avatar disc radius region
+
+      // deterministic lanes: evidence entering from both sides, converging on Ray
+      lanes = [];
+      var COUNT = w < 380 ? 6 : 9;
+      for (var i = 0; i < COUNT; i++) {
+        var side = i % 2 === 0 ? -1 : 1;                // left / right
+        var f = (i + 0.5) / COUNT;                      // 0..1 vertical spread
+        var y0 = h * (0.12 + 0.76 * f);
+        var startX = side < 0 ? -w * 0.04 : w * 1.04;
+        var ang = Math.atan2(cy - y0, (cx - startX));   // toward centre
+        // endpoint just outside the avatar ring, on the incoming side
+        var ex = cx - Math.cos(ang) * (ring + 6) * (side < 0 ? 1 : 1);
+        var ey = cy - Math.sin(ang) * (ring + 6);
+        // control point bends the lane toward the horizontal midline
+        var mx = (startX + ex) * 0.5;
+        var my = y0 + (cy - y0) * 0.35;
+        lanes.push({
+          sx: startX, sy: y0, cxp: mx, cyp: my, ex: ex, ey: ey,
+          speed: 0.10 + (i % 4) * 0.018,
+          offset: (i * 0.137) % 1,
+          packets: 2
+        });
+      }
+    }
+
+    function bez(l, u) {
+      var iu = 1 - u;
+      var x = iu * iu * l.sx + 2 * iu * u * l.cxp + u * u * l.ex;
+      var y = iu * iu * l.sy + 2 * iu * u * l.cyp + u * u * l.ey;
+      return [x, y];
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+      var e = 0.2 + 0.8 * energy;
+
+      // faint lanes
+      ctx.lineWidth = 1;
+      for (var i = 0; i < lanes.length; i++) {
+        var l = lanes[i];
+        ctx.beginPath();
+        ctx.moveTo(l.sx, l.sy);
+        ctx.quadraticCurveTo(l.cxp, l.cyp, l.ex, l.ey);
+        ctx.strokeStyle = 'rgba(246,111,0,' + (0.06 + 0.06 * energy).toFixed(3) + ')';
+        ctx.stroke();
+      }
+
+      // travelling evidence packets, converging then fading into Ray
+      ctx.globalCompositeOperation = 'lighter';
+      for (var j = 0; j < lanes.length; j++) {
+        var ln = lanes[j];
+        for (var k = 0; k < ln.packets; k++) {
+          var u = (t * ln.speed + ln.offset + k / ln.packets) % 1;
+          var pt = bez(ln, u);
+          // fade in near the edge, fade out as it reaches Ray
+          var a = Math.sin(Math.min(1, u) * Math.PI) * e * 0.9;
+          if (a <= 0.01) { continue; }
+          var rad = 1.6 + 1.8 * (1 - u);
+          var col = k % 2 === 0 ? '246,111,0' : '252,204,60';
+          var g = ctx.createRadialGradient(pt[0], pt[1], 0, pt[0], pt[1], rad * 3);
+          g.addColorStop(0, 'rgba(' + col + ',' + a.toFixed(3) + ')');
+          g.addColorStop(1, 'rgba(' + col + ',0)');
+          ctx.fillStyle = g;
+          ctx.beginPath();
+          ctx.arc(pt[0], pt[1], rad * 3, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      // the settle ring: a quiet pulse around Ray, the answer at rest
+      var pulse = 0.5 + 0.5 * Math.sin(t * 0.6);
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = 'rgba(252,204,60,' + (0.05 + 0.06 * pulse * energy).toFixed(3) + ')';
+      ctx.beginPath();
+      ctx.arc(cx, cy, ring + 10 + pulse * 4, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.globalCompositeOperation = 'source-over';
+    }
+
+    function frame() {
+      t += 0.016;
+      energy += (target - energy) * 0.04; // one-time assemble, then hold at rest
+      draw();
+      raf = window.requestAnimationFrame(frame);
+    }
+    function start() {
+      if (running) { return; }
+      running = true;
+      if (!started) { started = true; }
+      frame();
+    }
+    function stop() {
+      running = false;
+      if (raf) { window.cancelAnimationFrame(raf); raf = null; }
+    }
+
+    build();
+
+    // lazy: only run when the hero is on screen; pause otherwise / when hidden
+    if (hasIO) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) { start(); } else { stop(); }
+        });
+      }, { threshold: 0.05 });
+      io.observe(canvas);
+    } else {
+      start();
+    }
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) { stop(); } else if (isOnScreen(canvas)) { start(); }
+    });
+    var rt = null;
+    window.addEventListener('resize', function () {
+      if (rt) { clearTimeout(rt); }
+      rt = setTimeout(function () { build(); }, 180);
+    }, { passive: true });
+  }
+
+  function isOnScreen(eliel) {
+    try {
+      var r = eliel.getBoundingClientRect();
+      return r.bottom > 0 && r.top < (window.innerHeight || 800);
+    } catch (e) { return true; }
+  }
+
+  /* -------------------------------------------------------------- */
   /* Signature field — a calm, reactive canvas that carries Ray     */
+  /* inside the product window. Reacts to typing / thinking / rest. */
   /* -------------------------------------------------------------- */
   function SignatureField(canvas) {
     var ctx = canvas.getContext ? canvas.getContext('2d') : null;
@@ -925,7 +1025,7 @@
     // signature field lifecycle: run when the demo is visible, pause otherwise
     if (sig && !reduceMotion) {
       sig.start();
-      if ('IntersectionObserver' in window) {
+      if (hasIO) {
         var sio = new IntersectionObserver(function (entries) {
           entries.forEach(function (entry) {
             if (entry.isIntersecting) { sig.start(); } else { sig.stop(); }
@@ -956,9 +1056,10 @@
     try {
       setupReveals();
       docEl.classList.add('js-on');
-      setupProgress();
-      setupSystemStage();
+      setupHero();
+      setupTrustArchitecture();
       setupHeroVideo();
+      setupHeroField();
       setupChat();
     } catch (e) {
       // Fail open: any init exception must never leave content stranded hidden.
