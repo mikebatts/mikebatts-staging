@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en" class="va-page">
+<head>
+  <meta charset="utf-8">
+  <title>Beneath Vesuvius · Ongoing research by Mike Battaglia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="An ongoing attempt to recover writing from unopened Herculaneum scrolls—with X-rays, machine learning, and a research system designed to prove itself wrong.">
+  <meta name="theme-color" content="#050505">
+  <meta name="author" content="Mike Battaglia">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Beneath Vesuvius">
+  <meta property="og:description" content="Reading a scroll no one can open.">
+  <meta property="og:image" content="images/vesuvius-alt/hero-vesuvius-start.jpg">
+  <meta property="og:site_name" content="Mike Battaglia">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/webclip.png">
+  <link rel="preload" href="fonts/Quarto-Light.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="fonts/Graphik-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="images/vesuvius-alt/hero-vesuvius-start.jpg" as="image" fetchpriority="high">
+  <link rel="stylesheet" href="css/vesuvius-alt.css?v=3">
+  <link rel="stylesheet" href="css/daylight-gate.css?v=3">
+  <style>html.dl-locked{overflow:hidden}html.dl-locked body>*:not(#dl-gate){visibility:hidden}#dl-gate{display:none}html.dl-locked #dl-gate{display:flex}</style>
+  <script>try{if(sessionStorage.getItem('dl-unlocked')!=='1')document.documentElement.classList.add('dl-locked')}catch(e){document.documentElement.classList.add('dl-locked')}</script>
+</head>
+<body>
+  <div id="dl-gate" role="dialog" aria-modal="true" aria-labelledby="dl-gate-t">
+    <div class="dl-gate-box">
+      <div class="dl-gate-mark"><img src="images/avi.png" alt="Mike Battaglia" width="2208" height="2296"><span class="dl-gate-wm">Case study</span></div>
+      <h1 class="dl-gate-t" id="dl-gate-t">Vesuvius, up close.</h1>
+      <p class="dl-gate-s">This collection is private for now. Enter the password to view.</p>
+      <form class="dl-gate-form" id="dl-gate-form" novalidate>
+        <label class="dl-gate-field" for="dl-pass"><span class="dl-gate-lbl">Password</span><input id="dl-pass" name="password" type="password" autocomplete="current-password" placeholder="Enter password"></label>
+        <div class="dl-gate-row"><button id="dl-go" type="submit">View case study <span aria-hidden="true">→</span></button><span class="dl-gate-err" id="dl-err" role="status" aria-live="polite"></span></div>
+      </form>
+      <a class="dl-gate-back" href="index.html"><span aria-hidden="true">←</span> Back to portfolio</a>
+    </div>
+  </div>
+
+  <a class="va-skip" href="#challenge">Skip to the story</a>
+  <div class="va-progress" aria-hidden="true"><span></span></div>
+
+  <header class="va-nav">
+    <a class="va-person" href="index.html" aria-label="Mike Battaglia, portfolio home">
+      <img src="images/avi.png" width="34" height="34" alt="">
+      <span>Mike Battaglia</span>
+    </a>
+    <span class="va-nav-state"><i></i> Ongoing research</span>
+    <a class="va-nav-back" href="index.html">All work <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main>
+    <section class="va-hero" id="top" aria-labelledby="va-title" data-hero>
+      <div class="va-hero-sticky">
+        <div class="va-film" aria-hidden="true">
+          <video class="va-film-video" muted playsinline preload="auto" poster="images/vesuvius-alt/hero-vesuvius-start.jpg" tabindex="-1">
+            <source src="images/vesuvius-alt/vesuvius-scan-mobile.mp4" type="video/mp4" media="(max-width: 900px)">
+            <source src="images/vesuvius-alt/vesuvius-scan.mp4" type="video/mp4">
+          </video>
+          <img class="va-film-poster" src="images/vesuvius-alt/hero-vesuvius-start.jpg" width="2688" height="1520" alt="">
+          <canvas class="va-ash"></canvas>
+          <div class="va-scan"><span></span></div>
+          <div class="va-depth-grid"></div>
+          <div class="va-film-vignette"></div>
+        </div>
+
+        <div class="va-hero-copy" data-hero-intro>
+          <p class="va-kicker">The Vesuvius Challenge</p>
+          <h1 id="va-title">Beneath<br>Vesuvius.</h1>
+          <p class="va-hero-deck">I am building a research system to recover writing from ancient scrolls that no one can physically open.</p>
+        </div>
+
+        <div class="va-hero-scenes" aria-live="polite">
+          <article class="va-scene is-active" data-scene="0">
+            <p>A library survived the eruption.</p>
+          </article>
+          <article class="va-scene" data-scene="1">
+            <p>Its pages became solid carbon.</p>
+          </article>
+          <article class="va-scene" data-scene="2">
+            <p>X-rays let us enter without opening them.</p>
+          </article>
+          <article class="va-scene" data-scene="3">
+            <p>The hard part is proving which marks are words.</p>
+          </article>
+        </div>
+
+        <div class="va-hero-rail" aria-hidden="true">
+          <span class="is-active">Buried</span>
+          <span>Scanned</span>
+          <span>Unwrapped</span>
+          <span>Tested</span>
+        </div>
+
+        <a class="va-scroll" href="#challenge"><span></span> Scroll to excavate</a>
+      </div>
+    </section>
+
+    <section class="va-intro va-light" id="challenge" aria-labelledby="challenge-title">
+      <div class="va-wrap va-intro-grid">
+        <p class="va-side-note">The challenge, in plain English</p>
+        <div>
+          <h2 id="challenge-title">Read the page.<br>Never touch the scroll.</h2>
+          <div class="va-copy-pair">
+            <p>When Mount Vesuvius erupted in 79 CE, it buried a private library in Herculaneum. The heat turned hundreds of papyrus scrolls into fragile blocks of carbon.</p>
+            <p>Unroll one and it breaks apart. The Vesuvius Challenge exists to read the writing inside digitally—before a human hand ever touches a page.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="va-process" data-process>
+        <div class="va-process-stage">
+          <div class="va-process-object" aria-hidden="true">
+            <div class="va-volume">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              <span class="va-volume-beam"></span>
+            </div>
+            <div class="va-surface">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="va-letter">α</div>
+          </div>
+          <div class="va-process-count"><span>01</span> / 03</div>
+        </div>
+        <div class="va-process-steps">
+          <article class="is-active" data-process-step="scan">
+            <span>Scan</span>
+            <h3>Capture the sealed scroll as thousands of X-ray slices.</h3>
+            <p>Think of a medical CT scan, but detailed enough to see a single sheet of papyrus.</p>
+          </article>
+          <article data-process-step="unwrap">
+            <span>Unwrap</span>
+            <h3>Trace one crushed sheet through the three-dimensional scan.</h3>
+            <p>Software follows the page through every fold, then lays it flat on screen.</p>
+          </article>
+          <article data-process-step="read">
+            <span>Read</span>
+            <h3>Search the flat surface for physical traces left by ink.</h3>
+            <p>The model proposes a mark. The evidence system decides whether it deserves belief.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="va-turn" id="false-signal" aria-labelledby="false-title">
+      <div class="va-turn-sticky">
+        <div class="va-signal-field" aria-hidden="true">
+          <canvas class="va-signal-canvas"></canvas>
+          <div class="va-signal-word">ink</div>
+        </div>
+        <div class="va-turn-copy">
+          <p class="va-kicker">The first discovery</p>
+          <h2 id="false-title">How easy it is<br>to be fooled.</h2>
+          <p>Different ink models highlighted the same places. It looked like confirmation. Up close, the marks were fibers, seams, torn edges, and the natural grain of papyrus.</p>
+          <blockquote>Agreement is not proof.</blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section class="va-proof va-light" id="proof" aria-labelledby="proof-title">
+      <div class="va-wrap va-proof-head">
+        <p class="va-side-note">The pivot</p>
+        <div>
+          <h2 id="proof-title">So I changed<br>the question.</h2>
+          <p class="va-large-copy">Not “does this look like a letter?” but “what would prove that it is not one?”</p>
+        </div>
+      </div>
+
+      <div class="va-evidence" data-evidence>
+        <div class="va-evidence-sticky">
+          <div class="va-evidence-line" aria-hidden="true"><span></span></div>
+          <div class="va-evidence-visual" aria-hidden="true">
+            <div class="va-evidence-slab va-slab-published"><span>Α Β Γ</span></div>
+            <div class="va-evidence-slab va-slab-surface"><i></i><i></i><i></i></div>
+            <div class="va-evidence-slab va-slab-volume"><b></b><b></b><b></b><b></b></div>
+            <div class="va-evidence-seal">survived</div>
+          </div>
+        </div>
+        <div class="va-evidence-copy">
+          <article data-evidence-step>
+            <span>Begin with known writing</span>
+            <h3>Start where an expert has already read and published the text.</h3>
+          </article>
+          <article data-evidence-step>
+            <span>Return to the surface</span>
+            <h3>Tie every character to an exact pixel on the flattened page.</h3>
+          </article>
+          <article data-evidence-step>
+            <span>Return to the object</span>
+            <h3>Trace that pixel back into the original X-ray volume.</h3>
+          </article>
+          <article data-evidence-step>
+            <span>Try to break it</span>
+            <h3>Only a result that survives chance and false-positive tests is kept.</h3>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="va-results" id="results" aria-labelledby="results-title">
+      <div class="va-wrap">
+        <p class="va-side-note">What the instrument has established</p>
+        <h2 id="results-title">Proof before<br>prediction.</h2>
+      </div>
+      <div class="va-results-track">
+        <article>
+          <strong>51</strong>
+          <h3>known characters traced</h3>
+          <p>Published writing from PHerc0139 was connected back to exact surface coordinates and its parent CT volume.</p>
+        </article>
+        <article>
+          <strong>1</strong>
+          <h3>signal isolated</h3>
+          <p>The useful distinction was where the model predicts ink—spatial coverage—not how intensely it predicts.</p>
+        </article>
+        <article>
+          <strong>0</strong>
+          <h3>unsupported letters claimed</h3>
+          <p>Six available PHerc1447 surfaces produced no letter-scale candidates above chance. The system said no.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="va-cohort va-light" id="cohort" aria-labelledby="cohort-title">
+      <div class="va-wrap va-cohort-head">
+        <p class="va-side-note">Cohors Vesuviana</p>
+        <div>
+          <h2 id="cohort-title">A research system<br>built to disagree.</h2>
+          <p>I built six specialized roles to choose questions, build experiments, hunt for signal, attack claims, monitor new evidence, and hold the boundaries. No role can make a claim and approve it. I remain the orchestrator and the only approval gate.</p>
+        </div>
+      </div>
+      <div class="va-cohort-system" aria-label="The six roles in Cohors Vesuviana">
+        <span>Strategy <em>Minerva</em></span>
+        <span>Engineering <em>Vulcan</em></span>
+        <span>Reconnaissance <em>Diana</em></span>
+        <span>Scientific audit <em>Veritas</em></span>
+        <span>Intelligence <em>Mercury</em></span>
+        <span>Boundaries <em>Terminus</em></span>
+        <div class="va-cohort-core">Question<br><i>→</i><br>Experiment<br><i>→</i><br>Challenge<br><i>→</i><br>Sealed result</div>
+      </div>
+    </section>
+
+    <section class="va-live" id="live" aria-labelledby="live-title">
+      <div class="va-wrap va-live-head">
+        <p class="va-side-note">Where the work stands</p>
+        <h2 id="live-title">An excavation<br>still in motion.</h2>
+      </div>
+      <div class="va-ledger">
+        <article>
+          <span>Established</span>
+          <h3>The known-text pipeline works under a narrower, coverage-only claim.</h3>
+          <p>That is enough to trust the instrument on writing we already know.</p>
+        </article>
+        <article>
+          <span>Current boundary</span>
+          <h3>The same rule did not produce defensible letters on the available unread surfaces.</h3>
+          <p>A clean negative result is progress when the alternative is believing an artifact.</p>
+        </article>
+        <article>
+          <span>In flight</span>
+          <h3>The cohort is choosing the next causal test.</h3>
+          <p>The live decision is whether to train against a new physical hypothesis or acquire better-provenanced PHerc1447 surfaces.</p>
+        </article>
+      </div>
+    </section>
+
+    <footer class="va-ending">
+      <div class="va-ending-field" aria-hidden="true"><span></span></div>
+      <div class="va-ending-copy">
+        <p class="va-kicker">Status verified August 29, 2026</p>
+        <h2>No letters yet.<br>A much more truthful instrument.</h2>
+        <p>This page will change as the research does.</p>
+        <a href="index.html">Back to selected work <span aria-hidden="true">↗</span></a>
+      </div>
+    </footer>
+  </main>
+
+  <script src="js/vendor/gsap.min.js"></script>
+  <script src="js/vendor/ScrollTrigger.min.js"></script>
+  <script src="js/vesuvius-alt.js?v=3"></script>
+  <script src="js/daylight-gate.js?v=3"></script>
+</body>
+</html>
