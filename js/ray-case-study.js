@@ -80,6 +80,39 @@
   }
 
   /* -------------------------------------------------------------- */
+  /* Anatomy system map — the route draws as it scrolls through     */
+  /* -------------------------------------------------------------- */
+  function setupMap() {
+    var map = document.getElementById('ray-map');
+    var draw = document.getElementById('ray-map-draw');
+    if (!map || !draw) { return; }
+
+    // Reduced motion: show the full route immediately, no scroll work.
+    if (reduceMotion) { draw.style.setProperty('--map', '1'); return; }
+
+    var ticking = false;
+    function update() {
+      var r = map.getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      // 0 when the map top is ~72% down the viewport, 1 once its content has
+      // travelled ~42% up. Clamped, so the fill never over- or under-runs.
+      var startAt = vh * 0.72;
+      var span = r.height + vh * 0.30;
+      var travelled = startAt - r.top;
+      var p = span > 0 ? travelled / span : 1;
+      if (p < 0) { p = 0; } else if (p > 1) { p = 1; }
+      draw.style.setProperty('--map', p.toFixed(4));
+      ticking = false;
+    }
+    function onScroll() {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
+  }
+
+  /* -------------------------------------------------------------- */
   /* Hero video                                                     */
   /* -------------------------------------------------------------- */
   function setupHeroVideo() {
@@ -720,6 +753,7 @@
       docEl.classList.add('js-on');
 
       setupProgress();
+      setupMap();
       setupHeroVideo();
       setupChat();
     } catch (e) {
