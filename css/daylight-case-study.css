@@ -1,15 +1,20 @@
 /* ==========================================================================
    Daylight — product case study for mikebatts.net
-   One story, one object. The page follows a single home solar project as it
-   evolves: agreement, review and design, build, activation, and an ongoing
-   monthly relationship. Every act is a new view of that same project object.
-   Apple pacing (one claim + one dominant visual per act), Run Cabinet
-   continuity (the object transforms), Pear-grade alignment, Daylight warmth.
-   Serif display on beige, mono eyebrows, Inter for UI and body. Reduced
-   motion shows the fully settled state. No em dashes. Scope: under .dl-page.
+   A field guide to a home becoming a power plant. Warm off white paper, brown
+   ink, one controlled orange accent. Editorial serif display (Instrument Serif)
+   against a characterful sans (Graphik). Real product screens are treated as
+   annotated plates; one orange "current" line threads the story as the single
+   progression motif. No shader, no scroll jacking, no fake UI. Reduced motion
+   shows the settled state. No em dashes in copy. Scope: under .dl-page.
    ========================================================================== */
 
-:root {
+/* ---------- Graphik: the interface sans, local to the project ---------- */
+@font-face{font-family:'Graphik';src:url('../fonts/Graphik-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Graphik';src:url('../fonts/Graphik-Medium.ttf') format('truetype');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'Graphik';src:url('../fonts/Graphik-Semibold.ttf') format('truetype');font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:'Graphik';src:url('../fonts/Graphik-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap}
+
+:root{
   --orange:#F66F00;
   --orange-2:#FF8A2B;
   --yellow:#FCCC3C;
@@ -22,27 +27,24 @@
   --gray:#A09B93;
   --label:#76604B;
 
-  --ink:#111111;
-  --muted:rgba(76,40,6,0.62);
-  --muted-2:rgba(76,40,6,0.48);
+  --ink:#1c130a;
+  --muted:rgba(76,40,6,0.66);
+  --muted-2:rgba(76,40,6,0.5);
   --hair:rgba(30,30,30,0.12);
-  --hair-strong:rgba(30,30,30,0.18);
+  --hair-strong:rgba(30,30,30,0.2);
 
   --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
-  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-  --sans-tight:'Inter Tight','Inter',-apple-system,sans-serif;
+  --sans:'Graphik',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   --mono:'Inconsolata','SFMono-Regular',ui-monospace,monospace;
 
   --ease:cubic-bezier(0.16,1.08,0.38,0.98);
 
-  /* explicit 4px-derived spacing scale — the one rhythm the page composes to */
   --s-1:4px;   --s-2:8px;   --s-3:12px;  --s-4:16px;  --s-5:24px;
   --s-6:32px;  --s-7:48px;  --s-8:64px;  --s-9:96px;  --s-10:128px;
 
-  /* rails: content stays narrow for reading, artifacts run wider, wrap is the bleed */
-  --wrap:1120px;
+  --wrap:1160px;
   --measure:660px;
-  --pad:clamp(20px,5vw,64px);
+  --pad:clamp(20px,5vw,68px);
 }
 
 /* ---------- base / reset ---------- */
@@ -54,13 +56,13 @@ html.dl-page{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
   color:var(--ink);
   font-family:var(--sans);
   font-size:17px;
-  line-height:1.6;
+  line-height:1.62;
   font-weight:400;
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
   overflow-x:hidden;
 }
-.dl-page img,.dl-page video,.dl-page svg,.dl-page canvas{max-width:100%;display:block}
+.dl-page img,.dl-page video,.dl-page svg{max-width:100%;display:block}
 .dl-page a{color:inherit}
 .dl-page button{font-family:inherit}
 
@@ -86,443 +88,241 @@ html.dl-page{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
   touch-action:manipulation;
   -webkit-tap-highlight-color:rgba(246,111,0,.14);
 }
+.dl-vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
 /* ---------- layout primitives ---------- */
 .dl-wrap{max-width:var(--wrap);margin:0 auto;padding-left:max(var(--pad),env(safe-area-inset-left));padding-right:max(var(--pad),env(safe-area-inset-right))}
 .dl-measure{max-width:var(--measure)}
-.dl-act{position:relative;padding:clamp(64px,9vw,120px) 0;scroll-margin-top:24px}
+.dl-act{position:relative;padding:clamp(72px,10vw,140px) 0;scroll-margin-top:24px}
 .dl-bg-beige2{background:var(--beige-2)}
-.dl-bg-dark{background:var(--black);color:var(--beige)}
-
-/* chapter divider hairline between light acts */
-.dl-act + .dl-act:not(.dl-bg-dark)::before{
-  content:"";position:absolute;left:var(--pad);right:var(--pad);top:0;height:1px;background:var(--hair);
-  max-width:var(--wrap);margin:0 auto;
-}
 
 /* ---------- typographic atoms ---------- */
-.dl-eyebrow{
-  font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:0.09em;
-  text-transform:uppercase;line-height:1.35;color:var(--label);margin:0 0 18px;
+.dl-kicker{
+  font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:0.02em;
+  text-transform:uppercase;line-height:1.35;color:var(--label);margin:0 0 20px;
   display:inline-flex;align-items:center;gap:10px;
 }
-.dl-eyebrow .tick{width:6px;height:6px;border-radius:50%;background:var(--orange);flex:none}
+.dl-tick{width:7px;height:7px;border-radius:1px;background:var(--orange);flex:none;transform:rotate(45deg)}
+
+.dl-eyebrow-serif{
+  font-family:var(--serif);font-weight:400;font-size:clamp(19px,2vw,23px);
+  color:var(--brown);margin:0 0 20px;line-height:1.2;
+}
 
 .dl-h2{
   font-family:var(--serif);font-weight:400;color:var(--brown);
-  font-size:clamp(32px,5vw,54px);line-height:1.02;letter-spacing:0;margin:0 0 18px;
+  font-size:clamp(32px,5vw,56px);line-height:1.02;letter-spacing:0;margin:0 0 22px;
   text-wrap:balance;
 }
 .dl-lead{
-  font-family:var(--sans);font-size:clamp(16px,1.55vw,18.5px);line-height:1.62;
-  color:var(--muted);max-width:62ch;margin:0 0 18px;text-wrap:pretty;
+  font-family:var(--sans);font-size:clamp(16px,1.5vw,18.5px);line-height:1.62;
+  color:var(--muted);max-width:64ch;margin:0 0 20px;text-wrap:pretty;
 }
 .dl-lead:last-child{margin-bottom:0}
 .dl-lead b,.dl-lead strong{color:var(--brown);font-weight:600}
-.dl-lead--after{margin-top:clamp(30px,4vw,48px)}
+.dl-lead--sm{font-size:clamp(15px,1.4vw,17px)}
 
 /* buttons */
 .dl-btn{
   display:inline-flex;align-items:center;gap:9px;text-decoration:none;border-radius:4px;cursor:pointer;
-  font-family:var(--sans-tight);font-weight:600;font-size:15px;letter-spacing:-0.01em;
-  padding:12px 20px;min-height:44px;border:1px solid transparent;
-  transition:opacity .16s var(--ease),background .16s var(--ease),color .16s var(--ease),border-color .16s var(--ease);
+  font-family:var(--sans);font-weight:600;font-size:15px;letter-spacing:-0.005em;
+  padding:13px 22px;min-height:48px;border:1px solid transparent;
+  transition:opacity .16s var(--ease),background .16s var(--ease),color .16s var(--ease),border-color .16s var(--ease),transform .16s var(--ease);
 }
 .dl-btn.solid{background:var(--black);color:#fff}
-.dl-btn.solid:hover{opacity:0.82}
+.dl-btn.solid:hover{opacity:0.86}
+.dl-btn.solid:active{transform:translateY(1px)}
 .dl-btn.ghost{border-color:var(--hair-strong);color:var(--brown);background:transparent}
 .dl-btn.ghost:hover{border-color:var(--orange);color:var(--orange)}
+.dl-btn.ghost:active{transform:translateY(1px)}
 
 /* ==========================================================================
-   ACT 1 · HERO — the energy field is part of the composition, not a banner
+   THE READING CURRENT — one calm top progress line, the page's spine motif
    ========================================================================== */
-.dl-hero{
-  position:relative;min-height:100svh;overflow:hidden;display:flex;
-  background:var(--beige);
-}
-/* the living field bleeds from the top-right and feathers into the cream so the
-   headline sits on one continuous surface with it. Never composited over text. */
-.dl-hero-field{
-  position:absolute;top:0;right:0;z-index:0;
-  width:min(66%,900px);height:100%;
-  background:#FCE0AF;isolation:isolate;pointer-events:none;
-  -webkit-mask:linear-gradient(102deg,transparent 6%,rgba(0,0,0,0.22) 26%,rgba(0,0,0,0.72) 46%,#000 66%);
-          mask:linear-gradient(102deg,transparent 6%,rgba(0,0,0,0.22) 26%,rgba(0,0,0,0.72) 46%,#000 66%);
-}
-/* poster fallback (reduced motion / no WebGPU): a warm light source at top-right
-   streaming toward center, over a faint square lattice — the same "sunlight
-   becoming a structured system" idea the live shader animates. */
-.dl-hero-poster{
-  position:absolute;inset:0;z-index:0;
-  background:
-    linear-gradient(126deg, rgba(76,40,6,0.05) 0.5px, transparent 0.5px) 0 0/58px 58px,
-    linear-gradient(216deg, rgba(76,40,6,0.05) 0.5px, transparent 0.5px) 0 0/58px 58px,
-    radial-gradient(120% 150% at 88% -14%, rgba(255,247,233,0.98), rgba(255,247,233,0) 44%),
-    radial-gradient(90% 120% at 24% 118%, rgba(246,111,0,0.40), rgba(246,111,0,0) 58%),
-    linear-gradient(118deg,#FFECC0 0%,#FFC15A 34%,#F66F00 60%,#FF9A34 78%,#FCCC3C 100%);
-}
-.dl-hero-canvas{
-  position:absolute;inset:0;z-index:1;width:100%;height:100%;display:block;
-  opacity:0;transition:opacity .9s var(--ease);
-}
-.dl-hero-field[data-dl-hero-state="live"] .dl-hero-canvas{opacity:1}
+.dl-current{position:fixed;top:0;left:0;right:0;height:2px;z-index:160;pointer-events:none;opacity:0;transition:opacity .3s var(--ease);background:rgba(76,40,6,0.06)}
+.dl-page.dl-js .dl-current{opacity:1}
+.dl-current-bar{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--orange),var(--yellow));box-shadow:0 0 10px -1px rgba(246,111,0,0.5)}
 
-.dl-hero-inner{
-  position:relative;z-index:2;width:100%;
-  display:flex;flex-direction:column;
-  padding-top:clamp(20px,3vh,32px);padding-bottom:clamp(24px,4vh,40px);
+/* ==========================================================================
+   HERO — editorial split: thesis + one real product screen. No shader.
+   ========================================================================== */
+.dl-hero{position:relative;background:var(--beige);padding:0 0 clamp(48px,7vw,96px);overflow:hidden}
+.dl-hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--hair)}
+.dl-hero-grid{
+  display:grid;grid-template-columns:minmax(0,1.16fr) minmax(0,0.84fr);
+  grid-template-areas:"nav nav" "lede plate";
+  gap:clamp(28px,5vw,72px) clamp(32px,5vw,68px);
+  align-items:center;padding-top:clamp(20px,3vh,30px);
+  min-height:100svh;
 }
-.dl-nav{
-  display:flex;align-items:center;justify-content:space-between;gap:16px;
-  padding-bottom:22px;
-}
-.dl-navlink{
-  display:inline-flex;align-items:center;gap:8px;text-decoration:none;
-  font-family:var(--sans-tight);font-weight:500;font-size:14.5px;letter-spacing:-0.01em;
-  color:var(--muted);padding:10px 2px;min-height:44px;transition:color .18s var(--ease);
-}
-.dl-navlink:hover{color:var(--orange)}
-.dl-navlink .avi{width:26px;height:26px;border-radius:50%}
-.dl-nav-status{
-  display:inline-flex;align-items:center;gap:9px;flex:none;
-  font-family:var(--mono);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;
-  color:var(--label);white-space:nowrap;
-}
-.dl-nav-status .dot{
-  width:7px;height:7px;border-radius:50%;background:var(--yellow);
-  box-shadow:0 0 0 3px rgba(252,204,60,0.22);flex:none;
-}
+.dl-topnav{grid-area:nav;display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:clamp(24px,5vh,56px)}
+.dl-topback{display:inline-flex;align-items:center;gap:9px;text-decoration:none;font-weight:500;font-size:14.5px;letter-spacing:-0.005em;color:var(--muted);min-height:44px;transition:color .18s var(--ease)}
+.dl-topback:hover{color:var(--orange)}
+.dl-topback .avi{width:26px;height:26px;border-radius:50%}
+.dl-topmeta{font-family:var(--mono);font-size:12px;letter-spacing:0.04em;text-transform:uppercase;color:var(--label);white-space:nowrap}
 
-/* the lede is grounded lower-left; the field reads as the sky behind it */
-.dl-hero-lede{margin-top:auto;max-width:min(760px,84%)}
-.dl-masthead{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:0 0 clamp(20px,3vw,30px)}
-.dl-wordmark{width:clamp(120px,14vw,156px);height:auto}
-.dl-masthead-tag{
-  font-family:var(--mono);font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--label);
-  padding-left:14px;border-left:1px solid var(--hair-strong);
-}
+.dl-hero-lede{grid-area:lede;max-width:700px}
+.dl-masthead{display:flex;align-items:center;gap:16px;margin:0 0 clamp(22px,3vw,32px)}
+.dl-wordmark{width:clamp(124px,14vw,150px);height:auto}
+.dl-masthead-rule{flex:1;height:1px;max-width:64px;background:linear-gradient(90deg,var(--orange),rgba(246,111,0,0))}
+.dl-masthead-tag{font-family:var(--mono);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--label)}
 .dl-hero-title{
   font-family:var(--serif);font-weight:400;color:var(--brown);
-  font-size:clamp(44px,8vw,96px);line-height:0.98;letter-spacing:-0.01em;margin:0;text-wrap:balance;
+  font-size:clamp(44px,6vw,80px);line-height:1.0;letter-spacing:-0.012em;margin:0;text-wrap:balance;
 }
 .dl-hero-say{
-  font-family:var(--sans);font-size:clamp(17px,1.9vw,22px);line-height:1.5;
-  color:var(--muted);margin:clamp(18px,2.4vw,26px) 0 0;max-width:48ch;text-wrap:pretty;
+  font-family:var(--sans);font-size:clamp(16.5px,1.55vw,19px);line-height:1.55;
+  color:var(--muted);margin:clamp(20px,2.6vw,28px) 0 0;max-width:52ch;text-wrap:pretty;
 }
-.dl-hero-say b{color:var(--brown);font-weight:600}
-.dl-hero-meta{
-  display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;margin-top:clamp(24px,3.4vw,34px);
-  padding-top:20px;border-top:1px solid var(--hair);max-width:640px;
-}
-.dl-hero-role{font-family:var(--mono);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--label)}
-.dl-hero-role b{color:var(--brown);font-weight:500}
-.dl-extlink{
-  position:relative;display:inline-flex;align-items:center;gap:7px;text-decoration:none;
-  font-family:var(--mono);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;
-  color:var(--brown);min-height:44px;transition:color .16s var(--ease);
-}
-.dl-extlink::after{
-  content:"";position:absolute;left:0;right:0;top:calc(50% + 9px);height:1px;background:var(--hair-strong);
-  transition:background .16s var(--ease);
-}
+.dl-hero-meta{display:flex;flex-wrap:wrap;align-items:center;gap:10px 20px;margin-top:clamp(24px,3.2vw,32px);padding-top:20px;border-top:1px solid var(--hair)}
+.dl-hero-role{font-family:var(--mono);font-size:12px;letter-spacing:0.03em;text-transform:uppercase;color:var(--label)}
+.dl-hero-role + .dl-hero-role{padding-left:20px;border-left:1px solid var(--hair-strong)}
+.dl-extlink{position:relative;display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-family:var(--mono);font-size:12px;letter-spacing:0.03em;text-transform:uppercase;color:var(--brown);min-height:44px;transition:color .16s var(--ease)}
+.dl-extlink::after{content:"";position:absolute;left:0;right:0;bottom:11px;height:1px;background:var(--hair-strong);transition:background .16s var(--ease)}
 .dl-extlink:hover{color:var(--orange)}
 .dl-extlink:hover::after{background:var(--orange)}
 
-.dl-hero-scroll{
-  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
-  margin:clamp(28px,5vh,52px) 0 0;
-}
-.dl-hero-fieldnote,.dl-hero-down{
-  font-family:var(--mono);font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--label);
-  display:inline-flex;align-items:center;gap:10px;margin:0;
-}
-.dl-hero-fieldnote .tick{width:6px;height:6px;border-radius:50%;background:var(--orange);flex:none}
-.dl-hero-down{color:var(--muted-2)}
+.dl-hero-plate{grid-area:plate;margin:0;display:flex;flex-direction:column;align-items:center;gap:20px;justify-self:center}
 
-/* ==========================================================================
-   THE PROJECT OBJECT — one home SVG, reused and evolved across acts
-   ========================================================================== */
-.dl-home{width:100%;height:auto;overflow:visible}
-.dl-home line,.dl-home polyline,.dl-home rect,.dl-home polygon,.dl-home circle{
-  fill:none;stroke:var(--brown);stroke-opacity:0.72;stroke-width:2.4;
-  stroke-linecap:round;stroke-linejoin:round;
-  transition:opacity .5s var(--ease),fill .5s var(--ease),stroke .5s var(--ease),transform .5s var(--ease);
-}
-.dl-home .hm-ground{stroke-opacity:0.32}
-
-/* live look — used directly in Act 4, and as the settled default in Act 2 */
-.dl-home.is-live .hm-doc{display:none}
-.dl-home.is-live .hm-panels polygon{fill:var(--orange);stroke:var(--orange);stroke-opacity:1}
-.dl-home.is-live .hm-sun circle{fill:var(--yellow);stroke:var(--orange);stroke-opacity:1}
-.dl-home.is-live .hm-rays line{stroke:var(--orange);stroke-opacity:0.9}
-
-/* ==========================================================================
-   ACT 2 · ONE PROJECT, MANY HANDS — pinned two-column build
-   Left: one phase leads at a time down a measured rail. Right: the same project
-   object evolves and a single shared-state card fills. No spokes, no floating
-   corner cards, no geometry that can break across widths.
-   ========================================================================== */
-.dl-project .dl-lead{margin-top:0}
-.dl-build-track{position:relative;height:210vh;margin-top:clamp(24px,4vw,44px)}
-.dl-build-pin{
-  position:sticky;top:0;min-height:100svh;
-  display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,1.02fr);
-  gap:clamp(36px,6vw,88px);align-items:center;padding:5vh 0;
-}
-
-/* left: progressive phase rail — same measured-spine engine as the app rail */
-.dl-build-rail{list-style:none;margin:0;padding:0;position:relative;align-self:center}
-.dl-build-rail::before{content:"";position:absolute;left:6px;top:var(--sl-top,10px);height:var(--sl-len,calc(100% - 20px));width:2px;background:var(--hair-strong);border-radius:2px}
-.dl-build-rail::after{content:"";position:absolute;left:6px;top:var(--sl-top,10px);width:2px;height:calc(var(--p,0) * var(--sl-len,0px));background:linear-gradient(180deg,var(--orange),var(--yellow));border-radius:2px;transition:height .15s linear}
-.dl-build-step{
-  display:block;width:100%;position:relative;padding:0 0 clamp(20px,2.6vw,30px) 30px;cursor:pointer;
-  -webkit-appearance:none;appearance:none;background:none;border:0;margin:0;font:inherit;color:inherit;text-align:left;min-height:44px;
-}
-.dl-build-rail li:last-child .dl-build-step{padding-bottom:0}
-.bs-dot{position:absolute;left:0;top:4px;width:14px;height:14px;border-radius:50%;background:var(--beige-2);border:1.6px solid var(--muted-2);box-sizing:border-box;z-index:1;transition:background .25s var(--ease),border-color .25s var(--ease),box-shadow .25s var(--ease),transform .25s var(--ease)}
-.bs-body{display:block}
-.bs-phase{display:block;font-family:var(--mono);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--orange);margin-bottom:var(--s-1)}
-.bs-names{display:block;font-family:var(--sans-tight);font-weight:600;font-size:clamp(17px,2vw,21px);letter-spacing:-0.01em;color:var(--ink);line-height:1.2}
-.bs-names b{font-weight:700}
-.bs-copy{display:block;font-family:var(--sans);font-size:14px;line-height:1.5;color:var(--muted);margin-top:var(--s-2);max-width:42ch;text-wrap:pretty;transition:opacity .3s var(--ease)}
-.dl-build-step.done .bs-dot{background:var(--orange);border-color:var(--orange)}
-.dl-build-step.is-on .bs-dot{background:var(--orange);border-color:var(--orange);box-shadow:0 0 0 5px rgba(246,111,0,0.16);transform:scale(1.05)}
-.dl-build-step.is-on .bs-names{color:var(--brown)}
-.dl-page.dl-js .dl-build-step:not(.is-on) .bs-copy{opacity:0.42}
-.dl-build-step:focus-visible{outline:2px solid var(--orange);outline-offset:4px;border-radius:6px}
-
-/* right: the same project object evolving + the one shared-state card */
-.dl-build-stage{display:flex;flex-direction:column;align-items:center;gap:clamp(18px,2.4vw,26px);align-self:center}
-.dl-build-object{position:relative;width:100%;display:flex;align-items:center;justify-content:center;min-height:clamp(220px,34vh,340px)}
-/* a warm energy field grows behind the object as it verifies — the same light
-   from the hero, now concentrated into one detailed project */
-.dl-build-object::before{
-  content:"";position:absolute;inset:-8% -2%;z-index:0;border-radius:26px;
-  background:radial-gradient(58% 58% at 58% 42%,rgba(246,111,0,0.18),rgba(252,204,60,0.08) 46%,rgba(255,247,233,0) 72%);
-  filter:blur(6px);opacity:calc(0.30 + var(--p,0) * 0.70);transition:opacity .25s var(--ease);
-}
-.dl-build-object .dl-home{position:relative;z-index:1;width:clamp(220px,72%,320px);filter:drop-shadow(0 24px 44px rgba(246,111,0,0.16))}
-
-/* progressive build of the project object, driven by data-step on the stage
-   (desktop .dl-build-stage, or a mobile .dl-pm scene). Both reuse these rules. */
-.dl-home--build .hm-doc{opacity:0}
-.dl-home--build .hm-house{opacity:0.24}
-.dl-home--build .hm-win{opacity:0}
-.dl-home--build .hm-panels polygon{opacity:0;fill:none}
-.dl-home--build .hm-sun{opacity:0}
-[data-step="0"] .dl-home--build .hm-doc{opacity:1}
-[data-step="0"] .dl-home--build .hm-house{opacity:0.32}
-[data-step="1"] .dl-home--build .hm-house,
-[data-step="2"] .dl-home--build .hm-house,
-[data-step="3"] .dl-home--build .hm-house{opacity:1}
-[data-step="1"] .dl-home--build .hm-win,
-[data-step="2"] .dl-home--build .hm-win,
-[data-step="3"] .dl-home--build .hm-win{opacity:1}
-[data-step="1"] .dl-home--build .hm-panels polygon{opacity:1;stroke-dasharray:3 3}
-[data-step="2"] .dl-home--build .hm-panels polygon,
-[data-step="3"] .dl-home--build .hm-panels polygon{opacity:1;stroke-dasharray:0}
-[data-step="3"] .dl-home--build .hm-panels polygon{fill:var(--orange);stroke:var(--orange);stroke-opacity:1}
-[data-step="3"] .dl-home--build .hm-sun{opacity:1}
-[data-step="3"] .dl-home--build .hm-sun circle{fill:var(--yellow);stroke:var(--orange);stroke-opacity:1}
-[data-step="3"] .dl-home--build .hm-rays line{stroke:var(--orange);stroke-opacity:0.9}
-/* no-JS fallback: the rail already reads as a full list; show the finished home
-   and drop the dead scroll track so the section is complete without scripting */
-.dl-page:not(.dl-js) .dl-build-stage .hm-doc{display:none}
-.dl-page:not(.dl-js) .dl-build-stage .hm-house,
-.dl-page:not(.dl-js) .dl-build-stage .hm-win{opacity:1}
-.dl-page:not(.dl-js) .dl-build-stage .hm-panels polygon{opacity:1;fill:var(--orange);stroke:var(--orange);stroke-opacity:1}
-.dl-page:not(.dl-js) .dl-build-stage .hm-sun{opacity:1}
-.dl-page:not(.dl-js) .dl-build-stage .hm-sun circle{fill:var(--yellow);stroke:var(--orange);stroke-opacity:1}
-.dl-page:not(.dl-js) .dl-build-stage .hm-rays line{stroke:var(--orange)}
-.dl-page:not(.dl-js) .dl-build-track{height:auto}
-.dl-page:not(.dl-js) .dl-build-pin{position:static;min-height:0;padding:0}
-/* the shared-state card counts up under JS; without it, the finished home and a
-   frozen "1 of 4" would contradict, so drop the card in the no-JS composition */
-.dl-page:not(.dl-js) .dl-core-state{display:none}
-
-/* the one shared-state card that fills as phases verify */
-.dl-core-state{
-  width:min(100%,340px);background:var(--paper);border:1px solid var(--hair);border-radius:6px;
-  padding:14px 16px;box-shadow:0 20px 44px -34px rgba(76,40,6,0.55);
-}
-.cs-k{display:block;font-family:var(--mono);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--label)}
-.cs-track{display:block;height:6px;border-radius:100px;background:var(--beige-2);border:1px solid var(--hair);overflow:hidden;margin:10px 0 8px}
-.cs-fill{display:block;height:100%;width:25%;background:linear-gradient(90deg,var(--orange),var(--yellow));transition:width .45s var(--ease)}
-.cs-count{font-family:var(--mono);font-size:12px;letter-spacing:0.04em;text-transform:uppercase;color:var(--label)}
-.cs-count b{color:var(--brown);font-weight:700}
-
-/* ==========================================================================
-   ACT 3 · THE APP — one phone, four states pass through it
-   ========================================================================== */
-.dl-app-track{position:relative;height:200vh;margin-top:clamp(28px,4vw,48px)}
-.dl-app-pin{
-  position:sticky;top:0;min-height:100svh;
-  display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,0.86fr);
-  gap:clamp(36px,6vw,84px);align-items:center;padding:5vh 0;
-}
-/* left: one claim leads at a time; a segmented current marks the moment */
-.dl-app-say{align-self:center;max-width:44ch}
-.dl-app-idx{display:flex;align-items:baseline;gap:2px;margin:0 0 14px;font-family:var(--mono);font-size:13px;letter-spacing:0.04em;color:var(--muted-2)}
-.dl-app-idx b{font-family:var(--serif);font-weight:400;font-size:34px;letter-spacing:0;color:var(--orange);line-height:1}
-.dl-app-idx span{color:var(--muted-2)}
-.dl-app-t{font-family:var(--serif);font-weight:400;font-size:clamp(30px,4vw,44px);line-height:1.02;color:var(--brown);margin:0 0 14px;min-height:1.02em;text-wrap:balance}
-.dl-app-d{font-family:var(--sans);font-size:clamp(15px,1.5vw,17px);line-height:1.6;color:var(--muted);margin:0;max-width:40ch;text-wrap:pretty}
-.dl-app-seg{display:flex;gap:8px;margin:clamp(24px,3vw,34px) 0 0}
-.dl-seg{
-  -webkit-appearance:none;appearance:none;border:0;background:none;padding:12px 0;margin:0;cursor:pointer;
-  flex:1;max-width:74px;min-height:44px;display:flex;align-items:center;
-}
-.dl-seg-fill{display:block;position:relative;width:100%;height:3px;border-radius:3px;background:var(--hair-strong);overflow:hidden;transition:height .3s var(--ease)}
-.dl-seg-fill::after{content:"";position:absolute;inset:0;border-radius:3px;background:linear-gradient(90deg,var(--orange),var(--yellow));transform:scaleX(var(--v,0));transform-origin:left center;transition:transform .12s linear}
-.dl-seg.is-active .dl-seg-fill{height:5px}
-.dl-seg:focus-visible{outline:2px solid var(--orange);outline-offset:3px;border-radius:4px}
-.dl-app-hint{margin:clamp(20px,2.4vw,26px) 0 0;font-family:var(--mono);font-size:11px;letter-spacing:0.05em;text-transform:uppercase;color:var(--label)}
-
-.dl-app-phone{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
-.dl-app-phone .dl-device{width:clamp(250px,30vw,304px)}
-/* two crossfading screen layers, driven continuously by scroll */
-.dl-app-phone .dl-device-screen .dl-ios{position:absolute;inset:0}
-.dl-ios--b{opacity:0;will-change:opacity}
-
-/* no-JS fail-open: the four moments read as plain text; the dead track is hidden */
-.dl-app-fallback{display:none;margin-top:clamp(24px,4vw,40px)}
-.dl-page:not(.dl-js) .dl-app-fallback{display:block}
-.dl-page:not(.dl-js) .dl-app-track{display:none}
-.dl-app-fallback ol{list-style:none;margin:0;padding:0;display:grid;gap:22px;counter-reset:m}
-.dl-app-fallback li{counter-increment:m;position:relative;padding-left:44px}
-.dl-app-fallback li::before{content:"0" counter(m);position:absolute;left:0;top:2px;font-family:var(--mono);font-size:13px;color:var(--orange)}
-.dl-app-fallback .as-t{display:block;font-family:var(--sans-tight);font-weight:600;font-size:19px;letter-spacing:-0.01em;color:var(--brown)}
-.dl-app-fallback .as-d{display:block;font-family:var(--sans);font-size:15px;line-height:1.55;color:var(--muted);margin-top:5px;max-width:52ch}
-
-/* the mobile-only stack of four fully composed scenes */
-.dl-app-mobile{display:none}
-.dl-am-n{display:block;font-family:var(--mono);font-size:12px;letter-spacing:0.04em;color:var(--orange);margin-bottom:4px}
-
-/* ---------- the shared device shell + authentic iOS composition ---------- */
+/* ---------- the device: mounts a real iOS screenshot (331x720) ---------- */
 .dl-device{
-  position:relative;background:#0b0b0c;border-radius:38px;padding:9px;
-  box-shadow:0 30px 70px -34px rgba(76,40,6,0.6),inset 0 0 0 1.5px rgba(255,255,255,0.08);
+  position:relative;width:clamp(230px,26vw,286px);background:#0b0b0c;border-radius:40px;padding:8px;
+  box-shadow:0 40px 80px -40px rgba(76,40,6,0.6),0 8px 24px -18px rgba(76,40,6,0.5),inset 0 0 0 1.5px rgba(255,255,255,0.08);
 }
-.dl-device-island{position:absolute;top:16px;left:50%;transform:translateX(-50%);z-index:6;width:30%;height:20px;background:#000;border-radius:100px}
-.dl-device-screen{position:relative;width:100%;aspect-ratio:331/720;border-radius:30px;overflow:hidden;background:linear-gradient(180deg,#FFF7E9,#F7EED9)}
-.dl-ios{
-  position:relative;width:100%;height:100%;display:flex;flex-direction:column;
-  background:#FBF3E1;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Inter',var(--sans);color:#1c1c1e;
+.dl-device--sm{width:100%;max-width:270px}
+.dl-device-notch{position:absolute;top:15px;left:50%;transform:translateX(-50%);z-index:3;width:32%;height:19px;background:#000;border-radius:100px}
+.dl-device-shot{width:100%;height:auto;border-radius:32px;display:block;background:var(--beige-2)}
+
+.dl-plate-note{
+  font-family:var(--sans);font-size:13.5px;line-height:1.5;color:var(--muted);
+  max-width:34ch;text-align:center;margin:0;position:relative;padding-top:16px;
 }
-.dl-ios-status{display:flex;align-items:center;justify-content:space-between;padding:13px 22px 2px;flex:none}
-.dl-ios-time{font-family:-apple-system,var(--sans-tight);font-weight:600;font-size:13px;letter-spacing:0.01em;color:#1c1c1e}
-.dl-ios-icons{display:flex;align-items:center;gap:5px}
-.dl-ios-icons i{display:block;background:#1c1c1e;border-radius:1px}
-.dl-ios-icons .sig{width:15px;height:10px;background:
-  linear-gradient(#1c1c1e 0 0) 0 100%/3px 4px no-repeat,
-  linear-gradient(#1c1c1e 0 0) 4px 100%/3px 6px no-repeat,
-  linear-gradient(#1c1c1e 0 0) 8px 100%/3px 8px no-repeat,
-  linear-gradient(#1c1c1e 0 0) 12px 100%/3px 10px no-repeat;}
-.dl-ios-icons .wifi{width:15px;height:11px;background:none;-webkit-mask:radial-gradient(circle at 50% 100%,#000 30%,transparent 31%);mask:radial-gradient(circle at 50% 100%,#000 30%,transparent 31%)}
-.dl-ios-icons .bat{width:22px;height:11px;border:1px solid rgba(28,28,30,0.5);border-radius:3px;background:none;position:relative}
-.dl-ios-icons .bat::before{content:"";position:absolute;inset:1.5px;right:5px;background:#1c1c1e;border-radius:1px}
-.dl-ios-icons .bat::after{content:"";position:absolute;right:-3px;top:3px;width:2px;height:5px;background:rgba(28,28,30,0.5);border-radius:0 1px 1px 0}
-.dl-ios-nav{padding:2px 20px 8px;flex:none}
-.dl-ios-eyebrow{font-family:-apple-system,var(--sans);font-weight:600;font-size:11px;letter-spacing:0.02em;color:var(--orange)}
-.dl-ios-title{font-family:-apple-system,var(--sans-tight);font-weight:700;font-size:26px;letter-spacing:-0.02em;line-height:1.1;color:#1c1c1e;margin-top:2px}
-.dl-ios-body{flex:1;padding:8px 16px 12px;display:flex;flex-direction:column;gap:14px;overflow:hidden}
-.dl-ios-hero{padding:2px 2px 4px}
-.dl-jbig{font-family:var(--serif);font-weight:400;font-size:38px;letter-spacing:-0.005em;color:var(--brown);line-height:1}
-.dl-jsub{font-family:-apple-system,var(--sans);font-size:12.5px;line-height:1.4;color:#8a7d6c;margin-top:6px}
-.dl-jbars{display:flex;align-items:flex-end;gap:5px;height:60px;margin-top:12px}
-.dl-jbars i{flex:1;background:linear-gradient(180deg,var(--orange),var(--yellow));border-radius:3px;opacity:0.95;min-height:5px}
-.dl-ios-group{background:#FFFCF4;border-radius:12px;overflow:hidden;box-shadow:0 1px 2px rgba(76,40,6,0.05)}
-.dl-ios-glabel{font-family:-apple-system,var(--sans);font-size:11px;font-weight:500;letter-spacing:0.02em;text-transform:uppercase;color:#9c8f7c;margin:0 6px 6px}
-.dl-jrow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 14px;min-height:42px;font-family:-apple-system,var(--sans);font-size:14px;color:#1c1c1e;position:relative}
-.dl-jrow + .dl-jrow::before{content:"";position:absolute;left:14px;right:0;top:0;height:1px;background:rgba(60,60,67,0.12)}
-.dl-jrow .v{font-family:-apple-system,var(--sans);font-size:14px;color:#8a8a8e;display:inline-flex;align-items:center;gap:6px}
-.dl-jrow .v.ok{color:var(--orange)}
-.dl-jrow .v .chev{width:7px;height:7px;border-right:1.6px solid #c4c4c6;border-bottom:1.6px solid #c4c4c6;transform:rotate(-45deg);display:inline-block}
-.dl-jrow .v .tick{color:var(--orange);font-style:normal;font-weight:600}
-.dl-ios-btn{display:block;text-align:center;font-family:-apple-system,var(--sans-tight);font-weight:600;font-size:15px;color:#fff;background:var(--orange);border-radius:12px;padding:12px;margin-top:2px}
-.dl-ios-tabs{display:flex;align-items:center;justify-content:space-around;flex:none;padding:8px 6px 14px;background:rgba(255,252,244,0.9);border-top:1px solid rgba(76,40,6,0.12);backdrop-filter:saturate(160%) blur(8px);-webkit-backdrop-filter:saturate(160%) blur(8px)}
-.dl-ios-tab{display:flex;flex-direction:column;align-items:center;gap:3px;color:#a99c88;flex:1}
-.dl-ios-tab svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.dl-ios-tab span{font-family:-apple-system,var(--sans);font-size:9.5px;letter-spacing:0.01em}
-.dl-ios-tab.on{color:var(--orange)}
-.dl-ios-tab.on svg{fill:rgba(246,111,0,0.14)}
+.dl-plate-note::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:1px;height:10px;background:var(--hair-strong)}
+.dl-note-code{display:block;font-family:var(--mono);font-size:11px;letter-spacing:0.05em;text-transform:uppercase;color:var(--orange);margin-bottom:5px}
 
 /* ==========================================================================
-   ACT 4 · VALUE — one "sunlight to settlement" scene
-   One energy current flows through four stages. Geometry-safe: the rail is a
-   single horizontal hairline whose endpoints inset to the first/last node
-   centers (12.5% of a 4-column grid), so it can never miss a node or overrun.
+   BRIEF — an editorial definition list, not a card grid
    ========================================================================== */
-.dl-settle{margin-top:clamp(36px,5vw,60px)}
-.dl-settle-track{position:relative}
-.dl-settle-stages{
-  list-style:none;margin:0;padding:0;position:relative;z-index:1;
-  display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2.4vw,30px);align-items:start;
-}
-/* the energy current: hairline at the node row's center, filled left to right */
-.dl-settle-rail{position:absolute;left:12.5%;right:12.5%;top:28px;height:2px;background:var(--hair-strong);border-radius:2px;overflow:hidden;z-index:0}
-.dl-settle-flow{display:block;height:100%;width:100%;transform:scaleX(var(--p,0));transform-origin:left center;background:linear-gradient(90deg,var(--orange),var(--yellow));transition:transform .12s linear}
-
-.dl-stage{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;min-width:0}
-.st-node{
-  width:56px;height:56px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;
-  background:var(--paper);border:1.6px solid var(--hair-strong);
-  transition:background .45s var(--ease),border-color .45s var(--ease),box-shadow .45s var(--ease),transform .45s var(--ease);
-}
-.st-node svg{width:26px;height:26px;fill:none;stroke:var(--muted);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:stroke .45s var(--ease)}
-.st-node svg circle{fill:none}
-.dl-stage.is-lit .st-node{background:var(--orange);border-color:var(--orange);box-shadow:0 12px 30px -14px rgba(246,111,0,0.6);transform:translateY(-1px)}
-.dl-stage.is-lit .st-node svg{stroke:#fff}
-.st-k{font-family:var(--mono);font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--label)}
-.dl-stage.is-lit .st-k{color:var(--orange)}
-.st-v{font-family:var(--sans-tight);font-weight:600;font-size:clamp(16px,1.7vw,19px);letter-spacing:-0.01em;color:var(--brown);line-height:1.15;text-wrap:balance}
-.st-note{font-family:var(--sans);font-size:13px;line-height:1.5;color:var(--muted);max-width:26ch;margin-top:2px;text-wrap:pretty}
-
-/* the statement is the one product surface, anchoring the middle of the chain */
-.dl-stage--bill{grid-row:span 1}
-.dl-bill-card{
-  width:100%;max-width:230px;border:1px solid var(--hair);border-radius:12px;background:var(--paper);
-  padding:14px 16px 12px;box-shadow:0 26px 56px -40px rgba(76,40,6,0.55);text-align:left;margin:2px 0;
-  transition:border-color .45s var(--ease),box-shadow .45s var(--ease);
-}
-.dl-stage--bill.is-lit .dl-bill-card{border-color:rgba(246,111,0,0.4);box-shadow:0 30px 60px -38px rgba(246,111,0,0.4)}
-.dl-bill-top{display:flex;align-items:center;justify-content:space-between;padding-bottom:10px;border-bottom:1px solid var(--hair)}
-.dl-bill-brand{font-family:var(--sans-tight);font-weight:700;font-size:14px;color:var(--brown)}
-.dl-bill-tag{font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--label)}
-.dl-bill-amt{padding:12px 0 10px}
-.dl-bill-amt-k{display:block;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--label)}
-.dl-bill-amt-v{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(26px,3vw,32px);color:var(--brown);margin-top:2px}
-.dl-bill-rows{display:grid;gap:0}
-.dl-bill-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid var(--hair);font-family:var(--sans);font-size:13px;color:var(--muted)}
-.dl-bill-row b{font-family:var(--sans-tight);font-weight:600;color:var(--ink)}
-.dl-bill-row--paid b{color:var(--orange);display:inline-flex;align-items:center;gap:6px}
-.dl-bill-row--paid b i{font-style:normal}
-
-/* mobile: the chain stacks; a static vertical connector keeps the causality */
-@media (max-width:760px){
-  .dl-settle-stages{grid-template-columns:1fr;gap:0}
-  .dl-settle-rail{display:none}
-  .dl-stage{
-    display:grid;grid-template-columns:56px minmax(0,1fr);gap:6px 18px;text-align:left;align-items:start;
-    padding:20px 0;position:relative;
-  }
-  .dl-stage::before{content:"";position:absolute;left:27px;top:56px;bottom:-1px;width:2px;background:var(--hair-strong)}
-  .dl-stage:last-child::before{display:none}
-  .st-node{grid-row:span 3}
-  .st-k{grid-column:2}
-  .st-v{grid-column:2;text-align:left}
-  .st-note{grid-column:2;max-width:38ch;text-align:left}
-  .dl-stage--bill .dl-bill-card{grid-column:2;max-width:280px}
-  .dl-stage--bill .st-note{grid-row:auto}
-}
+.dl-brief-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,0.92fr);gap:clamp(36px,6vw,80px);align-items:start}
+.dl-brief-head{max-width:34ch}
+.dl-brief-list{margin:0;display:grid;gap:0}
+.dl-brief-row{display:grid;grid-template-columns:minmax(120px,0.42fr) minmax(0,1fr);gap:16px 28px;padding:16px 0;border-top:1px solid var(--hair)}
+.dl-brief-row:first-child{border-top:none;padding-top:2px}
+.dl-brief-row dt{font-family:var(--mono);font-size:12px;letter-spacing:0.04em;text-transform:uppercase;color:var(--label);padding-top:2px}
+.dl-brief-row dd{margin:0;font-size:15.5px;line-height:1.5;color:var(--brown)}
 
 /* ==========================================================================
-   ACT 5 · RAY — the energy system becomes an assistant
+   THE LIFECYCLE — six gated phases on the orange current line (vertical rail)
    ========================================================================== */
-.dl-ray-grid{display:grid;grid-template-columns:minmax(0,0.85fr) minmax(0,1.15fr);gap:clamp(32px,5vw,72px);align-items:center}
+.dl-life{margin-top:clamp(44px,6vw,72px)}
+.dl-life-head{max-width:56ch;margin-bottom:clamp(32px,4vw,48px)}
+.dl-life-title{font-family:var(--serif);font-weight:400;font-size:clamp(21px,2.4vw,28px);line-height:1.22;color:var(--brown);margin:0;text-wrap:pretty}
+.dl-life-rail{list-style:none;margin:0;padding:0;position:relative}
+/* the current line: a hairline track with an orange fill that draws once in view */
+.dl-life-rail::before{content:"";position:absolute;left:9px;top:10px;bottom:10px;width:2px;background:var(--hair-strong);border-radius:2px}
+/* settled by default (no-JS, reduced motion): the current is fully drawn */
+.dl-life-rail::after{content:"";position:absolute;left:9px;top:10px;width:2px;height:calc(100% - 20px);background:linear-gradient(180deg,var(--orange),var(--yellow));border-radius:2px;transform:scaleY(1);transform-origin:top center}
+.dl-phase{position:relative;display:grid;grid-template-columns:20px minmax(0,1fr);gap:0 clamp(20px,2.6vw,34px);padding:0 0 clamp(26px,3vw,38px)}
+.dl-phase:last-child{padding-bottom:0}
+.dl-phase-node{width:20px;height:20px;border-radius:50%;background:var(--orange);border:2px solid var(--orange);margin-top:1px;position:relative;z-index:1;transition:background .4s var(--ease),border-color .4s var(--ease),box-shadow .4s var(--ease)}
+.dl-phase--live .dl-phase-node{background:var(--yellow);border-color:var(--orange);box-shadow:0 0 0 5px rgba(252,204,60,0.22)}
+/* JS enhancement: collapse first, then draw the current as the rail enters view */
+.dl-page.dl-js .dl-life[data-current] .dl-life-rail::after{transform:scaleY(0)}
+.dl-page.dl-js .dl-life[data-current] .dl-phase-node{background:var(--beige-2);border-color:var(--muted-2);box-shadow:none}
+.dl-page.dl-js .dl-life.drawn .dl-life-rail::after{transform:scaleY(1);transition:transform 1.1s var(--ease)}
+.dl-page.dl-js .dl-life.drawn .dl-phase-node{background:var(--orange);border-color:var(--orange)}
+.dl-page.dl-js .dl-life.drawn .dl-phase--live .dl-phase-node{background:var(--yellow);border-color:var(--orange);box-shadow:0 0 0 5px rgba(252,204,60,0.22)}
+.dl-phase-body{min-width:0;padding-top:0}
+.dl-phase-name{font-family:var(--sans);font-weight:600;font-size:clamp(17px,1.9vw,20px);letter-spacing:-0.01em;color:var(--brown);margin:0 0 5px;line-height:1.15}
+.dl-phase-line{font-family:var(--sans);font-size:15px;line-height:1.5;color:var(--muted);margin:0 0 9px;max-width:52ch;text-wrap:pretty}
+.dl-phase-gate{display:inline-flex;align-items:center;gap:9px;margin:0;font-family:var(--mono);font-size:12px;letter-spacing:0.02em;color:var(--brown)}
+.dl-gate-flag{font-family:var(--sans);font-weight:600;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--orange);border:1px solid rgba(246,111,0,0.4);background:rgba(246,111,0,0.07);border-radius:2px;padding:2px 6px}
+
+/* ==========================================================================
+   THE MODEL — the four role handoff matrix (a real, quiet table)
+   ========================================================================== */
+.dl-matrix-wrap{margin-top:clamp(48px,6vw,76px)}
+.dl-matrix-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 calc(-1 * var(--pad));padding:0 var(--pad)}
+.dl-matrix{border-collapse:collapse;width:100%;min-width:560px;font-family:var(--sans)}
+.dl-matrix th,.dl-matrix td{padding:14px 10px;text-align:center;border-top:1px solid var(--hair)}
+.dl-matrix thead th{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:0.03em;text-transform:uppercase;color:var(--label);border-top:none;padding-bottom:16px;vertical-align:bottom}
+.dl-matrix .dl-matrix-role{text-align:left}
+.dl-matrix tbody th{text-align:left;font-weight:600;font-size:15px;color:var(--brown);white-space:nowrap}
+.dl-matrix .mx{display:inline-block;font-size:15px;line-height:1}
+.dl-matrix .mx-lead{color:var(--orange)}
+.dl-matrix .mx-on{color:var(--muted-2)}
+.dl-matrix .mx-off{color:var(--gray);opacity:0.6}
+.dl-matrix-key{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin:22px 0 0;font-family:var(--mono);font-size:12px;letter-spacing:0.02em;color:var(--muted)}
+.dl-matrix-key .mx{font-size:14px;margin-right:2px}
+.dl-matrix-key .mx-lead{color:var(--orange)}
+.dl-matrix-key .mx-on{color:var(--muted-2)}
+.dl-key-sep{width:1px;height:12px;background:var(--hair-strong);display:inline-block}
+
+/* ==========================================================================
+   SPLIT — copy + a quiet supporting aside (origination, craft)
+   ========================================================================== */
+.dl-split{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,0.85fr);gap:clamp(36px,6vw,80px);align-items:start}
+.dl-split-copy{max-width:60ch}
+.dl-split-aside{position:relative;padding:clamp(24px,3vw,32px);background:var(--paper);border:1px solid var(--hair);border-radius:8px;box-shadow:0 30px 60px -46px rgba(76,40,6,0.5)}
+.dl-aside-label{font-family:var(--mono);font-size:11px;letter-spacing:0.05em;text-transform:uppercase;color:var(--orange);margin:0 0 18px}
+.dl-flow{list-style:none;margin:0;padding:0;position:relative}
+.dl-flow::before{content:"";position:absolute;left:5px;top:10px;bottom:10px;width:2px;background:linear-gradient(180deg,var(--orange),var(--yellow));border-radius:2px}
+.dl-flow-step{position:relative;padding:0 0 20px 26px}
+.dl-flow-step:last-child{padding-bottom:0}
+.dl-flow-step::before{content:"";position:absolute;left:0;top:4px;width:12px;height:12px;border-radius:50%;background:var(--paper);border:2px solid var(--orange)}
+.dl-flow-k{display:block;font-family:var(--sans);font-weight:600;font-size:15.5px;color:var(--brown);letter-spacing:-0.005em}
+.dl-flow-v{display:block;font-family:var(--sans);font-size:13.5px;line-height:1.45;color:var(--muted);margin-top:3px}
+.dl-aside-foot{margin:22px 0 0;padding-top:18px;border-top:1px solid var(--hair);font-family:var(--sans);font-size:13.5px;line-height:1.5;color:var(--muted)}
+
+/* ==========================================================================
+   APP — three real screens as annotated plates
+   ========================================================================== */
+.dl-plates{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(28px,4vw,52px);margin-top:clamp(40px,5vw,64px);align-items:start}
+.dl-plate{margin:0;display:flex;flex-direction:column;align-items:center;gap:0}
+.dl-plate .dl-device{margin-bottom:20px}
+.dl-plate-cap{font-family:var(--sans);font-size:14px;line-height:1.5;color:var(--muted);text-align:center;max-width:32ch;margin:0;position:relative;padding-top:16px}
+.dl-plate-cap::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:1px;height:10px;background:var(--hair-strong)}
+
+/* ==========================================================================
+   MONEY — bill formula + money grade note, then the payout approval chain
+   ========================================================================== */
+.dl-money-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,0.9fr);gap:clamp(36px,6vw,72px);align-items:start;margin-top:clamp(40px,5vw,60px)}
+.dl-formula{list-style:none;margin:0;padding:0}
+.dl-formula-row{position:relative;display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);gap:8px 20px;align-items:baseline;padding:16px 0 16px 26px;border-top:1px solid var(--hair)}
+.dl-formula-row:first-child{border-top:none}
+.dl-formula-op{position:absolute;left:0;top:16px;font-family:var(--serif);font-size:20px;color:var(--orange);line-height:1}
+.dl-formula-k{font-family:var(--sans);font-weight:600;font-size:16px;color:var(--brown);letter-spacing:-0.005em}
+.dl-formula-v{font-family:var(--sans);font-size:14px;line-height:1.45;color:var(--muted)}
+.dl-formula-total{margin-top:6px;border-top:2px solid var(--brown);padding-left:0}
+.dl-formula-total .dl-formula-k{font-family:var(--serif);font-weight:400;font-size:clamp(20px,2.2vw,25px);color:var(--brown)}
+.dl-money-aside{padding-top:2px}
+.dl-money-out-head{margin-top:clamp(64px,8vw,104px)}
+
+/* the approval chain: four nodes on a horizontal current line */
+.dl-chain{margin-top:clamp(36px,5vw,56px)}
+.dl-chain-rail{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,2vw,26px);position:relative}
+.dl-chain-rail::before{content:"";position:absolute;left:12.5%;right:12.5%;top:10px;height:2px;background:var(--hair-strong);border-radius:2px}
+/* settled by default (no-JS, reduced motion): the current is fully drawn */
+.dl-chain-rail::after{content:"";position:absolute;left:12.5%;top:10px;height:2px;width:75%;background:linear-gradient(90deg,var(--orange),var(--yellow));border-radius:2px;transform:scaleX(1);transform-origin:left center}
+.dl-chain-node{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;min-width:0}
+.dl-chain-dot{width:22px;height:22px;border-radius:50%;background:var(--orange);border:2px solid var(--orange);position:relative;z-index:1;transition:background .4s var(--ease),border-color .4s var(--ease),box-shadow .4s var(--ease)}
+.dl-chain-node--paid .dl-chain-dot{background:var(--yellow);border-color:var(--orange);box-shadow:0 0 0 5px rgba(252,204,60,0.22)}
+/* JS enhancement: collapse first, then draw the current as the chain enters view */
+.dl-page.dl-js .dl-chain[data-current] .dl-chain-rail::after{transform:scaleX(0)}
+.dl-page.dl-js .dl-chain[data-current] .dl-chain-dot{background:var(--beige-2);border-color:var(--muted-2);box-shadow:none}
+.dl-page.dl-js .dl-chain.drawn .dl-chain-rail::after{transform:scaleX(1);transition:transform 1.1s var(--ease)}
+.dl-page.dl-js .dl-chain.drawn .dl-chain-dot{background:var(--orange);border-color:var(--orange)}
+.dl-page.dl-js .dl-chain.drawn .dl-chain-node--paid .dl-chain-dot{background:var(--yellow);border-color:var(--orange);box-shadow:0 0 0 5px rgba(252,204,60,0.22)}
+.dl-chain-k{font-family:var(--sans);font-weight:600;font-size:15px;color:var(--brown);letter-spacing:-0.005em;margin-top:4px}
+.dl-chain-v{font-family:var(--sans);font-size:13px;line-height:1.45;color:var(--muted);max-width:22ch}
+
+/* ==========================================================================
+   RAY — the energy system becomes an assistant (concise chapter)
+   ========================================================================== */
+.dl-ray-grid{display:grid;grid-template-columns:minmax(0,0.82fr) minmax(0,1.18fr);gap:clamp(32px,5vw,72px);align-items:center}
 .dl-ray-figure{position:relative;display:flex;align-items:center;justify-content:center;padding:clamp(6px,2vw,20px)}
-.dl-avatar{position:relative;width:min(70vw,360px);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center}
-.dl-avatar-field{position:absolute;inset:-16%;border-radius:50%;z-index:0;pointer-events:none;background:radial-gradient(circle at 50% 46%,rgba(246,111,0,0.36) 0%,rgba(255,138,43,0.18) 34%,rgba(252,204,60,0.09) 52%,rgba(255,247,233,0) 70%);filter:blur(6px)}
+.dl-avatar{position:relative;width:min(66vw,340px);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center}
+.dl-avatar-field{position:absolute;inset:-16%;border-radius:50%;z-index:0;pointer-events:none;background:radial-gradient(circle at 50% 46%,rgba(246,111,0,0.34) 0%,rgba(255,138,43,0.18) 34%,rgba(252,204,60,0.09) 52%,rgba(255,247,233,0) 70%);filter:blur(6px)}
 .dl-avatar-ring{position:absolute;inset:0;border-radius:50%;z-index:1;pointer-events:none;background:conic-gradient(from 210deg,var(--orange),var(--orange-2),var(--yellow),var(--orange-2),var(--orange));padding:2px;-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 2px));mask:radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 2px));opacity:0.85;animation:dlSpin 22s linear infinite}
 .dl-avatar-disc{position:relative;z-index:2;width:82%;height:82%;border-radius:50%;overflow:hidden;background:#0c0c0d;box-shadow:0 22px 60px -24px rgba(76,40,6,0.5),inset 0 0 0 1px rgba(255,255,255,0.06)}
 .dl-avatar-disc video,.dl-avatar-disc img{width:100%;height:100%;object-fit:cover}
@@ -530,8 +330,6 @@ html.dl-page{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 @keyframes dlSpin{to{transform:rotate(360deg)}}
 
 .dl-ray-copy{min-width:0}
-.dl-ray-h{font-family:var(--serif);font-weight:400;color:var(--brown);font-size:clamp(30px,4.2vw,50px);line-height:1.02;margin:0 0 18px;text-wrap:balance}
-/* a believable grounded exchange, styled like the real Ray chat */
 .dl-ray-thread{margin:26px 0 0;display:grid;gap:14px}
 .dl-rt-ask{justify-self:end;max-width:88%;display:inline-flex;align-items:baseline;gap:10px;background:var(--black);color:#fff;border-radius:13px 13px 4px 13px;padding:11px 15px}
 .dl-rt-ask .dl-rt-tag{font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,247,233,0.55);flex:none}
@@ -547,114 +345,91 @@ html.dl-page{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 .dl-rt-chip{display:inline-flex;align-items:center;gap:6px;padding:4px 9px;border-radius:2px;border:1px solid rgba(246,111,0,0.35);background:rgba(246,111,0,0.08);color:var(--orange);letter-spacing:0.04em;text-transform:uppercase}
 .dl-rt-chip::before{content:"";width:5px;height:5px;border-radius:1px;background:currentColor}
 .dl-rt-fresh{letter-spacing:0.03em;color:var(--muted-2)}
-/* scroll-linked reveal: the turn arrives as the scene enters, ask then answer */
 .dl-page.dl-js .dl-rt-ask,.dl-page.dl-js .dl-rt-ans{opacity:0;transform:translate3d(0,12px,0);transition:opacity .6s var(--ease),transform .6s var(--ease)}
 .dl-ray-thread.show-ask .dl-rt-ask{opacity:1;transform:none}
 .dl-ray-thread.show-ans .dl-rt-ans{opacity:1;transform:none}
 .dl-ray-thread.show-ans .dl-rt-chip{box-shadow:0 0 0 4px rgba(246,111,0,0.12)}
-.dl-ray-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin-top:26px}
-.dl-ray-note{font-family:var(--sans);font-size:13px;line-height:1.5;color:var(--muted);max-width:38ch}
+.dl-ray-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin-top:28px}
+.dl-ray-note{font-family:var(--sans);font-size:13px;line-height:1.5;color:var(--muted);max-width:40ch}
 
 /* ==========================================================================
-   ACT 6 · SCOPE & OUTCOME
+   CRAFT — the design and operating system specimen (restrained)
    ========================================================================== */
-.dl-closing{background:var(--beige-2)}
-/* editorial scope specifics — a quiet row, not a stat ledger */
-.dl-scope-specs{list-style:none;margin:clamp(34px,5vw,54px) 0 0;padding:0;display:flex;flex-wrap:wrap;gap:0}
-.dl-scope-specs li{display:flex;align-items:baseline;gap:12px;padding:14px 30px;border-left:1px solid var(--hair)}
-.dl-scope-specs li:first-child{padding-left:0;border-left:none}
-.dl-scope-specs b{font-family:var(--serif);font-weight:400;font-size:clamp(26px,3vw,34px);line-height:1;color:var(--orange);flex:none}
-.dl-scope-specs span{font-family:var(--sans);font-size:13.5px;line-height:1.4;color:var(--brown);max-width:20ch}
-.dl-ev-note{margin-top:16px;font-family:var(--mono);font-size:12px;letter-spacing:0.05em;text-transform:uppercase;color:var(--label)}
-.dl-closing-links{display:flex;flex-wrap:wrap;gap:14px 18px;margin-top:34px;padding-top:30px;border-top:1px solid var(--hair)}
-@media (max-width:680px){
-  .dl-scope-specs{flex-direction:column}
-  .dl-scope-specs li{padding:14px 0;border-left:none;border-top:1px solid var(--hair)}
-  .dl-scope-specs li:first-child{border-top:none}
-  .dl-scope-specs span{max-width:none}
-}
+.dl-spec{list-style:none;margin:0;padding:0}
+.dl-spec li{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0;border-top:1px solid var(--hair)}
+.dl-spec li:first-child{border-top:none;padding-top:2px}
+.dl-spec-k{font-family:var(--mono);font-size:11px;letter-spacing:0.05em;text-transform:uppercase;color:var(--label)}
+.dl-spec-v{font-family:var(--sans);font-size:14.5px;color:var(--brown);text-align:right}
+.dl-spec-serif{font-family:var(--serif);font-size:19px}
+.dl-spec-mono{font-family:var(--mono);font-size:12px;letter-spacing:0.01em}
+.dl-spec-swatches{display:inline-flex;gap:6px}
+.dl-spec-swatches i{width:18px;height:18px;border-radius:4px;display:block}
 
-.dl-footer{padding:34px 0 46px;background:var(--beige-2)}
+/* ==========================================================================
+   CLOSE — outcomes, evidence, reflection
+   ========================================================================== */
+.dl-scope-specs{list-style:none;margin:clamp(36px,5vw,54px) 0 0;padding:0;display:flex;flex-wrap:wrap;gap:0}
+.dl-scope-specs li{display:flex;align-items:baseline;gap:12px;padding:14px 32px;border-left:1px solid var(--hair)}
+.dl-scope-specs li:first-child{padding-left:0;border-left:none}
+.dl-scope-specs b{font-family:var(--serif);font-weight:400;font-size:clamp(30px,3.4vw,40px);line-height:1;color:var(--orange);flex:none}
+.dl-scope-specs span{font-family:var(--sans);font-size:13.5px;line-height:1.4;color:var(--brown);max-width:20ch}
+.dl-ev-note{margin-top:16px;font-family:var(--mono);font-size:12px;letter-spacing:0.03em;color:var(--label)}
+.dl-reflect{margin-top:clamp(48px,6vw,76px)}
+.dl-close-links{display:flex;flex-wrap:wrap;gap:14px 18px;margin-top:clamp(40px,5vw,56px);padding-top:32px;border-top:1px solid var(--hair)}
+
+.dl-footer{padding:36px 0 48px;background:var(--beige)}
 .dl-footer .dl-wrap{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between}
-.dl-footer .fmeta{font-family:var(--mono);font-size:12px;letter-spacing:0.05em;text-transform:uppercase;color:var(--label)}
+.dl-footer .fmeta{font-family:var(--mono);font-size:12px;letter-spacing:0.03em;text-transform:uppercase;color:var(--label)}
 .dl-footer .fmeta b{color:var(--brown);font-weight:500}
 
 /* ==========================================================================
    SCROLL REVEAL — subtle, and always resolves to visible
    ========================================================================== */
-.dl-page.dl-js .dl-reveal{opacity:0;transform:translate3d(0,24px,0);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.dl-page.dl-js .dl-reveal{opacity:0;transform:translate3d(0,22px,0);transition:opacity .8s var(--ease),transform .8s var(--ease)}
 .dl-page.dl-js .dl-reveal.in{opacity:1;transform:none}
-
-/* ==========================================================================
-   READING CURRENT — one calm top progress bar
-   ========================================================================== */
-.dl-progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:160;pointer-events:none;opacity:0;transition:opacity .3s var(--ease)}
-.dl-page.dl-js .dl-progress{opacity:1}
-.dl-progress-bar{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--orange),var(--yellow));box-shadow:0 0 10px -1px rgba(246,111,0,0.5)}
 
 /* ==========================================================================
    RESPONSIVE
    ========================================================================== */
-@media (max-width:1080px){
-  .dl-build-pin{gap:clamp(28px,4vw,56px)}
-}
-@media (max-width:900px){
+@media (max-width:960px){
+  .dl-hero-grid{grid-template-columns:1fr;grid-template-areas:"nav" "lede" "plate";min-height:0;gap:clamp(32px,7vw,52px);padding-top:clamp(18px,3vh,26px);padding-bottom:8px}
+  .dl-hero-lede{max-width:640px}
+  .dl-hero-plate{align-self:start;margin-top:8px}
+  .dl-brief-grid{grid-template-columns:1fr;gap:clamp(28px,6vw,40px)}
+  .dl-brief-head{max-width:none}
+  .dl-split{grid-template-columns:1fr;gap:clamp(28px,6vw,40px)}
+  .dl-money-grid{grid-template-columns:1fr;gap:clamp(28px,6vw,44px)}
   .dl-ray-grid{grid-template-columns:1fr;gap:32px}
   .dl-ray-figure{order:-1}
-  .dl-avatar{width:min(58vw,300px)}
-  .dl-after-split{grid-template-columns:1fr;gap:30px}
-  .dl-after-home{order:-1}
-  /* keep the hero subhead clear of the brighter field on tablet */
-  .dl-hero-field{-webkit-mask:linear-gradient(100deg,transparent 0%,rgba(0,0,0,0.26) 24%,#000 64%);mask:linear-gradient(100deg,transparent 0%,rgba(0,0,0,0.26) 24%,#000 64%)}
-  .dl-evidence{grid-template-columns:1fr}
-  .dl-ev{border-right:none;border-bottom:1px solid var(--hair);padding:22px 0}
-  .dl-ev:last-child{border-bottom:none}
-  .ev-l{max-width:none}
+  .dl-avatar{width:min(56vw,280px)}
 }
-
-/* Act 2 + Act 3 abandon the sticky composition below this width */
-@media (max-width:820px){
-  /* ACT 2: the pinned build gives way. Without JS the rail already reads as a
-     full list; with JS the injected mobile scenes replace it. */
-  .dl-build-track{height:auto;margin-top:clamp(20px,4vw,36px)}
-  .dl-build-pin{position:static;min-height:0;padding:0;display:block}
-  .dl-build-stage{display:none}
-  .dl-build-rail{max-width:none}
-  .dl-build-rail li:last-child .dl-build-step{padding-bottom:0}
-  .dl-page.dl-js .dl-build-track{display:none}
-  .dl-page.dl-js .dl-proj-mobile{display:grid;gap:22px;margin-top:8px}
-
-  /* ACT 3: the mobile stack replaces the sticky phone */
-  .dl-app-track{display:none}
-  .dl-app-mobile{display:grid;gap:clamp(40px,9vw,64px);margin-top:clamp(28px,6vw,44px)}
+@media (max-width:720px){
+  /* the payout chain stacks; a static vertical connector keeps the causality */
+  .dl-chain-rail{grid-template-columns:1fr;gap:0}
+  .dl-chain-rail::before,.dl-chain-rail::after{display:none}
+  .dl-chain-node{display:grid;grid-template-columns:22px minmax(0,1fr);gap:2px 16px;text-align:left;align-items:start;padding:16px 0;position:relative}
+  .dl-chain-node::before{content:"";position:absolute;left:10px;top:32px;bottom:-16px;width:2px;background:var(--hair-strong)}
+  .dl-chain-node:last-child::before{display:none}
+  .dl-chain-dot{grid-row:span 2;margin-top:1px;flex:none}
+  .dl-chain-k{grid-column:2;margin-top:0}
+  .dl-chain-v{grid-column:2;max-width:none;text-align:left}
+  .dl-plates{grid-template-columns:1fr;gap:clamp(40px,9vw,56px);max-width:420px;margin-left:auto;margin-right:auto}
+  .dl-formula-row{grid-template-columns:1fr}
+  .dl-formula-v{margin-top:2px}
+  .dl-scope-specs{flex-direction:column}
+  .dl-scope-specs li{padding:14px 0;border-left:none;border-top:1px solid var(--hair)}
+  .dl-scope-specs li:first-child{border-top:none}
+  .dl-scope-specs span{max-width:none}
 }
 @media (max-width:480px){
   .dl-page body{font-size:16px}
-  .dl-hero-field{width:100%;-webkit-mask:linear-gradient(180deg,#000 0%,#000 40%,transparent 82%);mask:linear-gradient(180deg,#000 0%,#000 40%,transparent 82%)}
-  .dl-hero-lede{max-width:100%}
-  .dl-nav{flex-wrap:wrap;gap:8px 16px}
   .dl-btn{width:100%;justify-content:center}
-  .dl-ray-actions{gap:12px}
+  .dl-brief-row{grid-template-columns:1fr;gap:4px}
+  .dl-brief-row dt{padding-top:0}
+  .dl-hero-meta{gap:8px 0}
+  .dl-hero-role + .dl-hero-role{padding-left:0;border-left:none;padding-top:2px;flex-basis:100%}
   .dl-ray-note{max-width:none}
 }
-
-/* ==========================================================================
-   MOBILE PROJECT SCENES (Act 2) + MOBILE APP SCENES (Act 3) — injected markup
-   ========================================================================== */
-.dl-proj-mobile{display:none}
-.dl-pm{display:grid;gap:14px;padding:18px;border:1px solid var(--hair);border-radius:12px;background:var(--paper)}
-.dl-pm-head{display:flex;align-items:baseline;gap:12px}
-.dl-pm-n{font-family:var(--mono);font-size:12px;color:var(--orange)}
-.dl-pm-phase{font-family:var(--sans-tight);font-weight:600;font-size:17px;letter-spacing:-0.01em;color:var(--brown)}
-.dl-pm .dl-home{width:min(64%,220px);margin:0 auto}
-.dl-pm-names{font-family:var(--sans);font-size:13px;color:var(--muted)}
-.dl-pm-names b{color:var(--ink);font-weight:600}
-.dl-pm-copy{font-family:var(--sans);font-size:14.5px;line-height:1.5;color:var(--brown);margin:0}
-
-.dl-am{display:grid;gap:16px}
-.dl-am-copy .as-t{display:block;font-family:var(--sans-tight);font-weight:600;font-size:20px;letter-spacing:-0.01em;color:var(--brown)}
-.dl-am-copy .as-d{display:block;font-family:var(--sans);font-size:14.5px;line-height:1.5;color:var(--muted);margin-top:6px}
-.dl-am .dl-device{width:min(74%,268px);margin:0 auto}
 
 /* ==========================================================================
    REDUCED MOTION — show final states, run no loops
@@ -662,35 +437,22 @@ html.dl-page{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){
   html.dl-page{scroll-behavior:auto}
   .dl-avatar-ring{animation:none}
-  .dl-nav-status .dot{box-shadow:none}
-  .dl-hero-canvas{transition:none}
   .dl-page.dl-js .dl-reveal{opacity:1 !important;transform:none !important;transition:none !important}
-  .dl-rf-step{opacity:1 !important;transform:none !important;transition:none}
-  /* the pinned scenes settle into the finished state, no dead scroll track */
-  .dl-build-track,.dl-app-track{height:auto}
-  .dl-build-pin,.dl-app-pin{position:static;min-height:0;padding:0}
-  .as-dot,.bs-dot,.dl-app-rail::after,.dl-build-rail::after,.cs-fill,.dl-progress-bar{transition:none}
-  /* the scroll engine never sets --p here, so force the spine fill to full to
-     match the settled, all-steps-done state */
-  .dl-build-rail::after,.dl-app-rail::after{height:var(--sl-len,0px)}
+  .dl-page.dl-js .dl-rt-ask,.dl-page.dl-js .dl-rt-ans{opacity:1 !important;transform:none !important;transition:none}
+  .dl-life .dl-life-rail::after{transform:scaleY(1) !important;transition:none !important}
+  .dl-chain .dl-chain-rail::after{transform:scaleX(1) !important;transition:none !important}
+  .dl-life .dl-phase-node,.dl-chain .dl-chain-dot{transition:none}
 }
 
 /* ==========================================================================
    FORCED COLORS — let the OS drive color; only fix what it cannot infer
    ========================================================================== */
 @media (forced-colors:active){
-  .dl-hero-canvas{display:none !important}
-  .dl-hero-poster{background:Canvas !important;forced-color-adjust:none}
-  .dl-hero-field{background:Canvas;-webkit-mask:none;mask:none;border-left:1px solid CanvasText}
-  .dl-device,.dl-btn,.dl-bill-card,.dl-core-state,.dl-rf-step,.dl-pm{
-    border:1px solid CanvasText;box-shadow:none;
-  }
-  .dl-device-island{background:CanvasText}
-  .dl-progress-bar,.dl-app-rail::after,.dl-build-rail::after,.cs-fill{background:Highlight !important;forced-color-adjust:none}
-  .dl-app-step.on .as-dot,.dl-app-step.done .as-dot,
-  .dl-build-step.is-on .bs-dot,.dl-build-step.done .bs-dot{
-    background:Highlight;border-color:Highlight;forced-color-adjust:none;
-  }
+  .dl-device,.dl-btn,.dl-split-aside,.dl-rt-body,.dl-avatar-disc{border:1px solid CanvasText;box-shadow:none}
+  .dl-device-notch{background:CanvasText}
+  .dl-current-bar,.dl-life-rail::after,.dl-chain-rail::after,.dl-flow::before{background:Highlight !important;forced-color-adjust:none}
+  .dl-life.drawn .dl-phase-node,.dl-chain.drawn .dl-chain-dot{background:Highlight;border-color:Highlight;forced-color-adjust:none}
+  .dl-matrix .mx-lead{color:Highlight;forced-color-adjust:none}
 }
 
 /* ==========================================================================
@@ -710,8 +472,6 @@ html.dl-page{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
    REDUCED TRANSPARENCY — flatten translucent fills and heavy shadows
    ========================================================================== */
 @media (prefers-reduced-transparency:reduce){
-  .dl-hero-field,.dl-device,.dl-bill-card,.dl-core-state,.dl-avatar-disc{box-shadow:none}
+  .dl-device,.dl-split-aside,.dl-avatar-disc{box-shadow:none}
   .dl-avatar-field{display:none}
-  .dl-nav-status .dot{box-shadow:none}
-  .dl-build-object .dl-home{filter:none}
 }
