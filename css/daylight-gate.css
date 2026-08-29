@@ -8,7 +8,12 @@
    ========================================================================== */
 
 /* Critical lock rules also live inline in each page <head> to avoid a flash.
-   This file carries the full visual treatment. */
+   This file carries the full visual treatment. Brand fonts are declared here so
+   the gate is self-contained on every page that loads it. */
+@font-face{font-family:'Feature Deck';src:url('../fonts/FeatureDeck-400.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Aeonik Pro';src:url('../fonts/AeonikPro-400.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Aeonik Pro';src:url('../fonts/AeonikPro-500.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'ABC Social Mono';src:url('../fonts/DaylightSocialMono-400.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
 
 #dl-gate{
   --g-orange:#F66F00;
@@ -18,9 +23,9 @@
   --g-brown:#4C2806;
   --g-gray:#A09B93;
   --g-hair:rgba(30,30,30,0.14);
-  --g-serif:'Instrument Serif',Georgia,'Times New Roman',serif;
-  --g-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-  --g-mono:'Inconsolata','SFMono-Regular',ui-monospace,monospace;
+  --g-serif:'Feature Deck',Georgia,'Times New Roman',serif;
+  --g-sans:'Aeonik Pro',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --g-mono:'ABC Social Mono','SFMono-Regular',ui-monospace,monospace;
 }
 
 /* overlay shell */
@@ -49,10 +54,10 @@
 }
 .dl-gate-mark img{width:40px;height:40px;border-radius:50%;display:block;flex:none}
 .dl-gate-mark .dl-gate-wm{
-  font-family:var(--g-mono);font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--g-gray);
+  font-family:var(--g-mono);font-size:12px;letter-spacing:0.05em;text-transform:uppercase;color:var(--g-gray);
 }
 .dl-gate-t{
-  font-family:var(--g-serif);font-weight:400;font-size:30px;line-height:1.05;color:var(--g-brown);margin:0 0 8px;
+  font-family:var(--g-serif);font-weight:400;font-size:34px;line-height:0.98;letter-spacing:-0.02em;color:var(--g-brown);margin:0 0 8px;
 }
 .dl-gate-s{
   font-family:var(--g-sans);font-size:15px;line-height:1.5;color:var(--g-brown);opacity:0.72;margin:0 0 26px;max-width:34ch;
@@ -61,14 +66,14 @@
 .dl-gate-form{margin:0}
 .dl-gate-field{display:block}
 .dl-gate-lbl{
-  display:block;font-family:var(--g-mono);font-size:11px;letter-spacing:0.09em;text-transform:uppercase;
+  display:block;font-family:var(--g-mono);font-size:12px;letter-spacing:0.05em;text-transform:uppercase;
   color:var(--g-gray);margin-bottom:8px;
 }
 #dl-pass{
-  display:block;width:100%;font-family:var(--g-sans);font-size:16px;color:var(--g-ink);
-  background:var(--g-paper);border:1px solid var(--g-hair);border-radius:6px;
-  padding:13px 14px;outline:none;transition:border-color .16s ease,box-shadow .16s ease;
-  min-height:48px;-webkit-appearance:none;appearance:none;
+  display:block;width:100%;font-family:var(--g-sans);font-size:16px;letter-spacing:-0.01em;color:var(--g-ink);
+  background:var(--g-paper);border:1px solid var(--g-hair);border-radius:4px;
+  padding:0 14px;outline:none;transition:border-color .16s ease,box-shadow .16s ease;
+  height:50px;-webkit-appearance:none;appearance:none;
 }
 #dl-pass::placeholder{color:#c7bfae}
 #dl-pass:focus{border-color:var(--g-orange)}
@@ -76,12 +81,12 @@
 
 .dl-gate-row{display:flex;align-items:center;gap:16px;margin-top:18px}
 #dl-go{
-  font-family:'Inter Tight',var(--g-sans);font-size:15px;font-weight:600;letter-spacing:-0.01em;color:#fff;
-  background:var(--g-ink);border:1px solid var(--g-ink);border-radius:6px;
-  padding:12px 22px;min-height:48px;cursor:pointer;transition:opacity .16s ease;
+  font-family:var(--g-sans);font-size:14px;font-weight:500;letter-spacing:-0.01em;color:#fff;
+  background:var(--g-ink);border:1px solid var(--g-ink);border-radius:4px;
+  padding:0 24px;height:50px;cursor:pointer;transition:background .1s ease-out;
   display:inline-flex;align-items:center;gap:9px;
 }
-#dl-go:hover{opacity:0.82}
+#dl-go:hover{background:#2a2a2a}
 #dl-go:focus-visible{outline:2px solid var(--g-orange);outline-offset:3px}
 
 .dl-gate-err{

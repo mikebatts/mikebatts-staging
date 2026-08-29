@@ -1,11 +1,12 @@
 /* ==========================================================================
    Daylight case study — page behavior
    A field guide, not a scroll experience. Content is fully present in the HTML;
-   JavaScript only enhances: it reveals sections as they enter, draws the orange
-   "current" line through the lifecycle and the payout chain, and plays the Ray
-   loop in view. The top reading current is CSS-native (scroll-driven animation),
-   so no scroll or resize listeners live here. Everything degrades to a fully
-   visible, settled page, and reduced motion shows the end state.
+   JavaScript only enhances: it choreographs the hero load, reveals sections and
+   data groups as they enter, draws the orange "current" line through the
+   lifecycle and the payout chain, and plays the hero and Ray loops in view. The
+   top reading current is CSS-native (scroll-driven animation), so no scroll or
+   resize listeners live here. Everything degrades to a fully visible, settled
+   page, and reduced motion shows the end state.
    No network calls. Nothing here touches a backend. No scroll hijacking.
    ========================================================================== */
 (function () {
@@ -19,10 +20,27 @@
   var hasIO = 'IntersectionObserver' in window;
 
   /* -------------------------------------------------------------- */
-  /* Reveals — visible by default; motion only enhances              */
+  /* Hero load choreography — masthead, headline by line, copy,      */
+  /* media, device. Pure CSS transitions; JS just flips the switch.  */
+  /* -------------------------------------------------------------- */
+  function setupHero() {
+    var hero = document.querySelector('.dl-hero');
+    if (!hero) { return; }
+    if (reduceMotion) { hero.classList.add('hero-in'); return; }
+    // next frame so the initial (hidden) state is committed before animating
+    window.requestAnimationFrame(function () {
+      window.requestAnimationFrame(function () { hero.classList.add('hero-in'); });
+    });
+    // safety net: never leave the hero mid-transition
+    setTimeout(function () { hero.classList.add('hero-in'); }, 2600);
+  }
+
+  /* -------------------------------------------------------------- */
+  /* Reveals and staggered groups — visible by default; motion       */
+  /* only enhances                                                   */
   /* -------------------------------------------------------------- */
   function setupReveals() {
-    var reveals = Array.prototype.slice.call(document.querySelectorAll('.dl-reveal'));
+    var reveals = Array.prototype.slice.call(document.querySelectorAll('.dl-reveal, .dl-stagger'));
     if (!reveals.length) { return; }
 
     if (reduceMotion || !hasIO) {
@@ -94,7 +112,7 @@
   }
 
   /* -------------------------------------------------------------- */
-  /* Ray loop: static under reduced motion, paused offscreen         */
+  /* Looping video: static under reduced motion, paused offscreen    */
   /* -------------------------------------------------------------- */
   function setupVideo(id) {
     var video = document.getElementById(id);
@@ -118,8 +136,10 @@
     try {
       setupReveals();
       docEl.classList.add('dl-js');
+      setupHero();
       setupCurrents();
       setupRayflow();
+      setupVideo('dl-hero-video');
       setupVideo('dl-ray-video');
     } catch (e) {
       docEl.classList.remove('dl-js');

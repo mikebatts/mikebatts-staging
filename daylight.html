@@ -21,13 +21,13 @@
   <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon">
   <link href="images/webclip.png" rel="apple-touch-icon">
 
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
-  <link href="css/daylight-case-study.css?v=16" rel="stylesheet" type="text/css">
-  <link href="css/daylight-gate.css?v=1" rel="stylesheet" type="text/css">
-
-  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
-  <script type="text/javascript">WebFont.load({ google: { families: ["Instrument Serif:400","Inconsolata:400,500,700"] } });</script>
+  <!-- Self-hosted Daylight brand fonts: Feature Deck (display), Aeonik Pro (body/UI), ABC Social Mono (labels) -->
+  <link rel="preload" href="fonts/FeatureDeck-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="fonts/AeonikPro-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="fonts/AeonikPro-500.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="css/daylight-case-study.css?v=19" as="style">
+  <link href="css/daylight-case-study.css?v=19" rel="stylesheet" type="text/css">
+  <link href="css/daylight-gate.css?v=3" rel="stylesheet" type="text/css">
 
   <!-- Privacy gate: critical lock rules + pre-paint lock, before first paint -->
   <style>
@@ -72,7 +72,7 @@
 
   <!-- ============================ HERO ============================ -->
   <header class="dl-hero" aria-label="Introduction">
-    <div class="dl-wrap dl-hero-grid">
+    <div class="dl-wrap">
       <nav class="dl-topnav" aria-label="Case study">
         <a class="dl-topback" href="index.html">
           <img class="avi" src="images/avi.png" alt="" width="26" height="26" loading="lazy">
@@ -80,32 +80,53 @@
         </a>
         <span class="dl-topmeta">Consumer energy platform</span>
       </nav>
+    </div>
 
-      <div class="dl-hero-lede">
-        <div class="dl-masthead">
+    <div class="dl-wrap dl-hero-inner">
+      <div class="dl-hero-head">
+        <div class="dl-masthead dl-anim">
           <img class="dl-wordmark" src="images/daylight-logo-brown.svg" alt="Daylight" width="150" height="28">
           <span class="dl-masthead-rule" aria-hidden="true"></span>
           <span class="dl-masthead-tag">Field guide</span>
         </div>
-        <h1 class="dl-hero-title">Making clean energy<br>feel simple.</h1>
-        <p class="dl-hero-say">Going solar turns a house into a small power plant. I designed and built the products that carry one home through it, from the first agreement to the day the panels switch on, and every month after.</p>
-        <div class="dl-hero-meta">
+        <h1 class="dl-hero-title">
+          <span class="dl-line"><span>A home becoming</span></span>
+          <span class="dl-line"><span>a <em>power plant</em>.</span></span>
+        </h1>
+      </div>
+
+      <div class="dl-hero-body">
+      <div class="dl-hero-copy">
+        <p class="dl-hero-say dl-anim">Solar turns a house into a small power plant. I designed and built the products that carry one home through it, from the first agreement to the day the panels switch on, and every month after.</p>
+        <div class="dl-hero-meta dl-anim">
           <span class="dl-hero-role">2024&ndash;Present</span>
           <span class="dl-hero-role">Senior PM and product engineer</span>
           <a class="dl-extlink" href="https://godaylight.com" target="_blank" rel="noopener noreferrer">godaylight.com &#8599;</a>
         </div>
       </div>
 
-      <figure class="dl-hero-plate">
-        <div class="dl-device">
-          <span class="dl-device-notch" aria-hidden="true"></span>
-          <img class="dl-device-shot" src="images/ios-overview.png" alt="The Daylight iOS app: a home with rooftop solar, live battery and solar readings, and a plain-language note explaining the day's energy." width="331" height="720" loading="eager">
+      <figure class="dl-hero-stage">
+        <div class="dl-stage-frame">
+          <img class="dl-stage-poster" src="images/daylight-hero-poster.jpg" alt="" width="1600" height="900" aria-hidden="true">
+          <video class="dl-stage-video" id="dl-hero-video"
+                 poster="images/daylight-hero-poster.jpg"
+                 muted loop playsinline autoplay preload="metadata"
+                 aria-label="A Daylight home: rooftop solar in daylight, with the orange energy window and live production and backup readings moving across the scene.">
+            <source src="images/daylight-hero-loop.mp4" type="video/mp4">
+          </video>
         </div>
-        <figcaption class="dl-plate-note">
-          <span class="dl-note-code">the homeowner app</span>
-          A real screen. One roof, read back in plain language.
+        <div class="dl-stage-device dl-anim">
+          <div class="dl-device dl-device--sm">
+            <span class="dl-device-notch" aria-hidden="true"></span>
+            <img class="dl-device-shot" src="images/ios-overview.png" alt="The Daylight iOS app: a home with rooftop solar, live battery and solar readings, and a plain-language note explaining the day's energy." width="331" height="720" loading="eager">
+          </div>
+        </div>
+        <figcaption class="dl-stage-cap dl-anim">
+          <span><b>The homeowner app.</b></span>
+          <span>One roof, read back in plain language.</span>
         </figcaption>
       </figure>
+      </div>
     </div>
   </header>
 
@@ -119,7 +140,7 @@
           <h2 class="dl-h2" id="br-h">One coherent product on top of a five party machine.</h2>
           <p class="dl-lead">Daylight is the consumer energy platform for going solar. I joined as a founding product engineer and have designed and architected the platform end to end. The job was to make a fragmented, trust heavy lifecycle feel like a single calm product to everyone inside it.</p>
         </div>
-        <dl class="dl-brief-list">
+        <dl class="dl-brief-list dl-stagger">
           <div class="dl-brief-row"><dt>Company</dt><dd>Daylight, consumer energy platform for residential solar</dd></div>
           <div class="dl-brief-row"><dt>Years</dt><dd>2024 to present</dd></div>
           <div class="dl-brief-row"><dt>Role</dt><dd>Senior PM and product engineer. Founding product engineer and manager</dd></div>
@@ -148,7 +169,7 @@
             <p class="dl-eyebrow-serif">The lifecycle</p>
             <p class="dl-life-title">Forward motion is earned, phase by phase. A project cannot advance until its phase is genuinely complete.</p>
           </div>
-          <ol class="dl-life-rail">
+          <ol class="dl-life-rail dl-stagger">
             <li class="dl-phase">
               <span class="dl-phase-node" aria-hidden="true"></span>
               <div class="dl-phase-body">
@@ -285,7 +306,7 @@
         </div>
         <aside class="dl-split-aside dl-reveal" aria-label="The signing flow">
           <p class="dl-aside-label">The signing moment</p>
-          <ol class="dl-flow">
+          <ol class="dl-flow dl-stagger">
             <li class="dl-flow-step"><span class="dl-flow-k">Disclosures</span><span class="dl-flow-v">City specific, read in plain language</span></li>
             <li class="dl-flow-step"><span class="dl-flow-k">Identity</span><span class="dl-flow-v">Verified before a signature is taken</span></li>
             <li class="dl-flow-step"><span class="dl-flow-k">Signature</span><span class="dl-flow-v">One contract, no fine print they never saw</span></li>
@@ -306,7 +327,7 @@
       </div>
 
       <div class="dl-wrap">
-        <div class="dl-plates dl-reveal">
+        <div class="dl-plates dl-stagger">
           <figure class="dl-plate">
             <div class="dl-device dl-device--sm">
               <span class="dl-device-notch" aria-hidden="true"></span>
@@ -354,7 +375,7 @@
       <div class="dl-wrap dl-money-grid">
         <div class="dl-reveal">
           <p class="dl-eyebrow-serif">Every bill is a model, not a flat fee</p>
-          <ol class="dl-formula">
+          <ol class="dl-formula dl-stagger">
             <li class="dl-formula-row"><span class="dl-formula-k">Contract rate</span><span class="dl-formula-v">The price per unit of energy, set in the agreement</span></li>
             <li class="dl-formula-row"><span class="dl-formula-op" aria-hidden="true">&times;</span><span class="dl-formula-k">Seasonal production</span><span class="dl-formula-v">Expected output, month by month, for the home&rsquo;s region</span></li>
             <li class="dl-formula-row"><span class="dl-formula-op" aria-hidden="true">&times;</span><span class="dl-formula-k">System health</span><span class="dl-formula-v">Long run panel degradation, priced in from day one</span></li>
@@ -379,7 +400,7 @@
       <div class="dl-wrap">
         <div class="dl-chain dl-reveal" data-current
              role="img" aria-label="Every partner invoice moves through a fixed approval chain: operations review verifies the work, capital markets confirms the funding source, disbursement runs the payment, and it is marked paid, confirmed and logged.">
-          <ol class="dl-chain-rail">
+          <ol class="dl-chain-rail dl-stagger">
             <li class="dl-chain-node"><span class="dl-chain-dot" aria-hidden="true"></span><span class="dl-chain-k">Operations review</span><span class="dl-chain-v">Work verified against project events</span></li>
             <li class="dl-chain-node"><span class="dl-chain-dot" aria-hidden="true"></span><span class="dl-chain-k">Capital markets</span><span class="dl-chain-v">Funding source confirmed</span></li>
             <li class="dl-chain-node"><span class="dl-chain-dot" aria-hidden="true"></span><span class="dl-chain-k">Disbursement</span><span class="dl-chain-v">Payment run, banking versioned and encrypted</span></li>
@@ -440,20 +461,25 @@
         </div>
         <aside class="dl-split-aside dl-reveal" aria-label="The system, in brief">
           <p class="dl-aside-label">The system, in brief</p>
-          <ul class="dl-spec">
+          <ul class="dl-spec dl-stagger">
             <li><span class="dl-spec-k">Palette</span><span class="dl-spec-swatches" aria-hidden="true"><i style="background:#F66F00"></i><i style="background:#FCCC3C"></i><i style="background:#4C2806"></i><i style="background:#FFF7E9;box-shadow:inset 0 0 0 1px rgba(30,30,30,.14)"></i></span></li>
-            <li><span class="dl-spec-k">Display</span><span class="dl-spec-v dl-spec-serif">Warm editorial serif</span></li>
-            <li><span class="dl-spec-k">Interface</span><span class="dl-spec-v">Graphik, one characterful sans</span></li>
+            <li><span class="dl-spec-k">Display</span><span class="dl-spec-v dl-spec-serif">Feature Deck</span></li>
+            <li><span class="dl-spec-k">Interface</span><span class="dl-spec-v">Aeonik Pro, 400 and 500</span></li>
             <li><span class="dl-spec-k">One accent</span><span class="dl-spec-v">A single orange moment per view</span></li>
-            <li><span class="dl-spec-k">Motion</span><span class="dl-spec-v dl-spec-mono">1000ms &middot; ease(0.16, 1.08, 0.38, 0.98)</span></li>
+            <li><span class="dl-spec-k">Motion</span><span class="dl-spec-v dl-spec-mono">100ms ease-out &middot; reveals 900ms</span></li>
           </ul>
         </aside>
       </div>
     </section>
 
     <!-- ==================== OUTCOMES AND REFLECTION ==================== -->
-    <section class="dl-act dl-close" aria-labelledby="cl-h">
+    <!-- Cinematic bookend: the energy window returns, resolving the hero motif -->
+    <section class="dl-act dl-close dl-on-dark" aria-labelledby="cl-h">
       <div class="dl-wrap">
+        <figure class="dl-coda dl-reveal">
+          <img class="dl-coda-img" src="images/daylight-hero-poster.jpg" alt="A Daylight home with rooftop solar in daylight, the energy window lit over the panels." width="1600" height="900" loading="lazy">
+          <figcaption class="dl-coda-label"><span class="dl-tick" aria-hidden="true"></span>Power on &middot; the system goes live</figcaption>
+        </figure>
         <div class="dl-measure dl-reveal">
           <p class="dl-kicker"><span class="dl-tick" aria-hidden="true"></span>Outcomes and evidence</p>
           <h2 class="dl-h2" id="cl-h">What shipped, and what it validated.</h2>
@@ -488,6 +514,6 @@
   </footer>
 
   <script src="js/daylight-gate.js" defer></script>
-  <script src="js/daylight-case-study.js?v=10" defer></script>
+  <script src="js/daylight-case-study.js?v=11" defer></script>
 </body>
 </html>
