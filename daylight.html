@@ -18,7 +18,7 @@
   <link rel="preload" href="fonts/FeatureDeck-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
   <link rel="preload" href="fonts/AeonikPro-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
   <link rel="preload" href="fonts/AeonikPro-500.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-  <link href="css/daylight-case-study.css?v=31" rel="stylesheet">
+  <link href="css/daylight-case-study.css?v=35" rel="stylesheet">
   <link href="css/daylight-gate.css?v=3" rel="stylesheet">
   <style>html.dl-locked{overflow:hidden}html.dl-locked body>*:not(#dl-gate){visibility:hidden}#dl-gate{display:none}html.dl-locked #dl-gate{display:flex}</style>
   <script>try{if(sessionStorage.getItem('dl-unlocked')!=='1'){document.documentElement.classList.add('dl-locked')}}catch(e){document.documentElement.classList.add('dl-locked')}</script>
@@ -64,7 +64,7 @@
         <div class="dpw-body">
           <aside class="dpw-rail" aria-hidden="true"><span class="is-on"></span><span></span><span></span><span></span><b>MB</b></aside>
           <div class="dpw-work">
-            <div class="dpw-heading"><div><small>Solar project</small><h2>One home. One clear path.</h2></div><button type="button" tabindex="-1">Ask Ray</button></div>
+            <div class="dpw-heading"><div><small>Solar project</small><h2>One home. One clear path.</h2></div><span class="dpw-ray-pill">Ask Ray</span></div>
             <ol class="dpw-journey">
               <li class="is-done"><span>01</span><b>Agreement</b><small>Signed</small></li>
               <li class="is-done"><span>02</span><b>Review</b><small>Approved</small></li>
@@ -87,7 +87,7 @@
   <main id="dl-main">
     <section class="dl-section dl-definition" aria-labelledby="definition-h">
       <div class="dl-wrap dl-definition-grid">
-        <p class="dl-chapter">01&nbsp;&nbsp;The system</p>
+        <p class="dl-chapter">The system</p>
         <div class="dl-definition-copy dl-reveal"><h2 class="dl-h2" id="definition-h">Solar is not one transaction. It is a chain of promises.</h2><p class="dl-lead">A homeowner meets a seller, an underwriter, an installer, a utility, and a long-term energy provider. Every handoff creates another place for context to disappear. Daylight gives everyone one project, one current state, and one next step.</p></div>
         <div class="dl-system-line dl-reveal" aria-label="The parties connected by Daylight"><span>Homeowner</span><i></i><span>Sales partner</span><i></i><span>Daylight</span><i></i><span>Builder</span><i></i><span>Utility</span></div>
       </div>
@@ -96,7 +96,7 @@
     <section class="dl-section dl-ray" aria-labelledby="ray-h">
       <div class="dl-wrap dl-ray-grid">
         <div class="dl-ray-copy dl-reveal">
-          <p class="dl-chapter light">02&nbsp;&nbsp;Intelligence</p>
+          <p class="dl-chapter light">Intelligence</p>
           <h2 class="dl-h2 light" id="ray-h">Meet Ray.</h2>
           <p class="dl-lead light">Ray is Daylight&rsquo;s grounded support system. It answers from the project, shows the source behind its answer, respects the viewer&rsquo;s access, and follows the work across the partner portal and homeowner app.</p>
           <a class="dl-text-link light" href="ray.html">Explore the Ray case study&nbsp;&rarr;</a>
@@ -116,37 +116,99 @@
 
     <section class="dl-section dl-origin" id="origination" aria-labelledby="origin-h">
       <div class="dl-wrap">
-        <div class="dl-origin-head dl-reveal"><p class="dl-chapter">03&nbsp;&nbsp;Origination portal</p><h2 class="dl-h2" id="origin-h">Going solar starts with a lot of paperwork. We made it feel like one clear path.</h2><p class="dl-lead">The portal takes a rep from a new homeowner to a review-ready agreement. Each step knows what came before it, what is missing now, and what must happen next.</p></div>
-        <ol class="dl-origin-accordion dl-reveal" id="dl-origin-accordion">
-          <li class="is-active" data-origin="01"><button type="button" aria-expanded="true"><span>01</span><b>Project</b></button><div class="doa-panel"><p>Start with the home and the people attached to it. The project record becomes the source of truth for everything that follows.</p><div class="doa-ui doa-project"><small>New project</small><h3>Maple Street residence</h3><div><span>Homeowner<b>Jamie Rivera</b></span><span>Property<b>18 Maple Street</b></span><span>System<b>8.4 kW solar + storage</b></span></div><i>Project created</i></div></div></li>
-          <li data-origin="02"><button type="button" aria-expanded="false"><span>02</span><b>Offer</b></button><div class="doa-panel"><p>Turn system design and financing into a proposal a homeowner can understand, without hiding the real tradeoffs.</p><div class="doa-ui doa-offer"><small>Recommended offer</small><h3>$168 / month</h3><div><span>25-year term</span><span>2.9% escalator</span><span>$0 due today</span></div><i>Offer selected</i></div></div></li>
-          <li data-origin="03"><button type="button" aria-expanded="false"><span>03</span><b>Disclosures</b></button><div class="doa-panel"><p>Collect state and utility disclosures in context, with progress that is visible to both the rep and homeowner.</p><div class="doa-ui doa-docs"><small>Required disclosures</small><span><b>Consumer protection guide</b><i>Complete</i></span><span><b>Utility authorization</b><i>Complete</i></span><span><b>System disclosure</b><i>Review</i></span></div></div></li>
-          <li data-origin="04"><button type="button" aria-expanded="false"><span>04</span><b>Identity</b></button><div class="doa-panel"><p>Verify the right people at the right moment. Sensitive details are collected directly and kept out of the sales workflow.</p><div class="doa-ui doa-identity"><small>Identity check</small><div class="doa-idrow"><span>JR</span><b>Jamie Rivera<small>Primary homeowner</small></b><i>Verified</i></div><p>Verified securely on mobile</p></div></div></li>
-          <li data-origin="05"><button type="button" aria-expanded="false"><span>05</span><b>Sign &amp; review</b></button><div class="doa-panel"><p>One final review catches missing information before signature. The completed package moves forward without a manual handoff.</p><div class="doa-ui doa-sign"><small>Ready to sign</small><h3>Everything is in place.</h3><span>8 documents complete</span><span>2 identities verified</span><i>Send agreement</i></div></div></li>
-        </ol>
-        <p class="dl-origin-foot dl-reveal"><span>One guided flow</span><span>Every requirement visible</span><span>A review-ready package at the end</span></p>
+        <div class="dl-origin-head dl-reveal"><p class="dl-chapter">Origination portal</p><h2 class="dl-h2" id="origin-h">Going solar starts with a lot of paperwork. We made it feel like one clear path.</h2><p class="dl-lead">The portal guides a rep from the first homeowner details to a review-ready agreement. Nothing disappears behind another tool or handoff; the entire application stays legible from start to signature.</p></div>
+
+        <div class="dl-origin-story dl-reveal" id="dl-origin-story">
+          <aside class="dos-spine" aria-label="Origination progress">
+            <div class="dos-spine-in">
+              <p>One guided application</p>
+              <ol>
+                <li class="is-active" data-origin-marker="project"><span>01</span><b>Project</b></li>
+                <li data-origin-marker="offer"><span>02</span><b>Offer</b></li>
+                <li data-origin-marker="disclosures"><span>03</span><b>Disclosures</b></li>
+                <li data-origin-marker="identity"><span>04</span><b>Identity</b></li>
+                <li data-origin-marker="review"><span>05</span><b>Review &amp; sign</b></li>
+              </ol>
+              <div class="dos-progress" aria-hidden="true"><i></i></div>
+              <small>Every requirement visible. One review-ready package at the end.</small>
+            </div>
+          </aside>
+
+          <div class="dos-window">
+            <div class="dos-window-top">
+              <img src="images/daylight-logo-brown.svg" alt="" width="72" height="15">
+              <span>Origination</span><i></i><span>Maple Street</span>
+              <small>Saved just now</small>
+            </div>
+            <div class="dos-window-head">
+              <div><small>New solar agreement</small><h3>Maple Street residence</h3></div>
+              <div class="dos-completion"><span><i></i></span><b>4 of 5 complete</b></div>
+            </div>
+
+            <div class="dos-application">
+              <section class="dos-block is-active" data-origin-block="project" aria-labelledby="dos-project-h">
+                <header><span>01</span><div><h4 id="dos-project-h">Start with one shared project.</h4><p>The home and the people attached to it become the source of truth for everything that follows.</p></div><i>Complete</i></header>
+                <div class="dos-fields">
+                  <label><small>Homeowner</small><b>Jamie Rivera</b></label>
+                  <label><small>Property</small><b>18 Maple Street</b></label>
+                  <label><small>System</small><b>8.4 kW solar + storage</b></label>
+                </div>
+              </section>
+
+              <section class="dos-block" data-origin-block="offer" aria-labelledby="dos-offer-h">
+                <header><span>02</span><div><h4 id="dos-offer-h">Make the offer understandable.</h4><p>System design and financing become one proposal with the real tradeoffs visible.</p></div><i>Selected</i></header>
+                <div class="dos-offer">
+                  <div><small>Recommended offer</small><strong>$168 <em>/ month</em></strong></div>
+                  <dl><div><dt>Term</dt><dd>25 years</dd></div><div><dt>Escalator</dt><dd>2.9%</dd></div><div><dt>Due today</dt><dd>$0</dd></div></dl>
+                </div>
+              </section>
+
+              <section class="dos-block" data-origin-block="disclosures" aria-labelledby="dos-disclosures-h">
+                <header><span>03</span><div><h4 id="dos-disclosures-h">Keep every disclosure in context.</h4><p>State and utility requirements appear where they matter, with nothing left to chase in email.</p></div><i>2 of 3</i></header>
+                <div class="dos-checklist">
+                  <span><b>Consumer protection guide</b><i>Complete</i></span>
+                  <span><b>Utility authorization</b><i>Complete</i></span>
+                  <span class="is-next"><b>System disclosure</b><i>Ready to review</i></span>
+                </div>
+              </section>
+
+              <section class="dos-block" data-origin-block="identity" aria-labelledby="dos-identity-h">
+                <header><span>04</span><div><h4 id="dos-identity-h">Verify the person, not just the fields.</h4><p>Sensitive details are collected directly and stay outside the sales workflow.</p></div><i>Verified</i></header>
+                <div class="dos-person"><span>JR</span><div><b>Jamie Rivera</b><small>Primary homeowner&nbsp;·&nbsp;verified securely on mobile</small></div><i>Identity verified</i></div>
+              </section>
+
+              <section class="dos-block dos-final" data-origin-block="review" aria-labelledby="dos-review-h">
+                <header><span>05</span><div><h4 id="dos-review-h">Review once. Send with confidence.</h4><p>The portal catches what is missing before signature and moves one complete package forward.</p></div></header>
+                <div class="dos-ready">
+                  <div><small>Ready to send</small><strong>Everything is in place.</strong><p>8 documents complete&nbsp;&nbsp;·&nbsp;&nbsp;2 identities verified</p></div>
+                  <span class="dos-send">Send agreement&nbsp;&rarr;</span>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
     <section class="dl-section dl-home" aria-labelledby="home-h">
       <div class="dl-wrap dl-home-grid">
         <div class="dl-home-copy dl-reveal">
-          <p class="dl-chapter">04&nbsp;&nbsp;Homeowner app</p>
+          <p class="dl-chapter">Homeowner app</p>
           <h2 class="dl-h2" id="home-h">After power on, Daylight stays with the home.</h2>
           <p class="dl-lead">The iPhone app turns a technical energy system into a daily relationship. Homeowners can understand what their home is doing, see where energy went, and manage payments without learning the machinery behind it.</p>
-          <div class="dl-home-tabs" role="tablist" aria-label="Homeowner app screens"><button class="is-active" type="button" data-home-tab="overview" role="tab" aria-selected="true">Overview</button><button type="button" data-home-tab="energy" role="tab" aria-selected="false">Energy</button><button type="button" data-home-tab="payments" role="tab" aria-selected="false">Payments</button></div>
+          <div class="dl-home-tabs" role="group" aria-label="Choose a homeowner app screen"><button class="is-active" type="button" data-home-tab="overview" aria-pressed="true">Overview</button><button type="button" data-home-tab="energy" aria-pressed="false">Energy</button><button type="button" data-home-tab="payments" aria-pressed="false">Payments</button></div>
           <div class="dl-home-note" id="dl-home-note"><span>Overview</span><p>Live production, storage, and home use in one readable picture.</p></div>
         </div>
         <div class="dl-home-stage dl-reveal">
           <div class="dl-home-orbit" aria-hidden="true"><span></span><i></i></div>
-          <figure class="dl-home-phone"><div class="dl-home-frame"><span class="dl-home-notch"></span><img class="is-active" data-home-panel="overview" src="images/ios-overview.png" alt="Daylight iOS overview showing live home energy" width="331" height="720"><img data-home-panel="energy" src="images/ios-breakdown.png" alt="Daylight iOS energy breakdown" width="331" height="720"><img data-home-panel="payments" src="images/ios-payments.png" alt="Daylight iOS payments" width="331" height="720"></div><figcaption>Daylight for iPhone</figcaption></figure>
+          <figure class="dl-home-phone"><div class="dl-home-frame"><span class="dl-home-notch"></span><img class="is-active" data-home-panel="overview" src="images/ios-overview.png" alt="Daylight iOS overview showing live home energy" width="331" height="720" aria-hidden="false"><img data-home-panel="energy" src="images/ios-breakdown.png" alt="Daylight iOS energy breakdown" width="331" height="720" aria-hidden="true"><img data-home-panel="payments" src="images/ios-payments.png" alt="Daylight iOS payments" width="331" height="720" aria-hidden="true"></div><figcaption>Daylight for iPhone</figcaption></figure>
         </div>
       </div>
     </section>
 
     <section class="dl-section dl-outcome" aria-labelledby="outcome-h">
       <div class="dl-wrap dl-outcome-in">
-        <p class="dl-chapter light">05&nbsp;&nbsp;The outcome</p>
+        <p class="dl-chapter light">The outcome</p>
         <h2 class="dl-h2 light" id="outcome-h">One project. One source of truth. A calmer way to go solar.</h2>
         <p class="dl-lead light">Homeowners have signed more than 200 agreements, and six construction organizations now operate through the portal. The product keeps compounding from the people using it—from the first Ray beta to every new project moving toward power on.</p>
         <div class="dl-outcome-stats"><span><b>200+</b><small>agreements signed</small></span><span><b>6</b><small>construction organizations</small></span><span><b>Portal + iOS</b><small>one connected product</small></span></div>
@@ -159,6 +221,6 @@
   <script src="js/daylight-gate.js" defer></script>
   <script src="js/vendor/gsap.min.js" defer></script>
   <script src="js/vendor/ScrollTrigger.min.js" defer></script>
-  <script src="js/daylight-case-study.js?v=21" defer></script>
+  <script src="js/daylight-case-study.js?v=25" defer></script>
 </body>
 </html>

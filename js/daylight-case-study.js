@@ -84,36 +84,55 @@
   }
 
   function setupOrigination() {
-    var accordion = document.getElementById('dl-origin-accordion');
-    if (!accordion) { return; }
-    var items = Array.prototype.slice.call(accordion.children);
-    function activate(item) {
-      items.forEach(function (candidate) {
-        var active = candidate === item;
-        candidate.classList.toggle('is-active', active);
-        var button = candidate.querySelector('button');
-        if (button) { button.setAttribute('aria-expanded', active ? 'true' : 'false'); }
+    var story = document.getElementById('dl-origin-story');
+    if (!story) { return; }
+    var blocks = Array.prototype.slice.call(story.querySelectorAll('[data-origin-block]'));
+    var markers = Array.prototype.slice.call(story.querySelectorAll('[data-origin-marker]'));
+    var progress = story.querySelector('.dos-progress i');
+    if (!blocks.length) { return; }
+
+    function activate(key) {
+      blocks.forEach(function (block) { block.classList.toggle('is-active', block.getAttribute('data-origin-block') === key); });
+      markers.forEach(function (marker) { marker.classList.toggle('is-active', marker.getAttribute('data-origin-marker') === key); });
+    }
+
+    activate(blocks[0].getAttribute('data-origin-block'));
+
+    if (reduceMotion) { return; }
+
+    var ticking = false;
+    function updateActive() {
+      ticking = false;
+      var focus = window.innerHeight * .48;
+      var nearest = blocks[0];
+      var nearestDistance = Infinity;
+      blocks.forEach(function (block) {
+        var rect = block.getBoundingClientRect();
+        var distance = Math.abs((rect.top + rect.bottom) * .5 - focus);
+        if (distance < nearestDistance) {
+          nearest = block;
+          nearestDistance = distance;
+        }
+      });
+      activate(nearest.getAttribute('data-origin-block'));
+    }
+    function requestUpdate() {
+      if (ticking) { return; }
+      ticking = true;
+      window.requestAnimationFrame(updateActive);
+    }
+    window.addEventListener('scroll', requestUpdate, { passive: true });
+    window.addEventListener('resize', requestUpdate, { passive: true });
+    updateActive();
+
+    if (window.gsap && window.ScrollTrigger && progress) {
+      try { window.gsap.registerPlugin(window.ScrollTrigger); } catch (e) { return; }
+      window.gsap.fromTo(progress, { scaleY: .04 }, {
+        scaleY: 1,
+        ease: 'none',
+        scrollTrigger: { trigger: story, start: 'top 52%', end: 'bottom 54%', scrub: .7 }
       });
     }
-    items.forEach(function (item) {
-      var button = item.querySelector('button');
-      if (button) { button.addEventListener('click', function () { activate(item); }); }
-      if (window.matchMedia('(min-width:1025px) and (hover:hover)').matches) {
-        item.addEventListener('mouseenter', function () { activate(item); });
-      }
-    });
-
-    if (reduceMotion || !window.gsap || !window.ScrollTrigger || window.innerWidth <= 1024) { return; }
-    try { window.gsap.registerPlugin(window.ScrollTrigger); } catch (e) { return; }
-    window.ScrollTrigger.create({
-      trigger: accordion,
-      start: 'top 42%',
-      end: 'bottom 42%',
-      onUpdate: function (self) {
-        var index = Math.min(items.length - 1, Math.floor(self.progress * items.length));
-        if (!items[index].classList.contains('is-active')) { activate(items[index]); }
-      }
-    });
   }
 
   function setupHome() {
@@ -129,9 +148,13 @@
       buttons.forEach(function (button) {
         var active = button.getAttribute('data-home-tab') === key;
         button.classList.toggle('is-active', active);
-        button.setAttribute('aria-selected', active ? 'true' : 'false');
+        button.setAttribute('aria-pressed', active ? 'true' : 'false');
       });
-      panels.forEach(function (panel) { panel.classList.toggle('is-active', panel.getAttribute('data-home-panel') === key); });
+      panels.forEach(function (panel) {
+        var active = panel.getAttribute('data-home-panel') === key;
+        panel.classList.toggle('is-active', active);
+        panel.setAttribute('aria-hidden', active ? 'false' : 'true');
+      });
       if (note && copy[key]) {
         note.querySelector('span').textContent = copy[key][0];
         note.querySelector('p').textContent = copy[key][1];
