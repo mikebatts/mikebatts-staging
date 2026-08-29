@@ -1,12 +1,14 @@
 /* ==========================================================================
-   Ray 2A case study — page behavior
-   - scroll reveals (progressive, degrades to visible)
-   - reading progress current bar
-   - trust-flow node indices for staged emphasis
+   Ray case study — page behavior
+   - scroll reveals (progressive, degrades to fully visible)
+   - reading progress bar
+   - one morphing "system stage": a sticky, four-movement reveal driven by scroll
+     progress. Degrades to a legible stacked layout with no JS and on mobile.
    - offscreen video pause (IntersectionObserver, optional)
    - reactive signature field (canvas) that responds to typing / thinking / rest
    - a working chat rebuild: real composer, local deterministic response engine,
-     streamed status, grounded answers, propose-then-confirm, repeat turns, reset.
+     streamed status, grounded answers, propose-then-confirm (support + document
+     placement), document concierge, repeat turns, short memory, reset.
    Honors prefers-reduced-motion. No network calls. Nothing here touches a backend.
    All records are fictional. Nothing is ever sent.
    ========================================================================== */
@@ -22,15 +24,10 @@
   try { pointerFine = window.matchMedia && window.matchMedia('(pointer: fine)').matches; } catch (e) {}
 
   /* -------------------------------------------------------------- */
-  /* Scroll reveals + trust-flow indices                            */
+  /* Scroll reveals                                                 */
   /* -------------------------------------------------------------- */
   function setupReveals() {
     var reveals = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
-
-    // trust-flow node stagger indices (works even outside .reveal)
-    var flowItems = document.querySelectorAll('.ray-flow li');
-    for (var f = 0; f < flowItems.length; f++) { flowItems[f].style.setProperty('--n', f); }
-
     if (!reveals.length) { return; }
 
     reveals.forEach(function (block) {
@@ -50,11 +47,13 @@
           io.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.08, rootMargin: '0px 0px -8% 0px' });
+    }, { threshold: 0.08, rootMargin: '0px 0px -6% 0px' });
 
     reveals.forEach(function (b) { io.observe(b); });
 
-    setTimeout(function () { reveals.forEach(function (b) { b.classList.add('in'); }); }, 4000);
+    // Failsafe: never leave content stranded hidden if the observer misfires
+    // (full-page capture tooling, background tabs, odd viewports).
+    setTimeout(function () { reveals.forEach(function (b) { b.classList.add('in'); }); }, 2600);
   }
 
   /* -------------------------------------------------------------- */
@@ -80,36 +79,78 @@
   }
 
   /* -------------------------------------------------------------- */
-  /* Anatomy system map — the route draws as it scrolls through     */
+  /* System stage — one sticky visual that morphs across 4 movements */
+  /* Default (no JS / reduced motion / mobile): a readable stack.     */
   /* -------------------------------------------------------------- */
-  function setupMap() {
-    var map = document.getElementById('ray-map');
-    var draw = document.getElementById('ray-map-draw');
-    if (!map || !draw) { return; }
+  function setupSystemStage() {
+    var section = document.getElementById('ray-system');
+    if (!section) { return; }
+    var track = section.querySelector('.sys');
+    var sticky = document.getElementById('sys-sticky');
+    var convo = section.querySelector('.sys-convo');
+    var moves = section.querySelectorAll('.sys-move');
+    if (!track || !sticky || !convo || !moves.length) { return; }
+    var COUNT = moves.length;
 
-    // Reduced motion: show the full route immediately, no scroll work.
-    if (reduceMotion) { draw.style.setProperty('--map', '1'); return; }
+    // Movement stepper — only rendered visible in pinned mode (CSS-gated).
+    var titles = ['Find the right evidence', 'Check who is asking', 'Answer in context', 'Act with permission'];
+    var steps = document.createElement('div');
+    steps.className = 'sys-steps';
+    steps.setAttribute('aria-hidden', 'true');
+    for (var i = 0; i < COUNT; i++) {
+      var ss = document.createElement('div');
+      ss.className = 'ss';
+      ss.setAttribute('data-s', String(i + 1));
+      ss.innerHTML = '<span class="ss-n">' + (i + 1) + '</span><span class="ss-t"></span>';
+      ss.querySelector('.ss-t').textContent = titles[i] || ('Movement ' + (i + 1));
+      steps.appendChild(ss);
+    }
+    convo.appendChild(steps);
 
-    var ticking = false;
-    function update() {
-      var r = map.getBoundingClientRect();
-      var vh = window.innerHeight || document.documentElement.clientHeight;
-      // 0 when the map top is ~72% down the viewport, 1 once its content has
-      // travelled ~42% up. Clamped, so the fill never over- or under-runs.
-      var startAt = vh * 0.72;
-      var span = r.height + vh * 0.30;
-      var travelled = startAt - r.top;
-      var p = span > 0 ? travelled / span : 1;
+    var mq = window.matchMedia('(min-width:901px)');
+    var pinned = false, ticking = false;
+
+    function setMv(n) {
+      if (section.getAttribute('data-mv') !== String(n)) { section.setAttribute('data-mv', String(n)); }
+    }
+    function compute() {
+      var rect = track.getBoundingClientRect();
+      var scrollable = track.offsetHeight - window.innerHeight;
+      var p = scrollable > 0 ? (-rect.top) / scrollable : 0;
       if (p < 0) { p = 0; } else if (p > 1) { p = 1; }
-      draw.style.setProperty('--map', p.toFixed(4));
+      setMv(Math.min(COUNT, Math.floor(p * COUNT) + 1));
       ticking = false;
     }
     function onScroll() {
-      if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
+      if (!pinned || ticking) { return; }
+      ticking = true;
+      window.requestAnimationFrame(compute);
     }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-    update();
+    function enable() {
+      if (pinned) { return; }
+      pinned = true;
+      section.classList.add('is-pinned');
+      // Scroll length per movement (vh). Kept under 100vh so the section stays
+      // snappy and the whole page lands inside the target desktop height.
+      track.style.height = (COUNT * 74) + 'vh';
+      window.addEventListener('scroll', onScroll, { passive: true });
+      compute();
+    }
+    function disable() {
+      if (!pinned) { return; }
+      pinned = false;
+      section.classList.remove('is-pinned');
+      track.style.height = '';
+      window.removeEventListener('scroll', onScroll);
+      setMv(1);
+    }
+    function evaluate() {
+      if (!reduceMotion && mq.matches) { enable(); } else { disable(); }
+    }
+    evaluate();
+    if (mq.addEventListener) { mq.addEventListener('change', evaluate); }
+    else if (mq.addListener) { mq.addListener(evaluate); }
+    window.addEventListener('resize', function () { if (pinned) { onScroll(); } }, { passive: true });
   }
 
   /* -------------------------------------------------------------- */
@@ -206,7 +247,6 @@
 
     resize();
     if (reduceMotion) {
-      // Composed still: one calm frame, no animation.
       energy = 0.4; t = 0.6; draw();
     }
 
@@ -241,6 +281,7 @@
     var busy = false;
     var timers = [];
     var proposalSeq = 0;
+    var lastIntent = null; // short server-owned-style memory of the last topic
 
     var POSTER = 'images/ray-avatar-poster.png';
 
@@ -283,6 +324,12 @@
             '<li><span class="d-name"><span class="ray-dot ok"></span>Government ID</span><span class="d-state ok">Received</span></li>' +
             '<li><span class="d-name"><span class="ray-dot ok"></span>Utility bill</span><span class="d-state ok">Received</span></li>' +
           '</ul>',
+        sources: '<b>Sources</b>&nbsp;Documents and contracts&nbsp;·&nbsp;<b>Freshness</b>&nbsp;fictional project record, checked this turn'
+      },
+      doclookup: {
+        statuses: ['Collecting the project documents', 'Preparing the document actions'],
+        lead: "Here are the documents on Maple Street you can open. I can also place a new one, with your confirmation.",
+        card: 'DOCLIST',
         sources: '<b>Sources</b>&nbsp;Documents and contracts&nbsp;·&nbsp;<b>Freshness</b>&nbsp;fictional project record, checked this turn'
       },
       review: {
@@ -355,7 +402,7 @@
       support: {
         statuses: ['Preparing a support ticket'],
         lead: "No project data or published article settles this on its own, so Ray does not guess. He can hand it to a person.",
-        card: 'PROPOSAL',
+        card: 'SUPPORT',
         sources: '<b>Sources</b>&nbsp;none available&nbsp;·&nbsp;<b>Freshness</b>&nbsp;Ray could not verify an answer, so he offered a handoff'
       },
       fallback: {
@@ -368,7 +415,7 @@
             '<div class="s-row"><span class="s-k">Next action</span><span class="s-v">Confirm title, or request an updated document</span></div>' +
             '<div class="s-row"><span class="s-k">Owner</span><span class="s-v">Assigned reviewer</span></div>' +
           '</div>' +
-          '<p class="ray-suggest">I can also pull the <b>missing documents</b>, the <b>review feedback</b>, the <b>payout status</b>, or hand this to a <b>person</b>. Just ask.</p>',
+          '<p class="ray-suggest">I can also pull the <b>missing documents</b>, find a <b>specific document</b>, the <b>review feedback</b>, the <b>payout status</b>, or hand this to a <b>person</b>. Just ask.</p>',
         sources: '<b>Sources</b>&nbsp;Project record&nbsp;·&nbsp;<b>Freshness</b>&nbsp;fictional project record, checked this turn'
       }
     };
@@ -378,6 +425,9 @@
       if (/\b(cancel|delete|terminate|refund|credit check|run a credit|send (the |an )?agreement|sign (it |this )?for me|change (the )?price|adjust (the )?pricing)\b/.test(s)) { return 'capability'; }
       if (s.trim().length < 42 && /^\s*(hi|hey|hello|yo|sup|thanks|thank you|good morning|good afternoon|howdy)\b/.test(s)) { return 'greeting'; }
       if (/\b(help from (a )?(person|human|someone)|a person|a human|talk to (someone|a person|a human|support)|escalate|support (ticket|request|team|case)|raise (a|this)|get someone|speak to|real person)\b/.test(s)) { return 'support'; }
+      // Document lookup / concierge: "find / open / pull the agreement, contract, title..."
+      if (/\b(find|open|pull|locate|get me|show me|where('?s| is)|copy of|send me|download|link to|retrieve)\b/.test(s) &&
+          /\b(agreement|contract|document|doc|docs|file|title|survey|welcome|report|paperwork|pdf|package)\b/.test(s)) { return 'doclookup'; }
       if (/\b(pay|paid|payout|payouts|payment|payments|invoice|invoices|commission|owed|milestone|disburse|disbursement|money|remit|remittance)\b/.test(s)) { return 'payment'; }
       if (/\b(review|reject|rejected|rejection|feedback|sent back|revision|kickback|reviewer)\b/.test(s)) { return 'review'; }
       if (/\b(next step|timeline|when|due|deadline|overdue|schedule|scheduled|how long|eta|behind)\b/.test(s)) { return 'timeline'; }
@@ -386,6 +436,32 @@
       if (/\b(note|notes|summar|catch me up|happening|latest|recent|update|thread)\b/.test(s)) { return 'notes'; }
       if (/\b(blocker|blocked|stuck|advance|move forward|progress|stage|phase|hold|holding|waiting|why can|why is|can.?t|cannot)\b/.test(s)) { return 'blocker'; }
       return 'fallback';
+    }
+
+    /* ---- short conversation memory: follow-ups continue the prior topic ---- */
+    var TOPICS = { blocker: 1, documents: 1, doclookup: 1, review: 1, timeline: 1, payment: 1, notes: 1, knowledge: 1 };
+    var MEMORY_LABEL = {
+      blocker: 'why this project is blocked',
+      documents: 'the missing documents',
+      doclookup: 'the project documents',
+      review: 'the review feedback',
+      timeline: 'the next step',
+      payment: 'the payout status',
+      notes: 'the recent notes',
+      knowledge: 'what document verification requires'
+    };
+    function isFollowup(text) {
+      var s = text.toLowerCase().trim();
+      if (/^(and\b|then\b|what about|how about|what'?s next|whats next|what next|next\b|what do i do|what should i do|what now|now what|why\b|who\b|when\b|okay\b|ok\b|so\b|got it|thanks|thank you|continue|go on|and then|more\b)/.test(s)) { return true; }
+      return s.replace(/[^a-z0-9]/g, '').length <= 5;
+    }
+    function route(text) {
+      var direct = classify(text);
+      if (lastIntent && direct === 'fallback' && isFollowup(text)) {
+        var cont = (lastIntent === 'blocker' || lastIntent === 'timeline' || lastIntent === 'review' || lastIntent === 'documents') ? 'timeline' : lastIntent;
+        return { intent: cont, memoryOf: lastIntent };
+      }
+      return { intent: direct, memoryOf: null };
     }
 
     /* ---- DOM helpers ---- */
@@ -437,11 +513,11 @@
       return row;
     }
 
-    function proposalHTML() {
+    function supportProposalHTML() {
       proposalSeq += 1;
       var id = 'ray-prop-' + proposalSeq;
       return (
-        '<div class="ray-proposal" data-proposal="' + id + '">' +
+        '<div class="ray-proposal" data-kind="support" data-proposal="' + id + '">' +
           '<div class="p-head"><span>Proposed action</span><span class="clock">Expires in 15 min</span></div>' +
           '<div class="p-body">' +
             '<p class="p-title">Open a support request</p>' +
@@ -456,6 +532,43 @@
               '<button class="ray-btn ghost" type="button" data-dismiss>Not now</button>' +
             '</div>' +
           '</div>' +
+        '</div>'
+      );
+    }
+
+    function placementProposalHTML() {
+      proposalSeq += 1;
+      var id = 'ray-prop-' + proposalSeq;
+      return (
+        '<div class="ray-proposal" data-kind="placement" data-proposal="' + id + '">' +
+          '<div class="p-head"><span>Proposed action</span><span class="clock">Expires in 15 min</span></div>' +
+          '<div class="p-body">' +
+            '<p class="p-title">Place the updated title document</p>' +
+            '<p class="p-desc">Attach the current title and Ray places it on Maple Street through the existing guarded upload. The previous version stays in history. Access is re-checked at confirm, and nothing runs until you confirm.</p>' +
+            '<ul class="p-fields">' +
+              '<li><span class="pk">Project</span><span class="pv">Maple Street residence</span></li>' +
+              '<li><span class="pk">Document</span><span class="pv">Proof of title</span></li>' +
+              '<li><span class="pk">Mode</span><span class="pv">Replace, prior version archived</span></li>' +
+            '</ul>' +
+            '<div class="p-actions">' +
+              '<button class="ray-btn primary" type="button" data-confirm>Confirm placement</button>' +
+              '<button class="ray-btn ghost" type="button" data-dismiss>Not now</button>' +
+            '</div>' +
+          '</div>' +
+        '</div>'
+      );
+    }
+
+    function docListHTML() {
+      return (
+        '<div class="ray-doclist">' +
+          '<div class="dl-head">Documents · Maple Street residence</div>' +
+          '<ul>' +
+            '<li><span class="dl-nm"><span class="ray-dot ok"></span>Signed agreement</span><span class="dl-kind">Agreement</span><span class="dl-act view" aria-hidden="true">View</span></li>' +
+            '<li><span class="dl-nm"><span class="ray-dot ok"></span>Government ID</span><span class="dl-kind">Identity</span><span class="dl-act view" aria-hidden="true">View</span></li>' +
+            '<li><span class="dl-nm"><span class="ray-dot ok"></span>Utility bill</span><span class="dl-kind">Utility</span><span class="dl-act view" aria-hidden="true">View</span></li>' +
+            '<li><span class="dl-nm"><span class="ray-dot miss"></span>Proof of title</span><span class="dl-kind">Missing</span><button class="dl-act" type="button" data-place="title">Place</button></li>' +
+          '</ul>' +
         '</div>'
       );
     }
@@ -477,8 +590,14 @@
       );
     }
 
+    function cardMarkup(card) {
+      if (card === 'SUPPORT') { return supportProposalHTML(); }
+      if (card === 'DOCLIST') { return docListHTML(); }
+      return card;
+    }
+
     function appendAnswer(resp) {
-      var cardHTML = resp.card === 'PROPOSAL' ? proposalHTML() : resp.card;
+      var cardHTML = cardMarkup(resp.card);
       var inner =
         '<div class="rc-answer">' +
           '<div class="rc-answer-in">' +
@@ -495,7 +614,6 @@
       );
       row.querySelector('.a-line').textContent = resp.lead;
       thread.appendChild(row);
-      // progressive reveal (next frame), degrades to instant
       var ans = row.querySelector('.rc-answer');
       if (!reduceMotion) {
         window.requestAnimationFrame(function () { ans.classList.add('reveal-in'); });
@@ -540,7 +658,15 @@
       moveAvatar();
       updateSendState();
 
-      var resp = RESPONSES[classify(text)] || RESPONSES.fallback;
+      var r = route(text);
+      var base = RESPONSES[r.intent] || RESPONSES.fallback;
+      var resp = base;
+      if (r.memoryOf && MEMORY_LABEL[r.memoryOf]) {
+        resp = {};
+        for (var key in base) { if (Object.prototype.hasOwnProperty.call(base, key)) { resp[key] = base[key]; } }
+        resp.lead = 'Following up on ' + MEMORY_LABEL[r.memoryOf] + ': ' + base.lead;
+      }
+      if (TOPICS[r.intent]) { lastIntent = r.intent; }
 
       if (reduceMotion) {
         finishTurn(resp);
@@ -629,12 +755,34 @@
       });
     }
 
-    // sample-prompt chips
-    var chips = Array.prototype.slice.call(demo.querySelectorAll('.rc-chip'));
-    chips.forEach(function (chip) {
-      chip.addEventListener('click', function () {
+    // attachment affordance: faithful to the real composer; this local demo
+    // runs on fictional records, so it explains rather than uploads.
+    var attachBtn = document.getElementById('ray-attach');
+    if (attachBtn) {
+      attachBtn.addEventListener('click', function () {
+        var composer = attachBtn.closest('.ray-chat-composer');
+        if (!composer || composer.querySelector('.rc-attach-toast')) { if (input) { input.focus(); } return; }
+        var toast = document.createElement('div');
+        toast.className = 'rc-attach-toast';
+        toast.setAttribute('role', 'status');
+        toast.textContent = 'In the product, Ray reads PDFs and images you attach. This demo runs on fictional records, so uploads stay off here.';
+        composer.appendChild(toast);
+        if (!reduceMotion) { window.requestAnimationFrame(function () { toast.classList.add('in'); }); }
+        else { toast.classList.add('in'); }
+        window.setTimeout(function () {
+          toast.classList.remove('in');
+          window.setTimeout(function () { if (toast.parentNode) { toast.parentNode.removeChild(toast); } }, 300);
+        }, 3400);
+        if (input) { input.focus(); }
+      });
+    }
+
+    // suggested prompts (empty state, product-faithful full-width buttons)
+    var suggs = Array.prototype.slice.call(demo.querySelectorAll('.rc-sugg'));
+    suggs.forEach(function (btn) {
+      btn.addEventListener('click', function () {
         if (busy) { return; }
-        var q = chip.getAttribute('data-q');
+        var q = btn.getAttribute('data-prompt');
         if (!q) { return; }
         runTurn(q);
       });
@@ -645,8 +793,8 @@
       newChatBtn.addEventListener('click', function () {
         clearTimers();
         busy = false;
+        lastIntent = null;
         chat.classList.remove('is-working');
-        // remove all message rows, keep empty state node
         var rows = thread.querySelectorAll('.rc-row');
         rows.forEach(function (r) { r.parentNode.removeChild(r); });
         showEmpty();
@@ -659,19 +807,43 @@
       });
     }
 
-    // delegated card actions (confirm / dismiss / copy / vote)
+    // delegated card actions (confirm / dismiss / place / copy / vote)
     thread.addEventListener('click', function (e) {
       var t = e.target.closest ? e.target.closest('button') : null;
       if (!t) { return; }
 
+      // document concierge: "Place" spawns a guarded placement proposal
+      if (t.hasAttribute('data-place')) {
+        var list = t.closest('.ray-doclist');
+        if (list && !list.parentNode.querySelector('.ray-proposal')) {
+          var prop = el(placementProposalHTML());
+          list.parentNode.appendChild(prop);
+          scrollBottom();
+        }
+        return;
+      }
+
       if (t.hasAttribute('data-confirm')) {
-        var prop = t.closest('.ray-proposal');
-        if (prop) {
-          prop.innerHTML =
-            '<div class="p-head"><span>Recorded in this demo</span><span class="clock">local only</span></div>' +
+        var proposal = t.closest('.ray-proposal');
+        if (proposal) {
+          var kind = proposal.getAttribute('data-kind') || 'support';
+          proposal.classList.add('is-confirmed');
+          var head, strongTxt, subTxt;
+          if (kind === 'placement') {
+            head = '<div class="p-head"><span>Recorded in this demo</span><span class="clock">local only</span></div>';
+            strongTxt = 'Placement recorded in this demo';
+            subTxt = 'Nothing was placed. In the product this routes through the guarded upload operation, re-checking your access at confirm, and the prior version stays archived in history.';
+          } else {
+            head = '<div class="p-head"><span>Recorded in this demo</span><span class="clock">local only</span></div>';
+            strongTxt = 'Support request recorded in this demo';
+            subTxt = 'Nothing was sent. In the product this opens a support case, with deduplication and a daily cap, for a person to pick up.';
+          }
+          proposal.innerHTML =
+            head +
             '<div class="p-confirmed"><span class="ok" aria-hidden="true">&#10003;</span>' +
-              '<span class="txt"><strong>Support request recorded in this demo</strong>' +
-              '<span>Nothing was sent. In the product this opens a support case, with deduplication and a daily cap, for a person to pick up.</span></span></div>';
+              '<span class="txt"><strong></strong><span></span></span></div>';
+          proposal.querySelector('.p-confirmed strong').textContent = strongTxt;
+          proposal.querySelector('.p-confirmed .txt span').textContent = subTxt;
           scrollBottom();
         }
         return;
@@ -679,8 +851,8 @@
       if (t.hasAttribute('data-dismiss')) {
         var prop2 = t.closest('.ray-proposal');
         if (prop2) {
-          var body = prop2.querySelector('.p-body');
-          if (body) { body.innerHTML = '<p class="p-desc" style="margin:0">Okay, no handoff. Ask me anything else about this project.</p>'; }
+          var body = prop2.querySelector('.p-body') || prop2;
+          body.innerHTML = '<p class="p-desc" style="margin:0">Okay, no action. Ask me anything else about this project.</p>';
         }
         return;
       }
@@ -728,7 +900,6 @@
       }, { passive: true });
     }
 
-    // demo video: static under reduced motion
     if (reduceMotion && demoVideo) {
       try { demoVideo.removeAttribute('autoplay'); demoVideo.pause(); } catch (e) {}
     }
@@ -740,25 +911,14 @@
   function init() {
     var docEl = document.documentElement;
     try {
-      // Configure the reveal observer and all its observations BEFORE enabling
-      // the JS-only CSS. The runtime class is what tells the stylesheet to hide
-      // .reveal content until it scrolls in, so it must go on only once the
-      // observer that will reveal that content is fully wired. If setupReveals
-      // throws, the class is never added and content stays fully visible.
       setupReveals();
-
-      // Reveals are armed — enable reveal motion + JS-only chrome.
-      // Added at runtime (not in the head) so that if this script fails to load,
-      // the CSS never hides .reveal content and the page stays fully visible.
       docEl.classList.add('js-on');
-
       setupProgress();
-      setupMap();
+      setupSystemStage();
       setupHeroVideo();
       setupChat();
     } catch (e) {
       // Fail open: any init exception must never leave content stranded hidden.
-      // Removing the runtime class restores the default fully-visible styling.
       docEl.classList.remove('js-on');
     }
   }

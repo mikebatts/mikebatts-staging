@@ -86,6 +86,7 @@ async function boot(): Promise<void> {
   let ptyTarget = 0;
   let ptx = 0;
   let pty = 0;
+  let energy = 0;        // pointer energy: rises on movement, decays at rest
   let scrollTarget = 0;
   let scroll = 0;
   let aspect = 1.6;
@@ -107,8 +108,14 @@ async function boot(): Promise<void> {
   const onPointer = (e: PointerEvent) => {
     const rect = canvas.getBoundingClientRect();
     if (rect.width <= 0 || rect.height <= 0) return;
-    ptxTarget = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-    ptyTarget = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+    const nx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    const ny = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+    // energy is proportional to how far the pointer jumped this event
+    const dx = nx - ptxTarget;
+    const dy = ny - ptyTarget;
+    energy = Math.min(1, energy + Math.min(1, Math.hypot(dx, dy) * 2.2));
+    ptxTarget = nx;
+    ptyTarget = ny;
   };
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", onResize, { passive: true });
@@ -119,7 +126,8 @@ async function boot(): Promise<void> {
     ptx += (ptxTarget - ptx) * 0.06;
     pty += (ptyTarget - pty) * 0.06;
     scroll += (scrollTarget - scroll) * 0.08;
-    fx.set({ u: { params: [time.time, scroll, aspect, 0], pointer: [ptx, pty, 0, 0] } });
+    energy *= 0.94; // decay toward rest
+    fx.set({ u: { params: [time.time, scroll, aspect, 0], pointer: [ptx, pty, energy, 0] } });
     frame.pass(surf, fx);
   };
 

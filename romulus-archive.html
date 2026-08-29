@@ -1231,7 +1231,8 @@
   <script>
     (function() {
       /* ===== PASSWORD GATE ===== */
-      var PASSWORD = 'Sfogliatelle!';
+      // SHA-256 of the shared password. The plaintext never appears in this file.
+      var PASSWORD_HASH = '0e3690809a8ee4fc9e8baf5d93346f92d0b0670be7e60266eb9f2224b05d3bf0';
       var SESSION_KEY = 'romulus_session';
       var SESSION_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
 
@@ -1261,19 +1262,31 @@
       var submit = document.getElementById('gateSubmit');
       var error = document.getElementById('gateError');
 
-      function unlock(isSession) {
-        if (!isSession) {
-          if (input.value !== PASSWORD) {
-            error.classList.add('visible');
-            return;
-          }
-        }
+      function reveal(isSession) {
         gate.classList.add('hidden');
         content.classList.add('visible');
         if (!isSession) saveSession();
         window.scrollTo(0, 0);
         initAnimations();
         initNavScroll();
+      }
+
+      function toHex(buf) {
+        return Array.prototype.map.call(new Uint8Array(buf), function(b) {
+          return b.toString(16).padStart(2, '0');
+        }).join('');
+      }
+
+      function unlock(isSession) {
+        if (isSession) { reveal(true); return; }
+        if (window.crypto && window.crypto.subtle && window.TextEncoder) {
+          window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(input.value)).then(function(buf) {
+            if (toHex(buf) === PASSWORD_HASH) { reveal(false); }
+            else { error.classList.add('visible'); }
+          }).catch(function() { error.classList.add('visible'); });
+        } else {
+          error.classList.add('visible');
+        }
       }
 
       if (!checkSession()) {

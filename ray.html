@@ -23,7 +23,7 @@
 
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
-  <link href="css/ray.css?v=4" rel="stylesheet" type="text/css">
+  <link href="css/ray.css?v=7" rel="stylesheet" type="text/css">
   <link href="css/daylight-gate.css?v=1" rel="stylesheet" type="text/css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
@@ -68,7 +68,7 @@
   <a class="ray-skip" href="#ray-main">Skip to content</a>
   <div class="ray-progress" id="ray-progress" aria-hidden="true"><span class="ray-progress-bar" id="ray-progress-bar"></span></div>
 
-  <!-- ============================ HERO ============================ -->
+  <!-- ============================ ACT 1 · HERO ============================ -->
   <header class="ray-hero">
     <div class="ray-wrap">
       <nav class="ray-nav" aria-label="Case study">
@@ -88,9 +88,12 @@
         <div class="ray-hero-copy">
           <p class="ray-eyebrow"><span class="tick" aria-hidden="true"></span>Daylight · Ray</p>
           <h1 class="ray-display ray-hero-title">Ask anything.<br>Trust the answer.</h1>
-          <p class="ray-hero-intro">Ray is the operational support layer inside Daylight. A complete system across two audiences: the partner origination portal and the homeowner iOS app. It answers from live project data and published process knowledge, and turns requests into guarded, confirmable actions.</p>
-          <p class="ray-hero-role"><b>Product, design, and engineering</b> · Mike Battaglia · 2026</p>
-          <p class="ray-hero-micro">Ray moves while working. He comes to rest with an answer.</p>
+          <p class="ray-hero-intro">Ray is Daylight's operational support layer. One grounded assistant across two audiences: the partner origination portal and the homeowner iOS app. It answers from live project data and published process knowledge, then turns requests into guarded, confirmable actions.</p>
+          <div class="ray-hero-meta">
+            <span class="ray-hero-role"><b>Product, design &amp; engineering</b><span>Mike Battaglia · 2026</span></span>
+            <span class="ray-hero-sep" aria-hidden="true"></span>
+            <span class="ray-hero-role"><b>The field, concentrated</b><span>Ray moves while working, and comes to rest with an answer.</span></span>
+          </div>
         </div>
 
         <div class="ray-hero-figure">
@@ -102,6 +105,11 @@
                      muted loop playsinline autoplay preload="metadata" aria-hidden="true" tabindex="-1"></video>
               <img class="poster-fallback" src="images/ray-avatar-poster.png" alt="" aria-hidden="true">
             </div>
+          </div>
+          <div class="ray-hero-badges" aria-hidden="true">
+            <span class="rhb"><span class="d"></span>Grounded answers</span>
+            <span class="rhb"><span class="d"></span>Guarded actions</span>
+            <span class="rhb"><span class="d"></span>Honest handoff</span>
           </div>
         </div>
       </div>
@@ -135,7 +143,7 @@
           </div>
         </div>
 
-        <p class="ray-lead stagger">Many of those questions already had answers, sitting in live project state or in published process knowledge. The real product problem was never generating text. It was making an answer trustworthy and actionable in the exact place the work happens.</p>
+        <p class="ray-lead stagger">Many of those questions already had answers, sitting in live project state or published process knowledge. The product problem was never generating text. It was making an answer trustworthy and actionable in the exact place the work happens.</p>
 
         <div class="ray-authornote stagger">
           <img class="avi" src="images/avi.png" alt="Mike Battaglia" width="34" height="34" loading="lazy">
@@ -144,13 +152,13 @@
       </div>
     </section>
 
-    <!-- ==================== INTERACTIVE DEMO ==================== -->
+    <!-- ==================== ACT 2 · THE REAL PRODUCT DEMO ==================== -->
     <section class="ray-section ray-demo-section" aria-labelledby="demo-h">
       <div class="ray-wrap reveal">
         <div class="ray-demo-head">
-          <span class="ray-demo-tag"><span class="sq" aria-hidden="true"></span>Illustrative interaction</span>
+          <span class="ray-demo-tag"><span class="sq" aria-hidden="true"></span>Live rebuild · runs in your browser</span>
           <h2 class="ray-h2" id="demo-h">See how Ray answers.</h2>
-          <p class="ray-lead">Ask anything. Ray reaches for a tool, narrates the step in plain language, and comes to rest on a grounded answer with its sources. This is a faithful rebuild of the real interaction, running entirely in your browser on fictional records.</p>
+          <p class="ray-lead">Ask anything. Ray reaches for a tool, narrates the step in plain language, and comes to rest on a grounded answer with its sources. This is a faithful rebuild of the real interaction, running entirely on fictional records. Nothing is ever sent.</p>
         </div>
 
         <div class="ray-demo" id="ray-demo">
@@ -180,8 +188,8 @@
                          muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
                 </span>
                 <span class="rc-idblock">
-                  <span class="who">Ray</span>
-                  <span class="ctx">Maple Street residence · PPA-4021</span>
+                  <span class="who">Ask Ray <span class="beta">Beta</span></span>
+                  <span class="ctx">Maple Street residence · PPA-4021 · Document verification</span>
                 </span>
                 <span class="rc-presence" id="ray-presence" aria-hidden="true">At rest</span>
                 <button type="button" class="rc-newchat" id="ray-newchat" aria-label="Start a new chat">
@@ -195,20 +203,23 @@
               <div class="rc-empty" id="ray-empty">
                 <span class="rc-empty-glow" aria-hidden="true"></span>
                 <p class="rc-empty-h">Ask about Maple Street residence</p>
-                <p class="rc-empty-s">This demo answers from a fictional project record and published process knowledge, shows its sources, and hands off to a person when nothing settles the question.</p>
+                <p class="rc-empty-s">PPA-4021 · Document verification. This demo answers from a fictional project record and published process knowledge, shows its sources, and hands off to a person when nothing settles the question.</p>
+                <div class="rc-suggest" role="group" aria-label="Suggested questions">
+                  <button type="button" class="rc-sugg" data-prompt="Why can't this project advance?">Why can't this project advance?</button>
+                  <button type="button" class="rc-sugg" data-prompt="What documents are still missing?">What documents are still missing?</button>
+                  <button type="button" class="rc-sugg" data-prompt="Find the signed agreement for this project">Find the signed agreement for this project</button>
+                  <button type="button" class="rc-sugg" data-prompt="How much have we been paid on this project?">How much have we been paid on this project?</button>
+                  <button type="button" class="rc-sugg" data-prompt="I need help from a person.">I need help from a person.</button>
+                </div>
               </div>
             </div>
 
             <form class="ray-chat-composer" id="ray-composer">
-              <div class="rc-chips" role="group" aria-label="Sample questions">
-                <button type="button" class="rc-chip" data-q="Why can't this project advance?">Why can't this advance?</button>
-                <button type="button" class="rc-chip" data-q="What documents are still missing?">Missing documents</button>
-                <button type="button" class="rc-chip" data-q="What did review say?">Review feedback</button>
-                <button type="button" class="rc-chip" data-q="How much have we been paid on this project?">Payout status</button>
-                <button type="button" class="rc-chip" data-q="I need help from a person.">Talk to a person</button>
-              </div>
               <div class="rc-inputrow">
                 <label class="rc-vh" for="ray-input">Ask Ray about this project</label>
+                <button type="button" class="rc-attach" id="ray-attach" aria-label="Attach a file" title="Attach a file">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5 12 20.5a5 5 0 0 1-7-7l8.5-8.5a3.3 3.3 0 0 1 4.7 4.7l-8.5 8.5a1.7 1.7 0 0 1-2.4-2.4l7.8-7.8"/></svg>
+                </button>
                 <textarea id="ray-input" class="rc-input" rows="1" placeholder="Ask about this project&hellip;"
                           autocomplete="off" autocapitalize="sentences" spellcheck="true" enterkeyhint="send"></textarea>
                 <button type="submit" class="rc-send" id="ray-send" aria-label="Send message" disabled>
@@ -226,261 +237,164 @@
       </div>
     </section>
 
-    <!-- ==================== SURFACES ==================== -->
-    <section class="ray-section ray-surfaces" aria-labelledby="surf-h">
-      <div class="ray-wrap reveal">
-        <p class="ray-eyebrow"><span class="tick" aria-hidden="true"></span>Where Ray lives</p>
-        <h2 class="ray-h2" id="surf-h">One assistant. Three surfaces.</h2>
-        <p class="ray-lead">The same grounded assistant meets people where they already work, without pulling them out of the project in front of them.</p>
-
-        <div class="ray-surface-grid">
-          <article class="ray-surface stagger">
-            <div class="s-num">01</div>
-            <h3 class="s-name">Full page</h3>
-            <p class="s-desc">Durable history and deep work. A dedicated place to think through a project and keep the thread.</p>
-            <div class="ray-schem full" aria-hidden="true">
-              <div class="bar"><i></i><i></i><i></i></div>
-              <div class="body">
-                <div class="ln w85"></div><div class="ln w70"></div>
-                <div class="ln w50 hot"></div><div class="ln w40"></div><div class="ln w70"></div>
-              </div>
-            </div>
-          </article>
-
-          <article class="ray-surface stagger">
-            <div class="s-num">02</div>
-            <h3 class="s-name">Drawer</h3>
-            <p class="s-desc">Project context stays visible while asking. Ray opens beside the work, not on top of it.</p>
-            <div class="ray-schem drawer" aria-hidden="true">
-              <div class="bar"><i></i><i></i><i></i></div>
-              <div class="body">
-                <div class="ctx"><div class="ln w85"></div><div class="ln w50"></div><div class="ln w70"></div><div class="ln w40"></div></div>
-                <div class="panel"><span class="disc"></span><div class="ln w85"></div><div class="ln w70 hot"></div><div class="ln w50"></div></div>
-              </div>
-            </div>
-          </article>
-
-          <article class="ray-surface stagger">
-            <div class="s-num">03</div>
-            <h3 class="s-name">Pop-out</h3>
-            <p class="s-desc">Ray can sit beside the portal without portal chrome. A floating window that follows the work across screens.</p>
-            <div class="ray-schem popout" aria-hidden="true">
-              <div class="win"></div>
-              <div class="float"><span class="disc"></span><div class="ln w85"></div><div class="ln w50 hot"></div><div class="ln w70"></div></div>
-            </div>
-          </article>
-        </div>
-
-        <div class="ray-mobile-callout reveal">
-          <div class="ray-phone" aria-hidden="true">
-            <span class="notch"></span>
-            <span class="launch"></span>
-            <div class="sheet"><div class="ln"></div><div class="ln w60"></div><div class="ln"></div><div class="ln w60"></div></div>
-          </div>
-          <div class="m-copy">
-            <h3>And a mobile lane built for the phone.</h3>
-            <p>A <b>top-right launcher</b> opens a <b>full-screen drawer</b> with safe-area handling. The composer uses a <b>16px font to stop Safari from zooming</b>, and scroll is contained so the page underneath stays put. Small surface, same guarantees.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== ANATOMY — scroll-driven system map ==================== -->
-    <section class="ray-section ray-anatomy" aria-labelledby="anat-h">
+    <!-- ============ ACTS 3–5 · ONE SYSTEM STAGE, FOUR MOVEMENTS ============ -->
+    <section class="ray-section ray-system" id="ray-system" aria-labelledby="sys-h" data-mv="1">
       <div class="ray-wrap reveal">
         <p class="ray-eyebrow"><span class="tick" aria-hidden="true"></span>The architecture</p>
-        <h2 class="ray-h2" id="anat-h">How a question becomes an answer you can trust.</h2>
-        <p class="ray-lead">Trust is architecture, not tone. Every question travels the same four movements before Ray ever speaks, and the model never reaches data directly or acts on its own. This is the whole system, end to end.</p>
+        <h2 class="ray-h2" id="sys-h">One question. Four things happen underneath.</h2>
+        <p class="ray-lead">Trust is architecture, not tone. Watch a single question travel the system: Ray finds the right evidence, checks who is asking, answers in context, and can act only with permission. Same question, same answer, the machinery revealed.</p>
       </div>
 
-      <div class="ray-wrap">
-        <!-- Decorative spine lives outside the <ol> so the list contains only <li> items -->
-        <div class="ray-map-wrap">
-          <span class="ray-map-spine" aria-hidden="true"><span class="ray-map-draw" id="ray-map-draw"></span></span>
-          <ol class="ray-map" id="ray-map" aria-label="How a request becomes a trustworthy answer or handoff">
+      <div class="sys">
+        <div class="sys-sticky" id="sys-sticky">
 
-          <!-- Movement 01 · Evidence -->
-          <li class="ray-move reveal" data-move="1">
-            <div class="mv-head">
-              <span class="mv-node" aria-hidden="true"></span>
-              <span class="mv-idx">Movement 01</span>
-              <h3 class="mv-title">Evidence</h3>
-              <p class="mv-claim">The answer has to point at something real.</p>
-            </div>
-            <div class="mv-body stagger">
-              <div class="mv-panel mv-cite">
-                <div class="mvp-k"><span class="sq" aria-hidden="true"></span>Knowledge base · cited</div>
-                <div class="mv-quote">
-                  <p class="q">&ldquo;Document verification requires a signed agreement, verified identity, a current proof of title, and a signed work order.&rdquo;</p>
-                  <div class="q-src"><span class="q-doc">Origination SOP</span><span class="q-link" aria-hidden="true">Open article &rarr;</span></div>
-                </div>
-                <p class="mv-note">Ray quotes a published, reviewable article and links it. If the source did not run, Ray does not claim it.</p>
-              </div>
-              <div class="mv-panel mv-retrieval">
-                <div class="mvp-k"><span class="sq" aria-hidden="true"></span>Hybrid retrieval</div>
-                <div class="mv-rrf" aria-hidden="true">
-                  <div class="rrf-lane"><span class="rl-k">Lexical · BM25</span><span class="rl-bar"><i style="width:74%"></i></span></div>
-                  <div class="rrf-lane"><span class="rl-k">Vector · pgvector</span><span class="rl-bar"><i style="width:88%"></i></span></div>
-                  <div class="rrf-fuse"><span class="rf-join"></span><span class="rf-out">Reciprocal-rank fusion</span></div>
-                  <div class="rrf-top"><span class="rt-dot"></span>Top article, ranked for this reader</div>
-                </div>
-                <p class="mv-note">Ask in your own words. Lexical and vector search fuse by RRF, portal and customer corpora stay isolated, and retrieval degrades safely to lexical.</p>
+          <!-- The persistent conversation: it never changes as the system reveals itself -->
+          <div class="sys-convo" aria-label="The question Ray is answering">
+            <div class="sc-ask"><span class="sc-tag" aria-hidden="true">You</span>Why can't this project advance?</div>
+            <div class="sc-ans">
+              <span class="sc-av" aria-hidden="true"><img src="images/ray-avatar-poster.png" alt="" width="26" height="26"></span>
+              <div class="sc-ans-body">
+                <p>Maple Street can't advance because <b>title verification is still open</b>. The signed agreement is in and identity is verified; the reviewer is waiting on a current title document.</p>
+                <p class="sc-cite"><span class="sc-cite-chip" data-cite>Origination SOP</span><span class="sc-fresh">live project data · checked this turn</span></p>
               </div>
             </div>
-            <p class="mv-why"><span class="w-k">Why it matters</span>Operational policy has to be challengeable, not model folklore. And nobody knows the exact words an SOP uses.</p>
-          </li>
+          </div>
 
-          <!-- Movement 02 · Context -->
-          <li class="ray-move reveal" data-move="2">
-            <div class="mv-head">
-              <span class="mv-node" aria-hidden="true"></span>
-              <span class="mv-idx">Movement 02</span>
-              <h3 class="mv-title">Context</h3>
-              <p class="mv-claim">A real question spans turns, time, and surfaces.</p>
-            </div>
-            <div class="mv-body stagger">
-              <div class="mv-panel mv-memory">
-                <div class="mvp-k"><span class="sq" aria-hidden="true"></span>Server-owned conversation</div>
-                <ul class="mv-turns" aria-hidden="true">
-                  <li class="t-you"><span>You</span>Why can&rsquo;t this project advance?</li>
-                  <li class="t-ray"><span>Ray</span>Title verification is still open&hellip;</li>
-                  <li class="t-you"><span>You</span>What did the reviewer ask for?</li>
-                  <li class="t-ray"><span>Ray</span>A current title and a re-signed work order.</li>
-                  <li class="t-out"><span aria-hidden="true">&#8618;</span>Action outcomes return to the transcript</li>
-                </ul>
-                <div class="mv-reload"><span class="rl-badge">20</span>most recent turns reloaded on every request</div>
-              </div>
-              <div class="mv-panel mv-surfaces-mini">
-                <div class="mvp-k"><span class="sq" aria-hidden="true"></span>One thread, every surface</div>
-                <div class="mv-surf-row" aria-hidden="true">
-                  <span class="ms-chip">Full page</span>
-                  <span class="ms-chip">Drawer</span>
-                  <span class="ms-chip">Pop-out</span>
-                  <span class="ms-chip">iOS</span>
-                </div>
-                <p class="mv-note">Turns run and persist server-side, so the thread survives navigation and reloads with its context intact wherever the work moves.</p>
-              </div>
-            </div>
-            <p class="mv-why"><span class="w-k">Why it matters</span>Operational questions build across navigation, time, and multiple turns. Memory the server owns is memory that cannot fall on the floor.</p>
-          </li>
+          <!-- The stage: four movements. Default = readable stack. js-on = pinned morph. -->
+          <div class="sys-stack" id="sys-stack">
 
-          <!-- Movement 03 · Authority -->
-          <li class="ray-move reveal" data-move="3">
-            <div class="mv-head">
-              <span class="mv-node" aria-hidden="true"></span>
-              <span class="mv-idx">Movement 03</span>
-              <h3 class="mv-title">Authority</h3>
-              <p class="mv-claim">Permission is fresh every turn, never a cached answer.</p>
-            </div>
-            <div class="mv-body stagger">
-              <div class="mv-panel mv-auth">
-                <div class="mvp-k"><span class="sq" aria-hidden="true"></span>Bound server-side</div>
-                <div class="mv-authflow" aria-hidden="true">
-                  <span class="af-node">Current viewer</span>
-                  <span class="af-arrow"></span>
-                  <span class="af-node"><code>visible_to(user)</code></span>
-                  <span class="af-arrow"></span>
-                  <span class="af-node af-hot">Only their tools</span>
+            <!-- MOVEMENT 01 -->
+            <article class="sys-move" data-mv="1" aria-labelledby="mv1-h">
+              <header class="sys-head">
+                <span class="sys-idx">Movement 01</span>
+                <h3 class="sys-title" id="mv1-h">Find the right evidence</h3>
+                <p class="sys-claim">The answer has to point at something real.</p>
+              </header>
+              <div class="sys-scene sc-evidence" aria-hidden="true">
+                <div class="ev-corpus">
+                  <span class="ev-lbl">Knowledge base · portal lane</span>
+                  <div class="ev-tiles">
+                    <span class="ev-tile">Origination SOP</span>
+                    <span class="ev-tile">Title verification</span>
+                    <span class="ev-tile">Work orders</span>
+                    <span class="ev-tile">Identity checks</span>
+                    <span class="ev-tile">Permitting</span>
+                    <span class="ev-tile">Payouts</span>
+                  </div>
                 </div>
-                <p class="mv-note">Tools bind the viewer on the server and start from what that person can already see. Homeowner tools take no model-supplied customer or job id at all.</p>
+                <div class="ev-search">
+                  <div class="ev-lane"><span class="el-k">Lexical · BM25</span><span class="el-bar"><i style="width:72%"></i></span></div>
+                  <div class="ev-lane"><span class="el-k">Vector · pgvector</span><span class="el-bar"><i style="width:90%"></i></span></div>
+                  <div class="ev-fuse"><span class="ef-join" aria-hidden="true"></span><span class="ef-out">Reciprocal-rank fusion</span></div>
+                </div>
+                <div class="ev-hit">
+                  <span class="eh-dot" aria-hidden="true"></span>
+                  <span class="eh-name">Origination SOP</span>
+                  <span class="eh-note">selected · quoted verbatim · linked</span>
+                </div>
               </div>
-              <div class="ray-invariants mv-panel mv-guarantees">
-                <p class="ray-invariants-title">Guarantees, always on</p>
-                <div class="iv"><span class="mk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><p>Every project-bound turn reauthorizes. Links reauthorize again on click.</p></div>
-                <div class="iv"><span class="mk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><p>A shared Sheet saves the query, not the rows, and reruns it for each viewer.</p></div>
-                <div class="iv"><span class="mk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><p>The stream is explicitly no-cache, no-transform. No stale answer is portable.</p></div>
-                <div class="iv"><span class="mk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><p>Withheld fields never serialize. Sensitive and destructive actions stay out of the catalog.</p></div>
-                <div class="iv"><span class="mk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><p>Proposals are user, audience, and conversation bound. Single-use, 15-minute TTL.</p></div>
-              </div>
-            </div>
-            <p class="mv-why"><span class="w-k">Why it matters</span>Project permissions and records change. An old answer, or another person&rsquo;s result, must never become portable authority. Ray inherits the product&rsquo;s authority. It never invents its own.</p>
-          </li>
+              <p class="sys-copy">Ask in your own words. Lexical and vector search fuse by rank; the top article is quoted verbatim and linked. If the source did not run, Ray does not claim it, and the portal and customer corpora never mix.</p>
+            </article>
 
-          <!-- Movement 04 · Resolution -->
-          <li class="ray-move reveal" data-move="4">
-            <div class="mv-head">
-              <span class="mv-node terminal" aria-hidden="true"></span>
-              <span class="mv-idx">Movement 04</span>
-              <h3 class="mv-title">Resolution</h3>
-              <p class="mv-claim">Every question ends somewhere honest.</p>
-            </div>
-            <div class="mv-body mv-resolve stagger">
-              <article class="mv-out">
-                <div class="mo-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
-                <h4>Grounded answer</h4>
-                <p>The data and the knowledge settle it. Ray answers with its sources and freshness attached.</p>
-              </article>
-              <article class="mv-out">
-                <div class="mo-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M13 3v4h4"/><path d="M10 13h5M10 16h3"/></svg></div>
-                <h4>The actual document</h4>
-                <p>Sometimes people need the artifact, not another explanation. Ray finds authorized documents and, in the portal, proposes placing an upload through the existing guarded operation.</p>
-              </article>
-              <article class="mv-out mv-out-hot">
-                <div class="mo-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></div>
-                <h4>Honest handoff</h4>
-                <p>When data and knowledge do not resolve it, Ray proposes a structured support case with safe context, deduplicates repeats, rate-limits requests, and tracks resolution. Uncertainty becomes a useful handoff, not a hallucinated answer.</p>
-              </article>
-            </div>
-            <p class="mv-why"><span class="w-k">Why it matters</span>An assistant that always answers is an assistant you cannot trust. Knowing when to stop is the product.</p>
-          </li>
-          </ol>
+            <!-- MOVEMENT 02 -->
+            <article class="sys-move" data-mv="2" aria-labelledby="mv2-h">
+              <header class="sys-head">
+                <span class="sys-idx">Movement 02</span>
+                <h3 class="sys-title" id="mv2-h">Check who is asking</h3>
+                <p class="sys-claim">Permission is checked fresh, every single turn.</p>
+              </header>
+              <div class="sys-scene sc-authority" aria-hidden="true">
+                <div class="au-gate">
+                  <span class="au-k">This turn</span>
+                  <code class="au-code">visible_to(you)</code>
+                  <span class="au-fresh">fresh · never cached</span>
+                </div>
+                <div class="au-rows">
+                  <div class="au-row ok"><span class="ar-name">This project's stage &amp; blockers</span><span class="ar-state">visible</span></div>
+                  <div class="au-row ok"><span class="ar-name">Documents you can already see</span><span class="ar-state">visible</span></div>
+                  <div class="au-row off"><span class="ar-name">Another rep's projects</span><span class="ar-state">withheld</span></div>
+                  <div class="au-row off"><span class="ar-name">SSN, income, co-applicant data</span><span class="ar-state">never serialized</span></div>
+                </div>
+                <p class="au-note">Filtered in SQL <b>before</b> ranking. Ray inherits your authority; it never invents its own.</p>
+              </div>
+              <p class="sys-copy">Every project-bound turn reauthorizes, and links reauthorize again on click. Tools bind the viewer on the server. An old answer, or someone else's result, never becomes portable authority.</p>
+            </article>
+
+            <!-- MOVEMENT 03 -->
+            <article class="sys-move" data-mv="3" aria-labelledby="mv3-h">
+              <header class="sys-head">
+                <span class="sys-idx">Movement 03</span>
+                <h3 class="sys-title" id="mv3-h">Answer in context</h3>
+                <p class="sys-claim">The same answer, wherever the work is.</p>
+              </header>
+              <div class="sys-scene sc-context" aria-hidden="true">
+                <div class="cx-memory">
+                  <span class="cx-k">Server-owned memory · reloaded every turn</span>
+                  <ul class="cx-turns">
+                    <li><span>You</span>Why can't this advance?</li>
+                    <li><span>Ray</span>Title verification is still open.</li>
+                    <li><span>You</span>What did the reviewer ask for?</li>
+                  </ul>
+                </div>
+                <div class="cx-surfaces">
+                  <span class="cx-frame full">Full page</span>
+                  <span class="cx-frame drawer">Drawer</span>
+                  <span class="cx-frame popout">Pop-out</span>
+                  <span class="cx-frame ios">iOS</span>
+                </div>
+                <p class="cx-note">One thread, four surfaces. It survives navigation and reloads with its context intact.</p>
+              </div>
+              <p class="sys-copy">Operational questions build across turns, time, and surfaces. Ray runs and persists the conversation server-side, so the same thread rides along across the full page, a drawer, a pop-out, and the homeowner's phone.</p>
+            </article>
+
+            <!-- MOVEMENT 04 -->
+            <article class="sys-move" data-mv="4" aria-labelledby="mv4-h">
+              <header class="sys-head">
+                <span class="sys-idx">Movement 04</span>
+                <h3 class="sys-title" id="mv4-h">Act with permission</h3>
+                <p class="sys-claim">Ray can propose. It can never quietly act.</p>
+              </header>
+              <div class="sys-scene sc-action" aria-hidden="true">
+                <div class="ac-card">
+                  <div class="ac-top"><span>Proposed action</span><span class="ac-clock">expires in 15 min</span></div>
+                  <p class="ac-title">Place the updated title document</p>
+                  <div class="ac-flow">
+                    <span class="af-step">Propose</span>
+                    <span class="af-arrow" aria-hidden="true"></span>
+                    <span class="af-step hot">Confirm</span>
+                    <span class="af-arrow" aria-hidden="true"></span>
+                    <span class="af-step">Placed</span>
+                  </div>
+                </div>
+                <p class="ac-note"><span class="an-dot" aria-hidden="true"></span>Single-use · deduplicated · rate-limited · honest handoff when nothing resolves</p>
+              </div>
+              <p class="sys-copy">Ray retrieves authorized documents and proposes guarded actions that only run after an explicit confirm. Escalations become a structured support case with safe context, deduplicated and rate-limited. No destructive action is ever in the catalog.</p>
+            </article>
+
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ==================== LANE BRANCH + CUSTOMER RAY / iOS ==================== -->
-    <section class="ray-section ray-lanes" aria-labelledby="lanes-h">
+    <!-- ==================== ACT 5 · CUSTOMER LANE / iOS ==================== -->
+    <section class="ray-section ray-ios-section" aria-labelledby="ios-h">
       <div class="ray-wrap reveal">
-        <p class="ray-eyebrow"><span class="tick" aria-hidden="true"></span>One engine, two audiences</p>
-        <h2 class="ray-h2" id="lanes-h">The same Ray. A genuinely different reader.</h2>
-        <p class="ray-lead">Partner operators and homeowners ask different questions and are allowed to see different things. So the engine stays shared, and everything that touches authority splits in two. &ldquo;One universal assistant&rdquo; would be less useful and less safe.</p>
-
-        <div class="ray-lane-grid">
-          <article class="ray-lane stagger">
-            <div class="rl-top"><span class="rl-tag">Partner lane · portal</span></div>
-            <p class="rl-who">Sales reps, installers, reviewers, operators</p>
-            <ul class="rl-set">
-              <li>Why a project is blocked, and what clears the gate</li>
-              <li>Documents, review feedback, notes, payout status</li>
-              <li>Find a project document; propose an upload, guarded</li>
-              <li>Escalate to a structured support case</li>
-            </ul>
-            <div class="rl-foot"><span class="rl-corpus"><b>28</b> portal articles</span><span class="rl-sep" aria-hidden="true"></span><span>Partner toolbox</span></div>
-          </article>
-
-          <div class="ray-lane-split" aria-hidden="true"><span class="ls-core">Ray engine</span><span class="ls-line ls-a"></span><span class="ls-line ls-b"></span></div>
-
-          <article class="ray-lane stagger">
-            <div class="rl-top"><span class="rl-tag rl-tag-b">Customer lane · iOS</span></div>
-            <p class="rl-who">Homeowners, in the native app</p>
-            <ul class="rl-set">
-              <li>Subscription and billing, installation timeline</li>
-              <li>App how-tos, Sun Points and Challenges</li>
-              <li>Equipment, batteries, and VPP; their energy</li>
-              <li>Their own documents; a person for anything unresolved</li>
-            </ul>
-            <div class="rl-foot"><span class="rl-corpus"><b>40</b> customer articles</span><span class="rl-sep" aria-hidden="true"></span><span>Customer toolbox</span></div>
-          </article>
-        </div>
-        <p class="ray-lane-note"><span class="sq" aria-hidden="true"></span>Separate problem sets, separate corpora, separate toolboxes, separate privacy rules. Additive feature and component contracts, so old clients never silently break.</p>
-      </div>
-
-      <!-- Customer / iOS visual chapter -->
-      <div class="ray-wrap reveal ray-ios">
         <div class="ray-ios-grid">
-          <div class="ray-ios-copy stagger">
-            <p class="ray-eyebrow accent"><span class="tick" aria-hidden="true"></span>Customer Ray B · native iOS</p>
-            <h3 class="ray-ios-h">Answers a homeowner can hold.</h3>
-            <p class="ray-lead">On the phone, Ray does not just talk. It returns native cards: project status, the install schedule, an energy chart, the homeowner&rsquo;s own documents, and a support proposal. Same grounded engine, rendered as real components a homeowner can tap.</p>
+          <div class="ray-ios-copy">
+            <p class="ray-eyebrow accent"><span class="tick" aria-hidden="true"></span>Customer Ray · native iOS</p>
+            <h2 class="ray-h2" id="ios-h">A different reader. The same trust.</h2>
+            <p class="ray-lead">A homeowner asks different questions than an operator, and is allowed to see different things. So the engine stays shared and everything that touches authority splits in two: separate problem set, separate knowledge base, separate toolbox, separate privacy rules.</p>
+
             <ul class="ray-ios-lines">
-              <li><span class="k">Privacy</span><span class="v">A homeowner&rsquo;s own agreements, welcome package, and site survey. Never SSN, DOB, income, or co-applicant data.</span></li>
-              <li><span class="k">Binding</span><span class="v">Tools bind the current customer server-side and take no model-supplied ids.</span></li>
-              <li><span class="k">Handoff</span><span class="v">Support proposals are single-use, expire in 15 minutes, and confirm before anything runs.</span></li>
+              <li><span class="k">Their world</span><span class="v">Energy subscription and billing, install timeline, app how-tos, Sun Points, equipment and batteries, their own energy.</span></li>
+              <li><span class="k">Answers to hold</span><span class="v">Ray returns typed native components: <code>document_list</code>, <code>support_case_proposal</code>, <code>support_case_result</code>, project status, schedule, energy. Unknown types are ignored, so an old app build never breaks.</span></li>
+              <li><span class="k">Never shown</span><span class="v">SSN, date of birth, household income, or co-applicant data. A homeowner sees their own documents, and a person for anything unresolved.</span></li>
             </ul>
+            <p class="ray-ios-foot"><span class="sq" aria-hidden="true"></span>The mobile contract is additive and CI-gated: a change that could break a shipped app fails the build. Backwards compatibility is treated as product quality.</p>
           </div>
 
-          <div class="ray-ios-figure stagger">
-            <div class="ray-phone-lg" role="img" aria-label="Customer Ray on iOS returning native cards: project status, install schedule, energy, documents, and a support proposal">
+          <div class="ray-ios-figure">
+            <div class="ray-phone-lg" role="img" aria-label="Customer Ray on iOS returning native cards: project status, install schedule, energy, documents, and a support proposal that must be confirmed">
               <span class="rpl-notch" aria-hidden="true"></span>
               <div class="rpl-screen">
                 <div class="rpl-bar" aria-hidden="true">
@@ -531,63 +445,14 @@
             </div>
           </div>
         </div>
-
-        <!-- Mobile contract integrity -->
-        <div class="ray-contract stagger">
-          <div class="rct-head">
-            <p class="ray-eyebrow"><span class="tick" aria-hidden="true"></span>Shipping integrity</p>
-            <h3 class="rct-h">A finished feature that could break an old app is not shipped.</h3>
-          </div>
-          <p class="rct-lead">The customer lane extends a contract that native clients already depend on. New capabilities are additive, and a strict checker fails the build if an old iOS client could silently break.</p>
-          <ul class="ray-contract-list">
-            <li class="stagger"><span class="c-id">#1937</span><span class="c-tx">Restores shipped mobile-contract compatibility.</span></li>
-            <li class="stagger"><span class="c-id">#1938</span><span class="c-tx">Removes the accepted-break escape hatch, pins a strict compatibility check, and assigns a CODEOWNER for the mobile-contract gate.</span></li>
-          </ul>
-          <p class="rct-foot"><span class="sq" aria-hidden="true"></span>Backwards compatibility is product quality. The gate has no text-file override, so completeness cannot be argued past it.</p>
-        </div>
       </div>
     </section>
 
-    <!-- ==================== PRODUCT DECISIONS ==================== -->
-    <section class="ray-section ray-surfaces" aria-labelledby="dec-h">
-      <div class="ray-wrap reveal">
-        <p class="ray-eyebrow"><span class="tick" aria-hidden="true"></span>Product decisions</p>
-        <h2 class="ray-h2" id="dec-h">Three choices that shaped Ray.</h2>
-        <p class="ray-lead">Not a feature list. The calls that decided how it should feel to trust an assistant with real work.</p>
-
-        <div class="ray-decisions">
-          <article class="ray-decision stagger">
-            <div>
-              <div class="d-idx">Decision 01</div>
-              <h3 class="d-title">Stay in context</h3>
-            </div>
-            <p class="d-body">The answer is worth less if you have to leave the project to get it. Ray ships as a <b>persistent drawer and a pop-out</b>, and its turns run <b>server-side so they survive navigation</b>. You can move around the portal and the work Ray is doing does not fall on the floor.</p>
-          </article>
-
-          <article class="ray-decision stagger">
-            <div>
-              <div class="d-idx">Decision 02</div>
-              <h3 class="d-title">Narrate the work</h3>
-            </div>
-            <p class="d-body">A silent spinner asks for blind trust. Instead Ray shows the <b>actual tool step in plain language while the avatar moves</b>, then comes to rest on a settled answer <b>with its sources and freshness</b>. You watch the reasoning happen, so you can judge the result.</p>
-          </article>
-
-          <article class="ray-decision stagger">
-            <div>
-              <div class="d-idx">Decision 03</div>
-              <h3 class="d-title">Escalate honestly</h3>
-            </div>
-            <p class="d-body">When project data and knowledge cannot explain the issue, the right move is a person, not a confident guess. Ray hands off to <b>human support</b>, with <b>deduplication and rate limits</b> so one problem does not turn into a pile of tickets.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== EVIDENCE — completed system ==================== -->
+    <!-- ==================== ACT 6 · COMPLETE SYSTEM RECEIPTS ==================== -->
     <section class="ray-section ray-evidence" aria-labelledby="ev-h">
       <div class="ray-wrap reveal">
         <p class="ray-eyebrow on-dark"><span class="tick" aria-hidden="true"></span>Completion receipts</p>
-        <h2 class="ray-h2" id="ev-h">A complete system, on the record.</h2>
+        <h2 class="ray-h2 on-dark" id="ev-h">A complete system, on the record.</h2>
         <p class="ray-lead">Receipts from the completion stack and the source itself, not outcome analytics. Adoption, time saved, and model quality have not been measured, so none of it is claimed here.</p>
 
         <div class="ray-receipts">
@@ -598,7 +463,7 @@
           </div>
           <div class="ray-receipt stagger">
             <div class="r-num">20</div>
-            <div class="r-lbl">most recent turns reloaded on every customer request</div>
+            <div class="r-lbl">most recent turns reloaded on every request</div>
             <div class="ray-receipt-src">Server-owned memory</div>
           </div>
           <div class="ray-receipt stagger">
@@ -613,39 +478,19 @@
           </div>
         </div>
 
-        <ul class="ray-ledger">
-          <li class="stagger">
-            <span class="l-id">#1338</span>
-            <span><span class="l-name">Foundation</span><span class="l-desc">Shared Ray chat foundation, built by the Daylight team</span></span>
-            <span class="ray-status merged"><span class="d" aria-hidden="true"></span>Merged</span>
-          </li>
-          <li class="stagger">
-            <span class="l-id">#1562</span>
-            <span><span class="l-name">Portal productization</span><span class="l-desc">Mike-led operational productization of Ray across the origination portal</span></span>
-            <span class="ray-status merged"><span class="d" aria-hidden="true"></span>Merged</span>
-          </li>
-          <li class="stagger">
-            <span class="l-id">#1926</span>
-            <span><span class="l-name">Operational feedback</span><span class="l-desc">Review and rejection dimensions, live viewer-rescoped Sheets, semantic note search, per-project inquiry history, admin Activity Log, support resolution state</span></span>
-            <span class="ray-status complete"><span class="d" aria-hidden="true"></span>Feature complete</span>
-          </li>
-          <li class="stagger">
-            <span class="l-id">#1932</span>
-            <span><span class="l-name">Hybrid retrieval</span><span class="l-desc">BM25 + pgvector + reciprocal-rank fusion, portal and customer lane separation, permission filtering in SQL before vector ranking, lexical fallback</span></span>
-            <span class="ray-status complete"><span class="d" aria-hidden="true"></span>Feature complete</span>
-          </li>
-          <li class="stagger">
-            <span class="l-id">#1935</span>
-            <span><span class="l-name">Customer Ray B</span><span class="l-desc">Homeowner problem set, toolbox, and privacy policy on the shared engine, help-center citations, customer documents, support propose and confirm, native iOS components, persisted customer conversations</span></span>
-            <span class="ray-status complete"><span class="d" aria-hidden="true"></span>Feature complete</span>
-          </li>
-          <li class="stagger">
-            <span class="l-id">#1937 / #1938</span>
-            <span><span class="l-name">Mobile contract integrity</span><span class="l-desc">Restores shipped mobile-contract compatibility, removes the accepted-break escape hatch, pins a strict compatibility check, and assigns a CODEOWNER for the gate</span></span>
-            <span class="ray-status complete"><span class="d" aria-hidden="true"></span>Feature complete</span>
-          </li>
-        </ul>
-        <p class="ray-ledger-note"><span class="sq" aria-hidden="true"></span>&ldquo;Feature complete&rdquo; describes the scope delivered, not GitHub merge state. &ldquo;Merged&rdquo; reflects the repository.</p>
+        <div class="ray-shipped">
+          <p class="ray-shipped-k">Shipped as a reviewed stack of pull requests</p>
+          <ul class="ray-prs">
+            <li class="stagger"><span class="pr-id">#1338</span><span class="pr-nm">Ask Ray on the PM dashboard</span><span class="pr-st merged">Merged</span></li>
+            <li class="stagger"><span class="pr-id">#1562</span><span class="pr-nm">Ray AI portal support (beta)</span><span class="pr-st merged">Merged</span></li>
+            <li class="stagger"><span class="pr-id">#1926</span><span class="pr-nm">Ask Ray beta improvements</span><span class="pr-st open">In stack</span></li>
+            <li class="stagger"><span class="pr-id">#1932</span><span class="pr-nm">Semantic retrieval with pgvector</span><span class="pr-st open">In stack</span></li>
+            <li class="stagger"><span class="pr-id">#1935</span><span class="pr-nm">Customer Ray on iOS</span><span class="pr-st open">In stack</span></li>
+            <li class="stagger"><span class="pr-id">#1937</span><span class="pr-nm">Restore mobile agreement compatibility</span><span class="pr-st open">In stack</span></li>
+            <li class="stagger"><span class="pr-id">#1938</span><span class="pr-nm">Remove mobile contract override escape hatch</span><span class="pr-st open">In stack</span></li>
+          </ul>
+          <p class="ray-prs-note"><span class="sq" aria-hidden="true"></span>Built on Daylight's shared Ray chat foundation, then completed: the portal operational assistant, hybrid retrieval, and the homeowner iOS lane, each with its own knowledge, tools, and privacy. The pull requests are the evidence; the feature is the point.</p>
+        </div>
       </div>
     </section>
 
@@ -655,7 +500,7 @@
         <p class="ray-eyebrow"><span class="tick" aria-hidden="true"></span>The lesson</p>
         <h2 class="ray-h2" id="close-h">Usefulness was the easy half.</h2>
         <p class="ray-lead">Getting an assistant to say something helpful is not hard anymore. The hard part was everything around the answer. Permission, so it only ever sees what the viewer sees. Grounding, so every claim points at a source that actually ran. Action boundaries, so it can propose but never quietly execute. And graceful escalation, so it knows when to stop and hand the problem to a person.</p>
-        <p class="ray-lead">Ray started from the team's shared chat foundation. I led the completion: turning that into a system the portal could trust with real projects, then a second homeowner lane on native iOS, each with its own knowledge, tools, and privacy, all on the surfaces where the work already happens. That is the part I am proud of.</p>
+        <p class="ray-lead">Ray started from the team's shared chat foundation. I led the completion: a system the portal could trust with real projects, then a second homeowner lane on native iOS, each with its own knowledge, tools, and privacy, on the surfaces where the work already happens. Trust, not novelty, was the hard part. That is the part I am proud of.</p>
 
         <div class="ray-closing-links">
           <a class="ray-outlink solid" href="daylight.html">&larr;&nbsp;Back to the Daylight case study</a>
@@ -673,6 +518,6 @@
   </footer>
 
   <script src="js/daylight-gate.js" defer></script>
-  <script src="js/ray-case-study.js?v=3" defer></script>
+  <script src="js/ray-case-study.js?v=6" defer></script>
 </body>
 </html>
