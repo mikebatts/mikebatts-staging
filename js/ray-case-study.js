@@ -972,6 +972,7 @@
   function init() {
     var docEl = document.documentElement;
     try {
+      setupVisualViewport();
       setupReveals();
       docEl.classList.add('js-on');
       setupNav();
@@ -984,6 +985,22 @@
       // Fail open: any init exception must never leave content stranded hidden.
       docEl.classList.remove('js-on');
     }
+  }
+
+  function setupVisualViewport() {
+    var viewport = window.visualViewport;
+    if (!viewport) { return; }
+    var initialHeight = viewport.height;
+    var update = function () {
+      docElStyle('--ray-vvh', viewport.height + 'px');
+      document.documentElement.classList.toggle('keyboard-open', initialHeight - viewport.height > 140);
+    };
+    function docElStyle(name, value) {
+      document.documentElement.style.setProperty(name, value);
+    }
+    viewport.addEventListener('resize', update, { passive: true });
+    viewport.addEventListener('scroll', update, { passive: true });
+    update();
   }
 
   if (document.readyState === 'loading') {

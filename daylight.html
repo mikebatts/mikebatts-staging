@@ -2,46 +2,39 @@
 <html lang="en" class="dl-page" data-wf-site="5dbdf5d45ad64f500c81ca1f">
 <head>
   <meta charset="utf-8">
-  <title>Daylight · A field guide to a home becoming a power plant · Mike Battaglia</title>
+  <title>Daylight · The operating system for a home becoming a power plant · Mike Battaglia</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Daylight is the consumer energy platform for going solar. A case study on the products Mike Battaglia designed and built: the origination portal, the homeowner iOS app, billing, partner payments, and the Ray support layer, held together by one shared project state.">
+  <meta name="description" content="Daylight is the consumer energy platform for going solar. Mike Battaglia designed and built the product system from origination and Ray through homeowner iOS, billing, and partner payments.">
   <meta name="theme-color" content="#FFF7E9">
   <meta name="author" content="Mike Battaglia">
-
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Daylight · A field guide to a home becoming a power plant">
-  <meta property="og:description" content="The consumer energy platform for going solar. The products Mike Battaglia designed and built, from the first agreement to power on, and every month after.">
+  <meta property="og:title" content="Daylight · The operating system for a home becoming a power plant">
+  <meta property="og:description" content="One coherent product from the first agreement to power on, and every month after. Designed and built by Mike Battaglia.">
   <meta property="og:image" content="images/daylight-cover-poster.jpg">
   <meta property="og:site_name" content="Mike Battaglia">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Daylight · A field guide to a home becoming a power plant">
+  <meta name="twitter:title" content="Daylight · A home becoming a power plant">
   <meta name="twitter:description" content="The consumer energy platform for going solar. Designed and built by Mike Battaglia.">
   <meta name="twitter:image" content="images/daylight-cover-poster.jpg">
-
   <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon">
   <link href="images/webclip.png" rel="apple-touch-icon">
-
-  <!-- Self-hosted Daylight brand fonts: Feature Deck (display), Aeonik Pro (body/UI), ABC Social Mono (labels) -->
   <link rel="preload" href="fonts/FeatureDeck-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
   <link rel="preload" href="fonts/AeonikPro-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
   <link rel="preload" href="fonts/AeonikPro-500.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-  <link rel="preload" href="css/daylight-case-study.css?v=22" as="style">
-  <link href="css/daylight-case-study.css?v=22" rel="stylesheet" type="text/css">
+  <link rel="preload" href="css/daylight-case-study.css?v=30" as="style">
+  <link href="css/daylight-case-study.css?v=30" rel="stylesheet" type="text/css">
   <link href="css/daylight-gate.css?v=3" rel="stylesheet" type="text/css">
-
-  <!-- Privacy gate: critical lock rules + pre-paint lock, before first paint -->
   <style>
     html.dl-locked{overflow:hidden}
     html.dl-locked body > *:not(#dl-gate){visibility:hidden}
     #dl-gate{display:none}
     html.dl-locked #dl-gate{display:flex}
   </style>
-  <script type="text/javascript">
+  <script>
     try{if(sessionStorage.getItem('dl-unlocked')!=='1'){document.documentElement.classList.add('dl-locked');}}catch(e){document.documentElement.classList.add('dl-locked');}
   </script>
 </head>
 <body>
-  <!-- ===================== PRIVACY GATE (shared) ===================== -->
   <div id="dl-gate" role="dialog" aria-modal="true" aria-labelledby="dl-gate-t">
     <div class="dl-gate-box">
       <div class="dl-gate-mark">
@@ -53,477 +46,272 @@
       <form class="dl-gate-form" id="dl-gate-form">
         <label class="dl-gate-field">
           <span class="dl-gate-lbl">Password</span>
-          <input id="dl-pass" name="dl-pass" type="password" autocomplete="current-password"
-                 autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Enter password&hellip;">
+          <input id="dl-pass" name="dl-pass" type="password" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Enter password&hellip;">
         </label>
         <p class="dl-gate-err" id="dl-err" role="alert" aria-live="assertive"></p>
-        <div class="dl-gate-row">
-          <button id="dl-go" type="submit">View case study &rarr;</button>
-        </div>
+        <div class="dl-gate-row"><button id="dl-go" type="submit">View case study &rarr;</button></div>
       </form>
       <a class="dl-gate-back" href="index.html">&larr;&nbsp;Return to mikebatts.net</a>
     </div>
   </div>
 
   <a class="dl-skip" href="#dl-main">Skip to content</a>
+  <div class="dl-current" aria-hidden="true"><span class="dl-current-bar"></span></div>
 
-  <!-- the one reading current: the single progress language for the page -->
-  <div class="dl-current" aria-hidden="true"><span class="dl-current-bar" id="dl-current-bar"></span></div>
+  <nav class="dl-nav" id="dl-nav" aria-label="Case study">
+    <div class="dl-wrap dl-nav-in">
+      <a class="dl-nav-home" href="index.html">
+        <img src="images/avi.png" alt="" width="25" height="25">
+        <span>Mike Battaglia</span>
+      </a>
+      <div class="dl-nav-context">
+        <img src="images/daylight-logo-brown.svg" alt="Daylight" width="90" height="18">
+        <span>Consumer energy platform</span>
+      </div>
+    </div>
+  </nav>
 
-  <!-- ============================ HERO ============================ -->
   <header class="dl-hero" aria-label="Introduction">
-    <div class="dl-wrap">
-      <nav class="dl-topnav" aria-label="Case study">
-        <a class="dl-topback" href="index.html">
-          <img class="avi" src="images/avi.png" alt="" width="26" height="26" loading="lazy">
-          <span>Mike Battaglia</span>
-        </a>
-        <span class="dl-topmeta">Consumer energy platform</span>
-      </nav>
+    <div class="dl-wrap dl-hero-copy">
+      <p class="dl-kicker"><span class="dl-tick" aria-hidden="true"></span>Daylight · 2024 to present</p>
+      <h1 class="dl-hero-title">
+        <span class="dl-line"><span>A home becoming</span></span>
+        <span class="dl-line"><span>a <em>power plant</em>.</span></span>
+      </h1>
+      <div class="dl-hero-intro">
+        <p>Going solar takes one homeowner through a network of sellers, reviewers, builders, utilities, documents, approvals, and money. I designed and built the product system that makes all of it feel like one calm experience.</p>
+        <div class="dl-hero-meta">
+          <span>Senior PM and founding product engineer</span>
+          <span>Product, design, and engineering</span>
+          <a href="https://godaylight.com" target="_blank" rel="noopener noreferrer">godaylight.com&nbsp;&#8599;</a>
+        </div>
+      </div>
     </div>
 
-    <div class="dl-wrap dl-hero-inner">
-      <div class="dl-hero-head">
-        <div class="dl-masthead dl-anim">
-          <img class="dl-wordmark" src="images/daylight-logo-brown.svg" alt="Daylight" width="150" height="28">
-          <span class="dl-masthead-rule" aria-hidden="true"></span>
-          <span class="dl-masthead-tag">Field guide</span>
-        </div>
-        <h1 class="dl-hero-title">
-          <span class="dl-line"><span>A home becoming</span></span>
-          <span class="dl-line"><span>a <em>power plant</em>.</span></span>
-        </h1>
+    <div class="dl-hero-stage" id="dl-hero-stage">
+      <div class="dl-hero-media">
+        <img class="dl-hero-poster" src="images/daylight-hero-poster.jpg" alt="" width="1600" height="900" aria-hidden="true">
+        <video id="dl-hero-video" poster="images/daylight-hero-poster.jpg" muted loop playsinline autoplay preload="metadata" aria-label="A Daylight home with rooftop solar, live production, and battery readings.">
+          <source src="images/daylight-hero-loop.mp4" type="video/mp4">
+        </video>
       </div>
-
-      <div class="dl-hero-body">
-      <div class="dl-hero-copy">
-        <p class="dl-hero-say dl-anim">Solar turns a house into a small power plant. I designed and built the products that carry one home through it, from the first agreement to the day the panels switch on, and every month after.</p>
-        <div class="dl-hero-meta dl-anim">
-          <span class="dl-hero-role">2024&ndash;Present</span>
-          <span class="dl-hero-role">Senior PM and product engineer</span>
-          <a class="dl-extlink" href="https://godaylight.com" target="_blank" rel="noopener noreferrer">godaylight.com &#8599;</a>
-        </div>
+      <div class="dl-energy-window" aria-hidden="true">
+        <span class="dew-label">Home now</span>
+        <span class="dew-value">4.8 <small>kW</small></span>
+        <span class="dew-state">Producing more than it uses</span>
+        <span class="dew-line"><i></i></span>
       </div>
-
-      <figure class="dl-hero-stage">
-        <div class="dl-stage-frame">
-          <img class="dl-stage-poster" src="images/daylight-hero-poster.jpg" alt="" width="1600" height="900" aria-hidden="true">
-          <video class="dl-stage-video" id="dl-hero-video"
-                 poster="images/daylight-hero-poster.jpg"
-                 muted loop playsinline autoplay preload="metadata"
-                 aria-label="A Daylight home: rooftop solar in daylight, with the orange energy window and live production and backup readings moving across the scene.">
-            <source src="images/daylight-hero-loop.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="dl-stage-device dl-anim">
-          <div class="dl-device dl-device--sm">
-            <span class="dl-device-notch" aria-hidden="true"></span>
-            <img class="dl-device-shot" src="images/ios-overview.png" alt="The Daylight iOS app: a home with rooftop solar, live battery and solar readings, and a plain-language note explaining the day's energy." width="331" height="720" loading="eager">
-          </div>
-        </div>
-        <figcaption class="dl-stage-cap dl-anim">
-          <span><b>The homeowner app.</b></span>
-          <span>One roof, read back in plain language.</span>
-        </figcaption>
+      <figure class="dl-hero-phone">
+        <div class="dl-phone"><span class="dl-phone-notch"></span><img src="images/ios-overview.png" alt="Daylight iOS home screen with live solar and battery readings." width="331" height="720"></div>
+        <figcaption>The same home, made legible.</figcaption>
       </figure>
-      </div>
     </div>
   </header>
 
   <main id="dl-main">
-
-    <!-- ==================== BRIEF ==================== -->
-    <section class="dl-act dl-brief" aria-labelledby="br-h">
-      <div class="dl-wrap dl-brief-grid">
-        <div class="dl-brief-head">
-          <p class="dl-kicker"><span class="dl-tick" aria-hidden="true"></span>At a glance</p>
-          <h2 class="dl-h2" id="br-h">One coherent product on top of a five party machine.</h2>
-          <p class="dl-lead">Daylight is the consumer energy platform for going solar. I joined as a founding product engineer and have designed and architected the platform end to end. The job was to make a fragmented, trust heavy lifecycle feel like a single calm product to everyone inside it.</p>
+    <section class="dl-section dl-dossier" aria-labelledby="brief-h">
+      <div class="dl-wrap dl-dossier-grid">
+        <div class="dl-dossier-copy dl-reveal">
+          <p class="dl-kicker"><span class="dl-tick" aria-hidden="true"></span>The brief</p>
+          <h2 class="dl-h2" id="brief-h">One coherent product on top of a five-party machine.</h2>
+          <p class="dl-lead">The hard problem was never one screen. It was orchestration: a single trustworthy project state, a clear next action for every participant, and handoffs that could not quietly drift into email and spreadsheets.</p>
         </div>
-        <dl class="dl-brief-list dl-stagger">
-          <div class="dl-brief-row"><dt>Company</dt><dd>Daylight, consumer energy platform for residential solar</dd></div>
-          <div class="dl-brief-row"><dt>Years</dt><dd>2024 to present</dd></div>
-          <div class="dl-brief-row"><dt>Role</dt><dd>Senior PM and product engineer. Founding product engineer and manager</dd></div>
-          <div class="dl-brief-row"><dt>Surfaces owned</dt><dd>Origination portal, homeowner iOS app, billing, partner payments, the design and operating system</dd></div>
-          <div class="dl-brief-row"><dt>Team</dt><dd>A small team organized into cross functional pods, working in parallel</dd></div>
-          <div class="dl-brief-row"><dt>The problem</dt><dd>Move a home through sale, verification, design, permitting, construction, and activation without the deal stalling, and without the homeowner ever feeling the machinery</dd></div>
+        <dl class="dl-dossier-list dl-reveal">
+          <div><dt>Company</dt><dd>Daylight, a consumer energy platform for residential solar</dd></div>
+          <div><dt>My role</dt><dd>Senior PM, founding product engineer, product designer, and manager</dd></div>
+          <div><dt>Scope</dt><dd>Ray, origination, homeowner iOS, billing, partner payments, and the operating system</dd></div>
+          <div><dt>Thesis</dt><dd>Model the machine once. Give every person a calm view of the same truth.</dd></div>
         </dl>
       </div>
     </section>
 
-    <!-- ==================== FEATURED PRODUCT: RAY ==================== -->
-    <section class="dl-act dl-ray dl-ray-feature" aria-labelledby="ry-h">
-      <div class="dl-wrap">
-        <div class="dl-ray-feature-head dl-reveal">
-          <p class="dl-kicker"><span class="dl-tick" aria-hidden="true"></span>Featured product · Ray</p>
-          <span class="dl-ray-index">01 of 05</span>
+    <section class="dl-section dl-ray" aria-labelledby="ray-h">
+      <div class="dl-wrap dl-ray-head dl-reveal">
+        <div>
+          <p class="dl-kicker light"><span class="dl-tick" aria-hidden="true"></span>Featured product · Ray</p>
+          <h2 class="dl-h2 light" id="ray-h">An answer worth trusting.</h2>
         </div>
+        <p class="dl-lead light">I conceived, designed, and built Ray end to end: a grounded support system that reads the live project, cites its sources, respects the viewer’s access, and asks before it acts.</p>
       </div>
-      <div class="dl-wrap dl-ray-grid">
-        <div class="dl-ray-figure dl-reveal">
-          <div class="dl-avatar">
-            <span class="dl-avatar-field" aria-hidden="true"></span>
-            <span class="dl-avatar-ring" aria-hidden="true"></span>
-            <div class="dl-avatar-disc">
-              <video id="dl-ray-video" src="images/ray-avatar-loop.mp4" poster="images/ray-avatar-poster.png"
-                     muted loop playsinline autoplay preload="metadata" aria-hidden="true" tabindex="-1"></video>
-              <img class="poster-fallback" src="images/ray-avatar-poster.png" alt="" width="480" height="480" aria-hidden="true">
+
+      <a class="dl-ray-product dl-reveal" href="ray.html" aria-label="Explore the Ray case study">
+        <div class="dl-ray-orbit" aria-hidden="true">
+          <video id="dl-ray-video" src="images/ray-avatar-loop.mp4" poster="images/ray-avatar-poster.png" muted loop playsinline autoplay preload="metadata" tabindex="-1"></video>
+        </div>
+        <div class="dl-ray-surface">
+          <div class="drs-head">
+            <span class="drs-id"><img src="images/ray-avatar-poster.png" alt="" width="32" height="32"><span><b>Ray</b><small>Maple Street residence · PPA-4021</small></span></span>
+            <span class="drs-grounded">Grounded</span>
+          </div>
+          <div class="drs-body" id="dl-rayflow">
+            <p class="drs-question">Why hasn’t my project moved forward?</p>
+            <div class="drs-answer">
+              <p>Title verification is still open. Your agreement is signed and identity is verified. The reviewer is waiting on one current title document.</p>
+              <div class="drs-result"><span><small>Blocker</small><b>Title verification</b></span><span><small>Owner</small><b>Assigned reviewer</b></span><span><small>Next action</small><b>Upload current title</b></span></div>
+              <div class="drs-source"><span>Origination playbook</span><small>live project data · checked now</small></div>
             </div>
           </div>
+          <div class="drs-action"><span><small>Proposed next step</small><b>Review the required document before uploading</b></span><i>Continue&nbsp;&rarr;</i></div>
         </div>
-        <div class="dl-ray-copy dl-reveal">
-          <h2 class="dl-h2" id="ry-h">An answer worth trusting.</h2>
-          <p class="dl-lead">Ray is Daylight&rsquo;s grounded support system across the partner portal and homeowner app. It reads the live project state, answers in plain language, shows where the answer came from, respects the viewer&rsquo;s access, and asks before it acts.</p>
-          <div class="dl-ray-window">
-            <div class="dl-ray-window-head">
-              <span class="dl-rt-av" aria-hidden="true"><img src="images/ray-avatar-poster.png" alt="" width="28" height="28"></span>
-              <span><b>Ray</b><small>Maple Street residence · PPA-4021</small></span>
-              <span class="dl-ray-grounded">Grounded</span>
-            </div>
-            <div class="dl-ray-thread" id="dl-rayflow" role="img" aria-label="A grounded Ray exchange: the homeowner asks why the project has not moved; Ray answers that title verification is still open, cites the origination playbook against live project data, and offers the exact next step or a person.">
-              <div class="dl-rt-ask">
-                <p>Why hasn&rsquo;t my project moved forward?</p>
+        <div class="dl-ray-link"><span>See how Ray was built and iterated after beta</span><b>Explore the case study&nbsp;&rarr;</b></div>
+      </a>
+    </section>
+
+    <section class="dl-section dl-system" aria-labelledby="system-h">
+      <div class="dl-wrap dl-system-head dl-reveal">
+        <p class="dl-kicker"><span class="dl-tick" aria-hidden="true"></span>The system problem</p>
+        <h2 class="dl-h2" id="system-h">Trust, in a category built on distrust.</h2>
+        <p class="dl-lead">Solar is construction on someone’s roof, financed across decades. It crosses inspections, township approvals, utility permission, contractors, documents, and money moving between companies. Forward motion has to be earned, phase by phase.</p>
+      </div>
+
+      <div class="dl-life-wrap" id="dl-life-wrap">
+        <ol class="dl-life" id="dl-life">
+          <li class="is-active" data-phase="0"><button type="button"><span>Origination</span><small>Shape the project</small></button><div class="dl-phase-detail"><p>Assign the customer and installer, set the system and pricing, then generate the agreement.</p><span>Gate · all origination checks pass</span></div></li>
+          <li data-phase="1"><button type="button"><span>Verification</span><small>Establish trust</small></button><div class="dl-phase-detail"><p>Sign the agreement, verify identity and title, and resolve every exception before construction.</p><span>Gate · reviewer approves the package</span></div></li>
+          <li data-phase="2"><button type="button"><span>Design</span><small>Make it buildable</small></button><div class="dl-phase-detail"><p>Turn a sale into a surveyed, engineered system and reconcile what was sold with what can be built.</p><span>Gate · as designed matches as sold</span></div></li>
+          <li data-phase="3"><button type="button"><span>Permitting</span><small>Clear the path</small></button><div class="dl-phase-detail"><p>File with the local authority and utility, then carry every comment back into the shared project.</p><span>Gate · filings approved</span></div></li>
+          <li data-phase="4"><button type="button"><span>Installation</span><small>Build the system</small></button><div class="dl-phase-detail"><p>Install the equipment, document the work, pass inspection, and assemble a clean closeout package.</p><span>Gate · inspection passes</span></div></li>
+          <li data-phase="5"><button type="button"><span>Power on</span><small>Begin the relationship</small></button><div class="dl-phase-detail"><p>Receive utility permission, start billing, and turn a construction project into a living energy product.</p><span>Gate · billing may begin</span></div></li>
+        </ol>
+        <div class="dl-life-current" aria-hidden="true"><span></span></div>
+      </div>
+    </section>
+
+    <section class="dl-section dl-product-story" aria-labelledby="product-h">
+      <div class="dl-wrap dl-product-head dl-reveal">
+        <p class="dl-kicker"><span class="dl-tick" aria-hidden="true"></span>One project · every surface</p>
+        <h2 class="dl-h2" id="product-h">Complex underneath. Calm wherever the work happens.</h2>
+        <p class="dl-lead">Every participant reads and writes to the same project. The interface changes with the job, but the anatomy stays familiar: context, work, evidence, action.</p>
+      </div>
+
+      <div class="dl-workbench-scroll" id="dl-workbench-scroll">
+        <div class="dl-workbench" id="dl-workbench">
+          <div class="dl-workbench-nav" role="tablist" aria-label="Product surfaces">
+            <button class="is-active" type="button" role="tab" aria-selected="true" data-scene="portal"><span>Operator portal</span><small>Coordinate the build</small></button>
+            <button type="button" role="tab" aria-selected="false" data-scene="app"><span>Homeowner iOS</span><small>Understand the home</small></button>
+            <button type="button" role="tab" aria-selected="false" data-scene="money"><span>Money movement</span><small>Keep the promise</small></button>
+          </div>
+
+          <div class="dl-workbench-stage">
+            <article class="dl-scene is-active" data-scene-panel="portal" aria-label="Origination portal">
+              <div class="dl-scene-copy">
+                <span class="dl-scene-label">Origination portal · B2B web</span>
+                <h3>The operating surface for everyone but the homeowner.</h3>
+                <p>One project dossier carries the phase, documents, exceptions, reviewer feedback, and exact next action. Nothing advances until its gate is genuinely complete.</p>
               </div>
-              <div class="dl-rt-ans">
-                <div class="dl-rt-body">
-                  <p class="dl-rt-line">Title verification is still open. Everything else is done: your signed agreement is in, and your identity is verified.</p>
-                  <p class="dl-rt-cite"><span class="dl-rt-chip">Origination playbook</span><span class="dl-rt-fresh">live project data, checked now</span></p>
+              <div class="portal-shell">
+                <aside class="portal-rail" aria-hidden="true"><b>daylight</b><i class="on"></i><i></i><i></i><i></i><span>MB</span></aside>
+                <div class="portal-main">
+                  <div class="portal-top"><span><b>Maple Street residence</b><small>PPA-4021 · Document verification</small></span><button type="button">Ask Ray</button></div>
+                  <div class="portal-context"><div><small>Project owner</small><b>Bright Roof Solar</b></div><div><small>Current gate</small><b>Title verification</b></div><div><small>Target install</small><b>September 3</b></div></div>
+                  <div class="portal-work">
+                    <div class="portal-checks">
+                      <div class="portal-title"><span><small>Review package</small><b>3 of 4 requirements complete</b></span><i>75%</i></div>
+                      <ul>
+                        <li class="done"><span></span><b>Signed agreement</b><small>Verified</small></li>
+                        <li class="done"><span></span><b>Identity verification</b><small>Verified</small></li>
+                        <li class="done"><span></span><b>City disclosure</b><small>Verified</small></li>
+                        <li class="next"><span></span><b>Current title document</b><small>Required</small></li>
+                      </ul>
+                    </div>
+                    <aside class="portal-review"><small>Reviewer feedback</small><h4>One clear way forward.</h4><p>The uploaded title is older than the allowed window. Request a current document before approving this phase.</p><button type="button">Request document</button></aside>
+                  </div>
+                  <div class="portal-action"><span><small>Next project action</small><b>Resolve title verification</b></span><button type="button">Open review&nbsp;&rarr;</button></div>
                 </div>
               </div>
-            </div>
-            <div class="dl-ray-window-action"><span>Next step</span><b>Upload a current title document, or bring in a person.</b></div>
+            </article>
+
+            <article class="dl-scene" data-scene-panel="app" aria-label="Homeowner iOS app">
+              <div class="dl-scene-copy">
+                <span class="dl-scene-label">Homeowner app · Native iOS</span>
+                <h3>The home’s energy, made legible.</h3>
+                <p>The homeowner sees the same project without the machinery: the install timeline before power on, then production, storage, bills, and support in language that feels native to the home.</p>
+              </div>
+              <div class="ios-family">
+                <div class="ios-focus-copy"><span>Home and energy</span><h4>The day, read back in one sentence.</h4><p>Battery and solar sit directly on the home, with the detail one gesture away.</p><div class="ios-tabs" role="tablist"><button class="is-active" type="button" data-phone="0">Overview</button><button type="button" data-phone="1">Energy</button><button type="button" data-phone="2">Payments</button></div></div>
+                <div class="ios-stack">
+                  <figure class="ios-device is-active" data-phone-panel="0"><div class="dl-phone"><span class="dl-phone-notch"></span><img src="images/ios-overview.png" alt="Daylight iOS overview with live solar and battery readings." width="331" height="720"></div></figure>
+                  <figure class="ios-device" data-phone-panel="1"><div class="dl-phone"><span class="dl-phone-notch"></span><img src="images/ios-breakdown.png" alt="Daylight iOS energy breakdown with production and storage detail." width="331" height="720"></div></figure>
+                  <figure class="ios-device" data-phone-panel="2"><div class="dl-phone"><span class="dl-phone-notch"></span><img src="images/ios-payments.png" alt="Daylight iOS payment screen with balance and autopay." width="331" height="720"></div></figure>
+                </div>
+              </div>
+            </article>
+
+            <article class="dl-scene" data-scene-panel="money" aria-label="Billing and partner payments">
+              <div class="dl-scene-copy">
+                <span class="dl-scene-label">Billing and partner payments</span>
+                <h3>One promise. Money moving in both directions.</h3>
+                <p>The homeowner gets one calm monthly bill. Behind it, milestone invoices move through review, capital approval, and disbursement with versioned banking and a complete audit trail.</p>
+              </div>
+              <div class="money-family">
+                <section class="money-card">
+                  <header><span><small>Homeowner</small><b>September statement</b></span><i>Autopay on</i></header>
+                  <div class="money-total"><small>Amount due</small><strong>$59.66</strong><span>September 18</span></div>
+                  <div class="money-formula"><span><small>Contract rate</small><b>$0.138 / kWh</b></span><i>&times;</i><span><small>Expected production</small><b>432.3 kWh</b></span></div>
+                  <footer><span><small>Payment method</small><b>Bank ending 4021</b></span><button type="button">View statement</button></footer>
+                </section>
+                <section class="money-card partner">
+                  <header><span><small>Partner</small><b>Installation milestone</b></span><i>Ready to pay</i></header>
+                  <div class="money-total"><small>Approved payout</small><strong>$18,420</strong><span>Maple Street · Install complete</span></div>
+                  <div class="payout-chain"><span class="done"><i></i><small>Operations</small></span><span class="done"><i></i><small>Capital</small></span><span class="current"><i></i><small>Disbursement</small></span><span><i></i><small>Paid</small></span></div>
+                  <footer><span><small>Audit trail</small><b>7 project events attached</b></span><button type="button">Review payout</button></footer>
+                </section>
+              </div>
+            </article>
           </div>
-          <div class="dl-ray-actions">
-            <a class="dl-btn solid" href="ray.html">Explore the Ray case study &rarr;</a>
-            <span class="dl-ray-note">Built on the team&rsquo;s shared Ray foundation. I led its completion across the origination portal and homeowner app.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="dl-section dl-craft" aria-labelledby="craft-h">
+      <div class="dl-wrap">
+        <div class="dl-craft-head dl-reveal">
+          <p class="dl-kicker"><span class="dl-tick" aria-hidden="true"></span>The connective tissue</p>
+          <h2 class="dl-h2" id="craft-h">A design system and an operating system, built together.</h2>
+          <p class="dl-lead">I stayed inside the work: designing the surfaces, architecting the backend, prototyping critical interactions, writing the systems briefs, and building the review discipline that let parallel pods move quickly without fragmenting the product.</p>
+        </div>
+        <div class="dl-family-spec dl-reveal">
+          <div class="family-swatch">
+            <span class="fs-label">Material palette</span>
+            <div><i style="--c:#F66F00"></i><i style="--c:#FCCC3C"></i><i style="--c:#4C2806"></i><i style="--c:#FFF7E9"></i></div>
           </div>
+          <div class="family-type"><span class="fs-label">Display</span><b>Feature Deck</b><small>A warm editorial voice for consequential moments.</small></div>
+          <div class="family-type interface"><span class="fs-label">Interface</span><b>Aeonik Pro</b><small>Calm, familiar, and precise across web and native iOS.</small></div>
+          <div class="family-anatomy"><span class="fs-label">Shared anatomy</span><ol><li>Context</li><li>Work</li><li>Evidence</li><li>Action</li></ol></div>
         </div>
       </div>
     </section>
 
-    <!-- ==================== THE SYSTEM PROBLEM ==================== -->
-    <section class="dl-act dl-bg-beige2 dl-problem" aria-labelledby="pr-h">
-      <div class="dl-wrap">
-        <div class="dl-measure dl-reveal">
-          <p class="dl-kicker"><span class="dl-tick" aria-hidden="true"></span>Why solar is hard</p>
-          <h2 class="dl-h2" id="pr-h">Trust, in a category built on distrust.</h2>
-          <p class="dl-lead">Going solar is one of the largest trust decisions a homeowner ever makes, in a category famous for bad sales and broken promises. It is not signing a lease on a car. It is construction on your roof: inspections, township approvals, utility permission to operate, contractors, documents, financing, and money moving between five parties over a decades long agreement.</p>
-          <p class="dl-lead">The hard problem was never any single screen. It was orchestration. How do you move a home through every phase, with a sales rep, a reviewer, an installer, and a homeowner all playing their part at once, without the deal stalling and without the homeowner ever feeling the machinery. Every phase has its own owner, its own failure modes, and its own paperwork.</p>
-        </div>
+    <section class="dl-section dl-outcomes" aria-labelledby="outcome-h">
+      <div class="dl-outcomes-media" aria-hidden="true">
+        <img src="images/daylight-hero-poster.jpg" alt="" width="1600" height="900">
       </div>
-
-      <!-- the six gated phases, threaded by the current line -->
-      <div class="dl-wrap">
-        <div class="dl-life dl-reveal" data-current>
-          <div class="dl-life-head">
-            <p class="dl-eyebrow-serif">The lifecycle</p>
-            <p class="dl-life-title">Forward motion is earned, phase by phase. A project cannot advance until its phase is genuinely complete.</p>
-          </div>
-          <ol class="dl-life-rail dl-stagger">
-            <li class="dl-phase">
-              <span class="dl-phase-node" aria-hidden="true"></span>
-              <div class="dl-phase-body">
-                <p class="dl-phase-name">Origination</p>
-                <p class="dl-phase-line">Customer and installer are assigned, the system and pricing are set, and the agreement is generated.</p>
-                <p class="dl-phase-gate"><span class="dl-gate-flag">Gate</span>All origination checks pass</p>
-              </div>
-            </li>
-            <li class="dl-phase">
-              <span class="dl-phase-node" aria-hidden="true"></span>
-              <div class="dl-phase-body">
-                <p class="dl-phase-name">Document verification</p>
-                <p class="dl-phase-line">The agreement is signed, and identity and title are verified before anything is built.</p>
-                <p class="dl-phase-gate"><span class="dl-gate-flag">Gate</span>Reviewer approves the package</p>
-              </div>
-            </li>
-            <li class="dl-phase">
-              <span class="dl-phase-node" aria-hidden="true"></span>
-              <div class="dl-phase-body">
-                <p class="dl-phase-name">Design and true up</p>
-                <p class="dl-phase-line">A site survey and CAD design turn the sale into a buildable system, approved with the customer.</p>
-                <p class="dl-phase-gate"><span class="dl-gate-flag">Gate</span>As designed matches as sold</p>
-              </div>
-            </li>
-            <li class="dl-phase">
-              <span class="dl-phase-node" aria-hidden="true"></span>
-              <div class="dl-phase-body">
-                <p class="dl-phase-name">Permitting and interconnection</p>
-                <p class="dl-phase-line">Local permits are filed and the utility clears the system to connect to the grid.</p>
-                <p class="dl-phase-gate"><span class="dl-gate-flag">Gate</span>Filings approved</p>
-              </div>
-            </li>
-            <li class="dl-phase">
-              <span class="dl-phase-node" aria-hidden="true"></span>
-              <div class="dl-phase-body">
-                <p class="dl-phase-name">Installation</p>
-                <p class="dl-phase-line">The installer builds it, documents it with photos, and carries a clean close out package.</p>
-                <p class="dl-phase-gate"><span class="dl-gate-flag">Gate</span>Inspection passes</p>
-              </div>
-            </li>
-            <li class="dl-phase dl-phase--live">
-              <span class="dl-phase-node" aria-hidden="true"></span>
-              <div class="dl-phase-body">
-                <p class="dl-phase-name">Permission to operate</p>
-                <p class="dl-phase-line">The utility letter lands, billing onboarding begins, and the system goes live for good.</p>
-                <p class="dl-phase-gate"><span class="dl-gate-flag">Gate</span>Billing may begin</p>
-              </div>
-            </li>
-          </ol>
+      <div class="dl-wrap dl-outcomes-in">
+        <div class="dl-outcomes-copy dl-reveal">
+          <p class="dl-kicker light"><span class="dl-tick" aria-hidden="true"></span>What shipped</p>
+          <h2 class="dl-h2 light" id="outcome-h">The machine became a product.</h2>
+          <p class="dl-lead light">Since launch, homeowners have signed more than 200 agreements and six construction organizations run their work through the portal. That feedback loop continues to shape the system, just as the first Ray beta compounded into a product used across portal and iOS.</p>
         </div>
-      </div>
-    </section>
-
-    <!-- ==================== THE UNIFYING MODEL ==================== -->
-    <section class="dl-act dl-model" aria-labelledby="md-h">
-      <div class="dl-wrap">
-        <div class="dl-measure dl-reveal">
-          <p class="dl-kicker"><span class="dl-tick" aria-hidden="true"></span>The product strategy</p>
-          <h2 class="dl-h2" id="md-h">One shared project state. Complex underneath, calm on the surface.</h2>
-          <p class="dl-lead">Every party writes to one shared project state instead of their own copy, so a signature, an approval, and a permit can never quietly disagree. The homeowner feels one calm project. Underneath, a group of companies moves in step and never loses the thread.</p>
-          <p class="dl-lead">On top of that single state, each party gets an experience scoped to their role and organization, and the handoffs between them become explicit product surfaces instead of emails and spreadsheets. That was the core bet: model the machine once, honestly, and let every surface read from and write to the same source of truth.</p>
-        </div>
-
-        <!-- the four-role handoff matrix: who carries the project, phase by phase -->
-        <div class="dl-reveal dl-matrix-wrap">
-          <p class="dl-eyebrow-serif">Who carries the project</p>
-          <div class="dl-matrix-scroll">
-            <table class="dl-matrix">
-              <caption class="dl-vh">Which party leads or is active in each of the six phases. Lead is marked with a filled dot, active with an open dot.</caption>
-              <thead>
-                <tr>
-                  <th scope="col" class="dl-matrix-role">Role</th>
-                  <th scope="col">Origination</th>
-                  <th scope="col">Verification</th>
-                  <th scope="col">Design</th>
-                  <th scope="col">Permitting</th>
-                  <th scope="col">Install</th>
-                  <th scope="col">Power on</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">Homeowner</th>
-                  <td><span class="mx mx-on" title="Active">&#9675;</span></td>
-                  <td><span class="mx mx-lead" title="Leads">&#9679;</span></td>
-                  <td><span class="mx mx-on" title="Active">&#9675;</span></td>
-                  <td><span class="mx mx-off" title="Not involved">&middot;</span></td>
-                  <td><span class="mx mx-off" title="Not involved">&middot;</span></td>
-                  <td><span class="mx mx-on" title="Active">&#9675;</span></td>
-                </tr>
-                <tr>
-                  <th scope="row">Sales</th>
-                  <td><span class="mx mx-lead" title="Leads">&#9679;</span></td>
-                  <td><span class="mx mx-lead" title="Leads">&#9679;</span></td>
-                  <td><span class="mx mx-on" title="Active">&#9675;</span></td>
-                  <td><span class="mx mx-off" title="Not involved">&middot;</span></td>
-                  <td><span class="mx mx-off" title="Not involved">&middot;</span></td>
-                  <td><span class="mx mx-off" title="Not involved">&middot;</span></td>
-                </tr>
-                <tr>
-                  <th scope="row">Installer</th>
-                  <td><span class="mx mx-on" title="Active">&#9675;</span></td>
-                  <td><span class="mx mx-off" title="Not involved">&middot;</span></td>
-                  <td><span class="mx mx-lead" title="Leads">&#9679;</span></td>
-                  <td><span class="mx mx-lead" title="Leads">&#9679;</span></td>
-                  <td><span class="mx mx-lead" title="Leads">&#9679;</span></td>
-                  <td><span class="mx mx-lead" title="Leads">&#9679;</span></td>
-                </tr>
-                <tr>
-                  <th scope="row">Reviewer</th>
-                  <td><span class="mx mx-off" title="Not involved">&middot;</span></td>
-                  <td><span class="mx mx-on" title="Active">&#9675;</span></td>
-                  <td><span class="mx mx-on" title="Active">&#9675;</span></td>
-                  <td><span class="mx mx-on" title="Active">&#9675;</span></td>
-                  <td><span class="mx mx-on" title="Active">&#9675;</span></td>
-                  <td><span class="mx mx-on" title="Active">&#9675;</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="dl-matrix-key"><span class="mx mx-lead">&#9679;</span> Leads the phase <span class="dl-key-sep" aria-hidden="true"></span> <span class="mx mx-on">&#9675;</span> Active in the phase</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== ORIGINATION PORTAL ==================== -->
-    <section class="dl-act dl-bg-beige2 dl-origination" aria-labelledby="or-h">
-      <div class="dl-wrap dl-split">
-        <div class="dl-split-copy dl-reveal">
-          <p class="dl-kicker"><span class="dl-tick" aria-hidden="true"></span>Origination portal · B2B web</p>
-          <h2 class="dl-h2" id="or-h">The operating surface for everyone but the homeowner.</h2>
-          <p class="dl-lead">The portal carries a project through the six gated phases. Each phase carries its own review gate, where a dedicated reviewer either approves the work or sends it back with structured, actionable feedback. Nobody works blind, and nothing advances until it is genuinely done.</p>
-          <p class="dl-lead">The turning point release was nailing the signing moment: exactly what we need from a customer at the point of signing their agreement, gathered in one guided flow. City specific disclosures, identity verification, and contract signature, in order, so high stakes paperwork carries as little friction as possible and the customer understands what they are agreeing to.</p>
-        </div>
-        <aside class="dl-split-aside dl-reveal" aria-label="The signing flow">
-          <p class="dl-aside-label">The signing moment</p>
-          <ol class="dl-flow dl-stagger">
-            <li class="dl-flow-step"><span class="dl-flow-k">Disclosures</span><span class="dl-flow-v">City specific, read in plain language</span></li>
-            <li class="dl-flow-step"><span class="dl-flow-k">Identity</span><span class="dl-flow-v">Verified before a signature is taken</span></li>
-            <li class="dl-flow-step"><span class="dl-flow-k">Signature</span><span class="dl-flow-v">One contract, no fine print they never saw</span></li>
-          </ol>
-          <p class="dl-aside-foot">Six construction organizations run their operations in this portal.</p>
-        </aside>
-      </div>
-    </section>
-
-    <!-- ==================== HOMEOWNER iOS APP ==================== -->
-    <section class="dl-act dl-app" aria-labelledby="ap-h">
-      <div class="dl-wrap">
-        <div class="dl-measure dl-reveal">
-          <p class="dl-kicker"><span class="dl-tick" aria-hidden="true"></span>Homeowner app · B2C iOS</p>
-          <h2 class="dl-h2" id="ap-h">The home&rsquo;s energy, made legible.</h2>
-          <p class="dl-lead">After activation, Daylight lives on the homeowner&rsquo;s phone. It is where they pay their bill, watch the panels produce, see the battery charge and discharge, and understand the home&rsquo;s energy in real time, down to the device. The category&rsquo;s history made people feel sold to. The app is built to make them feel informed. During grid events it shows how the system is responding, riding through severe weather and keeping the power on.</p>
-        </div>
-      </div>
-
-      <div class="dl-wrap">
-        <div class="dl-plates dl-stagger">
-          <figure class="dl-plate">
-            <div class="dl-device dl-device--sm">
-              <span class="dl-device-notch" aria-hidden="true"></span>
-              <img class="dl-device-shot" src="images/ios-overview.png" alt="Daylight iOS home screen: a photo of the house with rooftop panels, live battery and solar cards, and a plain-language note reading that the panels overproduced earlier and sent the extra into the battery." width="331" height="720" loading="lazy">
-            </div>
-            <figcaption class="dl-plate-cap">
-              <span class="dl-note-code">home and energy</span>
-              The day, read back in one sentence. Battery and solar sit right on the home, not buried in a dashboard.
-            </figcaption>
-          </figure>
-          <figure class="dl-plate">
-            <div class="dl-device dl-device--sm">
-              <span class="dl-device-notch" aria-hidden="true"></span>
-              <img class="dl-device-shot" src="images/ios-breakdown.png" alt="Daylight iOS energy breakdown: battery at 6.0 kWh and 75 percent charging, solar generated 25.7 kWh and consumed 27.5 kWh, with a production line chart." width="331" height="720" loading="lazy">
-            </div>
-            <figcaption class="dl-plate-cap">
-              <span class="dl-note-code">energy breakdown</span>
-              Production and storage down to the hour, for the homeowner who wants to look closer.
-            </figcaption>
-          </figure>
-          <figure class="dl-plate">
-            <div class="dl-device dl-device--sm">
-              <span class="dl-device-notch" aria-hidden="true"></span>
-              <img class="dl-device-shot" src="images/ios-payments.png" alt="Daylight iOS payments: a balance of $59.66, the PPA rate, a connected bank account on autopay, bill history, and a Pay Balance button." width="331" height="720" loading="lazy">
-            </div>
-            <figcaption class="dl-plate-cap">
-              <span class="dl-note-code">payments</span>
-              One balance, one connected account, autopay. The bill arrives the same way every month.
-            </figcaption>
-          </figure>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== BILLING AND MONEY MOVEMENT ==================== -->
-    <section class="dl-act dl-bg-beige2 dl-money" aria-labelledby="mo-h">
-      <div class="dl-wrap">
-        <div class="dl-measure dl-reveal">
-          <p class="dl-kicker"><span class="dl-tick" aria-hidden="true"></span>Billing · money in</p>
-          <h2 class="dl-h2" id="mo-h">A calm bill on top of a lot of moving money.</h2>
-          <p class="dl-lead">Billing does not start until the system is verified as energized. From that anchor date it runs in contract months with a fixed rhythm: statement, due date, autopay. The amount itself is dynamic, but none of that lands on the homeowner. They connect a bank account once, autopay handles the rest, and the bill arrives predictably every month.</p>
-        </div>
-      </div>
-
-      <div class="dl-wrap dl-money-grid">
-        <div class="dl-reveal">
-          <p class="dl-eyebrow-serif">Every bill is a model, not a flat fee</p>
-          <ol class="dl-formula dl-stagger">
-            <li class="dl-formula-row"><span class="dl-formula-k">Contract rate</span><span class="dl-formula-v">The price per unit of energy, set in the agreement</span></li>
-            <li class="dl-formula-row"><span class="dl-formula-op" aria-hidden="true">&times;</span><span class="dl-formula-k">Seasonal production</span><span class="dl-formula-v">Expected output, month by month, for the home&rsquo;s region</span></li>
-            <li class="dl-formula-row"><span class="dl-formula-op" aria-hidden="true">&times;</span><span class="dl-formula-k">System health</span><span class="dl-formula-v">Long run panel degradation, priced in from day one</span></li>
-            <li class="dl-formula-row"><span class="dl-formula-op" aria-hidden="true">&times;</span><span class="dl-formula-k">Annual escalator</span><span class="dl-formula-v">The contract&rsquo;s yearly rate step, compounding on each anniversary</span></li>
-            <li class="dl-formula-row dl-formula-total"><span class="dl-formula-k">A predictable monthly bill</span><span class="dl-formula-v">All of it computed for the homeowner. None of it their problem</span></li>
-          </ol>
-        </div>
-        <aside class="dl-reveal dl-money-aside" aria-label="Money grade correctness">
-          <p class="dl-eyebrow-serif">Built for money grade correctness</p>
-          <p class="dl-lead dl-lead--sm">A project can never be billed twice for the same period, and payments cannot double fire. The real product work lives in the unhappy path. A bank account that will not verify, a returned payment, a homeowner drifting toward delinquency. I designed the flows that catch these early, explain them in plain language, and give people a clear way back. In a trust heavy category, how you handle the bad day matters more than the good one.</p>
-        </aside>
-      </div>
-
-      <div class="dl-wrap">
-        <div class="dl-measure dl-reveal dl-money-out-head">
-          <p class="dl-kicker"><span class="dl-tick" aria-hidden="true"></span>Partner payments · money out</p>
-          <h2 class="dl-h2">The money the homeowner never sees.</h2>
-          <p class="dl-lead">A solar project is not just billed, it pays out. Installers and sales organizations earn milestone payments as a project hits real construction gates. I designed the system that generates those invoices automatically from project events, then moves each one through a multi role approval chain, with versioned, encrypted banking details and a full audit trail on every decision. The homeowner facing promise only holds if the six other people touching the project get paid correctly, on schedule, every time.</p>
-        </div>
-      </div>
-
-      <div class="dl-wrap">
-        <div class="dl-chain dl-reveal" data-current
-             role="img" aria-label="Every partner invoice moves through a fixed approval chain: operations review verifies the work, capital markets confirms the funding source, disbursement runs the payment, and it is marked paid, confirmed and logged.">
-          <ol class="dl-chain-rail dl-stagger">
-            <li class="dl-chain-node"><span class="dl-chain-dot" aria-hidden="true"></span><span class="dl-chain-k">Operations review</span><span class="dl-chain-v">Work verified against project events</span></li>
-            <li class="dl-chain-node"><span class="dl-chain-dot" aria-hidden="true"></span><span class="dl-chain-k">Capital markets</span><span class="dl-chain-v">Funding source confirmed</span></li>
-            <li class="dl-chain-node"><span class="dl-chain-dot" aria-hidden="true"></span><span class="dl-chain-k">Disbursement</span><span class="dl-chain-v">Payment run, banking versioned and encrypted</span></li>
-            <li class="dl-chain-node dl-chain-node--paid"><span class="dl-chain-dot" aria-hidden="true"></span><span class="dl-chain-k">Paid</span><span class="dl-chain-v">Confirmed and logged, immutable history</span></li>
-          </ol>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== DESIGN AND OPERATING SYSTEM ==================== -->
-    <section class="dl-act dl-bg-beige2 dl-craft" aria-labelledby="cr-h">
-      <div class="dl-wrap dl-split">
-        <div class="dl-split-copy dl-reveal">
-          <p class="dl-kicker"><span class="dl-tick" aria-hidden="true"></span>Design and operating system</p>
-          <h2 class="dl-h2" id="cr-h">How the surfaces stay coherent, and how the floor runs.</h2>
-          <p class="dl-lead">Solar software tends to look like the industry&rsquo;s reputation: dated, dense, transactional. We built the design system to be the opposite, and thought hard about how energy should feel, warm instead of clinical, confident instead of salesy. One shared component and state language spans the web portal and iOS, with rapid prototyping and 0 to 1 principles that let a small team ship fast without losing craft.</p>
-          <p class="dl-lead">I ran product as founding product engineer and manager, with the team organized into pods working in parallel, and the ticketing, roadmaps, and review discipline I set up and maintained. I stayed embedded in every body of work, designing the surfaces, architecting the backend, and writing the systems briefs that aligned external partners. Connective tissue, not a layer of management. The diagrams on this page are built in the system. The case study is the demo.</p>
-        </div>
-        <aside class="dl-split-aside dl-reveal" aria-label="The system, in brief">
-          <p class="dl-aside-label">The system, in brief</p>
-          <ul class="dl-spec dl-stagger">
-            <li><span class="dl-spec-k">Palette</span><span class="dl-spec-swatches" aria-hidden="true"><i style="background:#F66F00"></i><i style="background:#FCCC3C"></i><i style="background:#4C2806"></i><i style="background:#FFF7E9;box-shadow:inset 0 0 0 1px rgba(30,30,30,.14)"></i></span></li>
-            <li><span class="dl-spec-k">Display</span><span class="dl-spec-v dl-spec-serif">Feature Deck</span></li>
-            <li><span class="dl-spec-k">Interface</span><span class="dl-spec-v">Aeonik Pro, 400 and 500</span></li>
-            <li><span class="dl-spec-k">One accent</span><span class="dl-spec-v">A single orange moment per view</span></li>
-            <li><span class="dl-spec-k">Motion</span><span class="dl-spec-v dl-spec-mono">100ms ease-out &middot; reveals 900ms</span></li>
-          </ul>
-        </aside>
-      </div>
-    </section>
-
-    <!-- ==================== OUTCOMES AND REFLECTION ==================== -->
-    <!-- Cinematic bookend: the energy window returns, resolving the hero motif -->
-    <section class="dl-act dl-close dl-on-dark" aria-labelledby="cl-h">
-      <div class="dl-wrap">
-        <figure class="dl-coda dl-reveal">
-          <img class="dl-coda-img" src="images/daylight-hero-poster.jpg" alt="A Daylight home with rooftop solar in daylight, the energy window lit over the panels." width="1600" height="900" loading="lazy">
-          <figcaption class="dl-coda-label"><span class="dl-tick" aria-hidden="true"></span>Power on &middot; the system goes live</figcaption>
-        </figure>
-        <div class="dl-measure dl-reveal">
-          <p class="dl-kicker"><span class="dl-tick" aria-hidden="true"></span>Outcomes and evidence</p>
-          <h2 class="dl-h2" id="cl-h">What shipped, and what it validated.</h2>
-          <p class="dl-lead">Since going live, homeowners have signed 200+ agreements, and six construction organizations run their operations in the portal, a close feedback loop we have been iterating with ever since. Those numbers validated the original product bets, and they are compounding with scale. Design is never done, and we are still learning every week.</p>
-        </div>
-
-        <ul class="dl-scope-specs dl-reveal">
-          <li><b>200+</b><span>homeowner agreements signed since launch</span></li>
-          <li><b>6</b><span>construction organizations operating in the portal</span></li>
-          <li><b>5</b><span>product surfaces designed and built end to end</span></li>
-        </ul>
-        <p class="dl-ev-note">Platform scope at the time of this case study. Adoption of the portal, not a revenue or performance claim.</p>
-
-        <div class="dl-measure dl-reveal dl-reflect">
-          <p class="dl-eyebrow-serif">The through line</p>
-          <p class="dl-lead">Daylight is the clearest proof of the thing I do best: modeling a genuinely complex, regulated, multi party system, and shipping the surfaces that make it feel simple and trustworthy to every person inside it. What I would push further next is the unhappy path, the failure and recovery states that decide whether trust survives a bad month. That instinct, grounded and honest about what it does not know, is exactly where Ray takes the same system next.</p>
-        </div>
-
-        <div class="dl-close-links dl-reveal">
-          <a class="dl-btn solid" href="ray.html">Read the Ray case study &rarr;</a>
-          <a class="dl-btn ghost" href="index.html">Back to Mike Battaglia</a>
+        <dl class="dl-outcome-figures dl-reveal">
+          <div><dt>200+</dt><dd>homeowner agreements signed since launch</dd></div>
+          <div><dt>6</dt><dd>construction organizations operating in the portal</dd></div>
+          <div><dt>5</dt><dd>core product surfaces designed and built end to end</dd></div>
+        </dl>
+        <div class="dl-resolution dl-reveal">
+          <p>Daylight is the clearest expression of the work I do best: model a genuinely complex system, then make every encounter with it feel simple, familiar, and trustworthy.</p>
+          <div><a class="dl-btn solid" href="ray.html">Explore Ray&nbsp;&rarr;</a><a class="dl-btn ghost" href="index.html">Mike Battaglia</a></div>
         </div>
       </div>
     </section>
   </main>
 
   <footer class="dl-footer">
-    <div class="dl-wrap">
-      <span class="fmeta"><b>Daylight</b> · Consumer energy platform · 2024&ndash;Present</span>
-      <span class="fmeta">Senior PM and product engineer · Mike Battaglia</span>
-    </div>
+    <div class="dl-wrap"><span><b>Daylight</b> · Consumer energy platform · 2024 to present</span><span>Product, design, and engineering · Mike Battaglia</span></div>
   </footer>
 
   <script src="js/daylight-gate.js" defer></script>
-  <script src="js/daylight-case-study.js?v=12" defer></script>
+  <script src="js/vendor/gsap.min.js" defer></script>
+  <script src="js/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="js/daylight-case-study.js?v=20" defer></script>
 </body>
 </html>
