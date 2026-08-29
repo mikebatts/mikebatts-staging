@@ -25,8 +25,8 @@
   <link rel="preload" href="fonts/FeatureDeck-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
   <link rel="preload" href="fonts/AeonikPro-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
   <link rel="preload" href="fonts/AeonikPro-500.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-  <link rel="preload" href="css/daylight-case-study.css?v=20" as="style">
-  <link href="css/daylight-case-study.css?v=20" rel="stylesheet" type="text/css">
+  <link rel="preload" href="css/daylight-case-study.css?v=22" as="style">
+  <link href="css/daylight-case-study.css?v=22" rel="stylesheet" type="text/css">
   <link href="css/daylight-gate.css?v=3" rel="stylesheet" type="text/css">
 
   <!-- Privacy gate: critical lock rules + pre-paint lock, before first paint -->
@@ -148,6 +148,56 @@
           <div class="dl-brief-row"><dt>Team</dt><dd>A small team organized into cross functional pods, working in parallel</dd></div>
           <div class="dl-brief-row"><dt>The problem</dt><dd>Move a home through sale, verification, design, permitting, construction, and activation without the deal stalling, and without the homeowner ever feeling the machinery</dd></div>
         </dl>
+      </div>
+    </section>
+
+    <!-- ==================== FEATURED PRODUCT: RAY ==================== -->
+    <section class="dl-act dl-ray dl-ray-feature" aria-labelledby="ry-h">
+      <div class="dl-wrap">
+        <div class="dl-ray-feature-head dl-reveal">
+          <p class="dl-kicker"><span class="dl-tick" aria-hidden="true"></span>Featured product · Ray</p>
+          <span class="dl-ray-index">01 of 05</span>
+        </div>
+      </div>
+      <div class="dl-wrap dl-ray-grid">
+        <div class="dl-ray-figure dl-reveal">
+          <div class="dl-avatar">
+            <span class="dl-avatar-field" aria-hidden="true"></span>
+            <span class="dl-avatar-ring" aria-hidden="true"></span>
+            <div class="dl-avatar-disc">
+              <video id="dl-ray-video" src="images/ray-avatar-loop.mp4" poster="images/ray-avatar-poster.png"
+                     muted loop playsinline autoplay preload="metadata" aria-hidden="true" tabindex="-1"></video>
+              <img class="poster-fallback" src="images/ray-avatar-poster.png" alt="" width="480" height="480" aria-hidden="true">
+            </div>
+          </div>
+        </div>
+        <div class="dl-ray-copy dl-reveal">
+          <h2 class="dl-h2" id="ry-h">An answer worth trusting.</h2>
+          <p class="dl-lead">Ray is Daylight&rsquo;s grounded support system across the partner portal and homeowner app. It reads the live project state, answers in plain language, shows where the answer came from, respects the viewer&rsquo;s access, and asks before it acts.</p>
+          <div class="dl-ray-window">
+            <div class="dl-ray-window-head">
+              <span class="dl-rt-av" aria-hidden="true"><img src="images/ray-avatar-poster.png" alt="" width="28" height="28"></span>
+              <span><b>Ray</b><small>Maple Street residence · PPA-4021</small></span>
+              <span class="dl-ray-grounded">Grounded</span>
+            </div>
+            <div class="dl-ray-thread" id="dl-rayflow" role="img" aria-label="A grounded Ray exchange: the homeowner asks why the project has not moved; Ray answers that title verification is still open, cites the origination playbook against live project data, and offers the exact next step or a person.">
+              <div class="dl-rt-ask">
+                <p>Why hasn&rsquo;t my project moved forward?</p>
+              </div>
+              <div class="dl-rt-ans">
+                <div class="dl-rt-body">
+                  <p class="dl-rt-line">Title verification is still open. Everything else is done: your signed agreement is in, and your identity is verified.</p>
+                  <p class="dl-rt-cite"><span class="dl-rt-chip">Origination playbook</span><span class="dl-rt-fresh">live project data, checked now</span></p>
+                </div>
+              </div>
+            </div>
+            <div class="dl-ray-window-action"><span>Next step</span><b>Upload a current title document, or bring in a person.</b></div>
+          </div>
+          <div class="dl-ray-actions">
+            <a class="dl-btn solid" href="ray.html">Explore the Ray case study &rarr;</a>
+            <span class="dl-ray-note">Built on the team&rsquo;s shared Ray foundation. I led its completion across the origination portal and homeowner app.</span>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -406,46 +456,6 @@
             <li class="dl-chain-node"><span class="dl-chain-dot" aria-hidden="true"></span><span class="dl-chain-k">Disbursement</span><span class="dl-chain-v">Payment run, banking versioned and encrypted</span></li>
             <li class="dl-chain-node dl-chain-node--paid"><span class="dl-chain-dot" aria-hidden="true"></span><span class="dl-chain-k">Paid</span><span class="dl-chain-v">Confirmed and logged, immutable history</span></li>
           </ol>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== RAY ==================== -->
-    <section class="dl-act dl-ray" aria-labelledby="ry-h">
-      <div class="dl-wrap dl-ray-grid">
-        <div class="dl-ray-figure dl-reveal">
-          <div class="dl-avatar">
-            <span class="dl-avatar-field" aria-hidden="true"></span>
-            <span class="dl-avatar-ring" aria-hidden="true"></span>
-            <div class="dl-avatar-disc">
-              <video id="dl-ray-video" src="images/ray-avatar-loop.mp4" poster="images/ray-avatar-poster.png"
-                     muted loop playsinline autoplay preload="metadata" aria-hidden="true" tabindex="-1"></video>
-              <img class="poster-fallback" src="images/ray-avatar-poster.png" alt="" width="480" height="480" aria-hidden="true">
-            </div>
-          </div>
-        </div>
-        <div class="dl-ray-copy dl-reveal">
-          <p class="dl-kicker"><span class="dl-tick" aria-hidden="true"></span>Ray · support</p>
-          <h2 class="dl-h2" id="ry-h">The same system, now answering.</h2>
-          <p class="dl-lead">When someone needs help, they never leave the project. Ray is already inside it. It reads the live project state, answers in plain words, cites where the answer came from, and hands off to a person the moment it cannot be sure.</p>
-          <div class="dl-ray-thread" id="dl-rayflow" role="img" aria-label="A grounded Ray exchange: the homeowner asks why the project has not moved; Ray answers that title verification is still open, cites the origination playbook against live project data, and offers the exact next step or a person.">
-            <div class="dl-rt-ask">
-              <span class="dl-rt-tag" aria-hidden="true">You</span>
-              <p>Why hasn&rsquo;t my project moved forward?</p>
-            </div>
-            <div class="dl-rt-ans">
-              <span class="dl-rt-av" aria-hidden="true"><img src="images/ray-avatar-poster.png" alt="" width="28" height="28"></span>
-              <div class="dl-rt-body">
-                <p class="dl-rt-line">Title verification is still open. Everything else is done: your signed agreement is in, and your identity is verified.</p>
-                <p class="dl-rt-cite"><span class="dl-rt-chip">Origination playbook</span><span class="dl-rt-fresh">live project data, checked now</span></p>
-                <p class="dl-rt-line dl-rt-act">Here is the exact document to upload, or I can bring in a person.</p>
-              </div>
-            </div>
-          </div>
-          <div class="dl-ray-actions">
-            <a class="dl-btn solid" href="ray.html">Read the Ray case study &rarr;</a>
-            <span class="dl-ray-note">Built on the team&rsquo;s shared Ray foundation. I led its completion across the origination portal and the homeowner app.</span>
-          </div>
         </div>
       </div>
     </section>

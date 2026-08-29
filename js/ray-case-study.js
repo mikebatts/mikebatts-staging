@@ -103,6 +103,33 @@
       window.requestAnimationFrame(function () { hero.classList.add('hero-in'); });
     });
     setTimeout(function () { hero.classList.add('hero-in'); }, 2600);
+
+    var scene = hero.querySelector('.ray-hero-scene');
+    var sun = hero.querySelector('.ray-sun');
+    var answer = hero.querySelector('.ray-hero-answer');
+    var gsap = window.gsap;
+    var ScrollTrigger = window.ScrollTrigger;
+    if (!scene || !sun || !answer || !gsap || !ScrollTrigger) { return; }
+    try { gsap.registerPlugin(ScrollTrigger); } catch (e) { return; }
+    var mm = gsap.matchMedia();
+    mm.add('(min-width: 1025px) and (prefers-reduced-motion: no-preference)', function () {
+      var tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: hero,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true
+        }
+      });
+      tl.to(sun, { xPercent: -12, yPercent: 12, scale: 0.72, ease: 'none' }, 0)
+        .to(answer, { xPercent: -4, yPercent: 34, scale: 0.88, autoAlpha: 0, ease: 'none' }, 0)
+        .to(scene, { yPercent: 8, ease: 'none' }, 0);
+      return function () {
+        if (tl.scrollTrigger) { tl.scrollTrigger.kill(); }
+        tl.kill();
+        gsap.set([sun, answer, scene], { clearProps: 'all' });
+      };
+    });
   }
 
   /* -------------------------------------------------------------- */
@@ -263,14 +290,18 @@
   }
 
   /* -------------------------------------------------------------- */
-  /* Portal to phone — one graceful focus/scale transition on entry */
-  /* Blur is used only here, as a focus device. Desktop + motion.   */
+  /* One thread, two readers. The stage stays still while emphasis  */
+  /* moves from the operational portal to the homeowner phone.     */
   /* -------------------------------------------------------------- */
   function setupReaders() {
     var stage = document.getElementById('ray-readers-stage');
+    var scroll = document.getElementById('ray-readers-scroll');
     var phone = document.getElementById('ray-phone');
     var portal = document.getElementById('ray-portal');
-    if (!stage || !phone || !portal) { return; }
+    var handoff = stage ? stage.querySelector('.ray-reader-handoff') : null;
+    var labels = stage ? Array.prototype.slice.call(stage.querySelectorAll('[data-reader-label]')) : [];
+    var caption = stage ? stage.querySelector('[data-reader-caption]') : null;
+    if (!stage || !scroll || !phone || !portal) { return; }
     var gsap = window.gsap;
     var ScrollTrigger = window.ScrollTrigger;
     if (!gsap || !ScrollTrigger || reduceMotion) { return; }
@@ -278,15 +309,43 @@
 
     var mm = gsap.matchMedia();
     mm.add('(min-width: 1025px) and (prefers-reduced-motion: no-preference)', function () {
+      function setReader(mode) {
+        labels.forEach(function (label) {
+          label.classList.toggle('is-active', label.getAttribute('data-reader-label') === mode);
+        });
+        if (caption) {
+          caption.textContent = mode === 'phone'
+            ? 'The same trust contract, recomposed for a homeowner in plain language.'
+            : 'The operator gets depth, project context, and the next operational move.';
+        }
+      }
+      setReader('portal');
+      function stageTop() {
+        return scroll.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop || 0);
+      }
+      function navHeight() {
+        return parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 60;
+      }
       var tl = gsap.timeline({
-        scrollTrigger: { trigger: stage, start: 'top 82%', end: 'top 46%', scrub: true }
+        scrollTrigger: {
+          trigger: scroll,
+          start: function () { return stageTop() - navHeight(); },
+          end: function () { return stageTop() + scroll.offsetHeight - (window.innerHeight || 800); },
+          scrub: true,
+          onUpdate: function (self) { setReader(self.progress < 0.52 ? 'portal' : 'phone'); }
+        }
       });
-      tl.from(portal, { autoAlpha: 0, x: -18, filter: 'blur(6px)', ease: 'none' }, 0)
-        .from(phone, { autoAlpha: 0.4, y: 24, scale: 0.965, filter: 'blur(8px)', ease: 'none' }, 0);
+      gsap.set(phone, { autoAlpha: 0.34, y: 46, scale: 0.88, filter: 'blur(6px)' });
+      if (handoff) { gsap.set(handoff, { scaleX: 0 }); }
+      tl.to(portal, { autoAlpha: 0.42, x: -34, scale: 0.93, filter: 'blur(5px)', ease: 'none' }, 0)
+        .to(phone, { autoAlpha: 1, y: 0, scale: 1, filter: 'blur(0px)', ease: 'none' }, 0)
+        .to(handoff, { scaleX: 1, ease: 'none' }, 0.08);
+      ScrollTrigger.refresh();
       return function () {
         if (tl.scrollTrigger) { tl.scrollTrigger.kill(); }
         tl.kill();
-        gsap.set([portal, phone], { clearProps: 'all' });
+        gsap.set([portal, phone, handoff], { clearProps: 'all' });
+        setReader('portal');
       };
     });
   }

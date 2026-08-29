@@ -25,8 +25,8 @@
   <link rel="preload" href="fonts/FeatureDeck-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
   <link rel="preload" href="fonts/AeonikPro-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
   <link rel="preload" href="fonts/AeonikPro-500.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-  <link rel="preload" href="css/ray.css?v=28" as="style">
-  <link href="css/ray.css?v=28" rel="stylesheet" type="text/css">
+  <link rel="preload" href="css/ray.css?v=31" as="style">
+  <link href="css/ray.css?v=31" rel="stylesheet" type="text/css">
   <link href="css/daylight-gate.css?v=3" rel="stylesheet" type="text/css">
 
   <!-- Privacy gate: critical lock rules + pre-paint lock, before first paint -->
@@ -102,12 +102,23 @@
       </div>
 
       <div class="ray-hero-object" aria-hidden="true">
-        <div class="ray-sun">
-          <video id="ray-hero-video" src="images/ray-avatar-loop.mp4" poster="images/ray-avatar-poster.png"
-                 muted loop playsinline autoplay preload="metadata" tabindex="-1"></video>
-          <img class="ray-sun-fallback" src="images/ray-avatar-poster.png" alt="" width="480" height="480">
+        <div class="ray-hero-scene">
+          <div class="ray-sun">
+            <video id="ray-hero-video" src="images/ray-avatar-loop.mp4" poster="images/ray-avatar-poster.png"
+                   muted loop playsinline autoplay preload="metadata" tabindex="-1"></video>
+            <img class="ray-sun-fallback" src="images/ray-avatar-poster.png" alt="" width="480" height="480">
+          </div>
+          <div class="ray-hero-answer">
+            <div class="rha-head">
+              <span class="rha-avatar"><img src="images/ray-avatar-poster.png" alt="" width="32" height="32"></span>
+              <span class="rha-id"><b>Ray</b><small>Maple Street residence</small></span>
+              <span class="rha-status">Grounded</span>
+            </div>
+            <p class="rha-question">Why can&rsquo;t this project advance?</p>
+            <p class="rha-copy">Title verification is still open. The agreement is signed and identity is verified.</p>
+            <div class="rha-proof"><span>Origination SOP</span><small>checked this turn</small></div>
+          </div>
         </div>
-        <p class="ray-hero-cap"><span class="tick" aria-hidden="true"></span>Moving while it works&nbsp;·&nbsp;still when settled</p>
       </div>
     </div>
   </header>
@@ -129,27 +140,45 @@
 
       <div class="ray-demo-stage">
         <div class="ray-demo reveal" id="ray-demo">
-          <div class="ray-chat">
+          <div class="ray-chat-shell">
+            <aside class="ray-chat-context" aria-label="Project context">
+              <div class="rcc-project">
+                <span class="rcc-mark">MS</span>
+                <span><b>Maple Street</b><small>PPA-4021</small></span>
+              </div>
+              <div class="rcc-stage">
+                <span>Current stage</span>
+                <b>Document verification</b>
+              </div>
+              <div class="rcc-nav" aria-hidden="true">
+                <span class="is-current"><i></i>Conversation</span>
+                <span><i></i>Project record</span>
+                <span><i></i>Documents <b>2</b></span>
+                <span><i></i>Review history</span>
+              </div>
+              <p class="rcc-note">Ray inherits this project&rsquo;s context and your access.</p>
+            </aside>
+
+            <div class="ray-chat">
             <div class="ray-chat-top">
               <span class="ray-demo-mini" aria-hidden="true">
                 <video id="ray-demo-video" src="images/ray-avatar-loop.mp4" poster="images/ray-avatar-poster.png"
                        muted loop playsinline preload="none" tabindex="-1"></video>
               </span>
               <span class="rc-idblock">
-                <span class="who">Ask Ray <span class="beta">Beta</span></span>
-                <span class="ctx">Maple Street residence&nbsp;·&nbsp;PPA-4021&nbsp;·&nbsp;Document verification</span>
+                <span class="who">Ray</span>
+                <span class="ctx">Project support</span>
               </span>
-              <span class="rc-presence" id="ray-presence" aria-hidden="true">At rest</span>
               <button type="button" class="rc-newchat" id="ray-newchat" aria-label="Start a new chat">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
-                <span>New chat</span>
+                <span>New conversation</span>
               </button>
             </div>
 
             <div class="ray-chat-thread" id="ray-thread" role="log" aria-live="polite" aria-label="Conversation with Ray">
               <div class="rc-empty" id="ray-empty">
-                <p class="rc-empty-h">Ask about Maple Street residence</p>
-                <p class="rc-empty-s">PPA-4021&nbsp;·&nbsp;Document verification. This demo answers from a fictional project record and published process knowledge, shows its sources, and hands off to a person when nothing settles the question.</p>
+                <p class="rc-empty-h">How can I help with Maple Street?</p>
+                <p class="rc-empty-s">Ask about the project, its documents, review history, or next step. Every answer is checked against the fictional project record and shows where it came from.</p>
                 <div class="rc-suggest" role="group" aria-label="Suggested questions">
                   <button type="button" class="rc-sugg" data-prompt="Why can't this project advance?">Why can&rsquo;t this project advance?</button>
                   <button type="button" class="rc-sugg" data-prompt="What documents are still missing?">What documents are still missing?</button>
@@ -175,9 +204,10 @@
               </div>
               <p class="rc-disclaimer">
                 <span class="rc-mistakes">Ray can make mistakes. Check important info.</span>
-                <span class="rc-fic"><span class="sq" aria-hidden="true"></span>Fictional demo. No live data, and nothing is ever sent.</span>
+                <span class="rc-fic">Fictional demo. Nothing is sent.</span>
               </p>
             </form>
+            </div>
           </div>
         </div>
       </div>
@@ -291,59 +321,81 @@
           <p class="ray-lead">The operator in the portal and the homeowner on their phone meet the same Ray. The readers, the knowledge, the tools, and the privacy boundaries all differ. The trust contract stays exactly the same.</p>
         </div>
 
+      </div>
+
+      <div class="ray-readers-scroll" id="ray-readers-scroll">
         <div class="ray-readers-stage" id="ray-readers-stage">
-          <figure class="ray-portal" id="ray-portal">
-            <figcaption class="ray-portal-cap"><span class="rp-k">Operator&nbsp;·&nbsp;Portal</span></figcaption>
-            <div class="ray-portal-card">
-              <div class="rp-top" aria-hidden="true">
-                <span class="rp-mini"><img src="images/ray-avatar-poster.png" alt="" width="26" height="26"></span>
-                <span class="rp-id">Ask Ray</span>
-                <span class="rp-ctx">Maple Street&nbsp;·&nbsp;PPA-4021</span>
-              </div>
-              <div class="rp-ask">Why can&rsquo;t this project advance?</div>
-              <p class="rp-line">Title verification is still open. The signed agreement is in and identity is verified; the reviewer is waiting on a current title document.</p>
-              <p class="rp-cite"><span class="rp-chip">Origination SOP</span><span class="rp-fresh">live project data&nbsp;·&nbsp;this turn</span></p>
-            </div>
-          </figure>
-
-          <div class="ray-phone" id="ray-phone" role="img" aria-label="Customer Ray on iOS returning native cards: project status, install schedule, energy, documents, and a support proposal that must be confirmed before anything sends.">
-            <span class="rpl-notch" aria-hidden="true"></span>
-            <div class="rpl-screen">
-              <div class="rpl-bar" aria-hidden="true">
-                <span class="rpl-mini"><img src="images/ray-avatar-poster.png" alt="" width="22" height="22" loading="lazy"></span>
-                <span class="rpl-title">Ray</span>
-                <span class="rpl-ctx">Home &amp; support</span>
-              </div>
-              <div class="rpl-thread">
-                <div class="rpl-ask" aria-hidden="true">When does my system turn on?</div>
-                <div class="rpl-card rpl-status">
-                  <div class="rc-k">Project status</div>
-                  <div class="rc-phase"><span class="d" aria-hidden="true"></span>Installation scheduled</div>
-                  <div class="rc-sub">Maple Street residence</div>
-                </div>
-                <div class="rpl-card rpl-schedule">
-                  <div class="rc-k">Schedule</div>
-                  <ul>
-                    <li><span class="s-when">Aug 14</span><span class="s-what">Site survey</span><span class="s-ok" aria-hidden="true">&#10003;</span></li>
-                    <li><span class="s-when">Sep 03</span><span class="s-what">Install day</span><span class="s-next">Next</span></li>
-                    <li><span class="s-when">Sep 18</span><span class="s-what">Permission to operate</span></li>
-                  </ul>
-                </div>
-                <div class="rpl-card rpl-energy">
-                  <div class="rc-k">Your energy</div>
-                  <div class="rc-chart" aria-hidden="true"><i style="height:38%"></i><i style="height:58%"></i><i style="height:46%"></i><i style="height:72%"></i><i style="height:64%"></i><i style="height:88%"></i><i style="height:70%"></i></div>
-                  <div class="rc-sub">Production, last 7 days</div>
-                </div>
-                <div class="rpl-card rpl-support">
-                  <div class="rc-k rc-k-hot">Support request&nbsp;·&nbsp;proposed</div>
-                  <div class="rc-sub">Ask a person about your install date. Nothing sends until you confirm.</div>
-                  <div class="rc-actions" aria-hidden="true"><span class="rc-b1">Confirm</span><span class="rc-b2">Not now</span></div>
-                </div>
-              </div>
-            </div>
+          <div class="ray-reader-modes" aria-hidden="true">
+            <span class="is-active" data-reader-label="portal">Operator portal</span>
+            <i></i>
+            <span data-reader-label="phone">Homeowner app</span>
           </div>
-        </div>
 
+          <div class="ray-reader-canvas">
+            <figure class="ray-portal" id="ray-portal">
+              <figcaption class="ray-surface-label"><b>Operator</b><span>Detailed, operational, permissioned</span></figcaption>
+              <div class="ray-surface-window">
+                <div class="rsw-rail" aria-hidden="true">
+                  <span class="rsw-brand">daylight</span>
+                  <span class="rsw-nav is-on"></span><span class="rsw-nav"></span><span class="rsw-nav"></span>
+                  <span class="rsw-avatar">MB</span>
+                </div>
+                <div class="rsw-main">
+                  <div class="rsw-context">
+                    <span class="rsw-project"><b>Maple Street residence</b><small>PPA-4021&nbsp;·&nbsp;Document verification</small></span>
+                    <span class="rsw-scope">Operator view</span>
+                  </div>
+                  <div class="rsw-thread">
+                    <div class="rsw-ray"><img src="images/ray-avatar-poster.png" alt="" width="34" height="34"><span><b>Ray</b><small>Project support</small></span></div>
+                    <div class="rsw-question">Why can&rsquo;t this project advance?</div>
+                    <p class="rsw-answer">Title verification is still open. The agreement is signed and identity is verified; the reviewer is waiting on a current title document.</p>
+                    <div class="rsw-result">
+                      <div><span>Blocker</span><b>Title verification</b></div>
+                      <div><span>Owner</span><b>Assigned reviewer</b></div>
+                      <div><span>Next action</span><b>Request current title</b></div>
+                    </div>
+                    <div class="rsw-evidence"><span>Origination SOP</span><small>Live project data&nbsp;·&nbsp;checked this turn</small></div>
+                  </div>
+                  <div class="rsw-compose">Ask Ray about this project<span>&uarr;</span></div>
+                </div>
+              </div>
+            </figure>
+
+            <div class="ray-reader-handoff" aria-hidden="true"><span></span></div>
+
+            <figure class="ray-phone" id="ray-phone">
+              <figcaption class="ray-surface-label"><b>Homeowner</b><span>Plain language, native, personal</span></figcaption>
+              <div class="ray-phone-body" role="img" aria-label="Customer Ray on iOS answering a homeowner with project status, a cited timeline, and a guarded support action.">
+                <span class="rpl-notch" aria-hidden="true"></span>
+                <div class="rpl-screen">
+                  <div class="rpl-bar">
+                    <span class="rpl-back" aria-hidden="true">&#8249;</span>
+                    <span class="rpl-title">Ray</span>
+                    <span class="rpl-more" aria-hidden="true">&middot;&middot;&middot;</span>
+                  </div>
+                  <div class="rpl-thread">
+                    <div class="rpl-ray"><img src="images/ray-avatar-poster.png" alt="" width="32" height="32"><span><b>Ray</b><small>Home &amp; support</small></span></div>
+                    <div class="rpl-ask">When does my system turn on?</div>
+                    <p class="rpl-answer">Your install is scheduled for September 3. After inspection, the utility&rsquo;s current target for permission to operate is September 18.</p>
+                    <div class="rpl-result">
+                      <span>Project timeline</span>
+                      <div><small>Sep 03</small><b>Installation</b><i>Next</i></div>
+                      <div><small>Sep 18</small><b>Permission to operate</b></div>
+                    </div>
+                    <div class="rpl-evidence"><span>My project</span><small>checked just now</small></div>
+                    <div class="rpl-action"><span><b>Still need help?</b><small>Ask a person about your install.</small></span><span class="rpl-action-btn">Review request</span></div>
+                  </div>
+                  <div class="rpl-compose">Message Ray<span>&uarr;</span></div>
+                </div>
+              </div>
+            </figure>
+          </div>
+
+          <p class="ray-reader-caption"><span data-reader-caption>One conversation contract, shaped to the person reading it.</span></p>
+        </div>
+      </div>
+
+      <div class="ray-wrap">
         <ul class="ray-readers-lines reveal">
           <li><span class="k">Their world</span><span class="v">The operator sees stage, blockers, documents, payouts, and review history. The homeowner sees their subscription, install timeline, energy, and their own documents.</span></li>
           <li><span class="k">Never shown</span><span class="v">SSN, date of birth, household income, and co-applicant data are never serialized to either reader. Each sees only what they are already allowed to see.</span></li>
@@ -431,6 +483,6 @@
   <script src="js/daylight-gate.js" defer></script>
   <script src="js/vendor/gsap.min.js" defer></script>
   <script src="js/vendor/ScrollTrigger.min.js" defer></script>
-  <script src="js/ray-case-study.js?v=26" defer></script>
+  <script src="js/ray-case-study.js?v=28" defer></script>
 </body>
 </html>
