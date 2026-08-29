@@ -541,6 +541,183 @@ html.dl-page{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 .dl-page.dl-js .dl-reveal.in .dl-mrail::before{transform:scaleY(1)}
 
 /* ==========================================================================
+   PLAIN-LANGUAGE PRIMER — a beginner framing line under a chapter title
+   ========================================================================== */
+.dl-primer{
+  display:flex;gap:12px;align-items:flex-start;margin:0 0 6px;padding:14px 16px;
+  background:rgba(246,111,0,0.05);border:1px solid rgba(246,111,0,0.18);border-radius:8px;max-width:var(--measure);
+}
+.dl-primer .k{
+  font-family:var(--mono);font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--orange);
+  flex:none;padding-top:2px;
+}
+.dl-primer p{margin:0;font-family:var(--sans);font-size:14.5px;line-height:1.55;color:var(--brown)}
+.dl-primer p b{font-weight:600}
+
+/* ==========================================================================
+   RELAY — one project, many hands
+   ========================================================================== */
+.dl-relay{margin-top:36px}
+.dl-relay-steps{
+  list-style:none;margin:22px 0 0;padding:0;position:relative;
+  display:grid;grid-template-columns:repeat(6,1fr);gap:0;
+}
+.dl-relay-steps::before{
+  content:"";position:absolute;left:calc(100%/12);right:calc(100%/12);top:6px;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,var(--orange),var(--orange-2),var(--yellow));opacity:0.55;
+  transform-origin:left center;
+}
+.dl-page.dl-js .dl-reveal .dl-relay-steps::before{transform:scaleX(0);transition:transform 1.3s var(--ease) .25s}
+.dl-page.dl-js .dl-reveal.in .dl-relay-steps::before{transform:scaleX(1)}
+.dl-relay li{position:relative;padding:0 14px 0 0}
+.dl-relay li:last-child{padding-right:0}
+.dl-relay .node{
+  position:relative;z-index:1;display:block;width:13px;height:13px;border-radius:50%;background:var(--orange);
+  box-shadow:0 0 0 4px var(--paper),0 0 0 5px rgba(246,111,0,0.25);margin-bottom:16px;
+}
+.dl-bg-paper .dl-relay .node{box-shadow:0 0 0 4px var(--paper),0 0 0 5px rgba(246,111,0,0.25)}
+.dl-relay .r-no{font-family:var(--mono);font-size:11px;letter-spacing:0.05em;color:var(--gray);display:block;margin-bottom:4px}
+.dl-relay .who{font-family:var(--sans-tight);font-weight:600;font-size:15px;letter-spacing:-0.015em;color:var(--ink);line-height:1.2}
+.dl-relay .act{font-family:var(--sans);font-size:13px;line-height:1.45;color:var(--muted);margin-top:6px;text-wrap:pretty}
+.dl-relay .hand{
+  display:inline-flex;align-items:center;gap:6px;margin-top:10px;
+  font-family:var(--mono);font-size:11px;letter-spacing:0.04em;text-transform:uppercase;color:var(--orange);
+}
+.dl-relay .hand::before{content:"";width:12px;height:1px;background:var(--orange)}
+.dl-relay-foot{
+  margin-top:26px;padding-top:16px;border-top:1px solid var(--hair);
+  font-family:var(--mono);font-size:12px;letter-spacing:0.05em;text-transform:uppercase;color:var(--gray);
+  display:flex;align-items:center;gap:10px;
+}
+.dl-relay-foot .sq{width:7px;height:7px;background:var(--orange);flex:none}
+
+/* ==========================================================================
+   HOMEOWNER JOURNEY — an authored phone that advances step by step
+   ========================================================================== */
+.dl-journey{margin-top:44px;display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:clamp(28px,5vw,60px);align-items:start}
+.dl-journey-phone{position:sticky;top:80px;justify-self:center}
+.dl-jphone{
+  position:relative;width:clamp(220px,26vw,272px);aspect-ratio:9/19.5;background:#0b0b0c;border-radius:34px;padding:10px;
+  box-shadow:0 30px 70px -34px rgba(76,40,6,0.6),inset 0 0 0 1.5px rgba(255,255,255,0.09);
+}
+.dl-jphone::after{content:"";position:absolute;top:16px;left:50%;transform:translateX(-50%);width:28%;height:20px;background:#000;border-radius:100px;z-index:5}
+.dl-jscreen{position:relative;width:100%;height:100%;border-radius:26px;overflow:hidden;background:linear-gradient(180deg,#FFF7E9,#F7EED9);display:flex;flex-direction:column}
+.dl-jscreen-top{padding:34px 18px 12px;background:linear-gradient(180deg,rgba(246,111,0,0.14),rgba(246,111,0,0));text-align:center}
+.dl-jscreen-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--orange)}
+.dl-jscreen-title{font-family:var(--serif);font-weight:400;font-size:22px;line-height:1.05;color:var(--brown);margin-top:6px;min-height:48px}
+.dl-jscreen-body{flex:1;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.dl-jbig{font-family:var(--sans-tight);font-weight:600;font-size:30px;letter-spacing:-0.02em;color:var(--ink)}
+.dl-jsub{font-family:var(--sans);font-size:12.5px;line-height:1.45;color:var(--muted)}
+.dl-jbars{display:flex;align-items:flex-end;gap:6px;height:64px;margin-top:4px}
+.dl-jbars i{flex:1;background:linear-gradient(180deg,var(--orange),var(--yellow));border-radius:3px 3px 0 0;opacity:0.9}
+.dl-jchip{align-self:flex-start;font-family:var(--mono);font-size:10px;letter-spacing:0.05em;text-transform:uppercase;color:var(--orange);border:1px solid rgba(246,111,0,0.4);border-radius:100px;padding:4px 10px}
+.dl-jrow{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 0;border-top:1px solid rgba(30,30,30,0.08);font-family:var(--sans);font-size:12.5px;color:var(--ink)}
+.dl-jrow:first-of-type{border-top:none}
+.dl-jrow .v{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.dl-jscreen-nav{display:flex;justify-content:center;gap:5px;padding:0 0 16px}
+.dl-jscreen-nav i{width:6px;height:6px;border-radius:50%;background:rgba(76,40,6,0.2)}
+.dl-jscreen-nav i.on{background:var(--orange);width:16px;border-radius:100px}
+
+.dl-journey-steps{list-style:none;margin:0;padding:0;position:relative}
+.dl-journey-steps::before{content:"";position:absolute;left:6px;top:8px;bottom:8px;width:2px;background:var(--hair-strong)}
+.dl-jstep{display:block;width:100%;position:relative;padding:0 0 22px 30px;cursor:pointer;-webkit-appearance:none;appearance:none;background:none;border:0;margin:0;font:inherit;color:inherit;text-align:left}
+.dl-journey-steps li:last-child .dl-jstep{padding-bottom:0}
+.dl-jstep .jdot{position:absolute;left:0;top:4px;width:14px;height:14px;border-radius:50%;background:var(--beige);border:1.6px solid var(--muted-2);box-sizing:border-box;transition:background .25s var(--ease),border-color .25s var(--ease),box-shadow .25s var(--ease)}
+.dl-jstep .jt{display:block;font-family:var(--sans-tight);font-weight:600;font-size:16px;letter-spacing:-0.01em;color:var(--ink);line-height:1.25}
+.dl-jstep .jd{display:block;font-family:var(--sans);font-size:13.5px;line-height:1.5;color:var(--muted);margin-top:3px;max-width:46ch;text-wrap:pretty}
+.dl-jstep.on .jdot{background:var(--orange);border-color:var(--orange);box-shadow:0 0 0 4px rgba(246,111,0,0.15)}
+.dl-jstep.on .jt{color:var(--brown)}
+.dl-jstep:focus-visible{outline:2px solid var(--orange);outline-offset:3px;border-radius:4px}
+.dl-journey-hint{margin-top:18px;font-family:var(--mono);font-size:11px;letter-spacing:0.05em;text-transform:uppercase;color:var(--gray)}
+
+/* ==========================================================================
+   BILLING MACHINERY — customer promise vs. operational engine
+   ========================================================================== */
+.dl-machine{margin-top:36px}
+.dl-machine-flow{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative}
+.dl-machine-flow::before{content:"";position:absolute;left:calc(100%/10);right:calc(100%/10);top:15px;height:2px;background:var(--hair-strong)}
+.dl-machine-flow li{position:relative;padding:0 12px 0 0;text-align:left}
+.dl-machine-flow li:last-child{padding-right:0}
+.dl-machine-flow .mnode{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:8px;background:var(--beige-2);border:1px solid var(--hair-strong);color:var(--brown);margin-bottom:14px}
+.dl-machine-flow li.exc .mnode{border-color:var(--orange);color:var(--orange);background:rgba(246,111,0,0.08)}
+.dl-machine-flow .mnode svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.dl-machine-flow .mt{font-family:var(--sans-tight);font-weight:600;font-size:14px;letter-spacing:-0.01em;color:var(--ink)}
+.dl-machine-flow .md{font-family:var(--sans);font-size:12.5px;line-height:1.45;color:var(--muted);margin-top:5px;text-wrap:pretty}
+.dl-machine-guards{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px;padding-top:22px;border-top:1px solid var(--hair);
+}
+.dl-guard{display:flex;gap:11px;align-items:flex-start}
+.dl-guard .gk{width:22px;height:22px;border-radius:6px;background:var(--beige-2);border:1px solid var(--hair-strong);color:var(--orange);flex:none;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.dl-guard .gk svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.dl-guard .gt{font-family:var(--sans-tight);font-weight:600;font-size:14px;color:var(--ink)}
+.dl-guard .gd{font-family:var(--sans);font-size:12.5px;line-height:1.45;color:var(--muted);margin-top:2px}
+
+/* ==========================================================================
+   SYSTEM SYNTHESIS — the reusable system across portal + app
+   ========================================================================== */
+.dl-synth{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,2.5vw,28px);margin-top:36px}
+.dl-synth-cell{border:1px solid var(--hair);border-radius:6px;background:var(--paper);padding:22px}
+.dl-synth-cell h3{margin:0 0 4px;font-family:var(--sans-tight);font-weight:600;font-size:16px;letter-spacing:-0.01em;color:var(--ink)}
+.dl-synth-cell .sc-sub{margin:0 0 16px;font-family:var(--sans);font-size:13px;line-height:1.5;color:var(--muted)}
+.dl-comp-row{display:flex;flex-wrap:wrap;gap:8px}
+.dl-comp{font-family:var(--sans);font-size:12.5px;color:var(--brown);background:var(--beige-2);border:1px solid var(--hair);border-radius:6px;padding:7px 11px}
+.dl-states{display:flex;flex-wrap:wrap;gap:8px}
+.dl-state-pill{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;letter-spacing:0.04em;text-transform:uppercase;padding:6px 11px;border-radius:100px;border:1px solid var(--hair-strong);color:var(--muted)}
+.dl-state-pill .d{width:7px;height:7px;border-radius:50%;flex:none}
+.dl-state-pill.ok .d{background:#3f8a4d}.dl-state-pill.warn .d{background:var(--orange)}.dl-state-pill.wait .d{background:var(--gray)}.dl-state-pill.err .d{background:#b3401a}
+.dl-roles{display:grid;gap:9px}
+.dl-role-row{display:grid;grid-template-columns:104px minmax(0,1fr);gap:12px;align-items:baseline}
+.dl-role-row .rk{font-family:var(--mono);font-size:11px;letter-spacing:0.05em;text-transform:uppercase;color:var(--gray)}
+.dl-role-row .rv{font-family:var(--sans);font-size:13.5px;color:var(--ink)}
+.dl-cadence{display:flex;flex-wrap:wrap;gap:8px}
+.dl-cadence .cd{font-family:var(--sans);font-size:12.5px;color:var(--ink);background:var(--beige-2);border-radius:6px;padding:7px 11px;display:inline-flex;align-items:center;gap:8px}
+.dl-cadence .cd::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--orange)}
+.dl-synth-cell.span2{grid-column:1 / -1}
+
+/* ==========================================================================
+   READING CURRENT + CHAPTER PROGRESS — the orange current carrying state
+   ========================================================================== */
+.dl-progress{
+  position:fixed;top:0;left:0;right:0;height:2px;z-index:160;pointer-events:none;
+  opacity:0;transition:opacity .3s var(--ease);
+}
+.dl-page.dl-js .dl-progress{opacity:1}
+.dl-progress-bar{
+  display:block;height:100%;width:0;
+  background:linear-gradient(90deg,var(--orange),var(--yellow));
+  box-shadow:0 0 10px -1px rgba(246,111,0,0.5);
+}
+
+.dl-chapters{
+  position:fixed;top:50%;transform:translateY(-50%);right:clamp(16px,3vw,40px);z-index:140;display:none;
+}
+.dl-page.dl-js .dl-chapters{display:block}
+.dl-chapters ul{list-style:none;margin:0;padding:0;position:relative;display:flex;flex-direction:column;align-items:center}
+.dl-chapters-line{position:absolute;top:15px;bottom:15px;left:50%;transform:translateX(-50%);width:2px;background:var(--hair-strong);border-radius:2px;overflow:hidden}
+.dl-chapters-fill{position:absolute;left:0;top:0;width:100%;height:0;background:linear-gradient(180deg,var(--orange),var(--yellow));border-radius:2px}
+.dl-chapters li{position:relative;z-index:1}
+.dl-chapters a{position:relative;display:flex;align-items:center;justify-content:center;width:30px;height:30px;text-decoration:none}
+.dl-chapters .dot{
+  width:9px;height:9px;border-radius:50%;border:1.5px solid var(--muted-2);background:var(--beige);box-sizing:border-box;
+  transition:background .25s var(--ease),border-color .25s var(--ease),box-shadow .25s var(--ease),transform .25s var(--ease);
+}
+.dl-chapters .lbl{
+  position:absolute;right:34px;top:50%;transform:translateY(-50%) translateX(6px);opacity:0;pointer-events:none;white-space:nowrap;
+  font-family:var(--mono);font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--brown);
+  background:var(--paper);border:1px solid var(--hair);border-radius:100px;padding:4px 10px;
+  transition:opacity .2s var(--ease),transform .2s var(--ease);
+}
+.dl-chapters a:hover .lbl,.dl-chapters a:focus-visible .lbl,.dl-chapters a.active .lbl{opacity:1;transform:translateY(-50%)}
+.dl-chapters a.active .dot{background:var(--orange);border-color:var(--orange);box-shadow:0 0 0 4px rgba(246,111,0,0.15);transform:scale(1.15)}
+.dl-chapters a.done .dot{background:var(--muted-2);border-color:var(--muted-2)}
+.dl-chapters a:focus-visible{outline:2px solid var(--orange);outline-offset:2px;border-radius:50%}
+@media (max-width:1199px){ .dl-page.dl-js .dl-chapters{display:none} }
+@media (prefers-reduced-motion:reduce){
+  .dl-progress-bar{box-shadow:none}
+  .dl-chapters .dot,.dl-chapters .lbl{transition:none}
+}
+
+/* ==========================================================================
    RESPONSIVE
    ========================================================================== */
 @media (max-width:960px){
@@ -586,6 +763,35 @@ html.dl-page{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
   .dl-ray-actions{gap:12px}
 }
 
+/* ---- new diagrams: recompose to vertical narratives on smaller screens ---- */
+@media (max-width:860px){
+  .dl-journey{grid-template-columns:1fr;gap:26px}
+  .dl-journey-phone{position:static;order:-1;top:auto}
+}
+@media (max-width:760px){
+  /* relay -> vertical rail */
+  .dl-relay-steps{grid-template-columns:1fr;gap:0}
+  .dl-relay-steps::before{left:6px;right:auto;top:6px;bottom:6px;width:2px;height:auto;background:linear-gradient(180deg,var(--orange),var(--orange-2),var(--yellow))}
+  .dl-page.dl-js .dl-reveal .dl-relay-steps::before{transform:scaleY(0);transform-origin:top center;transition:transform 1.3s var(--ease) .25s}
+  .dl-page.dl-js .dl-reveal.in .dl-relay-steps::before{transform:scaleY(1)}
+  .dl-relay li{padding:0 0 22px 28px}
+  .dl-relay li:last-child{padding-bottom:0}
+  .dl-relay .node{position:absolute;left:0;top:3px;margin-bottom:0}
+  .dl-relay .r-no{margin-bottom:2px}
+  /* machine -> vertical rail */
+  .dl-machine-flow{grid-template-columns:1fr}
+  .dl-machine-flow::before{left:15px;right:auto;top:8px;bottom:8px;width:2px;height:auto}
+  .dl-machine-flow li{padding:0 0 20px 48px;min-height:32px}
+  .dl-machine-flow li:last-child{padding-bottom:0}
+  .dl-machine-flow .mnode{position:absolute;left:0;top:0;margin-bottom:0}
+  .dl-machine-guards{grid-template-columns:1fr;gap:14px}
+}
+@media (max-width:640px){
+  .dl-synth{grid-template-columns:1fr}
+  .dl-primer{flex-direction:column;gap:8px}
+  .dl-relay li .act{max-width:52ch}
+}
+
 /* ==========================================================================
    REDUCED MOTION
    ========================================================================== */
@@ -599,7 +805,9 @@ html.dl-page{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
   .dl-page.dl-js .dl-reveal .dl-stagger,
   .dl-page.dl-js .dl-reveal .dl-jt .line,
   .dl-page.dl-js .dl-reveal .dl-rail::before,
-  .dl-page.dl-js .dl-reveal .dl-mrail::before{
+  .dl-page.dl-js .dl-reveal .dl-mrail::before,
+  .dl-page.dl-js .dl-reveal .dl-relay-steps::before{
     opacity:1 !important;transform:none !important;transition:none !important;
   }
+  .dl-jstep .jdot,.dl-chapters-fill,.dl-progress-bar{transition:none}
 }

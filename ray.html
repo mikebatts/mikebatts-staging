@@ -23,14 +23,50 @@
 
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
-  <link href="css/ray.css" rel="stylesheet" type="text/css">
+  <link href="css/ray.css?v=3" rel="stylesheet" type="text/css">
+  <link href="css/daylight-gate.css?v=1" rel="stylesheet" type="text/css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
   <script type="text/javascript">WebFont.load({ google: { families: ["Instrument Serif:400","Inter:300,400,500,600,700","Inter Tight:400,500,600,700","Inconsolata:400,500,700"] } });</script>
-  <script type="text/javascript">document.documentElement.classList.add('js-on');</script>
+
+  <!-- Privacy gate: critical lock rules + pre-paint lock, before first paint -->
+  <style>
+    html.dl-locked{overflow:hidden}
+    html.dl-locked body > *:not(#dl-gate){visibility:hidden}
+    #dl-gate{display:none}
+    html.dl-locked #dl-gate{display:flex}
+  </style>
+  <script type="text/javascript">
+    try{if(sessionStorage.getItem('dl-unlocked')!=='1'){document.documentElement.classList.add('dl-locked');}}catch(e){document.documentElement.classList.add('dl-locked');}
+  </script>
 </head>
 <body>
+  <!-- ===================== PRIVACY GATE (shared) ===================== -->
+  <div id="dl-gate" role="dialog" aria-modal="true" aria-labelledby="dl-gate-t">
+    <div class="dl-gate-box">
+      <div class="dl-gate-mark">
+        <img src="images/avi.png" alt="Mike Battaglia">
+        <span class="dl-gate-wm">Case study</span>
+      </div>
+      <h1 class="dl-gate-t" id="dl-gate-t">Ray, inside Daylight.</h1>
+      <p class="dl-gate-s">This collection is private for now. Enter the password to view.</p>
+      <form class="dl-gate-form" id="dl-gate-form">
+        <label class="dl-gate-field">
+          <span class="dl-gate-lbl">Password</span>
+          <input id="dl-pass" name="dl-pass" type="password" autocomplete="current-password"
+                 autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Enter password&hellip;">
+        </label>
+        <p class="dl-gate-err" id="dl-err" role="alert" aria-live="assertive"></p>
+        <div class="dl-gate-row">
+          <button id="dl-go" type="submit">View case study &rarr;</button>
+        </div>
+      </form>
+      <a class="dl-gate-back" href="index.html">&larr;&nbsp;Return to mikebatts.net</a>
+    </div>
+  </div>
+
   <a class="ray-skip" href="#ray-main">Skip to content</a>
+  <div class="ray-progress" id="ray-progress" aria-hidden="true"><span class="ray-progress-bar" id="ray-progress-bar"></span></div>
 
   <!-- ============================ HERO ============================ -->
   <header class="ray-hero">
@@ -109,12 +145,12 @@
     </section>
 
     <!-- ==================== INTERACTIVE DEMO ==================== -->
-    <section class="ray-section" aria-labelledby="demo-h">
+    <section class="ray-section ray-demo-section" aria-labelledby="demo-h">
       <div class="ray-wrap reveal">
         <div class="ray-demo-head">
           <span class="ray-demo-tag"><span class="sq" aria-hidden="true"></span>Illustrative interaction</span>
           <h2 class="ray-h2" id="demo-h">See how Ray answers.</h2>
-          <p class="ray-lead">Pick a question. Ray reaches for a tool, narrates the step, and settles on a grounded answer with its sources. This is a rebuild of the real behavior, using fictional records.</p>
+          <p class="ray-lead">Ask anything. Ray reaches for a tool, narrates the step in plain language, and comes to rest on a grounded answer with its sources. This is a faithful rebuild of the real interaction, running entirely in your browser on fictional records.</p>
         </div>
 
         <div class="ray-demo" id="ray-demo">
@@ -122,131 +158,71 @@
           <aside class="ray-demo-rail" aria-label="Sample project context">
             <div class="k">Sample project</div>
             <div class="proj">Maple Street residence</div>
-            <div class="phase">Design review</div>
-            <ul class="ray-demo-steps" id="ray-steps" aria-hidden="true">
+            <div class="ppa">PPA-4021</div>
+            <div class="phase-tag"><span class="d" aria-hidden="true"></span>Document verification</div>
+            <ul class="ray-demo-steps" aria-hidden="true">
               <li class="done">Origination</li>
               <li class="now">Document verification</li>
               <li>CAD design &amp; true-up</li>
               <li>Permitting</li>
               <li>Installation</li>
             </ul>
+            <p class="rail-note">Fictional records. Ray never leaves this page.</p>
           </aside>
 
-          <!-- conversation -->
-          <div class="ray-demo-convo">
-            <div class="ray-demo-topbar">
-              <span class="ray-demo-mini">
-                <video id="ray-demo-video" src="images/ray-avatar-loop.mp4" poster="images/ray-avatar-poster.png"
-                       muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
-              </span>
-              <span>
-                <span class="who">Ray</span>
-                <span class="st" id="ray-presence"> · at rest</span>
-              </span>
-            </div>
-
-            <div class="ray-demo-body">
-              <p class="ray-demo-question" id="ray-question" aria-hidden="false">Why can't this project advance?</p>
-
-              <p class="ray-demo-working" id="ray-working" hidden aria-live="assertive">
-                <span class="pulse" aria-hidden="true"></span><span id="ray-working-text">Working</span>
-              </p>
-
-              <div class="ray-answers" id="ray-answers" aria-live="polite">
-
-                <!-- Answer 1 · blocker / next action / responsibility -->
-                <div class="ray-answer" data-answer="1">
-                  <div class="ray-answer-in">
-                    <span class="a-tag">Grounded answer · illustrative</span>
-                    <p class="a-line">This project can't advance because a required step in the current phase is still open.</p>
-                    <ul class="ray-fields">
-                      <li><span class="f-k">Blocker</span><span class="f-v hot">Title verification has not cleared</span></li>
-                      <li><span class="f-k">Also true</span><span class="f-v">The signed agreement is in and identity is verified</span></li>
-                      <li><span class="f-k">Next action</span><span class="f-v">Confirm title, or request an updated title document from the homeowner</span></li>
-                      <li><span class="f-k">Owner</span><span class="f-v">Assigned reviewer</span></li>
-                    </ul>
-                  </div>
-                  <p class="ray-sources"><b>Sources</b> project stage record, open review items · <b>Freshness</b> checked this turn</p>
-                </div>
-
-                <!-- Answer 2 · document list -->
-                <div class="ray-answer" data-answer="2" hidden>
-                  <div class="ray-answer-in">
-                    <span class="a-tag">Grounded answer · illustrative</span>
-                    <p class="a-line">Two items are still outstanding for this phase.</p>
-                    <ul class="ray-docs">
-                      <li>
-                        <span class="d-name"><span class="ray-dot miss" aria-hidden="true"></span>Proof of title</span>
-                        <span class="d-state miss">Not received</span>
-                        <span class="d-view">Portal only</span>
-                      </li>
-                      <li>
-                        <span class="d-name"><span class="ray-dot miss" aria-hidden="true"></span>Signed work order</span>
-                        <span class="d-state miss">Pending design</span>
-                        <span class="d-view">Portal only</span>
-                      </li>
-                      <li>
-                        <span class="d-name"><span class="ray-dot ok" aria-hidden="true"></span>Government ID</span>
-                        <span class="d-state ok">Received</span>
-                        <span class="d-view">Portal only</span>
-                      </li>
-                      <li>
-                        <span class="d-name"><span class="ray-dot ok" aria-hidden="true"></span>Utility bill</span>
-                        <span class="d-state ok">Received</span>
-                        <span class="d-view">Portal only</span>
-                      </li>
-                    </ul>
-                  </div>
-                  <p class="ray-sources"><b>Sources</b> document checklist for this phase · <b>Freshness</b> checked this turn</p>
-                </div>
-
-                <!-- Answer 3 · proposed action / confirm -->
-                <div class="ray-answer" data-answer="3" hidden>
-                  <div class="ray-answer-in">
-                    <span class="a-tag">Grounded answer · illustrative</span>
-                    <p class="a-line">No project data or published article resolves this on its own, so Ray does not guess. He can hand it to a person.</p>
-                    <div class="ray-proposal" id="ray-proposal" aria-live="polite">
-                      <div class="p-head">Proposed action</div>
-                      <div class="p-body" id="ray-proposal-body">
-                        <p class="p-title">Escalate to a human</p>
-                        <p class="p-desc">Create a support handoff for this project with your question and the current stage. A person reviews it and replies. Nothing runs until you confirm.</p>
-                        <button class="ray-btn primary" type="button" id="ray-confirm">Confirm request</button>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="ray-sources"><b>Sources</b> none available · <b>Freshness</b> Ray could not verify an answer, so he escalated instead</p>
-                </div>
-
+          <!-- chat -->
+          <div class="ray-chat">
+            <div class="ray-chat-top">
+              <canvas class="ray-sig" id="ray-sig" aria-hidden="true"></canvas>
+              <div class="ray-chat-topbar">
+                <span class="ray-demo-mini">
+                  <video id="ray-demo-video" src="images/ray-avatar-loop.mp4" poster="images/ray-avatar-poster.png"
+                         muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+                </span>
+                <span class="rc-idblock">
+                  <span class="who">Ray <span class="beta">Beta</span></span>
+                  <span class="ctx">Maple Street residence · PPA-4021</span>
+                </span>
+                <span class="rc-presence" id="ray-presence" aria-hidden="true">At rest</span>
+                <button type="button" class="rc-newchat" id="ray-newchat" aria-label="Start a new chat">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                  <span>New chat</span>
+                </button>
               </div>
             </div>
 
-            <div class="ray-demo-foot">
-              <p class="prompt-lbl">Ask Ray</p>
-              <ul class="ray-prompts" role="group" aria-label="Sample questions">
-                <li>
-                  <button class="ray-prompt" type="button" data-prompt="1" data-q="Why can't this project advance?"
-                          data-work="Checking project stage and open review items." aria-pressed="true">
-                    <span class="txt">Why can't this project advance?</span><span class="arrow" aria-hidden="true">&rarr;</span>
-                  </button>
-                </li>
-                <li>
-                  <button class="ray-prompt" type="button" data-prompt="2" data-q="What documents are still missing?"
-                          data-work="Reading the document checklist for this phase." aria-pressed="false">
-                    <span class="txt">What documents are still missing?</span><span class="arrow" aria-hidden="true">&rarr;</span>
-                  </button>
-                </li>
-                <li>
-                  <button class="ray-prompt" type="button" data-prompt="3" data-q="I need help from a person."
-                          data-work="No source resolves this. Preparing a human handoff." aria-pressed="false">
-                    <span class="txt">I need help from a person.</span><span class="arrow" aria-hidden="true">&rarr;</span>
-                  </button>
-                </li>
-              </ul>
+            <div class="ray-chat-thread" id="ray-thread" role="log" aria-live="polite" aria-label="Conversation with Ray">
+              <div class="rc-empty" id="ray-empty">
+                <span class="rc-empty-glow" aria-hidden="true"></span>
+                <p class="rc-empty-h">Ask about Maple Street residence</p>
+                <p class="rc-empty-s">This demo answers from a fictional project record and published process knowledge, shows its sources, and hands off to a person when nothing settles the question.</p>
+              </div>
             </div>
+
+            <form class="ray-chat-composer" id="ray-composer">
+              <div class="rc-chips" role="group" aria-label="Sample questions">
+                <button type="button" class="rc-chip" data-q="Why can't this project advance?">Why can't this advance?</button>
+                <button type="button" class="rc-chip" data-q="What documents are still missing?">Missing documents</button>
+                <button type="button" class="rc-chip" data-q="What did review say?">Review feedback</button>
+                <button type="button" class="rc-chip" data-q="How much have we been paid on this project?">Payout status</button>
+                <button type="button" class="rc-chip" data-q="I need help from a person.">Talk to a person</button>
+              </div>
+              <div class="rc-inputrow">
+                <label class="rc-vh" for="ray-input">Ask Ray about this project</label>
+                <textarea id="ray-input" class="rc-input" rows="1" placeholder="Ask about this project&hellip;"
+                          autocomplete="off" autocapitalize="sentences" spellcheck="true" enterkeyhint="send"></textarea>
+                <button type="submit" class="rc-send" id="ray-send" aria-label="Send message" disabled>
+                  <svg class="i-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+                  <svg class="i-stop" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="1.5"/></svg>
+                </button>
+              </div>
+              <p class="rc-disclaimer">
+                <span class="rc-mistakes">Ray can make mistakes. Check important info.</span>
+                <span class="rc-fic"><span class="sq" aria-hidden="true"></span>Fictional demo. No live data, and nothing is ever sent.</span>
+              </p>
+            </form>
           </div>
         </div>
-
-        <p class="ray-demo-note reveal"><span class="sq" aria-hidden="true"></span>A product demonstration using fictional records. No live customer data.</p>
       </div>
     </section>
 
@@ -452,6 +428,7 @@
     </div>
   </footer>
 
-  <script src="js/ray-case-study.js" defer></script>
+  <script src="js/daylight-gate.js" defer></script>
+  <script src="js/ray-case-study.js?v=2" defer></script>
 </body>
 </html>

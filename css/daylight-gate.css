@@ -1,0 +1,104 @@
+/* ==========================================================================
+   Daylight case-study privacy gate — shared across daylight.html and ray.html
+   A static, client-side privacy screen (not server authentication). Unlocking
+   one Daylight page unlocks the collection for the browser session via the
+   shared sessionStorage key `dl-unlocked`. Warm Daylight identity, accessible:
+   real form, visible label, aria-live error, 44px targets, visible focus,
+   reduced-motion aware. No em dashes in copy.
+   ========================================================================== */
+
+/* Critical lock rules also live inline in each page <head> to avoid a flash.
+   This file carries the full visual treatment. */
+
+#dl-gate{
+  --g-orange:#F66F00;
+  --g-beige:#FFF7E9;
+  --g-paper:#FFFCF4;
+  --g-ink:#111111;
+  --g-brown:#4C2806;
+  --g-gray:#A09B93;
+  --g-hair:rgba(30,30,30,0.14);
+  --g-serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --g-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --g-mono:'Inconsolata','SFMono-Regular',ui-monospace,monospace;
+}
+
+/* overlay shell */
+#dl-gate{
+  position:fixed;inset:0;z-index:99999;background:var(--g-beige);
+  align-items:center;justify-content:center;padding:24px;
+}
+#dl-gate.dl-bye{opacity:0;transition:opacity .4s cubic-bezier(0.4,0,0.2,1);pointer-events:none}
+
+/* soft daylight aura behind the card */
+#dl-gate::before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(60% 55% at 50% 34%,rgba(246,111,0,0.10) 0%,rgba(252,204,60,0.05) 40%,rgba(255,247,233,0) 72%);
+}
+/* base current line, brand motif */
+#dl-gate::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:2px;z-index:1;pointer-events:none;
+  background:linear-gradient(90deg,rgba(246,111,0,0) 0%,#F66F00 24%,#FCCC3C 50%,#F66F00 76%,rgba(246,111,0,0) 100%);
+  background-size:200% 100%;animation:dlGateShift 9s cubic-bezier(0.16,1.08,0.38,0.98) infinite;opacity:0.6;
+}
+@keyframes dlGateShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+.dl-gate-box{position:relative;z-index:2;width:100%;max-width:360px;text-align:left}
+.dl-gate-mark{
+  display:flex;align-items:center;gap:12px;margin-bottom:26px;
+}
+.dl-gate-mark img{width:40px;height:40px;border-radius:50%;display:block;flex:none}
+.dl-gate-mark .dl-gate-wm{
+  font-family:var(--g-mono);font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--g-gray);
+}
+.dl-gate-t{
+  font-family:var(--g-serif);font-weight:400;font-size:30px;line-height:1.05;color:var(--g-brown);margin:0 0 8px;
+}
+.dl-gate-s{
+  font-family:var(--g-sans);font-size:15px;line-height:1.5;color:var(--g-brown);opacity:0.72;margin:0 0 26px;max-width:34ch;
+}
+
+.dl-gate-form{margin:0}
+.dl-gate-field{display:block}
+.dl-gate-lbl{
+  display:block;font-family:var(--g-mono);font-size:11px;letter-spacing:0.09em;text-transform:uppercase;
+  color:var(--g-gray);margin-bottom:8px;
+}
+#dl-pass{
+  display:block;width:100%;font-family:var(--g-sans);font-size:16px;color:var(--g-ink);
+  background:var(--g-paper);border:1px solid var(--g-hair);border-radius:6px;
+  padding:13px 14px;outline:none;transition:border-color .16s ease,box-shadow .16s ease;
+  min-height:48px;-webkit-appearance:none;appearance:none;
+}
+#dl-pass::placeholder{color:#c7bfae}
+#dl-pass:focus{border-color:var(--g-orange)}
+#dl-pass:focus-visible{outline:2px solid var(--g-orange);outline-offset:2px}
+
+.dl-gate-row{display:flex;align-items:center;gap:16px;margin-top:18px}
+#dl-go{
+  font-family:'Inter Tight',var(--g-sans);font-size:15px;font-weight:600;letter-spacing:-0.01em;color:#fff;
+  background:var(--g-ink);border:1px solid var(--g-ink);border-radius:6px;
+  padding:12px 22px;min-height:48px;cursor:pointer;transition:opacity .16s ease;
+  display:inline-flex;align-items:center;gap:9px;
+}
+#dl-go:hover{opacity:0.82}
+#dl-go:focus-visible{outline:2px solid var(--g-orange);outline-offset:3px}
+
+.dl-gate-err{
+  font-family:var(--g-sans);font-size:13.5px;line-height:1.4;color:#b3401a;
+  min-height:18px;opacity:0;transition:opacity .16s ease;
+}
+.dl-gate-err.on{opacity:1}
+
+.dl-gate-back{
+  display:inline-flex;align-items:center;gap:7px;margin-top:32px;min-height:44px;
+  font-family:var(--g-sans);font-size:13.5px;color:var(--g-gray);text-decoration:none;
+  transition:color .16s ease;
+}
+.dl-gate-back:hover{color:var(--g-orange)}
+.dl-gate-back:focus-visible{outline:2px solid var(--g-orange);outline-offset:3px;border-radius:2px}
+
+@media (prefers-reduced-motion:reduce){
+  #dl-gate::after{animation:none;background-position:50% 50%}
+  #dl-gate.dl-bye,#dl-pass,#dl-go,.dl-gate-err,.dl-gate-back{transition:none}
+}
