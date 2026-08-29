@@ -19,6 +19,12 @@
 
   var hasIO = 'IntersectionObserver' in window;
 
+  // Data Saver: treat like reduced motion — hold the poster, never autoplay video.
+  var saveData = false;
+  try {
+    saveData = !!(navigator.connection && navigator.connection.saveData);
+  } catch (e) { saveData = false; }
+
   /* -------------------------------------------------------------- */
   /* Hero load choreography — masthead, headline by line, copy,      */
   /* media, device. Pure CSS transitions; JS just flips the switch.  */
@@ -117,7 +123,7 @@
   function setupVideo(id) {
     var video = document.getElementById(id);
     if (!video) { return; }
-    if (reduceMotion) { try { video.removeAttribute('autoplay'); video.pause(); } catch (e) {} return; }
+    if (reduceMotion || saveData) { try { video.removeAttribute('autoplay'); video.pause(); } catch (e) {} return; }
     var tryPlay = function () { var p = video.play(); if (p && typeof p.catch === 'function') { p.catch(function () {}); } };
     tryPlay();
     if (hasIO) {
