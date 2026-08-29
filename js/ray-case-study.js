@@ -3,19 +3,22 @@
    - scroll reveals (progressive, degrades to fully visible)
    - reading progress is CSS-native (animation-timeline:scroll); no JS scroll
      listener. This file only adds the js-on class that fades the current in.
-   - trust architecture: four guarantees scroll beside a CSS position:sticky
-     panel. An IntersectionObserver marks the active guarantee and drives the
-     routing diagram's state. No manual scroll/resize listeners, no pinned
-     giant-height track. Degrades to a legible stack with no JS and on mobile.
-   - signature field (chat topbar canvas): reactive to typing / thinking / rest.
-   - hero routing field (canvas): evidence lanes assemble toward Ray, then
-     settle. Poster-first, lazy, DPR-capped, paused offscreen/hidden, skipped
-     under reduced motion and Save-Data.
+   - fixed nav shadow: an IntersectionObserver sentinel, not a scroll listener.
+   - hero load choreography: flip a class, CSS carries the two-line title,
+     the Ray sun object, and the supporting copy in.
+   - the trust sequence: one persistent answer surface while four guarantees
+     scroll past. GSAP ScrollTrigger drives the scrubbed text reveal and the
+     card's proof state over a CSS-sticky stage (robust, no pin-spacer). It is
+     built desktop + motion only via gsap.matchMedia, so it is cleanly killed
+     and rebuilt on breakpoint changes. Everything is visible and correctly
+     ordered with no GSAP and no JS; mobile and reduced motion get a settled,
+     non-pinned stack. No scroll hijack, no manual continuous scroll listener.
+   - portal to phone: one graceful focus/scale transition on scroll-in.
    - a working chat rebuild: real composer, local deterministic response engine,
      streamed status, grounded answers, propose-then-confirm (support + document
      placement), document concierge, repeat turns, short memory, reset.
-   Honors prefers-reduced-motion. No network calls. Nothing here touches a
-   backend. All records are fictional. Nothing is ever sent.
+   Honors prefers-reduced-motion and Save-Data. No network calls. Nothing here
+   touches a backend. All records are fictional. Nothing is ever sent.
    ========================================================================== */
 (function () {
   'use strict';
@@ -73,6 +76,23 @@
   }
 
   /* -------------------------------------------------------------- */
+  /* Fixed nav shadow — sentinel IntersectionObserver, no scroll listener */
+  /* -------------------------------------------------------------- */
+  function setupNav() {
+    var nav = document.getElementById('ray-nav');
+    if (!nav) { return; }
+    if (!hasIO) { nav.classList.add('is-scrolled'); return; }
+    var sentinel = document.createElement('div');
+    sentinel.setAttribute('aria-hidden', 'true');
+    sentinel.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:8px;pointer-events:none';
+    document.body.appendChild(sentinel);
+    var io = new IntersectionObserver(function (entries) {
+      nav.classList.toggle('is-scrolled', !entries[0].isIntersecting);
+    }, { threshold: 0 });
+    io.observe(sentinel);
+  }
+
+  /* -------------------------------------------------------------- */
   /* Hero load choreography — flip the switch, CSS carries the rest */
   /* -------------------------------------------------------------- */
   function setupHero() {
@@ -86,64 +106,8 @@
   }
 
   /* -------------------------------------------------------------- */
-  /* Trust architecture — four guarantees drive a sticky state panel */
-  /* No pinned track, no scroll listener. IntersectionObserver only. */
-  /* -------------------------------------------------------------- */
-  function setupTrustArchitecture() {
-    var section = document.getElementById('ray-system');
-    if (!section) { return; }
-    var diagram = document.getElementById('sys-diagram');
-    var stateLabel = document.getElementById('sys-diagram-state');
-    var moves = Array.prototype.slice.call(section.querySelectorAll('.sys-move'));
-    if (!moves.length) { return; }
-
-    var STATE_LABEL = {
-      evidence: 'retrieving',
-      authority: 'authorizing',
-      context: 'binding context',
-      action: 'awaiting confirm',
-      settled: 'settled'
-    };
-
-    function activate(move) {
-      moves.forEach(function (m) { m.classList.toggle('is-active', m === move); });
-      var st = move.getAttribute('data-state') || 'settled';
-      if (diagram) { diagram.setAttribute('data-state', st); }
-      if (stateLabel) { stateLabel.textContent = STATE_LABEL[st] || st; }
-    }
-
-    // First guarantee is active by default so the panel is never blank.
-    activate(moves[0]);
-
-    if (reduceMotion || !hasIO) {
-      // Settled, legible: leave the first active, diagram shows the settled node.
-      if (diagram) { diagram.setAttribute('data-state', 'settled'); }
-      if (stateLabel) { stateLabel.textContent = STATE_LABEL.settled; }
-      moves.forEach(function (m) { m.classList.add('is-active'); });
-      return;
-    }
-
-    // Track which guarantees are in the activation band; the last one to enter
-    // (deepest into the read) wins, so the panel follows the reading position.
-    // A thin activation line at viewport centre. Exactly one guarantee overlaps
-    // it at a time, so tall cards activate reliably regardless of their height.
-    var visible = {};
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        var idx = moves.indexOf(entry.target);
-        if (idx < 0) { return; }
-        visible[idx] = entry.isIntersecting;
-      });
-      var chosen = -1;
-      for (var i = 0; i < moves.length; i++) { if (visible[i]) { chosen = i; } }
-      if (chosen >= 0) { activate(moves[chosen]); }
-    }, { threshold: 0, rootMargin: '-50% 0px -50% 0px' });
-    moves.forEach(function (m) { io.observe(m); });
-  }
-
-  /* -------------------------------------------------------------- */
-  /* Hero video — plays as the empty-state identity, paused offscreen */
-  /* Save-Data / reduced motion hold the poster.                     */
+  /* Ray sun video — plays as the hero identity, paused offscreen.  */
+  /* Save-Data / reduced motion hold the poster.                    */
   /* -------------------------------------------------------------- */
   function setupHeroVideo() {
     var video = document.getElementById('ray-hero-video');
@@ -168,237 +132,163 @@
   }
 
   /* -------------------------------------------------------------- */
-  /* Hero routing field (Canvas 2D)                                 */
-  /* Evidence lanes converge toward Ray and settle. Progressive     */
-  /* enhancement over the static SVG poster: lazy, DPR-capped, one  */
-  /* RAF, paused offscreen/hidden. Skipped under reduced motion /   */
-  /* Save-Data / no 2D context. Never the only carrier of meaning.  */
+  /* The trust sequence — pinned split + scrubbed text reveal.      */
+  /* Real GSAP ScrollTrigger, desktop + motion only, over a sticky  */
+  /* stage. Cleanly reverted on breakpoint change by gsap.matchMedia*/
+  /* Without GSAP/JS: the CSS shows every proof and step in order.  */
   /* -------------------------------------------------------------- */
-  function setupHeroField() {
-    var canvas = document.getElementById('ray-field');
-    if (!canvas || reduceMotion || saveData) { return; }
-    var ctx = canvas.getContext ? canvas.getContext('2d') : null;
-    if (!ctx) { return; }
+  function setupTrust() {
+    var split = document.getElementById('ray-trust-split');
+    var card = document.getElementById('ray-trust-card');
+    if (!split || !card) { return; }
+    var steps = Array.prototype.slice.call(split.querySelectorAll('.ray-trust-step'));
+    var proofs = Array.prototype.slice.call(card.querySelectorAll('.tc-proof'));
+    if (!steps.length || !proofs.length) { return; }
 
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    var w = 0, h = 0, cx = 0, cy = 0, ring = 0;
-    var t = 0, energy = 0, target = 0.5, raf = null, running = false, started = false;
-    var lanes = [];
-
-    function build() {
-      var r = canvas.getBoundingClientRect();
-      w = Math.max(1, Math.round(r.width));
-      h = Math.max(1, Math.round(r.height));
-      canvas.width = Math.round(w * dpr);
-      canvas.height = Math.round(h * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      cx = w * 0.5; cy = h * 0.5;
-      ring = Math.min(w, h) * 0.24; // matches the avatar disc radius region
-
-      // deterministic lanes: evidence entering from both sides, converging on Ray
-      lanes = [];
-      var COUNT = w < 380 ? 6 : 9;
-      for (var i = 0; i < COUNT; i++) {
-        var side = i % 2 === 0 ? -1 : 1;                // left / right
-        var f = (i + 0.5) / COUNT;                      // 0..1 vertical spread
-        var y0 = h * (0.12 + 0.76 * f);
-        var startX = side < 0 ? -w * 0.04 : w * 1.04;
-        var ang = Math.atan2(cy - y0, (cx - startX));   // toward centre
-        // endpoint just outside the avatar ring, on the incoming side
-        var ex = cx - Math.cos(ang) * (ring + 6) * (side < 0 ? 1 : 1);
-        var ey = cy - Math.sin(ang) * (ring + 6);
-        // control point bends the lane toward the horizontal midline
-        var mx = (startX + ex) * 0.5;
-        var my = y0 + (cy - y0) * 0.35;
-        lanes.push({
-          sx: startX, sy: y0, cxp: mx, cyp: my, ex: ex, ey: ey,
-          speed: 0.10 + (i % 4) * 0.018,
-          offset: (i * 0.137) % 1,
-          packets: 2
-        });
-      }
-    }
-
-    function bez(l, u) {
-      var iu = 1 - u;
-      var x = iu * iu * l.sx + 2 * iu * u * l.cxp + u * u * l.ex;
-      var y = iu * iu * l.sy + 2 * iu * u * l.cyp + u * u * l.ey;
-      return [x, y];
-    }
-
-    function draw() {
-      ctx.clearRect(0, 0, w, h);
-      var e = 0.2 + 0.8 * energy;
-
-      // faint lanes
-      ctx.lineWidth = 1;
-      for (var i = 0; i < lanes.length; i++) {
-        var l = lanes[i];
-        ctx.beginPath();
-        ctx.moveTo(l.sx, l.sy);
-        ctx.quadraticCurveTo(l.cxp, l.cyp, l.ex, l.ey);
-        ctx.strokeStyle = 'rgba(246,111,0,' + (0.06 + 0.06 * energy).toFixed(3) + ')';
-        ctx.stroke();
-      }
-
-      // travelling evidence packets, converging then fading into Ray
-      ctx.globalCompositeOperation = 'lighter';
-      for (var j = 0; j < lanes.length; j++) {
-        var ln = lanes[j];
-        for (var k = 0; k < ln.packets; k++) {
-          var u = (t * ln.speed + ln.offset + k / ln.packets) % 1;
-          var pt = bez(ln, u);
-          // fade in near the edge, fade out as it reaches Ray
-          var a = Math.sin(Math.min(1, u) * Math.PI) * e * 0.9;
-          if (a <= 0.01) { continue; }
-          var rad = 1.6 + 1.8 * (1 - u);
-          var col = k % 2 === 0 ? '246,111,0' : '252,204,60';
-          var g = ctx.createRadialGradient(pt[0], pt[1], 0, pt[0], pt[1], rad * 3);
-          g.addColorStop(0, 'rgba(' + col + ',' + a.toFixed(3) + ')');
-          g.addColorStop(1, 'rgba(' + col + ',0)');
-          ctx.fillStyle = g;
-          ctx.beginPath();
-          ctx.arc(pt[0], pt[1], rad * 3, 0, Math.PI * 2);
-          ctx.fill();
-        }
-      }
-
-      // the settle ring: a quiet pulse around Ray, the answer at rest
-      var pulse = 0.5 + 0.5 * Math.sin(t * 0.6);
-      ctx.lineWidth = 1;
-      ctx.strokeStyle = 'rgba(252,204,60,' + (0.05 + 0.06 * pulse * energy).toFixed(3) + ')';
-      ctx.beginPath();
-      ctx.arc(cx, cy, ring + 10 + pulse * 4, 0, Math.PI * 2);
-      ctx.stroke();
-      ctx.globalCompositeOperation = 'source-over';
-    }
-
-    function frame() {
-      t += 0.016;
-      energy += (target - energy) * 0.04; // one-time assemble, then hold at rest
-      draw();
-      raf = window.requestAnimationFrame(frame);
-    }
-    function start() {
-      if (running) { return; }
-      running = true;
-      if (!started) { started = true; }
-      frame();
-    }
-    function stop() {
-      running = false;
-      if (raf) { window.cancelAnimationFrame(raf); raf = null; }
-    }
-
-    build();
-
-    // lazy: only run when the hero is on screen; pause otherwise / when hidden
-    if (hasIO) {
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) { start(); } else { stop(); }
-        });
-      }, { threshold: 0.05 });
-      io.observe(canvas);
-    } else {
-      start();
-    }
-    document.addEventListener('visibilitychange', function () {
-      if (document.hidden) { stop(); } else if (isOnScreen(canvas)) { start(); }
+    // Below the pinned desktop composition, pair each guarantee with the proof
+    // it describes. The persistent card keeps the shared question and answer;
+    // the proof details move into the reading flow instead of appearing as one
+    // enormous duplicate block before all four explanations.
+    steps.forEach(function (step) {
+      var state = step.getAttribute('data-trust');
+      var proof = proofs.filter(function (item) {
+        return item.getAttribute('data-proof') === state;
+      })[0];
+      if (!proof || step.querySelector('.ray-trust-mobile-proof')) { return; }
+      var mobileProof = document.createElement('div');
+      mobileProof.className = 'ray-trust-mobile-proof';
+      mobileProof.appendChild(proof.cloneNode(true));
+      step.appendChild(mobileProof);
     });
-    var rt = null;
-    window.addEventListener('resize', function () {
-      if (rt) { clearTimeout(rt); }
-      rt = setTimeout(function () { build(); }, 180);
-    }, { passive: true });
-  }
+    split.classList.add('has-mobile-pairs');
 
-  function isOnScreen(eliel) {
-    try {
-      var r = eliel.getBoundingClientRect();
-      return r.bottom > 0 && r.top < (window.innerHeight || 800);
-    } catch (e) { return true; }
-  }
+    var gsap = window.gsap;
+    var ScrollTrigger = window.ScrollTrigger;
+    // No GSAP (blocked / failed): leave the legible settled stack in place.
+    if (!gsap || !ScrollTrigger || reduceMotion) { return; }
+    try { gsap.registerPlugin(ScrollTrigger); } catch (e) { return; }
 
-  /* -------------------------------------------------------------- */
-  /* Signature field — a calm, reactive canvas that carries Ray     */
-  /* inside the product window. Reacts to typing / thinking / rest. */
-  /* -------------------------------------------------------------- */
-  function SignatureField(canvas) {
-    var ctx = canvas.getContext ? canvas.getContext('2d') : null;
-    if (!ctx) { return { setEnergy: function () {}, resize: function () {}, start: function () {}, stop: function () {} }; }
-
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    var w = 0, h = 0, t = 0, energy = 0.14, target = 0.14, raf = null, running = false;
-
-    var LAYERS = [
-      { col: '246,111,0', base: 0.62, amp: 0.40, speed: 0.55, freq: 1.2, phase: 0.0, alpha: 0.55 },
-      { col: '255,138,43', base: 0.58, amp: 0.30, speed: 0.85, freq: 1.9, phase: 1.9, alpha: 0.42 },
-      { col: '252,204,60', base: 0.54, amp: 0.22, speed: 1.20, freq: 2.7, phase: 3.4, alpha: 0.30 }
-    ];
-
-    function resize() {
-      var r = canvas.getBoundingClientRect();
-      w = Math.max(1, Math.round(r.width));
-      h = Math.max(1, Math.round(r.height));
-      canvas.width = Math.round(w * dpr);
-      canvas.height = Math.round(h * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    function activate(state) {
+      card.setAttribute('data-trust', state);
+      proofs.forEach(function (p) {
+        p.classList.toggle('is-on', p.getAttribute('data-proof') === state);
+      });
     }
 
-    function draw() {
-      ctx.clearRect(0, 0, w, h);
-      var e = 0.25 + 0.75 * energy;
-      ctx.globalCompositeOperation = 'lighter';
-      for (var i = 0; i < LAYERS.length; i++) {
-        var L = LAYERS[i];
-        var base = h * L.base;
-        var amp = h * L.amp * e;
-        ctx.beginPath();
-        for (var x = 0; x <= w; x += 6) {
-          var y = base + Math.sin((x / (w || 1)) * Math.PI * 2 * L.freq + t * L.speed + L.phase) * amp;
-          if (x === 0) { ctx.moveTo(x, y); } else { ctx.lineTo(x, y); }
+    // Split each step paragraph into words for the scrubbed reveal. Done once,
+    // preserving text content and spacing, so no-JS text stays intact.
+    function wordwrap(elm) {
+      if (elm.dataset.split === '1') { return; }
+      var text = elm.textContent;
+      var parts = text.split(/(\s+)/);
+      var frag = document.createDocumentFragment();
+      parts.forEach(function (tok) {
+        if (/^\s+$/.test(tok)) { frag.appendChild(document.createTextNode(tok)); }
+        else if (tok.length) {
+          var s = document.createElement('span');
+          s.className = 'rt-word';
+          s.textContent = tok;
+          frag.appendChild(s);
         }
-        ctx.lineTo(w, h);
-        ctx.lineTo(0, h);
-        ctx.closePath();
-        var g = ctx.createLinearGradient(0, base - amp, 0, h);
-        g.addColorStop(0, 'rgba(' + L.col + ',' + (L.alpha * (0.35 + 0.65 * energy)).toFixed(3) + ')');
-        g.addColorStop(1, 'rgba(' + L.col + ',0)');
-        ctx.fillStyle = g;
-        ctx.fill();
+      });
+      elm.textContent = '';
+      elm.appendChild(frag);
+      elm.dataset.split = '1';
+    }
+
+    var mm = gsap.matchMedia();
+
+    // Desktop + fine control + motion: the pinned split with scrub + state.
+    mm.add('(min-width: 1025px) and (prefers-reduced-motion: no-preference)', function () {
+      split.classList.add('is-pinned');
+      activate(steps[0].getAttribute('data-trust'));
+
+      var triggers = [];
+
+      steps.forEach(function (step) {
+        var para = step.querySelector('.ray-trust-step-p');
+        if (para) { wordwrap(para); }
+        var words = para ? para.querySelectorAll('.rt-word') : [];
+
+        // scrubbed text reveal for this step's copy
+        if (words.length) {
+          var tl = gsap.to(words, {
+            opacity: 1, stagger: 0.08, ease: 'none',
+            scrollTrigger: {
+              trigger: step,
+              start: 'top 78%',
+              end: 'top 34%',
+              scrub: true
+            }
+          });
+          triggers.push(tl.scrollTrigger);
+        }
+
+      });
+
+      // One state controller chooses the guarantee nearest the viewport
+      // centre. This stays deterministic during ordinary scrolling, large
+      // trackpad jumps, scrollbar dragging, and reverse navigation.
+      function syncNearestProof() {
+        var centre = (window.innerHeight || 800) / 2;
+        var nearest = steps[0];
+        var distance = Infinity;
+        steps.forEach(function (step) {
+          var rect = step.getBoundingClientRect();
+          var current = Math.abs((rect.top + rect.height / 2) - centre);
+          if (current < distance) { distance = current; nearest = step; }
+        });
+        activate(nearest.getAttribute('data-trust'));
       }
-      ctx.globalCompositeOperation = 'source-over';
-    }
+      var stateTrigger = ScrollTrigger.create({
+        trigger: split,
+        start: 'top bottom',
+        end: 'bottom top',
+        onEnter: syncNearestProof,
+        onEnterBack: syncNearestProof,
+        onUpdate: syncNearestProof
+      });
+      triggers.push(stateTrigger);
 
-    function frame() {
-      t += 0.016 * (0.5 + energy * 1.6);
-      energy += (target - energy) * 0.06;
-      draw();
-      raf = window.requestAnimationFrame(frame);
-    }
+      ScrollTrigger.refresh();
 
-    function start() {
-      if (running || reduceMotion) { return; }
-      running = true;
-      frame();
-    }
-    function stop() {
-      running = false;
-      if (raf) { window.cancelAnimationFrame(raf); raf = null; }
-    }
+      return function () {
+        // cleanup on breakpoint change: kill triggers, drop pinned styling.
+        triggers.forEach(function (t) { if (t && t.kill) { t.kill(); } });
+        split.classList.remove('is-pinned');
+        proofs.forEach(function (p) { p.classList.remove('is-on'); });
+        card.setAttribute('data-trust', 'source');
+      };
+    });
+  }
 
-    resize();
-    if (reduceMotion) {
-      energy = 0.4; t = 0.6; draw();
-    }
+  /* -------------------------------------------------------------- */
+  /* Portal to phone — one graceful focus/scale transition on entry */
+  /* Blur is used only here, as a focus device. Desktop + motion.   */
+  /* -------------------------------------------------------------- */
+  function setupReaders() {
+    var stage = document.getElementById('ray-readers-stage');
+    var phone = document.getElementById('ray-phone');
+    var portal = document.getElementById('ray-portal');
+    if (!stage || !phone || !portal) { return; }
+    var gsap = window.gsap;
+    var ScrollTrigger = window.ScrollTrigger;
+    if (!gsap || !ScrollTrigger || reduceMotion) { return; }
+    try { gsap.registerPlugin(ScrollTrigger); } catch (e) { return; }
 
-    return {
-      setEnergy: function (v) { target = v; },
-      resize: function () { resize(); if (reduceMotion) { draw(); } },
-      start: start,
-      stop: stop
-    };
+    var mm = gsap.matchMedia();
+    mm.add('(min-width: 1025px) and (prefers-reduced-motion: no-preference)', function () {
+      var tl = gsap.timeline({
+        scrollTrigger: { trigger: stage, start: 'top 82%', end: 'top 46%', scrub: true }
+      });
+      tl.from(portal, { autoAlpha: 0, x: -18, filter: 'blur(6px)', ease: 'none' }, 0)
+        .from(phone, { autoAlpha: 0.4, y: 24, scale: 0.965, filter: 'blur(8px)', ease: 'none' }, 0);
+      return function () {
+        if (tl.scrollTrigger) { tl.scrollTrigger.kill(); }
+        tl.kill();
+        gsap.set([portal, phone], { clearProps: 'all' });
+      };
+    });
   }
 
   /* -------------------------------------------------------------- */
@@ -417,9 +307,6 @@
     var presenceEl = document.getElementById('ray-presence');
     var newChatBtn = document.getElementById('ray-newchat');
     var demoVideo = document.getElementById('ray-demo-video');
-    var sigCanvas = document.getElementById('ray-sig');
-
-    var sig = sigCanvas ? SignatureField(sigCanvas) : null;
 
     var busy = false;
     var timers = [];
@@ -782,7 +669,6 @@
       chat.classList.remove('is-working');
       setPresence('At rest');
       freezeAvatar();
-      if (sig) { sig.setEnergy(0.16); }
       updateSendState();
     }
 
@@ -797,7 +683,6 @@
       hideEmpty();
       appendUser(text);
       setPresence('Working');
-      if (sig) { sig.setEnergy(0.9); }
       moveAvatar();
       updateSendState();
 
@@ -885,16 +770,12 @@
       input.addEventListener('input', function () {
         autosize();
         updateSendState();
-        if (!busy && sig) { sig.setEnergy(input.value.trim().length ? 0.42 : 0.16); }
       });
       input.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' && !e.shiftKey) {
           e.preventDefault();
           if (!busy) { sendCurrent(); }
         }
-      });
-      input.addEventListener('blur', function () {
-        if (!busy && sig) { sig.setEnergy(0.16); }
       });
     }
 
@@ -943,7 +824,6 @@
         showEmpty();
         setPresence('At rest');
         freezeAvatar();
-        if (sig) { sig.setEnergy(0.16); }
         if (input) { input.value = ''; autosize(); }
         updateSendState();
         if (pointerFine && input) { input.focus(); }
@@ -1022,27 +902,6 @@
       }
     });
 
-    // signature field lifecycle: run when the demo is visible, pause otherwise
-    if (sig && !reduceMotion) {
-      sig.start();
-      if (hasIO) {
-        var sio = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) { sig.start(); } else { sig.stop(); }
-          });
-        }, { threshold: 0.05 });
-        sio.observe(demo);
-      }
-      document.addEventListener('visibilitychange', function () {
-        if (document.hidden) { sig.stop(); } else { sig.start(); }
-      });
-      var rt = null;
-      window.addEventListener('resize', function () {
-        if (rt) { clearTimeout(rt); }
-        rt = setTimeout(function () { sig.resize(); }, 160);
-      }, { passive: true });
-    }
-
     if (reduceMotion && demoVideo) {
       try { demoVideo.removeAttribute('autoplay'); demoVideo.pause(); } catch (e) {}
     }
@@ -1056,10 +915,11 @@
     try {
       setupReveals();
       docEl.classList.add('js-on');
+      setupNav();
       setupHero();
-      setupTrustArchitecture();
       setupHeroVideo();
-      setupHeroField();
+      setupTrust();
+      setupReaders();
       setupChat();
     } catch (e) {
       // Fail open: any init exception must never leave content stranded hidden.
