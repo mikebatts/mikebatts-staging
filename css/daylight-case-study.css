@@ -141,7 +141,14 @@ html.dl-page{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
    ========================================================================== */
 .dl-current{position:fixed;top:0;left:0;right:0;height:2px;z-index:160;pointer-events:none;opacity:0;transition:opacity .3s var(--ease);background:rgba(76,40,6,0.06)}
 .dl-page.dl-js .dl-current{opacity:1}
-.dl-current-bar{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--orange),var(--yellow));box-shadow:0 0 10px -1px rgba(246,111,0,0.5)}
+/* The bar fills left-to-right with reading position via a CSS scroll-driven
+   animation — no JS scroll/resize listeners. Fallback (no scroll timelines):
+   a calm, settled full-width rule. Progressive enhancement animates scaleX. */
+.dl-current-bar{display:block;height:100%;width:100%;transform-origin:left center;transform:scaleX(1);background:linear-gradient(90deg,var(--orange),var(--yellow));box-shadow:0 0 10px -1px rgba(246,111,0,0.5)}
+@keyframes dl-current-fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@supports (animation-timeline:scroll()){
+  .dl-current-bar{transform:scaleX(0);animation:dl-current-fill linear both;animation-timeline:scroll(root block)}
+}
 
 /* ==========================================================================
    HERO — editorial split: thesis + one real product screen. No shader.
@@ -437,6 +444,7 @@ html.dl-page{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){
   html.dl-page{scroll-behavior:auto}
   .dl-avatar-ring{animation:none}
+  .dl-current-bar{animation:none !important;transform:scaleX(1) !important}
   .dl-page.dl-js .dl-reveal{opacity:1 !important;transform:none !important;transition:none !important}
   .dl-page.dl-js .dl-rt-ask,.dl-page.dl-js .dl-rt-ans{opacity:1 !important;transform:none !important;transition:none}
   .dl-life .dl-life-rail::after{transform:scaleY(1) !important;transition:none !important}

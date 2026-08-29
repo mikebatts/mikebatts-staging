@@ -2,9 +2,10 @@
    Daylight case study — page behavior
    A field guide, not a scroll experience. Content is fully present in the HTML;
    JavaScript only enhances: it reveals sections as they enter, draws the orange
-   "current" line through the lifecycle and the payout chain, plays the Ray loop
-   in view, and reads out the top progress current. Everything degrades to a
-   fully visible, settled page, and reduced motion shows the end state.
+   "current" line through the lifecycle and the payout chain, and plays the Ray
+   loop in view. The top reading current is CSS-native (scroll-driven animation),
+   so no scroll or resize listeners live here. Everything degrades to a fully
+   visible, settled page, and reduced motion shows the end state.
    No network calls. Nothing here touches a backend. No scroll hijacking.
    ========================================================================== */
 (function () {
@@ -15,7 +16,6 @@
     reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   } catch (e) { reduceMotion = false; }
 
-  function clamp01(x) { return x < 0 ? 0 : (x > 1 ? 1 : x); }
   var hasIO = 'IntersectionObserver' in window;
 
   /* -------------------------------------------------------------- */
@@ -113,28 +113,6 @@
   }
 
   /* -------------------------------------------------------------- */
-  /* Reading current — one calm top progress line (decorative)       */
-  /* A passive readout of scroll position; it never drives layout or */
-  /* hijacks scrolling.                                              */
-  /* -------------------------------------------------------------- */
-  function setupReadingCurrent() {
-    var bar = document.getElementById('dl-current-bar');
-    if (!bar) { return; }
-    var ticking = false;
-    function update() {
-      var doc = document.documentElement;
-      var max = doc.scrollHeight - window.innerHeight;
-      var pct = max > 0 ? clamp01(window.scrollY / max) : 0;
-      bar.style.width = (pct * 100).toFixed(2) + '%';
-      ticking = false;
-    }
-    function onScroll() { if (!ticking) { ticking = true; window.requestAnimationFrame(update); } }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-    update();
-  }
-
-  /* -------------------------------------------------------------- */
   function init() {
     var docEl = document.documentElement;
     try {
@@ -143,7 +121,6 @@
       setupCurrents();
       setupRayflow();
       setupVideo('dl-ray-video');
-      setupReadingCurrent();
     } catch (e) {
       docEl.classList.remove('dl-js');
     }
