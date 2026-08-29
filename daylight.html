@@ -23,7 +23,7 @@
 
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
-  <link href="css/daylight-case-study.css?v=11" rel="stylesheet" type="text/css">
+  <link href="css/daylight-case-study.css?v=15" rel="stylesheet" type="text/css">
   <link href="css/daylight-gate.css?v=1" rel="stylesheet" type="text/css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
@@ -45,7 +45,7 @@
   <div id="dl-gate" role="dialog" aria-modal="true" aria-labelledby="dl-gate-t">
     <div class="dl-gate-box">
       <div class="dl-gate-mark">
-        <img src="images/avi.png" alt="Mike Battaglia">
+        <img src="images/avi.png" alt="Mike Battaglia" width="2208" height="2296">
         <span class="dl-gate-wm">Case study</span>
       </div>
       <h1 class="dl-gate-t" id="dl-gate-t">Daylight, up close.</h1>
@@ -114,31 +114,50 @@
         <p class="dl-lead dl-measure">Going solar is not buying a gadget. It is construction on a roof, permits from the town, permission from the utility, financing, and money moving between several companies for years. A homeowner should feel one calm project. Underneath, a group of companies has to move in step and never lose the thread.</p>
       </div>
 
-      <!-- sticky cinematic scene: one project object at the center, hands enter in turn -->
+      <!-- pinned build: one phase leads at a time on the left; the same project
+           object evolves on the right. No spokes, no floating corner cards. -->
       <div class="dl-wrap">
-        <div class="dl-scene-track" data-progress="sticky">
-          <div class="dl-scene-pin">
-            <div class="dl-scene" id="dl-scene" aria-label="One home project at the center. Four groups of companies contribute in turn: agreement, review and design, build, and going live. The project holds one verified shared state that every party works from.">
+        <div class="dl-build-track" data-progress="sticky">
+          <div class="dl-build-pin">
+            <ol class="dl-build-rail" id="dl-build-rail" aria-label="One solar project across four phases">
+              <li><button class="dl-build-step is-on" type="button" data-step="0">
+                <span class="bs-dot" aria-hidden="true"></span>
+                <span class="bs-body">
+                  <span class="bs-phase">Agreement</span>
+                  <span class="bs-names"><b>Homeowner</b> &middot; Sales</span>
+                  <span class="bs-copy">They agree on a system and sign. One project file, shared by everyone.</span>
+                </span>
+              </button></li>
+              <li><button class="dl-build-step" type="button" data-step="1">
+                <span class="bs-dot" aria-hidden="true"></span>
+                <span class="bs-body">
+                  <span class="bs-phase">Review &amp; design</span>
+                  <span class="bs-names"><b>Reviewer</b> &middot; Designer &middot; Financing</span>
+                  <span class="bs-copy">Reviewers, designers, and financing turn the file into a buildable system.</span>
+                </span>
+              </button></li>
+              <li><button class="dl-build-step" type="button" data-step="2">
+                <span class="bs-dot" aria-hidden="true"></span>
+                <span class="bs-body">
+                  <span class="bs-phase">Build</span>
+                  <span class="bs-names"><b>Installer</b> &middot; Town &middot; Utility</span>
+                  <span class="bs-copy">The installer permits it, the town approves, the utility clears it to connect.</span>
+                </span>
+              </button></li>
+              <li><button class="dl-build-step" type="button" data-step="3">
+                <span class="bs-dot" aria-hidden="true"></span>
+                <span class="bs-body">
+                  <span class="bs-phase">Live</span>
+                  <span class="bs-names"><b>Activation</b> &middot; Operations</span>
+                  <span class="bs-copy">The system switches on and runs, its whole history intact.</span>
+                </span>
+              </button></li>
+            </ol>
 
-              <!-- connectors: each group links to the shared project at the center -->
-              <svg class="dl-scene-links" viewBox="0 0 1000 640" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-                <g class="sl-base">
-                  <path d="M210,168 L470,300"/>
-                  <path d="M790,168 L530,300"/>
-                  <path d="M790,472 L530,340"/>
-                  <path d="M210,472 L470,340"/>
-                </g>
-                <g class="sl-live">
-                  <path class="sl" data-step="0" d="M210,168 L470,300"/>
-                  <path class="sl" data-step="1" d="M790,168 L530,300"/>
-                  <path class="sl" data-step="2" d="M790,472 L530,340"/>
-                  <path class="sl" data-step="3" d="M210,472 L470,340"/>
-                </g>
-              </svg>
-
-              <!-- the shared project object: the same home, evolving -->
-              <div class="dl-scene-core">
-                <svg class="dl-home dl-home--build" viewBox="0 0 260 210" role="img" aria-label="A home energy project">
+            <!-- the same project object, evolving. data-step drives its build. -->
+            <div class="dl-build-stage" id="dl-build-stage" data-step="0" aria-hidden="true">
+              <div class="dl-build-object">
+                <svg class="dl-home dl-home--build" viewBox="0 0 260 210" role="img" aria-label="One home solar project, evolving from agreement to live">
                   <line class="hm-ground" x1="24" y1="184" x2="236" y2="184"/>
                   <g class="hm-doc">
                     <rect x="34" y="120" width="40" height="52" rx="3"/>
@@ -166,155 +185,134 @@
                     </g>
                   </g>
                 </svg>
-                <div class="dl-core-state" aria-hidden="true">
-                  <span class="cs-k">Shared project state</span>
-                  <span class="cs-track"><span class="cs-fill" id="dl-core-fill"></span></span>
-                  <span class="cs-count"><b id="dl-core-n">0</b> of 4 verified</span>
-                </div>
               </div>
-
-              <!-- four groups of hands, one per phase, positioned around the project -->
-              <div class="dl-role dl-role--tl" data-step="0">
-                <span class="rl-phase">Agreement</span>
-                <span class="rl-names"><b>Homeowner</b> &middot; Sales</span>
-                <span class="rl-dot" aria-hidden="true"></span>
-              </div>
-              <div class="dl-role dl-role--tr" data-step="1">
-                <span class="rl-phase">Review &amp; design</span>
-                <span class="rl-names"><b>Reviewer</b> &middot; Designer &middot; Financing</span>
-                <span class="rl-dot" aria-hidden="true"></span>
-              </div>
-              <div class="dl-role dl-role--br" data-step="2">
-                <span class="rl-phase">Build</span>
-                <span class="rl-names"><b>Installer</b> &middot; Town &middot; Utility</span>
-                <span class="rl-dot" aria-hidden="true"></span>
-              </div>
-              <div class="dl-role dl-role--bl" data-step="3">
-                <span class="rl-phase">Live</span>
-                <span class="rl-names"><b>Activation</b> &middot; Operations</span>
-                <span class="rl-dot" aria-hidden="true"></span>
+              <div class="dl-core-state">
+                <span class="cs-k">Shared project state</span>
+                <span class="cs-track"><span class="cs-fill" id="dl-core-fill"></span></span>
+                <span class="cs-count"><b id="dl-core-n">1</b> of 4 verified</span>
               </div>
             </div>
-
-            <!-- the teaching caption swaps with the active phase -->
-            <div class="dl-scene-caption" id="dl-scene-caption" aria-live="polite">
-              <ol class="dl-scene-steps">
-                <li class="sc-step is-on" data-step="0"><span class="sc-n">01</span><p>The homeowner and their rep agree on a system and sign. The project is created, and everyone starts from the same file.</p></li>
-                <li class="sc-step" data-step="1"><span class="sc-n">02</span><p>Reviewers, designers, and financing check the file and turn it into a real, buildable system.</p></li>
-                <li class="sc-step" data-step="2"><span class="sc-n">03</span><p>The installer designs and permits it, the town approves, and the utility clears it to connect.</p></li>
-                <li class="sc-step" data-step="3"><span class="sc-n">04</span><p>The system is switched on and moves into everyday operation, with its whole history intact.</p></li>
-              </ol>
-            </div>
-
-            <!-- mobile: four compact, fully-visible scenes (injected by JS) -->
-            <div class="dl-proj-mobile" id="dl-proj-mobile" aria-hidden="true"></div>
           </div>
         </div>
       </div>
+
+      <!-- mobile: four compact, fully-visible scenes (injected by JS). Not
+           aria-hidden: on mobile the desktop rail is display:none, so these
+           carry the only accessible copy of the four phases. -->
+      <div class="dl-wrap"><div class="dl-proj-mobile" id="dl-proj-mobile"></div></div>
 
       <div class="dl-wrap dl-reveal">
         <p class="dl-lead dl-measure dl-lead--after">Nobody works blind, and nothing advances until it is genuinely done. Because every party writes to <b>one shared project state</b> instead of their own copy, a signature, an approval, and a permit can never quietly disagree. That is the whole problem this case study is about.</p>
       </div>
     </section>
 
-    <!-- ==================== ACT 3 · THE APP ==================== -->
+    <!-- ==================== ACT 3 · HOME / iOS ==================== -->
+    <!-- One iPhone. Its screen crossfades continuously as the reader scrolls the
+         homeowner journey: signing, install, power on, everyday. One claim leads
+         at a time; a segmented current fills to mark exactly where they are. -->
     <section class="dl-act dl-app dl-bg-beige2" id="app" aria-labelledby="app-h">
       <div class="dl-wrap dl-reveal">
-        <p class="dl-eyebrow"><span class="tick" aria-hidden="true"></span>The app</p>
-        <h2 class="dl-h2" id="app-h">What the homeowner actually sees.</h2>
-        <p class="dl-lead dl-measure">The same project, from the homeowner&rsquo;s side, is one app. It carries them from signing to switch-on to everyday life, and it never makes them feel sold to.</p>
+        <p class="dl-eyebrow"><span class="tick" aria-hidden="true"></span>Home</p>
+        <h2 class="dl-h2" id="app-h">One app, the whole way.</h2>
+        <p class="dl-lead dl-measure">The same project, from the homeowner&rsquo;s side, is one calm app. It carries them from signing to switch-on to everyday life, and never once makes them feel sold to.</p>
       </div>
 
-      <!-- desktop: one phone stays pinned, four states move through it on scroll -->
+      <!-- desktop: one phone stays pinned; its screen crossfades on scroll -->
       <div class="dl-wrap">
         <div class="dl-app-track" data-progress="sticky">
           <div class="dl-app-pin">
-            <ol class="dl-app-rail" id="dl-app-rail" aria-label="Four moments in the app">
-              <li><button class="dl-app-step is-on" type="button" data-step="0"><span class="as-dot" aria-hidden="true"></span><span class="as-t">Signing</span><span class="as-d">A guided flow reads the city disclosures, verifies identity, and takes the signature. No fine print they never saw.</span></button></li>
-              <li><button class="dl-app-step" type="button" data-step="1"><span class="as-dot" aria-hidden="true"></span><span class="as-t">Installation</span><span class="as-d">The build shows up as clear progress: survey, design, permit, install date. They always know where things stand.</span></button></li>
-              <li><button class="dl-app-step" type="button" data-step="2"><span class="as-dot" aria-hidden="true"></span><span class="as-t">Power on</span><span class="as-d">Permission to operate lands, the system goes live, and production and battery flow show up in real time.</span></button></li>
-              <li><button class="dl-app-step" type="button" data-step="3"><span class="as-dot" aria-hidden="true"></span><span class="as-t">Documents &amp; support</span><span class="as-d">Every document in one place, and help that goes to Ray or a real person. Never a dead end.</span></button></li>
-            </ol>
+            <div class="dl-app-say">
+              <p class="dl-app-idx"><b id="dl-app-n">01</b><span>&thinsp;/&thinsp;04</span></p>
+              <h3 class="dl-app-t" id="dl-app-t">Signing</h3>
+              <p class="dl-app-d" id="dl-app-d">A guided flow reads the city disclosures, verifies identity, and takes the signature. No fine print they never saw.</p>
+              <div class="dl-app-seg" id="dl-app-seg" role="tablist" aria-label="Four moments in the app"></div>
+              <p class="dl-app-hint">Scroll, or tap a marker, to move the phone.</p>
+            </div>
 
             <div class="dl-app-phone">
               <div class="dl-device dl-device--live" aria-hidden="true">
                 <span class="dl-device-island"></span>
-                <div class="dl-device-screen"><div class="dl-ios" id="dl-appscreen"></div></div>
+                <div class="dl-device-screen">
+                  <div class="dl-ios dl-ios--a" id="dl-appscreen-a"></div>
+                  <div class="dl-ios dl-ios--b" id="dl-appscreen-b"></div>
+                </div>
               </div>
-              <p class="dl-app-hint">Tap a moment, or scroll, to move the phone.</p>
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- no-JS fail-open: the four moments as readable text -->
+      <div class="dl-wrap dl-app-fallback">
+        <ol>
+          <li><span class="as-t">Signing</span><span class="as-d">A guided flow reads the city disclosures, verifies identity, and takes the signature. No fine print they never saw.</span></li>
+          <li><span class="as-t">Installation</span><span class="as-d">The build shows up as clear progress: survey, design, permit, install date. They always know where things stand.</span></li>
+          <li><span class="as-t">Power on</span><span class="as-d">Permission to operate lands, the system goes live, and production and battery flow show up in real time.</span></li>
+          <li><span class="as-t">Everyday</span><span class="as-d">Every document in one place, and help that goes to Ray or a real person. Never a dead end.</span></li>
+        </ol>
       </div>
 
       <!-- mobile: four fully-composed scenes, each phone shown at a comfortable size -->
       <div class="dl-wrap dl-app-mobile" id="dl-app-mobile" aria-hidden="true"></div>
     </section>
 
-    <!-- ==================== ACT 4 · AFTER POWER ON ==================== -->
-    <section class="dl-act dl-after" id="after" aria-labelledby="af-h">
+    <!-- ==================== ACT 4 · VALUE ==================== -->
+    <!-- One scene: sunlight becomes a settled month. One energy current flows
+         left to right through four stages. What is measured, what the homeowner
+         pays, what is verified, and how partners are paid — one causal chain. -->
+    <section class="dl-act dl-value" id="value" aria-labelledby="vl-h">
       <div class="dl-wrap dl-reveal">
-        <p class="dl-eyebrow"><span class="tick" aria-hidden="true"></span>After power on</p>
-        <h2 class="dl-h2" id="af-h">One predictable month.</h2>
-        <p class="dl-lead dl-measure">Once the panels are on, the relationship is simple on top and busy underneath. The homeowner gets one calm bill and real help. The same verified events quietly pay the partners who did the work, and reward the home for supporting the grid.</p>
+        <p class="dl-eyebrow"><span class="tick" aria-hidden="true"></span>Value</p>
+        <h2 class="dl-h2" id="vl-h">From sunlight to settlement.</h2>
+        <p class="dl-lead dl-measure">A calm monthly bill sits on top of a lot of moving money. The very same verified events the homeowner sees are what pay the partners who did the work, and what reward the home for supporting the grid.</p>
       </div>
 
       <div class="dl-wrap">
-        <div class="dl-after-split dl-reveal">
-          <!-- left: the same home, now live -->
-          <div class="dl-after-home">
-            <svg class="dl-home is-live" viewBox="0 0 260 210" role="img" aria-label="The home, now producing energy">
-              <line class="hm-ground" x1="24" y1="184" x2="236" y2="184"/>
-              <g class="hm-house">
-                <polyline class="hm-walls" points="74,184 74,114 130,74 186,114 186,184"/>
-                <polyline class="hm-roof" points="58,122 130,74 202,122"/>
-                <rect class="hm-door" x="118" y="146" width="26" height="38"/>
-                <rect class="hm-win" x="150" y="130" width="22" height="22"/>
-              </g>
-              <g class="hm-panels">
-                <polygon points="104,98 134,98 130,114 100,114"/>
-                <polygon points="138,98 168,98 166,114 134,114"/>
-                <polygon points="98,118 128,118 124,134 94,134"/>
-                <polygon points="132,118 162,118 160,134 128,134"/>
-              </g>
-              <g class="hm-sun">
-                <circle cx="212" cy="52" r="15"/>
-                <g class="hm-rays">
-                  <line x1="212" y1="24" x2="212" y2="31"/><line x1="212" y1="73" x2="212" y2="80"/>
-                  <line x1="184" y1="52" x2="191" y2="52"/><line x1="233" y1="52" x2="240" y2="52"/>
-                  <line x1="192" y1="32" x2="197" y2="37"/><line x1="227" y1="67" x2="232" y2="72"/>
-                  <line x1="232" y1="32" x2="227" y2="37"/><line x1="197" y1="67" x2="192" y2="72"/>
-                </g>
-              </g>
-            </svg>
-            <p class="dl-after-homecap"><span class="tick" aria-hidden="true"></span>Producing, month after month</p>
-          </div>
-
-          <!-- right: one real surface, two quiet outcomes -->
-          <div class="dl-after-out">
-            <!-- the one product surface that earns its place -->
-            <div class="dl-bill-card" role="img" aria-label="A homeowner's monthly statement: one amount, autopay on, paid">
-              <div class="dl-bill-top"><span class="dl-bill-brand">Daylight</span><span class="dl-bill-tag">Statement</span></div>
-              <div class="dl-bill-amt"><span class="dl-bill-amt-k">This month</span><span class="dl-bill-amt-v">$126.40</span></div>
-              <div class="dl-bill-rows">
-                <div class="dl-bill-row"><span>Billing period</span><b>One contract month</b></div>
-                <div class="dl-bill-row"><span>Autopay</span><b>On</b></div>
-                <div class="dl-bill-row dl-bill-row--paid"><span>Status</span><b><i aria-hidden="true">&#10003;</i>Paid</b></div>
-              </div>
-            </div>
-
-            <ul class="dl-after-list">
-              <li class="dl-after-item">
-                <span class="ai-k">Behind it</span>
-                <p class="ai-flow"><span class="ai-a">Verified milestone</span><span class="ai-arrow" aria-hidden="true">&rarr;</span><span class="ai-b">Partner paid</span></p>
-                <p class="ai-note">The same events the homeowner sees release money to installers and sales, once the work is real and approved.</p>
+        <div class="dl-settle dl-reveal" data-progress="settle"
+             role="img" aria-label="From measured sunlight to a settled month: the roof's energy is metered, the homeowner pays one bill on autopay, the install milestone is verified, and that same verified event pays the partners and earns the home Sun Points.">
+          <div class="dl-settle-track">
+            <div class="dl-settle-rail" aria-hidden="true"><span class="dl-settle-flow" id="dl-settle-flow"></span></div>
+            <ol class="dl-settle-stages">
+              <li class="dl-stage" data-i="0">
+                <span class="st-node">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.4"/><g class="st-rays"><line x1="12" y1="2.5" x2="12" y2="5.2"/><line x1="12" y1="18.8" x2="12" y2="21.5"/><line x1="2.5" y1="12" x2="5.2" y2="12"/><line x1="18.8" y1="12" x2="21.5" y2="12"/><line x1="5.2" y1="5.2" x2="7.1" y2="7.1"/><line x1="16.9" y1="16.9" x2="18.8" y2="18.8"/><line x1="18.8" y1="5.2" x2="16.9" y2="7.1"/><line x1="7.1" y1="16.9" x2="5.2" y2="18.8"/></g></svg>
+                </span>
+                <span class="st-k">Measured</span>
+                <span class="st-v">18.4&nbsp;kWh</span>
+                <span class="st-note">The roof produces. The meter reads real energy, hour by hour.</span>
               </li>
-              <li class="dl-after-item">
-                <span class="ai-k">And</span>
-                <p class="ai-flow"><span class="ai-a">Grid event joined</span><span class="ai-arrow" aria-hidden="true">&rarr;</span><span class="ai-b">Sun Points earned</span></p>
-                <p class="ai-note">Supporting the grid at peak turns into rewards, so the home shares in the value it creates.</p>
+              <li class="dl-stage dl-stage--bill" data-i="1">
+                <span class="st-node">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l3 3v15H6z"/><path d="M14 3v4h4"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg>
+                </span>
+                <span class="st-k">The homeowner pays</span>
+                <div class="dl-bill-card" aria-hidden="true">
+                  <div class="dl-bill-top"><span class="dl-bill-brand">Daylight</span><span class="dl-bill-tag">Statement</span></div>
+                  <div class="dl-bill-amt"><span class="dl-bill-amt-k">This month</span><span class="dl-bill-amt-v">$126.40</span></div>
+                  <div class="dl-bill-rows">
+                    <div class="dl-bill-row"><span>Autopay</span><b>On</b></div>
+                    <div class="dl-bill-row dl-bill-row--paid"><span>Status</span><b><i aria-hidden="true">&#10003;</i>Paid</b></div>
+                  </div>
+                </div>
+                <span class="st-note">One amount, on autopay. No statements to chase.</span>
               </li>
-            </ul>
+              <li class="dl-stage" data-i="2">
+                <span class="st-node">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                </span>
+                <span class="st-k">Verified</span>
+                <span class="st-v">Milestone cleared</span>
+                <span class="st-note">The install milestone is checked and marked real, once and for all.</span>
+              </li>
+              <li class="dl-stage" data-i="3">
+                <span class="st-node">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13h6l1 5 3-11 1.5 6H20"/></svg>
+                </span>
+                <span class="st-k">Settled</span>
+                <span class="st-v">Partners paid&nbsp;· Sun&nbsp;Points earned</span>
+                <span class="st-note">That same event releases the installer's payment, and rewards the home for supporting the grid.</span>
+              </li>
+            </ol>
           </div>
         </div>
       </div>
@@ -331,35 +329,33 @@
               <div class="dl-avatar-disc">
                 <video id="dl-ray-video" src="images/ray-avatar-loop.mp4" poster="images/ray-avatar-poster.png"
                        muted loop playsinline autoplay preload="metadata" aria-hidden="true" tabindex="-1"></video>
-                <img class="poster-fallback" src="images/ray-avatar-poster.png" alt="" aria-hidden="true">
+                <img class="poster-fallback" src="images/ray-avatar-poster.png" alt="" width="480" height="480" aria-hidden="true">
               </div>
             </div>
           </div>
 
           <div class="dl-ray-copy">
-            <p class="dl-eyebrow"><span class="tick" aria-hidden="true"></span>Ray</p>
-            <h2 class="dl-ray-h" id="ray-h">When they need help, Ray is already there.</h2>
-            <p class="dl-lead">The same energy system becomes an assistant. Ask a question in plain words. Ray answers from the real project, cites where the answer came from, and hands you to a person the moment it cannot be sure.</p>
+            <p class="dl-eyebrow"><span class="tick" aria-hidden="true"></span>Support</p>
+            <h2 class="dl-ray-h" id="ray-h">The same system, now answering.</h2>
+            <p class="dl-lead">When someone needs help, they never leave the project. Ray is already inside it. It knows the state, answers in plain words, cites where the answer came from, and hands off to a person the moment it cannot be sure.</p>
 
-            <div class="dl-rayflow" id="dl-rayflow" role="img" aria-label="How Ray answers: a question is asked, Ray cites its source, then resolves with a grounded answer or a handoff to a person">
-              <div class="dl-rf-step dl-rf-ask">
-                <span class="dl-rf-k">You ask</span>
-                <p class="dl-rf-q">Why can&rsquo;t this project move forward?</p>
+            <div class="dl-ray-thread" id="dl-rayflow" role="img" aria-label="A grounded Ray exchange: the homeowner asks why the project has not moved; Ray answers that title verification is still open, cites the origination playbook against live project data, and offers the exact next step or a person.">
+              <div class="dl-rt-ask">
+                <span class="dl-rt-tag" aria-hidden="true">You</span>
+                <p>Why hasn&rsquo;t my project moved forward?</p>
               </div>
-              <div class="dl-rf-step dl-rf-cite">
-                <span class="dl-rf-k"><span class="sq" aria-hidden="true"></span>Ray cites</span>
-                <p class="dl-rf-quote">&ldquo;A project advances once the agreement is signed and identity and title are verified.&rdquo;</p>
-                <span class="dl-rf-src">Origination playbook</span>
-              </div>
-              <div class="dl-rf-step dl-rf-resolve">
-                <span class="dl-rf-k">Ray resolves</span>
-                <p class="dl-rf-answer">Title verification is still open. Here is the exact document to upload, or talk to a person.</p>
-                <span class="dl-rf-chip">Grounded answer</span>
+              <div class="dl-rt-ans">
+                <span class="dl-rt-av" aria-hidden="true"><img src="images/ray-avatar-poster.png" alt="" width="28" height="28"></span>
+                <div class="dl-rt-body">
+                  <p class="dl-rt-line">Title verification is still open. Everything else is done: your signed agreement is in, and your identity is verified.</p>
+                  <p class="dl-rt-cite"><span class="dl-rt-chip" data-cite>Origination playbook</span><span class="dl-rt-fresh">live project data &middot; checked now</span></p>
+                  <p class="dl-rt-line dl-rt-act">Here&rsquo;s the exact document to upload, or I can bring in a person.</p>
+                </div>
               </div>
             </div>
 
             <div class="dl-ray-actions">
-              <a class="dl-btn solid" href="ray.html">Read the Ray case study &rarr;</a>
+              <a class="dl-btn solid" href="ray.html">Continue into Ray &rarr;</a>
               <span class="dl-ray-note">Built on the team&rsquo;s shared Ray foundation. I led its completion across product, design, and engineering.</span>
             </div>
           </div>
@@ -370,21 +366,21 @@
     <!-- ==================== ACT 6 · SCOPE & OUTCOME ==================== -->
     <section class="dl-act dl-scope dl-closing" aria-labelledby="sc-h">
       <div class="dl-wrap dl-measure dl-reveal">
-        <p class="dl-eyebrow"><span class="tick" aria-hidden="true"></span>Scope</p>
-        <h2 class="dl-h2" id="sc-h">Product leadership, hands on the craft.</h2>
+        <p class="dl-eyebrow"><span class="tick" aria-hidden="true"></span>My role</p>
+        <h2 class="dl-h2" id="sc-h">I take complex systems and make them feel simple.</h2>
         <p class="dl-lead">As founding product engineer and manager, I organized a small team into cross-functional pods and stayed hands on across prototypes, surface design, backend architecture, and production code. I moved between Figma and the shipping build daily, and set the review discipline that kept quality the default while we moved fast.</p>
         <p class="dl-lead">Daylight is the clearest proof of what I do best: taking a genuinely complex, regulated, multi-company system and shipping the surfaces that make it feel simple and trustworthy to everyone inside it. Ray is where that same instinct meets AI, grounded, guarded, and honest about what it does not know.</p>
       </div>
 
-      <div class="dl-wrap">
-        <div class="dl-evidence dl-reveal">
-          <div class="dl-ev"><span class="ev-n">200+</span><span class="ev-l">agreements signed by homeowners</span></div>
-          <div class="dl-ev"><span class="ev-n">6</span><span class="ev-l">construction organizations on the portal</span></div>
-          <div class="dl-ev"><span class="ev-n">5</span><span class="ev-l">product surfaces designed and built end to end</span></div>
-        </div>
-        <p class="dl-ev-note">Platform outcomes at the time of this case study.</p>
+      <div class="dl-wrap dl-reveal">
+        <ul class="dl-scope-specs">
+          <li><b>200+</b><span>agreements signed by homeowners</span></li>
+          <li><b>6</b><span>construction organizations on the portal</span></li>
+          <li><b>5</b><span>product surfaces designed and built end to end</span></li>
+        </ul>
+        <p class="dl-ev-note">Platform scope at the time of this case study.</p>
 
-        <div class="dl-closing-links dl-reveal">
+        <div class="dl-closing-links">
           <a class="dl-btn solid" href="ray.html">Read the Ray case study &rarr;</a>
           <a class="dl-btn ghost" href="index.html">Mike Battaglia</a>
         </div>
@@ -399,8 +395,8 @@
     </div>
   </footer>
 
-  <script type="module" src="js/daylight-spectrum.js?v=2"></script>
+  <script type="module" src="js/daylight-spectrum.js?v=3"></script>
   <script src="js/daylight-gate.js" defer></script>
-  <script src="js/daylight-case-study.js?v=6" defer></script>
+  <script src="js/daylight-case-study.js?v=9" defer></script>
 </body>
 </html>

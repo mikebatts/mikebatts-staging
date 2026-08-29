@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Ray · Daylight's complete support system · Mike Battaglia</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="description" content="Ray is Daylight's complete support system, one grounded assistant across the partner origination portal and the homeowner iOS app. It answers from live project data and published process knowledge, and turns requests into guarded, confirmable actions. A case study on product, design, and engineering by Mike Battaglia.">
   <meta name="theme-color" content="#FFF7E9">
   <meta name="author" content="Mike Battaglia">
@@ -23,7 +23,7 @@
 
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
-  <link href="css/ray.css?v=7" rel="stylesheet" type="text/css">
+  <link href="css/ray.css?v=12" rel="stylesheet" type="text/css">
   <link href="css/daylight-gate.css?v=1" rel="stylesheet" type="text/css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
@@ -45,7 +45,7 @@
   <div id="dl-gate" role="dialog" aria-modal="true" aria-labelledby="dl-gate-t">
     <div class="dl-gate-box">
       <div class="dl-gate-mark">
-        <img src="images/avi.png" alt="Mike Battaglia">
+        <img src="images/avi.png" alt="Mike Battaglia" width="2208" height="2296">
         <span class="dl-gate-wm">Case study</span>
       </div>
       <h1 class="dl-gate-t" id="dl-gate-t">Ray, inside Daylight.</h1>
@@ -88,11 +88,11 @@
         <div class="ray-hero-copy">
           <p class="ray-eyebrow"><span class="tick" aria-hidden="true"></span>Daylight · Ray</p>
           <h1 class="ray-display ray-hero-title">Ask anything.<br>Trust the answer.</h1>
-          <p class="ray-hero-intro">Ray is Daylight's operational support layer. One grounded assistant across two audiences: the partner origination portal and the homeowner iOS app. It answers from live project data and published process knowledge, then turns requests into guarded, confirmable actions.</p>
-          <div class="ray-hero-meta">
-            <span class="ray-hero-role"><b>Product, design &amp; engineering</b><span>Mike Battaglia · 2026</span></span>
-            <span class="ray-hero-sep" aria-hidden="true"></span>
-            <span class="ray-hero-role"><b>The field, concentrated</b><span>Ray moves while working, and comes to rest with an answer.</span></span>
+          <p class="ray-hero-intro">One grounded assistant across Daylight&rsquo;s partner portal and homeowner app. It answers from live project data and published process, then turns requests into guarded, confirmable actions.</p>
+          <div class="ray-hero-badges" aria-hidden="true">
+            <span class="rhb"><span class="d"></span>Grounded answers</span>
+            <span class="rhb"><span class="d"></span>Guarded actions</span>
+            <span class="rhb"><span class="d"></span>Honest handoff</span>
           </div>
         </div>
 
@@ -103,14 +103,10 @@
             <div class="ray-avatar-disc">
               <video id="ray-hero-video" src="images/ray-avatar-loop.mp4" poster="images/ray-avatar-poster.png"
                      muted loop playsinline autoplay preload="metadata" aria-hidden="true" tabindex="-1"></video>
-              <img class="poster-fallback" src="images/ray-avatar-poster.png" alt="" aria-hidden="true">
+              <img class="poster-fallback" src="images/ray-avatar-poster.png" alt="" width="480" height="480" aria-hidden="true">
             </div>
           </div>
-          <div class="ray-hero-badges" aria-hidden="true">
-            <span class="rhb"><span class="d"></span>Grounded answers</span>
-            <span class="rhb"><span class="d"></span>Guarded actions</span>
-            <span class="rhb"><span class="d"></span>Honest handoff</span>
-          </div>
+          <p class="ray-hero-cap" aria-hidden="true"><span class="tick"></span>Active while working, settled with an answer</p>
         </div>
       </div>
     </div>
@@ -118,47 +114,16 @@
 
   <main id="ray-main">
 
-    <!-- ==================== DISCOVERY TRIGGER ==================== -->
-    <section class="ray-section ray-discovery" aria-labelledby="disc-h">
-      <div class="ray-wrap reveal">
-        <p class="ray-eyebrow"><span class="tick" aria-hidden="true"></span>Where it started</p>
-        <h2 class="ray-h2" id="disc-h">The answers already existed. Trust did not.</h2>
-        <p class="ray-lead">A read-only analysis of project notes surfaced a quiet failure. People were asking real operational questions, and the thread went nowhere.</p>
-
-        <div class="ray-evidence-row">
-          <div class="ray-stat stagger">
-            <div class="num">1,813</div>
-            <div class="lbl">production notes analyzed, read only</div>
-            <div class="src">Product discovery</div>
-          </div>
-          <div class="ray-stat stagger">
-            <div class="num">67%</div>
-            <div class="lbl">of threads had no reply at all</div>
-            <div class="src">No response</div>
-          </div>
-          <div class="ray-stat stagger">
-            <div class="num">54%</div>
-            <div class="lbl">of direct questions went unanswered</div>
-            <div class="src">Question, then silence</div>
-          </div>
-        </div>
-
-        <p class="ray-lead stagger">Many of those questions already had answers, sitting in live project state or published process knowledge. The product problem was never generating text. It was making an answer trustworthy and actionable in the exact place the work happens.</p>
-
-        <div class="ray-authornote stagger">
-          <img class="avi" src="images/avi.png" alt="Mike Battaglia" width="34" height="34" loading="lazy">
-          <p>The Daylight team built the shared Ray chat foundation. <b>I led Ray's productization and completion across product, interaction design, and engineering.</b></p>
-        </div>
-      </div>
-    </section>
-
     <!-- ==================== ACT 2 · THE REAL PRODUCT DEMO ==================== -->
+    <!-- The promptable conversation is the dominant surface, right under the
+         hero. Ask anything; Ray reaches for a tool, narrates, and settles on a
+         grounded answer with sources. A faithful rebuild on fictional records. -->
     <section class="ray-section ray-demo-section" aria-labelledby="demo-h">
       <div class="ray-wrap reveal">
         <div class="ray-demo-head">
           <span class="ray-demo-tag"><span class="sq" aria-hidden="true"></span>Live rebuild · runs in your browser</span>
           <h2 class="ray-h2" id="demo-h">See how Ray answers.</h2>
-          <p class="ray-lead">Ask anything. Ray reaches for a tool, narrates the step in plain language, and comes to rest on a grounded answer with its sources. This is a faithful rebuild of the real interaction, running entirely on fictional records. Nothing is ever sent.</p>
+          <p class="ray-lead">Type a real question. Ray reaches for a tool, narrates the step in plain language, and comes to rest on a grounded answer with its sources. Nothing is ever sent.</p>
         </div>
 
         <div class="ray-demo" id="ray-demo">
@@ -237,10 +202,44 @@
       </div>
     </section>
 
+    <!-- ==================== WHY IT EXISTS ==================== -->
+    <section class="ray-section ray-discovery" aria-labelledby="disc-h">
+      <div class="ray-wrap reveal">
+        <p class="ray-eyebrow"><span class="tick" aria-hidden="true"></span>Problem</p>
+        <h2 class="ray-h2" id="disc-h">The answers already existed. Trust did not.</h2>
+        <p class="ray-lead">A read-only analysis of project notes surfaced a quiet failure: people were asking real operational questions, and the thread went nowhere.</p>
+
+        <div class="ray-evidence-row">
+          <div class="ray-stat stagger">
+            <div class="num">1,813</div>
+            <div class="lbl">production notes analyzed, read only</div>
+            <div class="src">Product discovery</div>
+          </div>
+          <div class="ray-stat stagger">
+            <div class="num">67%</div>
+            <div class="lbl">of threads had no reply at all</div>
+            <div class="src">No response</div>
+          </div>
+          <div class="ray-stat stagger">
+            <div class="num">54%</div>
+            <div class="lbl">of direct questions went unanswered</div>
+            <div class="src">Question, then silence</div>
+          </div>
+        </div>
+
+        <p class="ray-lead stagger">Many already had answers, sitting in live project state or published process knowledge. The problem was never generating text. It was making an answer trustworthy and actionable in the exact place the work happens.</p>
+
+        <div class="ray-authornote stagger">
+          <img class="avi" src="images/avi.png" alt="Mike Battaglia" width="34" height="34" loading="lazy">
+          <p>The Daylight team built the shared Ray chat foundation. <b>I led Ray's productization and completion across product, interaction design, and engineering.</b></p>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ ACTS 3–5 · ONE SYSTEM STAGE, FOUR MOVEMENTS ============ -->
     <section class="ray-section ray-system" id="ray-system" aria-labelledby="sys-h" data-mv="1">
       <div class="ray-wrap reveal">
-        <p class="ray-eyebrow"><span class="tick" aria-hidden="true"></span>The architecture</p>
+        <p class="ray-eyebrow"><span class="tick" aria-hidden="true"></span>System</p>
         <h2 class="ray-h2" id="sys-h">One question. Four things happen underneath.</h2>
         <p class="ray-lead">Trust is architecture, not tone. Watch a single question travel the system: Ray finds the right evidence, checks who is asking, answers in context, and can act only with permission. Same question, same answer, the machinery revealed.</p>
       </div>
@@ -381,9 +380,14 @@
       <div class="ray-wrap reveal">
         <div class="ray-ios-grid">
           <div class="ray-ios-copy">
-            <p class="ray-eyebrow accent"><span class="tick" aria-hidden="true"></span>Customer Ray · native iOS</p>
+            <p class="ray-eyebrow accent"><span class="tick" aria-hidden="true"></span>Customer</p>
             <h2 class="ray-h2" id="ios-h">A different reader. The same trust.</h2>
-            <p class="ray-lead">A homeowner asks different questions than an operator, and is allowed to see different things. So the engine stays shared and everything that touches authority splits in two: separate problem set, separate knowledge base, separate toolbox, separate privacy rules.</p>
+            <div class="ray-lane-split" aria-hidden="true">
+              <span class="lane">Portal<b>Operators</b></span>
+              <span class="lane-join"><span class="lj-dot"></span>one engine<span class="lj-dot"></span></span>
+              <span class="lane on">Customer<b>Homeowners</b></span>
+            </div>
+            <p class="ray-lead" style="margin-top:20px">Separate problem set, separate knowledge base, separate toolbox, separate privacy rules, from one shared foundation.</p>
 
             <ul class="ray-ios-lines">
               <li><span class="k">Their world</span><span class="v">Energy subscription and billing, install timeline, app how-tos, Sun Points, equipment and batteries, their own energy.</span></li>
@@ -451,7 +455,7 @@
     <!-- ==================== ACT 6 · COMPLETE SYSTEM RECEIPTS ==================== -->
     <section class="ray-section ray-evidence" aria-labelledby="ev-h">
       <div class="ray-wrap reveal">
-        <p class="ray-eyebrow on-dark"><span class="tick" aria-hidden="true"></span>Completion receipts</p>
+        <p class="ray-eyebrow on-dark"><span class="tick" aria-hidden="true"></span>Evidence</p>
         <h2 class="ray-h2 on-dark" id="ev-h">A complete system, on the record.</h2>
         <p class="ray-lead">Receipts from the completion stack and the source itself, not outcome analytics. Adoption, time saved, and model quality have not been measured, so none of it is claimed here.</p>
 
@@ -497,10 +501,12 @@
     <!-- ==================== CLOSING ==================== -->
     <section class="ray-section ray-closing" aria-labelledby="close-h">
       <div class="ray-wrap narrow reveal">
-        <p class="ray-eyebrow"><span class="tick" aria-hidden="true"></span>The lesson</p>
+        <p class="ray-eyebrow"><span class="tick" aria-hidden="true"></span>Lesson</p>
         <h2 class="ray-h2" id="close-h">Usefulness was the easy half.</h2>
         <p class="ray-lead">Getting an assistant to say something helpful is not hard anymore. The hard part was everything around the answer. Permission, so it only ever sees what the viewer sees. Grounding, so every claim points at a source that actually ran. Action boundaries, so it can propose but never quietly execute. And graceful escalation, so it knows when to stop and hand the problem to a person.</p>
-        <p class="ray-lead">Ray started from the team's shared chat foundation. I led the completion: a system the portal could trust with real projects, then a second homeowner lane on native iOS, each with its own knowledge, tools, and privacy, on the surfaces where the work already happens. Trust, not novelty, was the hard part. That is the part I am proud of.</p>
+        <p class="ray-lead">Ray started from the team's shared chat foundation. I led the completion: a system the portal could trust with real projects, then a second homeowner lane on native iOS, each with its own knowledge, tools, and privacy, on the surfaces where the work already happens.</p>
+
+        <p class="ray-closing-final">Anyone can make an assistant talk. The work was making this one worth trusting. That is the part I am proud of.</p>
 
         <div class="ray-closing-links">
           <a class="ray-outlink solid" href="daylight.html">&larr;&nbsp;Back to the Daylight case study</a>
@@ -518,6 +524,6 @@
   </footer>
 
   <script src="js/daylight-gate.js" defer></script>
-  <script src="js/ray-case-study.js?v=6" defer></script>
+  <script src="js/ray-case-study.js?v=11" defer></script>
 </body>
 </html>

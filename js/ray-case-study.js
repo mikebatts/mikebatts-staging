@@ -109,17 +109,59 @@
 
     var mq = window.matchMedia('(min-width:901px)');
     var pinned = false, ticking = false;
+    var moveList = Array.prototype.slice.call(moves);
 
     function setMv(n) {
       if (section.getAttribute('data-mv') !== String(n)) { section.setAttribute('data-mv', String(n)); }
     }
+
+    // Continuous transition between movements. The wipe is compressed into a
+    // narrow scroll band so most of the scroll shows one clean movement; inside
+    // the band the incoming movement is revealed top-to-bottom while the outgoing
+    // one fades out in sync, so there is never a lingering double-text ghost.
+    function smoothBand(a, b, x) { if (x <= a) { return 0; } if (x >= b) { return 1; } var t = (x - a) / (b - a); return t * t * (3 - 2 * t); }
+    function applyMovements(f) {
+      var base = Math.floor(f); if (base < 0) { base = 0; } else if (base > COUNT - 1) { base = COUNT - 1; }
+      var frac = f - base; if (frac < 0) { frac = 0; } else if (frac > 1) { frac = 1; }
+      var next = Math.min(COUNT - 1, base + 1);
+      var e = smoothBand(0.40, 0.60, frac);
+      for (var i = 0; i < moveList.length; i++) {
+        var m = moveList[i], s = m.style;
+        if (i === next && next !== base) {
+          var pct = e * 116 - 8;
+          var mask = 'linear-gradient(180deg,#000 ' + (pct - 10).toFixed(1) + '%, transparent ' + pct.toFixed(1) + '%)';
+          s.opacity = '1'; s.transform = 'none'; s.pointerEvents = e > 0.5 ? 'auto' : 'none'; s.zIndex = '2';
+          s.webkitMaskImage = mask; s.maskImage = mask;
+        } else if (i === base) {
+          s.opacity = (next !== base ? (1 - e) : 1).toFixed(3); s.transform = 'none';
+          s.pointerEvents = e < 0.5 ? 'auto' : 'none'; s.zIndex = '1';
+          s.webkitMaskImage = 'none'; s.maskImage = 'none';
+        } else {
+          s.opacity = '0'; s.pointerEvents = 'none'; s.zIndex = '0';
+          s.webkitMaskImage = 'none'; s.maskImage = 'none';
+        }
+      }
+      setMv((frac >= 0.5 ? next : base) + 1);
+    }
+    function clearMovements() {
+      for (var i = 0; i < moveList.length; i++) {
+        var s = moveList[i].style;
+        s.opacity = ''; s.transform = ''; s.pointerEvents = ''; s.zIndex = '';
+        s.webkitMaskImage = ''; s.maskImage = '';
+      }
+    }
     function compute() {
-      var rect = track.getBoundingClientRect();
-      var scrollable = track.offsetHeight - window.innerHeight;
-      var p = scrollable > 0 ? (-rect.top) / scrollable : 0;
-      if (p < 0) { p = 0; } else if (p > 1) { p = 1; }
-      setMv(Math.min(COUNT, Math.floor(p * COUNT) + 1));
-      ticking = false;
+      try {
+        var rect = track.getBoundingClientRect();
+        var scrollable = track.offsetHeight - window.innerHeight;
+        var p = scrollable > 0 ? (-rect.top) / scrollable : 0;
+        if (p < 0) { p = 0; } else if (p > 1) { p = 1; }
+        applyMovements(p * COUNT);
+      } catch (err) {
+        /* a single bad frame must never wedge the scroll handler */
+      } finally {
+        ticking = false;
+      }
     }
     function onScroll() {
       if (!pinned || ticking) { return; }
@@ -129,7 +171,7 @@
     function enable() {
       if (pinned) { return; }
       pinned = true;
-      section.classList.add('is-pinned');
+      section.classList.add('is-pinned', 'sys-wipe');
       // Scroll length per movement (vh). Kept under 100vh so the section stays
       // snappy and the whole page lands inside the target desktop height.
       track.style.height = (COUNT * 74) + 'vh';
@@ -139,9 +181,10 @@
     function disable() {
       if (!pinned) { return; }
       pinned = false;
-      section.classList.remove('is-pinned');
+      section.classList.remove('is-pinned', 'sys-wipe');
       track.style.height = '';
       window.removeEventListener('scroll', onScroll);
+      clearMovements();
       setMv(1);
     }
     function evaluate() {
@@ -503,7 +546,7 @@
     function appendWorking(firstStatus) {
       var row = el(
         '<div class="rc-row ray">' +
-          '<img class="rc-ray-avatar" src="' + POSTER + '" alt="" aria-hidden="true">' +
+          '<img class="rc-ray-avatar" src="' + POSTER + '" alt="" width="480" height="480" aria-hidden="true">' +
           '<div class="rc-ray-col"><div class="rc-working"><span class="pulse" aria-hidden="true"></span><span class="rc-working-text"></span></div></div>' +
         '</div>'
       );
@@ -608,7 +651,7 @@
         '</div>';
       var row = el(
         '<div class="rc-row ray">' +
-          '<img class="rc-ray-avatar" src="' + POSTER + '" alt="" aria-hidden="true">' +
+          '<img class="rc-ray-avatar" src="' + POSTER + '" alt="" width="480" height="480" aria-hidden="true">' +
           '<div class="rc-ray-col">' + inner + bylineHTML() + '</div>' +
         '</div>'
       );
@@ -625,7 +668,7 @@
     function appendStopped() {
       var row = el(
         '<div class="rc-row ray">' +
-          '<img class="rc-ray-avatar" src="' + POSTER + '" alt="" aria-hidden="true">' +
+          '<img class="rc-ray-avatar" src="' + POSTER + '" alt="" width="480" height="480" aria-hidden="true">' +
           '<div class="rc-ray-col"><div class="rc-answer"><div class="rc-answer-in"><p class="a-line">Stopped. Ask me anything else about this project.</p></div></div></div>' +
         '</div>'
       );

@@ -149,36 +149,57 @@
   /* ACT 2 — the shared project: hands arrive, the object evolves     */
   /* -------------------------------------------------------------- */
   var PROJECT = [
-    { phase: 'Agreement', names: '<b>Homeowner</b> and Sales', copy: 'The homeowner and their rep agree on a system and sign. The project is created, and everyone starts from the same file.' },
-    { phase: 'Review &amp; design', names: '<b>Reviewer</b>, Designer, Financing', copy: 'Reviewers, designers, and financing check the file and turn it into a real, buildable system.' },
-    { phase: 'Build', names: '<b>Installer</b>, Town, Utility', copy: 'The installer designs and permits it, the town approves, and the utility clears it to connect.' },
-    { phase: 'Live', names: '<b>Activation</b> and Operations', copy: 'The system is switched on and moves into everyday operation, with its whole history intact.' }
+    { phase: 'Agreement', names: '<b>Homeowner</b> and Sales', copy: 'They agree on a system and sign. One project file, shared by everyone.' },
+    { phase: 'Review &amp; design', names: '<b>Reviewer</b>, Designer, Financing', copy: 'Reviewers, designers, and financing turn the file into a buildable system.' },
+    { phase: 'Build', names: '<b>Installer</b>, Town, Utility', copy: 'The installer permits it, the town approves, the utility clears it to connect.' },
+    { phase: 'Live', names: '<b>Activation</b> and Operations', copy: 'The system switches on and runs, its whole history intact.' }
   ];
 
-  function sceneApply(scene) {
-    var roles = Array.prototype.slice.call(scene.querySelectorAll('.dl-role'));
-    var links = Array.prototype.slice.call(scene.querySelectorAll('.sl'));
-    var caps = Array.prototype.slice.call(document.querySelectorAll('.dl-scene-steps .sc-step'));
+  function setupBuild(engine) {
+    var track = document.querySelector('.dl-build-track');
+    var rail = document.getElementById('dl-build-rail');
+    var stage = document.getElementById('dl-build-stage');
     var fill = document.getElementById('dl-core-fill');
     var count = document.getElementById('dl-core-n');
-    var n = 4;
-    return function (p) {
-      var step = Math.min(n - 1, Math.floor(p * n));
-      if (p >= 0.999) { step = n - 1; }
-      scene.setAttribute('data-step', String(step));
-      roles.forEach(function (el) {
-        var i = parseInt(el.getAttribute('data-step'), 10) || 0;
-        el.classList.toggle('is-on', i <= step);
-        el.classList.toggle('is-active', i === step);
+    if (!rail || !stage) { return; }
+    var steps = Array.prototype.slice.call(rail.querySelectorAll('.dl-build-step'));
+    var n = steps.length;
+    if (!n) { return; }
+
+    var current = -1;
+    function setActive(i) {
+      i = Math.max(0, Math.min(n - 1, i));
+      if (i === current) { return; }
+      current = i;
+      steps.forEach(function (s, k) {
+        s.classList.toggle('is-on', k === i);
+        s.classList.toggle('done', k < i);
       });
-      links.forEach(function (el) {
-        var i = parseInt(el.getAttribute('data-step'), 10) || 0;
-        el.classList.toggle('is-lit', i <= step);
+      stage.setAttribute('data-step', String(i));
+      if (fill) { fill.style.width = (((i + 1) / n) * 100).toFixed(1) + '%'; }
+      if (count) { count.textContent = String(i + 1); }
+    }
+
+    steps.forEach(function (s, i) {
+      s.addEventListener('click', function () { setActive(i); });
+      s.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowDown' && steps[i + 1]) { e.preventDefault(); steps[i + 1].focus(); setActive(i + 1); }
+        else if (e.key === 'ArrowUp' && steps[i - 1]) { e.preventDefault(); steps[i - 1].focus(); setActive(i - 1); }
       });
-      caps.forEach(function (el, i) { el.classList.toggle('is-on', i === step); });
-      if (fill) { fill.style.width = (((step + 1) / n) * 100).toFixed(1) + '%'; }
-      if (count) { count.textContent = String(step + 1); }
-    };
+    });
+
+    // reduced motion shows the settled, finished project; motion starts at step 0
+    setActive(reduceMotion ? n - 1 : 0);
+
+    if (track && !reduceMotion) {
+      engine.add(track, 'sticky', function (p) {
+        var i = Math.min(n - 1, Math.floor(p * n + 0.0001));
+        if (p >= 0.985) { i = n - 1; }
+        setActive(i);
+        // the shared-state current fills continuously, ending exactly full
+        if (fill) { fill.style.width = (clamp01(p) * 100).toFixed(1) + '%'; }
+      });
+    }
   }
 
   function buildProjectMobile() {
@@ -250,7 +271,7 @@
         iosBody('<div class="dl-ios-hero"><div class="dl-jbig">Live</div><div class="dl-jsub">Solar and battery, in real time.</div>' +
           '<div class="dl-jbars"><i style="height:52%"></i><i style="height:70%"></i><i style="height:88%"></i><i style="height:96%"></i><i style="height:80%"></i><i style="height:62%"></i><i style="height:44%"></i></div></div>' +
           group('Today', row('Produced', '18.4 kWh') + row('Used', '11.2 kWh') + row('Sent to grid', '7.2 kWh', 'ok'))) + tabs('energy') },
-    { t: 'Documents &amp; support', d: 'Every document in one place, and help that goes to Ray or a real person. Never a dead end.',
+    { t: 'Everyday', d: 'Every document in one place, and help that goes to Ray or a real person. Never a dead end.',
       screen: statusBar() + navBar('All set', 'Documents &amp; help') +
         iosBody(group('Your documents',
           row('Agreement', 'PDF ' + chev()) +
@@ -263,53 +284,98 @@
 
   function setupApp(engine) {
     var track = document.querySelector('.dl-app-track');
-    var rail = document.getElementById('dl-app-rail');
-    var screen = document.getElementById('dl-appscreen');
-    if (!rail || !screen) { return; }
-    var steps = Array.prototype.slice.call(rail.querySelectorAll('.dl-app-step'));
-    var n = steps.length;
+    var screenA = document.getElementById('dl-appscreen-a');
+    var screenB = document.getElementById('dl-appscreen-b');
+    var titleEl = document.getElementById('dl-app-t');
+    var descEl = document.getElementById('dl-app-d');
+    var numEl = document.getElementById('dl-app-n');
+    var segHost = document.getElementById('dl-app-seg');
+    if (!screenA || !screenB || !segHost) { return; }
+    var n = APP.length;
     if (!n) { return; }
 
-    var current = -1;
-    function setActive(i) {
-      i = Math.max(0, Math.min(n - 1, i));
-      if (i === current) { return; }
-      current = i;
-      steps.forEach(function (s, k) {
-        s.classList.toggle('on', k === i);
-        s.classList.toggle('done', k < i);
-      });
-      screen.innerHTML = APP[i].screen;
+    // build the segmented progress current
+    var segs = [];
+    for (var s = 0; s < n; s++) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'dl-seg';
+      b.setAttribute('role', 'tab');
+      b.setAttribute('aria-label', 'Moment ' + (s + 1) + ': ' + APP[s].t.replace('&amp;', 'and'));
+      b.innerHTML = '<span class="dl-seg-fill" aria-hidden="true"></span>';
+      (function (idx) { b.addEventListener('click', function () { jumpTo(idx); }); })(s);
+      segHost.appendChild(b);
+      segs.push(b);
     }
 
-    steps.forEach(function (s, i) {
-      s.addEventListener('click', function () { setActive(i); });
-      s.addEventListener('keydown', function (e) {
-        if (e.key === 'ArrowDown' && steps[i + 1]) { e.preventDefault(); steps[i + 1].focus(); setActive(i + 1); }
-        else if (e.key === 'ArrowUp' && steps[i - 1]) { e.preventDefault(); steps[i - 1].focus(); setActive(i - 1); }
-      });
-    });
+    var curCaption = -1;
+    function renderCaption(i) {
+      if (i === curCaption) { return; }
+      curCaption = i;
+      if (numEl) { numEl.textContent = '0' + (i + 1); }
+      if (titleEl) { titleEl.innerHTML = APP[i].t; }
+      if (descEl) { descEl.innerHTML = APP[i].d; }
+      segs.forEach(function (seg, k) { seg.setAttribute('aria-selected', k === i ? 'true' : 'false'); });
+    }
 
-    setActive(0);
+    var lastA = -1, lastB = -1;
+    function apply(f) {
+      var base = Math.floor(f + 0.0001);
+      if (base < 0) { base = 0; } else if (base > n - 1) { base = n - 1; }
+      var frac = f - base; if (frac < 0) { frac = 0; } else if (frac > 1) { frac = 1; }
+      var nb = Math.min(n - 1, base + 1);
+      if (lastA !== base) { screenA.innerHTML = APP[base].screen; lastA = base; }
+      if (lastB !== nb) { screenB.innerHTML = APP[nb].screen; lastB = nb; }
+      // the next screen is fully opaque and revealed top-to-bottom over the
+      // current one with a soft feathered wipe — continuous, and never a ghost.
+      if (base === nb) {
+        screenB.style.opacity = '0';
+      } else {
+        var e = frac * frac * (3 - 2 * frac);
+        var pct = e * 114 - 7;
+        var mask = 'linear-gradient(180deg,#000 ' + (pct - 9).toFixed(1) + '%, transparent ' + pct.toFixed(1) + '%)';
+        screenB.style.opacity = '1';
+        screenB.style.webkitMaskImage = mask;
+        screenB.style.maskImage = mask;
+      }
+      var cap = frac >= 0.5 && base < n - 1 ? base + 1 : base;
+      renderCaption(cap);
+      // one continuous current across the four segments: fills smoothly and
+      // ends exactly full, with the active moment's segment marked.
+      var p = n > 1 ? f / (n - 1) : 0;
+      for (var k = 0; k < n; k++) {
+        var fill = segs[k].firstChild;
+        var v = p * n - k; if (v < 0) { v = 0; } else if (v > 1) { v = 1; }
+        if (fill) { fill.style.setProperty('--v', v.toFixed(3)); }
+        segs[k].classList.toggle('is-active', k === cap);
+      }
+    }
+
+    function jumpTo(i) {
+      if (!track || reduceMotion) { apply(i); return; }
+      var rect = track.getBoundingClientRect();
+      var span = track.offsetHeight - (window.innerHeight || 1);
+      if (span <= 0) { apply(i); return; }
+      var pTarget = n > 1 ? i / (n - 1) : 0;
+      var absTop = window.scrollY + rect.top;
+      window.scrollTo({ top: Math.round(absTop + pTarget * span), behavior: 'smooth' });
+    }
+
+    apply(reduceMotion ? n - 1 : 0);
 
     if (track && !reduceMotion) {
-      engine.add(track, 'sticky', function (p) {
-        // even quarters, with the last state reached only near the very end
-        var i = Math.min(n - 1, Math.floor(p * n + 0.0001));
-        if (p >= 0.985) { i = n - 1; }
-        setActive(i);
-      });
+      engine.add(track, 'sticky', function (p) { apply(p * (n - 1)); });
     }
 
     // mobile: four fully composed scenes, each phone shown at a comfortable size
     var mob = document.getElementById('dl-app-mobile');
     if (mob) {
       var html = '';
-      for (var k = 0; k < APP.length; k++) {
+      for (var m = 0; m < APP.length; m++) {
         html += '<div class="dl-am">' +
-          '<div class="dl-am-copy"><span class="as-t">' + APP[k].t + '</span><span class="as-d">' + APP[k].d + '</span></div>' +
+          '<div class="dl-am-copy"><span class="dl-am-n">0' + (m + 1) + '</span><span class="as-t">' + APP[m].t + '</span><span class="as-d">' + APP[m].d + '</span></div>' +
           '<div class="dl-device dl-device--live"><span class="dl-device-island"></span>' +
-          '<div class="dl-device-screen"><div class="dl-ios">' + APP[k].screen + '</div></div></div>' +
+          '<div class="dl-device-screen"><div class="dl-ios">' + APP[m].screen + '</div></div></div>' +
           '</div>';
       }
       mob.innerHTML = html;
@@ -333,16 +399,20 @@
   }
   function wireSpines() {
     function run() {
-      var rail = document.getElementById('dl-app-rail');
-      if (rail && rail.offsetParent !== null) { measureSpine(rail, '.as-dot'); }
+      var appRail = document.getElementById('dl-app-rail');
+      if (appRail && appRail.offsetParent !== null) { measureSpine(appRail, '.as-dot'); }
+      var buildRail = document.getElementById('dl-build-rail');
+      if (buildRail && buildRail.offsetParent !== null) { measureSpine(buildRail, '.bs-dot'); }
     }
     run();
     setTimeout(run, 350);
     if (document.fonts && document.fonts.ready) { document.fonts.ready.then(run).catch(function () {}); }
     if ('ResizeObserver' in window) {
       var ro = new ResizeObserver(run);
-      var rail = document.getElementById('dl-app-rail');
-      if (rail) { ro.observe(rail); }
+      ['dl-app-rail', 'dl-build-rail'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) { ro.observe(el); }
+      });
     } else {
       window.addEventListener('resize', run, { passive: true });
     }
@@ -351,16 +421,49 @@
   /* -------------------------------------------------------------- */
   /* ACT 5 — Ray mini-demo, plays once in view                       */
   /* -------------------------------------------------------------- */
-  function setupRayflow() {
+  function setupRayflow(engine) {
     var flow = document.getElementById('dl-rayflow');
     if (!flow) { return; }
-    if (reduceMotion || !('IntersectionObserver' in window)) { flow.classList.add('play'); return; }
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) { flow.classList.add('play'); io.disconnect(); }
-      });
-    }, { threshold: 0.4 });
-    io.observe(flow);
+    if (reduceMotion) { flow.classList.add('show-ask', 'show-ans'); return; }
+    var askShown = false, ansShown = false;
+    engine.addUpdate(function () {
+      var r = flow.getBoundingClientRect();
+      var vh = window.innerHeight || 1;
+      var p = clamp01((vh * 0.88 - r.top) / (vh * 0.42));
+      if (!askShown && p > 0.12) { askShown = true; flow.classList.add('show-ask'); }
+      if (!ansShown && p > 0.42) { ansShown = true; flow.classList.add('show-ans'); }
+    });
+  }
+
+  /* -------------------------------------------------------------- */
+  /* ACT 4 — sunlight to settlement: one current fills, stages light  */
+  /* -------------------------------------------------------------- */
+  function setupSettle(engine) {
+    var scene = document.querySelector('.dl-settle');
+    var flow = document.getElementById('dl-settle-flow');
+    if (!scene || !flow) { return; }
+    var stages = Array.prototype.slice.call(scene.querySelectorAll('.dl-stage'));
+    var n = stages.length;
+    if (!n) { return; }
+
+    function light(p) {
+      flow.style.setProperty('--p', p.toFixed(4));
+      for (var i = 0; i < n; i++) {
+        var thr = n > 1 ? (i / (n - 1)) : 0;
+        stages[i].classList.toggle('is-lit', p >= thr - 0.0001);
+      }
+    }
+
+    if (reduceMotion) { light(1); return; }
+
+    light(0);
+    engine.addUpdate(function () {
+      var r = scene.getBoundingClientRect();
+      var vh = window.innerHeight || 1;
+      // fill as the scene travels the middle band of the viewport
+      var p = clamp01((vh * 0.92 - r.top) / (vh * 0.62));
+      light(p);
+    });
   }
 
   /* -------------------------------------------------------------- */
@@ -374,17 +477,17 @@
 
       var engine = makeEngine();
 
-      var scene = document.getElementById('dl-scene');
-      if (scene) { engine.add(scene.closest('.dl-scene-track'), 'sticky', sceneApply(scene)); }
-
+      setupBuild(engine);
       setupApp(engine);
+      setupSettle(engine);
+
+      setupRayflow(engine);
 
       var chapterUpdate = setupChapters();
       if (chapterUpdate) { engine.addUpdate(chapterUpdate); }
 
       if (reduceMotion) { engine.settleFinal(); } else { engine.start(); }
 
-      setupRayflow();
       wireSpines();
       setupVideo('dl-ray-video');
     } catch (e) {
