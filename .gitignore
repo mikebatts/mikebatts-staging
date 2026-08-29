@@ -1,2 +1,9 @@
 .claude/settings.local.json
 .claude-brief.md
+
+# Daylight hero (vgpu) build pipeline — source is committed, deps + transient are not.
+# The compiled static bundle js/daylight-spectrum.js IS committed.
+build/daylight-hero/node_modules/
+build/daylight-hero/dist/
+build/**/.vite/
+node_modules/

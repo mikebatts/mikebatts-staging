@@ -1,0 +1,19 @@
+{
+  "name": "daylight-hero",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Isolated WebGPU energy field for the Daylight case-study hero, built on vgpu. Compiles to ../../js/daylight-spectrum.js.",
+  "scripts": {
+    "check": "vgpu check --require-validation src/daylight-spectrum.wgsl",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "vgpu": "0.3.1",
+    "@vgpu/wgsl": "0.3.1"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0",
+    "@webgpu/types": "^0.1.44"
+  }
+}
