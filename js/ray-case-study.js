@@ -172,23 +172,6 @@
     var proofs = Array.prototype.slice.call(card.querySelectorAll('.tc-proof'));
     if (!steps.length || !proofs.length) { return; }
 
-    // Below the pinned desktop composition, pair each guarantee with the proof
-    // it describes. The persistent card keeps the shared question and answer;
-    // the proof details move into the reading flow instead of appearing as one
-    // enormous duplicate block before all four explanations.
-    steps.forEach(function (step) {
-      var state = step.getAttribute('data-trust');
-      var proof = proofs.filter(function (item) {
-        return item.getAttribute('data-proof') === state;
-      })[0];
-      if (!proof || step.querySelector('.ray-trust-mobile-proof')) { return; }
-      var mobileProof = document.createElement('div');
-      mobileProof.className = 'ray-trust-mobile-proof';
-      mobileProof.appendChild(proof.cloneNode(true));
-      step.appendChild(mobileProof);
-    });
-    split.classList.add('has-mobile-pairs');
-
     var gsap = window.gsap;
     var ScrollTrigger = window.ScrollTrigger;
     // No GSAP (blocked / failed): leave the legible settled stack in place.

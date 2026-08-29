@@ -9,18 +9,23 @@
 
   function setupViewport() {
     if (!window.visualViewport) { return; }
-    var update = function () {
-      root.style.setProperty('--dl-vvh', window.visualViewport.height + 'px');
-    };
+    function update() { root.style.setProperty('--dl-vvh', window.visualViewport.height + 'px'); }
     window.visualViewport.addEventListener('resize', update, { passive: true });
     update();
   }
 
-  function setupNav() {
+  function setupNavigation() {
     var nav = document.getElementById('dl-nav');
-    if (!nav) { return; }
-    var update = function () { nav.classList.toggle('is-scrolled', window.scrollY > 18); };
+    var progress = document.querySelector('.dl-progress span');
+    function update() {
+      if (nav) { nav.classList.toggle('is-scrolled', window.scrollY > 18); }
+      if (progress) {
+        var available = document.documentElement.scrollHeight - window.innerHeight;
+        progress.style.transform = 'scaleX(' + (available > 0 ? Math.min(1, window.scrollY / available) : 0) + ')';
+      }
+    }
     window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
     update();
   }
 
@@ -39,185 +44,123 @@
       });
     }, { threshold: .08, rootMargin: '0px 0px -7% 0px' });
     items.forEach(function (item) { observer.observe(item); });
-    window.setTimeout(function () {
-      items.forEach(function (item) { item.classList.add('in'); });
-    }, 3600);
+    window.setTimeout(function () { items.forEach(function (item) { item.classList.add('in'); }); }, 3200);
   }
 
   function setupHero() {
     var hero = document.querySelector('.dl-hero');
+    var object = document.getElementById('dl-hero-object');
     if (!hero) { return; }
-    if (reduceMotion) { hero.classList.add('hero-in'); return; }
     window.requestAnimationFrame(function () {
-      window.requestAnimationFrame(function () { hero.classList.add('hero-in'); });
+      window.requestAnimationFrame(function () { hero.classList.add('is-in'); });
     });
-
-    var gsap = window.gsap;
-    var ScrollTrigger = window.ScrollTrigger;
-    var stage = document.getElementById('dl-hero-stage');
-    if (!gsap || !ScrollTrigger || !stage || window.innerWidth < 760) { return; }
-    try { gsap.registerPlugin(ScrollTrigger); } catch (e) { return; }
-    gsap.fromTo(stage.querySelector('.dl-hero-media'),
-      { scale: 1 },
-      { scale: 1.08, ease: 'none', scrollTrigger: { trigger: stage, start: 'top bottom', end: 'bottom top', scrub: .8 } }
-    );
-    gsap.to(stage.querySelector('.dl-energy-window'), {
-      y: -34, ease: 'none', scrollTrigger: { trigger: stage, start: 'top 85%', end: 'bottom 15%', scrub: .7 }
-    });
-    gsap.to(stage.querySelector('.dl-hero-phone'), {
-      y: -72, ease: 'none', scrollTrigger: { trigger: stage, start: 'top 85%', end: 'bottom 15%', scrub: .7 }
-    });
-  }
-
-  function setupVideo(id) {
-    var video = document.getElementById(id);
-    if (!video) { return; }
-    if (reduceMotion || saveData) {
-      try { video.removeAttribute('autoplay'); video.pause(); } catch (e) {}
-      return;
-    }
-    var play = function () {
-      var promise;
-      try { promise = video.play(); } catch (e) { return; }
-      if (promise && promise.catch) { promise.catch(function () {}); }
-    };
-    play();
-    if ('IntersectionObserver' in window) {
-      var observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) { play(); } else { try { video.pause(); } catch (e) {} }
-        });
-      }, { threshold: .12 });
-      observer.observe(video);
+    if (reduceMotion || !object || !window.gsap || !window.ScrollTrigger) { return; }
+    try { window.gsap.registerPlugin(window.ScrollTrigger); } catch (e) { return; }
+    if (window.innerWidth > 760) {
+      window.gsap.fromTo(object.querySelector('.dl-project-window'),
+        { scale: .965, rotateX: 1.4 },
+        { scale: 1.015, rotateX: 0, ease: 'none', scrollTrigger: { trigger: object, start: 'top 92%', end: 'bottom 22%', scrub: .8 } }
+      );
+      window.gsap.to(object.querySelector('.dpw-orbit'), {
+        rotate: 24, ease: 'none', scrollTrigger: { trigger: object, start: 'top bottom', end: 'bottom top', scrub: 1 }
+      });
     }
   }
 
   function setupRay() {
-    var flow = document.getElementById('dl-rayflow');
-    if (!flow) { return; }
-    var answer = flow.querySelector('.drs-answer');
-    if (reduceMotion || !answer || !('IntersectionObserver' in window)) { return; }
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          if (window.gsap) {
-            window.gsap.fromTo(answer, { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: .72, delay: .25, ease: 'power3.out', clearProps: 'all' });
-          }
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: .12 });
-    observer.observe(document.querySelector('.dl-ray-product') || flow);
+    var stage = document.querySelector('.dl-ray-stage');
+    var video = stage ? stage.querySelector('video') : null;
+    if (video && (reduceMotion || saveData)) {
+      try { video.removeAttribute('autoplay'); video.pause(); } catch (e) {}
+    }
+    if (reduceMotion || !stage || !window.gsap || !window.ScrollTrigger) { return; }
+    try { window.gsap.registerPlugin(window.ScrollTrigger); } catch (e) { return; }
+    window.gsap.to(stage.querySelector('.dl-ray-sun'), {
+      y: -42, rotate: 8, ease: 'none', scrollTrigger: { trigger: stage, start: 'top bottom', end: 'bottom top', scrub: .9 }
+    });
+    window.gsap.fromTo(stage.querySelector('.dl-ray-chat'), { y: 38 }, {
+      y: -18, ease: 'none', scrollTrigger: { trigger: stage, start: 'top 88%', end: 'bottom 18%', scrub: .7 }
+    });
   }
 
-  function setupLifecycle() {
-    var life = document.getElementById('dl-life');
-    if (!life) { return; }
-    var items = Array.prototype.slice.call(life.querySelectorAll('li'));
-    var current = document.querySelector('.dl-life-current span');
-    var activate = function (item) {
-      items.forEach(function (candidate, index) {
+  function setupOrigination() {
+    var accordion = document.getElementById('dl-origin-accordion');
+    if (!accordion) { return; }
+    var items = Array.prototype.slice.call(accordion.children);
+    function activate(item) {
+      items.forEach(function (candidate) {
         var active = candidate === item;
         candidate.classList.toggle('is-active', active);
-        candidate.querySelector('button').setAttribute('aria-expanded', active ? 'true' : 'false');
-        if (active && current) { current.style.transform = 'translateX(' + (index * 100) + '%)'; }
+        var button = candidate.querySelector('button');
+        if (button) { button.setAttribute('aria-expanded', active ? 'true' : 'false'); }
       });
-    };
+    }
     items.forEach(function (item) {
       var button = item.querySelector('button');
-      button.setAttribute('aria-expanded', item.classList.contains('is-active') ? 'true' : 'false');
-      button.addEventListener('click', function () { activate(item); });
-      if (window.matchMedia('(hover:hover)').matches) {
+      if (button) { button.addEventListener('click', function () { activate(item); }); }
+      if (window.matchMedia('(min-width:1025px) and (hover:hover)').matches) {
         item.addEventListener('mouseenter', function () { activate(item); });
       }
     });
-  }
 
-  function setupPhones() {
-    var buttons = Array.prototype.slice.call(document.querySelectorAll('[data-phone]'));
-    var phones = Array.prototype.slice.call(document.querySelectorAll('[data-phone-panel]'));
-    if (!buttons.length) { return; }
-    buttons.forEach(function (button) {
-      button.addEventListener('click', function () {
-        var index = button.getAttribute('data-phone');
-        buttons.forEach(function (candidate) { candidate.classList.toggle('is-active', candidate === button); });
-        phones.forEach(function (phone) { phone.classList.toggle('is-active', phone.getAttribute('data-phone-panel') === index); });
-      });
+    if (reduceMotion || !window.gsap || !window.ScrollTrigger || window.innerWidth <= 1024) { return; }
+    try { window.gsap.registerPlugin(window.ScrollTrigger); } catch (e) { return; }
+    window.ScrollTrigger.create({
+      trigger: accordion,
+      start: 'top 42%',
+      end: 'bottom 42%',
+      onUpdate: function (self) {
+        var index = Math.min(items.length - 1, Math.floor(self.progress * items.length));
+        if (!items[index].classList.contains('is-active')) { activate(items[index]); }
+      }
     });
   }
 
-  function setupWorkbench() {
-    var scroller = document.getElementById('dl-workbench-scroll');
-    var workbench = document.getElementById('dl-workbench');
-    if (!scroller || !workbench) { return; }
-    var buttons = Array.prototype.slice.call(workbench.querySelectorAll('[data-scene]'));
-    var panels = Array.prototype.slice.call(workbench.querySelectorAll('[data-scene-panel]'));
-    var current = 0;
-
-    function show(index, animate) {
-      index = Math.max(0, Math.min(panels.length - 1, index));
-      if (index === current && panels[index].classList.contains('is-active')) { return; }
-      current = index;
-      buttons.forEach(function (button, buttonIndex) {
-        var active = buttonIndex === index;
+  function setupHome() {
+    var buttons = Array.prototype.slice.call(document.querySelectorAll('[data-home-tab]'));
+    var panels = Array.prototype.slice.call(document.querySelectorAll('[data-home-panel]'));
+    var note = document.getElementById('dl-home-note');
+    var copy = {
+      overview: ['Overview', 'Live production, storage, and home use in one readable picture.'],
+      energy: ['Energy', 'A clear breakdown of how the home produced, stored, and used energy.'],
+      payments: ['Payments', 'Statements, autopay, and payment history without leaving the Daylight relationship.']
+    };
+    function activate(key) {
+      buttons.forEach(function (button) {
+        var active = button.getAttribute('data-home-tab') === key;
         button.classList.toggle('is-active', active);
         button.setAttribute('aria-selected', active ? 'true' : 'false');
       });
-      panels.forEach(function (panel, panelIndex) {
-        panel.classList.toggle('is-active', panelIndex === index);
-      });
-      if (animate && window.gsap && !reduceMotion) {
-        window.gsap.fromTo(panels[index], { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: .7, ease: 'power3.out', clearProps: 'all' });
+      panels.forEach(function (panel) { panel.classList.toggle('is-active', panel.getAttribute('data-home-panel') === key); });
+      if (note && copy[key]) {
+        note.querySelector('span').textContent = copy[key][0];
+        note.querySelector('p').textContent = copy[key][1];
       }
     }
-
-    buttons.forEach(function (button, index) {
-      button.addEventListener('click', function () { show(index, true); });
-    });
-    show(0, false);
-
-    var gsap = window.gsap;
-    var ScrollTrigger = window.ScrollTrigger;
-    if (!gsap || !ScrollTrigger || reduceMotion || window.innerWidth < 1025) { return; }
-    try { gsap.registerPlugin(ScrollTrigger); } catch (e) { return; }
-    scroller.classList.add('is-scroll-story');
-    ScrollTrigger.create({
-      trigger: scroller,
-      start: 'top top+=84',
-      end: 'bottom bottom',
-      pin: workbench,
-      pinSpacing: false,
-      anticipatePin: 1,
-      onUpdate: function (self) {
-        var index = Math.min(panels.length - 1, Math.floor(self.progress * panels.length));
-        show(index, index !== current);
-      }
-    });
-    ScrollTrigger.refresh();
+    buttons.forEach(function (button) { button.addEventListener('click', function () { activate(button.getAttribute('data-home-tab')); }); });
+    if (reduceMotion || !window.gsap || !window.ScrollTrigger) { return; }
+    try { window.gsap.registerPlugin(window.ScrollTrigger); } catch (e) { return; }
+    var phone = document.querySelector('.dl-home-phone');
+    var orbit = document.querySelector('.dl-home-orbit');
+    if (phone) {
+      window.gsap.fromTo(phone, { y: 42, scale: .97 }, { y: -18, scale: 1, ease: 'none', scrollTrigger: { trigger: phone, start: 'top bottom', end: 'bottom 20%', scrub: .8 } });
+    }
+    if (orbit) {
+      window.gsap.to(orbit, { rotate: -28, ease: 'none', scrollTrigger: { trigger: orbit, start: 'top bottom', end: 'bottom top', scrub: 1 } });
+    }
   }
 
   function init() {
-    try {
-      setupViewport();
-      setupReveals();
-      root.classList.add('dl-js');
-      setupNav();
-      setupHero();
-      setupVideo('dl-hero-video');
-      setupVideo('dl-ray-video');
-      setupRay();
-      setupLifecycle();
-      setupPhones();
-      setupWorkbench();
-    } catch (e) {
-      root.classList.remove('dl-js');
-      document.querySelectorAll('.dl-reveal').forEach(function (item) { item.classList.add('in'); });
-    }
+    root.classList.add('js-on');
+    setupViewport();
+    setupNavigation();
+    setupReveals();
+    setupHero();
+    setupRay();
+    setupOrigination();
+    setupHome();
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); }
+  else { init(); }
 })();
