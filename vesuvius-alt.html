@@ -19,7 +19,7 @@
   <link rel="preload" href="fonts/Graphik-Regular.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="images/vesuvius-alt/eruption/desktop/frame-001.webp" as="image" type="image/webp" fetchpriority="high" media="(min-width: 901px)">
   <link rel="preload" href="images/vesuvius-alt/eruption/mobile/frame-001.webp" as="image" type="image/webp" fetchpriority="high" media="(max-width: 900px)">
-  <link rel="stylesheet" href="css/vesuvius-alt.css?v=7">
+  <link rel="stylesheet" href="css/vesuvius-alt.css?v=8">
 </head>
 <body>
   <a class="va-skip" href="#challenge">Skip to the story</a>
@@ -88,33 +88,33 @@
         </div>
       </div>
 
-      <div class="va-sequence" data-sequence>
-        <div class="va-sequence-stage">
-          <div class="va-sequence-visual">
-            <canvas class="va-sequence-canvas" aria-hidden="true"></canvas>
-            <div class="va-sequence-meta" aria-hidden="true"><span data-sequence-index>01</span><b data-sequence-name>Scan</b></div>
+      <div class="va-process" data-process>
+        <div class="va-process-stage">
+          <div class="va-process-object" aria-hidden="true">
+            <div class="va-volume">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              <span class="va-volume-beam"></span>
+            </div>
+            <div class="va-surface"><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="va-letter">α</div>
           </div>
+          <div class="va-process-count"><span>01</span> / 03</div>
         </div>
-        <div class="va-sequence-steps">
-          <article class="is-active" data-sequence-step="scan">
+        <div class="va-process-steps">
+          <article class="is-active" data-process-step="scan">
             <span>Scan</span>
-            <h3>X-rays turn the sealed scroll into thousands of slices.</h3>
-            <p>Like a medical CT scan, but detailed enough to see the shape of a single sheet of papyrus.</p>
+            <h3>Capture the sealed scroll as thousands of X-ray slices.</h3>
+            <p>Think of a medical CT scan, but detailed enough to see a single sheet of papyrus.</p>
           </article>
-          <article data-sequence-step="separate">
-            <span>Separate</span>
-            <h3>Software follows one crushed sheet through the volume.</h3>
-            <p>The page is pressed against hundreds of others. Its path has to be traced through every fold and collision.</p>
+          <article data-process-step="unwrap">
+            <span>Unwrap</span>
+            <h3>Follow one crushed sheet, then lay it flat on screen.</h3>
+            <p>Software separates the page from hundreds around it and traces every fold without opening the physical scroll.</p>
           </article>
-          <article data-sequence-step="flatten">
-            <span>Flatten</span>
-            <h3>The warped sheet becomes a flat image.</h3>
-            <p>This is virtual unwrapping: the digital equivalent of laying the page on a table while the physical scroll stays sealed.</p>
-          </article>
-          <article data-sequence-step="read">
+          <article data-process-step="read">
             <span>Read</span>
-            <h3>A model searches for the physical trace left by ink.</h3>
-            <p>Carbon ink on carbonized papyrus is nearly invisible. The model proposes a mark; the evidence system decides whether it deserves belief.</p>
+            <h3>Search the flat surface for the physical trace of ink.</h3>
+            <p>The model proposes a mark. The evidence system decides whether it deserves belief.</p>
           </article>
         </div>
       </div>
@@ -146,15 +146,17 @@
         </div>
       </div>
 
-      <div class="va-trace" data-trace>
-        <div class="va-trace-stage">
-          <div class="va-trace-visual" aria-hidden="true">
-            <canvas class="va-trace-canvas"></canvas>
-            <div class="va-trace-verdict"><b>Evidence held</b><span>known-text control</span></div>
+      <div class="va-evidence" data-evidence>
+        <div class="va-evidence-sticky">
+          <div class="va-evidence-line" aria-hidden="true"><span></span></div>
+          <div class="va-evidence-visual" aria-hidden="true">
+            <div class="va-evidence-slab va-slab-published"><span>Α Β Γ</span></div>
+            <div class="va-evidence-slab va-slab-surface"><i></i><i></i><i></i><em></em></div>
+            <div class="va-evidence-slab va-slab-volume"><b></b><b></b><b></b><b></b></div>
+            <div class="va-evidence-seal">survived</div>
           </div>
-          <div class="va-trace-line" aria-hidden="true"><span></span></div>
         </div>
-        <div class="va-trace-steps">
+        <div class="va-evidence-copy">
           <article class="is-active" data-trace-step="0">
             <span>Begin with writing already read</span>
             <h3>Start on a scroll where experts have published the answer.</h3>
@@ -179,130 +181,65 @@
       </div>
     </section>
 
-    <section class="va-findings" id="findings" aria-labelledby="findings-title">
+    <section class="va-findings va-light" id="findings" aria-labelledby="findings-title">
       <div class="va-wrap va-findings-head">
         <p class="va-side-note">What survived challenge</p>
-        <h2 id="findings-title">A narrower result.<br>A stronger foundation.</h2>
+        <h2 id="findings-title">Keep the instrument.<br>Demote the signal.</h2>
       </div>
-      <div class="va-findings-grid">
-        <article class="va-finding-wide">
-          <div><strong>51</strong><span>known characters</span></div>
-          <p>Published writing from PHerc0139 was connected back to exact surface coordinates and its parent CT volume.</p>
+      <div class="va-verdict-board">
+        <article class="va-verdict-primary">
+          <strong>51</strong>
+          <div><span>Verified foundation</span><h3>Known characters traced all the way back to the scan.</h3><p>PHerc0139 connected published writing to exact surface coordinates and its parent CT volume.</p></div>
         </article>
-        <article>
-          <div class="va-coverage" aria-label="Prediction coverage: 93 to 99 percent on known text, 73 percent on blank gutters">
-            <span style="--fill:.96"><i>Known text</i><b>93–99%</b></span>
-            <span style="--fill:.73"><i>Blank gutters</i><b>73%</b></span>
-          </div>
-          <h3>The useful signal is where the model speaks at all.</h3>
-          <p>On PHerc1667, coverage separated known text from blank gutters beyond the frozen chance test.</p>
+        <article class="va-verdict-chain">
+          <span>Verified foundation</span><h3>The canonical PHerc1667 chain reproduces end to end.</h3><p>Every hash checks. The renderer passes from pinned binary and source.</p>
         </article>
-        <article>
-          <div class="va-discard" aria-hidden="true"><span>Brightness</span><i></i><b>discarded</b></div>
-          <h3>Brightness did not carry the result.</h3>
-          <p>Hardening reversed the original intensity story. The claim was downgraded instead of defended.</p>
+        <article class="va-verdict-demoted">
+          <span>Demoted honestly</span><h3>The coverage signal was render geometry—not ink.</h3><p>All five PHerc1447 leads failed the frozen structural test.</p>
         </article>
       </div>
     </section>
 
-    <section class="va-cohort" id="cohort" aria-labelledby="cohort-title" data-cohort>
-      <div class="va-cohort-sticky">
-        <div class="va-cohort-media" aria-hidden="true">
-          <canvas class="va-cohort-canvas"></canvas>
-          <div class="va-cohort-vignette"></div>
+    <section class="va-cohort va-light" id="cohort" aria-labelledby="cohort-title" data-cohort>
+      <div class="va-wrap va-cohort-head">
+        <p class="va-side-note">Cohors Vesuviana</p>
+        <div><h2 id="cohort-title">A research system<br>built to disagree.</h2><p>Romulus runs the cohort continuously. Six independent roles pressure every decision. I approve consequential gates and debrief the sealed result.</p></div>
+      </div>
+      <div class="va-cohort-system">
+        <article class="va-operator">
+          <span>Operator</span><h3>Romulus</h3><p>Frames the question, convenes the cohort, routes the work, verifies every receipt, and returns with one accountable recommendation.</p>
+          <div class="va-operator-flow"><i>Question</i><i>Experiment</i><i>Challenge</i><i>Sealed result</i></div>
+        </article>
+        <div class="va-lenses" aria-label="The six roles in Cohors Vesuviana">
+          <article data-role="0"><span>Minerva</span><p>Strategy</p></article>
+          <article data-role="1"><span>Vulcan</span><p>Engineering</p></article>
+          <article data-role="2"><span>Veritas</span><p>Falsification</p></article>
+          <article data-role="3"><span>Mercury</span><p>Intelligence</p></article>
+          <article data-role="4"><span>Plutus</span><p>Cost</p></article>
+          <article data-role="5"><span>Cassandra</span><p>Risk</p></article>
         </div>
-        <div class="va-cohort-copy">
-          <p class="va-kicker">Cohors Vesuviana</p>
-          <h2 id="cohort-title">One decision.<br>Six independent pressures.</h2>
-          <p>I built a six-role research cohort so scientific strategy, engineering, methodology, outside intelligence, cost, and risk cannot quietly collapse into one opinion.</p>
-        </div>
-        <div class="va-roles" aria-label="The six roles in Cohors Vesuviana">
-          <article data-role="0"><span>Minerva</span><p>Chooses the question worth testing.</p></article>
-          <article data-role="1"><span>Vulcan</span><p>Builds the experiment and its receipts.</p></article>
-          <article data-role="2"><span>Veritas</span><p>Tries to falsify every claim.</p></article>
-          <article data-role="3"><span>Mercury</span><p>Tracks new evidence and prior art.</p></article>
-          <article data-role="4"><span>Plutus</span><p>Prices the value of the next experiment.</p></article>
-          <article data-role="5"><span>Cassandra</span><p>Names the risks consensus can miss.</p></article>
-        </div>
-        <div class="va-approval"><span>Mike</span><b>Only human approval gate</b></div>
+        <article class="va-human-gate"><span>Human gate + debrief</span><h3>Mike</h3><p>Approves spend, publication, and material changes in direction—then reviews what the cohort actually proved.</p></article>
       </div>
     </section>
 
-    <section class="va-journal va-light" id="journal" aria-labelledby="journal-title">
-      <div class="va-wrap va-journal-head">
-        <p class="va-side-note">Verified progress journal</p>
-        <div>
-          <h2 id="journal-title">The work, without<br>the victory edit.</h2>
-          <p>Every milestone below is a sealed result or an explicitly unfinished gate. The journal changes when the evidence does.</p>
-        </div>
+    <section class="va-status va-light" id="journal" aria-labelledby="status-title">
+      <div class="va-wrap va-status-head"><p class="va-side-note">Live status · August 29, 10:42 PM</p><h2 id="status-title">Zero letters.<br>One honest bottleneck.</h2></div>
+      <div class="va-status-board">
+        <article><span>Demoted</span><h3>Five PHerc1447 leads</h3><p>Every gap was explained by render support, not ink.</p><b>STRUCTURAL_EXPLAINED</b></article>
+        <article><span>Failed closed</span><h3>PHerc800 surface gate</h3><p>The metric failed its own known-good control. No surface was classified on a broken ruler.</p><b>FAIL_METRIC_INVALID</b></article>
+        <article><span>Verified</span><h3>PHerc1667 canonical chain</h3><p>Hashes and coverage reproduce end to end. The daily cycle is unblocked.</p><b>CANONICAL_CHAIN_PASS</b></article>
+        <article class="is-live"><span>Running now</span><h3>M1v2 metric repair</h3><p>Diagnose the offset, freeze a corrected preregistration, and rerun the surface gate.</p><b>MIKE_GO · ACTIVE</b></article>
       </div>
-
-      <div class="va-latest">
-        <div class="va-latest-state"><i></i><span>Latest sealed result</span></div>
-        <div>
-          <h3>Five regions advanced. None became a letter.</h3>
-          <p>Six PHerc1447 surface segments were tested under a frozen coverage-only rule. Five regions passed a coarse comparison against blank controls, but zero letter-shaped forms beat the chance test. They remain reconnaissance leads—not discoveries.</p>
-        </div>
-        <code>RECON_CANDIDATES_SEALED · k=0</code>
-      </div>
-
-      <ol class="va-journal-list">
-        <li>
-          <time datetime="2026-08-18">Aug 18</time>
-          <div><span>Survey</span><h3>Agreement across models looked promising.</h3><p>Repeated hot spots appeared across the first PHerc1447 maps.</p></div>
-          <b>Reopened</b>
-        </li>
-        <li>
-          <time datetime="2026-08-20">Aug 20–26</time>
-          <div><span>Reset</span><h3>The apparent letters resolved into papyrus structure.</h3><p>The program shifted from visual hunting to provenance, controls, null tests, and explicit failure rules.</p></div>
-          <b>Closed honestly</b>
-        </li>
-        <li>
-          <time datetime="2026-08-28">Aug 28</time>
-          <div><span>Known text</span><h3>Fifty-one published characters were closed back to the scan.</h3><p>PHerc0139 established the full publication-to-pixel-to-volume chain.</p></div>
-          <b>Verified</b>
-        </li>
-        <li>
-          <time datetime="2026-08-29T14:08:00-04:00">Aug 29 · 2:08 PM</time>
-          <div><span>Hardening</span><h3>Coverage survived. Brightness did not.</h3><p>PHerc1667 known text showed 93–99% coverage versus 73% in gutters, p = 0.001. The brighter-ink explanation was discarded.</p></div>
-          <b>Claim narrowed</b>
-        </li>
-        <li>
-          <time datetime="2026-08-29T19:05:00-04:00">Aug 29 · 7:05 PM</time>
-          <div><span>Mechanism check</span><h3>Silent regions were structural, but not an edge artifact.</h3><p>Ninety-four percent of silent pixels formed 39 large regions, and silence increased inside blank gutters rather than at their borders.</p></div>
-          <b>Condition cleared</b>
-        </li>
-        <li>
-          <time datetime="2026-08-29T20:09:00-04:00">Aug 29 · 8:09 PM</time>
-          <div><span>Unread scroll</span><h3>Five regions survived a coarse screen. Zero letter shapes survived chance.</h3><p>The run sealed region-level reconnaissance leads with a structural caveat. It made no letter, word, or content claim.</p></div>
-          <b>Leads, not letters</b>
-        </li>
-        <li class="is-current">
-          <time datetime="2026-08-29T20:25:00-04:00">Aug 29 · latest</time>
-          <div><span>Roadmap review</span><h3>Consolidate the control. Open the surface path. Draft the method.</h3><p>The cohort deferred GPU spend and vetoed escalation of the five regions. The next work is a canonical PHerc1667 control, a usable PHerc800 surface pipeline, and a public coverage-methodology draft.</p></div>
-          <b>In flight</b>
-        </li>
-      </ol>
-
-      <div class="va-next">
-        <div>
-          <p class="va-side-note">Not achieved yet</p>
-          <h3>No unread letter has passed independent physical confirmation and papyrological review.</h3>
-        </div>
-        <div>
-          <p class="va-side-note">Next decision</p>
-          <h3>Build the missing surface pipeline and replace the debug-lineage control before spending on another letter hunt.</h3>
-          <p>PHerc800 rendering, the canonical PHerc1667 chain, and the coverage-methodology contribution are now the active lanes. GPU inference stays deferred until a surface gate passes.</p>
-        </div>
-      </div>
+      <div class="va-status-next"><p>The letter path is now precise:</p><h3>Build a surface metric that passes its control. Open PHerc800. Then scout for writing.</h3><span>The methodology draft is ready for Mike’s publication review.</span></div>
     </section>
 
     <footer class="va-ending">
+      <canvas class="va-ending-canvas" aria-hidden="true"></canvas>
       <div class="va-ending-field" aria-hidden="true"><span></span></div>
       <div class="va-ending-copy">
-        <p class="va-kicker">Status verified August 29, 2026</p>
+        <p class="va-kicker">The standard does not move</p>
         <h2>The next letter<br>has to survive.</h2>
-        <p>This research is ongoing. The threshold does not move to make the story cleaner.</p>
+        <p>This research is ongoing. Every failed path makes the instrument harder to fool.</p>
         <a href="index.html">Back to selected work <span aria-hidden="true">↗</span></a>
       </div>
     </footer>
@@ -310,6 +247,6 @@
 
   <script src="js/vendor/gsap.min.js"></script>
   <script src="js/vendor/ScrollTrigger.min.js"></script>
-  <script src="js/vesuvius-alt.js?v=7"></script>
+  <script src="js/vesuvius-alt.js?v=10"></script>
 </body>
 </html>
