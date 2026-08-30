@@ -181,33 +181,12 @@
     watchSteps(evidenceSteps,setEvidence);setEvidence(reduce?3:0);
   }
 
-  /* COHORS: a pinned desktop chapter and a native mobile swipe sequence. */
+  /* COHORS: one sticky explanation beside a simple, responsive role list. */
   var cohort=doc.querySelector('[data-cohort]');
-  if(cohort){
-    var cohortSticky=cohort.querySelector('.va-cohort-sticky'),roles=[].slice.call(cohort.querySelectorAll('[data-role]')),dots=[].slice.call(cohort.querySelectorAll('.va-cohort-timeline i'));
-    var cohortLine=cohort.querySelector('.va-cohort-timeline span'),cohortIndex=cohort.querySelector('[data-cohort-index]'),cohortName=cohort.querySelector('[data-cohort-name]'),cohortCopy=cohort.querySelector('[data-cohort-copy]'),lastRole=-1;
-    var roleCopy=[
-      'Chooses the next question and defines what a useful answer would change.',
-      'Builds the machinery, records the environment, and makes every run reproducible.',
-      'Tries to break the claim before the claim can move forward.',
-      'Tracks new papers, community findings, and outside evidence that can change the plan.',
-      'Protects the compute, storage, and spend required to keep the work running.',
-      'Names the failure modes early and keeps unresolved risk visible.'
-    ];
-    function applyCohort(p){
-      p=clamp(p,0,1);var index=Math.min(5,Math.floor(p*6));
-      roles.forEach(function(el,i){el.classList.toggle('is-active',i===index);el.classList.toggle('is-past',i<index)});
-      dots.forEach(function(el,i){el.classList.toggle('is-active',i<=index)});
-      if(cohortLine)cohortLine.style.transform='scaleX('+Math.max(.035,p)+')';
-      if(index!==lastRole){lastRole=index;if(cohortIndex)cohortIndex.textContent='0'+(index+1)+' / 06';if(cohortName)cohortName.textContent=roles[index].querySelector('span').textContent;if(cohortCopy)cohortCopy.textContent=roleCopy[index]}
-    }
-    if(window.innerWidth>900&&hasGsap&&!reduce){
-      ST.create({trigger:cohort,start:'top top',end:'+=320%',pin:cohortSticky,pinSpacing:true,scrub:1.05,anticipatePin:1,onUpdate:function(self){applyCohort(self.progress)}});
-      applyCohort(0);
-    }else{
-      var lensRail=cohort.querySelector('.va-lenses');applyCohort(0);
-      if(lensRail&&!reduce)lensRail.addEventListener('scroll',function(){var max=Math.max(1,lensRail.scrollWidth-lensRail.clientWidth);applyCohort(lensRail.scrollLeft/max)},{passive:true});
-    }
+  if(cohort&&hasGsap&&!reduce){
+    [].slice.call(cohort.querySelectorAll('[data-role]')).forEach(function(role){
+      gs.from(role,{y:18,opacity:.36,duration:1,ease:'power3.out',scrollTrigger:{trigger:role,start:'top 88%',once:true}});
+    });
   }
 
   /* ENDING: an ink-in-water plume with a lighter renderer for mobile Safari. */
@@ -247,9 +226,14 @@
     if(reduce){endingVisible=true;renderEnding(4200)}
   }
 
+  var endingImage=doc.querySelector('.va-ending-scene img');
+  if(endingImage&&hasGsap&&!reduce){
+    gs.fromTo(endingImage,{scale:1.055,yPercent:1.5},{scale:1,yPercent:-1.5,ease:'none',scrollTrigger:{trigger:'.va-ending',start:'top bottom',end:'bottom top',scrub:1.2}});
+  }
+
   /* Quiet entrances support the story without calling attention to themselves. */
   if(hasGsap&&!reduce){
-    [].slice.call(doc.querySelectorAll('.va-intro-grid,.va-proof-head,.va-findings-head,.va-verdict-board article,.va-status-head,.va-status-board article,.va-status-signal')).forEach(function(el){
+    [].slice.call(doc.querySelectorAll('.va-intro-grid,.va-proof-head,.va-findings-grid>*,.va-status-head,.va-status-board article,.va-status-signal')).forEach(function(el){
       gs.from(el,{y:16,opacity:0,duration:1.12,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 90%',once:true}});
     });
   }

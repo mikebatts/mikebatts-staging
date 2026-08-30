@@ -19,7 +19,7 @@
   <link rel="preload" href="fonts/Graphik-Regular.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="images/vesuvius-alt/eruption/desktop/frame-001.webp" as="image" type="image/webp" fetchpriority="high" media="(min-width: 901px)">
   <link rel="preload" href="images/vesuvius-alt/eruption/mobile/frame-001.webp" as="image" type="image/webp" fetchpriority="high" media="(max-width: 900px)">
-  <link rel="stylesheet" href="css/vesuvius-alt.css?v=9">
+  <link rel="stylesheet" href="css/vesuvius-alt.css?v=10">
 </head>
 <body>
   <a class="va-skip" href="#challenge">Skip to the story</a>
@@ -83,7 +83,7 @@
           <h2 id="challenge-title">Read the page.<br>Never touch the scroll.</h2>
           <div class="va-copy-pair">
             <p>Mount Vesuvius buried Herculaneum and its private library. Heat turned hundreds of papyrus scrolls into fragile, tightly wound blocks of carbon. Together, they form the only intact library to survive from the ancient world.</p>
-            <p>Unroll one and it can crumble. The Vesuvius Challenge asks us to read the writing digitally: scan the sealed object, reconstruct a page inside it, and detect ink without ever opening the scroll.</p>
+            <p>Unroll one and it can crumble. The <a class="va-text-link" href="https://scrollprize.org/" target="_blank" rel="noopener noreferrer">Vesuvius Challenge</a> asks us to read the writing digitally: scan the sealed object, reconstruct a page inside it, and detect ink without ever opening the scroll.</p>
           </div>
         </div>
       </div>
@@ -182,45 +182,45 @@
     </section>
 
     <section class="va-findings va-light" id="findings" aria-labelledby="findings-title">
-      <div class="va-wrap va-findings-head">
-        <p class="va-side-note">What survived challenge</p>
-        <h2 id="findings-title">Keep the instrument.<br>Demote the signal.</h2>
-      </div>
-      <div class="va-verdict-board">
-        <article class="va-verdict-primary">
-          <strong>51</strong>
-          <div><span>Verified foundation</span><h3>Known characters traced all the way back to the scan.</h3><p>PHerc0139 connected published writing to exact surface coordinates and its parent CT volume.</p></div>
+      <div class="va-findings-grid">
+        <header class="va-findings-intro">
+          <h2 id="findings-title">What survived<br>the challenge.</h2>
+          <p>The strongest result was not a new letter. It was a research foundation that became harder to fool.</p>
+        </header>
+        <article class="va-finding va-finding-known">
+          <span>Known-text control · 51 characters</span>
+          <h3>Published writing traced back to the original scan.</h3>
+          <p>PHerc0139 connected known characters to exact surface coordinates and their parent CT volume.</p>
         </article>
-        <article class="va-verdict-chain">
-          <span>Verified foundation</span><h3>The canonical PHerc1667 chain reproduces end to end.</h3><p>Every hash checks. The same renderer output can be rebuilt from its pinned source and binary.</p>
+        <article class="va-finding va-finding-chain">
+          <span>Reproducible foundation</span>
+          <h3>The PHerc1667 chain rebuilds end to end.</h3>
+          <p>Every hash checks. The same renderer output can be rebuilt from its pinned source and binary.</p>
         </article>
-        <article class="va-verdict-demoted">
-          <span>Demoted honestly</span><h3>The coverage signal came from render geometry, not ink.</h3><p>All five PHerc1447 leads failed the frozen structural test.</p>
+        <article class="va-finding va-finding-demoted">
+          <span>Signal retired</span>
+          <h3>Render geometry explained what first looked like ink.</h3>
+          <p>All five PHerc1447 leads failed the frozen structural test, so none moved forward.</p>
         </article>
       </div>
     </section>
 
     <section class="va-cohort va-light" id="cohort" aria-labelledby="cohort-title" data-cohort>
-      <div class="va-cohort-sticky">
-        <div class="va-wrap va-cohort-head">
-          <p class="va-side-note">Cohors Vesuviana</p>
-          <div><h2 id="cohort-title">A research system<br>built to disagree.</h2><p>Romulus runs the work as one continuous research cycle. Six independent roles challenge the strategy, the engineering, the evidence, and the cost before a result is allowed to stand.</p></div>
+      <div class="va-cohort-layout">
+        <header class="va-cohort-head">
+          <p>Cohors Vesuviana</p>
+          <h2 id="cohort-title">A research system<br>built to disagree.</h2>
+          <span>Romulus runs one continuous cycle. Six independent roles challenge the plan before a result is allowed to stand.</span>
+          <div class="va-cohort-lead"><small>Operator</small><strong>Romulus</strong><em>Frames the question, routes the work, verifies the receipts, and returns one accountable recommendation.</em></div>
+        </header>
+        <div class="va-cohort-list" aria-label="The six roles in Cohors Vesuviana">
+          <article data-role="0"><small>01</small><h3>Minerva</h3><span>Strategy</span><p>Chooses the next question and defines what a useful answer would change.</p></article>
+          <article data-role="1"><small>02</small><h3>Vulcan</h3><span>Engineering</span><p>Builds the machinery and records enough detail for every run to be repeated.</p></article>
+          <article data-role="2"><small>03</small><h3>Veritas</h3><span>Falsification</span><p>Tries to break the claim before the claim can move forward.</p></article>
+          <article data-role="3"><small>04</small><h3>Mercury</h3><span>Intelligence</span><p>Tracks outside findings that can change the plan or shorten the path.</p></article>
+          <article data-role="4"><small>05</small><h3>Plutus</h3><span>Cost</span><p>Protects the compute, storage, and spend required to keep the work running.</p></article>
+          <article data-role="5"><small>06</small><h3>Cassandra</h3><span>Risk</span><p>Names the failure modes early and keeps unresolved risk visible.</p></article>
         </div>
-        <div class="va-cohort-system">
-          <article class="va-operator">
-            <span>Operator</span><h3>Romulus</h3><p>Frames the question, convenes the cohort, routes the work, verifies every receipt, and returns with one accountable recommendation.</p>
-            <div class="va-operator-current" aria-live="polite"><small data-cohort-index>01 / 06</small><strong data-cohort-name>Minerva</strong><em data-cohort-copy>Chooses the next question and defines what a useful answer would change.</em></div>
-          </article>
-          <div class="va-lenses" aria-label="The six roles in Cohors Vesuviana">
-            <article class="is-active" data-role="0"><span>Minerva</span><p>Strategy</p></article>
-            <article data-role="1"><span>Vulcan</span><p>Engineering</p></article>
-            <article data-role="2"><span>Veritas</span><p>Falsification</p></article>
-            <article data-role="3"><span>Mercury</span><p>Intelligence</p></article>
-            <article data-role="4"><span>Plutus</span><p>Cost</p></article>
-            <article data-role="5"><span>Cassandra</span><p>Risk</p></article>
-          </div>
-        </div>
-        <div class="va-cohort-timeline" aria-hidden="true"><span></span><i></i><i></i><i></i><i></i><i></i><i></i></div>
       </div>
     </section>
 
@@ -236,8 +236,11 @@
     </section>
 
     <footer class="va-ending">
-      <canvas class="va-ending-canvas" aria-hidden="true"></canvas>
-      <div class="va-ending-field" aria-hidden="true"><span></span></div>
+      <picture class="va-ending-scene" aria-hidden="true">
+        <source media="(max-width: 700px)" srcset="images/vesuvius-alt/herculaneum-footer.webp">
+        <img src="images/vesuvius-alt/herculaneum-footer.webp" width="3504" height="2336" loading="lazy" decoding="async" alt="">
+      </picture>
+      <div class="va-ending-field" aria-hidden="true"></div>
       <div class="va-ending-copy">
         <p class="va-kicker">The standard does not move</p>
         <h2>The next letter<br>has to survive every test.</h2>
@@ -249,6 +252,6 @@
 
   <script src="js/vendor/gsap.min.js"></script>
   <script src="js/vendor/ScrollTrigger.min.js"></script>
-  <script src="js/vesuvius-alt.js?v=11"></script>
+  <script src="js/vesuvius-alt.js?v=12"></script>
 </body>
 </html>
