@@ -1,339 +1,258 @@
-<!DOCTYPE html>
-<html lang="en" class="vs-page">
+<!doctype html>
+<html lang="en" class="va-page">
 <head>
   <meta charset="utf-8">
-  <title>Digital excavation · The Vesuvius Challenge · Mike Battaglia</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Hundreds of ancient scrolls survived Mount Vesuvius as sealed blocks of carbon. I am building a research system to help recover the writing inside — without opening them.">
-  <meta name="theme-color" content="#0a0e14">
+  <title>Beneath Vesuvius · Ongoing research by Mike Battaglia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="An ongoing attempt to recover writing from unopened Herculaneum scrolls using X-rays, machine learning, and experiments designed to catch their own mistakes.">
+  <meta name="theme-color" content="#050505">
   <meta name="author" content="Mike Battaglia">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Digital excavation · The Vesuvius Challenge">
+  <meta property="og:title" content="Beneath Vesuvius">
   <meta property="og:description" content="Reading a scroll no one can open.">
-  <meta property="og:image" content="images/vesuvius-cover.jpg">
+  <meta property="og:image" content="images/vesuvius-alt/hero-eruption-start-v3.jpg">
   <meta property="og:site_name" content="Mike Battaglia">
   <meta name="twitter:card" content="summary_large_image">
-  <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon">
-  <link href="images/webclip.png" rel="apple-touch-icon">
-  <link rel="preload" href="fonts/SF-Pro-Display-Light.otf" as="font" type="font/otf" crossorigin="anonymous">
-  <link rel="preload" href="fonts/ATCArquette-Regular.otf" as="font" type="font/otf" crossorigin="anonymous">
-  <link rel="preload" href="fonts/DaylightSocialMono-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-  <link href="css/vesuvius.css?v=3" rel="stylesheet">
-  <link href="css/daylight-gate.css?v=3" rel="stylesheet">
-  <style>html.dl-locked{overflow:hidden}html.dl-locked body>*:not(#dl-gate){visibility:hidden}#dl-gate{display:none}html.dl-locked #dl-gate{display:flex}</style>
-  <script>try{if(sessionStorage.getItem('dl-unlocked')!=='1'){document.documentElement.classList.add('dl-locked')}}catch(e){document.documentElement.classList.add('dl-locked')}</script>
+  <link rel="canonical" href="https://mikebatts.net/vesuvius.html">
+  <link rel="icon" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/webclip.png">
+  <link rel="preload" href="fonts/Quarto-Light.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="fonts/Graphik-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="images/vesuvius-alt/eruption/desktop/frame-001.webp" as="image" type="image/webp" fetchpriority="high" media="(min-width: 901px)">
+  <link rel="preload" href="images/vesuvius-alt/eruption/mobile/frame-001.webp" as="image" type="image/webp" fetchpriority="high" media="(max-width: 900px)">
+  <link rel="stylesheet" href="css/vesuvius-alt.css?v=10">
 </head>
 <body>
-  <!-- Privacy gate (unchanged behaviour: css/daylight-gate.css + js/daylight-gate.js) -->
-  <div id="dl-gate" role="dialog" aria-modal="true" aria-labelledby="dl-gate-t">
-    <div class="dl-gate-box">
-      <div class="dl-gate-mark"><img src="images/avi.png" alt="Mike Battaglia" width="2208" height="2296"><span class="dl-gate-wm">Case study</span></div>
-      <h1 class="dl-gate-t" id="dl-gate-t">Vesuvius, up close.</h1>
-      <p class="dl-gate-s">This collection is private for now. Enter the password to view.</p>
-      <form class="dl-gate-form" id="dl-gate-form" novalidate>
-        <label class="dl-gate-field" for="dl-pass"><span class="dl-gate-lbl">Password</span><input id="dl-pass" name="password" type="password" autocomplete="current-password" inputmode="text" placeholder="Enter password"></label>
-        <div class="dl-gate-row"><button id="dl-go" type="submit">View case study <span aria-hidden="true">→</span></button><span class="dl-gate-err" id="dl-err" role="status" aria-live="polite"></span></div>
-      </form>
-      <a class="dl-gate-back" href="index.html"><span aria-hidden="true">←</span> Back to portfolio</a>
-    </div>
-  </div>
+  <a class="va-skip" href="#challenge">Skip to the story</a>
+  <div class="va-progress" aria-hidden="true"><span></span></div>
 
-  <a class="vs-skip" href="#story">Skip to the story</a>
-  <div class="vs-progress" aria-hidden="true"><span></span></div>
-
-  <header class="vs-nav" id="vs-nav">
-    <a class="vs-brand" href="index.html" aria-label="Mike Battaglia, portfolio home">
-      <img src="images/avi.png" alt="" width="40" height="40">
+  <header class="va-nav">
+    <a class="va-person" href="index.html" aria-label="Mike Battaglia, portfolio home">
+      <img src="images/avi.png" width="34" height="34" alt="">
       <span>Mike Battaglia</span>
     </a>
-    <span class="vs-nav-title" aria-hidden="true">Digital excavation</span>
-    <a class="vs-nav-back" href="index.html">All work <span aria-hidden="true">↗</span></a>
+    <span class="va-nav-state"><i></i> Ongoing research</span>
+    <a class="va-nav-back" href="index.html">All work <span aria-hidden="true">↗</span></a>
   </header>
 
-  <main id="story">
+  <main>
+    <section class="va-hero" id="top" aria-labelledby="va-title" data-hero>
+      <div class="va-hero-sticky">
+        <div class="va-film" aria-hidden="true">
+          <canvas class="va-film-sequence"></canvas>
+          <img class="va-film-poster" src="images/vesuvius-alt/hero-eruption-start-v3.jpg" width="2688" height="1520" alt="">
+          <div class="va-xray-world">
+            <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+              <path d="M0 650 C230 620 355 668 520 624 C700 576 780 542 915 590 C1060 641 1238 640 1600 603"/>
+              <path d="M0 684 C220 652 372 704 545 655 C714 608 804 581 934 626 C1090 679 1286 673 1600 636"/>
+              <path d="M0 718 C246 687 387 731 566 687 C739 646 823 620 958 663 C1120 714 1310 706 1600 669"/>
+              <path d="M74 772 C282 736 408 763 598 726 C758 695 846 664 985 702 C1140 746 1330 746 1532 710"/>
+            </svg>
+            <span class="va-xray-point"></span>
+          </div>
+          <div class="va-scan"><span>Surface / depth</span></div>
+          <div class="va-depth-grid"></div>
+          <div class="va-film-vignette"></div>
+          <div class="va-frame-status"><span>79 CE</span><b data-frame-status>Before the ash</b></div>
+        </div>
 
-    <!-- ============================ HERO ============================ -->
-    <section class="vs-hero" aria-labelledby="vs-title">
-      <canvas class="vs-hero-canvas" aria-hidden="true"></canvas>
-      <div class="vs-hero-fallback" aria-hidden="true"></div>
-      <div class="vs-hero-inner">
-        <p class="vs-eyebrow">The Vesuvius Challenge · Independent research · Ongoing</p>
-        <h1 id="vs-title">Reading a scroll <br>no one can open.</h1>
-        <p class="vs-hero-deck">Hundreds of ancient scrolls survived Mount Vesuvius as sealed blocks of carbon. The Vesuvius Challenge asks whether X-rays and machine learning can recover the writing inside — without physically opening them. I am building a research system to help find out.</p>
+        <div class="va-hero-copy" data-hero-intro>
+          <p class="va-kicker">The Vesuvius Challenge</p>
+          <h1 id="va-title">Beneath<br>Vesuvius.</h1>
+          <p class="va-hero-deck">I am building a research system to recover writing from ancient scrolls that cannot be physically opened.</p>
+        </div>
+
+        <div class="va-hero-scenes" aria-live="polite">
+          <article class="va-scene is-active" data-scene="0"><p>A library stood beneath this mountain.</p></article>
+          <article class="va-scene" data-scene="1"><p>Then the sky became ash.</p></article>
+          <article class="va-scene" data-scene="2"><p>The buildings disappeared. The scrolls became carbon.</p></article>
+          <article class="va-scene" data-scene="3"><p>Two thousand years later, X-rays let us enter.</p></article>
+          <article class="va-scene" data-scene="4"><p>Now I am building a way to tell real writing from a convincing mistake.</p></article>
+        </div>
+
+        <div class="va-hero-rail" aria-hidden="true">
+          <span class="is-active">Library</span><span>Eruption</span><span>Buried</span><span>Scanned</span><span>Tested</span>
+        </div>
+        <a class="va-scroll" href="#challenge"><span></span> Scroll to enter the scan</a>
       </div>
-      <a class="vs-scrollcue" href="#challenge" aria-label="Scroll to begin">
-        <span></span>
-      </a>
     </section>
 
-    <!-- ==================== 1 · THE CHALLENGE ==================== -->
-    <section class="vs-chapter vs-challenge" id="challenge" aria-labelledby="vs-c1-title">
-      <div class="vs-chapter-head">
-        <p class="vs-eyebrow">The challenge</p>
-        <h2 id="vs-c1-title" class="vs-h2">A library survived.<br>The pages did not.</h2>
-      </div>
-      <div class="vs-prose">
-        <p>In 79 CE, Mount Vesuvius buried the Roman town of Herculaneum. In one villa sat a private library — hundreds of papyrus scrolls. The heat did not burn them to ash. It carbonized them, turning each scroll into a fragile block of solid carbon.</p>
-        <p>They are the only library to survive intact from the ancient world. But they cannot be read. Try to unroll one and it crumbles. The writing is sealed inside, wound in hundreds of crushed layers.</p>
-        <p>So the scrolls are not opened at all. They are taken to a particle accelerator and scanned with X-rays, the same idea as a medical CT scan, at a resolution fine enough to see a single sheet of papyrus. The question is what you do with the scan once you have it.</p>
-      </div>
-
-      <figure class="vs-plate" data-asset="images/vesuvius-01-carbonized-scroll.jpg" style="--ar:3 / 2" role="img" aria-label="Placeholder for a carbonized Herculaneum scroll resting in a dark scanning chamber, its crushed layers lit by a thin edge of warm light.">
-        <div class="vs-plate-art vs-plate-art--scroll" aria-hidden="true"></div>
-        <figcaption class="vs-plate-meta">
-          <span class="vs-plate-badge">Artwork in production</span>
-          <span class="vs-plate-subject">A carbonized scroll, before the scan</span>
-        </figcaption>
-      </figure>
-    </section>
-
-    <!-- ============ 2 · HOW YOU READ A CLOSED SCROLL ============ -->
-    <section class="vs-chapter vs-read" id="read" aria-labelledby="vs-c2-title">
-      <div class="vs-chapter-head">
-        <p class="vs-eyebrow">How you read a closed scroll</p>
-        <h2 id="vs-c2-title" class="vs-h2">Four moves, on one<br>untouched object.</h2>
-      </div>
-
-      <div class="vs-seq" data-seq>
-        <div class="vs-seq-stage">
-          <div class="vs-seq-visual">
-            <canvas class="vs-seq-canvas" aria-hidden="true"></canvas>
-            <div class="vs-seq-fallback" aria-hidden="true"></div>
-            <div class="vs-seq-tag" aria-hidden="true"><span data-seq-index>01</span><b data-seq-tag>Scan</b></div>
+    <section class="va-intro va-light" id="challenge" aria-labelledby="challenge-title">
+      <div class="va-wrap va-intro-grid">
+        <p class="va-side-note">The challenge, in plain English</p>
+        <div>
+          <h2 id="challenge-title">Read the page.<br>Never touch the scroll.</h2>
+          <div class="va-copy-pair">
+            <p>Mount Vesuvius buried Herculaneum and its private library. Heat turned hundreds of papyrus scrolls into fragile, tightly wound blocks of carbon. Together, they form the only intact library to survive from the ancient world.</p>
+            <p>Unroll one and it can crumble. The <a class="va-text-link" href="https://scrollprize.org/" target="_blank" rel="noopener noreferrer">Vesuvius Challenge</a> asks us to read the writing digitally: scan the sealed object, reconstruct a page inside it, and detect ink without ever opening the scroll.</p>
           </div>
         </div>
-        <ol class="vs-seq-steps">
-          <li class="vs-seq-step is-active" data-seq-step="scan">
-            <span class="vs-seq-kicker">Scan</span>
-            <h3>X-rays turn the scroll into thousands of detailed slices.</h3>
-            <p>A synchrotron captures the sealed scroll as a stack of cross-sections — a full three-dimensional volume, without ever touching it.</p>
-          </li>
-          <li class="vs-seq-step" data-seq-step="separate">
-            <span class="vs-seq-kicker">Separate</span>
-            <h3>Software traces one crushed sheet through the volume.</h3>
-            <p>Inside the block, the layers are pressed together and warped. Software follows a single sheet of papyrus through the scan, wrap after wrap.</p>
-          </li>
-          <li class="vs-seq-step" data-seq-step="flatten">
-            <span class="vs-seq-kicker">Flatten</span>
-            <h3>That warped sheet becomes a flat image.</h3>
-            <p>The traced surface is unrolled and flattened into a readable plane — the digital equivalent of laying the page out on a table.</p>
-          </li>
-          <li class="vs-seq-step" data-seq-step="detect">
-            <span class="vs-seq-kicker">Read</span>
-            <h3>A model searches the surface for physical traces left by ink.</h3>
-            <p>Ancient ink is carbon on carbon, nearly invisible. A model looks across the flattened surface for the faint physical signature the ink left behind.</p>
-          </li>
-        </ol>
       </div>
 
-      <figure class="vs-plate" data-asset="images/vesuvius-02-exploded-cutaway.jpg" style="--ar:4 / 3" role="img" aria-label="Placeholder for an exploded technical cutaway of a scroll, with concentric papyrus layers pulled apart into wireframe sheets and one sheet flattening into a readable plane.">
-        <div class="vs-plate-art vs-plate-art--layers" aria-hidden="true"></div>
-        <figcaption class="vs-plate-meta">
-          <span class="vs-plate-badge">Artwork in production</span>
-          <span class="vs-plate-subject">Exploded scroll cutaway · scan to surface</span>
-        </figcaption>
-      </figure>
-    </section>
-
-    <!-- ==================== 3 · WHAT FOOLED US ==================== -->
-    <section class="vs-chapter vs-false" id="false-signal" aria-labelledby="vs-c3-title">
-      <div class="vs-chapter-head">
-        <p class="vs-eyebrow">What fooled us</p>
-        <h2 id="vs-c3-title" class="vs-h2">The first models found<br>“ink” everywhere.</h2>
-      </div>
-      <div class="vs-prose">
-        <p>Early on, I ran released ink-detection models across surfaces from an unopened scroll. Different models lit up the same places. When independent models agree, it feels like confirmation.</p>
-        <p>It was not. Looking closer, the bright marks were papyrus fibers, seams, torn edges, and surface texture — the natural grain of a two-thousand-year-old page. The models were agreeing on the paper, not on letters.</p>
-      </div>
-
-      <div class="vs-falsefield" data-falsefield aria-label="Illustration: marks that first resemble letters resolve into papyrus texture on scroll.">
-        <canvas class="vs-falsefield-canvas" aria-hidden="true"></canvas>
-        <div class="vs-falsefield-fallback" aria-hidden="true"></div>
-        <div class="vs-falsefield-lesson">
-          <span>The lesson</span>
-          <p>Agreement is not proof.</p>
+      <div class="va-process" data-process>
+        <div class="va-process-stage">
+          <div class="va-process-object" aria-hidden="true">
+            <div class="va-volume">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              <span class="va-volume-beam"></span>
+            </div>
+            <div class="va-surface"><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="va-letter">α</div>
+          </div>
+          <div class="va-process-count"><span>01</span> / 03</div>
         </div>
-      </div>
-
-      <figure class="vs-plate" data-asset="images/vesuvius-03-false-signal.jpg" style="--ar:2 / 1" role="img" aria-label="Placeholder for an abstract scan surface where faint orange glyph-like marks dissolve into the woven fibers of papyrus.">
-        <div class="vs-plate-art vs-plate-art--false" aria-hidden="true"></div>
-        <figcaption class="vs-plate-meta">
-          <span class="vs-plate-badge">Artwork in production</span>
-          <span class="vs-plate-subject">False glyphs resolving into papyrus fiber</span>
-        </figcaption>
-      </figure>
-    </section>
-
-    <!-- ==================== 4 · BUILDING PROOF ==================== -->
-    <section class="vs-chapter vs-proof" id="proof" aria-labelledby="vs-c4-title">
-      <div class="vs-chapter-head">
-        <p class="vs-eyebrow">Building proof</p>
-        <h2 id="vs-c4-title" class="vs-h2">So I built a system<br>designed to prove<br>itself wrong.</h2>
-      </div>
-      <div class="vs-prose">
-        <p>I stopped asking whether a mark looked like a letter. I started asking what would prove that it is not one. Every claim has to map back to the physical scroll and survive tests built to break it.</p>
-      </div>
-
-      <div class="vs-pipeline" data-pipeline aria-label="An evidence pipeline: a single claim is traced from published writing to sealed result.">
-        <div class="vs-pipeline-track" aria-hidden="true"><span class="vs-packet"></span></div>
-        <ol class="vs-pipeline-nodes">
-          <li class="vs-node" data-node style="--i:0">
-            <span class="vs-node-dot" aria-hidden="true"></span>
-            <span class="vs-node-k">Published writing</span>
-            <p>Start from text an expert has already read and published.</p>
-          </li>
-          <li class="vs-node" data-node style="--i:1">
-            <span class="vs-node-dot" aria-hidden="true"></span>
-            <span class="vs-node-k">Exact surface pixels</span>
-            <p>Tie that writing to the precise pixels on the flattened surface.</p>
-          </li>
-          <li class="vs-node" data-node style="--i:2">
-            <span class="vs-node-dot" aria-hidden="true"></span>
-            <span class="vs-node-k">Original CT volume</span>
-            <p>Trace those pixels back down into the original X-ray scan.</p>
-          </li>
-          <li class="vs-node" data-node style="--i:3">
-            <span class="vs-node-dot" aria-hidden="true"></span>
-            <span class="vs-node-k">Adversarial tests</span>
-            <p>Attack the result with chance baselines and false-positive checks.</p>
-          </li>
-          <li class="vs-node" data-node style="--i:4">
-            <span class="vs-node-dot" aria-hidden="true"></span>
-            <span class="vs-node-k">Sealed result</span>
-            <p>Only what survives is written down. A failed test ends the path.</p>
-          </li>
-        </ol>
-      </div>
-
-      <div class="vs-bento" aria-hidden="false">
-        <article class="vs-bento-lead">
-          <span class="vs-bento-k">The rule</span>
-          <h3>Every mark must return to a real place in the scan.</h3>
-          <p>If a candidate letter cannot be traced from the published image, to an exact surface pixel, to a voxel in the original CT volume, it is not evidence. It is a picture.</p>
-        </article>
-        <article class="vs-bento-cell">
-          <span class="vs-bento-k">Fail closed</span>
-          <p>A failed test ends the path — it never becomes a prettier claim.</p>
-        </article>
-        <article class="vs-bento-cell">
-          <span class="vs-bento-k">One gate</span>
-          <p>I make the claims. The system is built so nothing approves itself.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- ==================== 5 · COHORS VESUVIANA ==================== -->
-    <section class="vs-chapter vs-cohort" id="cohort" aria-labelledby="vs-c5-title">
-      <div class="vs-chapter-head">
-        <p class="vs-eyebrow">Cohors Vesuviana</p>
-        <h2 id="vs-c5-title" class="vs-h2">A research team<br>built to disagree.</h2>
-      </div>
-      <div class="vs-prose">
-        <p>To keep the work moving, I built a small autonomous research cohort — six specialized roles that investigate, build, challenge, and monitor experiments. They are deliberately separated so that no single agent can both make a claim and approve it. I remain the orchestrator and the only approval gate.</p>
-      </div>
-
-      <div class="vs-atlas" data-atlas>
-        <ul class="vs-atlas-grid" role="list">
-          <li class="vs-role is-active" data-role role="listitem">
-            <button type="button" class="vs-role-btn" aria-expanded="true" aria-controls="role-strategy">
-              <span class="vs-role-name">Strategy</span>
-              <span class="vs-role-latin">Minerva</span>
-            </button>
-            <p class="vs-role-detail" id="role-strategy">Chooses the one question worth answering next, and the cheapest test that could kill it.</p>
-          </li>
-          <li class="vs-role" data-role role="listitem">
-            <button type="button" class="vs-role-btn" aria-expanded="false" aria-controls="role-engineering">
-              <span class="vs-role-name">Engineering</span>
-              <span class="vs-role-latin">Vulcan</span>
-            </button>
-            <p class="vs-role-detail" id="role-engineering">Builds the experimental machinery — pipelines, storage, and the tests that run against them.</p>
-          </li>
-          <li class="vs-role" data-role role="listitem">
-            <button type="button" class="vs-role-btn" aria-expanded="false" aria-controls="role-reconnaissance">
-              <span class="vs-role-name">Reconnaissance</span>
-              <span class="vs-role-latin">Diana</span>
-            </button>
-            <p class="vs-role-detail" id="role-reconnaissance">Hunts across scroll surfaces for defensible, letter-scale signal worth escalating.</p>
-          </li>
-          <li class="vs-role" data-role role="listitem">
-            <button type="button" class="vs-role-btn" aria-expanded="false" aria-controls="role-audit">
-              <span class="vs-role-name">Scientific audit</span>
-              <span class="vs-role-latin">Veritas</span>
-            </button>
-            <p class="vs-role-detail" id="role-audit">Attempts to break every claim before it is believed — the adversary inside the team.</p>
-          </li>
-          <li class="vs-role" data-role role="listitem">
-            <button type="button" class="vs-role-btn" aria-expanded="false" aria-controls="role-intelligence">
-              <span class="vs-role-name">Intelligence</span>
-              <span class="vs-role-latin">Mercury</span>
-            </button>
-            <p class="vs-role-detail" id="role-intelligence">Monitors new data, prior art, and the wider community for anything that changes the odds.</p>
-          </li>
-          <li class="vs-role" data-role role="listitem">
-            <button type="button" class="vs-role-btn" aria-expanded="false" aria-controls="role-boundaries">
-              <span class="vs-role-name">Boundaries</span>
-              <span class="vs-role-latin">Terminus</span>
-            </button>
-            <p class="vs-role-detail" id="role-boundaries">Holds the limits — compute, permissions, and spend — so the work stays inside its guardrails.</p>
-          </li>
-        </ul>
-        <div class="vs-atlas-flow" aria-hidden="true">
-          <span>Question</span><i></i><span>Experiment</span><i></i><span>Challenge</span><i></i><span>Sealed result</span>
-        </div>
-      </div>
-
-      <figure class="vs-plate" data-asset="images/vesuvius-04-research-atlas.jpg" style="--ar:3 / 2" role="img" aria-label="Placeholder for an abstract isometric diagram of a research system with connected nodes and quiet data pathways in mineral navy and volcanic orange.">
-        <div class="vs-plate-art vs-plate-art--atlas" aria-hidden="true"></div>
-        <figcaption class="vs-plate-meta">
-          <span class="vs-plate-badge">Artwork in production</span>
-          <span class="vs-plate-subject">The cohort as one system atlas</span>
-        </figcaption>
-      </figure>
-    </section>
-
-    <!-- ==================== 6 · WHAT WE KNOW NOW ==================== -->
-    <section class="vs-chapter vs-now" id="now" aria-labelledby="vs-c6-title">
-      <div class="vs-chapter-head">
-        <p class="vs-eyebrow">What we know now</p>
-        <h2 id="vs-c6-title" class="vs-h2">No letters yet.<br>A much more<br>truthful instrument.</h2>
-      </div>
-
-      <ul class="vs-facts" role="list">
-        <li class="vs-fact">
-          <span class="vs-fact-k">Proven</span>
-          <p>The scan-to-score pipeline works on writing we already know. It runs end to end, from a published image to a score, without breaking.</p>
-        </li>
-        <li class="vs-fact">
-          <span class="vs-fact-k">Traced</span>
-          <p>51 published characters from scroll PHerc0139 were traced back to their exact physical locations inside the original CT volume.</p>
-        </li>
-        <li class="vs-fact">
-          <span class="vs-fact-k">Discovered</span>
-          <p>On PHerc1667, the useful signal was <em>spatial coverage</em> — where the model predicts ink — not how strongly it predicts. That distinction survived every frozen test.</p>
-        </li>
-        <li class="vs-fact">
-          <span class="vs-fact-k">Honest boundary</span>
-          <p>With that rule frozen, the six locally available PHerc1447 surfaces produced no defensible letter-scale candidates above chance. Not a discovery. A clean edge around what the current model can do.</p>
-        </li>
-      </ul>
-
-      <div class="vs-ending" data-asset="images/vesuvius-05-single-point.jpg" role="img" aria-label="Placeholder for a dark, nearly empty scan field with a single unresolved point of orange light suspended in the darkness.">
-        <canvas class="vs-ending-canvas" aria-hidden="true"></canvas>
-        <div class="vs-ending-fallback" aria-hidden="true"></div>
-        <span class="vs-ending-badge">Artwork in production</span>
-        <div class="vs-ending-copy">
-          <p>The work continues. The next direction is intentionally not frozen yet — the point of the instrument is to stay honest about what it cannot yet see.</p>
-          <p class="vs-asof">Status verified August 29, 2026. This case study evolves with the research.</p>
-          <a class="vs-back" href="index.html">Back to selected work <span aria-hidden="true">↗</span></a>
+        <div class="va-process-steps">
+          <article class="is-active" data-process-step="scan">
+            <span>Scan</span>
+            <h3>Capture the sealed scroll as thousands of X-ray slices.</h3>
+            <p>Think of a medical CT scan, but detailed enough to see a single sheet of papyrus.</p>
+          </article>
+          <article data-process-step="unwrap">
+            <span>Unwrap</span>
+            <h3>Follow one crushed sheet, then lay it flat on screen.</h3>
+            <p>Software separates the page from hundreds around it and traces every fold without opening the physical scroll.</p>
+          </article>
+          <article data-process-step="read">
+            <span>Read</span>
+            <h3>Search the flat surface for the physical trace of ink.</h3>
+            <p>The model can propose a mark. The evidence still has to prove that the mark is real.</p>
+          </article>
         </div>
       </div>
     </section>
 
+    <section class="va-false" id="false-signal" aria-labelledby="false-title" data-false>
+      <div class="va-false-sticky">
+        <div class="va-false-media" aria-hidden="true">
+          <canvas class="va-false-canvas"></canvas>
+          <div class="va-false-scan"></div>
+          <div class="va-false-shade"></div>
+        </div>
+        <div class="va-false-copy">
+          <p class="va-kicker">The first discovery</p>
+          <h2 id="false-title">Confidence can<br>look like writing.</h2>
+          <p>Different ink models highlighted the same places. At first, agreement looked like confirmation. Under closer inspection, the marks resolved into fibers, seams, torn edges, and the natural grain of papyrus.</p>
+          <blockquote>Reproducible does not mean true.</blockquote>
+        </div>
+        <div class="va-false-state" aria-hidden="true"><span class="is-active">Proposal</span><span>Inspection</span><span>Artifact</span></div>
+      </div>
+    </section>
+
+    <section class="va-proof va-light" id="proof" aria-labelledby="proof-title">
+      <div class="va-wrap va-proof-head">
+        <p class="va-side-note">The pivot</p>
+        <div>
+          <h2 id="proof-title">Stop asking what<br>looks like a letter.</h2>
+          <p class="va-large-copy">Ask what would still be true if the letter disappeared.</p>
+        </div>
+      </div>
+
+      <div class="va-evidence" data-evidence>
+        <div class="va-evidence-sticky">
+          <div class="va-evidence-line" aria-hidden="true"><span></span></div>
+          <div class="va-evidence-visual" aria-hidden="true">
+            <div class="va-evidence-slab va-slab-published"><span>Α Β Γ</span></div>
+            <div class="va-evidence-slab va-slab-surface"><i></i><i></i><i></i><em></em></div>
+            <div class="va-evidence-slab va-slab-volume"><b></b><b></b><b></b><b></b></div>
+            <div class="va-evidence-seal">survived</div>
+          </div>
+        </div>
+        <div class="va-evidence-copy">
+          <article class="is-active" data-trace-step="0">
+            <span>Begin with writing already read</span>
+            <h3>Start on a scroll where experts have published the answer.</h3>
+            <p>If the system cannot recover known writing, it has no right to approach an unread scroll.</p>
+          </article>
+          <article data-trace-step="1">
+            <span>Return to the page</span>
+            <h3>Connect each character to an exact place on the flattened surface.</h3>
+            <p>No loose visual resemblance. Every mark gets a location that another researcher can inspect.</p>
+          </article>
+          <article data-trace-step="2">
+            <span>Return to the object</span>
+            <h3>Trace that surface point back into the original X-ray volume.</h3>
+            <p>The claim has to remain connected to physical papyrus, not just a convenient image.</p>
+          </article>
+          <article data-trace-step="3">
+            <span>Try to break the result</span>
+            <h3>Chance tests, blank regions, alternate masks, and independent review can all stop the result.</h3>
+            <p>Only a result that survives those challenges moves forward.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="va-findings va-light" id="findings" aria-labelledby="findings-title">
+      <div class="va-findings-grid">
+        <header class="va-findings-intro">
+          <h2 id="findings-title">What survived<br>the challenge.</h2>
+          <p>The strongest result was not a new letter. It was a research foundation that became harder to fool.</p>
+        </header>
+        <article class="va-finding va-finding-known">
+          <span>Known-text control · 51 characters</span>
+          <h3>Published writing traced back to the original scan.</h3>
+          <p>PHerc0139 connected known characters to exact surface coordinates and their parent CT volume.</p>
+        </article>
+        <article class="va-finding va-finding-chain">
+          <span>Reproducible foundation</span>
+          <h3>The PHerc1667 chain rebuilds end to end.</h3>
+          <p>Every hash checks. The same renderer output can be rebuilt from its pinned source and binary.</p>
+        </article>
+        <article class="va-finding va-finding-demoted">
+          <span>Signal retired</span>
+          <h3>Render geometry explained what first looked like ink.</h3>
+          <p>All five PHerc1447 leads failed the frozen structural test, so none moved forward.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="va-cohort va-light" id="cohort" aria-labelledby="cohort-title" data-cohort>
+      <div class="va-cohort-layout">
+        <header class="va-cohort-head">
+          <p>Cohors Vesuviana</p>
+          <h2 id="cohort-title">A research system<br>built to disagree.</h2>
+          <span>Romulus runs one continuous cycle. Six independent roles challenge the plan before a result is allowed to stand.</span>
+          <div class="va-cohort-lead"><small>Operator</small><strong>Romulus</strong><em>Frames the question, routes the work, verifies the receipts, and returns one accountable recommendation.</em></div>
+        </header>
+        <div class="va-cohort-list" aria-label="The six roles in Cohors Vesuviana">
+          <article data-role="0"><small>01</small><h3>Minerva</h3><span>Strategy</span><p>Chooses the next question and defines what a useful answer would change.</p></article>
+          <article data-role="1"><small>02</small><h3>Vulcan</h3><span>Engineering</span><p>Builds the machinery and records enough detail for every run to be repeated.</p></article>
+          <article data-role="2"><small>03</small><h3>Veritas</h3><span>Falsification</span><p>Tries to break the claim before the claim can move forward.</p></article>
+          <article data-role="3"><small>04</small><h3>Mercury</h3><span>Intelligence</span><p>Tracks outside findings that can change the plan or shorten the path.</p></article>
+          <article data-role="4"><small>05</small><h3>Plutus</h3><span>Cost</span><p>Protects the compute, storage, and spend required to keep the work running.</p></article>
+          <article data-role="5"><small>06</small><h3>Cassandra</h3><span>Risk</span><p>Names the failure modes early and keeps unresolved risk visible.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="va-status va-light" id="journal" aria-labelledby="status-title">
+      <div class="va-wrap va-status-head"><p class="va-side-note">Live research · August 29, 10:48 PM</p><h2 id="status-title">A stronger foundation.<br>One clear question ahead.</h2></div>
+      <div class="va-status-board">
+        <article class="is-closed"><span>Resolved</span><h3>Five PHerc1447 leads</h3><p>Every gap was explained by the renderer. Closing those false leads removed a major source of error.</p><b>STRUCTURAL_EXPLAINED</b></article>
+        <article class="is-closed"><span>Protected by the control</span><h3>PHerc800 surface gate</h3><p>The ruler failed before it touched the unread scroll, so no weak result was allowed through.</p><b>FAIL_METRIC_INVALID</b></article>
+        <article class="is-verified"><span>Verified foundation</span><h3>PHerc1667 canonical chain</h3><p>Every hash and coverage figure reproduces from the original scan. The daily research cycle is running again.</p><b>CANONICAL_CHAIN_PASS</b></article>
+        <article class="is-live"><span>Running now</span><h3>M1v2 offset scan</h3><p>A live scan is testing whether the surface labels sit about 2.3 voxels away from the sheet center, the same scale seen by another Vesuvius team.</p><div class="va-live-progress"><i></i><small>Offset profile in progress</small></div><b>ACTIVE · CPU · $0</b></article>
+      </div>
+      <div class="va-status-signal"><span>Why this matters</span><p>The failed gate may have exposed a real geometry property in the public surface labels. M1v2 is testing that explanation now. If it holds, it gives the field a better ruler before the next unread scroll is touched.</p><small>The methodology draft is ready for publication review.</small></div>
+    </section>
+
+    <footer class="va-ending">
+      <picture class="va-ending-scene" aria-hidden="true">
+        <source media="(max-width: 700px)" srcset="images/vesuvius-alt/herculaneum-footer.webp">
+        <img src="images/vesuvius-alt/herculaneum-footer.webp" width="3504" height="2336" loading="lazy" decoding="async" alt="">
+      </picture>
+      <div class="va-ending-field" aria-hidden="true"></div>
+      <div class="va-ending-copy">
+        <p class="va-kicker">The standard does not move</p>
+        <h2>The next letter<br>has to survive every test.</h2>
+        <p>The work continues, but the standard stays fixed. The next result moves forward only if the evidence holds.</p>
+        <a href="index.html">Back to selected work <span aria-hidden="true">↗</span></a>
+      </div>
+    </footer>
   </main>
 
   <script src="js/vendor/gsap.min.js"></script>
   <script src="js/vendor/ScrollTrigger.min.js"></script>
-  <script src="js/vesuvius.js?v=3"></script>
-  <script src="js/daylight-gate.js?v=3"></script>
+  <script src="js/vesuvius-alt.js?v=12"></script>
 </body>
 </html>

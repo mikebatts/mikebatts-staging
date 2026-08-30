@@ -5,11 +5,50 @@
    the shared Webflow stylesheet and the legacy pages are left untouched.
    ========================================================================== */
 
+@font-face {
+  font-family: "Graphik Home";
+  src: url("../fonts/Graphik-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Graphik Home";
+  src: url("../fonts/Graphik-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* The Webflow .portv3 body is locked to height:100vh for the single-screen
    intro. The portfolio scrolls, so release the height on the home page only. */
 body.portv3.home {
   height: auto;
-  min-height: 100vh;
+  min-height: 100dvh;
+  background: #fdfdfc;
+  color: #111210;
+  font-family: "Graphik Home", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.pf-skip {
+  position: fixed;
+  z-index: 10;
+  top: 12px;
+  left: 12px;
+  padding: 10px 14px;
+  border-radius: 7px;
+  color: #fff;
+  background: #111210;
+  font: 500 13px/1 "Graphik Home", Arial, sans-serif;
+  transform: translateY(-160%);
+  transition: transform 0.2s ease;
+}
+
+.pf-skip:focus {
+  transform: translateY(0);
 }
 
 /* Vesuvius Challenge cover: the supplied volcano artwork, filling the shared
@@ -26,13 +65,14 @@ body.portv3.home {
 }
 
 /* --- Intro alignment ----------------------------------------------------- */
-/* Match the intro to the work section: same 720px editorial width and left
+/* Match the intro to the work section: same 760px editorial width and left
    edge. Both are centered inside the body.portv3 horizontal padding (85px
    desktop / 24px mobile), so equal max-widths give identical left edges. The
    24px mobile gutter is inherited from that body padding and stays intact. */
 body.home .container-29.pport3 {
   width: 100%;
-  max-width: 720px;
+  max-width: 760px;
+  margin-top: clamp(68px, 8vw, 96px);
   box-sizing: border-box;
 }
 
@@ -40,7 +80,50 @@ body.home .container-29.pport3 {
    from the intrinsic ratio. Keep height derived from that width so responsive
    srcset source selection can never distort the rendered box. */
 body.home .image-39 {
+  width: 42px;
   height: auto;
+  border-radius: 50%;
+}
+
+body.home .port3.header {
+  max-width: 690px;
+  padding-bottom: 20px;
+}
+
+body.home .port3.header > .port3-h1:not(.subhead) {
+  margin-bottom: 7px;
+  color: #111210;
+  font-family: "Graphik Home", Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+
+body.home .port3-h1.subhead {
+  color: #71736f;
+  font-family: "Graphik Home", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.52;
+  letter-spacing: -0.008em;
+  text-wrap: pretty;
+}
+
+.link-daylight,
+body.home .link-49.cherry {
+  color: #111210;
+  text-decoration-color: rgba(17, 18, 16, 0.22);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.link-daylight:hover,
+.link-daylight:focus-visible,
+body.home .link-49.cherry:hover,
+body.home .link-49.cherry:focus-visible {
+  color: #111210;
+  text-decoration-color: #111210;
 }
 
 /* Intro links: one horizontal, wrap-friendly nav under the bio — same
@@ -50,9 +133,9 @@ body.home .image-39 {
   flex-wrap: wrap;
   align-items: center;
   gap: 4px 24px;
-  margin-top: 8px;
-  font-family: Inter, sans-serif;
-  font-size: 16px;
+  margin-top: 4px;
+  font-family: "Graphik Home", Arial, sans-serif;
+  font-size: 14px;
   line-height: 24px;
 }
 /* Calm contact row: subtle gray at rest, black on hover/focus. Overrides the
@@ -77,11 +160,11 @@ body.home .image-39 {
 
 /* --- Work section shell -------------------------------------------------- */
 .pf-work {
-  max-width: 720px;
+  max-width: 760px;
   margin: 0 auto;
-  padding: 8px 0 120px;
-  font-family: Inter, sans-serif;
-  color: #111;
+  padding: 16px 0 128px;
+  font-family: "Graphik Home", Arial, sans-serif;
+  color: #111210;
 }
 
 .pf-work a {
@@ -94,8 +177,8 @@ body.home .image-39 {
   display: flex;
   align-items: baseline;
   gap: 16px;
-  margin: 0 0 28px;
-  padding-top: 24px;
+  margin: 0 0 30px;
+  padding-top: 20px;
   border-top: 1px solid rgba(0, 0, 0, 0.09);
 }
 .pf-eyebrow .pf-kicker {
@@ -111,16 +194,6 @@ body.home .image-39 {
   margin-left: auto;
 }
 
-/* Directional affordance shared by feature + archive links */
-.pf-arrow {
-  display: inline-block;
-  margin-left: 6px;
-  color: #c2c6cd;
-  font-weight: 400;
-  transform: translateX(0);
-  transition: transform 0.25s ease, color 0.25s ease, opacity 0.25s ease;
-}
-
 /* --- Media frame --------------------------------------------------------- */
 .pf-frame {
   /* Single-cell grid: media and the optional logo overlay share one "stack"
@@ -132,10 +205,11 @@ body.home .image-39 {
      so mixed sources (1200x630, 2400x1260, RatMap 1280x720) all show in full. */
   aspect-ratio: 1200 / 630;
   overflow: hidden;
-  border-radius: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 13px;
+  border: 1px solid rgba(17, 18, 16, 0.08);
   background: #f6f6f5;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 1px 0 rgba(17, 18, 16, 0.02);
+  transition: border-color 0.25s ease, box-shadow 0.3s ease;
 }
 .pf-frame > img:not(.pf-logo-overlay),
 .pf-frame > video {
@@ -190,12 +264,28 @@ body.home .image-39 {
   margin-top: 16px;
 }
 .pf-title {
-  display: block;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px 9px;
   font-size: 16px;
   font-weight: 500;
   line-height: 1.35;
-  color: #111;
+  color: #111210;
   letter-spacing: -0.005em;
+}
+.pf-title-text {
+  display: inline-block;
+}
+.pf-tags {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+}
+.pf-title .work-tag,
+.pf-title .work-tag + .work-tag {
+  margin-left: 0;
 }
 .pf-desc {
   display: block;
@@ -204,6 +294,7 @@ body.home .image-39 {
   line-height: 1.5;
   color: #6b7280;
   max-width: 46ch;
+  text-wrap: pretty;
 }
 .pf-year {
   display: block;
@@ -216,7 +307,7 @@ body.home .image-39 {
 /* --- Lead flagship (Daylight) ------------------------------------------- */
 .pf-lead {
   display: block;
-  margin-bottom: 56px;
+  margin-bottom: 60px;
 }
 .pf-lead .pf-cap {
   margin-top: 20px;
@@ -233,7 +324,7 @@ body.home .image-39 {
 /* --- Secondary feature (WaitLayer) -------------------------------------- */
 .pf-feature {
   display: block;
-  margin-bottom: 48px;
+  margin-bottom: 52px;
 }
 .pf-feature .pf-title {
   font-size: 18px;
@@ -349,8 +440,8 @@ body.home .image-39 {
 .pf-lead:focus-visible .pf-frame,
 .pf-feature:focus-visible .pf-frame,
 .pf-tile:focus-visible .pf-frame {
-  border-color: rgba(0, 0, 0, 0.18);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border-color: rgba(17, 18, 16, 0.17);
+  box-shadow: 0 12px 32px rgba(17, 18, 16, 0.055);
 }
 /* Safeguard: no hover/focus state may transform or move the Daylight overlay
    or the media. The logo stays grid-centered with transform:none at all times. */
@@ -386,17 +477,6 @@ body.home .image-39 {
     transform: none;
   }
 }
-.pf-lead:hover .pf-arrow,
-.pf-feature:hover .pf-arrow,
-.pf-tile:hover .pf-arrow,
-.pf-row:hover .pf-arrow,
-.pf-lead:focus-visible .pf-arrow,
-.pf-feature:focus-visible .pf-arrow,
-.pf-tile:focus-visible .pf-arrow,
-.pf-row:focus-within .pf-arrow {
-  color: #6b7280;
-  transform: translateX(3px);
-}
 /* Hover/focus strengthens legibility: modestly darken the description and year
    instead of fading the whole row. The row does not move or resize. */
 .pf-row:hover .pf-row-desc,
@@ -426,6 +506,16 @@ body.home .image-39 {
 
 /* --- Responsive: designed for 390px, not merely collapsed --------------- */
 @media screen and (max-width: 767px) {
+  body.home .container-29.pport3 {
+    margin-top: 48px;
+  }
+  body.home .port3.header > .port3-h1:not(.subhead) {
+    font-size: 16px;
+  }
+  body.home .port3-h1.subhead {
+    font-size: 16px;
+    line-height: 1.5;
+  }
   .pf-work {
     max-width: none;
     padding-bottom: 88px;
@@ -438,6 +528,12 @@ body.home .image-39 {
   }
   .pf-lead .pf-title {
     font-size: 18px;
+  }
+  .pf-title {
+    gap: 6px 8px;
+  }
+  .pf-feature .pf-title {
+    font-size: 17px;
   }
   .pf-grid {
     grid-template-columns: 1fr;
@@ -476,15 +572,6 @@ body.home .image-39 {
 
 /* --- Motion / no-JS safety ---------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
-  .pf-arrow {
-    transition: none;
-  }
-  .pf-lead:hover .pf-arrow,
-  .pf-feature:hover .pf-arrow,
-  .pf-tile:hover .pf-arrow,
-  .pf-row:hover .pf-arrow {
-    transform: none;
-  }
   /* Swap the autoplaying lead loop for its still poster frame.
      Specificity 0,2,1 to override the cover/base rules above. */
   .pf-frame > video.pf-lead-video {
@@ -527,7 +614,7 @@ html:not(.w-mod-js) .home [data-w-id] {
   padding: 3px 9px;
   border: 1px solid #e5e7eb;
   border-radius: 100px;
-  font-family: Inter, sans-serif;
+  font-family: "Graphik Home", Arial, sans-serif;
   font-size: 10.5px;
   font-weight: 500;
   letter-spacing: 0.05em;
@@ -550,6 +637,23 @@ html:not(.w-mod-js) .home [data-w-id] {
   100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
 }
 .work-tag.beta i { background: #f59e0b; animation: betaBreathe 2.8s ease-in-out infinite; }
+.work-tag.ongoing {
+  color: #b93420;
+  border-color: #f0d2cc;
+  background: #fff8f6;
+}
+.work-tag.ongoing i {
+  width: 9px;
+  height: 2px;
+  border-radius: 2px;
+  background: #e34025;
+  animation: none;
+}
+.work-tag.research {
+  color: #5f625d;
+  border-color: #e2e3df;
+  background: #f7f7f4;
+}
 .work-tag.acq b {
   color: #8b5cf6;
   font-weight: 400;
