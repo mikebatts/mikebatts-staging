@@ -10,15 +10,16 @@
   <meta property="og:type" content="article">
   <meta property="og:title" content="Beneath Vesuvius">
   <meta property="og:description" content="Reading a scroll no one can open.">
-  <meta property="og:image" content="images/vesuvius-alt/hero-vesuvius-v2.jpg">
+  <meta property="og:image" content="images/vesuvius-alt/hero-eruption-start-v3.jpg">
   <meta property="og:site_name" content="Mike Battaglia">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="images/favicon.png">
   <link rel="apple-touch-icon" href="images/webclip.png">
   <link rel="preload" href="fonts/Quarto-Light.otf" as="font" type="font/otf" crossorigin>
   <link rel="preload" href="fonts/Graphik-Regular.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="preload" href="images/vesuvius-alt/hero-vesuvius-v2.jpg" as="image" fetchpriority="high">
-  <link rel="stylesheet" href="css/vesuvius-alt.css?v=5">
+  <link rel="preload" href="images/vesuvius-alt/eruption/desktop/frame-001.webp" as="image" type="image/webp" fetchpriority="high" media="(min-width: 901px)">
+  <link rel="preload" href="images/vesuvius-alt/eruption/mobile/frame-001.webp" as="image" type="image/webp" fetchpriority="high" media="(max-width: 900px)">
+  <link rel="stylesheet" href="css/vesuvius-alt.css?v=7">
 </head>
 <body>
   <a class="va-skip" href="#challenge">Skip to the story</a>
@@ -37,15 +38,21 @@
     <section class="va-hero" id="top" aria-labelledby="va-title" data-hero>
       <div class="va-hero-sticky">
         <div class="va-film" aria-hidden="true">
-          <video class="va-film-video" muted playsinline preload="auto" poster="images/vesuvius-alt/hero-vesuvius-v2.jpg" tabindex="-1">
-            <source src="images/vesuvius-alt/vesuvius-hero-v2-mobile.mp4" type="video/mp4" media="(max-width: 900px)">
-            <source src="images/vesuvius-alt/vesuvius-hero-v2.mp4" type="video/mp4">
-          </video>
-          <img class="va-film-poster" src="images/vesuvius-alt/hero-vesuvius-v2.jpg" width="2688" height="1520" alt="">
-          <canvas class="va-ash"></canvas>
+          <canvas class="va-film-sequence"></canvas>
+          <img class="va-film-poster" src="images/vesuvius-alt/hero-eruption-start-v3.jpg" width="2688" height="1520" alt="">
+          <div class="va-xray-world">
+            <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+              <path d="M0 650 C230 620 355 668 520 624 C700 576 780 542 915 590 C1060 641 1238 640 1600 603"/>
+              <path d="M0 684 C220 652 372 704 545 655 C714 608 804 581 934 626 C1090 679 1286 673 1600 636"/>
+              <path d="M0 718 C246 687 387 731 566 687 C739 646 823 620 958 663 C1120 714 1310 706 1600 669"/>
+              <path d="M74 772 C282 736 408 763 598 726 C758 695 846 664 985 702 C1140 746 1330 746 1532 710"/>
+            </svg>
+            <span class="va-xray-point"></span>
+          </div>
           <div class="va-scan"><span>Surface / depth</span></div>
           <div class="va-depth-grid"></div>
           <div class="va-film-vignette"></div>
+          <div class="va-frame-status"><span>79 CE</span><b data-frame-status>Before the ash</b></div>
         </div>
 
         <div class="va-hero-copy" data-hero-intro>
@@ -55,14 +62,15 @@
         </div>
 
         <div class="va-hero-scenes" aria-live="polite">
-          <article class="va-scene is-active" data-scene="0"><p>In 79 CE, a library vanished beneath this mountain.</p></article>
-          <article class="va-scene" data-scene="1"><p>Its scrolls survived as blocks of carbon.</p></article>
-          <article class="va-scene" data-scene="2"><p>X-rays let us enter without opening them.</p></article>
-          <article class="va-scene" data-scene="3"><p>Now the work is separating writing from everything that only looks like it.</p></article>
+          <article class="va-scene is-active" data-scene="0"><p>A library stood beneath this mountain.</p></article>
+          <article class="va-scene" data-scene="1"><p>Then the sky became ash.</p></article>
+          <article class="va-scene" data-scene="2"><p>The buildings disappeared. The scrolls became carbon.</p></article>
+          <article class="va-scene" data-scene="3"><p>Two thousand years later, X-rays let us enter.</p></article>
+          <article class="va-scene" data-scene="4"><p>Now I am building the instrument that decides what is writing.</p></article>
         </div>
 
         <div class="va-hero-rail" aria-hidden="true">
-          <span class="is-active">Buried</span><span>Carbonized</span><span>Scanned</span><span>Tested</span>
+          <span class="is-active">Library</span><span>Eruption</span><span>Buried</span><span>Scanned</span><span>Tested</span>
         </div>
         <a class="va-scroll" href="#challenge"><span></span> Scroll to enter the scan</a>
       </div>
@@ -115,11 +123,7 @@
     <section class="va-false" id="false-signal" aria-labelledby="false-title" data-false>
       <div class="va-false-sticky">
         <div class="va-false-media" aria-hidden="true">
-          <video class="va-false-video" muted playsinline preload="metadata" poster="images/vesuvius-alt/false-signal-v2.jpg" tabindex="-1">
-            <source src="images/vesuvius-alt/false-signal-v2-mobile.mp4" type="video/mp4" media="(max-width: 900px)">
-            <source src="images/vesuvius-alt/false-signal-v2.mp4" type="video/mp4">
-          </video>
-          <img class="va-false-reveal" src="images/vesuvius-title-photo.png" width="2048" height="664" loading="lazy" decoding="async" alt="">
+          <canvas class="va-false-canvas"></canvas>
           <div class="va-false-scan"></div>
           <div class="va-false-shade"></div>
         </div>
@@ -145,10 +149,7 @@
       <div class="va-trace" data-trace>
         <div class="va-trace-stage">
           <div class="va-trace-visual" aria-hidden="true">
-            <div class="va-trace-frame va-trace-published"><img src="images/vesuvius-atlas.jpg" width="1600" height="1200" loading="lazy" decoding="async" alt=""></div>
-            <div class="va-trace-frame va-trace-surface"><img src="images/vesuvius-title-photo.png" width="2048" height="664" loading="lazy" decoding="async" alt=""><i></i></div>
-            <div class="va-trace-frame va-trace-map"><img src="images/vesuvius-title-ink.png" width="2048" height="664" loading="lazy" decoding="async" alt=""></div>
-            <div class="va-trace-volume"><i></i><i></i><i></i><i></i><i></i><i></i><span></span></div>
+            <canvas class="va-trace-canvas"></canvas>
             <div class="va-trace-verdict"><b>Evidence held</b><span>known-text control</span></div>
           </div>
           <div class="va-trace-line" aria-hidden="true"><span></span></div>
@@ -207,11 +208,7 @@
     <section class="va-cohort" id="cohort" aria-labelledby="cohort-title" data-cohort>
       <div class="va-cohort-sticky">
         <div class="va-cohort-media" aria-hidden="true">
-          <video class="va-cohort-video" muted playsinline preload="metadata" poster="images/vesuvius-alt/cohort-system-v2.jpg" tabindex="-1">
-            <source src="images/vesuvius-alt/cohort-system-v2-mobile.mp4" type="video/mp4" media="(max-width: 900px)">
-            <source src="images/vesuvius-alt/cohort-system-v2.mp4" type="video/mp4">
-          </video>
-          <img class="va-cohort-poster" src="images/vesuvius-alt/cohort-system-v2.jpg" width="2688" height="1520" loading="lazy" decoding="async" alt="">
+          <canvas class="va-cohort-canvas"></canvas>
           <div class="va-cohort-vignette"></div>
         </div>
         <div class="va-cohort-copy">
@@ -313,6 +310,6 @@
 
   <script src="js/vendor/gsap.min.js"></script>
   <script src="js/vendor/ScrollTrigger.min.js"></script>
-  <script src="js/vesuvius-alt.js?v=5"></script>
+  <script src="js/vesuvius-alt.js?v=7"></script>
 </body>
 </html>
