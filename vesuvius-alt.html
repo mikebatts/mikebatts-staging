@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>Beneath Vesuvius · Ongoing research by Mike Battaglia</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="An ongoing attempt to recover writing from unopened Herculaneum scrolls—with X-rays, machine learning, and a research system designed to prove itself wrong.">
+  <meta name="description" content="An ongoing attempt to recover writing from unopened Herculaneum scrolls using X-rays, machine learning, and experiments designed to catch their own mistakes.">
   <meta name="theme-color" content="#050505">
   <meta name="author" content="Mike Battaglia">
   <meta property="og:type" content="article">
@@ -19,7 +19,7 @@
   <link rel="preload" href="fonts/Graphik-Regular.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="images/vesuvius-alt/eruption/desktop/frame-001.webp" as="image" type="image/webp" fetchpriority="high" media="(min-width: 901px)">
   <link rel="preload" href="images/vesuvius-alt/eruption/mobile/frame-001.webp" as="image" type="image/webp" fetchpriority="high" media="(max-width: 900px)">
-  <link rel="stylesheet" href="css/vesuvius-alt.css?v=8">
+  <link rel="stylesheet" href="css/vesuvius-alt.css?v=9">
 </head>
 <body>
   <a class="va-skip" href="#challenge">Skip to the story</a>
@@ -66,7 +66,7 @@
           <article class="va-scene" data-scene="1"><p>Then the sky became ash.</p></article>
           <article class="va-scene" data-scene="2"><p>The buildings disappeared. The scrolls became carbon.</p></article>
           <article class="va-scene" data-scene="3"><p>Two thousand years later, X-rays let us enter.</p></article>
-          <article class="va-scene" data-scene="4"><p>Now I am building the instrument that decides what is writing.</p></article>
+          <article class="va-scene" data-scene="4"><p>Now I am building a way to tell real writing from a convincing mistake.</p></article>
         </div>
 
         <div class="va-hero-rail" aria-hidden="true">
@@ -82,7 +82,7 @@
         <div>
           <h2 id="challenge-title">Read the page.<br>Never touch the scroll.</h2>
           <div class="va-copy-pair">
-            <p>Mount Vesuvius buried Herculaneum and its private library. Heat turned hundreds of papyrus scrolls into fragile, tightly wound blocks of carbon—the only intact library to survive from the ancient world.</p>
+            <p>Mount Vesuvius buried Herculaneum and its private library. Heat turned hundreds of papyrus scrolls into fragile, tightly wound blocks of carbon. Together, they form the only intact library to survive from the ancient world.</p>
             <p>Unroll one and it can crumble. The Vesuvius Challenge asks us to read the writing digitally: scan the sealed object, reconstruct a page inside it, and detect ink without ever opening the scroll.</p>
           </div>
         </div>
@@ -114,7 +114,7 @@
           <article data-process-step="read">
             <span>Read</span>
             <h3>Search the flat surface for the physical trace of ink.</h3>
-            <p>The model proposes a mark. The evidence system decides whether it deserves belief.</p>
+            <p>The model can propose a mark. The evidence still has to prove that the mark is real.</p>
           </article>
         </div>
       </div>
@@ -174,8 +174,8 @@
           </article>
           <article data-trace-step="3">
             <span>Try to break the result</span>
-            <h3>Chance tests, blank regions, alternate masks, and independent review get a veto.</h3>
-            <p>The system keeps only what survives the attempt to disprove it.</p>
+            <h3>Chance tests, blank regions, alternate masks, and independent review can all stop the result.</h3>
+            <p>Only a result that survives those challenges moves forward.</p>
           </article>
         </div>
       </div>
@@ -192,45 +192,47 @@
           <div><span>Verified foundation</span><h3>Known characters traced all the way back to the scan.</h3><p>PHerc0139 connected published writing to exact surface coordinates and its parent CT volume.</p></div>
         </article>
         <article class="va-verdict-chain">
-          <span>Verified foundation</span><h3>The canonical PHerc1667 chain reproduces end to end.</h3><p>Every hash checks. The renderer passes from pinned binary and source.</p>
+          <span>Verified foundation</span><h3>The canonical PHerc1667 chain reproduces end to end.</h3><p>Every hash checks. The same renderer output can be rebuilt from its pinned source and binary.</p>
         </article>
         <article class="va-verdict-demoted">
-          <span>Demoted honestly</span><h3>The coverage signal was render geometry—not ink.</h3><p>All five PHerc1447 leads failed the frozen structural test.</p>
+          <span>Demoted honestly</span><h3>The coverage signal came from render geometry, not ink.</h3><p>All five PHerc1447 leads failed the frozen structural test.</p>
         </article>
       </div>
     </section>
 
     <section class="va-cohort va-light" id="cohort" aria-labelledby="cohort-title" data-cohort>
-      <div class="va-wrap va-cohort-head">
-        <p class="va-side-note">Cohors Vesuviana</p>
-        <div><h2 id="cohort-title">A research system<br>built to disagree.</h2><p>Romulus runs the cohort continuously. Six independent roles pressure every decision. I approve consequential gates and debrief the sealed result.</p></div>
-      </div>
-      <div class="va-cohort-system">
-        <article class="va-operator">
-          <span>Operator</span><h3>Romulus</h3><p>Frames the question, convenes the cohort, routes the work, verifies every receipt, and returns with one accountable recommendation.</p>
-          <div class="va-operator-flow"><i>Question</i><i>Experiment</i><i>Challenge</i><i>Sealed result</i></div>
-        </article>
-        <div class="va-lenses" aria-label="The six roles in Cohors Vesuviana">
-          <article data-role="0"><span>Minerva</span><p>Strategy</p></article>
-          <article data-role="1"><span>Vulcan</span><p>Engineering</p></article>
-          <article data-role="2"><span>Veritas</span><p>Falsification</p></article>
-          <article data-role="3"><span>Mercury</span><p>Intelligence</p></article>
-          <article data-role="4"><span>Plutus</span><p>Cost</p></article>
-          <article data-role="5"><span>Cassandra</span><p>Risk</p></article>
+      <div class="va-cohort-sticky">
+        <div class="va-wrap va-cohort-head">
+          <p class="va-side-note">Cohors Vesuviana</p>
+          <div><h2 id="cohort-title">A research system<br>built to disagree.</h2><p>Romulus runs the work as one continuous research cycle. Six independent roles challenge the strategy, the engineering, the evidence, and the cost before a result is allowed to stand.</p></div>
         </div>
-        <article class="va-human-gate"><span>Human gate + debrief</span><h3>Mike</h3><p>Approves spend, publication, and material changes in direction—then reviews what the cohort actually proved.</p></article>
+        <div class="va-cohort-system">
+          <article class="va-operator">
+            <span>Operator</span><h3>Romulus</h3><p>Frames the question, convenes the cohort, routes the work, verifies every receipt, and returns with one accountable recommendation.</p>
+            <div class="va-operator-current" aria-live="polite"><small data-cohort-index>01 / 06</small><strong data-cohort-name>Minerva</strong><em data-cohort-copy>Chooses the next question and defines what a useful answer would change.</em></div>
+          </article>
+          <div class="va-lenses" aria-label="The six roles in Cohors Vesuviana">
+            <article class="is-active" data-role="0"><span>Minerva</span><p>Strategy</p></article>
+            <article data-role="1"><span>Vulcan</span><p>Engineering</p></article>
+            <article data-role="2"><span>Veritas</span><p>Falsification</p></article>
+            <article data-role="3"><span>Mercury</span><p>Intelligence</p></article>
+            <article data-role="4"><span>Plutus</span><p>Cost</p></article>
+            <article data-role="5"><span>Cassandra</span><p>Risk</p></article>
+          </div>
+        </div>
+        <div class="va-cohort-timeline" aria-hidden="true"><span></span><i></i><i></i><i></i><i></i><i></i><i></i></div>
       </div>
     </section>
 
     <section class="va-status va-light" id="journal" aria-labelledby="status-title">
-      <div class="va-wrap va-status-head"><p class="va-side-note">Live status · August 29, 10:42 PM</p><h2 id="status-title">Zero letters.<br>One honest bottleneck.</h2></div>
+      <div class="va-wrap va-status-head"><p class="va-side-note">Live research · August 29, 10:48 PM</p><h2 id="status-title">A stronger foundation.<br>One clear question ahead.</h2></div>
       <div class="va-status-board">
-        <article><span>Demoted</span><h3>Five PHerc1447 leads</h3><p>Every gap was explained by render support, not ink.</p><b>STRUCTURAL_EXPLAINED</b></article>
-        <article><span>Failed closed</span><h3>PHerc800 surface gate</h3><p>The metric failed its own known-good control. No surface was classified on a broken ruler.</p><b>FAIL_METRIC_INVALID</b></article>
-        <article><span>Verified</span><h3>PHerc1667 canonical chain</h3><p>Hashes and coverage reproduce end to end. The daily cycle is unblocked.</p><b>CANONICAL_CHAIN_PASS</b></article>
-        <article class="is-live"><span>Running now</span><h3>M1v2 metric repair</h3><p>Diagnose the offset, freeze a corrected preregistration, and rerun the surface gate.</p><b>MIKE_GO · ACTIVE</b></article>
+        <article class="is-closed"><span>Resolved</span><h3>Five PHerc1447 leads</h3><p>Every gap was explained by the renderer. Closing those false leads removed a major source of error.</p><b>STRUCTURAL_EXPLAINED</b></article>
+        <article class="is-closed"><span>Protected by the control</span><h3>PHerc800 surface gate</h3><p>The ruler failed before it touched the unread scroll, so no weak result was allowed through.</p><b>FAIL_METRIC_INVALID</b></article>
+        <article class="is-verified"><span>Verified foundation</span><h3>PHerc1667 canonical chain</h3><p>Every hash and coverage figure reproduces from the original scan. The daily research cycle is running again.</p><b>CANONICAL_CHAIN_PASS</b></article>
+        <article class="is-live"><span>Running now</span><h3>M1v2 offset scan</h3><p>A live scan is testing whether the surface labels sit about 2.3 voxels away from the sheet center, the same scale seen by another Vesuvius team.</p><div class="va-live-progress"><i></i><small>Offset profile in progress</small></div><b>ACTIVE · CPU · $0</b></article>
       </div>
-      <div class="va-status-next"><p>The letter path is now precise:</p><h3>Build a surface metric that passes its control. Open PHerc800. Then scout for writing.</h3><span>The methodology draft is ready for Mike’s publication review.</span></div>
+      <div class="va-status-signal"><span>Why this matters</span><p>The failed gate may have exposed a real geometry property in the public surface labels. M1v2 is testing that explanation now. If it holds, it gives the field a better ruler before the next unread scroll is touched.</p><small>The methodology draft is ready for publication review.</small></div>
     </section>
 
     <footer class="va-ending">
@@ -238,8 +240,8 @@
       <div class="va-ending-field" aria-hidden="true"><span></span></div>
       <div class="va-ending-copy">
         <p class="va-kicker">The standard does not move</p>
-        <h2>The next letter<br>has to survive.</h2>
-        <p>This research is ongoing. Every failed path makes the instrument harder to fool.</p>
+        <h2>The next letter<br>has to survive every test.</h2>
+        <p>The work continues, but the standard stays fixed. The next result moves forward only if the evidence holds.</p>
         <a href="index.html">Back to selected work <span aria-hidden="true">↗</span></a>
       </div>
     </footer>
@@ -247,6 +249,6 @@
 
   <script src="js/vendor/gsap.min.js"></script>
   <script src="js/vendor/ScrollTrigger.min.js"></script>
-  <script src="js/vesuvius-alt.js?v=10"></script>
+  <script src="js/vesuvius-alt.js?v=11"></script>
 </body>
 </html>
