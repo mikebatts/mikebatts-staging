@@ -408,10 +408,11 @@ test('daylight.html: six real stages and origination requirement cards replace t
     const d = p.d, hero = d.querySelector('.ds-hero');
     assert.equal(d.querySelector('h1').textContent.replace(/\u00a0/g, ' ').trim(), 'My work at Daylight.');
     assert.equal(hero.querySelector('.dl-hero-lead').textContent.trim(), 'I lead product and design for our partner portal, homeowner app and Ray, our AI assistant.');
-    const collage = hero.querySelector('.ds-collage');
-    assert.deepEqual([...collage.querySelectorAll('img[src^="images/"]:not(.rp-avatar)')].map((i) => i.getAttribute('src')), ['images/ios-overview.png'], 'the opening joins the authentic homeowner app with the portal and Ray');
-    assert.match(collage.querySelector('.ds-collage-portal').textContent, /Title Verification.*Pending Approval.*holding this project up/s);
-    assert.equal(collage.querySelector('figcaption').textContent.trim(), 'Portal demo with sample data. Original homeowner app screen.');
+    const visual = hero.querySelector('.ds-hero-visual');
+    assert.equal(hero.querySelectorAll('img[src^="images/ios-"]').length, 0, 'the opening is the portal and Ray, with no phone screenshot');
+    assert.match(visual.textContent, /Title Verification.*Pending Approval.*Not sent.*holding this project up/s);
+    assert.equal(visual.querySelectorAll('a, button, input').length, 0, 'the illustration has no controls');
+    assert.equal(visual.querySelector('figcaption').textContent.trim(), 'Portal and Ray reconstruction with sample data.');
     assert.deepEqual([...hero.querySelectorAll('.ds-parts a')].map((a) => a.getAttribute('href')), ['#handoffs', '#reach', '#questions'], 'the opening indexes the three parts');
     assert.match(hero.querySelector('.ds-hero-role').textContent, /2024 to present.*Senior PM & Product Engineer/s);
     assert.equal(d.querySelectorAll('.dl-rail, [data-product-scene="daylight"]').length, 0);
@@ -470,10 +471,11 @@ test('daylight.html: the broader Daylight work leads, and Ray follows in order w
     assert.match(notes.textContent, /doesn’t tell us whether someone answered elsewhere/, 'no reply in the thread is not proof of no reply');
     assert.doesNotMatch(notes.textContent, /waiting on each other|left waiting/, 'no inferred waiting from unrecorded replies');
     assert.equal(d.querySelectorAll('.notes-audit').length, 1, 'the audit appears once');
-    /* Ray is introduced after the need, with the team foundation first */
+    /* Ray is introduced after the need, from the basic chat it started as */
     const ray = d.getElementById('ray');
-    assert.match(ray.textContent, /Our team had already built its foundation/);
-    assert.match(ray.textContent, /I led the product direction, interaction design and AI-assisted implementation/);
+    assert.match(ray.textContent, /A teammate had added a basic OpenAI chat to the project-management kanban/);
+    assert.match(ray.textContent, /leading the product direction, design and implementation/);
+    assert.doesNotMatch(d.documentElement.textContent, /shared chat engine/, 'teammates did not build a shared engine');
     assert.ok(order.indexOf('questions') < order.indexOf('ray'), 'what people needed comes before the assistant');
     assert.match(d.getElementById('continuity').textContent, /A full-page chat would have been simpler to build/, 'the view tradeoff is stated');
     assert.equal((d.body.textContent.match(/Ray adapts to you; you don’t adapt to Ray/g) || []).length, 1, 'his phrase appears once');
@@ -488,8 +490,7 @@ test('daylight.html: the broader Daylight work leads, and Ray follows in order w
     assert.match(people.querySelector('.handoff').textContent, /Ray Triage.*Routing rules.*Intercom and Slack.*A person/s, 'classification, configured routing and the human handoff');
     assert.match(people.querySelector('.handoff').textContent, /SOPs and policies from Ops and Growth/);
     const home = d.getElementById('homeowners').textContent;
-    assert.match(home, /Homeowner Ray predates my portal work/);
-    assert.match(home, /iOS engineer built the native conversation and cards/);
+    assert.match(home, /iOS engineer implemented the native conversation and cards/);
     assert.match(home, /merged behind feature flags/);
     assert.match(home, /never handles bank credentials or authorizes a payment/);
     assert.match(home, /Reconstructed iOS conversation and document card/);
@@ -503,7 +504,7 @@ test('daylight.html: the broader Daylight work leads, and Ray follows in order w
     const evidence = d.getElementById('evidence');
     assert.equal(evidence.tagName, 'DETAILS', 'the contribution recap is a native disclosure');
     assert.equal(d.querySelector('.cs-nav-menu a[href="#evidence"]'), null, 'the recap is not a main chapter');
-    assert.match(evidence.textContent, /Ray existed before this work/);
+    assert.match(evidence.textContent, /basic OpenAI chat that a teammate had added/);
     assert.match(evidence.textContent, /Our iOS engineer implemented the native app/);
     assert.match(d.getElementById('work').textContent, /None of it was solo/);
     assert.doesNotMatch(d.querySelector('main').textContent, /left out usage numbers|main case study|shorter tour|Daylight overview/, 'one story, no internal accounting');

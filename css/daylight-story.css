@@ -1,8 +1,8 @@
-/* Daylight, one case study (v1, October 2026). The portal, the homeowner
+/* Daylight, one case study (v3, October 2026). The portal, the homeowner
    app and Ray in one continuous editorial page. Loaded only by daylight.html
    (html.dl-story) after daylight-case-study.css and ray.css, whose product
    reconstructions it reuses unchanged. This file sets the story's reading
-   system, the part and chapter rhythm, the opening product pair and the larger
+   system, the part and chapter rhythm, the opening product view and the larger
    evidence scenes. Daylight's own type and color: Feature Deck for the
    opening and part titles, Aeonik Pro for reading, ABC Social Mono only for
    short labels and numbers. Cream belongs to homeowners, neutral white to
@@ -38,38 +38,57 @@ html.dl-story .dl-depth>summary{font-size:15.5px;color:#4e4d48}
 .dl-story .cs-nav-group:first-child{padding-top:6px}
 
 /* ---------- part markers and chapter heads ---------- */
-.ds-part{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px;margin:0 0 clamp(44px,5vw,72px);padding-top:18px;border-top:1px solid var(--ink);font-family:var(--display);font-size:clamp(26px,1.2vw + 18px,36px);line-height:1.1;letter-spacing:-.01em;color:var(--ink)}
-.ds-part>span{font-family:var(--mono);font-size:13px;line-height:16px;letter-spacing:.06em;text-transform:uppercase;color:var(--orange-ink)}
+/* the part label sits above its title on one left edge, at every width */
+.ds-part{display:block;margin:0 0 clamp(44px,5vw,72px);padding-top:18px;border-top:1px solid var(--ink);font-family:var(--display);font-size:clamp(26px,1.2vw + 18px,36px);line-height:1.1;letter-spacing:-.01em;color:var(--ink)}
+.ds-part>span{display:block;margin:0 0 10px;font-family:var(--mono);font-size:13px;line-height:16px;letter-spacing:.06em;text-transform:uppercase;color:var(--orange-ink)}
 .ds-head{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:24px clamp(40px,5vw,80px);align-items:start;margin-bottom:clamp(40px,4.5vw,64px)}
 .ds-head>.ch-prose{padding-top:6px}
-.ds-head>.cs-lead{margin:6px 0 0}
+html.dl-story .ds-head>.cs-lead{margin:6px 0 0}
 .ds-split{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:40px clamp(40px,5vw,80px);align-items:center}
 .ds-split-copy .ch-prose{margin-top:24px}
 .ds-takeaway{margin:clamp(36px,4vw,56px) 0 0;max-width:30ch;font-family:var(--display);font-size:clamp(26px,1.4vw + 18px,40px);line-height:1.12;letter-spacing:-.015em;color:var(--ink)}
 
 /* ---------- opening: one body of work ---------- */
 .ds-hero{padding:clamp(108px,10vw,150px) 0 clamp(56px,6vw,88px)}
-.ds-hero-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:48px clamp(40px,5vw,88px);align-items:center}
+.ds-hero-grid{display:grid;grid-template-columns:minmax(0,4.5fr) minmax(0,7.5fr);gap:48px clamp(40px,5vw,88px);align-items:center}
 .ds-hero-copy .dl-brand{margin-bottom:clamp(24px,2.4vw,36px)}
 html.dl-story .ds-h1{font-family:var(--display);font-weight:400;font-size:clamp(46px,2.6vw + 26px,68px);line-height:1;letter-spacing:-.025em;color:#1e1b17;max-width:11ch;margin:0;text-wrap:balance}
 html.dl-story .dl-hero-lead{font-size:clamp(19px,.5vw + 15px,22px);line-height:1.45;letter-spacing:-.015em;color:#2a2926;max-width:26em;margin:clamp(20px,2vw,28px) 0 0;text-wrap:pretty}
 .ds-hero-sub{font-size:17px;line-height:1.55;color:var(--muted);max-width:34em;margin:18px 0 0}
-/* the portal with Ray beside the real phone screen, on one quiet warm field */
-.ds-collage-stage{display:grid;grid-template-columns:minmax(0,1fr) clamp(170px,36%,230px);align-items:center;gap:clamp(20px,2.6vw,36px);padding:clamp(24px,3vw,40px);border-radius:20px;background:#f5f2ea}
-.ds-collage-phone img{display:block;width:100%;height:auto;border-radius:22px;border:1px solid #dedad0;box-shadow:0 30px 60px -32px rgba(60,48,24,.4),0 2px 8px rgba(60,48,24,.06)}
-.ds-collage-portal{max-width:400px;justify-self:end;width:100%;overflow:hidden;background:#fff;border:1px solid #e4e1d8;border-radius:16px;box-shadow:0 24px 50px -34px rgba(60,48,24,.4),0 2px 6px rgba(60,48,24,.05);font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#171717}
-.ds-collage-portal p{margin:0}
-.ds-cc-card{padding:16px 18px}
-.ds-cc-ray{border-top:1px solid #ecebe6}
-.ds-cc-crumb{font-size:13px;color:#73766a}
-.ds-cc-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 12px;margin-top:8px!important}
-.ds-cc-row>b{font-size:16px;font-weight:600;letter-spacing:-.01em}
-.ds-cc-ray{padding:16px 16px 18px;display:grid;gap:12px}
-.ds-cc-q{justify-self:end;max-width:90%;padding:9px 14px;border-radius:16px;background:#171717;color:#fff;font-size:15px;line-height:1.4}
-.ds-cc-a{display:flex;align-items:flex-start;gap:9px}
-.ds-cc-a>img{width:26px;height:26px;margin-top:2px}
-.ds-cc-a>span{padding:9px 14px;border-radius:16px;background:#f3f3f1;font-size:15px;line-height:1.45}
-.ds-collage>figcaption{margin-top:18px}
+/* the portal and Ray as one reconstructed product: the project's open
+   requirement on the left, Ray's answer about it attached on the right.
+   Product UI type, legible at reading size; one orange anchor on the
+   requirement Ray is talking about. Nothing here is a control. */
+.ds-hero-visual{width:100%;max-width:780px;justify-self:end}
+.ds-hv{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);background:#fff;border:1px solid #e4e1d8;border-radius:18px;box-shadow:0 40px 80px -52px rgba(60,48,24,.45),0 2px 8px rgba(60,48,24,.05);font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#171717}
+.ds-hv p{margin:0}
+.ds-hv-portal{padding:clamp(20px,2.2vw,28px);background:#f7f6f2;border-radius:17px 0 0 17px}
+.ds-hv-brand{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding-bottom:16px;margin-bottom:20px!important;border-bottom:1px solid #e6e4dc}
+.ds-hv-brand img{width:88px;height:auto}
+.ds-hv-brand span{font-size:13px;color:#73766a}
+.ds-hv-name{font-size:22px;font-weight:600;line-height:1.2;letter-spacing:-.02em}
+.ds-hv-meta{margin-top:4px!important;font-size:14px;color:#6b6e63}
+.ds-hv-stage{margin:20px 0 14px}
+.ds-hv-stage>p{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px;font-size:14px}
+.ds-hv-stage b{font-weight:600}
+.ds-hv-stage span{color:#6b6e63}
+.ds-hv-stage ol{list-style:none;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px;margin:10px 0 0;padding:0}
+.ds-hv-stage li{height:4px;border-radius:2px;background:#e1ded4}
+.ds-hv-stage li.is-current{background:var(--orange)}
+.ds-hv-reqs{list-style:none;display:grid;gap:8px;margin:0;padding:0}
+.ds-hv-reqs li{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 12px;padding:11px 14px;background:#fff;border:1px solid #e6e4dc;border-radius:10px;font-size:15px;line-height:1.35}
+.ds-hv-reqs li>span:first-child{font-weight:500}
+.ds-hv-reqs li.is-focus{border-color:#efc9a6;box-shadow:inset 3px 0 0 var(--orange)}
+.ds-hv-ray{display:grid;align-content:start;gap:16px;padding:clamp(20px,2.2vw,28px);border-left:1px solid #e6e4dc}
+.ds-hv-ray-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 12px;padding-bottom:14px;border-bottom:1px solid #ecebe6}
+.ds-hv-ray-head b{font-size:15px;font-weight:600}
+.ds-hv-ray-head span{font-size:13px;color:#73766a}
+.ds-hv-q{justify-self:end;max-width:92%;padding:10px 15px;border-radius:18px;background:#171717;color:#fff;font-size:15px;line-height:1.4}
+.ds-hv-a{display:flex;align-items:flex-start;gap:10px}
+.ds-hv-a>img{margin-top:2px}
+.ds-hv-a>div{padding:12px 15px;border-radius:18px;background:#f3f3f1;font-size:15px;line-height:1.5}
+.ds-hv-a .ds-hv-src{margin-top:10px;padding-top:8px;border-top:1px solid #e3e3df;font-size:13px;line-height:1.45;color:#6b6b65}
+.ds-hero-visual>figcaption{margin-top:16px}
 .ds-hero-role{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:8px clamp(40px,5vw,88px);margin-top:clamp(40px,5vw,64px);padding-top:20px;border-top:1px solid var(--hair);font-size:14px;line-height:1.5;color:var(--label)}
 .ds-hero-role p{margin:0;color:#393834}
 .ds-parts{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 clamp(24px,3vw,48px);margin-top:clamp(36px,4vw,56px)}
@@ -153,7 +172,8 @@ html.dl-story .ray-notes{background:#fff}
 html.dl-story .ray-notes .ch-grid-notes{align-items:center}
 html.dl-story .dl-signal{padding:clamp(80px,9vw,128px) 0;min-height:0}
 html.dl-story .dl-signal-in{grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px clamp(40px,5vw,88px);align-items:center}
-html.dl-story .dl-signal .cs-h2{color:#241c13;max-width:14ch}
+/* the shared chapter scale, not the older page's fixed tablet size */
+html.dl-story .dl-signal .cs-h2{color:#241c13;max-width:16ch;font-size:clamp(34px,2.2vw + 18px,56px)}
 html.dl-story .dl-signal .cs-kicker,html.dl-story .dl-signal .cs-kicker .num{color:#5a3e22}
 html.dl-story .dl-signal-lead{font-size:clamp(20px,.7vw + 16px,26px);line-height:1.4;max-width:30em;margin:24px 0 18px;color:#2b2016}
 html.dl-story .dl-signal-body{font-size:clamp(17px,.25vw + 16px,19px);line-height:1.6;max-width:36em;color:#4a3320;margin:0 0 30px}
@@ -241,7 +261,7 @@ html.dl-story .ray-engineering .cs-lead{color:#b9bdb7}
 @media (max-width:1099px){
   .ds-hero-grid{grid-template-columns:1fr}
   html.dl-story .ds-h1{max-width:none}
-  .ds-collage{max-width:720px}
+  .ds-hero-visual{max-width:720px;justify-self:start}
   .ds-split,.ds-actions{grid-template-columns:1fr}
   .ds-notes-pair{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:32px}
   .ds-home-grid,.ds-language{grid-template-columns:1fr}
@@ -300,12 +320,23 @@ html.dl-story .ray-engineering .cs-lead{color:#b9bdb7}
   .ds-close-actions .cs-btn{width:100%}
 }
 @media (max-width:599px){
-  .ds-collage-stage{grid-template-columns:1fr;justify-items:center;gap:24px;padding:20px 16px 28px;border-radius:16px}
-  .ds-collage-portal{justify-self:stretch;max-width:none}
-  .ds-collage-phone{width:min(220px,72%)}
+  .ds-hv{grid-template-columns:1fr;border-radius:16px}
+  .ds-hv-portal{padding:16px 16px 14px;border-radius:15px 15px 0 0}
+  .ds-hv-brand{padding-bottom:10px;margin-bottom:12px!important}
+  .ds-hv-brand img{width:76px}
+  .ds-hv-name{font-size:19px}
+  .ds-hv-meta{margin-top:2px!important}
+  .ds-hv-stage{margin:14px 0 12px}
+  .ds-hv-reqs{gap:6px}
+  .ds-hv-reqs li{padding:9px 12px}
+  .ds-hv-ray{gap:12px;padding:14px 16px 16px;border-left:0;border-top:1px solid #e6e4dc}
+  .ds-hv-ray-head{padding-bottom:10px}
+  .ds-hv-a{gap:8px}
+  .ds-hv-a>img{width:24px;height:24px}
+  .ds-hv-a>div{padding:10px 13px}
+  .ds-hv-a .ds-hv-src{margin-top:8px;padding-top:6px}
 }
 @media print{
-  .ds-collage-stage{background:#fff;padding:0}
-  .ds-collage-phone{max-width:160px}
+  .ds-hv{box-shadow:none}
   html.dl-story .ds-home,html.dl-story .dl-project,html.dl-story .dl-notes,html.dl-story .ray-sheets,html.dl-story .ray-eval{background:#fff}
 }

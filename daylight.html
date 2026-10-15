@@ -22,7 +22,7 @@
   <link href="css/daylight-case-study.css?v=50" rel="stylesheet">
   <link href="css/product-scenes.css?v=2" rel="stylesheet">
   <link href="css/ray.css?v=59" rel="stylesheet">
-  <link href="css/daylight-story.css?v=2" rel="stylesheet">
+  <link href="css/daylight-story.css?v=3" rel="stylesheet">
   <link href="css/daylight-gate.css?v=3" rel="stylesheet">
   <style>
     html.dl-locked{overflow:hidden}
@@ -91,15 +91,25 @@
             <h1 class="cs-h1 ds-h1" id="dl-title">My work at&nbsp;Daylight.</h1>
             <p class="dl-hero-lead">I lead product and design for our partner portal, homeowner app and Ray, our AI assistant.</p>
           </div>
-          <figure class="ds-collage cs-reveal">
-            <div class="ds-collage-stage">
-              <div class="ds-collage-portal" aria-label="Reconstructed portal card and Ray reply">
-                <div class="ds-cc-card"><p class="ds-cc-crumb">Orchard House · DL-1042 · Origination</p><p class="ds-cc-row"><b>Title Verification</b><span class="dp-badge is-yellow">Pending Approval</span></p></div>
-                <div class="ds-cc-ray"><p class="ds-cc-q">What’s holding this project up?</p><p class="ds-cc-a"><img class="rp-avatar" src="images/ray-avatar-poster.png" width="28" height="28" alt=""><span>Title verification still needs review. The bill and agreement are in.</span></p></div>
+          <figure class="ds-hero-visual cs-reveal">
+            <div class="ds-hv">
+              <div class="ds-hv-portal">
+                <p class="ds-hv-brand"><img src="images/logo-main.417b1780.svg" width="111" height="21" alt="Daylight"><span>Partner portal</span></p>
+                <p class="ds-hv-name">Orchard House</p>
+                <p class="ds-hv-meta">142 Orchard Lane · DL-1042</p>
+                <div class="ds-hv-stage"><p><b>Origination</b><span>Stage 1 of 6</span></p><ol aria-hidden="true"><li class="is-current"></li><li></li><li></li><li></li><li></li><li></li></ol></div>
+                <ul class="ds-hv-reqs" aria-label="Origination requirements">
+                  <li class="is-focus"><span>Title Verification</span><span class="dp-badge is-yellow">Pending Approval</span></li>
+                  <li><span>Energy Subscription Agreement</span><span class="dp-badge">Not sent</span></li>
+                </ul>
               </div>
-              <div class="ds-collage-phone"><img src="images/ios-overview.png" width="331" height="720" fetchpriority="high" alt="The homeowner app’s Energy screen: the home, battery and solar totals, and a plain-language summary of the afternoon"></div>
+              <div class="ds-hv-ray">
+                <p class="ds-hv-ray-head"><b>Ask Ray</b><span>Orchard House · DL-1042</span></p>
+                <p class="ds-hv-q">What’s holding this project up?</p>
+                <div class="ds-hv-a"><img class="rp-avatar" src="images/ray-avatar-poster.png" width="28" height="28" alt=""><div><p>Title verification. The title document is uploaded and waiting for reviewer approval. The agreement can’t be sent until it’s approved.</p><p class="ds-hv-src">Source: Orchard House project</p></div></div>
+              </div>
             </div>
-            <figcaption class="cs-caption">Portal demo with sample data. Original homeowner app screen.</figcaption>
+            <figcaption class="cs-caption">Portal and Ray reconstruction with sample data.</figcaption>
           </figure>
         </div>
         <div class="ds-hero-role"><span>2024 to present</span><p>Senior PM &amp; Product Engineer</p></div>
@@ -139,7 +149,7 @@
     <section class="cs-section ds-chapter dl-project" id="journey" aria-labelledby="journey-h">
       <div class="cs-wrap wide">
         <div class="ds-head">
-          <div><p class="cs-kicker"><span class="num">02</span>Project pages</p><h2 class="cs-h2" id="journey-h">Project pages built around the stages</h2></div>
+          <div><p class="cs-kicker"><span class="num">02</span>Project pages</p><h2 class="cs-h2" id="journey-h">Built around the six stages</h2></div>
           <div class="ch-prose">
             <p>Each stage has its own requirements and its own owners. Credit, system details, the utility bill, title and the agreement all belong to origination, so I built the project page around the stages and the requirement cards that move a project forward, instead of one long form.</p>
             <p>Later stages stay visible but unreached. A sales rep can see the road ahead without mistaking it for work they can do today.</p>
@@ -300,9 +310,9 @@
       <div class="cs-wrap wide dl-signal-in" id="signal">
         <div class="dl-signal-copy">
           <p class="cs-kicker"><span class="num">07</span>Ray</p>
-          <h2 class="cs-h2" id="ray-h">So we grew Ray into the portal</h2>
-          <p class="dl-signal-lead">Ray is Daylight’s AI assistant. It was meant to cut through the fat of the portal and get people the answer that keeps a project moving.</p>
-          <p class="dl-signal-body">Our team had already built its foundation: the shared chat engine, the first scoped partner tools, a dashboard drawer and the homeowner app’s conversations. From August I led the product direction, interaction design and AI-assisted implementation that grew it into the portal’s assistant.</p>
+          <h2 class="cs-h2" id="ray-h">From a basic chat to a portal-wide assistant</h2>
+          <p class="dl-signal-lead">Ray is Daylight’s AI assistant. People use it to answer questions about a project or a process, add documents, build working lists and reach support.</p>
+          <p class="dl-signal-body">A teammate had added a basic OpenAI chat to the project-management kanban. I expanded it across the portal and turned it into a feature, leading the product direction, design and implementation.</p>
           <div class="cs-actions dl-signal-actions"><a class="cs-btn ray-try" href="ray-demo.html" data-ray-demo>Try Ray <span aria-hidden="true">↗</span></a><span class="ray-try-note">Interactive demo &middot; Sample data</span><button type="button" class="cs-video-toggle" data-video-toggle="dl-wave-video" data-paused="true" aria-label="Play animation"><svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h3v14H7zM14 5h3v14h-3z"/></svg><svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span class="t-pause">Pause</span><span class="t-play">Play</span></button></div>
         </div>
         <div class="ds-ray-intro">
@@ -362,7 +372,7 @@
             <h3 class="cs-h3">One support path for both audiences</h3>
             <div class="ch-prose">
               <p>Support was Ray’s other job. People had questions for Daylight itself, Ops was resolving those cases by hand, and we needed a support stack for every Daylight surface. When Ray can’t help, it offers to escalate, and the case goes to a person with the context attached.</p>
-              <p>Homeowners reach the same path from the app, where Ray has its own tab. Homeowner Ray predates my portal work: our iOS engineer built the native conversation and cards, and I added the shared document, knowledge and support actions they call. It runs on the same service as the portal, with its own knowledge base, tools and access, enforced on the server. It can take people to the bank connection and payment screens we already had, but it never handles bank credentials or authorizes a payment.</p>
+              <p>Homeowners reach the same path from the app, where Ray has its own tab. Our iOS engineer implemented the native conversation and cards, and I added the shared document, knowledge and support actions they call. It runs on the same service as the portal, with its own knowledge base, tools and access, enforced on the server. It can take people to the bank connection and payment screens we already had, but it never handles bank credentials or authorizes a payment.</p>
               <p>I’ve since built Ray into the homeowner web dashboard too. That’s merged behind feature flags, so I’m not counting it as launched.</p>
             </div>
 <figure class="handoff-figure"><ol class="handoff"><li><b>You confirm</b><p>The conversation, project and current page go with the request.</p></li><li><b>Ray Triage</b><p>Classifies and summarizes the case, following SOPs and policies from Ops and Growth.</p></li><li><b>Routing rules</b><p>Configured by us, separately from the classification, to pick the team.</p></li><li><b>Intercom and Slack</b><p>The case lands where the team already works.</p></li><li><b>A person</b><p>Resolves it and closes it.</p></li></ol><figcaption class="cs-caption">What happens after you confirm an escalation, simplified.</figcaption></figure>
@@ -412,15 +422,15 @@
       <div class="cs-wrap wide">
         <div class="ds-close-grid">
           <div>
-            <p class="cs-kicker"><span class="num">13</span>My role</p>
-            <h2 class="cs-h2" id="work-h">My role, and the team around it</h2>
+            <p class="cs-kicker"><span class="num">13</span>Role and team</p>
+            <h2 class="cs-h2" id="work-h">What I owned, and who I worked with</h2>
           </div>
           <div class="ch-prose">
             <p>I’ve been Senior PM and Product Engineer at Daylight since 2024. On the portal I’ve owned the work from the first workflow through design, production code and release, using AI tools throughout implementation and taking the result through engineering review.</p>
             <p>None of it was solo. Our COO and the Ops and Growth teams set the process rules, five engineers built and reviewed alongside me, I worked with Marketing on the design language, and our iOS engineer implemented the native app.</p>
             <p>The thread through all of it was helping a lot of different people coordinate one installation, and making the result understandable for the homeowner who lives with it. Ray became part of that work, not a replacement for it.</p>
             <details class="cs-details dl-depth"><summary>What I worked on, and when</summary><div><p><b>Since 2024:</b> the portal’s project pages, stage navigation and requirement flows, the dashboards, and the homeowner energy and payments experience with our iOS engineer.</p><p><b>June–July 2026:</b> stage-link clarity and unreached states; note attachments; mention and reply notifications; individual mentions; mobile Notes hierarchy and refresh fixes; role-aware navigation; persistent saved dashboard views.</p><p><b>August–September 2026:</b> expanding Ray in the portal: the three views, document and support actions, sheets, hybrid retrieval and triage.</p></div></details>
-            <details class="cs-details credits-detail" id="evidence"><summary>Who built what in Ray</summary><div><p>Ray existed before this work: teammates had built the shared chat engine, the first scoped partner tools, a dashboard drawer and the homeowner conversations. From August, I led the portal expansion, implemented it with AI tools and took it through engineering review. That covers the three views, document and support actions, sheets, hybrid retrieval, triage and the shared actions behind the homeowner app. Our iOS engineer implemented the native app, and triage follows policies from our Ops and Growth teams.</p><p class="credits-note">Every portal and Ray image here is a reconstruction with fictional data. The homeowner app screenshots are original.</p></div></details>
+            <details class="cs-details credits-detail" id="evidence"><summary>Who built what in Ray</summary><div><p>Ray started as a basic OpenAI chat that a teammate had added to the project-management kanban. I expanded it across the portal and made it a feature: the three workspace views, document and support actions, sheets, hybrid retrieval and triage, and the shared actions the homeowner app calls. I implemented it with AI tools and took it through engineering review. Our iOS engineer implemented the native app, and triage follows policies from our Ops and Growth teams.</p><p class="credits-note">Every portal and Ray image here is a reconstruction with fictional data. The homeowner app screenshots are original.</p></div></details>
           </div>
         </div>
         <div class="cs-actions ds-close-actions"><a class="cs-btn large" href="index.html#work">Back to selected work</a><a class="cs-btn ghost large" href="ray-demo.html" data-ray-demo>Try Ray on a sample project <span aria-hidden="true">↗</span></a></div>
