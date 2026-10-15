@@ -1,15 +1,21 @@
 /* ==========================================================================
-   Ray case study: return position for the demo (v1). Loaded only by
-   ray.html. When the reader follows a Try Ray link, the article position
-   is stored for this tab. When ray.html loads again from the demo, the
-   position is restored once and the marker is removed. A cached history
-   restore (pageshow.persisted) keeps the browser's own position and drops
-   the marker. Nothing else is intercepted, no URL is rewritten, and the
-   gate flag is never read or written. No em dashes.
+   Daylight case study: return position for the Ray demo (v2). Loaded only
+   by the combined Daylight page. When the reader follows a Try Ray link,
+   the article position is stored for this tab. When the page loads again
+   from the demo, the position is restored once and the marker is removed;
+   if the browser applies the demo's fragment after that (Chrome animates
+   it from around load), the position is put back once more, unless the
+   reader has already scrolled. A cached history restore (pageshow.persisted)
+   keeps the browser's own position and drops the marker.
+   Without a stored position, a deep link (an old Ray link forwarded here,
+   or the demo's Back on a first visit) would be lost when the gate lifts,
+   because the gate scrolls to the top. So behind the gate the fragment is
+   honoured right after it lifts. Nothing else is intercepted, no URL is
+   rewritten, and the gate flag is never read or written. No em dashes.
    ========================================================================== */
 (function () {
   'use strict';
-  var KEY = 'ray-demo-return-v1';
+  var KEY = 'ray-demo-return-v2';
   var MAX_AGE = 30 * 60 * 1000;
   var root = document.documentElement;
 
@@ -35,30 +41,59 @@
     if (link) { remember(); }
   });
 
-  function jump(y) {
+  function instantly(fn) {
     var previous = root.style.scrollBehavior;
     root.style.scrollBehavior = 'auto';
-    window.scrollTo(0, y);
+    fn();
     root.style.scrollBehavior = previous;
+  }
+  function jump(y) { instantly(function () { window.scrollTo(0, y); }); }
+  function toFragment() {
+    var id = '';
+    try { id = decodeURIComponent((window.location.hash || '').slice(1)); } catch (e) { return; }
+    var target = id ? document.getElementById(id) : null;
+    if (target && target.scrollIntoView) { instantly(function () { target.scrollIntoView({ block: 'start' }); }); }
+  }
+  /* run once the gate is gone: at once if it already is, otherwise right
+     after the gate's own scroll to the top */
+  function whenOpen(fn) {
+    if (!root.classList.contains('dl-locked')) { fn(); return; }
+    if (!('MutationObserver' in window)) { return; }
+    var mo = new MutationObserver(function () {
+      if (root.classList.contains('dl-locked')) { return; }
+      mo.disconnect();
+      window.setTimeout(fn, 0);
+    });
+    mo.observe(root, { attributes: true, attributeFilter: ['class'] });
+  }
+  /* a fragment in the URL may be applied after DOMContentLoaded, and with
+     smooth scrolling Chrome animates it from around load. Until shortly
+     after load, put the stored position back once if the page is moved
+     away from it, unless the reader has moved since */
+  function holdUntilLoad(y) {
+    if (document.readyState === 'complete') { return; }
+    var moved = false, done = false;
+    var mark = function () { moved = true; };
+    ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(function (name) { window.addEventListener(name, mark, { passive: true, once: true }); });
+    var stop = function () { window.removeEventListener('scroll', putBack); };
+    function putBack() {
+      if (done || moved || root.classList.contains('dl-locked')) { return; }
+      if (Math.abs((window.pageYOffset || 0) - y) > 4) { done = true; stop(); jump(y); }
+    }
+    window.addEventListener('scroll', putBack, { passive: true });
+    window.addEventListener('load', function () { putBack(); window.setTimeout(stop, 1500); }, { once: true });
   }
   function restore() {
     var m = marker();
-    if (!m) { return; }
-    if (Date.now() - m.t > MAX_AGE || m.y <= 0) { return; }
     var from = document.referrer || '';
-    if (from && !/ray-demo\.html/.test(from)) { return; }
-    if (root.classList.contains('dl-locked')) {
-      /* the gate scrolls to the top when it lifts; restore right after it */
-      if (!('MutationObserver' in window)) { return; }
-      var mo = new MutationObserver(function () {
-        if (root.classList.contains('dl-locked')) { return; }
-        mo.disconnect();
-        window.setTimeout(function () { jump(m.y); }, 0);
-      });
-      mo.observe(root, { attributes: true, attributeFilter: ['class'] });
+    var usable = !!m && Date.now() - m.t <= MAX_AGE && m.y > 0 && (!from || /ray-demo\.html/.test(from));
+    if (usable) {
+      if (root.classList.contains('dl-locked')) { whenOpen(function () { jump(m.y); }); return; }
+      jump(m.y);
+      holdUntilLoad(m.y);
       return;
     }
-    jump(m.y);
+    if (window.location.hash && root.classList.contains('dl-locked')) { whenOpen(toFragment); }
   }
 
   window.addEventListener('pageshow', function (event) {

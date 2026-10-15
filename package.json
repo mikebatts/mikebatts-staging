@@ -1,0 +1,10 @@
+{
+  "name": "mikebatts-portfolio",
+  "private": true,
+  "description": "Static portfolio site. The scripts here only run local checks for the Daylight and Ray case studies.",
+  "scripts": {
+    "test": "node --test tests/*.test.js && node tests/check-pages.js",
+    "check:pages": "node tests/check-pages.js",
+    "syntax": "node --check js/cs-state.js && node --check tests/check-pages.js && node --check js/dl-shared.js && node --check js/ray-case-study.js && node --check js/product-scenes.js && node --check js/ray-demo-state.js && node --check js/ray-demo.js && node --check js/ray-return.js"
+  }
+}
