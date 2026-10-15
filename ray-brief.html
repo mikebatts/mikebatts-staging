@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" class="rb-page">
+<head>
+  <meta charset="utf-8">
+  <title>Ray — Mike Battaglia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Ray, Daylight’s AI assistant. A brief case study in contextual answers, flexible workspace and live working lists by Mike Battaglia.">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="author" content="Mike Battaglia">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Ray — Mike Battaglia">
+  <meta property="og:description" content="An assistant that fits around the work. Product direction, design and implementation at Daylight.">
+  <meta property="og:image" content="images/ray-og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="images/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="images/webclip.png">
+  <link rel="preload" href="fonts/AeonikPro-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/AeonikPro-500.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/ray-brief.css">
+  <link rel="stylesheet" href="css/daylight-gate.css?v=3">
+  <style>
+    html.dl-locked{overflow:hidden}
+    html.dl-locked body > *:not(#dl-gate){visibility:hidden}
+    #dl-gate{display:none}
+    html.dl-locked #dl-gate{display:flex}
+  </style>
+  <script type="text/javascript">
+    try{if(sessionStorage.getItem('dl-unlocked')!=='1'){document.documentElement.classList.add('dl-locked');}}catch(e){document.documentElement.classList.add('dl-locked');}
+  </script>
+</head>
+<body class="rb-body">
+  <div id="dl-gate" role="dialog" aria-modal="true" aria-labelledby="dl-gate-t">
+    <div class="dl-gate-box">
+      <div class="dl-gate-mark"><img src="images/avi.png" alt="Mike Battaglia" width="2208" height="2296"><span class="dl-gate-wm">Case study</span></div>
+      <h2 class="dl-gate-t" id="dl-gate-t">Daylight, up close.</h2>
+      <p class="dl-gate-s">This collection is private for now. Enter the password to view.</p>
+      <form class="dl-gate-form" id="dl-gate-form">
+        <label class="dl-gate-field"><span class="dl-gate-lbl">Password</span><input id="dl-pass" name="dl-pass" type="password" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Enter password&hellip;"></label>
+        <p class="dl-gate-err" id="dl-err" role="alert" aria-live="assertive"></p>
+        <div class="dl-gate-row"><button id="dl-go" type="submit">View case study &rarr;</button></div>
+      </form>
+      <a class="dl-gate-back" href="index.html">&larr;&nbsp;Return to mikebatts.net</a>
+    </div>
+  </div>
+
+  <a class="rb-skip" href="#rb-main">Skip to content</a>
+  <header class="rb-site rb-text">
+    <a class="rb-home" href="index.html#work" aria-label="Mike Battaglia — back to selected work"><img src="images/avi.png" width="40" height="42" alt=""><span>Mike Battaglia <span aria-hidden="true">↖</span></span></a>
+  </header>
+
+  <main id="rb-main" tabindex="-1">
+    <article aria-labelledby="rb-title">
+      <header class="rb-intro rb-text">
+        <div class="rb-title-row"><h1 id="rb-title">Ray</h1><span class="rb-company">Daylight</span></div>
+        <p class="rb-role">Product direction, design &amp; implementation</p>
+        <p class="rb-dek">An assistant that fits around the work.</p>
+        <p class="rb-summary">Answers to project questions, right where people need them.</p>
+      </header>
+
+      <figure class="rb-figure rb-workspace">
+        <div class="rb-scene">
+          <img class="rb-scene-light" src="images/daylight-cover-poster.jpg" width="1200" height="630" alt="" fetchpriority="high">
+          <div class="rb-portal">
+            <div class="rb-project">
+              <img class="rb-daylight" src="images/logo-main.417b1780.svg" width="111" height="21" alt="Daylight">
+              <p class="rb-project-path">Projects / Orchard House</p>
+              <h2>Orchard House</h2>
+              <p class="rb-project-meta">DL-1042 · Origination</p>
+              <div class="rb-requirement"><span class="rb-ui-label">Title verification</span><strong>Awaiting approval</strong><p>Document uploaded.<br>Waiting for reviewer approval.</p></div>
+            </div>
+            <div class="rb-chat" aria-label="Illustrated Ray conversation alongside the project">
+              <div class="rb-chat-head"><img src="images/ray-avatar-poster.png" width="32" height="32" alt=""><div><strong>Ask Ray</strong><span>Orchard House</span></div><span class="rb-view-label">Side drawer</span></div>
+              <div class="rb-exchange">
+                <p class="rb-question">What’s holding up the agreement?</p>
+                <div class="rb-answer"><img src="images/ray-avatar-poster.png" width="26" height="26" alt="Ray"><div><p>Title verification. The title document is uploaded and waiting for reviewer approval. The agreement can’t be sent until it’s approved.</p><p class="rb-source">Source: Orchard House project</p></div></div>
+              </div>
+              <p class="rb-chat-foot">Project context, not a fresh start.</p>
+            </div>
+          </div>
+        </div>
+        <figcaption>A sourced answer, beside the work. Reconstructed with fictional data.</figcaption>
+      </figure>
+
+      <section class="rb-section rb-text" aria-labelledby="rb-context">
+        <h2 id="rb-context">Context</h2>
+        <p>Daylight’s partner portal helps teams coordinate solar installations. Project Notes revealed a recurring problem: people were asking questions whose answers already existed in project records or the knowledge base.</p>
+        <p>A teammate had added a basic OpenAI chat to the project-management kanban. I expanded it across the portal and turned it into a feature, leading the product direction, design and implementation.</p>
+      </section>
+
+      <section class="rb-section rb-text" aria-labelledby="rb-design">
+        <h2 id="rb-design">Fit around the task</h2>
+        <p>Ray opens as a side drawer, full screen or a separate mini window. The conversation and unsent draft carry across views and portal navigation. People can keep a project in sight without starting over.</p>
+      </section>
+
+      <section class="rb-section rb-text" aria-labelledby="rb-learning">
+        <h2 id="rb-learning">A CSV was only half the answer</h2>
+        <p>We released Ray to Daylight Ops internally first. Interviews and transcripts surfaced requests for CSVs, but the underlying need was often a working list people could return to.</p>
+        <p>I added sheets that save the query and run it again when opened. Each viewer sees only what their permissions allow. CSV export stays available.</p>
+      </section>
+
+      <figure class="rb-figure rb-sheets">
+        <div class="rb-sheets-scene">
+          <div class="rb-sheet-request"><img src="images/ray-avatar-poster.png" width="28" height="28" alt="Ray"><p>Show installation reviews with their status and feedback.</p></div>
+          <div class="rb-sheet-pair">
+            <div class="rb-sheet rb-sheet-old">
+              <p class="rb-sheet-eyebrow">A one-time export</p>
+              <h3>installation-reviews.csv</h3>
+              <p class="rb-sheet-meta">Frozen when saved</p>
+              <table><caption class="rb-vh">CSV export — sample installation reviews</caption><thead><tr><th scope="col">Project</th><th scope="col">Review</th></tr></thead><tbody><tr><th scope="row">Orchard House</th><td>Rejected</td></tr><tr><th scope="row">Juniper House</th><td>Rejected</td></tr></tbody></table>
+            </div>
+            <div class="rb-sheet rb-sheet-live">
+              <p class="rb-sheet-eyebrow">A returning workspace</p>
+              <h3>Installation reviews</h3>
+              <p class="rb-sheet-meta">Saved query · Reopened</p>
+              <table><caption class="rb-vh">Saved sheet, reopened — sample installation reviews</caption><thead><tr><th scope="col">Project</th><th scope="col">Review</th></tr></thead><tbody><tr><th scope="row">Orchard House</th><td>Rejected</td></tr><tr class="rb-changed"><th scope="row">Juniper House</th><td>Approved<span>Changed</span></td></tr><tr class="rb-changed"><th scope="row">Cedar House</th><td>Rejected<span>New</span></td></tr></tbody></table>
+            </div>
+          </div>
+        </div>
+        <figcaption>The file stays frozen; the sheet reflects the work now. Fictional projects.</figcaption>
+      </figure>
+
+      <section class="rb-section rb-text rb-close" aria-labelledby="rb-reflection">
+        <h2 id="rb-reflection">What I took away</h2>
+        <p>The useful question wasn’t just “can Ray answer this?” It was “what does someone need to do next?” Retrieval checks were a start, not proof that the final answer was right.</p>
+        <nav class="rb-links" aria-label="Explore Ray"><a href="daylight.html#ray">Read the full case study <span aria-hidden="true">→</span></a><a href="ray-demo.html" target="_blank" rel="noopener noreferrer">Try demo (new tab) <span aria-hidden="true">↗</span><span class="rb-vh"> — Ray, with sample data</span></a></nav>
+      </section>
+    </article>
+  </main>
+  <footer class="rb-footer rb-text"><span>Mike Battaglia</span><a href="index.html#work">Back to selected work <span aria-hidden="true">↖</span></a></footer>
+  <script src="js/daylight-gate.js" defer></script>
+</body>
+</html>
