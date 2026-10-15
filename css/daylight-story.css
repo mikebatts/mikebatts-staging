@@ -1,4 +1,4 @@
-/* Daylight, one case study (v3, October 2026). The portal, the homeowner
+/* Daylight, one case study (v4, October 2026). The portal, the homeowner
    app and Ray in one continuous editorial page. Loaded only by daylight.html
    (html.dl-story) after daylight-case-study.css and ray.css, whose product
    reconstructions it reuses unchanged. This file sets the story's reading
@@ -32,6 +32,8 @@ html.dl-story .cs-nav.is-scrolled{background:rgba(255,255,255,.94);border-color:
 html.dl-story .cs-footer{background:#fff;border-top:1px solid var(--hair)}
 html.dl-story .dl-depth{margin-top:36px;max-width:880px}
 html.dl-story .dl-depth>summary{font-size:15.5px;color:#4e4d48}
+/* a project reference that should wrap as one piece, never at its hyphen */
+html.dl-story .ds-keep{white-space:nowrap}
 
 /* the chapter menu groups the three parts with quiet labels */
 .dl-story .cs-nav-group{font-family:var(--mono);font-size:13px;line-height:16px;letter-spacing:.06em;text-transform:uppercase;color:var(--label);padding:14px 12px 4px}
@@ -200,7 +202,7 @@ html.dl-story .sheet-request>.rp-user{justify-content:flex-start}
 html.dl-story .sheet-request>.rp-user>p{font-size:17px}
 html.dl-story .sheet-request .artifact-response{margin-top:0}
 html.dl-story .sheet-request .artifact-link{margin-top:12px}
-html.dl-story .sh-file{grid-area:file;align-self:start;padding:28px;border-radius:16px;background:#fbfbf9;border:1px dashed #cfcfc7}
+html.dl-story .sh-file{grid-area:file;align-self:start;padding:28px;border-radius:16px;background:#fbfbf9;border:1px dashed #cfcfc7;color:#696963}
 html.dl-story .sh-live{grid-area:live;padding:32px 36px 30px;border:1px solid #dcdcd5;border-radius:16px;background:#fff;box-shadow:0 34px 70px -50px rgba(36,36,24,.5)}
 html.dl-story .sh-live h3{font-size:clamp(26px,1vw + 18px,34px)}
 html.dl-story .sh-live .sh-live-meta{font-size:14px}
@@ -336,6 +338,119 @@ html.dl-story .ray-engineering .cs-lead{color:#b9bdb7}
   .ds-hv-a>div{padding:10px 13px}
   .ds-hv-a .ds-hv-src{margin-top:8px;padding-top:6px}
 }
+/* ---------- phones (v4): one reading system ----------
+   Every chapter reads the same way on a phone: eyebrow, a balanced headline
+   at full measure, prose, then the evidence with a short caption and any
+   detail below it. Frames that only repeated a parent frame are dropped so
+   product UI keeps its width; nothing is hidden that carries the story. */
+@media (max-width:1099px){
+  /* the dashboard's detail follows its figure, as in every other chapter;
+     the figure holds no controls, so focus order is unchanged */
+  .ds-split{display:flex;flex-direction:column;align-items:stretch;gap:0}
+  .ds-split-copy{display:contents}
+  html.dl-story .ds-split>figure{order:1;margin-top:clamp(32px,4vw,44px)}
+  .ds-split-copy>.dl-depth{order:2}
+}
+@media (max-width:759px){
+  html.dl-story .cs-h2,html.dl-story .dl-signal .cs-h2{font-size:clamp(30px,6.2vw + 8px,36px);line-height:1.08;letter-spacing:-.035em;max-width:22ch;text-wrap:balance}
+  html.dl-story .cs-h3{max-width:none;text-wrap:balance}
+  html.dl-story .cs-kicker{margin-bottom:14px}
+  html.dl-story figure>figcaption{margin-top:14px}
+  html.dl-story .dl-depth{margin-top:28px}
+  .ds-part{margin-bottom:36px}
+  .ds-head{margin-bottom:32px}
+  .ds-takeaway{margin-top:36px}
+
+  /* opening: the role on one line, the three parts as a compact index */
+  .ds-hero-grid{gap:32px}
+  .ds-hero-role{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:2px 16px;margin-top:32px;padding-top:14px}
+  .ds-hero-role p{order:-1;font-weight:500}
+  .ds-parts{margin-top:24px}
+  .ds-parts a{grid-template-columns:minmax(0,1fr) 20px;gap:4px 12px;padding:14px 0 16px}
+  .ds-parts a>*{grid-column:1}
+  .ds-parts a::after{content:"";grid-column:2;grid-row:1/4;align-self:center;justify-self:center;width:8px;height:8px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:translateY(-3px) rotate(45deg);opacity:.55;transition:opacity var(--t-press) var(--ease-out)}
+  .ds-parts a:hover::after,.ds-parts a:active::after{opacity:1;color:var(--orange-ink)}
+  .ds-parts b{font-size:27px}
+  .ds-parts a>span:last-child{font-size:15px}
+  .ds-stages>figcaption{margin-top:16px}
+
+  /* homeowner screens: a native, snapping row with the next screen showing.
+     It bleeds to the screen edges; the page itself never scrolls sideways. */
+  .ds-home-grid{gap:32px}
+  .ds-home-copy{padding-top:0}
+  .ds-home-screens{display:flex;gap:14px;justify-items:normal;align-items:start;max-width:none;margin:0 calc(-1 * max(var(--pad),env(safe-area-inset-right))) 0 calc(-1 * max(var(--pad),env(safe-area-inset-left)));padding:4px max(var(--pad),env(safe-area-inset-right)) 14px max(var(--pad),env(safe-area-inset-left));overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding-inline:max(var(--pad),env(safe-area-inset-left));scrollbar-width:thin;scrollbar-color:rgba(76,40,6,.28) transparent;-webkit-overflow-scrolling:touch}
+  .ds-home-screens:focus-visible{outline-offset:-3px;border-radius:12px}
+  html.dl-story .ds-home-screens>.dl-shot{flex:0 0 min(300px,calc(100% - 56px));max-width:none;scroll-snap-align:start}
+  html.dl-story .dl-shot img{border-radius:24px;box-shadow:0 24px 44px -32px rgba(76,40,6,.5)}
+  html.dl-story .dl-shot>figcaption{margin-top:14px;font-size:14px}
+  html.dl-story .dl-authentic-caption{text-align:left;margin-top:12px}
+  .ds-language{margin-top:56px;padding-top:36px;gap:28px}
+  .ds-tones{gap:12px}
+
+  /* Ray's opening: try and play share a row, the principles read as a list */
+  html.dl-story .dl-signal{padding:64px 0}
+  html.dl-story .dl-signal-in{gap:36px}
+  html.dl-story .dl-signal-lead{margin:20px 0 16px}
+  html.dl-story .dl-signal-body{margin-bottom:26px}
+  html.dl-story .dl-signal-actions{gap:10px 12px}
+  html.dl-story .dl-signal-actions .cs-btn{flex:0 1 auto}
+  html.dl-story .dl-signal .ray-try-note{order:3;flex-basis:100%}
+  .ds-ray-intro{gap:20px}
+  html.dl-story .dl-ray-mark{gap:14px}
+  html.dl-story .dl-ray-mark img{width:56px}
+  html.dl-story .dl-ray-mark>span{font-size:36px}
+  .ds-principles li{padding:12px 0}
+
+  /* sheets: saved rows mirror the CSV rows above them, so the change reads */
+  html.dl-story .sh-live .sh-table tr{grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:6px 12px;padding:13px 14px}
+  html.dl-story .sh-live .sh-table td::before{content:none}
+  html.dl-story .sh-live .sh-table td:nth-child(2){justify-self:end}
+  html.dl-story .sh-live .sh-table small{color:#5f5f59}
+  html.dl-story .sh-actions{display:flex;flex-wrap:wrap;gap:8px}
+  html.dl-story .sh-actions .cs-btn{flex:1 1 auto;min-height:44px;padding:0 16px}
+
+  /* actions: the chat is the frame; no grey board around it */
+  .ds-actions .feature-board{padding:0;gap:14px;background:transparent;border-radius:0}
+  .ds-actions .feature-panel>.rp-chat{box-shadow:0 20px 44px -36px #32322966}
+  .ds-actions .feature-status{margin-top:14px;color:#55554f}
+  .ds-actions .feature-replay{margin-top:12px;text-align:left}
+  .ds-actions .feature-story>figcaption{margin-top:6px}
+  .ds-support{margin-top:56px;padding-top:36px;gap:36px}
+  html.dl-story .ds-support .homeowner-stage{padding:20px 14px}
+  html.dl-story .ds-support .native-ray{max-width:380px}
+
+  .ds-eval-col{padding:22px 20px}
+  .ds-close-actions{margin-top:36px;padding-top:0;border-top:0}
+}
+@media (max-width:599px){
+  /* the Ray panel already sits under the project it names */
+  .ds-hv-ray-head span{display:none}
+  .ds-actions .feature-panel .rp-tools{display:none}
+  html.dl-story .dl-note-figure>figcaption,html.dl-story .dl-phone-figure>figcaption{text-align:left;margin-left:0}
+  html.dl-story .dl-phone-figure{max-width:340px}
+}
+/* dashboard rows: name across the top, stage and next step side by side in
+   columns that line up from row to row; narrower phones keep the stack */
+@media (min-width:360px) and (max-width:599px){
+  html.dl-story .dp-jobs tbody{display:grid;grid-template-columns:max-content minmax(0,1fr);column-gap:16px}
+  html.dl-story .dp-jobs tr{grid-column:1/-1;grid-template-columns:subgrid;gap:12px 16px;padding:18px 0}
+  html.dl-story .dp-jobs tbody th{grid-column:1/-1}
+  html.dl-story .dp-jobs td{min-width:0}
+}
+@media (min-width:360px) and (max-width:759px){
+  .ds-principles li{grid-template-columns:minmax(0,7.5em) minmax(0,1fr);align-items:baseline}
+}
+/* touch at any width, landscape phones included: the view switches stay a full tap */
+@media (pointer:coarse){
+  html.dl-story .ray-product .ray-window-controls button{min-width:44px;min-height:44px}
+}
+/* without motion the streamed events sit still on their lane, not vanish */
+@media (prefers-reduced-motion:reduce){
+  html.dl-story .eng-event-lane i{animation:none;opacity:1}
+  html.dl-story .eng-event-lane i:nth-child(2){left:24%}html.dl-story .eng-event-lane i:nth-child(3){left:44%}html.dl-story .eng-event-lane i:nth-child(4){left:64%}html.dl-story .eng-event-lane i:nth-child(5){left:84%}
+}
+html.reduce-motion.dl-story .eng-event-lane i{animation:none;opacity:1}
+html.reduce-motion.dl-story .eng-event-lane i:nth-child(2){left:24%}html.reduce-motion.dl-story .eng-event-lane i:nth-child(3){left:44%}html.reduce-motion.dl-story .eng-event-lane i:nth-child(4){left:64%}html.reduce-motion.dl-story .eng-event-lane i:nth-child(5){left:84%}
 @media print{
   .ds-hv{box-shadow:none}
   html.dl-story .ds-home,html.dl-story .dl-project,html.dl-story .dl-notes,html.dl-story .ray-sheets,html.dl-story .ray-eval{background:#fff}

@@ -90,7 +90,7 @@ for (const page of pages) {
 
   // versions on the rebuilt files
   for (const v of ['css/dl-shared.css?v=7', 'js/dl-shared.js?v=7']) { if (!html.includes(v)) { fail(`${page}: expected ${v}`); } }
-  for (const v of ['css/daylight-case-study.css?v=50', 'css/product-scenes.css?v=2', 'css/ray.css?v=59', 'css/daylight-story.css?v=3', 'js/product-scenes.js?v=3', 'js/ray-case-study.js?v=50', 'js/cs-state.js?v=3', 'js/ray-return.js?v=3']) { if (!html.includes(v)) { fail(`${page}: expected ${v}`); } }
+  for (const v of ['css/daylight-case-study.css?v=50', 'css/product-scenes.css?v=2', 'css/ray.css?v=59', 'css/daylight-story.css?v=4', 'js/product-scenes.js?v=3', 'js/ray-case-study.js?v=50', 'js/cs-state.js?v=3', 'js/ray-return.js?v=3']) { if (!html.includes(v)) { fail(`${page}: expected ${v}`); } }
   if (!/<html lang="en" class="dl-page ray-page dl-story">/.test(html)) { fail(`${page}: the combined page scopes its composition with html.dl-story`); }
   if (/daylight-case-study\.js/.test(html)) { fail(`${page}: the retired Daylight page script stays unloaded`); }
   if (!/<a class="cs-btn ray-try" href="ray-demo\.html" data-ray-demo>/.test(html)) { fail(`${page}: the Ray chapter must offer Try Ray as a marked link to the demo`); }
@@ -271,11 +271,14 @@ for (const f of styles) {
   if (touch.length !== 1 || touch[0] !== 'a,button,summary') { fail('dl-shared.css: touch-action only on controls (a,button,summary): ' + JSON.stringify(touch)); }
   for (const f of styles) {
     const css = read(f);
-    const noMenus = css.replace(/\.cs-nav-menu\{[^}]*\}/g, '');
+    // The homeowner screens are the one bounded gallery: on phones they scroll
+    // sideways only, snap, and bleed to the screen edge inside their own box.
+    const gallery = (s) => s.replace(/\.ds-home-screens\{[^}]*\}/g, (r) => (/overflow-x:auto/.test(r) && /scroll-snap-type:x/.test(r) && !/overflow(-y)?:/.test(r) ? '' : r));
+    const noMenus = gallery(css.replace(/\.cs-nav-menu\{[^}]*\}/g, ''));
     if (/overflow(-x|-y)?:\s*(auto|scroll)/.test(noMenus)) { fail(`${f}: inner scrolling outside the chapter menu`); }
     if (/max-height/.test(noMenus)) { fail(`${f}: max-height on variable content outside the chapter menu`); }
     for (const m of css.matchAll(/@media \(max-width:\d+px\)\{([\s\S]*?)\n\}/g)) {
-      if (/margin(-top|-left|-right|-bottom)?:\s*-|margin:[^;}]*\s-\d/.test(m[1])) { fail(`${f}: negative margin inside a phone rule`); }
+      if (/margin(-top|-left|-right|-bottom)?:\s*-|margin:[^;}]*\s-\d/.test(gallery(m[1]))) { fail(`${f}: negative margin inside a phone rule`); }
     }
     // Ray's compact mobile choices may stay reachable while their own figure
     // scrolls. Product scenes and reading content must never be pinned.
