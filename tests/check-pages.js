@@ -90,7 +90,7 @@ for (const page of pages) {
 
   // versions on the rebuilt files
   for (const v of ['css/dl-shared.css?v=7', 'js/dl-shared.js?v=7']) { if (!html.includes(v)) { fail(`${page}: expected ${v}`); } }
-  for (const v of ['css/daylight-case-study.css?v=50', 'css/product-scenes.css?v=2', 'css/ray.css?v=59', 'css/daylight-story.css?v=1', 'js/product-scenes.js?v=3', 'js/ray-case-study.js?v=50', 'js/cs-state.js?v=3', 'js/ray-return.js?v=3']) { if (!html.includes(v)) { fail(`${page}: expected ${v}`); } }
+  for (const v of ['css/daylight-case-study.css?v=50', 'css/product-scenes.css?v=2', 'css/ray.css?v=59', 'css/daylight-story.css?v=2', 'js/product-scenes.js?v=3', 'js/ray-case-study.js?v=50', 'js/cs-state.js?v=3', 'js/ray-return.js?v=3']) { if (!html.includes(v)) { fail(`${page}: expected ${v}`); } }
   if (!/<html lang="en" class="dl-page ray-page dl-story">/.test(html)) { fail(`${page}: the combined page scopes its composition with html.dl-story`); }
   if (/daylight-case-study\.js/.test(html)) { fail(`${page}: the retired Daylight page script stays unloaded`); }
   if (!/<a class="cs-btn ray-try" href="ray-demo\.html" data-ray-demo>/.test(html)) { fail(`${page}: the Ray chapter must offer Try Ray as a marked link to the demo`); }
@@ -296,7 +296,7 @@ for (const f of textFiles.filter((f) => !f.endsWith('.md'))) {
   const dl = read('daylight.html');
   if (!/id="homeowners"/.test(dl)) { fail('daylight.html: homeowner Ray keeps its #homeowners anchor'); }
   if (!/Reconstructed iOS conversation and document card/.test(dl)) { fail('daylight.html: reconstructed native cards must be labeled'); }
-  if (!/images\/daylight-house-editorial-crop\.jpg/.test(dl)) { fail('daylight.html: the opening must use the existing home photograph'); }
+  if (/images\/daylight-house-editorial-crop\.jpg/.test((dl.match(/<header class="ds-hero"[\s\S]*?<\/header>/) || [''])[0])) { fail('daylight.html: the opening leads with the homeowner app, not the separate house photograph'); }
   for (const s of ['ios-overview', 'ios-breakdown', 'ios-payments']) { if (!dl.includes(`images/${s}.png`)) { fail(`daylight.html: missing authentic screenshot ${s}`); } }
   if (!/<source src="images\/daylight-cover-loop\.mp4"/.test(dl)) { fail('daylight.html: the pivot must use the original gradient film'); }
   /* the brand media this page uses; the staging checkout does not carry the

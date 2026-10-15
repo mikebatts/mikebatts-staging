@@ -406,14 +406,12 @@ test('daylight.html: six real stages and origination requirement cards replace t
   const p = inert('daylight.html');
   try {
     const d = p.d, hero = d.querySelector('.ds-hero');
-    assert.equal(d.querySelector('h1').textContent.replace(/\u00a0/g, ' ').trim(), 'Solar takes a team.');
-    assert.match(hero.querySelector('.dl-hero-lead').textContent, /solar and batteries to homes/);
-    assert.match(hero.querySelector('.dl-hero-lead').textContent, /the portal our partners and Ops teams use/);
-    assert.match(hero.querySelector('.dl-hero-lead').textContent, /the app homeowners use/);
+    assert.equal(d.querySelector('h1').textContent.replace(/\u00a0/g, ' ').trim(), 'My work at Daylight.');
+    assert.equal(hero.querySelector('.dl-hero-lead').textContent.trim(), 'I lead product and design for our partner portal, homeowner app and Ray, our AI assistant.');
     const collage = hero.querySelector('.ds-collage');
-    assert.deepEqual([...collage.querySelectorAll('img[src^="images/"]:not(.rp-avatar)')].map((i) => i.getAttribute('src')), ['images/daylight-house-editorial-crop.jpg', 'images/ios-overview.png'], 'the opening joins the home and the homeowner app with the portal and Ray');
+    assert.deepEqual([...collage.querySelectorAll('img[src^="images/"]:not(.rp-avatar)')].map((i) => i.getAttribute('src')), ['images/ios-overview.png'], 'the opening joins the authentic homeowner app with the portal and Ray');
     assert.match(collage.querySelector('.ds-collage-portal').textContent, /Title Verification.*Pending Approval.*holding this project up/s);
-    assert.match(collage.querySelector('figcaption').textContent, /reconstructed with a fictional project.*original homeowner app screen/);
+    assert.equal(collage.querySelector('figcaption').textContent.trim(), 'Portal demo with sample data. Original homeowner app screen.');
     assert.deepEqual([...hero.querySelectorAll('.ds-parts a')].map((a) => a.getAttribute('href')), ['#handoffs', '#reach', '#questions'], 'the opening indexes the three parts');
     assert.match(hero.querySelector('.ds-hero-role').textContent, /2024 to present.*Senior PM & Product Engineer/s);
     assert.equal(d.querySelectorAll('.dl-rail, [data-product-scene="daylight"]').length, 0);
