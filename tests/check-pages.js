@@ -90,7 +90,7 @@ for (const page of pages) {
 
   // versions on the rebuilt files
   for (const v of ['css/dl-shared.css?v=7', 'js/dl-shared.js?v=7']) { if (!html.includes(v)) { fail(`${page}: expected ${v}`); } }
-  for (const v of ['css/daylight-case-study.css?v=50', 'css/product-scenes.css?v=2', 'css/ray.css?v=59', 'css/daylight-story.css?v=4', 'js/product-scenes.js?v=3', 'js/ray-case-study.js?v=50', 'js/cs-state.js?v=3', 'js/ray-return.js?v=3']) { if (!html.includes(v)) { fail(`${page}: expected ${v}`); } }
+  for (const v of ['css/daylight-case-study.css?v=50', 'css/product-scenes.css?v=2', 'css/ray.css?v=59', 'css/daylight-story.css?v=5', 'js/product-scenes.js?v=3', 'js/ray-case-study.js?v=50', 'js/cs-state.js?v=3', 'js/ray-return.js?v=3']) { if (!html.includes(v)) { fail(`${page}: expected ${v}`); } }
   if (!/<html lang="en" class="dl-page ray-page dl-story">/.test(html)) { fail(`${page}: the combined page scopes its composition with html.dl-story`); }
   if (/daylight-case-study\.js/.test(html)) { fail(`${page}: the retired Daylight page script stays unloaded`); }
   if (!/<a class="cs-btn ray-try" href="ray-demo\.html" data-ray-demo>/.test(html)) { fail(`${page}: the Ray chapter must offer Try Ray as a marked link to the demo`); }

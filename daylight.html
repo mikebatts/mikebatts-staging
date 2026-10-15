@@ -22,7 +22,7 @@
   <link href="css/daylight-case-study.css?v=50" rel="stylesheet">
   <link href="css/product-scenes.css?v=2" rel="stylesheet">
   <link href="css/ray.css?v=59" rel="stylesheet">
-  <link href="css/daylight-story.css?v=4" rel="stylesheet">
+  <link href="css/daylight-story.css?v=5" rel="stylesheet">
   <link href="css/daylight-gate.css?v=3" rel="stylesheet">
   <style>
     html.dl-locked{overflow:hidden}
@@ -306,22 +306,33 @@
       </div>
     </section>
 
-    <section class="cs-section ds-chapter dl-signal cs-wave" id="ray" aria-labelledby="ray-h"><video class="cs-wave-video" id="dl-wave-video" data-cs-video poster="images/daylight-cover-poster.jpg" muted loop playsinline preload="metadata" width="1200" height="630" tabindex="-1" aria-hidden="true"><source src="images/daylight-cover-loop.mp4" type="video/mp4"></video>
-      <div class="cs-wrap wide dl-signal-in" id="signal">
-        <div class="dl-signal-copy">
-          <p class="cs-kicker"><span class="num">07</span>Ray</p>
-          <h2 class="cs-h2" id="ray-h">From a basic chat to a portal-wide assistant</h2>
-          <p class="dl-signal-lead">Ray is Daylight’s AI assistant. People use it to answer questions about a project or a process, add documents, build working lists and reach support.</p>
-          <p class="dl-signal-body">A teammate had added a basic OpenAI chat to the project-management kanban. I expanded it across the portal and turned it into a feature, leading the product direction, design and implementation.</p>
-          <div class="cs-actions dl-signal-actions"><a class="cs-btn ray-try" href="ray-demo.html" data-ray-demo>Try Ray <span aria-hidden="true">↗</span></a><span class="ray-try-note">Interactive demo &middot; Sample data</span><button type="button" class="cs-video-toggle" data-video-toggle="dl-wave-video" data-paused="true" aria-label="Play animation"><svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h3v14H7zM14 5h3v14h-3z"/></svg><svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span class="t-pause">Pause</span><span class="t-play">Play</span></button></div>
+    <section class="cs-section ds-chapter ray-open" id="ray" aria-labelledby="ray-h">
+      <div class="ray-open-stage cs-wave"><video class="cs-wave-video" id="dl-wave-video" data-cs-video poster="images/daylight-cover-poster.jpg" muted loop playsinline preload="metadata" width="1200" height="630" tabindex="-1" aria-hidden="true"><source src="images/daylight-cover-loop.mp4" type="video/mp4"></video>
+        <div class="cs-wrap wide ray-open-marks">
+          <p class="cs-kicker ray-open-slate"><span class="num">07</span>Ray</p>
+          <button type="button" class="cs-video-toggle ray-open-toggle" data-video-toggle="dl-wave-video" data-paused="true" aria-label="Play animation"><svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h3v14H7zM14 5h3v14h-3z"/></svg><svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span class="t-pause">Pause</span><span class="t-play">Play</span></button>
         </div>
-        <div class="ds-ray-intro">
-          <div class="dl-ray-mark" aria-hidden="true"><img src="images/ray-avatar-poster.png" width="280" height="280" alt=""><span>Ray</span></div>
-          <ol class="ds-principles" aria-label="What I held Ray to">
-            <li><b>Transparent</b><span>Show where an answer came from.</span></li>
-            <li><b>Familiar</b><span>Work like the chat tools people already know.</span></li>
-            <li><b>Composable</b><span>Fit around the work people are already doing.</span></li>
-          </ol>
+      </div>
+      <div class="cs-wrap wide ray-open-body" id="signal">
+        <h2 class="ray-open-word" id="ray-h"><span class="ray-open-lit" aria-hidden="true">Ray</span><span class="ray-open-dusk">Ray</span></h2>
+        <div class="ray-open-intro">
+          <p class="ray-open-line">From a basic chat to a portal-wide assistant</p>
+          <p class="ray-open-lead">Ray is Daylight’s AI assistant. People use it to answer questions about a project or a process, add documents, build working lists and reach support.</p>
+          <div class="ray-open-try"><a class="cs-btn ray-try" href="ray-demo.html" data-ray-demo>Try Ray <span aria-hidden="true">↗</span></a><span class="ray-try-note">Interactive demo &middot; Sample data</span></div>
+        </div>
+        <div class="ray-open-notes">
+          <div class="ray-open-part">
+            <p class="ray-open-label">My part</p>
+            <p>A teammate had added a basic OpenAI chat to the project-management kanban. I expanded it across the portal and turned it into a feature, leading the product direction, design and implementation.</p>
+          </div>
+          <div class="ray-open-held">
+            <p class="ray-open-label" id="ray-held">What I held Ray to</p>
+            <ol class="ray-open-principles" aria-labelledby="ray-held">
+              <li><b>Transparent</b><span>Show where an answer came from.</span></li>
+              <li><b>Familiar</b><span>Work like the chat tools people already know.</span></li>
+              <li><b>Composable</b><span>Fit around the work people are already doing.</span></li>
+            </ol>
+          </div>
         </div>
       </div>
     </section>

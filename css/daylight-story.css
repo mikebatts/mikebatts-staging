@@ -1,4 +1,4 @@
-/* Daylight, one case study (v4, October 2026). The portal, the homeowner
+/* Daylight, one case study (v5, October 2026). The portal, the homeowner
    app and Ray in one continuous editorial page. Loaded only by daylight.html
    (html.dl-story) after daylight-case-study.css and ray.css, whose product
    reconstructions it reuses unchanged. This file sets the story's reading
@@ -172,24 +172,63 @@ html.dl-story .dl-authentic-caption{text-align:right;margin:28px 0 0;max-width:n
 /* ---------- part three: Ray ---------- */
 html.dl-story .ray-notes{background:#fff}
 html.dl-story .ray-notes .ch-grid-notes{align-items:center}
-html.dl-story .dl-signal{padding:clamp(80px,9vw,128px) 0;min-height:0}
-html.dl-story .dl-signal-in{grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px clamp(40px,5vw,88px);align-items:center}
-/* the shared chapter scale, not the older page's fixed tablet size */
-html.dl-story .dl-signal .cs-h2{color:#241c13;max-width:16ch;font-size:clamp(34px,2.2vw + 18px,56px)}
-html.dl-story .dl-signal .cs-kicker,html.dl-story .dl-signal .cs-kicker .num{color:#5a3e22}
-html.dl-story .dl-signal-lead{font-size:clamp(20px,.7vw + 16px,26px);line-height:1.4;max-width:30em;margin:24px 0 18px;color:#2b2016}
-html.dl-story .dl-signal-body{font-size:clamp(17px,.25vw + 16px,19px);line-height:1.6;max-width:36em;color:#4a3320;margin:0 0 30px}
-html.dl-story .dl-signal-actions{gap:12px 16px}
-html.dl-story .dl-signal .ray-try-note{font-size:14px;color:#533b28}
-html.dl-story .dl-signal .cs-video-toggle{margin-left:auto;background:rgba(255,252,244,.7);border-color:rgba(76,40,6,.2);color:#3d2810}
-.ds-ray-intro{display:grid;gap:32px;justify-items:start}
-html.dl-story .dl-ray-mark{flex-direction:row;gap:20px;align-items:center}
-html.dl-story .dl-ray-mark img{width:clamp(96px,9vw,140px)}
-html.dl-story .dl-ray-mark>span{font-family:var(--display);font-weight:400;font-size:clamp(44px,3vw + 20px,72px);letter-spacing:-.02em;color:#241c13}
-.ds-principles{list-style:none;display:grid;gap:0;width:100%;max-width:440px;border-top:1px solid rgba(60,36,10,.28)}
-.ds-principles li{display:grid;grid-template-columns:minmax(0,9em) minmax(0,1fr);gap:4px 16px;padding:14px 0;border-bottom:1px solid rgba(60,36,10,.28)}
-.ds-principles b{font-weight:500;font-size:17px;color:#241c13}
-.ds-principles span{font-size:16px;line-height:1.45;color:#4a3320}
+/* 07, Ray's opening: a deliberate break from the white reading surface. The
+   original gradient film runs unveiled on a full-bleed stage and the chapter
+   continues on warm ink, which makes the film glow. The word Ray sits on the
+   seam between them: an ink copy is drawn above the seam and a cream copy
+   below it. Ink on the film measures at least 3.9:1 on every frame, enough
+   for display type and control outlines only, so smaller text over the film
+   always sits on an ink plate. The word's size and the seam are em-based, so
+   text zoom and the fallback face keep the halves aligned. */
+html.dl-story .ray-open{--ro-ink:#140b05;--ro-cream:#fff7e9;--ro-soft:rgba(255,247,233,.76);--ro-hair:rgba(255,247,233,.17);--ro-ember:#ff9a3d;--ro-word:min(clamp(176px,21vw + 100px,380px),56vh);--ro-seam:.56em;padding:0 0 clamp(72px,8vw,120px);background:var(--ro-ink);color:var(--ro-cream)}
+html.dl-story .ray-open-stage{height:max(250px,min(30vw + 210px,660px,100vh - 120px));height:max(250px,min(30vw + 210px,660px,100svh - 120px));background-position:62% 50%}
+html.dl-story .ray-open-stage .cs-wave-video{object-position:62% 50%}
+html.dl-story .ray-open-marks{position:absolute;inset:0 0 auto;z-index:1;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding-top:clamp(20px,2.6vw,40px)}
+html.dl-story .ray-open-slate{display:inline-flex;align-items:baseline;gap:10px;margin:0;padding:8px 14px 9px;background:var(--ro-ink);color:var(--ro-cream);font-size:15px;line-height:1.35;border-radius:2px}
+html.dl-story .ray-open-slate .num{color:var(--ro-ember)}
+html.dl-story .ray-open-toggle{margin:0;padding:0 15px 0 13px;border:0;border-radius:100px;background:rgba(20,11,5,.84);color:var(--ro-cream);font-size:14px}
+html.dl-story .ray-open-toggle:hover{background:var(--ro-ink)}
+html.dl-story .ray-open-toggle:focus-visible{outline:2px solid var(--ro-ink);outline-offset:3px;border-radius:100px}
+html.dl-story .ray-open-body{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr)}
+html.dl-story .ray-open-word{display:grid;margin:0 0 0 -.03em;font-family:var(--display);font-weight:400;font-size:var(--ro-word);line-height:1;letter-spacing:-.04em;color:var(--ro-cream);transform:translateY(calc(var(--ro-seam) * -1));margin-bottom:calc(var(--ro-seam) * -1)}
+html.dl-story .ray-open-word>span{grid-area:1/1;padding:0 .04em .14em 0}
+html.dl-story .ray-open-lit{color:var(--ro-ink);clip-path:inset(0 0 calc(100% - var(--ro-seam)) 0);pointer-events:none;user-select:none;-webkit-user-select:none}
+html.dl-story .ray-open-dusk{clip-path:inset(var(--ro-seam) 0 0 0)}
+html.dl-story .ray-open-intro{max-width:36em;margin-top:6px}
+html.dl-story .ray-open-line{margin:0;max-width:17ch;font-size:clamp(26px,1.15vw + 21px,40px);font-weight:500;line-height:1.08;letter-spacing:-.035em;color:var(--ro-cream);text-wrap:balance}
+html.dl-story .ray-open-lead{margin:16px 0 0;max-width:33em;font-size:clamp(17px,.3vw + 16px,20px);line-height:1.55;color:var(--ro-soft)}
+html.dl-story .ray-open-try{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-top:30px}
+html.dl-story .ray-open .ray-try{min-height:54px;padding:0 26px 0 28px;border-color:#F66F00;background:#F66F00;color:var(--ro-ink);font-size:16.5px}
+html.dl-story .ray-open .ray-try:hover{border-color:#ff8a2e;background:#ff8a2e}
+html.dl-story .ray-open .ray-try:focus-visible{outline-color:var(--ro-cream)}
+html.dl-story .ray-open .ray-try-note{font-size:14px;color:var(--ro-soft)}
+html.dl-story .ray-open-notes{display:grid;gap:40px;margin-top:clamp(56px,6vw,80px);padding-top:26px;border-top:1px solid var(--ro-hair)}
+html.dl-story .ray-open-label{margin:0 0 14px;font-family:var(--mono);font-size:13px;line-height:16px;letter-spacing:.06em;text-transform:uppercase;color:var(--ro-ember)}
+html.dl-story .ray-open-part p+p{margin:0;max-width:34em;font-size:clamp(17px,.25vw + 16px,19px);line-height:1.62;color:var(--ro-soft)}
+html.dl-story .ray-open-principles{list-style:none;margin:0;padding:0}
+html.dl-story .ray-open-principles li{display:grid;grid-template-columns:minmax(0,10.5rem) minmax(0,1fr);gap:4px 24px;align-items:baseline;padding:14px 0 15px;border-bottom:1px solid var(--ro-hair)}
+html.dl-story .ray-open-principles li:first-child{padding-top:2px}
+html.dl-story .ray-open-principles b{font-family:var(--display);font-weight:400;font-size:clamp(24px,.6vw + 20px,30px);line-height:1.1;letter-spacing:-.01em;color:var(--ro-cream)}
+html.dl-story .ray-open-principles span{font-size:16.5px;line-height:1.5;color:var(--ro-soft)}
+@media (min-width:1000px){
+  /* A wider, lower film on desktop so the opening line and Try Ray arrive in
+     the same view as the film: about 480px at 1440x900, easing down with
+     shorter laptop heights but never below a 360px field. */
+  html.dl-story .ray-open-stage{height:clamp(360px,min(33.33vw,100vh - 420px),560px);height:clamp(360px,min(33.33vw,100svh - 420px),560px)}
+  html.dl-story .ray-open-body{grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(24px,2.4vw,40px)}
+  html.dl-story .ray-open-word{grid-column:1/8;grid-row:1}
+  html.dl-story .ray-open-intro{grid-column:8/13;grid-row:1;align-self:start;margin-top:0;padding-top:clamp(32px,3vw,48px)}
+  html.dl-story .ray-open-notes{grid-column:1/-1;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(24px,2.4vw,40px)}
+  html.dl-story .ray-open-part{grid-column:1/7}
+  html.dl-story .ray-open-held{grid-column:8/13}
+}
+@media (max-width:419px){
+  html.dl-story .ray-open-principles li{grid-template-columns:1fr}
+}
+@media (forced-colors:active){
+  html.dl-story .ray-open-lit{display:none}
+  html.dl-story .ray-open-dusk{clip-path:none}
+}
 html.dl-story #continuity .product-scene{margin-top:0}
 html.dl-story .product-scene>figcaption{text-align:left;margin:16px 0 0}
 
@@ -269,8 +308,6 @@ html.dl-story .ray-engineering .cs-lead{color:#b9bdb7}
   .ds-home-grid,.ds-language{grid-template-columns:1fr}
   .ds-home-screens{max-width:820px}
   .ds-support{grid-template-columns:minmax(0,1fr) minmax(0,330px);gap:40px}
-  html.dl-story .dl-signal-in{grid-template-columns:1fr}
-  .ds-ray-intro{grid-template-columns:auto minmax(0,1fr);align-items:center;gap:24px 40px}
 }
 @media (max-width:999px){
   .ds-head,.ds-close-grid{grid-template-columns:1fr;gap:20px}
@@ -302,13 +339,6 @@ html.dl-story .ray-engineering .cs-lead{color:#b9bdb7}
   html.dl-story .dl-authentic-caption{text-align:center}
   .ds-tones{grid-template-columns:1fr}
   .ds-tone{padding:22px 20px}
-  html.dl-story .dl-signal{padding:72px 0}
-  html.dl-story .dl-signal-in{display:grid;grid-template-columns:1fr;gap:40px}
-  html.dl-story .dl-signal .cs-video-toggle{margin-left:0}
-  .ds-ray-intro{grid-template-columns:1fr;gap:24px}
-  html.dl-story .dl-ray-mark img{width:72px}
-  html.dl-story .dl-ray-mark>span{font-size:44px}
-  .ds-principles li{grid-template-columns:1fr}
   html.dl-story .sheet-request{grid-template-columns:1fr;padding:18px 16px}
   html.dl-story .sh-file{padding:20px 16px}
   html.dl-story .sh-live{padding:22px 16px 20px}
@@ -352,7 +382,7 @@ html.dl-story .ray-engineering .cs-lead{color:#b9bdb7}
   .ds-split-copy>.dl-depth{order:2}
 }
 @media (max-width:759px){
-  html.dl-story .cs-h2,html.dl-story .dl-signal .cs-h2{font-size:clamp(30px,6.2vw + 8px,36px);line-height:1.08;letter-spacing:-.035em;max-width:22ch;text-wrap:balance}
+  html.dl-story .cs-h2{font-size:clamp(30px,6.2vw + 8px,36px);line-height:1.08;letter-spacing:-.035em;max-width:22ch;text-wrap:balance}
   html.dl-story .cs-h3{max-width:none;text-wrap:balance}
   html.dl-story .cs-kicker{margin-bottom:14px}
   html.dl-story figure>figcaption{margin-top:14px}
@@ -387,19 +417,6 @@ html.dl-story .ray-engineering .cs-lead{color:#b9bdb7}
   .ds-language{margin-top:56px;padding-top:36px;gap:28px}
   .ds-tones{gap:12px}
 
-  /* Ray's opening: try and play share a row, the principles read as a list */
-  html.dl-story .dl-signal{padding:64px 0}
-  html.dl-story .dl-signal-in{gap:36px}
-  html.dl-story .dl-signal-lead{margin:20px 0 16px}
-  html.dl-story .dl-signal-body{margin-bottom:26px}
-  html.dl-story .dl-signal-actions{gap:10px 12px}
-  html.dl-story .dl-signal-actions .cs-btn{flex:0 1 auto}
-  html.dl-story .dl-signal .ray-try-note{order:3;flex-basis:100%}
-  .ds-ray-intro{gap:20px}
-  html.dl-story .dl-ray-mark{gap:14px}
-  html.dl-story .dl-ray-mark img{width:56px}
-  html.dl-story .dl-ray-mark>span{font-size:36px}
-  .ds-principles li{padding:12px 0}
 
   /* sheets: saved rows mirror the CSV rows above them, so the change reads */
   html.dl-story .sh-live .sh-table tr{grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:6px 12px;padding:13px 14px}
@@ -437,9 +454,6 @@ html.dl-story .ray-engineering .cs-lead{color:#b9bdb7}
   html.dl-story .dp-jobs tbody th{grid-column:1/-1}
   html.dl-story .dp-jobs td{min-width:0}
 }
-@media (min-width:360px) and (max-width:759px){
-  .ds-principles li{grid-template-columns:minmax(0,7.5em) minmax(0,1fr);align-items:baseline}
-}
 /* touch at any width, landscape phones included: the view switches stay a full tap */
 @media (pointer:coarse){
   html.dl-story .ray-product .ray-window-controls button{min-width:44px;min-height:44px}
@@ -454,4 +468,9 @@ html.reduce-motion.dl-story .eng-event-lane i:nth-child(2){left:24%}html.reduce-
 @media print{
   .ds-hv{box-shadow:none}
   html.dl-story .ds-home,html.dl-story .dl-project,html.dl-story .dl-notes,html.dl-story .ray-sheets,html.dl-story .ray-eval{background:#fff}
+  html.dl-story .ray-open{--ro-cream:var(--ink);--ro-soft:var(--prose);--ro-hair:var(--hair-strong);--ro-ember:var(--orange-ink);padding-top:32px;background:#fff;color:var(--ink)}
+  html.dl-story .ray-open-stage{display:none}
+  html.dl-story .ray-open-lit{display:none}
+  html.dl-story .ray-open-word{transform:none;margin-bottom:0}
+  html.dl-story .ray-open-dusk{clip-path:none}
 }
