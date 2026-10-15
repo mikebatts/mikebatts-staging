@@ -2,14 +2,14 @@
 <html lang="en" class="dl-page">
 <head>
   <meta charset="utf-8">
-  <title>Daylight · The consumer energy platform for going solar · Mike Battaglia</title>
+  <title>Daylight overview · Mike Battaglia</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Daylight brings the entire solar journey into one product, from the first agreement to installation, power on, and every month after. Designed and built by Mike Battaglia.">
-  <meta name="theme-color" content="#FFF8ED">
+  <meta name="description" content="An overview of my product and engineering work at Daylight: project pages, dashboards, Project Notes, the mobile layout and the homeowner app. The main case study is Ray at Daylight.">
+  <meta name="theme-color" content="#ffffff">
   <meta name="author" content="Mike Battaglia">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Daylight · The consumer energy platform for going solar">
-  <meta property="og:description" content="One product from the first agreement to power on, and every month after. Designed and built by Mike Battaglia.">
+  <meta property="og:title" content="Daylight · Solar takes a team">
+  <meta property="og:description" content="An overview of Mike Battaglia’s product and engineering work at Daylight. The main case study is Ray at Daylight.">
   <meta property="og:image" content="images/daylight-cover-poster.jpg">
   <meta property="og:site_name" content="Mike Battaglia">
   <meta name="twitter:card" content="summary_large_image">
@@ -18,7 +18,8 @@
   <link rel="preload" href="fonts/FeatureDeck-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
   <link rel="preload" href="fonts/AeonikPro-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
   <link rel="preload" href="fonts/AeonikPro-500.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-  <link href="css/daylight-case-study.css?v=35" rel="stylesheet">
+  <link href="css/dl-shared.css?v=7" rel="stylesheet">
+  <link href="css/daylight-case-study.css?v=50" rel="stylesheet">
   <link href="css/daylight-gate.css?v=3" rel="stylesheet">
   <style>html.dl-locked{overflow:hidden}html.dl-locked body>*:not(#dl-gate){visibility:hidden}#dl-gate{display:none}html.dl-locked #dl-gate{display:flex}</style>
   <script>try{if(sessionStorage.getItem('dl-unlocked')!=='1'){document.documentElement.classList.add('dl-locked')}}catch(e){document.documentElement.classList.add('dl-locked')}</script>
@@ -27,7 +28,7 @@
   <div id="dl-gate" role="dialog" aria-modal="true" aria-labelledby="dl-gate-t">
     <div class="dl-gate-box">
       <div class="dl-gate-mark"><img src="images/avi.png" alt="Mike Battaglia" width="2208" height="2296"><span class="dl-gate-wm">Case study</span></div>
-      <h1 class="dl-gate-t" id="dl-gate-t">Daylight, up close.</h1>
+      <h2 class="dl-gate-t" id="dl-gate-t">Daylight, up close.</h2>
       <p class="dl-gate-s">This collection is private for now. Enter the password to view.</p>
       <form class="dl-gate-form" id="dl-gate-form">
         <label class="dl-gate-field"><span class="dl-gate-lbl">Password</span><input id="dl-pass" name="dl-pass" type="password" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Enter password&hellip;"></label>
@@ -38,189 +39,126 @@
     </div>
   </div>
 
-  <a class="dl-skip" href="#dl-main">Skip to content</a>
-  <div class="dl-progress" aria-hidden="true"><span></span></div>
-  <nav class="dl-nav" id="dl-nav" aria-label="Case study">
-    <div class="dl-wrap dl-nav-in">
-      <a class="dl-nav-home" href="index.html"><img src="images/avi.png" alt="" width="25" height="25"><span>Mike Battaglia</span></a>
-      <img class="dl-nav-logo" src="images/daylight-logo-brown.svg" alt="Daylight" width="88" height="18">
-      <span class="dl-nav-label">Consumer energy platform</span>
+  <a class="cs-skip" href="#dl-main">Skip to content</a>
+
+  <nav class="cs-nav" aria-label="Site">
+    <div class="cs-wrap wide cs-nav-in">
+      <a class="cs-nav-back" href="index.html#work" aria-label="Back to selected work"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span>Back</span></a>
+      <span class="cs-nav-title">Daylight overview</span>
+      <details class="cs-nav-chapters">
+        <summary>Chapters</summary>
+        <ul class="cs-nav-menu">
+          <li><a href="ray.html"><span>→</span>Ray at Daylight, the main case study</a></li>
+          <li><a href="#journey"><span>01</span>Project pages</a></li>
+          <li><a href="#queues"><span>02</span>Dashboards and saved views</a></li>
+          <li><a href="#notes"><span>03</span>Project Notes</a></li>
+          <li><a href="#mobile"><span>04</span>Notes on a phone</a></li>
+          <li><a href="#signal"><span>05</span>Ray</a></li>
+          <li><a href="#reach"><span>06</span>The homeowner app</a></li>
+          <li><a href="#work"><span>07</span>My role</a></li>
+        </ul>
+      </details>
     </div>
+    <span class="cs-nav-progress" aria-hidden="true"><i></i></span>
   </nav>
 
-  <header class="dl-hero" aria-label="Daylight introduction">
-    <div class="dl-wrap dl-hero-copy">
-      <p class="dl-kicker">Daylight&nbsp;&nbsp;·&nbsp;&nbsp;2024 to present</p>
-      <h1 class="dl-hero-title"><span class="dl-line"><span>The consumer energy platform</span></span> <span class="dl-line"><span>for <em>going solar</em>.</span></span></h1>
-      <div class="dl-hero-intro">
-        <p>Daylight brings the entire solar journey into one product—from the first agreement to installation, power on, and every month after.</p>
-        <div class="dl-hero-meta"><span>Conceived, designed &amp; built by Mike</span><span>Product, design &amp; engineering</span><a href="https://godaylight.com" target="_blank" rel="noopener noreferrer">Visit Daylight&nbsp;&#8599;</a></div>
-      </div>
-    </div>
-
-    <div class="dl-wrap dl-hero-object" id="dl-hero-object">
-      <div class="dl-project-window" aria-label="A Daylight solar project moving toward power on">
-        <div class="dpw-top"><img src="images/daylight-logo-brown.svg" alt="" width="76" height="16"><span>Maple Street</span><small>PPA-4021</small><i>In progress</i></div>
-        <div class="dpw-body">
-          <aside class="dpw-rail" aria-hidden="true"><span class="is-on"></span><span></span><span></span><span></span><b>MB</b></aside>
-          <div class="dpw-work">
-            <div class="dpw-heading"><div><small>Solar project</small><h2>One home. One clear path.</h2></div><span class="dpw-ray-pill">Ask Ray</span></div>
-            <ol class="dpw-journey">
-              <li class="is-done"><span>01</span><b>Agreement</b><small>Signed</small></li>
-              <li class="is-done"><span>02</span><b>Review</b><small>Approved</small></li>
-              <li class="is-current"><span>03</span><b>Build</b><small>In progress</small></li>
-              <li><span>04</span><b>Power on</b><small>Next</small></li>
-              <li><span>05</span><b>Home energy</b><small>Ongoing</small></li>
-            </ol>
-            <div class="dpw-focus">
-              <div class="dpw-orbit" aria-hidden="true"><i></i><span></span></div>
-              <div class="dpw-focus-copy"><small>Right now</small><h3>Installation is scheduled.</h3><p>Your crew arrives Thursday between 8 and 10am. Daylight is keeping the project, documents, and people in sync.</p><a href="#origination">See how the journey starts&nbsp;&darr;</a></div>
-              <div class="dpw-details"><span><small>Next visit</small><b>Thu, Sep 3</b></span><span><small>Project owner</small><b>Northstar Solar</b></span><span><small>Documents</small><b>8 of 8 ready</b></span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <p class="dl-object-caption"><span>A shared project record</span><span>From first signature to power on</span></p>
-    </div>
-  </header>
-
   <main id="dl-main">
-    <section class="dl-section dl-definition" aria-labelledby="definition-h">
-      <div class="dl-wrap dl-definition-grid">
-        <p class="dl-chapter">The system</p>
-        <div class="dl-definition-copy dl-reveal"><h2 class="dl-h2" id="definition-h">Solar is not one transaction. It is a chain of promises.</h2><p class="dl-lead">A homeowner meets a seller, an underwriter, an installer, a utility, and a long-term energy provider. Every handoff creates another place for context to disappear. Daylight gives everyone one project, one current state, and one next step.</p></div>
-        <div class="dl-system-line dl-reveal" aria-label="The parties connected by Daylight"><span>Homeowner</span><i></i><span>Sales partner</span><i></i><span>Daylight</span><i></i><span>Builder</span><i></i><span>Utility</span></div>
-      </div>
-    </section>
-
-    <section class="dl-section dl-ray" aria-labelledby="ray-h">
-      <div class="dl-wrap dl-ray-grid">
-        <div class="dl-ray-copy dl-reveal">
-          <p class="dl-chapter light">Intelligence</p>
-          <h2 class="dl-h2 light" id="ray-h">Meet Ray.</h2>
-          <p class="dl-lead light">Ray is Daylight&rsquo;s grounded support system. It answers from the project, shows the source behind its answer, respects the viewer&rsquo;s access, and follows the work across the partner portal and homeowner app.</p>
-          <a class="dl-text-link light" href="ray.html">Explore the Ray case study&nbsp;&rarr;</a>
+    <header class="dl-hero" aria-labelledby="dl-title">
+      <div class="cs-wrap wide">
+        <div class="dl-hero-intro">
+          <div><p class="dl-brand"><img src="images/logo-main.417b1780.svg" width="111" height="21" alt="Daylight"><span>Product design &amp; engineering</span></p><h1 class="cs-h1 dl-h1" id="dl-title">Solar takes<br> a team.</h1></div>
+          <div class="dl-hero-copy"><p class="dl-hero-lead">Daylight brings solar and batteries to homes. I designed and built the portal that brings the people behind each installation together.</p><div class="dl-hero-home"><img src="images/daylight-house-editorial-crop.jpg" width="910" height="512" alt="A home with solar panels across its roof" fetchpriority="high"><span>A home at the end<br> of every handoff.</span></div></div>
         </div>
-        <div class="dl-ray-stage dl-reveal">
-          <div class="dl-ray-sun" aria-hidden="true"><video src="images/ray-avatar-loop.mp4" poster="images/ray-avatar-poster.png" muted loop playsinline autoplay preload="metadata"></video></div>
-          <div class="dl-ray-chat">
-            <div class="drc-head"><span class="drc-mini"><img src="images/ray-avatar-poster.png" alt="" width="32" height="32"></span><span><b>Ray</b><small>Maple Street residence</small></span><i>Grounded</i></div>
-            <p class="drc-question">What happens next for this project?</p>
-            <p class="drc-answer">Installation is scheduled for Thursday. After the crew finishes, Daylight will submit the final inspection package and keep you updated here.</p>
-            <div class="drc-proof"><span>Project record</span><span>Installation schedule</span><small>Checked this turn</small></div>
-            <div class="drc-compose"><span>Ask about this project&hellip;</span><b>&uarr;</b></div>
-          </div>
-        </div>
+        <div class="dl-hero-role"><span>Daylight · 2024 to present</span><p>Conceived, designed, engineered.<br> From the first workflow to production.</p><b>Mike Battaglia<br> Senior PM &amp; Product Engineer</b></div>
+        <a class="dl-route" href="ray.html"><img src="images/ray-avatar-poster.png" width="280" height="280" alt=""><span><b>Start with Ray at Daylight</b><span>The main case study: how questions in Project Notes led me to expand Ray into the portal’s AI concierge. This page is a shorter tour of the work around it.</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7"/></svg></a>
       </div>
-    </section>
+    </header>
 
-    <section class="dl-section dl-origin" id="origination" aria-labelledby="origin-h">
-      <div class="dl-wrap">
-        <div class="dl-origin-head dl-reveal"><p class="dl-chapter">Origination portal</p><h2 class="dl-h2" id="origin-h">Going solar starts with a lot of paperwork. We made it feel like one clear path.</h2><p class="dl-lead">The portal guides a rep from the first homeowner details to a review-ready agreement. Nothing disappears behind another tool or handoff; the entire application stays legible from start to signature.</p></div>
-
-        <div class="dl-origin-story dl-reveal" id="dl-origin-story">
-          <aside class="dos-spine" aria-label="Origination progress">
-            <div class="dos-spine-in">
-              <p>One guided application</p>
-              <ol>
-                <li class="is-active" data-origin-marker="project"><span>01</span><b>Project</b></li>
-                <li data-origin-marker="offer"><span>02</span><b>Offer</b></li>
-                <li data-origin-marker="disclosures"><span>03</span><b>Disclosures</b></li>
-                <li data-origin-marker="identity"><span>04</span><b>Identity</b></li>
-                <li data-origin-marker="review"><span>05</span><b>Review &amp; sign</b></li>
-              </ol>
-              <div class="dos-progress" aria-hidden="true"><i></i></div>
-              <small>Every requirement visible. One review-ready package at the end.</small>
-            </div>
-          </aside>
-
-          <div class="dos-window">
-            <div class="dos-window-top">
-              <img src="images/daylight-logo-brown.svg" alt="" width="72" height="15">
-              <span>Origination</span><i></i><span>Maple Street</span>
-              <small>Saved just now</small>
-            </div>
-            <div class="dos-window-head">
-              <div><small>New solar agreement</small><h3>Maple Street residence</h3></div>
-              <div class="dos-completion"><span><i></i></span><b>4 of 5 complete</b></div>
-            </div>
-
-            <div class="dos-application">
-              <section class="dos-block is-active" data-origin-block="project" aria-labelledby="dos-project-h">
-                <header><span>01</span><div><h4 id="dos-project-h">Start with one shared project.</h4><p>The home and the people attached to it become the source of truth for everything that follows.</p></div><i>Complete</i></header>
-                <div class="dos-fields">
-                  <label><small>Homeowner</small><b>Jamie Rivera</b></label>
-                  <label><small>Property</small><b>18 Maple Street</b></label>
-                  <label><small>System</small><b>8.4 kW solar + storage</b></label>
+    <section class="cs-section dl-project" id="journey" aria-labelledby="journey-h">
+      <div class="cs-wrap wide">
+        <div class="dl-heading dl-heading-inline"><div><p class="cs-kicker"><span class="num">01</span>Project pages</p><h2 class="cs-h2" id="journey-h">Project pages built around the six stages</h2></div><p class="cs-lead">A project passes from sales to Ops to installers. Its page shows the stage it’s in and the requirement cards that move it forward.</p></div>
+        <figure class="dl-portal-figure cs-reveal">
+          <div class="dp-product dp-portal dl-page-surface">
+            <aside class="dp-sidebar" aria-label="Illustrated portal navigation"><img src="images/logo-main.417b1780.svg" width="111" height="21" alt="Daylight"><span class="dp-sidebar-label">Dashboards</span><span class="is-active"><i aria-hidden="true">▦</i>Sales</span><span><i aria-hidden="true">≡</i>Origination</span><span><i aria-hidden="true">⌑</i>Project Management</span><span class="dp-side-ray"><img src="images/ray-avatar-poster.png" width="28" height="28" alt="">Ask Ray</span><span class="dp-spacer"></span><span>Support</span><span>Knowledge Base</span><span class="dp-account">AM <b>Alex Morgan</b></span></aside>
+            <div class="dp-project-main">
+              <div class="dp-mobile-bar"><svg class="dp-menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><img src="images/logo-main.417b1780.svg" width="111" height="21" alt="Daylight"><span class="dp-dot" aria-hidden="true"></span></div>
+              <p class="dp-breadcrumb">Dashboard <span>/</span> Alex Morgan</p>
+              <header class="dp-project-head"><div><h3>Alex Morgan</h3><p>142 Orchard Lane · DL-1042</p></div><span class="dp-ui-button dp-ray-label"><img src="images/ray-avatar-poster.png" width="28" height="28" alt="">Ask Ray</span></header>
+              <div class="dp-applicant"><div><span>Applicant</span><b>Alex Morgan</b></div><div><span>Sales organization</span><b>Orchard Solar</b></div><div><span>Installer</span><b>Northline Energy</b></div></div>
+              <div class="dp-workspace">
+                <aside class="dp-phases" aria-label="Project stages">
+                  <div class="dp-phase is-current"><h4>Origination <span aria-hidden="true">→</span></h4><p>Credit &amp; Underwriting <span class="dp-check" aria-label="Complete"></span></p><p>System Details <span class="dp-check" aria-label="Complete"></span></p><p>Utility Bill <span class="dp-check" aria-label="Complete"></span></p><p>Title Verification <span class="dp-pending-dot" aria-label="Pending"></span></p><p>Energy Subscription Agreement <span class="dp-pending-dot" aria-label="Not complete"></span></p></div>
+                  <div class="dp-phase is-future"><h4>Document Verification</h4></div><div class="dp-phase is-future"><h4>CAD Design &amp; True Up</h4></div><div class="dp-phase is-future"><h4>Permitting &amp; Interconnection</h4></div><div class="dp-phase is-future"><h4>Installation</h4></div><div class="dp-phase is-future"><h4>Permission to Operate</h4></div>
+                  <div class="dp-notes-promo"><header><b>Project Notes</b><span>8 Total</span></header><p>Tag collaborators and create internal notes for this project.</p><span class="dp-note-cta">View 2 New Notes</span></div>
+                </aside>
+                <div class="dp-requirements">
+                  <div class="dp-mobile-stage-label"><b>Origination</b><span>Stage 1 of 6</span></div>
+                  <article class="dp-card"><header><h4>Credit &amp; Underwriting</h4><span class="dp-badge is-green">Completed</span></header><p class="dp-card-success"><span class="dp-check" aria-hidden="true"></span>Soft Credit Inquiry Completed</p></article>
+                  <article class="dp-card"><header><h4>System Details</h4></header><dl class="dp-system-values"><div><dt>System Size (kW-DC)</dt><dd>8.40</dd></div><div><dt>Year-1 Production (kWh-DC)</dt><dd>11,250</dd></div></dl></article>
+                  <article class="dp-card"><header><h4>Upload Utility Bill</h4><span class="dp-badge is-green">Uploaded</span></header><p class="dp-file"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 2h9l5 5v15H5zM14 2v6h5M8 13h8M8 17h6"/></svg>utility-bill.pdf</p></article>
+                  <article class="dp-card dp-title-card"><header><h4>Title Verification</h4><span class="dp-badge is-yellow">Pending Approval</span></header><p>Acceptable documents for title verification</p><p class="dp-title-message">Title verification document uploaded. Awaiting reviewer approval.</p></article>
+                  <article class="dp-card dp-agreement"><header><h4>Energy Subscription Agreement &amp; Underwriting</h4></header><p>Send the PPA to the customer.</p><div><span class="dp-badge">Not sent</span><span>Title verification is pending.</span></div></article>
                 </div>
-              </section>
-
-              <section class="dos-block" data-origin-block="offer" aria-labelledby="dos-offer-h">
-                <header><span>02</span><div><h4 id="dos-offer-h">Make the offer understandable.</h4><p>System design and financing become one proposal with the real tradeoffs visible.</p></div><i>Selected</i></header>
-                <div class="dos-offer">
-                  <div><small>Recommended offer</small><strong>$168 <em>/ month</em></strong></div>
-                  <dl><div><dt>Term</dt><dd>25 years</dd></div><div><dt>Escalator</dt><dd>2.9%</dd></div><div><dt>Due today</dt><dd>$0</dd></div></dl>
-                </div>
-              </section>
-
-              <section class="dos-block" data-origin-block="disclosures" aria-labelledby="dos-disclosures-h">
-                <header><span>03</span><div><h4 id="dos-disclosures-h">Keep every disclosure in context.</h4><p>State and utility requirements appear where they matter, with nothing left to chase in email.</p></div><i>2 of 3</i></header>
-                <div class="dos-checklist">
-                  <span><b>Consumer protection guide</b><i>Complete</i></span>
-                  <span><b>Utility authorization</b><i>Complete</i></span>
-                  <span class="is-next"><b>System disclosure</b><i>Ready to review</i></span>
-                </div>
-              </section>
-
-              <section class="dos-block" data-origin-block="identity" aria-labelledby="dos-identity-h">
-                <header><span>04</span><div><h4 id="dos-identity-h">Verify the person, not just the fields.</h4><p>Sensitive details are collected directly and stay outside the sales workflow.</p></div><i>Verified</i></header>
-                <div class="dos-person"><span>JR</span><div><b>Jamie Rivera</b><small>Primary homeowner&nbsp;·&nbsp;verified securely on mobile</small></div><i>Identity verified</i></div>
-              </section>
-
-              <section class="dos-block dos-final" data-origin-block="review" aria-labelledby="dos-review-h">
-                <header><span>05</span><div><h4 id="dos-review-h">Review once. Send with confidence.</h4><p>The portal catches what is missing before signature and moves one complete package forward.</p></div></header>
-                <div class="dos-ready">
-                  <div><small>Ready to send</small><strong>Everything is in place.</strong><p>8 documents complete&nbsp;&nbsp;·&nbsp;&nbsp;2 identities verified</p></div>
-                  <span class="dos-send">Send agreement&nbsp;&rarr;</span>
-                </div>
-              </section>
+              </div>
             </div>
           </div>
-        </div>
+          <figcaption class="cs-caption">Source-faithful reconstruction · Fictional project data · Selected origination cards</figcaption>
+        </figure>
+        
+        <details class="cs-details dl-depth"><summary>Designing around the real project rules</summary><div><p>I built the project pages, stage navigation, and requirement flows around the work itself. The six phases have different conditions and owners. Credit, equipment, system design, pricing, utility bills, title checks, and the agreement belong to origination, not one generic form.</p><p>The illustration selects five cards for readability. Later stages remain visible but unreached. Actual availability depends on the project, its completed requirements, and the viewer’s permissions.</p></div></details>
       </div>
     </section>
 
-    <section class="dl-section dl-home" aria-labelledby="home-h">
-      <div class="dl-wrap dl-home-grid">
-        <div class="dl-home-copy dl-reveal">
-          <p class="dl-chapter">Homeowner app</p>
-          <h2 class="dl-h2" id="home-h">After power on, Daylight stays with the home.</h2>
-          <p class="dl-lead">The iPhone app turns a technical energy system into a daily relationship. Homeowners can understand what their home is doing, see where energy went, and manage payments without learning the machinery behind it.</p>
-          <div class="dl-home-tabs" role="group" aria-label="Choose a homeowner app screen"><button class="is-active" type="button" data-home-tab="overview" aria-pressed="true">Overview</button><button type="button" data-home-tab="energy" aria-pressed="false">Energy</button><button type="button" data-home-tab="payments" aria-pressed="false">Payments</button></div>
-          <div class="dl-home-note" id="dl-home-note"><span>Overview</span><p>Live production, storage, and home use in one readable picture.</p></div>
-        </div>
-        <div class="dl-home-stage dl-reveal">
-          <div class="dl-home-orbit" aria-hidden="true"><span></span><i></i></div>
-          <figure class="dl-home-phone"><div class="dl-home-frame"><span class="dl-home-notch"></span><img class="is-active" data-home-panel="overview" src="images/ios-overview.png" alt="Daylight iOS overview showing live home energy" width="331" height="720" aria-hidden="false"><img data-home-panel="energy" src="images/ios-breakdown.png" alt="Daylight iOS energy breakdown" width="331" height="720" aria-hidden="true"><img data-home-panel="payments" src="images/ios-payments.png" alt="Daylight iOS payments" width="331" height="720" aria-hidden="true"></div><figcaption>Daylight for iPhone</figcaption></figure>
-        </div>
-      </div>
-    </section>
+    <section class="cs-section dl-queue" id="queues" aria-labelledby="queues-h"><div class="cs-wrap wide">
+      <div class="dl-heading"><p class="cs-kicker"><span class="num">02</span>Dashboards</p><h2 class="cs-h2" id="queues-h">Dashboards and saved views</h2><p class="cs-lead">A salesperson follows their projects. A reviewer works a queue. I designed the navigation around those roles, and saved views around the work people return to.</p></div>
+      <figure class="dl-queue-figure cs-reveal"><div class="dp-product dp-dashboard dl-page-surface">
+        <header class="dp-dashboard-head"><div><h3>Dashboard <span class="dp-badge is-blue">3 Jobs</span></h3><p>View and manage your jobs</p></div><span class="dp-ui-button">Filters <span aria-hidden="true">≡</span></span></header>
+        <div class="dp-search" aria-label="Illustrated dashboard search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="m15 15 5 5"/></svg><span>Search jobs by name, address, or PPA ID</span></div>
+        <div class="dp-saved-views" aria-label="Illustrated saved dashboard views"><span>Views</span><span class="dp-view">All jobs</span><span class="dp-view is-selected">Needs attention <i aria-hidden="true">×</i></span><span class="dp-view">Ready to install <i aria-hidden="true">×</i></span><span class="dp-view dp-save">+ Save view</span></div>
+        <table class="dp-jobs"><caption class="cs-vh">Fictional jobs in the Needs attention dashboard view</caption><thead><tr><th scope="col">Customer Name</th><th scope="col">Stage</th><th scope="col">Next Step</th><th scope="col">Sales Rep</th></tr></thead><tbody><tr><th scope="row"><b>Alex Morgan</b><span>142 Orchard Lane · DL-1042</span></th><td data-label="Stage"><span class="dp-badge">Origination</span></td><td data-label="Next step">Awaiting review</td><td data-label="Sales rep">Jamie Park</td></tr><tr><th scope="row"><b>Jordan Lee</b><span>26 Maple Drive · DL-1086</span></th><td data-label="Stage"><span class="dp-badge">Document Verification</span></td><td data-label="Next step">Upload missing documents</td><td data-label="Sales rep">Jamie Park</td></tr><tr><th scope="row"><b>Sam Rivera</b><span>8 Cedar Court · DL-1103</span></th><td data-label="Stage"><span class="dp-badge">Installation</span></td><td data-label="Next step">Submit installation photos</td><td data-label="Sales rep">Taylor Brooks</td></tr></tbody></table>
+        <footer class="dp-dashboard-foot"><span>Showing 3 sample jobs</span><span>Needs attention · Saved view</span></footer>
+      </div><figcaption class="cs-caption">Reconstructed dashboard · Named views preserve personal filters and sorts, not separate copies of the project.</figcaption></figure>
+      
+      <details class="cs-details dl-depth"><summary>Roles, saved views, and permission boundaries</summary><div><p>I built persistent, personal filter-and-sort sets across the dashboards. The sidebar shows destinations the user is entitled to access. A Sales/Reviewer switch appears only for users entitled to both roles, not as a universal mode switch.</p><p>This is a static, selected-column reconstruction. In the product, saved views can be created, updated, and deleted. These views keep frequently used filters close without duplicating the underlying project record.</p></div></details>
+    </div></section>
 
-    <section class="dl-section dl-outcome" aria-labelledby="outcome-h">
-      <div class="dl-wrap dl-outcome-in">
-        <p class="dl-chapter light">The outcome</p>
-        <h2 class="dl-h2 light" id="outcome-h">One project. One source of truth. A calmer way to go solar.</h2>
-        <p class="dl-lead light">Homeowners have signed more than 200 agreements, and six construction organizations now operate through the portal. The product keeps compounding from the people using it—from the first Ray beta to every new project moving toward power on.</p>
-        <div class="dl-outcome-stats"><span><b>200+</b><small>agreements signed</small></span><span><b>6</b><small>construction organizations</small></span><span><b>Portal + iOS</b><small>one connected product</small></span></div>
-        <div class="dl-outcome-links"><a href="ray.html">Explore Ray&nbsp;&rarr;</a><a href="index.html">Back to Mike Battaglia</a></div>
-      </div>
-    </section>
+    <section class="cs-section dl-notes" id="notes" aria-labelledby="notes-h"><div class="cs-wrap wide">
+      <div class="dl-notes-layout"><div class="dl-heading"><p class="cs-kicker"><span class="num">03</span>Project Notes</p><h2 class="cs-h2" id="notes-h">Project Notes</h2><p class="cs-lead">A status can’t tell the whole story. I built Project Notes so questions, files and the people answering them sit on the project itself, with mentions and replies to pull the right teammate in.</p><p class="dl-notes-ray">Going back through these notes shaped how I expanded Ray in the portal. <a href="ray.html#questions">Read what they showed us</a>.</p></div>
+      <figure class="dl-note-figure cs-reveal"><div class="dp-product dp-notes-modal dl-page-surface"><header class="dp-modal-head"><div><h3>Project Notes</h3><p>Alex Morgan · DL-1042</p></div><span aria-hidden="true">×</span></header><div class="dp-note-list">
+        <article class="dp-note"><header><b>Jamie Park</b><span>Partner</span></header><time datetime="2026-09-02T09:14:00">Sep 2, 9:14 AM</time><p><span class="dp-mention">@Taylor Brooks</span> The bill is uploaded. What still needs to happen before we can send the agreement?</p><div class="dp-note-file"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 2h9l5 5v15H5zM14 2v6h5M8 13h8M8 17h6"/></svg><span>utility-bill.pdf<small>PDF attachment</small></span></div><div class="dp-note-reply"><header><b>Taylor Brooks</b><span>Daylight</span></header><time datetime="2026-09-02T09:26:00">Sep 2, 9:26 AM</time><p>Title verification is awaiting reviewer approval. I’ll check on the timing.</p></div><footer class="dp-note-actions"><span>Reply</span><span>Ask Ray</span><span>Close Note</span></footer></article>
+        <article class="dp-note dp-note-secondary"><header><b>Alex Morgan</b><span>Partner</span></header><time datetime="2026-09-01T15:42:00">Sep 1, 3:42 PM</time><p>Confirmed the system details with the homeowner.</p><footer class="dp-note-actions"><span>Reply</span><span>Ask Ray</span></footer></article>
+      </div><footer class="dp-modal-footer"><span class="dp-ui-button is-dark">Create Note</span><span>8 notes in this project</span></footer></div><figcaption class="cs-caption">Source-faithful Notes reconstruction · Fictional people and thread</figcaption></figure></div>
+      <details class="cs-details dl-depth"><summary>The small decisions behind a useful conversation</summary><div><p>Threaded replies, individual mentions, removable pending attachments, drafts, unread counts, and notification preferences all shape the handoff. Notification deep links open the project’s Notes and focus the relevant thread.</p><p>Attaching a file to a note keeps evidence with the conversation. It does not file it as a project document or approve a requirement. In this example, the bill was uploaded to the project separately. Posting a reply does not complete a requirement.</p><p>Ask Ray carries the note’s context into an editable draft before it is sent. Nothing sends automatically. The Notes modal closes so the Ray drawer opens in view; a person can then review a reply before posting it.</p></div></details>
+    </div></section>
+
+    <section class="cs-section dl-mobile" id="mobile" aria-labelledby="mobile-h"><div class="cs-wrap wide dl-mobile-layout">
+      <div class="dl-heading"><p class="cs-kicker"><span class="num">04</span>Mobile</p><h2 class="cs-h2" id="mobile-h">Notes first on a phone</h2><p class="cs-lead">Shrinking the desktop page buried Notes below a long block of applicant details. On phones I moved Notes above the details, collapsed the stages into the current one, and opened Notes as a near-full-height sheet.</p></div>
+      <figure class="dl-phone-figure cs-reveal"><div class="dp-product dp-phone dl-page-surface"><div class="dp-phone-status"><b>9:41</b><span aria-hidden="true">▮▮▮ ▰</span></div><div class="dp-mobile-bar"><svg class="dp-menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><img src="images/logo-main.417b1780.svg" width="111" height="21" alt="Daylight"><span class="dp-dot" aria-hidden="true"></span></div><div class="dp-phone-content"><p class="dp-breadcrumb">Dashboard <span>/</span> Alex Morgan</p><h3>Alex Morgan</h3><div class="dp-notes-promo"><header><b>Project Notes</b><span>8 Total</span></header><p>Tag collaborators and create internal notes for this project.</p><a class="dp-note-cta" href="#notes">View 2 New Notes</a></div><div class="dp-phone-details"><b>Applicant Details</b><span>Alex Morgan<br> 142 Orchard Lane</span></div><details class="dp-mobile-stages"><summary><b>Origination</b><span>Stage 1 of 6 <i aria-hidden="true">⌄</i></span></summary><ol><li class="is-current"><span>Origination</span><small>Current</small></li><li><span>Document Verification</span></li><li><span>CAD Design &amp; True Up</span></li><li><span>Permitting &amp; Interconnection</span></li><li><span>Installation</span></li><li><span>Permission to Operate</span></li></ol></details><article class="dp-card"><header><h4>Title Verification</h4><span class="dp-badge is-yellow">Pending Approval</span></header><p>Title verification document uploaded. Awaiting reviewer approval.</p></article></div><div class="dp-home-indicator" aria-hidden="true"></div></div><figcaption class="cs-caption">Reconstructed mobile hierarchy · Open the stages</figcaption></figure>
+      <details class="cs-details dl-depth dl-mobile-depth"><summary>Making the same project work on two layouts</summary><div><p>The desktop Notes card and mobile Notes card both exist on the page. I fixed their duplicate IDs and refresh behavior so an update reaches both. I also refined mobile navigation, touch targets, and deep links.</p><p>In the real portal, Notes opens in a centered desktop modal and a 92dvh mobile sheet. This inline illustration demonstrates the stage disclosure; its Notes link takes you to the thread above. It does not connect to the live portal.</p></div></details>
+    </div></section>
+
+    <section class="cs-section dl-signal cs-wave" id="signal" aria-labelledby="signal-h"><video class="cs-wave-video" id="dl-wave-video" data-cs-video poster="images/daylight-cover-poster.jpg" muted loop playsinline preload="metadata" width="1200" height="630" tabindex="-1" aria-hidden="true"><source src="images/daylight-cover-loop.mp4" type="video/mp4"></video><div class="cs-wrap wide dl-signal-in"><div class="dl-signal-copy"><p class="cs-kicker"><span class="num">05</span>Ray</p><h2 class="cs-h2" id="signal-h">What we built next with Ray</h2><p class="dl-signal-lead">What is blocking this project? Which document is missing? What happens next?</p><p class="dl-signal-body">A lot of the questions in Notes looked answerable from what the portal already had. Ray at Daylight, the main case study, covers how I expanded Ray into the portal’s AI concierge.</p><div class="cs-actions dl-signal-actions"><a class="cs-btn" href="ray.html">Read Ray at Daylight <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7"/></svg></a><button type="button" class="cs-video-toggle" data-video-toggle="dl-wave-video" data-paused="true" aria-label="Play animation"><svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h3v14H7zM14 5h3v14h-3z"/></svg><svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span class="t-pause">Pause</span><span class="t-play">Play</span></button></div></div><div class="dl-ray-mark" aria-hidden="true"><img src="images/ray-avatar-poster.png" width="280" height="280" alt=""><span>Ray</span></div></div></section>
+
+    <section class="cs-section dl-home" id="reach" aria-labelledby="reach-h"><div class="cs-wrap wide">
+      <div class="dl-heading dl-heading-inline"><div><p class="cs-kicker"><span class="num">06</span>Homeowners</p><h2 class="cs-h2" id="reach-h">The homeowner app after power-on</h2></div><div class="dl-home-copy"><p class="cs-lead">For a homeowner, the questions are different. What did my panels produce? What is the battery doing? What am I paying for?</p><p class="cs-caption">I designed the energy and payments experience with Daylight’s iOS engineer, who implemented the native app.</p></div></div>
+      <div class="dl-home-screens"><figure class="dl-shot is-lead"><div class="dl-shot-title"><span>01</span><h3>What the home is doing</h3></div><img src="images/ios-overview.png" width="331" height="720" alt="Daylight Energy overview: a home photograph, current battery and solar totals, and a plain-language explanation of the home’s energy" loading="lazy" decoding="async"><figcaption class="cs-caption">Current battery and solar, with a plain-language summary.</figcaption></figure><figure class="dl-shot"><div class="dl-shot-title"><span>02</span><h3>Where the energy goes</h3></div><img src="images/ios-breakdown.png" width="331" height="720" alt="Daylight energy breakdown: battery charge and solar energy generated against consumed" loading="lazy" decoding="async"><figcaption class="cs-caption">Production, storage and use together.</figcaption></figure><figure class="dl-shot"><div class="dl-shot-title"><span>03</span><h3>What you owe</h3></div><img src="images/ios-payments.png" width="331" height="720" alt="Daylight Payments: current balance, energy rate, bank on file, and bill history" loading="lazy" decoding="async"><figcaption class="cs-caption">Balance, rate and payment history.</figcaption></figure></div><p class="dl-authentic-caption cs-caption">Original screenshots from the Daylight homeowner app.</p>
+    </div></section>
+
+    <section class="cs-section dl-work" id="work" aria-labelledby="work-h"><div class="cs-wrap wide">
+      <div class="dl-heading dl-heading-inline"><div><p class="cs-kicker"><span class="num">07</span>My role</p><h2 class="cs-h2" id="work-h">My role at Daylight</h2></div><p class="cs-lead">I’ve been Senior PM and Product Engineer at Daylight since 2024. I’ve owned the portal from the first workflow through design, production code and release, working with our COO, five engineers, Ops, Growth and Marketing.</p></div>
+      <details class="cs-details dl-depth"><summary>What I worked on, and when</summary><div><p><b>June–July 2026:</b> stage-link clarity and unreached states; note attachments; mention and reply notifications; individual mentions; mobile Notes hierarchy and refresh fixes; role-aware navigation; persistent saved dashboard views.</p><p><b>August–September 2026:</b> expanding Ray in the portal, covered in <a href="ray.html">Ray at Daylight</a>.</p><p>I work with operations on the process rules, use AI tools throughout implementation, and take the result through engineering review. Native iOS implementation belongs to my teammate. My ownership spans the product, design, portal engineering, and the experience across those surfaces.</p></div></details>
+      <div class="dl-closing"><div class="cs-actions"><a class="cs-btn large" href="ray.html">Read Ray at Daylight <span aria-hidden="true">→</span></a><a class="cs-btn ghost large" href="index.html#work">Back to selected work</a></div></div>
+    </div></section>
   </main>
 
-  <footer class="dl-footer"><div class="dl-wrap"><span><b>Daylight</b>&nbsp;·&nbsp;2024 to present</span><span>Product, design &amp; engineering&nbsp;·&nbsp;Mike Battaglia</span></div></footer>
+  <footer class="cs-footer">
+    <div class="cs-wrap wide">
+      <span><b>Daylight</b> · 2024 to present</span>
+      <span>Senior PM · Product Engineer · Mike Battaglia</span>
+    </div>
+  </footer>
+
   <script src="js/daylight-gate.js" defer></script>
-  <script src="js/vendor/gsap.min.js" defer></script>
-  <script src="js/vendor/ScrollTrigger.min.js" defer></script>
-  <script src="js/daylight-case-study.js?v=25" defer></script>
+  <script src="js/dl-shared.js?v=7" defer></script>
 </body>
 </html>

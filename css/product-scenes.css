@@ -1,0 +1,123 @@
+/* Two ways of seeing the same work. The objects are real reading-size DOM;
+   layout changes around them. Controls precede the view they change. */
+.product-scene{max-width:none}
+.product-scene p{margin:0}
+.product-scene [data-scene-stage]{align-content:start}
+.product-scene .scene-label{font-family:var(--mono);font-size:13px;line-height:1.4;letter-spacing:.015em;color:var(--label)}
+.scene-controls{display:flex;justify-content:center;flex-wrap:wrap;gap:4px;margin:0 auto 28px;width:fit-content;max-width:100%;padding:4px;border:1px solid var(--hair-strong);border-radius:30px;background:transparent}
+.scene-controls button{display:flex;align-items:center;justify-content:center;flex:1 1 auto;min-height:46px;min-width:44px;padding:11px 22px;border:1px solid transparent;border-radius:24px;background:transparent;color:var(--muted);font-size:15px;line-height:1.35;text-align:center;cursor:pointer;overflow-wrap:anywhere;transition:background .2s ease,color .2s ease}
+.scene-controls button:hover{color:var(--brown);background:rgba(76,40,6,.06)}
+.scene-controls button[aria-pressed="true"]{background:var(--brown);color:var(--beige)}
+.product-scene>figcaption{text-align:center;margin:16px auto 0;max-width:62ch}
+/* Daylight's ledger: disconnected updates resolve into the same address. */
+.daylight-product-stage{position:relative;isolation:isolate;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px;padding:clamp(24px,4.5vw,64px);border:1px solid var(--hair-strong);border-radius:8px;background:var(--beige-1)}
+.daylight-product-stage,.daylight-product [data-scene-object]{transition:background-color .3s ease,border-color .3s ease,box-shadow .3s ease}
+.daylight-project-head{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:14px 18px;padding-bottom:16px}
+.daylight-project-head img{width:70px;height:58px;object-fit:cover;border-radius:5px}
+.daylight-project-head>div{display:grid;gap:5px}
+.daylight-project-head h3{font-family:var(--sans);font-size:clamp(24px,1.3vw + 14px,36px);line-height:1.12;font-weight:500;letter-spacing:-.025em;color:var(--brown)}
+.project-phase{margin-left:auto;align-self:center;font-size:15px;color:var(--label)}
+.project-question,.project-document,.project-requirement{position:relative;padding:28px;border:1px solid var(--hair-strong);border-radius:7px;background:var(--white);box-shadow:0 15px 30px -24px rgba(76,40,6,.25)}
+.project-question{grid-column:1/7;grid-row:2;align-self:start;display:grid;gap:22px}
+.project-question-text{font-size:clamp(27px,2vw + 8px,40px);line-height:1.1;letter-spacing:-.025em;color:var(--brown);max-width:15ch}
+.project-question-by{font-size:16px;line-height:1.4;color:var(--label)}
+.project-document{grid-column:8/-1;grid-row:2;align-self:end;display:flex;align-items:flex-start;gap:18px}
+.project-document>div{display:grid;gap:8px}
+.project-file-mark{flex:none;width:32px;color:var(--orange-ink)}
+.project-document h4,.project-requirement h4{font-size:19px;line-height:1.3;font-weight:500;letter-spacing:-.01em;color:var(--brown)}
+.project-document-state{font-size:16px;line-height:1.4;color:var(--green)}
+.project-requirement{grid-column:5/-1;grid-row:3;display:grid;gap:24px;border-left:3px solid var(--orange)}
+.project-requirement-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 16px}
+.project-open{display:inline-flex;align-items:center;gap:7px;font-size:15px;line-height:1.4;color:var(--orange-ink)}
+.project-open::before{content:"";width:7px;height:7px;flex:none;border:1.5px solid currentColor;border-radius:50%}
+.project-requirement dl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:12px 24px;margin:0}
+.project-requirement dl>div{display:grid;align-content:start;gap:6px}
+.project-requirement dt{font-size:14px;line-height:1.4;color:var(--label)}
+.project-requirement dd{margin:0;font-size:17px;line-height:1.4;color:var(--brown)}
+.daylight-product[data-state="1"] .daylight-product-stage{gap:0;grid-template-rows:auto 1fr 1fr;align-content:stretch;background:var(--white);box-shadow:0 34px 65px -46px rgba(76,40,6,.35)}
+.daylight-product[data-state="1"] .daylight-project-head{padding-bottom:28px;border-bottom:1px solid var(--hair-strong);margin-bottom:30px}
+.daylight-product[data-state="1"] .project-question{grid-column:1/6;grid-row:2/4;align-self:stretch;padding:12px 36px 12px 0;align-content:start;border:0;border-radius:0;background:transparent;box-shadow:none}
+.daylight-product[data-state="1"] .project-document{grid-column:6/-1;grid-row:2;align-self:stretch;padding:12px 0 28px 36px;border:0;border-left:1px solid var(--hair-strong);border-radius:0;background:transparent;box-shadow:none}
+.daylight-product[data-state="1"] .project-requirement{grid-column:6/-1;grid-row:3;padding:28px 0 12px 36px;border:0;border-top:1px solid var(--hair);border-left:1px solid var(--hair-strong);border-radius:0;background:transparent;box-shadow:none}
+.dl-journey-index{margin-top:48px}
+/* Ray: an unchanged answer, source and draft move as one. The canvas is
+   deliberately spare so full-page, drawer and window have distinct shapes. */
+.ray-product-stage{position:relative;isolation:isolate;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-template-rows:auto auto;gap:32px 0;padding:32px;border:1px solid var(--dark-hair);border-radius:10px;background:#1b1b19}
+.ray-portal-head{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 24px;padding-bottom:24px;border-bottom:1px solid var(--dark-hair);font-size:16px;line-height:1.4;color:var(--dark-ink)}
+.ray-portal-head>span{font-weight:500;letter-spacing:-.025em;font-size:23px}
+.ray-portal-head>b{font-weight:400;color:var(--dark-muted)}
+.ray-portal-context{grid-row:2;grid-column:1/5;align-self:start;padding:20px 0}
+.ray-product .ray-portal-context .scene-label{color:#e6ac7b}
+.ray-context-detail{display:grid;gap:12px;margin-top:20px!important;font-size:clamp(22px,1.4vw + 8px,30px);line-height:1.18;letter-spacing:-.02em;color:var(--dark-ink);max-width:18ch}
+.ray-context-detail span{font-size:15px;line-height:1.4;letter-spacing:0;color:var(--dark-muted)}
+.ray-convo{position:relative;grid-row:2;grid-column:6/-1;align-self:start;display:grid;gap:26px;padding:clamp(26px,3.4vw,48px);border:1px solid rgba(255,255,255,.7);border-radius:10px;background:var(--beige);color:var(--ink);box-shadow:0 30px 60px -28px rgba(0,0,0,.5)}
+.ray-product .ray-convo{transition:border-color .3s ease,box-shadow .3s ease}
+.ray-convo-head{display:flex;align-items:center;gap:10px;font-size:20px;line-height:1.3;color:var(--brown)}
+.ray-convo-head img{flex:none;width:36px;height:36px;border-radius:50%}
+.ray-convo-head b{font-weight:500}
+.ray-continuity-mark{margin-left:auto;width:26px;height:4px;border-radius:2px;background:var(--orange)}
+.ray-convo-q{justify-self:end;max-width:95%;padding:11px 14px;border:1px solid var(--hair);border-radius:12px 12px 3px 12px;background:var(--beige-2);color:var(--brown);font-size:17px;line-height:1.4}
+.ray-convo-a{font-size:clamp(28px,2vw + 8px,40px);line-height:1.12;letter-spacing:-.025em;font-weight:500;color:var(--brown);max-width:22ch}
+.ray-convo-source{display:grid;gap:7px;padding-left:14px;border-left:2px solid var(--orange)}
+.ray-convo-source cite{font-size:16px;line-height:1.45;font-style:normal;color:var(--muted)}
+.ray-convo-draft{display:grid;gap:8px;padding-top:22px;border-top:1px solid var(--hair)}
+.ray-convo-draft p{font-size:17px;line-height:1.4;color:var(--muted)}
+.ray-product[data-state="1"] .ray-portal-context{grid-row:2;grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 22px;padding:0}
+.ray-product[data-state="1"] .ray-context-detail{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 16px;max-width:none;margin-top:0!important;font-size:17px;letter-spacing:0}
+.ray-product[data-state="1"] .ray-convo{grid-row:3;grid-column:1/-1;padding:clamp(32px,5vw,72px);border-radius:4px;box-shadow:none}
+.ray-product[data-state="2"] .ray-convo{grid-column:4/-2;margin-top:24px;border-top:5px solid var(--orange);box-shadow:0 40px 80px -20px rgba(0,0,0,.8),0 0 0 8px rgba(255,247,233,.04)}
+.ray-product[data-state="2"] .ray-portal-context{grid-column:1/4}
+.ray-product .scene-controls{border-color:var(--dark-hair)}
+.ray-product .scene-controls button{color:var(--dark-muted)}
+.ray-product .scene-controls button:hover{background:rgba(255,247,233,.08);color:var(--dark-ink)}
+.ray-product .scene-controls button[aria-pressed="true"]{background:var(--beige);color:var(--brown)}
+/* The opening settles once. Nothing waits for it: no opacity or hidden text.
+   A source underline grows to connect the answer to its evidence. */
+@keyframes ray-answer-arrive{from{transform:translateY(22px)}to{transform:translateY(0)}}
+@keyframes ray-source-arrive{from{transform:scaleX(.15)}to{transform:scaleX(1)}}
+html.js-on:not(.reduce-motion) .ray-hero-figure.in .ray-opening-answer{animation:ray-answer-arrive .75s var(--ease-out) both}
+.ray-opening-source{position:relative}
+.ray-opening-source::before{content:"";position:absolute;top:-1px;left:0;width:100%;height:1px;background:var(--orange);transform-origin:left}
+html.js-on:not(.reduce-motion) .ray-hero-figure.in .ray-opening-source::before{animation:ray-source-arrive 1.1s var(--ease-out) both}
+@media (min-width:760px) and (max-width:999px){
+  .daylight-product-stage{gap:20px;padding:26px}.project-question{grid-column:1/7}.project-document{grid-column:7/-1}.project-requirement{grid-column:3/-1}
+  .project-question,.project-document,.project-requirement{padding:22px}
+  .ray-product-stage{padding:24px}.ray-convo{grid-column:5/-1;padding:26px}.ray-portal-context{grid-column:1/4}
+  .ray-product[data-state="2"] .ray-convo{grid-column:4/-1}.ray-product[data-state="2"] .ray-portal-context{grid-column:1/4}
+}
+@media (max-width:759px){
+  .scene-controls{margin:0 0 24px;width:100%;border-radius:28px}
+  .scene-controls button{padding:10px 9px;font-size:15px;flex:1 1 0}
+  .daylight-product-stage,.daylight-product[data-state="1"] .daylight-product-stage{display:flex;flex-direction:column;padding:22px 16px;gap:18px}
+  .daylight-project-head{padding:0 2px 6px;gap:12px}.daylight-project-head img{width:52px;height:48px}.daylight-project-head h3{font-size:25px}.project-phase{display:none}
+  .project-question,.project-document,.project-requirement{padding:22px 18px;width:100%}
+  .project-question{gap:18px}.project-question-text{font-size:30px}.project-document{gap:14px}
+  .project-requirement{gap:20px}.project-requirement dl{grid-template-columns:1fr;gap:14px}
+  .daylight-product[data-state="1"] .daylight-project-head{padding:0 2px 6px;margin:0;border:0}
+  .daylight-product[data-state="1"] .project-question{padding:22px 18px;gap:18px;border:1px solid transparent;border-bottom-color:var(--hair)}
+  .daylight-product[data-state="1"] .project-document{padding:22px 18px;border:1px solid transparent;border-bottom-color:var(--hair)}
+  .daylight-product[data-state="1"] .project-requirement{padding:22px 18px;border:1px solid transparent;border-left-width:3px}
+  .dl-journey-index{margin-top:32px}
+  .ray-product-stage{display:flex;flex-direction:column;gap:0;padding:0;background:none;border:0;border-radius:0}
+  .ray-portal-head{gap:6px 16px;padding:0 0 16px}.ray-portal-head>span{font-size:20px}
+  .ray-product[data-state] .ray-portal-context{display:grid;grid-template-columns:1fr;gap:6px;padding:20px 0 24px;align-self:stretch}
+  .ray-product[data-state] .ray-context-detail{display:flex;flex-wrap:wrap;gap:4px 12px;max-width:none;margin-top:0!important;font-size:17px;letter-spacing:0}
+  .ray-context-detail span{font-size:15px}
+  .ray-product[data-state] .ray-convo{width:100%;margin:0;padding:28px 24px;gap:24px;border:1px solid rgba(255,255,255,.7);border-radius:10px;box-shadow:0 20px 40px -20px rgba(0,0,0,.5)}
+  .ray-product .ray-convo-a{font-size:30px}.ray-convo-q{font-size:16px;max-width:100%;padding:10px 12px}
+}
+@media (max-width:359px){
+  .scene-controls button{font-size:14px;padding:10px 6px}
+  .daylight-product-stage,.daylight-product[data-state="1"] .daylight-product-stage{padding:20px 12px}
+  .project-document{flex-wrap:wrap}.project-question,.project-document,.project-requirement{padding:20px 16px}
+  .daylight-product[data-state="1"] .project-question,.daylight-product[data-state="1"] .project-document,.daylight-product[data-state="1"] .project-requirement{padding:20px 16px}
+  .ray-product[data-state] .ray-convo{padding:26px 20px}
+}
+@media (prefers-reduced-motion:reduce){.product-scene *,.product-scene *::before,.ray-opening-answer,.ray-opening-source::before{animation:none!important;transition:none!important}}
+html.reduce-motion .product-scene *,html.reduce-motion .product-scene *::before,html.reduce-motion .ray-opening-answer,html.reduce-motion .ray-opening-source::before{animation:none!important;transition:none!important}
+@media print{
+  .scene-controls{display:none!important}.product-scene [data-scene-stage]{min-height:0!important}
+  .ray-product-stage{background:#fff;color:#111;border-color:#777}
+  .ray-product .ray-portal-head,.ray-product .ray-portal-head>b,.ray-product .ray-context-detail,.ray-product .ray-context-detail span,.ray-product .ray-portal-context .scene-label{color:#111}
+  .ray-convo{box-shadow:none!important;border-color:#777}
+}

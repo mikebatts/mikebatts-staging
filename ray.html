@@ -1,35 +1,30 @@
 <!DOCTYPE html>
-<html lang="en" class="ray-page" data-wf-site="5dbdf5d45ad64f500c81ca1f">
+<html lang="en" class="ray-page">
 <head>
   <meta charset="utf-8">
-  <title>Introducing Ray · Daylight&rsquo;s grounded support system · Mike Battaglia</title>
+  <title>Ray at Daylight · Mike Battaglia</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Ray is Daylight's grounded support system, one assistant across the partner origination portal and the homeowner iOS app. It answers from live project data and published process, shows its sources, and turns requests into guarded, confirmable actions. A case study on product, design, and engineering by Mike Battaglia.">
-  <meta name="theme-color" content="#FFF7E9">
+  <meta name="description" content="How I expanded Ray into the AI concierge for Daylight’s solar origination portal: what Project Notes showed us, fitting Ray around the work, turning CSV requests into saved sheets, and what our first evaluation missed.">
+  <meta name="theme-color" content="#ffffff">
   <meta name="author" content="Mike Battaglia">
-
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Ray · An answer worth trusting">
-  <meta property="og:description" content="Daylight's grounded support system, across the partner portal and the homeowner iOS app. It shows its sources, checks who is asking, and asks before it acts. A case study by Mike Battaglia.">
+  <meta property="og:title" content="Ray at Daylight">
+  <meta property="og:description" content="Expanding Ray into the AI concierge for Daylight’s solar origination portal. A case study by Mike Battaglia.">
   <meta property="og:image" content="images/ray-og.png">
   <meta property="og:site_name" content="Mike Battaglia">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Ray · An answer worth trusting">
-  <meta name="twitter:description" content="Daylight's grounded support system, across the partner portal and the homeowner iOS app. A case study by Mike Battaglia.">
+  <meta name="twitter:title" content="Ray at Daylight">
+  <meta name="twitter:description" content="Expanding Ray into the AI concierge for Daylight’s solar origination portal. By Mike Battaglia.">
   <meta name="twitter:image" content="images/ray-og.png">
-
   <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon">
   <link href="images/webclip.png" rel="apple-touch-icon">
-
-  <!-- Self-hosted Daylight brand fonts: Feature Deck (display), Aeonik Pro (body/UI), ABC Social Mono (labels) -->
   <link rel="preload" href="fonts/FeatureDeck-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
   <link rel="preload" href="fonts/AeonikPro-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
   <link rel="preload" href="fonts/AeonikPro-500.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-  <link rel="preload" href="css/ray.css?v=32" as="style">
-  <link href="css/ray.css?v=32" rel="stylesheet" type="text/css">
-  <link href="css/daylight-gate.css?v=3" rel="stylesheet" type="text/css">
-
-  <!-- Privacy gate: critical lock rules + pre-paint lock, before first paint -->
+  <link href="css/dl-shared.css?v=7" rel="stylesheet">
+  <link href="css/product-scenes.css?v=2" rel="stylesheet">
+  <link href="css/ray.css?v=59" rel="stylesheet">
+  <link href="css/daylight-gate.css?v=3" rel="stylesheet">
   <style>
     html.dl-locked{overflow:hidden}
     html.dl-locked body > *:not(#dl-gate){visibility:hidden}
@@ -48,7 +43,7 @@
         <img src="images/avi.png" alt="Mike Battaglia" width="2208" height="2296">
         <span class="dl-gate-wm">Case study</span>
       </div>
-      <h1 class="dl-gate-t" id="dl-gate-t">Ray, inside Daylight.</h1>
+      <h2 class="dl-gate-t" id="dl-gate-t">Ray, inside Daylight.</h2>
       <p class="dl-gate-s">This collection is private for now. Enter the password to view.</p>
       <form class="dl-gate-form" id="dl-gate-form">
         <label class="dl-gate-field">
@@ -65,463 +60,55 @@
     </div>
   </div>
 
-  <a class="ray-skip" href="#ray-main">Skip to content</a>
-  <div class="ray-progress" aria-hidden="true"><span class="ray-progress-bar"></span></div>
+  <a class="cs-skip" href="#ray-main">Skip to content</a>
 
-  <!-- ===================== FIXED QUIET NAVIGATION ===================== -->
-  <nav class="ray-nav" id="ray-nav" aria-label="Case study">
-    <div class="ray-wrap ray-nav-inner">
-      <a class="ray-nav-back" href="daylight.html" aria-label="Back to Daylight">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
-        <span>Daylight</span>
-      </a>
-      <a class="ray-nav-home" href="index.html">
-        <img class="avi" src="images/avi.png" alt="" width="24" height="24" loading="lazy">
-        <span>Mike Battaglia</span>
-      </a>
+  <nav class="cs-nav" aria-label="Site">
+    <div class="cs-wrap wide cs-nav-in">
+      <a class="cs-nav-back" href="index.html#work" aria-label="Back to selected work"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span>Back</span></a>
+      <span class="cs-nav-title">Ray at Daylight</span>
+      <details class="cs-nav-chapters">
+        <summary>Chapters</summary>
+        <ul class="cs-nav-menu"><li><a href="#daylight"><span>01</span>Daylight</a></li><li><a href="#questions"><span>02</span>What Notes showed us</a></li><li><a href="#continuity"><span>03</span>Fitting around the work</a></li><li><a href="#sheets"><span>04</span>From CSVs to sheets</a></li><li><a href="#people"><span>05</span>Actions and support</a></li><li><a href="#homeowners"><span>06</span>Homeowners</a></li><li><a href="#answers"><span>07</span>What evaluation missed</a></li><li><a href="#engineering"><span>08</span>How it’s built</a></li><li><a href="ray-demo.html" data-ray-demo>Try Ray on a sample project ↗</a></li><li><a href="daylight.html">Daylight overview</a></li></ul>
+      </details>
     </div>
+    <span class="cs-nav-progress" aria-hidden="true"><i></i></span>
   </nav>
 
-  <!-- ============================ HERO ============================ -->
-  <!-- Calm intelligence. Asymmetric, exceptionally spacious. One iconic Ray
-       object beside a two-line thesis. No badges, stats, grids, or fields. -->
-  <header class="ray-hero" aria-label="Introduction">
-    <div class="ray-wrap ray-hero-wrap">
-      <div class="ray-hero-lead">
-        <h1 class="ray-hero-title">
-          <span class="rt-line"><span>Introducing <em>Ray</em>.</span></span>
-        </h1>
-        <p class="ray-hero-sub">Ray is Daylight&rsquo;s grounded support system across the partner portal and homeowner app. It answers from the project, shows its sources, respects the viewer&rsquo;s access, and asks before it acts.</p>
-        <div class="ray-hero-meta">
-          <span class="ray-hero-role">Conceived, designed &amp; built by Mike</span>
-          <span class="ray-hero-role">Live across portal &amp; iOS</span>
-          <a class="ray-hero-link" href="daylight.html">Daylight case study&nbsp;&rarr;</a>
-        </div>
-      </div>
+<main id="ray-main">
+<header class="ray-hero" id="ray-hero" aria-labelledby="ray-title"><div class="cs-wrap wide"><div class="ray-hero-intro"><div class="ray-hero-title"><p class="ray-brand"><img src="images/logo-main.417b1780.svg" width="111" height="21" alt="Daylight"><span>Case study by Mike Battaglia, 2026</span></p><h1 class="cs-h1 ray-h1" id="ray-title"><img class="ray-h1-avatar" src="images/ray-avatar-poster.png" width="280" height="280" alt="">Ray at Daylight</h1></div><div class="ray-hero-copy"><p class="ray-hero-lead">In Daylight’s partner portal for solar projects, a lot of the questions people asked each other in Project Notes looked answerable from what the portal already had.</p><p class="ray-hero-sub">Our team had built the foundation of Ray, Daylight’s AI assistant. I led the product direction, interaction design and AI-assisted implementation that grew it into the portal’s AI concierge.</p><div class="cs-actions ray-hero-actions"><a class="cs-btn ray-try" href="ray-demo.html" data-ray-demo>Try Ray <span aria-hidden="true">↗</span></a><span class="ray-try-note">Interactive demo &middot; Sample data</span></div></div></div><figure class="ray-hero-figure"><div class="ray-hero-media rp-product"><aside class="rp-sidebar"><img src="images/logo-main.417b1780.svg" width="111" height="21" alt="Daylight"><span class="rp-side-label">Dashboards</span><span><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 11 9-8 9 8M5 10v11h14V10M9 21v-7h6v7"/></svg> Sales</span><span><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h9l5 5v13H5zM14 3v6h5M8 13h8M8 17h6"/></svg> Origination</span><span class="is-active"><img class="rp-avatar" src="images/ray-avatar-poster.png" width="28" height="28" alt=""> Ask Ray</span><span class="rp-side-spacer"></span><span><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11a9 9 0 0 1-9 9H4l-2 2V11a9 9 0 0 1 19 0Z"/></svg> Support</span><span><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h6a3 3 0 0 1 3 3v14a4 4 0 0 0-4-3H3zM21 4h-6a3 3 0 0 0-3 3v14a4 4 0 0 1 4-3h5z"/></svg> Knowledge Base</span><span class="rp-side-account">AM <b>Alex Morgan</b></span></aside><div class="rp-project"><p class="rp-breadcrumb">Projects / Orchard House</p><p class="rp-project-phase">Origination</p><h3>Orchard House</h3><p class="rp-project-address">142 Orchard Lane · DL-1042</p><div class="rp-project-tabs"><b>Overview</b><span>Documents</span><span>Notes</span></div><div class="rp-project-card"><span class="rp-status">In progress</span><h4>Document verification</h4><div><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg> Utility bill</div><div><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg> Signed agreement</div><div class="needs-review"><i></i> Title verification <small>Needs review</small></div></div><div class="rp-project-note"><b>Latest note</b><p>What’s holding this project up?</p><span>Alex Morgan · Just now</span></div></div><div class="rp-chat "><header class="rp-chat-head"><div class="rp-chat-identity"><img class="rp-avatar" src="images/ray-avatar-poster.png" width="28" height="28" alt=""><div><div class="rp-chat-title"><b>Ask Ray</b><span class="rp-beta">Beta</span></div><p>Orchard House · DL-1042 · Origination</p></div></div><div class="rp-tools" aria-hidden="true"><span><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 9v12M15 9v12M3 15h18"/></svg></span><i></i><span><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3h7v7M21 3l-9 9M10 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5"/></svg></span><span><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></div></header><div class="rp-messages"><div class="rp-user"><p>What’s holding this project up?</p></div><div class="rp-assistant "><img class="rp-avatar" src="images/ray-avatar-poster.png" width="28" height="28" alt=""><div><div class="rp-answer"><p><strong>Title verification still needs review.</strong></p><p>Your utility bill and signed agreement are in. The next step is with the review team.</p></div><div class="rp-action-card compact"><b>Review the project</b><p>Orchard House · DL-1042</p><div class="rp-card-actions"><span class="rp-ui-btn primary">Open project</span></div></div><p class="rp-sources">Sources: Project notes · Live portal data</p><div class="rp-reactions" aria-hidden="true"><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="7" width="12" height="14" rx="2"/><path d="M15 7V3H4v14h4"/></svg><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 10h-4v11h4M7 11l5-8a2 2 0 0 1 2 2l-1 5h6a2 2 0 0 1 2 2l-2 8H7z"/></svg><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7a9 9 0 1 0 1 8M20 3v5h-5"/></svg></div></div></div></div><div class="rp-composer-wrap"><div class="rp-composer"><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 13 6-6a3 3 0 0 1 4 4l-8 8a5 5 0 0 1-7-7l9-9a4 4 0 0 1 6 6l-9 9a2 2 0 0 1-3-3l8-8"/></svg><span>Ask about your projects…</span><i><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6"/></svg></i></div><p>Ray can make mistakes. Check important info.</p></div></div></div><figcaption class="cs-caption">Ray in the drawer next to a project. Reconstructed from the portal with fictional project data.</figcaption></figure></div></header>
 
-      <div class="ray-hero-object" aria-hidden="true">
-        <div class="ray-hero-scene">
-          <div class="ray-sun">
-            <video id="ray-hero-video" src="images/ray-avatar-loop.mp4" poster="images/ray-avatar-poster.png"
-                   muted loop playsinline autoplay preload="metadata" tabindex="-1"></video>
-            <img class="ray-sun-fallback" src="images/ray-avatar-poster.png" alt="" width="480" height="480">
-          </div>
-          <div class="ray-hero-answer">
-            <div class="rha-head">
-              <span class="rha-avatar"><img src="images/ray-avatar-poster.png" alt="" width="32" height="32"></span>
-              <span class="rha-id"><b>Ray</b><small>Maple Street residence</small></span>
-              <span class="rha-status">Grounded</span>
-            </div>
-            <p class="rha-question">Why can&rsquo;t this project advance?</p>
-            <p class="rha-copy">Title verification is still open. The agreement is signed and identity is verified.</p>
-            <div class="rha-proof"><span>Origination SOP</span><small>checked this turn</small></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
+<section class="cs-section ray-chapter ray-context" id="daylight" data-ray-chapter="" aria-labelledby="daylight-h"><div class="cs-wrap wide"><div class="ch-grid"><div class="ch-text"><p class="cs-kicker"><span class="num">01</span>Daylight</p><h2 class="cs-h2" id="daylight-h">A solar project changes hands a lot</h2><div class="ch-prose"><p>Daylight brings solar and batteries to homes. We have two main products: the origination portal for our partners and internal teams, and the homeowner experience on the web and iOS.</p><p>The portal follows a project from the first door knock and a signed agreement through document verification, design, permits and township inspections, to installation and permission to operate. It’s a fragmented process, with a lot of different parties carrying the football: sales reps, installers, and our Ops and Growth teams.</p><p>Since day one I’ve worked closely with our COO, sales reps, installers and the Ops and Growth teams, alongside our five engineers. I also worked with Marketing on the design system behind our web, iOS and marketing surfaces.</p></div></div><figure class="context-photo"><img src="images/daylight-house-editorial-crop.jpg" width="910" height="512" alt="A home with solar panels across its roof" loading="lazy" decoding="async"></figure></div><figure class="stage-figure"><ol class="stage-strip"><li><span class="stage-n">1</span><b>Origination</b><p>Credit, system details, utility bill, title and the signed agreement</p></li><li><span class="stage-n">2</span><b>Document Verification</b><p>Uploaded documents get reviewed</p></li><li><span class="stage-n">3</span><b>CAD Design &amp; True Up</b><p>The final system design</p></li><li><span class="stage-n">4</span><b>Permitting &amp; Interconnection</b><p>Permits, township inspections and the utility</p></li><li><span class="stage-n">5</span><b>Installation</b><p>The system is installed</p></li><li><span class="stage-n">6</span><b>Permission to Operate</b><p>The system is turned on</p></li></ol><figcaption class="cs-caption">The six stages a project moves through in the portal.</figcaption></figure></div></section>
 
-  <main id="ray-main">
+<section class="cs-section ray-chapter ray-notes" id="questions" data-ray-chapter="" aria-labelledby="questions-h"><div class="cs-wrap wide"><div class="ch-grid ch-grid-notes"><div class="ch-text"><p class="cs-kicker"><span class="num">02</span>Project Notes</p><h2 class="cs-h2" id="questions-h">What Project Notes showed us</h2><div class="ch-prose"><p>Our first fix for the coordination problem was something we could ship quickly: a message board on every project. People could post, tag a collaborator, ask a question and get an answer right next to the work.</p><p>After a few weeks of real use, I went back through the questions. A lot of them looked answerable from information we already had, in the project itself, our backend, or the knowledge base that holds our SOPs and underwriting guidance. And many notes that tagged someone had no reply recorded in the thread. That suggested Ray could answer some of these questions without another person having to step in.</p><p>So that’s where I took Ray next. Ray was meant to cut through the fat of the portal and get people the answer they needed to keep a project moving.</p></div></div><figure class="notes-audit cs-reveal"><div class="na-board"><header class="na-head"><b>Project Notes</b><span>Sample notes</span></header><ol class="na-list"><li class="na-item"><article class="na-note"><header><b>Jamie Park</b><span>Orchard Solar</span><time datetime="2026-09-02T09:14:00">Sep 2, 9:14 AM</time></header><p><span class="na-mention">@Taylor Brooks</span> What’s still holding up the agreement on this one?</p></article><div class="na-marks"><p class="na-mark is-answerable"><i aria-hidden="true"></i><b>Already on the project page</b><span>Title verification is waiting on review.</span></p><p class="na-mark is-silent"><i aria-hidden="true"></i><b>Tagged, no reply in the thread</b></p></div></li><li class="na-item"><article class="na-note"><header><b>Sam Rivera</b><span>Northline Energy</span><time datetime="2026-09-03T14:05:00">Sep 3, 2:05 PM</time></header><p>Does the utility bill have to be from the last month, or will any recent bill work?</p></article><div class="na-marks"><p class="na-mark is-answerable"><i aria-hidden="true"></i><b>In the knowledge base</b><span>Utility bill requirements are part of our underwriting guidance.</span></p></div></li><li class="na-item"><article class="na-note"><header><b>Jordan Lee</b><span>Orchard Solar</span><time datetime="2026-09-04T11:30:00">Sep 4, 11:30 AM</time></header><p><span class="na-mention">@Riley Chen</span> Did the roof photos come through on your side?</p></article><div class="na-marks"><p class="na-mark is-silent"><i aria-hidden="true"></i><b>Tagged, no reply in the thread</b></p></div></li></ol></div><figcaption class="cs-caption">Sample notes written for this page, not real projects or people. The margin marks the two things I was looking for.</figcaption></figure></div></div></section>
 
-    <!-- ==================== THE PRODUCT ARRIVES ==================== -->
-    <!-- One dominant, working product window. Ask anything; Ray reaches for a
-         tool, narrates, and settles on a grounded answer with sources. A
-         faithful rebuild on fictional records. Nothing is ever sent. -->
-    <section class="ray-section ray-demo-section" aria-labelledby="demo-h">
-      <div class="ray-wrap reveal">
-        <div class="ray-demo-head">
-          <p class="ray-eyebrow"><span class="tick" aria-hidden="true"></span>The product</p>
-          <h2 class="ray-h2" id="demo-h">Ask a question. See the work.</h2>
-          <p class="ray-lead">Ray reaches for a tool, narrates the step in plain language, and comes to rest on a grounded answer with its sources. Try the real interaction, rebuilt on a fictional project. Nothing is ever sent.</p>
-        </div>
-      </div>
+<section class="cs-section ray-chapter" id="continuity" data-ray-chapter="" aria-labelledby="continuity-h"><div class="cs-wrap wide"><div class="ch-text ch-text-wide"><p class="cs-kicker"><span class="num">03</span>Workspace</p><h2 class="cs-h2" id="continuity-h">Ray had to fit around the work</h2><div class="ch-prose ch-prose-cols"><p>People in the portal are usually in the middle of something: checking a sales dashboard, uploading documents, looking at a fulfillment order. Asking Ray shouldn’t mean leaving that page. So Ray sits in a small floating button and opens as a side drawer, full screen, or a separate mini window. Ray adapts to you; you don’t adapt to Ray.</p><p>A full-page chat would have been simpler to build. With three views, it has to stay one conversation as you switch between them and move around the portal. Turns run on the server, so a page you navigate to can pick up an answer that’s still coming in. Ray also takes the page you’re on as a hint about which project you mean, without that hint widening what you can see.</p></div></div><figure class="cs-figure product-scene ray-product" id="ray-continuity-scene" data-product-scene="ray" data-state="0" aria-labelledby="continuity-h"><div class="ray-product-stage rp-product" id="ray-product-stage" data-scene-stage=""><header class="ray-portal-head"><img src="images/logo-main.417b1780.svg" width="111" height="21" alt="Daylight"><b>Orchard House</b></header><div class="ray-portal-context" data-scene-object=""><p class="scene-label" data-ray-context="">Project</p><p class="ray-context-detail" data-ray-context-detail="">Title verification <span>Needs review</span></p><div class="rp-context-rule"></div><p class="rp-context-note">The same conversation in whichever view you pick.</p></div><article class="ray-convo rp-chat" data-scene-object="" aria-label="One continuing Ray conversation"><header class="rp-chat-head"><div class="rp-chat-identity"><img class="rp-avatar" src="images/ray-avatar-poster.png" width="28" height="28" alt=""><div><div class="rp-chat-title"><b>Ask Ray</b><span class="rp-beta">Beta</span></div><p>Orchard House · DL-1042 · Origination</p></div></div><div class="scene-controls ray-window-controls" data-scene-controls="" role="group" aria-label="Desktop Ray view" hidden=""><button type="button" data-scene-choice="0" aria-pressed="true" aria-controls="ray-product-stage" aria-label="Drawer" title="Drawer"><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M15 4v16"></path></svg><span class="ray-visually-hidden">Drawer</span></button><button type="button" data-scene-choice="1" aria-pressed="false" aria-controls="ray-product-stage" aria-label="Full page" title="Full page"><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"></path></svg><span class="ray-visually-hidden">Full page</span></button><button type="button" data-scene-choice="2" aria-pressed="false" aria-controls="ray-product-stage" aria-label="Separate window" title="Separate window"><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14 3h7v7M21 3l-9 9M10 3H5v18h16V14"></path></svg><span class="ray-visually-hidden">Separate window</span></button></div></header><div class="rp-messages"><p class="ray-convo-q">What still needs review?</p><div class="rp-assistant"><img class="rp-avatar" src="images/ray-avatar-poster.png" width="28" height="28" alt=""><div><p class="ray-convo-a rp-answer">Title verification still needs review.</p><p class="ray-convo-source rp-sources">Sources: <cite>Origination guidance, help center</cite></p><div class="rp-reactions" aria-hidden="true"><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="7" width="12" height="14" rx="2"></rect><path d="M15 7V3H4v14h4"></path></svg><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 10h-4v11h4M7 11l5-8a2 2 0 0 1 2 2l-1 5h6a2 2 0 0 1 2 2l-2 8H7z"></path></svg></div></div></div></div><div class="ray-convo-draft"><span class="scene-label">Saved draft</span><div class="rp-composer"><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 13 6-6a3 3 0 0 1 4 4l-8 8a5 5 0 0 1-7-7l9-9a4 4 0 0 1 6 6l-9 9a2 2 0 0 1-3-3l8-8"></path></svg><p>I’ll check with the reviewer.</p><i><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6"></path></svg></i></div></div></article></div><p class="cs-vh" data-scene-status="" role="status" aria-live="polite" aria-atomic="true"></p><figcaption class="cs-caption">Reconstructed sample. Switch views with the buttons in Ray’s header; the answer, its source and the unsent draft stay put.</figcaption></figure></div></section>
 
-      <div class="ray-demo-stage">
-        <div class="ray-demo reveal" id="ray-demo">
-          <div class="ray-chat-shell">
-            <aside class="ray-chat-context" aria-label="Project context">
-              <div class="rcc-project">
-                <span class="rcc-mark">MS</span>
-                <span><b>Maple Street</b><small>PPA-4021</small></span>
-              </div>
-              <div class="rcc-stage">
-                <span>Current stage</span>
-                <b>Document verification</b>
-              </div>
-              <div class="rcc-nav" aria-hidden="true">
-                <span class="is-current"><i></i>Conversation</span>
-                <span><i></i>Project record</span>
-                <span><i></i>Documents <b>2</b></span>
-                <span><i></i>Review history</span>
-              </div>
-              <p class="rcc-note">Ray inherits this project&rsquo;s context and your access.</p>
-            </aside>
+<section class="cs-section ray-chapter ray-sheets" id="sheets" data-ray-chapter="" aria-labelledby="sheets-h"><div class="cs-wrap wide"><div class="ch-text ch-text-wide"><p class="cs-kicker"><span class="num">04</span>Sheets</p><h2 class="cs-h2" id="sheets-h">Ops kept asking Ray for CSVs</h2><div class="ch-prose ch-prose-cols"><p>We shipped Ray to Daylight Ops internally first. We interviewed people about how they were using it and went through the feedback and transcripts for gaps and common requests. A big one was CSVs: which jobs are held up in document verification, which jobs are overdue for a particular installer.</p><p>A CSV answers that question once. What people needed was a list they could come back to. So I took Ray past plain exports. It now creates a sheet that saves the query behind the list and runs it again whenever you open it. The sheet uses the permissions of whoever is looking, so sharing the link doesn’t share the creator’s access. You can still download a CSV.</p></div></div><figure class="sheet-story" id="sheet-figure" aria-labelledby="sheets-h"><div class="sheet-stage rp-product"><div class="sheet-side"><div class="sheet-request"><p class="step-label"><span>1</span>The request</p><div class="rp-user"><p>Show installation reviews with their status and feedback.</p></div><div class="artifact-response"><img src="images/ray-avatar-poster.png" class="rp-avatar" width="28" height="28" alt="Ray"><div><p>I created a sheet for those reviews.</p><a href="#sheet-live" class="artifact-link"><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 9h18M9 9v12M15 9v12M3 15h18"></path></svg><span><b>Installation reviews</b><small>Open sheet <span aria-hidden="true">↗</span></small></span></a></div></div></div><div class="sh-file"><p class="step-label"><span>2</span>Before: a CSV export</p><div class="sh-export-title"><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h9l5 5v13H5zM14 3v6h5M8 13h8M8 17h6"></path></svg><div><span>Exported from chat</span><b>installation-reviews.csv</b></div></div><p class="sh-when">Saved Sep 2, 9:40 AM</p><table class="sh-table"><thead><tr><th scope="col">Project</th><th scope="col">Review</th><th scope="col">Feedback</th></tr></thead><tbody class="sh-rows"><tr data-row="orchard" class=""><td data-cell="Project"><b>Orchard House</b></td><td data-cell="Review"><span class="cs-tag warn" data-status="">Rejected</span></td><td data-cell="Feedback"><small data-note="">Photo is missing</small></td></tr><tr data-row="juniper" class=""><td data-cell="Project"><b>Juniper House</b></td><td data-cell="Review"><span class="cs-tag warn" data-status="">Rejected</span></td><td data-cell="Feedback"><small data-note="">Document needs review</small></td></tr></tbody></table><p class="sh-stamp">Frozen at the moment it was saved.</p></div></div><div class="sh-live" id="sheet-live" data-state="reopened"><p class="step-label"><span>3</span>Now: a saved sheet</p><div class="sh-live-top"><span><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 9h18M9 9v12M15 9v12M3 15h18"></path></svg> Your sheets</span><span class="rp-ui-btn">Download CSV</span></div><h3 id="sheet-live-t">Installation reviews</h3><p class="sh-live-meta">Saved query · Runs again when opened · Uses the viewer’s access</p><div class="sh-actions" id="sheet-actions" hidden=""><button type="button" class="cs-btn small" id="sheet-reopen">Reopen the sheet <svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7a9 9 0 1 0 1 8M20 3v5h-5"></path></svg></button><button type="button" class="cs-btn ghost small" id="sheet-reset">Reset to saved</button></div><p class="cs-status" id="sheet-status" role="status" aria-live="polite"></p><p class="sh-when" id="sheet-when">Reopened Sep 5, 4:12 PM</p><table class="sh-table"><thead><tr><th scope="col">Project</th><th scope="col">Review</th><th scope="col">Feedback</th></tr></thead><tbody class="sh-rows" id="sheet-rows"><tr data-row="orchard" class=""><td data-cell="Project"><b>Orchard House</b></td><td data-cell="Review"><span class="cs-tag warn" data-status="">Rejected</span></td><td data-cell="Feedback"><small data-note="">Photo is missing</small></td></tr><tr data-row="juniper" class="is-changed"><td data-cell="Project"><b>Juniper House</b></td><td data-cell="Review"><span class="cs-tag ok" data-status="">Approved</span></td><td data-cell="Feedback"><small data-note="">Reviewed Sep 4</small><i class="sh-mark">Changed on reopen</i></td></tr><tr data-row="cedar" class="is-added"><td data-cell="Project"><b>Cedar House</b></td><td data-cell="Review"><span class="cs-tag warn" data-status="">Rejected</span></td><td data-cell="Feedback"><small data-note="">Roof measurement is unclear</small><i class="sh-mark">Added on reopen</i></td></tr></tbody></table><p class="sh-stamp" id="sheet-summary">1 record changed, 1 added since the file was saved.</p></div></div><figcaption class="cs-caption">Reconstructed with fictional projects. Reopen the sheet: one review has changed since the export and one is new. The CSV stays as it was.</figcaption></figure></div></section>
 
-            <div class="ray-chat">
-            <div class="ray-chat-top">
-              <span class="ray-demo-mini" aria-hidden="true">
-                <video id="ray-demo-video" src="images/ray-avatar-loop.mp4" poster="images/ray-avatar-poster.png"
-                       muted loop playsinline preload="none" tabindex="-1"></video>
-              </span>
-              <span class="rc-idblock">
-                <span class="who">Ray</span>
-                <span class="ctx">Project support</span>
-              </span>
-              <button type="button" class="rc-newchat" id="ray-newchat" aria-label="Start a new chat">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
-                <span>New conversation</span>
-              </button>
-            </div>
+<section class="cs-section ray-chapter ray-actions" id="people" data-ray-chapter="" aria-labelledby="people-h"><div class="cs-wrap wide"><div class="ch-text ch-text-wide"><p class="cs-kicker"><span class="num">05</span>Actions and support</p><h2 class="cs-h2" id="people-h">Ray proposes, you confirm</h2><div class="ch-prose ch-prose-cols"><p>Some requests are really actions: put this file on my project, or get me a person. For both, I designed the same interaction. Ray shows exactly what it’s about to do, you review and confirm, and then you see the result.</p><p>Support was Ray’s other job. People also had questions for Daylight itself, and Ops was resolving those cases by hand. At the same time, we needed a support stack for every Daylight surface. When Ray can’t help, it offers to escalate, and the case goes to a person with the context attached.</p></div></div><div class="action-pair"><figure class="feature-story feature-document" data-ray-feature="" data-step="0" data-feature-default="0" data-feature-steps="1" data-feature-messages="[&quot;Review the project and document type.&quot;,&quot;The sample file is placed on the project.&quot;]"><div class="feature-board"><div class="feature-panel" data-feature-object="" data-feature-panel="0" tabindex="-1" role="group" aria-label="Review sample"><div class="rp-chat "><header class="rp-chat-head"><div class="rp-chat-identity"><img class="rp-avatar" src="images/ray-avatar-poster.png" width="28" height="28" alt=""><div><div class="rp-chat-title"><b>Ask Ray</b><span class="rp-beta">Beta</span></div><p>Orchard House · DL-1042 · Origination</p></div></div><div class="rp-tools" aria-hidden="true"><span><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></span><span><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span><span><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 9h18M9 9v12M15 9v12M3 15h18"></path></svg></span><i></i><span><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3h7v7M21 3l-9 9M10 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5"></path></svg></span><span><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span></div></header><div class="rp-messages"><div class="rp-user"><p>Can you add this to my project?<span class="rp-bubble-file"><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 13 6-6a3 3 0 0 1 4 4l-8 8a5 5 0 0 1-7-7l9-9a4 4 0 0 1 6 6l-9 9a2 2 0 0 1-3-3l8-8"></path></svg> Utility bill.pdf <small>248 KB</small></span></p></div><div class="rp-assistant "><img class="rp-avatar" src="images/ray-avatar-poster.png" width="28" height="28" alt=""><div><div class="rp-answer"><p>Ready to place it. Please review the destination.</p></div><div class="rp-action-card "><b>Place document</b><p>Utility bill.pdf as Utility bill on Orchard House · DL-1042</p><div class="rp-card-actions" data-feature-controls="" hidden=""><button type="button" class="rp-ui-btn primary" data-feature-choice="1">Confirm sample</button></div></div><div class="rp-reactions" aria-hidden="true"><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="7" width="12" height="14" rx="2"></rect><path d="M15 7V3H4v14h4"></path></svg><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 10h-4v11h4M7 11l5-8a2 2 0 0 1 2 2l-1 5h6a2 2 0 0 1 2 2l-2 8H7z"></path></svg><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7a9 9 0 1 0 1 8M20 3v5h-5"></path></svg></div></div></div></div><div class="rp-composer-wrap"><div class="rp-composer"><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 13 6-6a3 3 0 0 1 4 4l-8 8a5 5 0 0 1-7-7l9-9a4 4 0 0 1 6 6l-9 9a2 2 0 0 1-3-3l8-8"></path></svg><span>Ask about your projects…</span><i><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6"></path></svg></i></div><p>Ray can make mistakes. Check important info.</p></div></div></div><div class="feature-panel" data-feature-object="" data-feature-panel="1" tabindex="-1" role="group" aria-label="Sample result"><div class="rp-chat "><header class="rp-chat-head"><div class="rp-chat-identity"><img class="rp-avatar" src="images/ray-avatar-poster.png" width="28" height="28" alt=""><div><div class="rp-chat-title"><b>Ask Ray</b><span class="rp-beta">Beta</span></div><p>Orchard House · DL-1042 · Origination</p></div></div><div class="rp-tools" aria-hidden="true"><span><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></span><span><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span><span><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 9h18M9 9v12M15 9v12M3 15h18"></path></svg></span><i></i><span><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3h7v7M21 3l-9 9M10 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5"></path></svg></span><span><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span></div></header><div class="rp-messages"><div class="rp-user"><p>Can you add this to my project?<span class="rp-bubble-file"><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 13 6-6a3 3 0 0 1 4 4l-8 8a5 5 0 0 1-7-7l9-9a4 4 0 0 1 6 6l-9 9a2 2 0 0 1-3-3l8-8"></path></svg> Utility bill.pdf <small>248 KB</small></span></p></div><div class="rp-assistant "><img class="rp-avatar" src="images/ray-avatar-poster.png" width="28" height="28" alt=""><div><div class="rp-answer"><p>The document is now on your project.</p></div><div class="rp-action-card is-complete"><b>Placed</b><p>Utility bill on DL-1042.</p><div class="rp-card-actions"><span class="rp-ui-btn primary">View document</span><span class="rp-ui-btn">Open project</span></div></div><div class="rp-reactions" aria-hidden="true"><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="7" width="12" height="14" rx="2"></rect><path d="M15 7V3H4v14h4"></path></svg><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 10h-4v11h4M7 11l5-8a2 2 0 0 1 2 2l-1 5h6a2 2 0 0 1 2 2l-2 8H7z"></path></svg><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7a9 9 0 1 0 1 8M20 3v5h-5"></path></svg></div></div></div></div><div class="rp-composer-wrap"><div class="rp-composer"><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 13 6-6a3 3 0 0 1 4 4l-8 8a5 5 0 0 1-7-7l9-9a4 4 0 0 1 6 6l-9 9a2 2 0 0 1-3-3l8-8"></path></svg><span>Ask about your projects…</span><i><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6"></path></svg></i></div><p>Ray can make mistakes. Check important info.</p></div></div><div class="feature-replay" data-feature-controls="" hidden=""><button type="button" class="feature-replay-button" data-feature-choice="0">Replay example</button></div></div></div><p class="feature-status" data-feature-status="" role="status" aria-live="polite">Review the project and document type.</p><figcaption class="cs-caption">Placing a document. Reconstructed, sample data.</figcaption></figure><figure class="feature-story feature-support" data-ray-feature="" data-step="0" data-feature-default="0" data-feature-steps="1" data-feature-messages="[&quot;Review what goes to support.&quot;,&quot;The sample request appears in the Activity Log.&quot;]"><div class="feature-board"><div class="feature-panel" data-feature-object="" data-feature-panel="0" tabindex="-1" role="group" aria-label="Review sample"><div class="rp-chat "><header class="rp-chat-head"><div class="rp-chat-identity"><img class="rp-avatar" src="images/ray-avatar-poster.png" width="28" height="28" alt=""><div><div class="rp-chat-title"><b>Ask Ray</b><span class="rp-beta">Beta</span></div><p>Orchard House · DL-1042 · Origination</p></div></div><div class="rp-tools" aria-hidden="true"><span><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></span><span><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span><span><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 9h18M9 9v12M15 9v12M3 15h18"></path></svg></span><i></i><span><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3h7v7M21 3l-9 9M10 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5"></path></svg></span><span><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span></div></header><div class="rp-messages"><div class="rp-user"><p>I need a person to help with this review.</p></div><div class="rp-assistant "><img class="rp-avatar" src="images/ray-avatar-poster.png" width="28" height="28" alt=""><div><div class="rp-answer"><p>Here’s the request for you to review.</p></div><div class="rp-action-card "><b>Raise a support ticket</b><p>Document review for Orchard House · DL-1042. Includes this conversation and current page.</p><div class="rp-card-actions" data-feature-controls="" hidden=""><button type="button" class="rp-ui-btn primary" data-feature-choice="1">Send sample request</button></div></div><div class="rp-reactions" aria-hidden="true"><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="7" width="12" height="14" rx="2"></rect><path d="M15 7V3H4v14h4"></path></svg><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 10h-4v11h4M7 11l5-8a2 2 0 0 1 2 2l-1 5h6a2 2 0 0 1 2 2l-2 8H7z"></path></svg><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7a9 9 0 1 0 1 8M20 3v5h-5"></path></svg></div></div></div></div><div class="rp-composer-wrap"><div class="rp-composer"><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 13 6-6a3 3 0 0 1 4 4l-8 8a5 5 0 0 1-7-7l9-9a4 4 0 0 1 6 6l-9 9a2 2 0 0 1-3-3l8-8"></path></svg><span>Ask about your projects…</span><i><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6"></path></svg></i></div><p>Ray can make mistakes. Check important info.</p></div></div></div><div class="feature-panel" data-feature-object="" data-feature-panel="1" tabindex="-1" role="group" aria-label="Sample result"><div class="rp-activity"><div class="rp-section-title"><b>Activity Log</b><span class="rp-ui-btn">Staff view</span></div><div class="rp-activity-project"><span>Orchard House · DL-1042</span><h3>Support request created</h3></div><div class="rp-activity-event"><i><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11a9 9 0 0 1-9 9H4l-2 2V11a9 9 0 0 1 19 0Z"></path></svg></i><div><b>Support inquiry</b><p>Document review</p><span>Intercom · Open</span></div></div><div class="rp-activity-event"><i><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4 4 10-10"></path></svg></i><div><b>Project context included</b><p>Conversation and current page</p><span>Available to the support team</span></div></div></div><div class="feature-replay" data-feature-controls="" hidden=""><button type="button" class="feature-replay-button" data-feature-choice="0">Replay example</button></div></div></div><p class="feature-status" data-feature-status="" role="status" aria-live="polite">Review what goes to support.</p><figcaption class="cs-caption">Escalating to support. Reconstructed, sample data.</figcaption></figure></div><figure class="handoff-figure"><ol class="handoff"><li><b>You confirm</b><p>The conversation, project and current page go with the request.</p></li><li><b>Ray Triage</b><p>Classifies and summarizes the case, following SOPs and policies from Ops and Growth.</p></li><li><b>Routing rules</b><p>Configured by us, separately from the classification, to pick the team.</p></li><li><b>Intercom and Slack</b><p>The case lands where the team already works.</p></li><li><b>A person</b><p>Resolves it and closes it.</p></li></ol><figcaption class="cs-caption">What happens after you confirm an escalation, simplified.</figcaption></figure></div></section>
 
-            <div class="ray-chat-thread" id="ray-thread" role="log" aria-live="polite" aria-label="Conversation with Ray">
-              <div class="rc-empty" id="ray-empty">
-                <p class="rc-empty-h">How can I help with Maple Street?</p>
-                <p class="rc-empty-s">Ask about the project, its documents, review history, or next step. Every answer is checked against the fictional project record and shows where it came from.</p>
-                <div class="rc-suggest" role="group" aria-label="Suggested questions">
-                  <button type="button" class="rc-sugg" data-prompt="Why can't this project advance?">Why can&rsquo;t this project advance?</button>
-                  <button type="button" class="rc-sugg" data-prompt="What documents are still missing?">What documents are still missing?</button>
-                  <button type="button" class="rc-sugg" data-prompt="Find the signed agreement for this project">Find the signed agreement for this project</button>
-                  <button type="button" class="rc-sugg" data-prompt="How much have we been paid on this project?">How much have we been paid on this project?</button>
-                  <button type="button" class="rc-sugg" data-prompt="I need help from a person.">I need help from a person.</button>
-                </div>
-              </div>
-            </div>
+<section class="cs-section ray-chapter ray-homeowners" id="homeowners" data-ray-chapter="" aria-labelledby="homeowners-h"><div class="cs-wrap wide"><div class="ch-grid ch-grid-home"><div class="ch-text"><p class="cs-kicker"><span class="num">06</span>Homeowners</p><h2 class="cs-h2" id="homeowners-h">Homeowners get their own Ray</h2><div class="ch-prose"><p>Ray also lives in the Daylight homeowner app. It runs on the same service as the portal, but homeowners get their own knowledge base, their own tools and separate access, enforced on the server. After onboarding, Ray helps people track their project, see how their system is doing, find documents like their signed agreement, and reach support through the same triage.</p><p>It can take homeowners to the bank connection and payment screens we already had, but it never handles bank credentials or authorizes a payment.</p><p>The homeowner side of Ray predates my portal work. Our iOS engineer built the native conversation and cards, and I added the shared document, knowledge and support actions they call. I’ve since built Ray into the homeowner web dashboard too; that’s merged behind feature flags, so I’m not counting it as launched.</p></div></div><figure class="homeowner-stage"><div class="native-ray rp-product" aria-label="Homeowner conversation with a signed agreement card"><div class="native-status" aria-hidden="true"><b>9:41</b><span>▰</span></div><header><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6"></path></svg><b>Ray</b><span>•••</span></header><div class="rp-user"><p>Where’s my signed agreement?</p></div><div class="native-answer"><p>Here’s the signed agreement for your home.</p><div class="rp-file"><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h9l5 5v13H5zM14 3v6h5M8 13h8M8 17h6"></path></svg><span><b>Signed agreement</b><small>PDF · Signed copy</small></span></div><span class="native-link">View document <svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3h7v7M21 3l-9 9M10 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5"></path></svg></span></div><div class="rp-composer-wrap"><div class="rp-composer"><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 13 6-6a3 3 0 0 1 4 4l-8 8a5 5 0 0 1-7-7l9-9a4 4 0 0 1 6 6l-9 9a2 2 0 0 1-3-3l8-8"></path></svg><span>Ask Ray…</span><i><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6"></path></svg></i></div><p>Ray can make mistakes. Check important info.</p></div><div class="native-home-indicator" aria-hidden="true"></div></div><figcaption class="cs-caption">Reconstructed iOS conversation and document card · Sample data</figcaption></figure></div></div></section>
 
-            <form class="ray-chat-composer" id="ray-composer">
-              <div class="rc-inputrow">
-                <label class="rc-vh" for="ray-input">Ask Ray about this project</label>
-                <button type="button" class="rc-attach" id="ray-attach" aria-label="Attach a file" title="Attach a file">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5 12 20.5a5 5 0 0 1-7-7l8.5-8.5a3.3 3.3 0 0 1 4.7 4.7l-8.5 8.5a1.7 1.7 0 0 1-2.4-2.4l7.8-7.8"/></svg>
-                </button>
-                <textarea id="ray-input" class="rc-input" rows="1" placeholder="Ask about this project&hellip;"
-                          autocomplete="off" autocapitalize="sentences" spellcheck="true" enterkeyhint="send"></textarea>
-                <button type="submit" class="rc-send" id="ray-send" aria-label="Send message" disabled>
-                  <svg class="i-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
-                  <svg class="i-stop" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="1.5"/></svg>
-                </button>
-              </div>
-              <p class="rc-disclaimer">
-                <span class="rc-mistakes">Ray can make mistakes. Check important info.</span>
-                <span class="rc-fic">Fictional demo. Nothing is sent.</span>
-              </p>
-            </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+<section class="cs-section ray-chapter ray-eval" id="answers" data-ray-chapter="" aria-labelledby="answers-h"><div class="cs-wrap wide"><div class="ch-text ch-text-wide"><p class="cs-kicker"><span class="num">07</span>Evaluation</p><h2 class="cs-h2" id="answers-h">What our first evaluation couldn’t tell us</h2><div class="ch-prose ch-prose-cols"><p>Ray isn’t a model we trained. It’s an existing model connected to our approved knowledge and to tools scoped by permission. Process questions pull from the knowledge base, project questions query current project data and notes, and Ray cites what it used.</p><p>Retrieval started as keyword search over a curated Markdown knowledge base. I added semantic search alongside it, because notes and questions often describe the same situation in different words. We combined the two rankings and kept keyword search as the fallback.</p><p>Our first evaluation didn’t show that hybrid search was better in general. Our golden set paired each question with the article we expected back, and it mostly used phrasings keyword search already handled. It also only checked retrieval. Ray can pull the right article and still misread it, or answer half the question.</p><p>Next, I’d build end-to-end cases that check the whole task, from the answer itself to knowing when to hand off.</p></div></div><figure class="eval-figure"><div class="eval-board rp-product"><div class="rp-chat "><header class="rp-chat-head"><div class="rp-chat-identity"><img class="rp-avatar" src="images/ray-avatar-poster.png" width="28" height="28" alt=""><div><div class="rp-chat-title"><b>Ask Ray</b><span class="rp-beta">Beta</span></div><p>Ray can only see projects visible to you.</p></div></div><div class="rp-tools" aria-hidden="true"><span><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></span><span><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span><span><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 9h18M9 9v12M15 9v12M3 15h18"></path></svg></span><i></i><span><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3h7v7M21 3l-9 9M10 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5"></path></svg></span><span><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span></div></header><div class="rp-messages"><div class="rp-user"><p>Where can I find the contract?</p></div><div class="rp-assistant "><img class="rp-avatar" src="images/ray-avatar-poster.png" width="28" height="28" alt=""><div><div class="rp-answer"><p><strong>Your signed agreement is in Documents.</strong></p><p>The project notes confirm that a signed copy was uploaded.</p></div><details class="source-inspect"><summary>Knowledge base · Signed agreements <svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></summary><div class="source-excerpt"><b>Signed agreements</b><p>Find the signed copy under Documents on the project page.</p><span>Illustrative knowledge-base excerpt</span></div></details><p class="rp-sources">Sources: Knowledge base · Project notes</p><div class="rp-reactions" aria-hidden="true"><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="7" width="12" height="14" rx="2"></rect><path d="M15 7V3H4v14h4"></path></svg><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 10h-4v11h4M7 11l5-8a2 2 0 0 1 2 2l-1 5h6a2 2 0 0 1 2 2l-2 8H7z"></path></svg><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7a9 9 0 1 0 1 8M20 3v5h-5"></path></svg></div></div></div></div><div class="rp-composer-wrap"><div class="rp-composer"><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 13 6-6a3 3 0 0 1 4 4l-8 8a5 5 0 0 1-7-7l9-9a4 4 0 0 1 6 6l-9 9a2 2 0 0 1-3-3l8-8"></path></svg><span>Ask about your projects…</span><i><svg class="rp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6"></path></svg></i></div><p>Ray can make mistakes. Check important info.</p></div></div><div class="eval-compare"><div class="eval-col"><p class="eval-label">What our golden set checked</p><dl><div><dt>Question</dt><dd>Where can I find the contract?</dd></div><div><dt>Expected article</dt><dd>Signed agreements</dd></div></dl><p class="eval-pass"><i aria-hidden="true"></i>Retrieved the expected article</p></div><div class="eval-col is-next"><p class="eval-label">What I’d check next</p><ul><li>Was the answer right?</li><li>Did Ray use the right project?</li><li>Did it stay inside the person’s permissions?</li><li>Did it decline or escalate when the evidence wasn’t there?</li></ul></div></div></div><figcaption class="cs-caption">Reconstructed answer with its sources, next to an illustrative golden-set case.</figcaption></figure></div></section>
 
-    <!-- ==================== WHY YOU CAN TRUST IT ==================== -->
-    <!-- The Run Cabinet-inspired centerpiece. One answer surface stays
-         persistent while four guarantees scroll past. Each guarantee lights a
-         single subtle proof inside the same interface. GSAP ScrollTrigger
-         drives the pinned split + scrubbed text; everything is visible and
-         correctly ordered without JS, and the pin is dropped on mobile and
-         under reduced motion. -->
-    <section class="ray-section ray-trust" id="ray-trust" aria-labelledby="trust-h">
-      <div class="ray-wrap reveal">
-        <div class="ray-trust-head">
-          <p class="ray-eyebrow"><span class="tick" aria-hidden="true"></span>Why you can trust it</p>
-          <h2 class="ray-h2" id="trust-h">Usefulness was the easy part.</h2>
-          <p class="ray-lead">Getting an assistant to say something helpful is not the hard part anymore. The hard part is everything around the answer. Watch one question, and the four quiet guarantees that make its answer worth acting on.</p>
-        </div>
-      </div>
+<section class="cs-section ray-engineering" id="engineering" data-ray-chapter="" aria-labelledby="engineering-h" data-ray-motion=""><div class="cs-wrap wide"><div class="ch-text ch-text-wide"><p class="cs-kicker"><span class="num">08</span>Engineering</p><h2 class="cs-h2" id="engineering-h">How it’s built</h2><p class="cs-lead">Ray runs inside Daylight’s existing stack. These are the parts the design depended on.</p></div><div class="engineering-grid"><article><figure class="eng-diagram eng-core" role="img" aria-label="The portal and iOS app use a shared Ray service"><div class="eng-clients"><span>Portal</span><span>iOS</span></div><div class="eng-wires"><i></i><i></i></div><div class="eng-service"><img class="rp-avatar" src="images/ray-avatar-poster.png" width="28" height="28" alt=""><b>Ray service</b></div><div class="eng-tools"><span>Model</span><span>Tools</span></div></figure><h3>One service, separate audiences</h3><p>The portal and the homeowner app call the same Ray service. Each audience gets its own knowledge, tools and access.</p><p class="engineering-stack">Python · Django · Jinja<br> HTMX · Stimulus · Tailwind</p></article><article><figure class="eng-diagram eng-stream" role="img" aria-label="A server turn sends buffered events to the conversation"><div class="eng-stream-head"><span>Server turn</span><span>SSE</span></div><div class="eng-event-lane"><i></i><i></i><i></i><i></i><i></i></div><div class="eng-buffer"><span>Event buffer</span><b>Redis</b></div><div class="eng-message-lines"><i></i><i></i><i></i></div><span class="eng-endpoint">Conversation</span></figure><h3>Answers that survive navigation</h3><p>A turn runs on the server and streams through a buffer, so a page that loads mid-answer can reconnect. Finished messages are saved.</p><p class="engineering-stack">Responses API · SSE<br> Redis · PostgreSQL</p></article><article><figure class="eng-diagram eng-scope" role="img" aria-label="Scoped records and knowledge feed a change the person asked for, which they confirm"><div class="eng-boundary"><span>Your access</span><div><b>Records</b><b>Knowledge</b></div></div><div class="eng-gate-line"><i></i></div><div class="eng-confirm"><span>Requested change</span><b>You confirm</b></div></figure><h3>Permissions in the tools</h3><p>Search is scoped before results reach the model. Changes you ask for, like placing a document or sending a support request, are reviewed and confirmed, with a fresh access check before they run.</p><p class="engineering-stack">pgvector · BM25<br> Scoped queries · Confirmed changes</p></article></div></div></section>
 
-      <div class="ray-trust-split" id="ray-trust-split">
-        <div class="ray-trust-stage">
-          <div class="ray-trust-card" id="ray-trust-card" data-trust="source">
-            <div class="tc-top" aria-hidden="true">
-              <span class="tc-mini"><img src="images/ray-avatar-poster.png" alt="" width="28" height="28"></span>
-              <span class="tc-id">Ask Ray</span>
-              <span class="tc-ctx">Maple Street&nbsp;·&nbsp;PPA-4021</span>
-            </div>
-            <div class="tc-ask"><span class="tc-tag" aria-hidden="true">You</span>Why can&rsquo;t this project advance?</div>
-            <p class="tc-answer">Maple Street can&rsquo;t advance because <b>title verification is still open</b>. The signed agreement is in and identity is verified; the reviewer is waiting on a current title document.</p>
+<section class="ray-credits" id="evidence" aria-label="Who built what"><div class="cs-wrap wide"><details class="cs-details credits-detail"><summary>Who built what</summary><div><p>Ray existed before this work: teammates built the shared chat engine, the first scoped partner tools, a dashboard drawer and the homeowner conversations. From August, I led the portal expansion, implemented it with AI tools and took it through engineering review. That covers the three views, document and support actions, sheets, hybrid retrieval, triage and the shared actions behind the homeowner app. Native iOS was my teammate’s work, and triage follows policies from our Ops and Growth teams.</p><p class="credits-note">Every product image here is a reconstruction with fictional data.</p></div></details></div></section>
 
-            <div class="tc-proofs">
-              <!-- source -->
-              <div class="tc-proof" data-proof="source">
-                <p class="tc-proof-k"><span class="tc-dot" aria-hidden="true"></span>Cited source</p>
-                <div class="tc-quote">
-                  <span class="tc-chip">Origination SOP</span>
-                  <p>&ldquo;A current, unexpired proof of title must be on file before a project can clear document verification.&rdquo;</p>
-                  <span class="tc-fresh">quoted verbatim&nbsp;·&nbsp;checked this turn</span>
-                </div>
-              </div>
-              <!-- authority -->
-              <div class="tc-proof" data-proof="authority">
-                <p class="tc-proof-k"><span class="tc-dot" aria-hidden="true"></span>Checked against your access</p>
-                <div class="tc-rows">
-                  <div class="tc-row ok"><span>This project&rsquo;s stage &amp; blockers</span><span class="tc-state">visible</span></div>
-                  <div class="tc-row off"><span>Another rep&rsquo;s projects</span><span class="tc-state">withheld</span></div>
-                  <div class="tc-row off"><span>SSN, income, co-applicant data</span><span class="tc-state">never serialized</span></div>
-                </div>
-              </div>
-              <!-- context -->
-              <div class="tc-proof" data-proof="context">
-                <p class="tc-proof-k"><span class="tc-dot" aria-hidden="true"></span>Attached to the project</p>
-                <div class="tc-context">
-                  <p class="tc-context-line">The same thread, wherever the work happens.</p>
-                  <div class="tc-frames">
-                    <span class="tc-frame">Full page</span>
-                    <span class="tc-frame">Drawer</span>
-                    <span class="tc-frame">Pop-out</span>
-                    <span class="tc-frame on">iOS</span>
-                  </div>
-                  <span class="tc-fresh">20 recent turns reloaded each request</span>
-                </div>
-              </div>
-              <!-- action -->
-              <div class="tc-proof" data-proof="action">
-                <p class="tc-proof-k"><span class="tc-dot" aria-hidden="true"></span>Proposed, never quietly run</p>
-                <div class="tc-action">
-                  <div class="tc-action-top"><span>Place the updated title document</span><span class="tc-clock">expires in 15 min</span></div>
-                  <div class="tc-flow">
-                    <span class="tc-step">Propose</span>
-                    <span class="tc-arrow" aria-hidden="true"></span>
-                    <span class="tc-step hot">Confirm</span>
-                    <span class="tc-arrow" aria-hidden="true"></span>
-                    <span class="tc-step">Placed</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="ray-trust-steps">
-          <article class="ray-trust-step" data-trust="source" aria-labelledby="ts1-h">
-            <h3 class="ray-trust-step-h" id="ts1-h">It can point to the source.</h3>
-            <p class="ray-trust-step-p">Ray quotes the published article it used and links back to it. Portal and homeowner knowledge stay separate. If a source did not run, Ray does not claim it.</p>
-          </article>
-          <article class="ray-trust-step" data-trust="authority" aria-labelledby="ts2-h">
-            <h3 class="ray-trust-step-h" id="ts2-h">It checks who is asking.</h3>
-            <p class="ray-trust-step-p">Access is re-checked before retrieval. Ray inherits the viewer&rsquo;s permissions, so an answer can never reveal more than the product already allows.</p>
-          </article>
-          <article class="ray-trust-step" data-trust="context" aria-labelledby="ts3-h">
-            <h3 class="ray-trust-step-h" id="ts3-h">It stays attached to the project.</h3>
-            <p class="ray-trust-step-p">The conversation belongs to the project, not the tab. It follows the work across a full page, drawer, pop-out, and iPhone without losing the thread.</p>
-          </article>
-          <article class="ray-trust-step" data-trust="action" aria-labelledby="ts4-h">
-            <h3 class="ray-trust-step-h" id="ts4-h">It asks before it acts.</h3>
-            <p class="ray-trust-step-p">Ray can retrieve or propose, never quietly execute. Every action needs an explicit, single-use confirmation. Unresolved questions become honest handoffs.</p>
-          </article>
-        </div>
-      </div>
-
-      <div class="ray-mobile-trust" aria-label="Four ways Ray earns trust">
-        <article class="ray-mobile-trust-card mt-source">
-          <p class="mt-index">01&nbsp;&nbsp;Evidence</p>
-          <h3>It shows its work.</h3>
-          <p>Ray quotes the published source it used and links back to it. If a source did not run, Ray does not claim it.</p>
-          <div class="mt-proof mt-quote">
-            <span>Origination SOP</span>
-            <blockquote>&ldquo;A current proof of title must be on file before a project can clear document verification.&rdquo;</blockquote>
-            <small>Quoted verbatim&nbsp;·&nbsp;checked this turn</small>
-          </div>
-        </article>
-        <article class="ray-mobile-trust-card mt-access">
-          <p class="mt-index">02&nbsp;&nbsp;Access</p>
-          <h3>It knows who is asking.</h3>
-          <p>Permissions are checked before retrieval, so an answer can never reveal more than the product already allows.</p>
-          <div class="mt-proof mt-access-list">
-            <span><b>Project stage &amp; blockers</b><i>Visible</i></span>
-            <span><b>Another rep&rsquo;s projects</b><i>Withheld</i></span>
-            <span><b>SSN &amp; income data</b><i>Never serialized</i></span>
-          </div>
-        </article>
-        <article class="ray-mobile-trust-card mt-context">
-          <p class="mt-index">03&nbsp;&nbsp;Context</p>
-          <h3>It stays with the project.</h3>
-          <p>The conversation belongs to the project, not the tab. The same thread follows the work without losing context.</p>
-          <div class="mt-proof">
-            <div class="mt-thread"><span>Maple Street</span><b>PPA-4021</b></div>
-            <div class="mt-surfaces"><span>Full page</span><span>Drawer</span><span>Pop-out</span><span class="is-on">iPhone</span></div>
-            <small>20 recent turns reloaded each request</small>
-          </div>
-        </article>
-        <article class="ray-mobile-trust-card mt-action">
-          <p class="mt-index">04&nbsp;&nbsp;Control</p>
-          <h3>It asks before it acts.</h3>
-          <p>Ray can retrieve or propose, never quietly execute. Every action needs an explicit, single-use confirmation.</p>
-          <div class="mt-proof mt-action-flow">
-            <span>Propose</span><i></i><span class="is-on">Confirm</span><i></i><span>Execute</span>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- ==================== ONE RAY, TWO READERS ==================== -->
-    <section class="ray-section ray-bg-beige2 ray-readers" aria-labelledby="readers-h">
-      <div class="ray-wrap reveal">
-        <div class="ray-readers-head">
-          <p class="ray-eyebrow accent"><span class="tick" aria-hidden="true"></span>Two readers</p>
-          <h2 class="ray-h2" id="readers-h">One Ray. Two private worlds.</h2>
-          <p class="ray-lead">The operator in the portal and the homeowner on their phone meet the same Ray. The readers, the knowledge, the tools, and the privacy boundaries all differ. The trust contract stays exactly the same.</p>
-        </div>
-
-      </div>
-
-      <div class="ray-readers-scroll" id="ray-readers-scroll">
-        <div class="ray-readers-stage" id="ray-readers-stage">
-          <div class="ray-reader-modes" aria-hidden="true">
-            <span class="is-active" data-reader-label="portal">Operator portal</span>
-            <i></i>
-            <span data-reader-label="phone">Homeowner app</span>
-          </div>
-
-          <div class="ray-reader-canvas">
-            <figure class="ray-portal" id="ray-portal">
-              <figcaption class="ray-surface-label"><b>Operator</b><span>Detailed, operational, permissioned</span></figcaption>
-              <div class="ray-surface-window">
-                <div class="rsw-rail" aria-hidden="true">
-                  <span class="rsw-brand">daylight</span>
-                  <span class="rsw-nav is-on"></span><span class="rsw-nav"></span><span class="rsw-nav"></span>
-                  <span class="rsw-avatar">MB</span>
-                </div>
-                <div class="rsw-main">
-                  <div class="rsw-context">
-                    <span class="rsw-project"><b>Maple Street residence</b><small>PPA-4021&nbsp;·&nbsp;Document verification</small></span>
-                    <span class="rsw-scope">Operator view</span>
-                  </div>
-                  <div class="rsw-thread">
-                    <div class="rsw-ray"><img src="images/ray-avatar-poster.png" alt="" width="34" height="34"><span><b>Ray</b><small>Project support</small></span></div>
-                    <div class="rsw-question">Why can&rsquo;t this project advance?</div>
-                    <p class="rsw-answer">Title verification is still open. The agreement is signed and identity is verified; the reviewer is waiting on a current title document.</p>
-                    <div class="rsw-result">
-                      <div><span>Blocker</span><b>Title verification</b></div>
-                      <div><span>Owner</span><b>Assigned reviewer</b></div>
-                      <div><span>Next action</span><b>Request current title</b></div>
-                    </div>
-                    <div class="rsw-evidence"><span>Origination SOP</span><small>Live project data&nbsp;·&nbsp;checked this turn</small></div>
-                  </div>
-                  <div class="rsw-compose">Ask Ray about this project<span>&uarr;</span></div>
-                </div>
-              </div>
-            </figure>
-
-            <div class="ray-reader-handoff" aria-hidden="true"><span></span></div>
-
-            <figure class="ray-phone" id="ray-phone">
-              <figcaption class="ray-surface-label"><b>Homeowner</b><span>Plain language, native, personal</span></figcaption>
-              <div class="ray-phone-body" role="img" aria-label="Customer Ray on iOS answering a homeowner with project status, a cited timeline, and a guarded support action.">
-                <span class="rpl-notch" aria-hidden="true"></span>
-                <div class="rpl-screen">
-                  <div class="rpl-bar">
-                    <span class="rpl-back" aria-hidden="true">&#8249;</span>
-                    <span class="rpl-title">Ray</span>
-                    <span class="rpl-more" aria-hidden="true">&middot;&middot;&middot;</span>
-                  </div>
-                  <div class="rpl-thread">
-                    <div class="rpl-ray"><img src="images/ray-avatar-poster.png" alt="" width="32" height="32"><span><b>Ray</b><small>Home &amp; support</small></span></div>
-                    <div class="rpl-ask">When does my system turn on?</div>
-                    <p class="rpl-answer">Your install is scheduled for September 3. After inspection, the utility&rsquo;s current target for permission to operate is September 18.</p>
-                    <div class="rpl-result">
-                      <span>Project timeline</span>
-                      <div><small>Sep 03</small><b>Installation</b><i>Next</i></div>
-                      <div><small>Sep 18</small><b>Permission to operate</b></div>
-                    </div>
-                    <div class="rpl-evidence"><span>My project</span><small>checked just now</small></div>
-                    <div class="rpl-action"><span><b>Still need help?</b><small>Ask a person about your install.</small></span><span class="rpl-action-btn">Review request</span></div>
-                  </div>
-                  <div class="rpl-compose">Message Ray<span>&uarr;</span></div>
-                </div>
-              </div>
-            </figure>
-          </div>
-
-          <p class="ray-reader-caption"><span data-reader-caption>One conversation contract, shaped to the person reading it.</span></p>
-        </div>
-      </div>
-
-      <div class="ray-wrap">
-        <ul class="ray-readers-lines reveal">
-          <li><span class="k">Their world</span><span class="v">The operator sees stage, blockers, documents, payouts, and review history. The homeowner sees their subscription, install timeline, energy, and their own documents.</span></li>
-          <li><span class="k">Never shown</span><span class="v">SSN, date of birth, household income, and co-applicant data are never serialized to either reader. Each sees only what they are already allowed to see.</span></li>
-          <li><span class="k">Same contract</span><span class="v">Both lanes cite their source, re-check access every turn, and propose before they act. The iOS contract is additive and CI-gated: a change that could break a shipped app fails the build.</span></li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- ==================== EVIDENCE, NOT SPECTACLE ==================== -->
-    <section class="ray-section ray-evidence" aria-labelledby="ev-h">
-      <div class="ray-wrap reveal">
-        <div class="ray-evidence-head">
-          <p class="ray-eyebrow"><span class="tick" aria-hidden="true"></span>On the record</p>
-          <h2 class="ray-h2" id="ev-h">The system, accounted for.</h2>
-          <p class="ray-lead">Ray shipped first as a focused beta, close to the people doing the work. Their questions and friction became the roadmap: stronger project context, deeper retrieval, a native homeowner experience, and tighter safeguards with every release.</p>
-        </div>
-
-        <div class="ray-evi-figures">
-          <div class="ray-evi-fig">
-            <span class="ef-num">68</span>
-            <span class="ef-lbl">reviewable published articles, across two isolated lanes</span>
-          </div>
-          <div class="ray-evi-fig">
-            <span class="ef-num">20</span>
-            <span class="ef-lbl">most recent turns reloaded on every request</span>
-          </div>
-          <div class="ray-evi-fig">
-            <span class="ef-num">15<span class="u">min</span></span>
-            <span class="ef-lbl">single-use lifetime before a proposal expires</span>
-          </div>
-          <div class="ray-evi-fig">
-            <span class="ef-num">0</span>
-            <span class="ef-lbl">sensitive or destructive actions in the tool catalog</span>
-          </div>
-        </div>
-
-        <p class="ray-evi-railk">The product, release by release</p>
-      </div>
-
-      <div class="ray-evi-rail-wrap">
-        <ul class="ray-evi-rail" id="ray-evi-rail" aria-label="Pull request history">
-          <li class="ray-evi-card"><span class="pr-id">#1338</span><span class="pr-nm">The first Ray conversation inside a live project</span><span class="pr-chapter">First release</span></li>
-          <li class="ray-evi-card"><span class="pr-id">#1562</span><span class="pr-nm">Project-aware support across the operator portal</span><span class="pr-chapter">Portal</span></li>
-          <li class="ray-evi-card"><span class="pr-id">#1926</span><span class="pr-nm">Beta feedback shaped the conversation and handoff</span><span class="pr-chapter">Iteration</span></li>
-          <li class="ray-evi-card"><span class="pr-id">#1932</span><span class="pr-nm">Semantic retrieval made answers more precise</span><span class="pr-chapter">Grounding</span></li>
-          <li class="ray-evi-card"><span class="pr-id">#1935</span><span class="pr-nm">Ray arrived in the homeowner iOS app</span><span class="pr-chapter">iOS</span></li>
-          <li class="ray-evi-card"><span class="pr-id">#1937</span><span class="pr-nm">Mobile contract compatibility hardened</span><span class="pr-chapter">Reliability</span></li>
-          <li class="ray-evi-card"><span class="pr-id">#1938</span><span class="pr-nm">The last action escape hatch was removed</span><span class="pr-chapter">Guardrail</span></li>
-        </ul>
-      </div>
-
-      <div class="ray-wrap">
-        <p class="ray-evi-note reveal"><span class="sq" aria-hidden="true"></span>I conceived, designed, and built Ray end to end. The first release was deliberately a beta: ship the useful core, put it in front of the team, listen closely, then compound what we learned into better retrieval, clearer handoffs, native iOS support, and stricter action boundaries.</p>
-      </div>
-    </section>
-
-    <!-- ==================== CLOSE ==================== -->
-    <section class="ray-section ray-closing reveal" aria-labelledby="close-h">
-      <div class="ray-wrap narrow">
-        <div class="ray-close-object" aria-hidden="true">
-          <div class="ray-close-sun">
-            <img src="images/ray-avatar-poster.png" alt="" width="120" height="120">
-          </div>
-        </div>
-        <p class="ray-eyebrow"><span class="tick" aria-hidden="true"></span>The resolution</p>
-        <h2 class="ray-h2" id="close-h">Trustworthiness was the product.</h2>
-        <p class="ray-lead">I conceived, designed, and built Ray from the first project-aware conversation through the shipped portal and native iOS experiences. The beta created a direct feedback loop with the team; every release after it made the answers more grounded, the interactions more familiar, and the action boundaries more dependable.</p>
-        <p class="ray-lead">Permission, so it only ever sees what the viewer sees. Grounding, so every claim points at a source that actually ran. Action boundaries, so it can propose but never quietly execute. Graceful escalation, so it knows when to hand the problem to a person.</p>
-        <p class="ray-closing-final">Anyone can make an assistant talk. The work was making this one worth <em>trusting</em>.</p>
-        <div class="ray-closing-links">
-          <a class="ray-outlink solid" href="daylight.html">&larr;&nbsp;Back to the Daylight case study</a>
-          <a class="ray-outlink ghost" href="index.html">Mike Battaglia</a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="ray-footer">
-    <div class="ray-wrap">
-      <span class="fmeta"><b>Ray</b>&nbsp;·&nbsp;Daylight&nbsp;·&nbsp;Grounded support system&nbsp;·&nbsp;2026</span>
-      <span class="fmeta">Product, design, and engineering&nbsp;·&nbsp;Mike Battaglia</span>
+<section class="cs-section ray-close" id="role" aria-labelledby="role-h"><div class="cs-wrap wide"><div class="ch-grid ch-grid-close"><div class="ch-text"><h2 class="cs-h2" id="role-h">More of my work at Daylight</h2><p class="cs-lead">Ray is one part of it. The Daylight overview covers the portal around it.</p></div><ul class="close-links"><li><a href="daylight.html#journey">Project pages and stages <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7"/></svg></a></li><li><a href="daylight.html#queues">Dashboards and saved views <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7"/></svg></a></li><li><a href="daylight.html#notes">Project Notes <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7"/></svg></a></li><li><a href="daylight.html#mobile">Notes on a phone <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7"/></svg></a></li><li><a href="daylight.html#reach">The homeowner app’s energy and payments <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7"/></svg></a></li></ul></div><div class="cs-actions close-actions"><a class="cs-btn large" href="daylight.html">Daylight overview <span aria-hidden="true">→</span></a><a class="cs-btn ghost large" href="ray-demo.html" data-ray-demo>Try the sample demo <span aria-hidden="true">↗</span></a><a class="cs-btn ghost large" href="index.html#work">More selected work</a></div></div></section>
+</main>
+  <footer class="cs-footer">
+    <div class="cs-wrap wide">
+      <span><b>Ray at Daylight</b> · 2026</span>
+      <span>Product direction, interaction design and implementation · Mike Battaglia</span>
     </div>
   </footer>
 
   <script src="js/daylight-gate.js" defer></script>
-  <script src="js/vendor/gsap.min.js" defer></script>
-  <script src="js/vendor/ScrollTrigger.min.js" defer></script>
-  <script src="js/ray-case-study.js?v=29" defer></script>
+  <script src="js/cs-state.js?v=3" defer></script>
+  <script src="js/dl-shared.js?v=7" defer></script>
+  <script src="js/product-scenes.js?v=3" defer></script>
+  <script src="js/ray-case-study.js?v=50" defer></script>
+  <script src="js/ray-return.js?v=1" defer></script>
 </body>
 </html>

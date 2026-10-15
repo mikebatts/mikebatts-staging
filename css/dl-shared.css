@@ -1,0 +1,244 @@
+/* ==========================================================================
+   Shared primitives for the Daylight and Ray case studies (v7).
+   An editorial reading system for a static site read mostly in Safari:
+   one column of prose, large legible artifacts, ordinary vertical scroll.
+   Fonts follow the Daylight brand: Feature Deck for the opening statement
+   and one decisive line per page, Aeonik Pro for everything people read,
+   ABC Social Mono only for short tracked labels. No em dashes in copy.
+   Page files (daylight-case-study.css, ray.css) add composition only.
+   ========================================================================== */
+@font-face{font-family:'Feature Deck';src:url('../fonts/FeatureDeck-400.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Aeonik Pro';src:url('../fonts/AeonikPro-400.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Aeonik Pro';src:url('../fonts/AeonikPro-500.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'ABC Social Mono';src:url('../fonts/DaylightSocialMono-400.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+
+:root{
+  --orange:#F66F00;--orange-ink:#B54D00;--yellow:#FCCC3C;
+  --beige:#FFF7E9;--beige-1:#F7EED9;--beige-2:#F0E5CF;--beige-3:#DACAB6;--paper:#FFFCF4;--white:#FFFFFF;
+  --black:#111111;--brown:#4C2806;--ink:#1C130A;--muted:#5C4632;--label:#7A5A3E;--green:#2F7A3E;--red:#B3401A;
+  --hair:rgba(30,30,30,.10);--hair-strong:rgba(30,30,30,.18);
+  --dark:#111111;--dark-2:#1A1A1A;--dark-ink:#FFF7E9;--dark-muted:rgba(255,247,233,.74);--dark-hair:rgba(255,247,233,.16);
+  --display:'Feature Deck',Georgia,'Times New Roman',serif;
+  --sans:'Aeonik Pro',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  --mono:'ABC Social Mono','SFMono-Regular',ui-monospace,Menlo,monospace;
+  --ease:cubic-bezier(.16,1,.3,1);--ease-out:cubic-bezier(.33,1,.68,1);
+  --t-press:.16s;--t-state:.22s;--t-reveal:.5s;
+  --r-btn:4px;--r-card:6px;--r-panel:12px;--r-img:16px;
+  --shadow-card:0 24px 48px -40px rgba(76,40,6,.32),0 6px 18px -14px rgba(76,40,6,.12);
+  --wrap:1180px;--wrap-wide:1320px;--wrap-text:760px;--nav-h:60px;
+  --pad:clamp(20px,4vw,56px);
+  --gap-chapter:clamp(64px,9vw,128px);
+}
+*,*::before,*::after{box-sizing:border-box;min-width:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + env(safe-area-inset-top) + 16px)}
+body{margin:0;background:var(--beige);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;letter-spacing:-.004em;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img,video,svg{max-width:100%;display:block}
+img{height:auto}
+a{color:inherit}
+button{font:inherit;color:inherit}
+[hidden]{display:none !important}
+p{margin:0 0 1em}
+h1,h2,h3,h4{margin:0;font-weight:400;text-wrap:balance;overflow-wrap:anywhere}
+p,li,dd,dt,figcaption,blockquote,small{text-wrap:pretty;overflow-wrap:anywhere}
+ul,ol{margin:0;padding:0}
+blockquote{margin:0}
+.cs-vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--orange);outline-offset:3px;border-radius:2px}
+/* touch-action only on controls; the page itself scrolls and zooms normally */
+a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:rgba(246,111,0,.14)}
+
+/* ---------- skip link ---------- */
+.cs-skip{position:fixed;left:16px;top:-80px;z-index:1200;display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:var(--r-btn);background:var(--brown);color:var(--beige);font-size:15px;font-weight:500;text-decoration:none;transition:top .18s var(--ease)}
+.cs-skip:focus{top:calc(12px + env(safe-area-inset-top))}
+
+/* ---------- site nav: back, project name, one Chapters disclosure ----------
+   Fixed at the top, quiet until the page scrolls. Every control is 44px.
+   The bar has a minimum height, not a fixed one, and its row may wrap, so
+   enlarged text never overlaps the back link and the menu. The project
+   name is omitted under 600px, where a short back label and the Chapters
+   control are what fit.
+   The chapter menu is a native details element; Escape and outside clicks
+   close it (dl-shared.js). A 2px page-position line sits on its lower edge. */
+.cs-nav{position:fixed;top:0;left:0;right:0;z-index:300;min-height:calc(var(--nav-h) + env(safe-area-inset-top));padding-top:env(safe-area-inset-top);border-bottom:1px solid transparent;background:transparent;transition:background .25s ease,border-color .25s ease}
+.cs-nav.is-scrolled{background:rgba(255,247,233,.92);border-color:var(--hair);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.cs-nav.on-dark:not(.is-scrolled){color:var(--dark-ink)}
+.cs-nav-in{min-height:var(--nav-h);display:flex;flex-wrap:wrap;align-items:center;gap:0 12px}
+.cs-nav-back{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 6px 0 0;flex:none;text-decoration:none;font-size:15px;font-weight:500;color:var(--brown)}
+.cs-nav-back svg{width:18px;height:18px;flex:none}
+.cs-nav-back:hover{color:var(--orange-ink)}
+.cs-nav-title{display:inline-flex;align-items:center;min-height:44px;min-width:0;padding-left:12px;border-left:1px solid var(--hair-strong);font-size:15px;color:var(--label)}
+.cs-nav.on-dark:not(.is-scrolled) .cs-nav-back,.cs-nav.on-dark:not(.is-scrolled) .cs-nav-title,.cs-nav.on-dark:not(.is-scrolled) .cs-nav-chapters>summary{color:var(--dark-ink)}
+.cs-nav.on-dark:not(.is-scrolled) .cs-nav-title{border-left-color:var(--dark-hair)}
+.cs-nav-chapters{position:relative;flex:none;margin-left:auto}
+.cs-nav-chapters>summary{list-style:none;display:inline-flex;align-items:center;gap:8px;min-height:44px;min-width:44px;padding:0 10px;cursor:pointer;font-size:15px;font-weight:500;color:var(--brown);border-radius:var(--r-btn)}
+.cs-nav-chapters>summary::-webkit-details-marker{display:none}
+.cs-nav-chapters>summary::after{content:"";width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform var(--t-state) var(--ease-out)}
+.cs-nav-chapters[open]>summary::after{transform:rotate(-135deg) translateY(-2px)}
+.cs-nav-menu{position:absolute;right:0;top:calc(100% + 6px);width:min(320px,calc(100vw - 2 * var(--pad)));max-height:calc(100dvh - var(--nav-h) - env(safe-area-inset-top) - 24px);overflow-y:auto;overscroll-behavior:contain;padding:8px;list-style:none;background:var(--paper);color:var(--brown);border:1px solid var(--hair);border-radius:var(--r-card);box-shadow:var(--shadow-card)}
+.cs-nav-menu a{display:flex;gap:12px;align-items:baseline;min-height:44px;padding:10px 12px;border-radius:var(--r-btn);text-decoration:none;font-size:15px;color:var(--brown)}
+.cs-nav-menu a:hover{background:var(--beige-1)}
+.cs-nav-menu a span{flex:none;font-family:var(--mono);font-size:13px;line-height:16px;color:var(--orange-ink);letter-spacing:.05em}
+.cs-nav-menu a[aria-current="location"]{background:var(--beige-1);font-weight:500}
+.cs-nav-progress{position:absolute;left:0;right:0;bottom:-1px;height:2px;pointer-events:none;overflow:hidden}
+.cs-nav-progress i{display:block;height:100%;background:var(--orange);transform-origin:0 50%;transform:scaleX(0);transition:transform .12s linear}
+
+/* ---------- layout ---------- */
+.cs-wrap{max-width:var(--wrap);margin:0 auto;padding-left:max(var(--pad),env(safe-area-inset-left));padding-right:max(var(--pad),env(safe-area-inset-right))}
+.cs-wrap.wide{max-width:var(--wrap-wide)}
+.cs-wrap.text{max-width:var(--wrap-text)}
+.cs-section{position:relative;padding:var(--gap-chapter) 0;scroll-margin-top:calc(var(--nav-h) + env(safe-area-inset-top) + 8px)}
+.cs-section.dark{background:var(--dark);color:var(--dark-ink)}
+.cs-section.dark .cs-h2,.cs-section.dark .cs-h3,.cs-section.dark .cs-takeaway{color:var(--dark-ink)}
+.cs-section.dark .cs-lead,.cs-section.dark .cs-body{color:var(--dark-muted)}
+.cs-section.dark .cs-kicker{color:#FFA24D}
+.cs-section.dark .cs-kicker .num,.cs-section.dark .cs-caption,.cs-section.dark .cs-label.quiet{color:var(--dark-muted)}
+.cs-chapter{max-width:var(--wrap-text)}
+.cs-chapter .cs-h2{margin-bottom:clamp(16px,2vw,22px)}
+.cs-figure{margin:clamp(32px,5vw,56px) 0 0}
+.cs-figure>figcaption{margin-top:14px}
+.cs-after{margin-top:clamp(28px,4vw,40px);max-width:var(--wrap-text)}
+
+/* ---------- typography ----------
+   Body 17px on phones and 18px from 900px; leads 18 to 22; captions 13.5;
+   short mono labels 13px tracked; h2 about 32 on phones, up to 56 wide;
+   the Feature Deck opening 44 to 52 on phones and up to 96 wide. */
+.cs-label,.cs-kicker,.cs-eyebrow{font-family:var(--mono);font-weight:400;font-size:13px;line-height:16px;letter-spacing:.05em;text-transform:uppercase;color:var(--orange-ink)}
+.cs-label{display:inline-block}
+.cs-label.quiet{color:var(--label)}
+.cs-eyebrow{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin:0 0 18px}
+.cs-kicker{display:flex;align-items:baseline;gap:12px;margin:0 0 16px}
+.cs-kicker .num,.cs-eyebrow .num{flex:none;color:var(--label)}
+.cs-h1{font-family:var(--display);font-size:clamp(44px,4vw + 32px,96px);line-height:.98;letter-spacing:-.02em;color:var(--brown);max-width:12ch}
+.cs-h2{font-family:var(--sans);font-weight:500;font-size:clamp(30px,2.2vw + 24px,56px);line-height:1.06;letter-spacing:-.025em;color:var(--black);margin:0 0 20px}
+.cs-h2.display{font-family:var(--display);font-weight:400;font-size:clamp(36px,3vw + 26px,72px);line-height:1;letter-spacing:-.015em;color:var(--brown)}
+.cs-h3{font-family:var(--sans);font-weight:500;font-size:clamp(22px,1vw + 18px,30px);line-height:1.18;letter-spacing:-.02em;color:var(--black);margin:0 0 12px}
+.cs-lead{font-size:clamp(18px,.5vw + 16px,22px);line-height:1.5;color:var(--muted);max-width:60ch;margin:0 0 18px}
+.cs-body{font-size:inherit;line-height:1.6;color:var(--muted);max-width:62ch;margin:0 0 16px}
+.cs-body b,.cs-lead b{font-weight:500;color:var(--brown)}
+.cs-body:last-child,.cs-lead:last-child{margin-bottom:0}
+.cs-caption{display:block;font-size:13.5px;line-height:1.45;color:var(--label);max-width:62ch}
+.cs-caption a{color:var(--orange-ink)}
+.cs-takeaway{margin:clamp(28px,4vw,48px) 0 0;max-width:34ch;font-weight:500;font-size:clamp(21px,1.2vw + 16px,30px);line-height:1.22;letter-spacing:-.02em;color:var(--black)}
+.cs-link{display:inline-flex;align-items:center;gap:8px;min-height:44px;text-decoration:none;font-weight:500;font-size:16px;color:var(--brown)}
+.cs-link:hover{color:var(--orange-ink)}
+.cs-link svg{width:16px;height:16px;flex:none}
+.cs-note{margin:0;font-size:15px;line-height:1.5;color:var(--muted)}
+
+/* ---------- buttons: 50px, 4px corners; compact ones 44px ---------- */
+.cs-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:50px;min-width:44px;padding:0 20px;border:1px solid transparent;border-radius:var(--r-btn);background:var(--black);color:#fff;font-family:var(--sans);font-weight:500;font-size:15px;letter-spacing:-.01em;text-decoration:none;cursor:pointer;transition:background var(--t-press) var(--ease-out),color var(--t-press) var(--ease-out),border-color var(--t-press) var(--ease-out),transform var(--t-press) var(--ease-out)}
+.cs-btn:hover{background:#2a2a2a}
+.cs-btn:active{transform:scale(.985)}
+.cs-btn.ghost{background:transparent;border-color:var(--hair-strong);color:var(--brown)}
+.cs-btn.ghost:hover{border-color:var(--brown);background:rgba(76,40,6,.04)}
+.cs-btn.small{min-height:44px;padding:0 16px;font-size:14.5px}
+.cs-btn.large{padding:0 26px;font-size:16px}
+.cs-btn:disabled,.cs-btn[aria-disabled="true"]{opacity:.45;cursor:not-allowed;transform:none}
+.cs-btn svg{width:16px;height:16px;flex:none}
+.cs-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.dark .cs-btn{background:var(--dark-ink);color:var(--dark)}
+.dark .cs-btn:hover{background:#fff}
+.dark .cs-btn.ghost{background:transparent;border-color:var(--dark-hair);color:var(--dark-ink)}
+.dark .cs-btn.ghost:hover{background:rgba(255,247,233,.08);border-color:var(--dark-ink)}
+
+/* ---------- status tags and live text ---------- */
+.cs-tag{display:inline-flex;align-items:center;gap:6px;padding:3px 8px;border-radius:var(--r-btn);font-family:var(--mono);font-size:13px;line-height:16px;letter-spacing:.04em;text-transform:uppercase;background:var(--beige-2);color:var(--label)}
+.cs-tag.ok{background:rgba(47,122,62,.12);color:var(--green)}
+.cs-tag.open{background:rgba(246,111,0,.13);color:var(--orange-ink)}
+.cs-tag.warn{background:rgba(179,64,26,.12);color:var(--red)}
+.cs-status{display:flex;align-items:flex-start;gap:10px;margin:0;min-height:24px;font-size:15px;line-height:1.5;color:var(--muted)}
+.cs-status:empty{display:none}
+.cs-status::before{content:"";flex:none;width:8px;height:8px;margin-top:7px;border-radius:50%;background:var(--orange)}
+.cs-nojs{margin:0;padding:12px 14px;border:1px dashed var(--hair-strong);border-radius:var(--r-card);font-size:15px;line-height:1.5;color:var(--muted)}
+html.js-on .cs-nojs{display:none}
+html:not(.js-on) .cs-js-only{display:none}
+
+/* ---------- details: optional depth, native and keyboard friendly ---------- */
+.cs-details{border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin-top:clamp(24px,3vw,36px);max-width:var(--wrap-text)}
+.cs-details+.cs-details{border-top:0;margin-top:0}
+.cs-details>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:52px;padding:12px 0;cursor:pointer;font-weight:500;font-size:16.5px;line-height:1.35;color:var(--brown)}
+.cs-details>summary::-webkit-details-marker{display:none}
+.cs-details>summary::after{content:"+";flex:none;width:28px;height:28px;display:grid;place-items:center;border:1px solid var(--hair-strong);border-radius:50%;font-weight:400;color:var(--brown);transition:background var(--t-press)}
+.cs-details>summary:hover::after{background:rgba(76,40,6,.05)}
+.cs-details[open]>summary::after{content:"\2212"}
+.cs-details>div{padding:2px 0 22px;max-width:66ch}
+.cs-details>div p{font-size:16px;line-height:1.6;color:var(--muted)}
+.cs-details>div ul{padding-left:18px;color:var(--muted);font-size:16px;line-height:1.6}
+.cs-details>div li{margin-bottom:8px}
+.cs-details>div a{color:var(--orange-ink)}
+.dark .cs-details{border-color:var(--dark-hair)}
+.dark .cs-details>summary,.dark .cs-details>summary::after{color:var(--dark-ink);border-color:var(--dark-hair)}
+.dark .cs-details>summary:hover::after{background:rgba(255,247,233,.08)}
+.dark .cs-details>div p,.dark .cs-details>div ul{color:var(--dark-muted)}
+
+/* ---------- photography with the brand light frame ----------
+   The orange gradient sits as a rectangle over the photograph, aligned to
+   two thin gridlines. It settles once, from a wider rectangle to its
+   resting one, when the figure enters. Media only; text is never clipped. */
+.cs-photo{position:relative;overflow:hidden;background:var(--beige-2);border-radius:var(--r-img)}
+.cs-photo>img{width:100%;height:100%;object-fit:cover}
+.cs-frame{position:absolute;inset:var(--frame-inset,18% 12% 22% 14%);z-index:1;pointer-events:none;background:linear-gradient(152deg,rgba(246,111,0,.9) 0%,rgba(252,204,60,.72) 100%);mix-blend-mode:multiply;box-shadow:0 0 0 1px rgba(255,255,255,.36);transition:inset 1.2s var(--ease),opacity 1.2s var(--ease)}
+.cs-frame-grid{position:absolute;inset:0;z-index:1;pointer-events:none;--gl:rgba(255,255,255,.34);background:linear-gradient(var(--gl),var(--gl)) 0 var(--gy1,18%)/100% 1px no-repeat,linear-gradient(var(--gl),var(--gl)) 0 var(--gy2,78%)/100% 1px no-repeat,linear-gradient(var(--gl),var(--gl)) var(--gx1,14%) 0/1px 100% no-repeat,linear-gradient(var(--gl),var(--gl)) var(--gx2,88%) 0/1px 100% no-repeat}
+html.js-on .cs-reveal:not(.in) .cs-frame{inset:var(--frame-start,8% 4% 10% 4%);opacity:.55}
+/* one small image settle when a figure enters: a slight scale that resolves */
+.cs-settle{transform:scale(1.04);transform-origin:50% 60%;transition:transform 1.2s var(--ease)}
+.cs-reveal.in .cs-settle,html:not(.js-on) .cs-settle{transform:none}
+
+/* ---------- the brand gradient film as a field ----------
+   Poster first; muted inline video only with scripting, while visible, and
+   never under reduced motion or Save-Data (dl-shared.js). The pause control
+   is in normal flow beside the copy and reports real playback state. */
+.cs-wave{position:relative;isolation:isolate;overflow:hidden;background:var(--orange) url('../images/daylight-cover-poster.jpg') center/cover no-repeat;color:var(--black)}
+.cs-wave-video{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.cs-video-toggle{display:inline-flex;align-items:center;gap:8px;min-height:44px;min-width:44px;padding:0 14px;border:1px solid var(--hair-strong);border-radius:var(--r-btn);background:rgba(255,252,244,.88);color:var(--brown);font-size:14.5px;font-weight:500;cursor:pointer;transition:background var(--t-press),transform var(--t-press)}
+.cs-video-toggle:hover{background:var(--paper)}
+.cs-video-toggle:active{transform:scale(.985)}
+.cs-video-toggle svg{width:14px;height:14px;flex:none}
+.cs-video-toggle .icon-play,.cs-video-toggle .t-play,.cs-video-toggle[data-paused="true"] .icon-pause,.cs-video-toggle[data-paused="true"] .t-pause{display:none}
+.cs-video-toggle[data-paused="true"] .icon-play,.cs-video-toggle[data-paused="true"] .t-play{display:inline}
+html:not(.js-on) .cs-wave-video,html:not(.js-on) .cs-video-toggle{display:none}
+
+/* ---------- reveals: a hook for media, never a condition for reading ----------
+   .cs-reveal marks blocks the viewport observer has reached (.in). Text is
+   always visible: nothing here sets opacity or a transform on the block.
+   Only media inside it responds: the photograph settle (.cs-settle), the
+   light frame (.cs-frame) and the continuity line draw once on entrance.
+   Without JS, without an observer, under reduced motion and in print
+   those media rest at their final state. */
+.cs-reveal{opacity:1;transform:none}
+/* a short fade for content that just changed (a row, a status). Opacity only. */
+@keyframes cs-enter{from{opacity:0}to{opacity:1}}
+.cs-enter{animation:cs-enter var(--t-state) var(--ease-out) both}
+html:not(.js-on) .cs-enter{animation:none}
+
+/* ---------- footer ---------- */
+.cs-footer{padding:28px 0 calc(28px + env(safe-area-inset-bottom));border-top:1px solid var(--hair);background:var(--beige-1)}
+.cs-footer .cs-wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 20px;font-size:14px;line-height:1.5;color:var(--label)}
+.cs-footer b{font-weight:500;color:var(--brown)}
+
+/* ---------- responsive ---------- */
+@media (min-width:900px){
+  body{font-size:18px}
+}
+@media (max-width:760px){
+  :root{--nav-h:56px}
+  .cs-nav-in{gap:10px}
+  .cs-nav-title{padding-left:10px}
+  .cs-actions .cs-btn{flex:1 1 auto}
+}
+@media (max-width:599px){
+  .cs-nav-title{display:none}
+}
+@media (max-width:359px){
+  :root{--pad:16px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition-duration:.01ms !important;animation-duration:.01ms !important;animation-iteration-count:1 !important;scroll-behavior:auto !important}
+  .cs-reveal,.cs-settle{opacity:1;transform:none}
+  .cs-frame{inset:var(--frame-inset,18% 12% 22% 14%) !important;opacity:1 !important}
+}
+html.reduce-motion *,html.reduce-motion *::before,html.reduce-motion *::after{transition:none !important;animation:none !important;scroll-behavior:auto !important}
+html.reduce-motion .cs-reveal,html.reduce-motion .cs-settle{opacity:1;transform:none}
+html.reduce-motion .cs-frame{inset:var(--frame-inset,18% 12% 22% 14%);opacity:1}
+@media print{.cs-nav,.cs-skip,.cs-video-toggle,.cs-wave-video{display:none}.cs-reveal,.cs-settle{opacity:1;transform:none}.cs-frame{inset:var(--frame-inset,18% 12% 22% 14%);opacity:1}.cs-section{padding:32px 0}}

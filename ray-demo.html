@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" class="rd-page">
+<head>
+  <meta charset="utf-8">
+  <title>Try Ray · Sample project · Mike Battaglia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="An interactive demo of Ray, Daylight's assistant, on a fictional sample project. Scripted responses, sample data, nothing sent. Part of a case study by Mike Battaglia.">
+  <meta name="theme-color" content="#FFF7E9">
+  <meta name="author" content="Mike Battaglia">
+  <meta name="robots" content="noindex">
+  <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon">
+  <link href="images/webclip.png" rel="apple-touch-icon">
+  <link rel="preload" href="fonts/AeonikPro-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="fonts/AeonikPro-500.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link href="css/dl-shared.css?v=7" rel="stylesheet">
+  <link href="css/ray-demo.css?v=1" rel="stylesheet">
+  <link href="css/daylight-gate.css?v=3" rel="stylesheet">
+  <style>
+    html.dl-locked{overflow:hidden}
+    html.dl-locked body > *:not(#dl-gate){visibility:hidden}
+    #dl-gate{display:none}
+    html.dl-locked #dl-gate{display:flex}
+  </style>
+  <script type="text/javascript">
+    try{if(sessionStorage.getItem('dl-unlocked')!=='1'){document.documentElement.classList.add('dl-locked');}}catch(e){document.documentElement.classList.add('dl-locked');}
+  </script>
+</head>
+<body>
+  <!-- ===================== PRIVACY GATE (shared) ===================== -->
+  <div id="dl-gate" role="dialog" aria-modal="true" aria-labelledby="dl-gate-t">
+    <div class="dl-gate-box">
+      <div class="dl-gate-mark">
+        <img src="images/avi.png" alt="Mike Battaglia" width="2208" height="2296">
+        <span class="dl-gate-wm">Case study</span>
+      </div>
+      <h2 class="dl-gate-t" id="dl-gate-t">Try Ray on a sample project.</h2>
+      <p class="dl-gate-s">This demo is part of a private collection. Enter the password to view.</p>
+      <form class="dl-gate-form" id="dl-gate-form">
+        <label class="dl-gate-field">
+          <span class="dl-gate-lbl">Password</span>
+          <input id="dl-pass" name="dl-pass" type="password" autocomplete="current-password"
+                 autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Enter password&hellip;">
+        </label>
+        <p class="dl-gate-err" id="dl-err" role="alert" aria-live="assertive"></p>
+        <div class="dl-gate-row">
+          <button id="dl-go" type="submit">View case study &rarr;</button>
+        </div>
+      </form>
+      <a class="dl-gate-back" href="index.html">&larr;&nbsp;Return to mikebatts.net</a>
+    </div>
+  </div>
+
+  <a class="cs-skip" href="#rd-input">Skip to the composer</a>
+
+  <!-- The demo is one bounded screen: a quiet top bar, one message scroller,
+       a composer, and a detail view that is a full-height destination on
+       phones and a side panel from 900px. Everything is scripted from
+       fixtures in js/ray-demo-state.js; nothing is sent anywhere. -->
+  <div class="rd-shell" id="rd-shell" data-view="chat">
+    <header class="rd-top">
+      <a class="rd-back" href="ray.html" id="rd-back" aria-label="Back to the Ray case study"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span>Back</span></a>
+      <h1 class="rd-title"><img src="images/ray-avatar-poster.png" alt="" width="22" height="22"><span>Ray</span><span class="rd-title-sample">Sample project</span></h1>
+      <button type="button" class="rd-reset" id="rd-reset">Start over</button>
+    </header>
+
+    <div class="rd-body">
+      <main class="rd-chat" id="rd-chat" aria-labelledby="rd-intro-h">
+        <div class="rd-scroll-wrap">
+        <div class="rd-scroll" id="rd-scroll" tabindex="-1">
+          <div class="rd-column">
+            <div class="rd-intro" id="rd-intro">
+              <p class="rd-intro-label"><span class="cs-label">Interactive demo &middot; Sample data</span></p>
+              <h2 class="rd-intro-h" id="rd-intro-h">Ask about Orchard House.</h2>
+              <p class="rd-intro-p">A fictional solar project with sample records. Ray answers three kinds of question here, with scripted responses.</p>
+              <ul class="rd-starters" id="rd-starters" aria-label="Suggested questions">
+                <li><button type="button" class="rd-starter" data-starter>What is holding up this project?</button></li>
+                <li><button type="button" class="rd-starter" data-starter>Show installation reviews that need attention.</button></li>
+                <li><button type="button" class="rd-starter" data-starter>Help me file a utility bill.</button></li>
+              </ul>
+              <details class="rd-about" id="rd-about">
+                <summary>About this demo</summary>
+                <div>
+                  <p>Responses are scripted for three sample tasks and come from fixtures in this page, not from a live model. The project, its records, the people and every reference number are fictional.</p>
+                  <p>Nothing you type is sent anywhere. The conversation stays in this browser tab until you close it or choose Start over. Filing a document, posting a reply and asking for a person are simulated locally and say so.</p>
+                  <p>Unsupported questions get a short explanation and the three examples above.</p>
+                </div>
+              </details>
+            </div>
+            <ol class="rd-turns" id="rd-turns" aria-label="Conversation"></ol>
+          </div>
+        </div>
+        <button type="button" class="rd-latest" id="rd-latest" hidden>Latest message<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></button>
+        </div>
+        <form class="rd-composer" id="rd-composer" aria-label="Message Ray">
+          <div class="rd-composer-in">
+          <label class="cs-vh" for="rd-input">Ask about this sample project</label>
+          <textarea class="rd-input" id="rd-input" name="rd-input" rows="1" maxlength="2000" placeholder="Ask about this sample project" autocomplete="off" autocapitalize="sentences" spellcheck="true"></textarea>
+          <button type="submit" class="rd-send" id="rd-send" aria-label="Send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+          <button type="button" class="rd-stop" id="rd-stop" hidden>Stop</button>
+          </div>
+          <p class="rd-composer-note" id="rd-note" hidden></p>
+        </form>
+        <p class="cs-vh" id="rd-live" role="status" aria-live="polite"></p>
+      </main>
+
+      <!-- On phones this bar is the only header while a detail is open (the
+           top bar above is hidden), so there is one Back, to the chat. From
+           900px the top bar stays and this control reads Close. -->
+      <section class="rd-detail" id="rd-detail" aria-labelledby="rd-detail-title" hidden>
+        <div class="rd-detail-top">
+          <button type="button" class="rd-detail-back" id="rd-detail-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span class="rd-narrow">Back to chat</span><span class="rd-wide">Close</span></button>
+          <p class="rd-detail-kind cs-label quiet" id="rd-detail-kind"></p>
+        </div>
+        <div class="rd-detail-scroll" id="rd-detail-scroll">
+          <h2 class="rd-detail-title" id="rd-detail-title" tabindex="-1"></h2>
+          <div class="rd-detail-body" id="rd-detail-body"></div>
+        </div>
+      </section>
+    </div>
+
+    <noscript><p class="rd-nojs">This demo needs JavaScript. The Ray case study explains the same three tasks in reading order: <a href="ray.html">open the case study</a>.</p></noscript>
+  </div>
+
+  <script src="js/daylight-gate.js" defer></script>
+  <script src="js/cs-state.js?v=3" defer></script>
+  <script src="js/dl-shared.js?v=7" defer></script>
+  <script src="js/ray-demo-state.js?v=1" defer></script>
+  <script src="js/ray-demo.js?v=1" defer></script>
+</body>
+</html>

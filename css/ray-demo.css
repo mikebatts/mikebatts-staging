@@ -1,0 +1,210 @@
+/* ==========================================================================
+   Ray demo (v1). Composition for ray-demo.html; primitives, fonts, palette
+   and focus rules come from dl-shared.css. One bounded screen: a quiet top
+   bar, one message scroller, a bottom composer, and a detail view that is
+   a full-height destination on phones and a side panel from 900px. The
+   shell uses dvh with a vh fallback and safe areas on all four sides; the
+   script adds a visualViewport correction only while the iOS keyboard is
+   open. Readable 17px text, quiet cards, Daylight orange for the one
+   purposeful action, and the Ray avatar only in the top bar. No em dashes.
+   ========================================================================== */
+html.rd-page,html.rd-page body{height:100%;overflow:hidden;overscroll-behavior:none;scroll-behavior:auto}
+html.rd-page body{background:var(--beige);color:var(--ink);font-size:17px}
+
+/* ---------- the shell: top bar, body, and nothing else ---------- */
+.rd-shell{position:fixed;top:0;left:0;right:0;height:100vh;height:100dvh;display:grid;grid-template-rows:auto minmax(0,1fr);background:var(--beige)}
+.rd-top{display:flex;flex-wrap:wrap;align-items:center;gap:0 6px;min-height:calc(56px + env(safe-area-inset-top));padding:env(safe-area-inset-top) max(10px,env(safe-area-inset-right)) 0 max(10px,env(safe-area-inset-left));border-bottom:1px solid var(--hair);background:rgba(255,252,244,.96)}
+.rd-back{display:inline-flex;align-items:center;gap:4px;flex:none;min-height:44px;min-width:44px;padding:0 8px 0 2px;border-radius:var(--r-btn);text-decoration:none;font-size:15px;font-weight:500;color:var(--brown)}
+.rd-back svg{width:18px;height:18px;flex:none}
+.rd-back:hover{color:var(--orange-ink)}
+.rd-title{display:flex;align-items:center;justify-content:center;gap:8px;flex:1 1 auto;min-width:0;min-height:44px;margin:0;font-family:var(--sans);font-size:16px;font-weight:500;line-height:1.2;letter-spacing:-.01em;color:var(--black)}
+.rd-title img{width:22px;height:22px;border-radius:50%;flex:none}
+.rd-title-sample{padding-left:8px;border-left:1px solid var(--hair-strong);font-family:var(--mono);font-size:13px;line-height:16px;letter-spacing:.05em;text-transform:uppercase;font-weight:400;color:var(--label)}
+.rd-reset{flex:none;min-height:44px;min-width:44px;padding:0 8px;border:0;border-radius:var(--r-btn);background:transparent;font-size:15px;font-weight:500;color:var(--brown);cursor:pointer}
+.rd-reset:hover{color:var(--orange-ink)}
+
+.rd-body{position:relative;display:grid;grid-template-columns:minmax(0,1fr);min-height:0}
+
+/* ---------- the conversation column ---------- */
+.rd-chat{position:relative;display:grid;grid-template-rows:minmax(0,1fr) auto;min-height:0}
+.rd-scroll-wrap{position:relative;display:grid;min-height:0}
+.rd-scroll{min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:0 max(16px,env(safe-area-inset-right)) 20px max(16px,env(safe-area-inset-left))}
+.rd-scroll:focus{outline:none}
+.rd-scroll:focus-visible{outline:2px solid var(--orange);outline-offset:-2px}
+.rd-column{width:100%;max-width:720px;margin:0 auto}
+
+/* the opening: what this is, three suggestions, one disclosure */
+.rd-intro{display:grid;gap:14px;padding:24px 0 12px;border-bottom:1px solid var(--hair);margin-bottom:8px}
+.rd-intro-label{margin:0}
+.rd-intro-h{font-family:var(--sans);font-weight:500;font-size:clamp(24px,1.4vw + 18px,32px);line-height:1.12;letter-spacing:-.02em;color:var(--black);margin:0}
+.rd-intro-p{margin:0;font-size:17px;line-height:1.5;color:var(--muted);max-width:52ch}
+.rd-starters{list-style:none;display:grid;gap:8px;margin-top:4px}
+.rd-starter{display:flex;align-items:center;gap:10px;width:100%;min-height:48px;padding:10px 14px;border:1px solid var(--hair-strong);border-radius:var(--r-card);background:var(--white);color:var(--brown);font-size:16px;font-weight:500;line-height:1.35;text-align:left;cursor:pointer;transition:border-color var(--t-press),background var(--t-press)}
+.rd-starter::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--orange)}
+.rd-starter:hover{border-color:var(--brown);background:var(--paper)}
+.rd-about{margin-top:6px}
+.rd-about>summary{list-style:none;display:inline-flex;align-items:center;gap:8px;min-height:44px;cursor:pointer;font-size:15px;font-weight:500;color:var(--brown)}
+.rd-about>summary::-webkit-details-marker{display:none}
+.rd-about>summary::after{content:"+";width:22px;height:22px;display:grid;place-items:center;border:1px solid var(--hair-strong);border-radius:50%;font-weight:400}
+.rd-about[open]>summary::after{content:"\2212"}
+.rd-about>div{display:grid;gap:10px;padding:4px 0 12px;max-width:60ch}
+.rd-about>div p{margin:0;font-size:15.5px;line-height:1.55;color:var(--muted)}
+
+/* turns: a restrained bubble for the person, open reading text for Ray */
+.rd-turns{list-style:none;display:grid;gap:22px;padding:12px 0 8px}
+.rd-turn{display:grid;gap:10px;align-content:start}
+.rd-turn.is-user{justify-items:end}
+.rd-bubble{margin:0;max-width:88%;padding:10px 14px;border-radius:16px 16px 4px 16px;background:var(--brown);color:var(--beige);font-size:17px;line-height:1.45;white-space:pre-wrap}
+.rd-by{display:flex;align-items:center;gap:8px;margin:0;font-size:14px;font-weight:500;line-height:1.3;color:var(--label)}
+.rd-by::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--orange)}
+.rd-answer{display:grid;gap:10px}
+.rd-answer p{margin:0;font-size:17px;line-height:1.5;color:var(--ink)}
+.rd-turn[data-kind="answer"] .rd-answer p:first-child{font-size:19px;font-weight:500;line-height:1.35;letter-spacing:-.012em;color:var(--black)}
+.rd-turn.is-note .rd-answer p{padding:12px 14px;border-left:2px solid var(--green);background:var(--paper);border-radius:0 var(--r-card) var(--r-card) 0;font-size:16px;color:var(--muted)}
+/* the text a person confirmed (the posted reply), kept visible in the record */
+.rd-note-quote{margin:0;padding:10px 14px;border-left:2px solid var(--hair-strong);background:var(--white);border-radius:0 var(--r-card) var(--r-card) 0;font-size:16px;line-height:1.5;color:var(--ink);white-space:pre-wrap}
+.rd-progress{display:flex;align-items:center;gap:10px;margin:0;font-size:15px;line-height:1.4;color:var(--muted)}
+.rd-progress::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--orange);animation:rd-pulse 1s ease-in-out infinite}
+@keyframes rd-pulse{0%,100%{opacity:.35}50%{opacity:1}}
+.rd-halt{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin:0;font-size:15px;line-height:1.4;color:var(--muted)}
+.rd-halt p{margin:0}
+.rd-sources,.rd-actions,.rd-examples{display:flex;flex-wrap:wrap;gap:8px}
+.rd-sources-k{flex:1 0 100%;margin:0}
+.rd-chip{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 12px;border:1px solid var(--hair-strong);border-radius:var(--r-btn);background:var(--paper);color:var(--brown);font-size:14.5px;font-weight:500;line-height:1.3;text-align:left;cursor:pointer;transition:border-color var(--t-press),background var(--t-press)}
+.rd-chip::before{content:"";flex:none;width:10px;height:12px;border:1px solid currentColor;border-radius:2px;opacity:.7}
+.rd-chip:hover{border-color:var(--brown);background:var(--white)}
+.rd-examples .rd-starter{width:auto;min-height:44px}
+.rd-actions .cs-btn{min-height:44px}
+
+/* cards: a saved sheet, a sample file. One quiet panel each. */
+.rd-card{display:grid;gap:10px;align-content:start;padding:14px 16px;border:1px solid var(--hair);border-radius:var(--r-panel);background:var(--white);box-shadow:var(--shadow-card);max-width:520px}
+.rd-card-k{margin:0}
+.rd-card-t{margin:0;font-size:17px;font-weight:500;line-height:1.3;color:var(--black)}
+.rd-card-p{margin:0;font-size:15px;line-height:1.5;color:var(--muted)}
+.rd-card-file{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px}
+.rd-doc{display:grid;gap:4px;align-content:start;flex:none;width:34px;height:44px;padding:9px 6px;border:1px solid var(--hair-strong);border-radius:3px;background:var(--paper)}
+.rd-doc i{display:block;height:2px;background:var(--hair-strong)}
+.rd-doc i:nth-child(2){width:70%}.rd-doc i:nth-child(3){width:85%}
+.rd-card-name{display:grid;gap:2px;min-width:0}
+.rd-card-name b{font-size:16px;font-weight:500;color:var(--black);overflow-wrap:anywhere}
+.rd-card-name small{font-size:13.5px;color:var(--muted)}
+.rd-rows{margin:0;display:grid;border-top:1px solid var(--hair)}
+.rd-rows>div{display:grid;gap:4px;padding:10px 0;border-bottom:1px solid var(--hair)}
+.rd-rows dt{font-family:var(--mono);font-size:13px;line-height:16px;letter-spacing:.05em;text-transform:uppercase;color:var(--label)}
+.rd-rows dd{margin:0;display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font-size:16px;line-height:1.5;color:var(--ink)}
+.rd-path{font-weight:500;color:var(--brown)}
+.rd-path i{font-style:normal;margin:0 6px;color:var(--label)}
+.rd-card .cs-actions{padding-top:2px}
+.rd-card-state{margin:0;font-size:15px;line-height:1.5;color:var(--muted)}
+.rd-card-state:focus{outline:none}
+
+/* the latest-message control: only when the reader is not at the bottom */
+.rd-latest{position:absolute;left:50%;bottom:12px;z-index:1;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:0;border-radius:22px;background:var(--black);color:#fff;font-size:14.5px;font-weight:500;cursor:pointer;transform:translateX(-50%);box-shadow:0 10px 24px -12px rgba(0,0,0,.5)}
+.rd-latest svg{width:16px;height:16px}
+
+/* the composer: a real textarea, 17px, grows to a bound then scrolls inside */
+.rd-composer{margin:0;padding:10px max(12px,env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));border-top:1px solid var(--hair);background:rgba(255,252,244,.96)}
+.rd-composer-in{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:8px;width:100%;max-width:720px;margin:0 auto}
+.rd-input{display:block;width:100%;min-height:48px;max-height:40vh;max-height:40dvh;padding:12px 14px;border:1px solid var(--hair-strong);border-radius:12px;background:var(--white);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.4;letter-spacing:-.004em;resize:none;overflow-y:auto;-webkit-appearance:none;appearance:none;transition:border-color var(--t-press)}
+.rd-input::placeholder{color:var(--label)}
+.rd-input:focus{border-color:var(--orange);outline:none}
+.rd-input:focus-visible{outline:2px solid var(--orange);outline-offset:1px}
+.rd-input[aria-invalid="true"]{border-color:var(--orange-ink)}
+/* a refused message says why, under the composer; the draft stays as typed */
+.rd-composer-note{width:100%;max-width:720px;margin:8px auto 0;font-size:14.5px;line-height:1.45;color:var(--orange-ink)}
+.rd-send{display:grid;place-items:center;width:48px;height:48px;border:0;border-radius:50%;background:var(--orange);color:var(--black);cursor:pointer;transition:background var(--t-press),transform var(--t-press)}
+.rd-send svg{width:20px;height:20px}
+.rd-send:hover{background:#FF8324}
+.rd-send:active{transform:scale(.96)}
+.rd-stop{min-height:48px;padding:0 16px;border:1px solid var(--hair-strong);border-radius:24px;background:var(--white);color:var(--brown);font-size:15px;font-weight:500;cursor:pointer}
+.rd-stop:hover{border-color:var(--brown)}
+
+/* ---------- the detail view: a destination on phones, a panel from 900px ---------- */
+.rd-detail{position:absolute;inset:0;z-index:2;display:grid;grid-template-rows:auto minmax(0,1fr);min-height:0;background:var(--beige)}
+.rd-detail.is-entering{animation:rd-enter var(--t-state) var(--ease-out) both}
+@keyframes rd-enter{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
+.rd-detail-top{display:flex;align-items:center;gap:10px;min-height:52px;padding:4px max(12px,env(safe-area-inset-right)) 4px max(8px,env(safe-area-inset-left));border-bottom:1px solid var(--hair);background:rgba(255,252,244,.96)}
+.rd-detail-back{display:inline-flex;align-items:center;gap:4px;flex:none;min-height:44px;min-width:44px;padding:0 10px 0 4px;border:0;border-radius:var(--r-btn);background:transparent;font-size:15px;font-weight:500;color:var(--brown);cursor:pointer}
+.rd-detail-back svg{width:18px;height:18px;flex:none}
+.rd-detail-kind{margin:0;min-width:0}
+.rd-wide{display:none}
+.rd-detail-scroll{min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:20px max(16px,env(safe-area-inset-right)) calc(28px + env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}
+.rd-detail-title{max-width:640px;margin:0 auto 14px;font-family:var(--sans);font-weight:500;font-size:clamp(22px,1vw + 18px,28px);line-height:1.2;letter-spacing:-.02em;color:var(--black)}
+.rd-detail-title:focus{outline:none}
+.rd-detail-title:focus-visible{outline:2px solid var(--orange);outline-offset:4px;border-radius:2px}
+.rd-detail-body{display:grid;gap:16px;max-width:640px;margin:0 auto}
+/* each detail's content is one structured wrapper with its own spacing:
+   paragraphs, quote blocks, rows and actions never touch */
+.rd-detail-content{display:grid;gap:16px;align-content:start}
+.rd-detail-content>.cs-actions{padding-top:4px}
+.rd-detail-body p{margin:0;font-size:16px;line-height:1.55;color:var(--muted)}
+.rd-field-note{font-weight:500;color:var(--orange-ink)}
+.rd-reply-input[aria-invalid="true"]{border-color:var(--orange-ink)}
+.rd-detail-where{font-size:15px;color:var(--label)}
+.rd-excerpt{margin:0;display:grid;gap:6px;padding:14px 16px;border-left:2px solid var(--orange);background:var(--paper);border-radius:0 var(--r-card) var(--r-card) 0}
+.rd-excerpt p{font-size:17px;line-height:1.5;color:var(--ink)}
+.rd-excerpt cite{font-style:normal;font-size:14px;color:var(--label)}
+.rd-context{display:grid;gap:10px;padding:16px;border:1px solid var(--hair);border-radius:var(--r-panel);background:var(--white)}
+.rd-context p{font-size:16px;color:var(--ink)}
+.rd-context mark{background:rgba(252,204,60,.35);color:inherit;padding:0 2px;border-radius:2px}
+.rd-record{list-style:none;display:grid;border-top:1px solid var(--hair)}
+.rd-record li{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 12px;min-height:46px;padding:8px 0;border-bottom:1px solid var(--hair);font-size:16px;color:var(--brown)}
+.rd-sheet-head{display:grid;gap:4px}
+.rd-sheet-when{font-size:14.5px;color:var(--muted)}
+.rd-sheet-rows{list-style:none;display:grid;border-top:1px solid var(--hair)}
+.rd-sheet-rows li{display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;padding:12px 6px;border-bottom:1px solid var(--hair)}
+.rd-sheet-rows li b{flex:1 1 auto;min-width:0;font-size:16px;font-weight:500;color:var(--brown)}
+.rd-sheet-rows li .cs-tag{flex:none;margin-left:auto}
+.rd-sheet-rows li small{flex:1 0 100%;font-size:14.5px;line-height:1.45;color:var(--muted)}
+.rd-sheet-rows li.is-changed,.rd-sheet-rows li.is-added{background:rgba(252,204,60,.22);border-radius:var(--r-btn)}
+.rd-sheet-mark{flex:1 0 100%;font-style:normal;font-family:var(--mono);font-size:13px;line-height:16px;letter-spacing:.05em;text-transform:uppercase;color:var(--orange-ink)}
+.rd-sheet-summary{font-weight:500;color:var(--black)}
+.rd-detail-body .cs-status{margin:0}
+.rd-reply-label{display:grid;gap:8px}
+.rd-reply-label>span{font-size:15px;font-weight:500;color:var(--brown)}
+.rd-reply-input{display:block;width:100%;min-height:150px;padding:12px 14px;border:1px solid var(--hair-strong);border-radius:var(--r-card);background:var(--white);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.45;resize:vertical}
+.rd-reply-input:focus{border-color:var(--orange);outline:2px solid var(--orange);outline-offset:1px}
+.rd-quote{margin:0;padding:12px 14px;border-left:2px solid var(--hair-strong);background:var(--paper);border-radius:0 var(--r-card) var(--r-card) 0;font-size:16px;line-height:1.5;color:var(--ink)}
+.rd-detail-body .cs-actions .cs-btn{min-height:48px}
+.cs-btn.rd-primary{background:var(--orange);color:var(--black)}
+.cs-btn.rd-primary:hover{background:#FF8324}
+.rd-nojs{margin:0;padding:20px;font-size:16px;line-height:1.5;color:var(--muted)}
+.rd-nojs a{color:var(--orange-ink)}
+
+/* ---------- from 900px: a comfortable column and a side panel ---------- */
+@media (min-width:900px){
+  .rd-top{padding-left:max(20px,env(safe-area-inset-left));padding-right:max(20px,env(safe-area-inset-right))}
+  .rd-shell[data-view="detail"] .rd-body{grid-template-columns:minmax(0,1fr) minmax(340px,420px)}
+  .rd-detail{position:static;inset:auto;border-left:1px solid var(--hair);background:var(--paper)}
+  .rd-detail.is-entering{animation-name:rd-enter-wide}
+  @keyframes rd-enter-wide{from{opacity:0}to{opacity:1}}
+  .rd-narrow{display:none}
+  .rd-wide{display:inline}
+  .rd-detail-back svg{display:none}
+  .rd-detail-back{padding:0 10px}
+  .rd-intro{padding-top:36px}
+  .rd-turns{gap:26px}
+  .rd-bubble{max-width:76%}
+}
+
+/* ---------- phones: the detail is the whole view; the conversation keeps its place underneath.
+   The top bar is hidden, so the detail's own bar is the one header: one Back, to the chat,
+   with the top safe area. The shell's first grid row collapses, so the detail keeps the full height. ---------- */
+@media (max-width:899px){
+  .rd-shell[data-view="detail"] .rd-top{display:none}
+  .rd-shell[data-view="detail"] .rd-chat{visibility:hidden}
+  .rd-detail-top{min-height:calc(52px + env(safe-area-inset-top));padding-top:calc(4px + env(safe-area-inset-top))}
+}
+@media (max-width:359px){
+  .rd-back span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+  .rd-back{padding:0 4px}
+}
+
+/* ---------- reduced motion: no spatial transition, no pulse ---------- */
+@media (prefers-reduced-motion:reduce){
+  .rd-detail.is-entering{animation:none}
+  .rd-progress::before{animation:none;opacity:1}
+  .rd-send:active{transform:none}
+}
+html.reduce-motion .rd-detail.is-entering{animation:none}
+html.reduce-motion .rd-progress::before{animation:none;opacity:1}
